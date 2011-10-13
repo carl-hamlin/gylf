@@ -1,0 +1,10 @@
+gylf
+
+An MMO Server for linux implemented entirely in x86 assembly language, using the linux kernel services for Berkeley Sockets.
+
+Relevant data:
+
+  ./build.gylf.sh
+
+    This is the build script. It depends on the presence of nasm and ld. Run the build script to produce an executable
+    binary from the existing codebase.
