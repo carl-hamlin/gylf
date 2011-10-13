@@ -1,0 +1,36 @@
+;====================================================================================================================================================================================================
+;
+;	command.broadcast.asm
+;
+;	This function broadcasts a message to the entire world.
+;
+;	Assumptions:	eax - Length of received data.
+;			esi - Pointer to descriptor associated with target socket.
+;
+;	Returns:	None.
+;
+
+command.broadcast:		push	eax									; Preserve length of received data.
+
+				call	check.admin								; See if the calling socket is controlled by an admin.
+				jc	command.broadcast.admin							; If so, go run the broadcast. Otherwise...
+
+				pop	eax									; Restore length of received data.
+
+				mov	ebx, dword [esi+connection.descriptor.index]				; ebx - Descriptor associated with current connection.
+				mov	dword [socket.data.send.socket.descriptor], ebx				; Store socket descriptor for send function. 
+				mov	dword [socket.data.send.buffer.pointer], socket.data.bad.command.error	; Point send function to message indicating that the command was bad.
+				mov	dword [socket.data.send.buffer.l], socket.data.bad.command.error.l	; Store length of message for send function.
+				call	socket.send								; Tell the user that the command doesn't have a current analogue.
+
+				ret										; Return to caller.
+
+command.broadcast.admin:	pop	eax									; Restore length of received data.
+
+				mov	ecx, buffer.1								; ecx - Pointer to received command string.
+				add	ecx, command.broadcast.l						; ecx - Pointer to argument for command.
+				mov	edx, eax								; edx - Length of command string minus terminator(s).
+				sub	edx, command.broadcast.l						; edx - Length of command string minus terminator(s) and command.
+				call	send.to.world								; Broadcast the message.
+
+				ret										; Return to caller.

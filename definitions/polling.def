@@ -1,0 +1,10 @@
+;====================================================================================================================================================================================================
+;
+;	polling
+;
+;	This file contains definitions made use of when polling descriptors.
+;
+
+%define	sys.poll.in			001h	; 001h is what gets returned by the poll function when there's data on the socket that needs to be addressed.
+%define	sys.poll.timeout		010h	; 010h is the time to wait before assuming the socket isn't communicating.
+%define	sys.poll.number.of.structures	001h	; 001h is *always* the number of sockets to be polled in this program. We poll them one at a time to keep it simple.

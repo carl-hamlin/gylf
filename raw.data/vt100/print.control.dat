@@ -1,0 +1,26 @@
+;=================================================================================================================================================================================================
+;
+;	print.control
+;
+;	This file contains data definitions for vt100 escape sequences pertaining to print control. Its future is uncertain.
+;
+
+prt.scr		db	01Bh, "[i"	; Print Screen		<ESC>[i
+					; Print the current screen.
+
+prt.scr.l	equ	$-prt.scr	; Length of Print Screen sequence.
+
+prt.ln		db	01Bh, "[1i"	; Print Line		<ESC>[1i
+					; Print the current line.
+
+prt.ln.l	equ	$-prt.ln	; Length of Print Line sequence.
+
+stp.prt.log	db	01Bh, "[4i"	; Stop Print Log	<ESC>[4i
+					; Disable log.
+
+stp.prt.log.l	equ	$-stp.prt.log	; Length of Stop Print Log sequence.
+
+str.prt.log	db	01Bh, "[5i"	; Start Print Log	<ESC>[5i
+					; Start log; all received text is echoed to a printer.
+
+str.prt.log.l	equ	$-str.prt.log	; Length of Start Print Log sequence.
