@@ -79,6 +79,11 @@ Relevant data:
         context-sensitive help.
 
     ./code/commands/command.look.asm
+
+        command.look.asm contains code pertinent to the implementation of the
+        'look' command; a player-level command that displays information about
+        the target.
+
     ./code/commands/command.shutdown.asm
 
     ------------------------------------------------------------------------
