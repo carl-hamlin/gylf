@@ -173,6 +173,10 @@ Relevant data:
         by both parents to create an entirely new gylf.
 
     ./code/functions/get.character.data.asm
+
+        get.character.data.asm contains code which populates the character data
+        in memory from file for the character on the current socket.
+
     ./code/functions/get.external.data.asm
     ./code/functions/get.ticks.asm
     ./code/functions/open.descriptor.asm
