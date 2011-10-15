@@ -45,6 +45,12 @@ Relevant data:
         interface.
 
     ./code/commands/command.broadcast.asm
+
+        command.broadcast.asm contains code pertinent to the implementation of
+        the 'broadcast' command; an administrator command that allows for
+        administrators to send a message to the entire playerbase all at once,
+        regardless of their locations in the world.
+
     ./code/commands/command.dig.asm
     ./code/commands/command.egg.asm
     ./code/commands/command.gylf.asm
