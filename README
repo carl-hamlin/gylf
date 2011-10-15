@@ -168,6 +168,10 @@ Relevant data:
         locations.
 
     ./code/functions/dna.lab.asm
+
+        dna.lab.asm contains code which combines the DNA left behind on an egg
+        by both parents to create an entirely new gylf.
+
     ./code/functions/get.character.data.asm
     ./code/functions/get.external.data.asm
     ./code/functions/get.ticks.asm
