@@ -126,6 +126,10 @@ Relevant data:
         from memory, and returns control to Linux.
 
     ./code/functions/buffer.strip.asm
+
+        buffer.strip.asm contains code that strips buffered data of carriage
+        returns and line feeds and replaces them with zeroes.
+
     ./code/functions/check.admin.asm
     ./code/functions/check.login.asm
     ./code/functions/clear.screen.asm
