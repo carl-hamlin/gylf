@@ -107,6 +107,10 @@ Relevant data:
 
     ./code/comms/send.to.world.asm
 
+        send.to.world.asm contains code that sends a provided message to the
+        entire environment. This code is used to facilitate administrator
+        communications that need to be addressed to everyone in the environment.
+
     ------------------------------------------------------------------------
 
     ./code/functions
