@@ -1,13 +1,13 @@
 ;================================================================================================================================================================================================
 ;
-;    command.area.asm
+;   command.area.asm
 ;
-;    This function creates an area. Syntax: area <name>|<description>
+;   This function creates an area. Syntax: area <name>|<description>
 ;
-;    Assumptions:   eax - Length of received data.
+;   Assumptions:    eax - Length of received data.
 ;                   esi - Pointer to descriptor associated with target socket.
 ;
-;    Returns:       None.
+;   Returns:        None.
 ;
 
 command.area:                       push    eax                                                                         ; Preserve length of received data.
