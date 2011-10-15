@@ -162,6 +162,11 @@ Relevant data:
         which it associates a logical descriptor.
 
     ./code/functions/create.lock.file.asm
+
+        create.lock.file.asm contains code that creates a lock file for use in
+        preventing multiple instances of the same login from different
+        locations.
+
     ./code/functions/dna.lab.asm
     ./code/functions/get.character.data.asm
     ./code/functions/get.external.data.asm
