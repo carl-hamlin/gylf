@@ -157,6 +157,10 @@ Relevant data:
         sequences left behind by either parent on the associated egg.
 
     ./code/functions/create.file.asm
+
+        create.file.asm contains code that builds a dataset on the drive, to
+        which it associates a logical descriptor.
+
     ./code/functions/create.lock.file.asm
     ./code/functions/dna.lab.asm
     ./code/functions/get.character.data.asm
