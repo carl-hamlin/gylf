@@ -146,6 +146,11 @@ Relevant data:
         and places their cursor in the upper left hand corner.
 
     ./code/functions/close.descriptor.asm
+
+        close.descriptor.asm contains code that tells linux that we're finished
+        with a descriptor, causing it to become disassociated with the dataset
+        to which it currently points.
+
     ./code/functions/create.character.asm
     ./code/functions/create.file.asm
     ./code/functions/create.lock.file.asm
