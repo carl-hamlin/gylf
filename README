@@ -98,6 +98,13 @@ Relevant data:
         scenes mechanisms surrounding communications between users.
 
     ./code/comms/send.to.area.asm
+
+        send.to.area.asm contains code that sends a provided message to a
+        specified area. Everyone in the specified area will receive the message.
+        This code is used to facilitate communication between users in a given
+        area of the environment, as well as facilitating communications between
+        administrators and a given area.
+
     ./code/comms/send.to.world.asm
 
     ------------------------------------------------------------------------
