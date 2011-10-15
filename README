@@ -1,10 +1,207 @@
 gylf
 
-An MMO Server for linux implemented entirely in x86 assembly language, using the linux kernel services for Berkeley Sockets.
+An MMO Server for linux implemented entirely in x86 assembly language, using the
+linux kernel services for Berkeley Sockets.
 
 Relevant data:
 
-  ./build.gylf.sh
+    ========================================================================
 
-    This is the build script. It depends on the presence of nasm and ld. Run the build script to produce an executable
-    binary from the existing codebase.
+    ./build.gylf.sh
+
+        This is the build script. It depends on the presence of nasm and ld. Run
+        the build script to produce an executable binary called 'gylf' from the
+        existing codebase, which it then places in the root directory.
+
+    ========================================================================
+
+    ./code
+
+        The ./code directory acts as the root directory for the code implemented
+        in the gylf project.
+
+    ./code/gylf.asm
+
+        gylf.asm is the main program - it cycles through the main loop.
+
+    ./code/include.asm
+
+        The include.asm file contains references to all the code contained in
+        the ./code directory. This allows for selective development; we don't
+        have to write all our code to one file.
+
+    ------------------------------------------------------------------------
+
+    ./code/commands
+
+        The ./code/commands directory contains code pertaining to commands
+        available to users depending on their access level.
+
+    ./code/commands/command.area.asm
+
+        command.area.asm contains code pertinent to the implementation of the
+        'area' command; an administrator command that allows for administrators
+        to create new areas without having to dig them out using the player
+        interface.
+
+    ./code/commands/command.broadcast.asm
+    ./code/commands/command.dig.asm
+    ./code/commands/command.egg.asm
+    ./code/commands/command.gylf.asm
+    ./code/commands/command.help.asm
+    ./code/commands/command.look.asm
+    ./code/commands/command.shutdown.asm
+
+    ------------------------------------------------------------------------
+
+    ./code/comms
+    ./code/comms/send.to.area.asm
+    ./code/comms/send.to.world.asm
+
+    ------------------------------------------------------------------------
+
+    ./code/functions
+    ./code/functions/bail.asm
+    ./code/functions/buffer.strip.asm
+    ./code/functions/check.admin.asm
+    ./code/functions/check.login.asm
+    ./code/functions/clear.screen.asm
+    ./code/functions/close.descriptor.asm
+    ./code/functions/create.character.asm
+    ./code/functions/create.file.asm
+    ./code/functions/create.lock.file.asm
+    ./code/functions/dna.lab.asm
+    ./code/functions/get.character.data.asm
+    ./code/functions/get.external.data.asm
+    ./code/functions/get.ticks.asm
+    ./code/functions/open.descriptor.asm
+    ./code/functions/poll.descriptor.asm
+    ./code/functions/print.socket.number.asm
+    ./code/functions/read.descriptor.asm
+    ./code/functions/set.single.attribute.asm
+    ./code/functions/set.up.listener.asm
+    ./code/functions/system.check.asm
+    ./code/functions/time.in.seconds.since.epoch.asm
+    ./code/functions/write.descriptor.asm
+    ./code/functions/write.prompt.asm
+    ./code/functions/write.welcome.asm
+
+    ------------------------------------------------------------------------
+
+    ./code/player.interaction
+    ./code/player.interaction/address.active.status.asm
+    ./code/player.interaction/address.login.status.asm
+    ./code/player.interaction/address.passphrase.status.asm
+    ./code/player.interaction/address.set.passphrase.status.asm
+
+    ------------------------------------------------------------------------
+
+    ./code/socket
+    ./code/socket/accept.socket.asm
+    ./code/socket/active.socket.poll.asm
+    ./code/socket/answer.active.socket.asm
+    ./code/socket/bind.socket.asm
+    ./code/socket/clean.socket.asm
+    ./code/socket/create.socket.asm
+    ./code/socket/listen.socket.asm
+    ./code/socket/listening.socket.poll.asm
+    ./code/socket/recv.from.socket.asm
+    ./code/socket/socket.errors.asm
+    ./code/socket/socket.send.asm
+
+    ------------------------------------------------------------------------
+
+    ./code/world.maintenance
+    ./code/world.maintenance/maintain.asm
+
+    ========================================================================
+
+    ./definitions
+	./definitions/area.def
+	./definitions/buffers.def
+	./definitions/character.def
+	./definitions/egg.def
+	./definitions/functions.def
+	./definitions/id.def
+	./definitions/include.def
+	./definitions/miscellaneous.indicators.def
+	./definitions/miscellaneous.lengths.def
+	./definitions/numerals.def
+	./definitions/polling.def
+	./definitions/socket.def
+	./definitions/statii.def
+
+    ========================================================================
+
+    ./external.data
+	./external.data/cursor.control
+	./external.data/cursor.control/clear.screen
+	./external.data/cursor.control/cursor.home
+
+    ========================================================================
+
+    ./raw.data
+	./raw.data/include.dat
+
+    ------------------------------------------------------------------------
+
+	./raw.data/area.data
+	./raw.data/area.data/area.dat
+
+    ------------------------------------------------------------------------
+
+	./raw.data/character.representation
+	./raw.data/character.representation/block.dat
+	./raw.data/character.representation/box.double.dat
+	./raw.data/character.representation/box.hybrid.dat
+	./raw.data/character.representation/box.light.dat
+	./raw.data/character.representation/capitals.dat
+	./raw.data/character.representation/character.representation.dat
+	./raw.data/character.representation/control.characters.dat
+	./raw.data/character.representation/esoterics.dat
+	./raw.data/character.representation/lowercase.dat
+	./raw.data/character.representation/punctuation.dat
+	./raw.data/character.representation/stone.dat
+
+    ------------------------------------------------------------------------
+
+	./raw.data/command.data
+	./raw.data/command.data/command.table.dat
+
+    ------------------------------------------------------------------------
+
+	./raw.data/file.paths
+	./raw.data/file.paths/file.paths.dat
+
+    ------------------------------------------------------------------------
+
+	./raw.data/function.data
+	./raw.data/function.data/file.indicator.dat
+	./raw.data/item.data
+
+    ------------------------------------------------------------------------
+
+	./raw.data/messages
+	./raw.data/messages/messages.dat
+	./raw.data/messages/messages.local.dat
+	./raw.data/messages/messages.out.dat
+
+    ------------------------------------------------------------------------
+
+	./raw.data/socket
+	./raw.data/socket/socket.dat
+
+    ------------------------------------------------------------------------
+
+	./raw.data/vt100
+	./raw.data/vt100/attribute.control.dat
+	./raw.data/vt100/cursor.control.dat
+	./raw.data/vt100/key.definition.control.dat
+	./raw.data/vt100/line.wrap.and.fonts.dat
+	./raw.data/vt100/print.control.dat
+	./raw.data/vt100/query.report.reset.dat
+	./raw.data/vt100/screen.control.dat
+	./raw.data/vt100/tab.control.dat
+	./raw.data/vt100/vt100.dat
+
+
