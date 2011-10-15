@@ -141,6 +141,10 @@ Relevant data:
         to log in is already logged in from a different location.
 
     ./code/functions/clear.screen.asm
+
+        clear.screen.asm contains code that remotely clears the user's screen
+        and places their cursor in the upper left hand corner.
+
     ./code/functions/close.descriptor.asm
     ./code/functions/create.character.asm
     ./code/functions/create.file.asm
