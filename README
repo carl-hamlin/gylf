@@ -131,6 +131,10 @@ Relevant data:
         returns and line feeds and replaces them with zeroes.
 
     ./code/functions/check.admin.asm
+
+        check.admin.asm contains code that checks to see if the user on the
+        current socket has administrative privileges.
+
     ./code/functions/check.login.asm
     ./code/functions/clear.screen.asm
     ./code/functions/close.descriptor.asm
