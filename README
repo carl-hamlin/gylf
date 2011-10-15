@@ -66,6 +66,12 @@ Relevant data:
         through mating.
 
     ./code/commands/command.gylf.asm
+
+        command.gylf.asm contains code pertinent to the implementation of the
+        'gylf' command; an administrator command that allows for the creation
+        of a complete new gylf without the intervening process of mating,
+        fertilization, gestation, laying, and hatching.
+
     ./code/commands/command.help.asm
     ./code/commands/command.look.asm
     ./code/commands/command.shutdown.asm
