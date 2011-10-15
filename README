@@ -136,6 +136,10 @@ Relevant data:
         current socket has administrative privileges.
 
     ./code/functions/check.login.asm
+
+        check.login.asm contains code that checks to see if a user attempting
+        to log in is already logged in from a different location.
+
     ./code/functions/clear.screen.asm
     ./code/functions/close.descriptor.asm
     ./code/functions/create.character.asm
