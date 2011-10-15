@@ -93,6 +93,10 @@ Relevant data:
     ------------------------------------------------------------------------
 
     ./code/comms
+
+        The ./code/comms directory contains code pertaining to the behind the
+        scenes mechanisms surrounding communications between users.
+
     ./code/comms/send.to.area.asm
     ./code/comms/send.to.world.asm
 
