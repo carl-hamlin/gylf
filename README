@@ -52,6 +52,11 @@ Relevant data:
         regardless of their locations in the world.
 
     ./code/commands/command.dig.asm
+
+        command.dig.asm contains code pertinent to the implementation of the
+        'dig' command; a player-level command that allows for player to, under
+        certain circumstances, extend the wworld by creating new areas.
+
     ./code/commands/command.egg.asm
     ./code/commands/command.gylf.asm
     ./code/commands/command.help.asm
