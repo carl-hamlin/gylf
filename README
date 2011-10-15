@@ -121,6 +121,10 @@ Relevant data:
         all kept here.
 
     ./code/functions/bail.asm
+
+        bail.asm contains code that suspends execution of the code, unloads
+        from memory, and returns control to Linux.
+
     ./code/functions/buffer.strip.asm
     ./code/functions/check.admin.asm
     ./code/functions/check.login.asm
