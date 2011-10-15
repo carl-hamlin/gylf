@@ -10,7 +10,7 @@
 ;
 
 get.character.data: mov     ebx, esi                        ; Pointer to socket table.
- 	            add     ebx, connection.filename.index  ; Pointer to socket filename.
+ 	                add     ebx, connection.filename.index  ; Pointer to socket filename.
                     call    open.descriptor                 ; Associate a descriptor with the filename.
 
                     mov     ebx, eax                        ; ebx - Descriptor associated with character data.
