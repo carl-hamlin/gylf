@@ -86,6 +86,10 @@ Relevant data:
 
     ./code/commands/command.shutdown.asm
 
+        commmand.shutdown.asm contains code pertinent to the implementation of
+        the 'shutdown' command; an administrator command that shuts down the
+        server from within the environment.
+
     ------------------------------------------------------------------------
 
     ./code/comms
