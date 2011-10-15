@@ -73,6 +73,11 @@ Relevant data:
         fertilization, gestation, laying, and hatching.
 
     ./code/commands/command.help.asm
+
+        command.help.asm contains code pertinent to the implementation of the
+        'help' command; a player-level command whose sole purpose is to display
+        context-sensitive help.
+
     ./code/commands/command.look.asm
     ./code/commands/command.shutdown.asm
 
