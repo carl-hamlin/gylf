@@ -1,13 +1,13 @@
 ;====================================================================================================================================================================================================
 ;
-;    command.broadcast.asm
+;   command.broadcast.asm
 ;
-;    This function broadcasts a message to the entire world.
+;   This function broadcasts a message to the entire world.
 ;
-;    Assumptions:   eax - Length of received data.
+;   Assumptions:    eax - Length of received data.
 ;                   esi - Pointer to descriptor associated with target socket.
 ;
-;    Returns:       None.
+;   Returns:        None.
 ;
 
 command.broadcast:          push    eax                                                                     ; Preserve length of received data.
