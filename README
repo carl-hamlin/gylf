@@ -58,6 +58,13 @@ Relevant data:
         certain circumstances, extend the wworld by creating new areas.
 
     ./code/commands/command.egg.asm
+
+        command.egg.asm contains code pertinent to the implementation of the
+        'egg' command; an administrator command that allows for the forced
+        implantation and fertilization of an egg in the womb of the target gylf
+        without having to go through the normal channels of fertilization
+        through mating.
+
     ./code/commands/command.gylf.asm
     ./code/commands/command.help.asm
     ./code/commands/command.look.asm
