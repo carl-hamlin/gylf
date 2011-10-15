@@ -114,6 +114,12 @@ Relevant data:
     ------------------------------------------------------------------------
 
     ./code/functions
+
+        The ./code/functions directory contains code pertaining to the
+        background mechanisms that contribute to the overall functioning of the
+        codebase. Things like writing to files, reading user input, etc... are
+        all kept here.
+
     ./code/functions/bail.asm
     ./code/functions/buffer.strip.asm
     ./code/functions/check.admin.asm
