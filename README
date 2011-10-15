@@ -152,6 +152,10 @@ Relevant data:
         to which it currently points.
 
     ./code/functions/create.character.asm
+
+        create.character.asm builds out character data on the basis of DNA
+        sequences left behind by either parent on the associated egg.
+
     ./code/functions/create.file.asm
     ./code/functions/create.lock.file.asm
     ./code/functions/dna.lab.asm
