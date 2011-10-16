@@ -235,7 +235,7 @@ Relevant data:
 
     ./code/functions/time.in.seconds.since.epoch.asm
 
-        time.in.seconds.since.the.epoch contains code that returns the time in
+        time.in.seconds.since.epoch.asm contains code that returns the time in
         seconds since the epoch.
 
     ./code/functions/write.descriptor.asm
