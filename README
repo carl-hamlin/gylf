@@ -188,6 +188,12 @@ Relevant data:
         since the environment was booted.
 
     ./code/functions/open.descriptor.asm
+
+        open.descriptor.asm contains code that associates a logical descriptor
+        with an existing dataset on disk. If the code is unable to associate a
+        descriptor, it instead returns an error code, which is detectable via a
+        check on the sign of eax.
+
     ./code/functions/poll.descriptor.asm
     ./code/functions/print.socket.number.asm
     ./code/functions/read.descriptor.asm
