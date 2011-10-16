@@ -212,6 +212,12 @@ Relevant data:
         dataset in question.
 
     ./code/functions/set.single.attribute.asm
+
+        set.single.attribute.asm contains code that sends a vt100 escape
+        sequence to the remote terminal which changes a single attribute about
+        the printed text. Attributes can be found in the file
+        "attribute.control.dat".
+
     ./code/functions/set.up.listener.asm
     ./code/functions/system.check.asm
     ./code/functions/time.in.seconds.since.epoch.asm
