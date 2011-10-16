@@ -229,6 +229,10 @@ Relevant data:
         the hopes that the admin can figure out what's clogging up the works.
 
     ./code/functions/system.check.asm
+
+        system.check.asm contains code that performs checks to ensure the
+        environment is ready to go live, prior to instantiation.
+
     ./code/functions/time.in.seconds.since.epoch.asm
     ./code/functions/write.descriptor.asm
     ./code/functions/write.prompt.asm
