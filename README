@@ -178,6 +178,10 @@ Relevant data:
         in memory from file for the character on the current socket.
 
     ./code/functions/get.external.data.asm
+
+        get.external.data.asm contains code which reads data that exists
+        outside the codebase and memory.
+
     ./code/functions/get.ticks.asm
     ./code/functions/open.descriptor.asm
     ./code/functions/poll.descriptor.asm
