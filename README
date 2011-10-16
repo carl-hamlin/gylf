@@ -234,6 +234,10 @@ Relevant data:
         environment is ready to go live, prior to instantiation.
 
     ./code/functions/time.in.seconds.since.epoch.asm
+
+        time.in.seconds.since.the.epoch contains code that returns the time in
+        seconds since the epoch.
+
     ./code/functions/write.descriptor.asm
     ./code/functions/write.prompt.asm
     ./code/functions/write.welcome.asm
