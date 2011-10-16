@@ -195,6 +195,11 @@ Relevant data:
         check on the sign of eax.
 
     ./code/functions/poll.descriptor.asm
+
+        poll.descriptor.asm contains code that uses a logical descriptor
+        associated with a Berkely Socket to ask the socket whether or not there
+        is currently data on it that requires the attention of a handler.
+
     ./code/functions/print.socket.number.asm
     ./code/functions/read.descriptor.asm
     ./code/functions/set.single.attribute.asm
