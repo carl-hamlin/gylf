@@ -206,6 +206,11 @@ Relevant data:
         associated with an event in the administrator console.
 
     ./code/functions/read.descriptor.asm
+
+        read.descriptor.asm contains code that pulls data from an existing
+        dataset using a logical descriptor previously associated with the
+        dataset in question.
+
     ./code/functions/set.single.attribute.asm
     ./code/functions/set.up.listener.asm
     ./code/functions/system.check.asm
