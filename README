@@ -201,6 +201,10 @@ Relevant data:
         is currently data on it that requires the attention of a handler.
 
     ./code/functions/print.socket.number.asm
+
+        print.socket.number.asm contains code that prints a socket number
+        associated with an event in the administrator console.
+
     ./code/functions/read.descriptor.asm
     ./code/functions/set.single.attribute.asm
     ./code/functions/set.up.listener.asm
