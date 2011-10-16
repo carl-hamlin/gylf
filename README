@@ -183,6 +183,10 @@ Relevant data:
         outside the codebase and memory.
 
     ./code/functions/get.ticks.asm
+
+        get.ticks.asm contains code that returns the number of clock ticks
+        since the environment was booted.
+
     ./code/functions/open.descriptor.asm
     ./code/functions/poll.descriptor.asm
     ./code/functions/print.socket.number.asm
