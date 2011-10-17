@@ -185,6 +185,9 @@ Relevant data:
         The ./code/player.interaction directory contains code that has to do with interaction between the user and the infractructure of the environment. Essentially, this code all addresses user statii and how to handle them.
 
     ./code/player.interaction/address.active.status.asm
+
+        address.active.status.asm parses commands issues by users with an active status and sends them to the appropriate handler.
+
     ./code/player.interaction/address.login.status.asm
     ./code/player.interaction/address.passphrase.status.asm
     ./code/player.interaction/address.set.passphrase.status.asm
