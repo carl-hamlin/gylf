@@ -231,6 +231,9 @@ Relevant data:
         create.socket.asm contains code that builds a socket for further use.
 
     ./code/socket/listen.socket.asm
+
+        listen.socket.asm contains code that tells a created and bound socket to listen for incoming connections.
+
     ./code/socket/listening.socket.poll.asm
     ./code/socket/recv.from.socket.asm
     ./code/socket/socket.errors.asm
