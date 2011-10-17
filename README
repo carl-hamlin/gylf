@@ -198,6 +198,8 @@ Relevant data:
 
     ./code/player.interaction/address.set.passphrase.status.asm
 
+        address.set.passphrase.status parses commands issued by users with a set passphrase status and sends them to the appropriate handler.
+
     ------------------------------------------------------------------------
 
     ./code/socket
