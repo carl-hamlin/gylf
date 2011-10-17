@@ -235,6 +235,9 @@ Relevant data:
         listen.socket.asm contains code that tells a created and bound socket to listen for incoming connections.
 
     ./code/socket/listening.socket.poll.asm
+
+        listening.socket.poll.asm contains code that polls the listening socket for new connection attempts and sends the login message when it finds them.
+
     ./code/socket/recv.from.socket.asm
     ./code/socket/socket.errors.asm
     ./code/socket/socket.send.asm
