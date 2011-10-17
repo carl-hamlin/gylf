@@ -1,7 +1,6 @@
 gylf
 
-An MMO Server for linux implemented entirely in x86 assembly language, using the
-linux kernel services for Berkeley Sockets.
+An MMO Server for linux implemented entirely in x86 assembly language, using the linux kernel services for Berkeley Sockets.
 
 Relevant data:
 
@@ -9,16 +8,13 @@ Relevant data:
 
     ./build.gylf.sh
 
-        This is the build script. It depends on the presence of nasm and ld. Run
-        the build script to produce an executable binary called 'gylf' from the
-        existing codebase, which it then places in the root directory.
+        This is the build script. It depends on the presence of nasm and ld. Run the build script to produce an executable binary called 'gylf' from the existing codebase, which it then places in the root directory.
 
     ========================================================================
 
     ./code
 
-        The ./code directory acts as the root directory for the code implemented
-        in the gylf project.
+        The ./code directory acts as the root directory for the code implemented in the gylf project.
 
     ./code/gylf.asm
 
@@ -26,219 +22,154 @@ Relevant data:
 
     ./code/include.asm
 
-        The include.asm file contains references to all the code contained in
-        the ./code directory. This allows for selective development; we don't
-        have to write all our code to one file.
+        The include.asm file contains references to all the code contained in the ./code directory. This allows for selective development; we don't have to write all our code to one file.
 
     ------------------------------------------------------------------------
 
     ./code/commands
 
-        The ./code/commands directory contains code pertaining to commands
-        available to users depending on their access level.
+        The ./code/commands directory contains code pertaining to commands available to users depending on their access level.
 
     ./code/commands/command.area.asm
 
-        command.area.asm contains code pertinent to the implementation of the
-        'area' command; an administrator command that allows for administrators
-        to create new areas without having to dig them out using the player
-        interface.
+        command.area.asm contains code pertinent to the implementation of the 'area' command; an administrator command that allows for administrators to create new areas without having to dig them out using the player interface.
 
     ./code/commands/command.broadcast.asm
 
-        command.broadcast.asm contains code pertinent to the implementation of
-        the 'broadcast' command; an administrator command that allows for
-        administrators to send a message to the entire playerbase all at once,
-        regardless of their locations in the world.
+        command.broadcast.asm contains code pertinent to the implementation of the 'broadcast' command; an administrator command that allows for administrators to send a message to the entire playerbase all at once, regardless of their locations in the world.
 
     ./code/commands/command.dig.asm
 
-        command.dig.asm contains code pertinent to the implementation of the
-        'dig' command; a player-level command that allows for player to, under
-        certain circumstances, extend the wworld by creating new areas.
+        command.dig.asm contains code pertinent to the implementation of the 'dig' command; a player-level command that allows for player to, under certain circumstances, extend the wworld by creating new areas.
 
     ./code/commands/command.egg.asm
 
-        command.egg.asm contains code pertinent to the implementation of the
-        'egg' command; an administrator command that allows for the forced
-        implantation and fertilization of an egg in the womb of the target gylf
-        without having to go through the normal channels of fertilization
-        through mating.
+        command.egg.asm contains code pertinent to the implementation of the 'egg' command; an administrator command that allows for the forced implantation and fertilization of an egg in the womb of the target gylf without having to go through the normal channels of fertilization through mating.
 
     ./code/commands/command.gylf.asm
 
-        command.gylf.asm contains code pertinent to the implementation of the
-        'gylf' command; an administrator command that allows for the creation
-        of a complete new gylf without the intervening process of mating,
-        fertilization, gestation, laying, and hatching.
+        command.gylf.asm contains code pertinent to the implementation of the 'gylf' command; an administrator command that allows for the creation of a complete new gylf without the intervening process of mating, fertilization, gestation, laying, and hatching.
 
     ./code/commands/command.help.asm
 
-        command.help.asm contains code pertinent to the implementation of the
-        'help' command; a player-level command whose sole purpose is to display
-        context-sensitive help.
+        command.help.asm contains code pertinent to the implementation of the 'help' command; a player-level command whose sole purpose is to display context-sensitive help.
 
     ./code/commands/command.look.asm
 
-        command.look.asm contains code pertinent to the implementation of the
-        'look' command; a player-level command that displays information about
-        the target.
+        command.look.asm contains code pertinent to the implementation of the 'look' command; a player-level command that displays information about the target.
 
     ./code/commands/command.shutdown.asm
 
-        commmand.shutdown.asm contains code pertinent to the implementation of
-        the 'shutdown' command; an administrator command that shuts down the
-        server from within the environment.
+        commmand.shutdown.asm contains code pertinent to the implementation of the 'shutdown' command; an administrator command that shuts down the server from within the environment.
 
     ------------------------------------------------------------------------
 
     ./code/comms
 
-        The ./code/comms directory contains code pertaining to the behind the
-        scenes mechanisms surrounding communications between users.
+        The ./code/comms directory contains code pertaining to the behind the scenes mechanisms surrounding communications between users.
 
     ./code/comms/send.to.area.asm
 
-        send.to.area.asm contains code that sends a provided message to a
-        specified area. Everyone in the specified area will receive the message.
-        This code is used to facilitate communication between users in a given
-        area of the environment, as well as facilitating communications between
-        administrators and a given area.
+        send.to.area.asm contains code that sends a provided message to a specified area. Everyone in the specified area will receive the message. This code is used to facilitate communication between users in a given area of the environment, as well as facilitating communications between administrators and a given area.
 
     ./code/comms/send.to.world.asm
 
-        send.to.world.asm contains code that sends a provided message to the
-        entire environment. This code is used to facilitate administrator
-        communications that need to be addressed to everyone in the environment.
+        send.to.world.asm contains code that sends a provided message to the entire environment. This code is used to facilitate administrator communications that need to be addressed to everyone in the environment.
 
     ------------------------------------------------------------------------
 
     ./code/functions
 
-        The ./code/functions directory contains code pertaining to the
-        background mechanisms that contribute to the overall functioning of the
-        codebase. Things like writing to files, reading user input, etc... are
-        all kept here.
+        The ./code/functions directory contains code pertaining to the background mechanisms that contribute to the overall functioning of the codebase. Things like writing to files, reading user input, etc... are all kept here.
 
     ./code/functions/bail.asm
 
-        bail.asm contains code that suspends execution of the code, unloads
-        from memory, and returns control to Linux.
+        bail.asm contains code that suspends execution of the code, unloads from memory, and returns control to Linux.
 
     ./code/functions/buffer.strip.asm
 
-        buffer.strip.asm contains code that strips buffered data of carriage
-        returns and line feeds and replaces them with zeroes.
+        buffer.strip.asm contains code that strips buffered data of carriage returns and line feeds and replaces them with zeroes.
 
     ./code/functions/check.admin.asm
 
-        check.admin.asm contains code that checks to see if the user on the
-        current socket has administrative privileges.
+        check.admin.asm contains code that checks to see if the user on the current socket has administrative privileges.
 
     ./code/functions/check.login.asm
 
-        check.login.asm contains code that checks to see if a user attempting
-        to log in is already logged in from a different location.
+        check.login.asm contains code that checks to see if a user attempting to log in is already logged in from a different location.
 
     ./code/functions/clear.screen.asm
 
-        clear.screen.asm contains code that remotely clears the user's screen
-        and places their cursor in the upper left hand corner.
+        clear.screen.asm contains code that remotely clears the user's screen and places their cursor in the upper left hand corner.
 
     ./code/functions/close.descriptor.asm
 
-        close.descriptor.asm contains code that tells linux that we're finished
-        with a descriptor, causing it to become disassociated with the dataset
-        to which it currently points.
+        close.descriptor.asm contains code that tells linux that we're finished with a descriptor, causing it to become disassociated with the dataset to which it currently points.
 
     ./code/functions/create.character.asm
 
-        create.character.asm builds out character data on the basis of DNA
-        sequences left behind by either parent on the associated egg.
+        create.character.asm builds out character data on the basis of DNA sequences left behind by either parent on the associated egg.
 
     ./code/functions/create.file.asm
 
-        create.file.asm contains code that builds a dataset on the drive, to
-        which it associates a logical descriptor.
+        create.file.asm contains code that builds a dataset on the drive, to which it associates a logical descriptor.
 
     ./code/functions/create.lock.file.asm
 
-        create.lock.file.asm contains code that creates a lock file for use in
-        preventing multiple instances of the same login from different
-        locations.
+        create.lock.file.asm contains code that creates a lock file for use in preventing multiple instances of the same login from different locations.
 
     ./code/functions/dna.lab.asm
 
-        dna.lab.asm contains code which combines the DNA left behind on an egg
-        by both parents to create an entirely new gylf.
+        dna.lab.asm contains code which combines the DNA left behind on an egg by both parents to create an entirely new gylf.
 
     ./code/functions/get.character.data.asm
 
-        get.character.data.asm contains code which populates the character data
-        in memory from file for the character on the current socket.
+        get.character.data.asm contains code which populates the character data in memory from file for the character on the current socket.
 
     ./code/functions/get.external.data.asm
 
-        get.external.data.asm contains code which reads data that exists
-        outside the codebase and memory.
+        get.external.data.asm contains code which reads data that exists outside the codebase and memory.
 
     ./code/functions/get.ticks.asm
 
-        get.ticks.asm contains code that returns the number of clock ticks
-        since the environment was booted.
+        get.ticks.asm contains code that returns the number of clock ticks since the environment was booted.
 
     ./code/functions/open.descriptor.asm
 
-        open.descriptor.asm contains code that associates a logical descriptor
-        with an existing dataset on disk. If the code is unable to associate a
-        descriptor, it instead returns an error code, which is detectable via a
-        check on the sign of eax.
+        open.descriptor.asm contains code that associates a logical descriptor with an existing dataset on disk. If the code is unable to associate a descriptor, it instead returns an error code, which is detectable via a check on the sign of eax.
 
     ./code/functions/poll.descriptor.asm
 
-        poll.descriptor.asm contains code that uses a logical descriptor
-        associated with a Berkely Socket to ask the socket whether or not there
-        is currently data on it that requires the attention of a handler.
+        poll.descriptor.asm contains code that uses a logical descriptor associated with a Berkely Socket to ask the socket whether or not there is currently data on it that requires the attention of a handler.
 
     ./code/functions/print.socket.number.asm
 
-        print.socket.number.asm contains code that prints a socket number
-        associated with an event in the administrator console.
+        print.socket.number.asm contains code that prints a socket number associated with an event in the administrator console.
 
     ./code/functions/read.descriptor.asm
 
-        read.descriptor.asm contains code that pulls data from an existing
-        dataset using a logical descriptor previously associated with the
-        dataset in question.
+        read.descriptor.asm contains code that pulls data from an existing dataset using a logical descriptor previously associated with the dataset in question.
 
     ./code/functions/set.single.attribute.asm
 
-        set.single.attribute.asm contains code that sends a vt100 escape
-        sequence to the remote terminal which changes a single attribute about
-        the printed text. Attributes can be found in the file
-        "attribute.control.dat".
+        set.single.attribute.asm contains code that sends a vt100 escape sequence to the remote terminal which changes a single attribute about the printed text. Attributes can be found in the file "attribute.control.dat".
 
     ./code/functions/set.up.listener.asm
 
-        set.up.listener.asm contains code that builds a socket, binds it to a
-        specified hardware port, and tells it to listen for incoming
-        connections. When it's finished, it displays a message to the admin
-        indicating that we're online and ready to go. If at any point an error
-        occurs, the function displays an error message and passes control to the
-        bail function so we can suspend execution and return control to linux in
-        the hopes that the admin can figure out what's clogging up the works.
+        set.up.listener.asm contains code that builds a socket, binds it to a specified hardware port, and tells it to listen for incoming connections. When it's finished, it displays a message to the admin indicating that we're online and ready to go. If at any point an error occurs, the function displays an error message and passes control to the bail function so we can suspend execution and return control to linux in the hopes that the admin can figure out what's clogging up the works.
 
     ./code/functions/system.check.asm
 
-        system.check.asm contains code that performs checks to ensure the
-        environment is ready to go live, prior to instantiation.
+        system.check.asm contains code that performs checks to ensure the environment is ready to go live, prior to instantiation.
 
     ./code/functions/time.in.seconds.since.epoch.asm
 
-        time.in.seconds.since.epoch.asm contains code that returns the time in
-        seconds since the epoch.
+        time.in.seconds.since.epoch.asm contains code that returns the time in seconds since the epoch.
 
     ./code/functions/write.descriptor.asm
+
+        write.descriptor.asm contains code that adds data to an existing dataset on disk using a logical descriptor previously associated with the dataset.
+
     ./code/functions/write.prompt.asm
     ./code/functions/write.welcome.asm
 
