@@ -215,6 +215,9 @@ Relevant data:
         active.socket.poll.asm contains code that runs through the list of potentially active connections and checks each of them for activity. Upon discovering activity in a connection, the function then passes control off to the answer.active.socket function for more specialized treatment.
 
     ./code/socket/answer.active.socket.asm
+
+        answer.active.socket.asm contains code that determines the status of an active socket and routes the data to the appropriate handler.
+
     ./code/socket/bind.socket.asm
     ./code/socket/clean.socket.asm
     ./code/socket/create.socket.asm
