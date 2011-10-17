@@ -176,11 +176,14 @@ Relevant data:
 
     ./code/functions/write.welcome.asm
 
-        write.welcome.asm containscode that builds and displays the initial welcome screen to the user.
+        write.welcome.asm contains code that builds and displays the initial welcome screen to the user.
 
     ------------------------------------------------------------------------
 
     ./code/player.interaction
+
+        The ./code/player.interaction directory contains code that has to do with interaction between the user and the infractructure of the environment. Essentially, this code all addresses user statii and how to handle them.
+
     ./code/player.interaction/address.active.status.asm
     ./code/player.interaction/address.login.status.asm
     ./code/player.interaction/address.passphrase.status.asm
