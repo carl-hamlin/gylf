@@ -193,6 +193,9 @@ Relevant data:
         address.login.status parses commands issued by users with a login status and sends them to the appropriate handler.
 
     ./code/player.interaction/address.passphrase.status.asm
+
+        address.passphrase.status.asm parses commands issues by users with a passphrase status and sends them to the appropriate handler.
+
     ./code/player.interaction/address.set.passphrase.status.asm
 
     ------------------------------------------------------------------------
