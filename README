@@ -227,6 +227,9 @@ Relevant data:
         clean.socket.asm contains code that removes the data associated with an active socket from memory, smokes the lock file, and uses the close.descriptor function to close out the socket. This function does not closeout other files associated with the socket - that responsibility is left to the caller.
 
     ./code/socket/create.socket.asm
+
+        create.socket.asm contains code that builds a socket for further use.
+
     ./code/socket/listen.socket.asm
     ./code/socket/listening.socket.poll.asm
     ./code/socket/recv.from.socket.asm
