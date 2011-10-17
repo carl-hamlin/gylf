@@ -207,6 +207,9 @@ Relevant data:
         The ./code/socket directory contains code that governs the 'behind the scenes' mechanisms surround the operation of Berkeley Sockets under Linux in X86 ASM.
 
     ./code/socket/accept.socket.asm
+
+        accept.socket.asm contains code that calls the linux kernel to associate a descriptor with an incoming Berkeley Socket.
+
     ./code/socket/active.socket.poll.asm
     ./code/socket/answer.active.socket.asm
     ./code/socket/bind.socket.asm
