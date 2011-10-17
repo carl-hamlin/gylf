@@ -186,9 +186,12 @@ Relevant data:
 
     ./code/player.interaction/address.active.status.asm
 
-        address.active.status.asm parses commands issues by users with an active status and sends them to the appropriate handler.
+        address.active.status.asm parses commands issued by users with an active status and sends them to the appropriate handler.
 
     ./code/player.interaction/address.login.status.asm
+
+        address.login.status parses commands issued by users with a login status and sends them to the appropriate handler.
+
     ./code/player.interaction/address.passphrase.status.asm
     ./code/player.interaction/address.set.passphrase.status.asm
 
