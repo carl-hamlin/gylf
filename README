@@ -203,6 +203,9 @@ Relevant data:
     ------------------------------------------------------------------------
 
     ./code/socket
+
+        The ./code/socket directory contains code that governs the 'behind the scenes' mechanisms surround the operation of Berkeley Sockets under Linux in X86 ASM.
+
     ./code/socket/accept.socket.asm
     ./code/socket/active.socket.poll.asm
     ./code/socket/answer.active.socket.asm
