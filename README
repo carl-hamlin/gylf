@@ -219,6 +219,9 @@ Relevant data:
         answer.active.socket.asm contains code that determines the status of an active socket and routes the data to the appropriate handler.
 
     ./code/socket/bind.socket.asm
+
+        bind.socket.asm contains code that binds a socket to a specified hardware port.
+
     ./code/socket/clean.socket.asm
     ./code/socket/create.socket.asm
     ./code/socket/listen.socket.asm
