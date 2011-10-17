@@ -223,6 +223,9 @@ Relevant data:
         bind.socket.asm contains code that binds a socket to a specified hardware port.
 
     ./code/socket/clean.socket.asm
+
+        clean.socket.asm contains code that removes the data associated with an active socket from memory, smokes the lock file, and uses the close.descriptor function to close out the socket. This function does not closeout other files associated with the socket - that responsibility is left to the caller.
+
     ./code/socket/create.socket.asm
     ./code/socket/listen.socket.asm
     ./code/socket/listening.socket.poll.asm
