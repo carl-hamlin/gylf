@@ -263,6 +263,9 @@ Relevant data:
     ========================================================================
 
     ./definitions
+
+        The ./definitions directory contains defined data.
+
 	./definitions/area.def
 	./definitions/buffers.def
 	./definitions/character.def
