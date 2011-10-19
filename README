@@ -239,6 +239,9 @@ Relevant data:
         listening.socket.poll.asm contains code that polls the listening socket for new connection attempts and sends the login message when it finds them.
 
     ./code/socket/recv.from.socket.asm
+
+        recv.from.socket.asm contains code that receives data from a connected socket and places it in a specified buffer.
+
     ./code/socket/socket.errors.asm
     ./code/socket/socket.send.asm
 
