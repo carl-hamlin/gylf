@@ -243,6 +243,9 @@ Relevant data:
         recv.from.socket.asm contains code that receives data from a connected socket and places it in a specified buffer.
 
     ./code/socket/socket.errors.asm
+
+        socket.error.asm contains code that sets up error messages to be displayed to the admin in the event that something goes awry while building the listening socket. If any of these are ever executed, we're beyond the point of no return, so each of them passes control to the bail function after displaying their unique message.
+
     ./code/socket/socket.send.asm
 
     ------------------------------------------------------------------------
