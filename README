@@ -258,6 +258,8 @@ Relevant data:
 
     ./code/world.maintenance/maintain.asm
 
+        maintain.asm contains code that governs the passage of time in the environment.
+
     ========================================================================
 
     ./definitions
