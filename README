@@ -253,6 +253,9 @@ Relevant data:
     ------------------------------------------------------------------------
 
     ./code/world.maintenance
+
+        The ./code/world.maintenance directory contains code pertinent to the passage of time in the environment.
+
     ./code/world.maintenance/maintain.asm
 
     ========================================================================
