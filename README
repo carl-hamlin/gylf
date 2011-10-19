@@ -271,6 +271,9 @@ Relevant data:
         area.def contains definitions for all aspects of area data.
 
 	./definitions/buffers.def
+
+        buffers.def contains definitions of data buffers.
+
 	./definitions/character.def
 	./definitions/egg.def
 	./definitions/functions.def
