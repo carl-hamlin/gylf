@@ -267,6 +267,9 @@ Relevant data:
         The ./definitions directory contains defined data.
 
 	./definitions/area.def
+
+        area.def contains definitions for all aspects of area data.
+
 	./definitions/buffers.def
 	./definitions/character.def
 	./definitions/egg.def
