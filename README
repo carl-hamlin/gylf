@@ -299,6 +299,9 @@ Relevant data:
         miscellaneous.indicators.def contains defined elements which represent various indicators used in the program.
 
 	./definitions/miscellaneous.lengths.def
+
+        miscellaneous.lengths.def contains defined elements which represent various sizes used in the program.
+
 	./definitions/numerals.def
 	./definitions/polling.def
 	./definitions/socket.def
