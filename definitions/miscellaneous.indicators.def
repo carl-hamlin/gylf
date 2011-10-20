@@ -1,11 +1,11 @@
 ;====================================================================================================================================================================================================
 ;
-;	Miscellaneous Indicators.
+;   Miscellaneous Indicators.
 ;
-;	The following defined elements represent various indicators used in the program.
+;   The following defined elements represent various indicators used in the program.
 ;
 
-%define	dead.socket	0000h			; Dead socket indicator. If the session file returns this value instead of a valid descriptor, the socket once held by the entry has disconnected and
-						; no longer requires polling for activity. Dead socket entries are candidates for reactivation when new connections arrive.
+%define     dead.socket 0000h   ; Dead socket indicator. If the session file returns this value instead of a valid descriptor, the socket once held by the entry has disconnected and no longer requires
+                                ; polling for activity. Dead socket entries are candidates for reactivation when new connections arrive.
 
-%define	id.size		0008h			; Size of area/item ids.
+%define     id.size     0008h   ; Size of area/item ids.
