@@ -283,6 +283,9 @@ Relevant data:
         egg.def contains definitions for all aspects of egg data.
 
 	./definitions/functions.def
+
+        functions.def contains definitions for function calls. Without these definitions, the program would run on magic numbers and be difficult to read.
+
 	./definitions/id.def
 	./definitions/include.def
 	./definitions/miscellaneous.indicators.def
