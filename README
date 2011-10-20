@@ -291,6 +291,9 @@ Relevant data:
         id.def contains definitions for all aspects of id data.
 
 	./definitions/include.def
+
+        The include.def file contains references to all the code contained in the ./definitions directory. This allows for selective development; we don't have to write all our code to one file.
+
 	./definitions/miscellaneous.indicators.def
 	./definitions/miscellaneous.lengths.def
 	./definitions/numerals.def
