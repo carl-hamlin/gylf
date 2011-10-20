@@ -279,6 +279,9 @@ Relevant data:
         character.def contains definitions for all aspects of character data.
 
 	./definitions/egg.def
+
+        egg.def contains definitions for all aspects of egg data.
+
 	./definitions/functions.def
 	./definitions/id.def
 	./definitions/include.def
