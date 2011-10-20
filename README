@@ -275,6 +275,9 @@ Relevant data:
         buffers.def contains definitions of data buffers.
 
 	./definitions/character.def
+
+        character.def contains definitions for all aspects of character data.
+
 	./definitions/egg.def
 	./definitions/functions.def
 	./definitions/id.def
