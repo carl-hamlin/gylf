@@ -307,6 +307,9 @@ Relevant data:
         numerals.def contains data definitions of numerals.
 
 	./definitions/polling.def
+
+        polling.def contains definitions made use of when polling descriptors.
+
 	./definitions/socket.def
 	./definitions/statii.def
 
