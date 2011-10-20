@@ -287,6 +287,9 @@ Relevant data:
         functions.def contains definitions for function calls. Without these definitions, the program would run on magic numbers and be difficult to read.
 
 	./definitions/id.def
+
+        id.def contains definitions for all aspects of id data.
+
 	./definitions/include.def
 	./definitions/miscellaneous.indicators.def
 	./definitions/miscellaneous.lengths.def
