@@ -311,6 +311,9 @@ Relevant data:
         polling.def contains definitions made use of when polling descriptors.
 
 	./definitions/socket.def
+
+        socket.def contains various definitions made use of by socket functions.
+
 	./definitions/statii.def
 
     ========================================================================
