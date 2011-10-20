@@ -295,6 +295,9 @@ Relevant data:
         The include.def file contains references to all the code contained in the ./definitions directory. This allows for selective development; we don't have to write all our code to one file.
 
 	./definitions/miscellaneous.indicators.def
+
+        miscellaneous.indicators.def contains defined elements which represent various indicators used in the program.
+
 	./definitions/miscellaneous.lengths.def
 	./definitions/numerals.def
 	./definitions/polling.def
