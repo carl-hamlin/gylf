@@ -1,14 +1,14 @@
 ;====================================================================================================================================================================================================
 ;
-;	Miscellaneous Lengths.
+;   Miscellaneous Lengths.
 ;
-;	The following defined elements represent various sizes used in the program.
+;   The following defined elements represent various sizes used in the program.
 ;
 
-%define	dword.l		0004h	; Size of a dword.
-%define	word.l		0002h	; Size of a word.
-%define	byte.l		0001h	; Size of a byte.
+%define     dword.l         0004h   ; Size of a dword.
+%define     word.l          0002h   ; Size of a word.
+%define     byte.l          0001h   ; Size of a byte.
 
-%define	nibble.l	0004h	; SIze of a nibble.
+%define     nibble.l        0004h   ; Size of a nibble.
 
-%define	new.char.sig.l	word.l	; Length of new character signature.
+%define     new.char.sig.l  word.l  ; Length of new character signature.
