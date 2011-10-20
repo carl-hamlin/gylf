@@ -316,6 +316,8 @@ Relevant data:
 
 	./definitions/statii.def
 
+        statii.def contains definitions of various connection statii for use in determining how to interpret data received from a connected socket.
+
     ========================================================================
 
     ./external.data
