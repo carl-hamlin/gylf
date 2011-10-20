@@ -303,6 +303,9 @@ Relevant data:
         miscellaneous.lengths.def contains defined elements which represent various sizes used in the program.
 
 	./definitions/numerals.def
+
+        numerals.def contains data definitions of numerals.
+
 	./definitions/polling.def
 	./definitions/socket.def
 	./definitions/statii.def
