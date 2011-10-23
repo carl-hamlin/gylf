@@ -326,9 +326,12 @@ Relevant data:
 
 	./external.data/cursor.control
 
-        The ./external.dsata/cursor.control directory contains external cursor control information made use of at runtime, but unable to be reoiably stored in memory.
+        The ./external.data/cursor.control directory contains external cursor control information made use of at runtime, but unable to be reoiably stored in memory.
 
 	./external.data/cursor.control/clear.screen
+
+        clear.screen contains the escape sequence pertinent to remotely clearing a user's screen.
+
 	./external.data/cursor.control/cursor.home
 
     ========================================================================
