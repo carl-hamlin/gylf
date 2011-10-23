@@ -344,6 +344,8 @@ Relevant data:
 
 	./raw.data/include.dat
 
+        The include.dat file contains references to all the code contained in the ./definitions directory. This allows for selective development; we don't have to write all our code to one file.
+
     ------------------------------------------------------------------------
 
 	./raw.data/area.data
