@@ -359,6 +359,9 @@ Relevant data:
     ------------------------------------------------------------------------
 
 	./raw.data/character.representation
+
+        The ./raw.data/character.representation directory contains data pertinent to the definition of specific character representations via remote connections. The need for this data is currently under review.
+
 	./raw.data/character.representation/block.dat
 	./raw.data/character.representation/box.double.dat
 	./raw.data/character.representation/box.hybrid.dat
