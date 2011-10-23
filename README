@@ -349,6 +349,9 @@ Relevant data:
     ------------------------------------------------------------------------
 
 	./raw.data/area.data
+
+        The ./raw.data/area.data directory contains data pertinent to the definition and implementation of areas in the environment.
+
 	./raw.data/area.data/area.dat
 
     ------------------------------------------------------------------------
