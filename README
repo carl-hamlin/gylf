@@ -354,6 +354,8 @@ Relevant data:
 
 	./raw.data/area.data/area.dat
 
+        area.dat contains data definitions for data pertaining to areas.
+
     ------------------------------------------------------------------------
 
 	./raw.data/character.representation
