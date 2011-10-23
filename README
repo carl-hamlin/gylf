@@ -321,6 +321,9 @@ Relevant data:
     ========================================================================
 
     ./external.data
+
+        The ./external.data directory contains data that is read from the disk at runtime, rather than being stored in memory.
+
 	./external.data/cursor.control
 	./external.data/cursor.control/clear.screen
 	./external.data/cursor.control/cursor.home
