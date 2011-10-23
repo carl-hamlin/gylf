@@ -1,12 +1,12 @@
 ;====================================================================================================================================================================================================
 ;
-;	area
+;   area
 ;
-;	This file contains data definitions for data pertaining to areas.
+;   This file contains data definitions for data pertaining to areas.
 ;
 
-pouch.declaration	db	27h, 's pouch'
-pouch.declaration.l	equ	$-pouch.declaration
+pouch.declaration   db  27h, 's pouch'
+pouch.declaration.l equ $-pouch.declaration
 
-pouch.description	db	'This is the interior of a marsupial pouch. It is warm and dry.', 0Ah, 0Dh
-pouch.description.l	equ	$-pouch.description
+pouch.description   db  'This is the interior of a marsupial pouch. It is warm and dry.', 0Ah, 0Dh
+pouch.description.l equ $-pouch.description
