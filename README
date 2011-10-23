@@ -339,6 +339,9 @@ Relevant data:
     ========================================================================
 
     ./raw.data
+
+        The ./raw.data directory contains data defined in binary and stored in memory at runtime.
+
 	./raw.data/include.dat
 
     ------------------------------------------------------------------------
