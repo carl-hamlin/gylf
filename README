@@ -334,6 +334,8 @@ Relevant data:
 
 	./external.data/cursor.control/cursor.home
 
+        cursor.home contains the escape sequence pertinent to remotely sending a user's cursor to the upper left corner of their screen.
+
     ========================================================================
 
     ./raw.data
