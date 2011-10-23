@@ -1,12 +1,12 @@
 ;====================================================================================================================================================================================================
 ;
-;	block
+;   block
 ;
-;	This file contains data definitions for blocks. Its future is uncertain.
+;   This file contains data definitions for blocks. Its future is uncertain.
 ;
 
-char.lower.half.block	db	"▄"	; lower half block
-char.left.half.block	db	"▌"	; left half block
-char.right.half.block	db	"▐"	; right half block
-char.upper.half.block	db	"▀"	; upper half block
-char.black.square	db	"■"	; black square
+char.lower.half.block   db  "▄" ; lower half block
+char.left.half.block    db  "▌" ; left half block
+char.right.half.block   db  "▐" ; right half block
+char.upper.half.block   db  "▀" ; upper half block
+char.black.square       db  "■" ; black square
