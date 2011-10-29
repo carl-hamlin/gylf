@@ -429,8 +429,16 @@ Relevant data:
     ------------------------------------------------------------------------
 
 	./raw.data/function.data
+
+        The ./raw.data/function.data directory contains data pertinent to the operation of certain functions.
+
 	./raw.data/function.data/file.indicator.dat
+
+        file.indicator.dat contains a definition that tells write.indicator whether it's writing to a file or the screen.
+
 	./raw.data/item.data
+
+        item.data seems to have gone missing. This is perplexing.
 
     ------------------------------------------------------------------------
 
