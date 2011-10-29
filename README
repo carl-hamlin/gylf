@@ -419,7 +419,12 @@ Relevant data:
     ------------------------------------------------------------------------
 
 	./raw.data/file.paths
+
+	    The ./raw.data/file.paths directory contains data pertinent to the defintions of paths to files used by the system.
+
 	./raw.data/file.paths/file.paths.dat
+
+        file.paths.dat contains data definitions for files used by the system.
 
     ------------------------------------------------------------------------
 
