@@ -409,7 +409,12 @@ Relevant data:
     ------------------------------------------------------------------------
 
 	./raw.data/command.data
+
+	    The ./raw.data/command.data directory contains data pertinent to the implementation of commnands.
+
 	./raw.data/command.data/command.table.dat
+
+        command.table.dat associates the keywords for commands with pointers to their handlers.
 
     ------------------------------------------------------------------------
 
