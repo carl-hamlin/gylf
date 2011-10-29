@@ -463,7 +463,12 @@ Relevant data:
     ------------------------------------------------------------------------
 
 	./raw.data/socket
+
+        The ./raw.data/socket directory contains data related to the implementation of Berkeley Sockets.
+
 	./raw.data/socket/socket.dat
+
+        socket.dat contains data definitions pertinent to the functions surrounding socket management.
 
     ------------------------------------------------------------------------
 
