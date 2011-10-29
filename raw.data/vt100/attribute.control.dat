@@ -1,43 +1,42 @@
 ;=================================================================================================================================================================================================
 ;
-;	attribute.control
+;   attribute.control
 ;
-;	This file contains data definitions for attribute control vt100 escape sequences. Its future is uncertain.
+;   This file contains data definitions for attribute control vt100 escape sequences. Its future is uncertain.
 ;
 
-set.att.mod.1	db	01Bh, "["	; Set Attribute Mode	<ESC>[{attr1};...;{attrn}m
-set.att.mod.2	db	03Bh		; Sets multiple display attribute settings. The
-					; following lists standard attributes:
-set.att.mod.3	db	"m"
+set.att.mod.1   db  01Bh, "["   ; Set Attribute Mode    <ESC>[{attr1};...;{attrn}m
+set.att.mod.2   db  03Bh        ; Sets multiple display attribute settings. The following lists standard attributes:
+set.att.mod.3   db  "m"
 
-;	Main Attributes
+;    Main Attributes
 
-set.att.rst	db	"0"		; Reset all attributes
-set.att.brt	db	"1"		; Bright
-set.att.dim	db	"2"		; Dim
-set.att.und	db	"4"		; Underscore	
-set.att.bnk	db	"5"		; Blink
-set.att.rvs	db	"7"		; Reverse
-set.att.hdn	db	"8"		; Hidden
+set.att.rst     db  "0"         ; Reset all attributes
+set.att.brt     db  "1"         ; Bright
+set.att.dim     db  "2"         ; Dim
+set.att.und     db  "4"         ; Underscore    
+set.att.bnk     db  "5"         ; Blink
+set.att.rvs     db  "7"         ; Reverse
+set.att.hdn     db  "8"         ; Hidden
 
-;	Foreground Colours
+;    Foreground Colours
 
-set.att.f.blk	db	"30"		; Black
-set.att.f.red	db	"31"		; Red
-set.att.f.grn	db	"32"		; Green
-set.att.f.yel	db	"33"		; Yellow
-set.att.f.blu	db	"34"		; Blue
-set.att.f.mag	db	"35"		; Magenta
-set.att.f.cyn	db	"36"		; Cyan
-set.att.f.wht	db	"37"		; White
+set.att.f.blk   db  "30"        ; Black
+set.att.f.red   db  "31"        ; Red
+set.att.f.grn   db  "32"        ; Green
+set.att.f.yel   db  "33"        ; Yellow
+set.att.f.blu   db  "34"        ; Blue
+set.att.f.mag   db  "35"        ; Magenta
+set.att.f.cyn   db  "36"        ; Cyan
+set.att.f.wht   db  "37"        ; White
 
-;      	Background Colours
+;          Background Colours
 
-set.att.b.blk	db	"40"		; Black
-set.att.b.red	db	"41"		; Red
-set.att.b.grn	db	"42"		; Green
-set.att.b.yel	db	"43"		; Yellow
-set.att.b.blu	db	"44"		; Blue
-set.att.b.mag	db	"45"		; Magenta
-set.att.b.cyn	db	"46"		; Cyan
-set.att.b.wht	db	"47"		; White
+set.att.b.blk   db  "40"        ; Black
+set.att.b.red   db  "41"        ; Red
+set.att.b.grn   db  "42"        ; Green
+set.att.b.yel   db  "43"        ; Yellow
+set.att.b.blu   db  "44"        ; Blue
+set.att.b.mag   db  "45"        ; Magenta
+set.att.b.cyn   db  "46"        ; Cyan
+set.att.b.wht   db  "47"        ; White

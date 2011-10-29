@@ -473,14 +473,41 @@ Relevant data:
     ------------------------------------------------------------------------
 
 	./raw.data/vt100
+
+        The ./raw.data/vt100 directory contains data pertinent to the implementation of remote terminal manipulation.
+
 	./raw.data/vt100/attribute.control.dat
+
+        attribute.control.dat contains data definitions for attribute control vt100 escape sequences. Its future is uncertain.
+
 	./raw.data/vt100/cursor.control.dat
+
+        cursor.control.dat contains data definitions for vt100 escape sequences pertinent to moving the cursor about on the screen, locally or remotely. Its future is uncertain.
+
 	./raw.data/vt100/key.definition.control.dat
+
+        key.definition.control.dat contains data definitions for vt100 escape sequences pertinent to the definition of key macros. Its future is uncertain.
+
 	./raw.data/vt100/line.wrap.and.fonts.dat
+
+        line.wrap.and.fonts.dat contains data definitions for vt100 escape sequences pertinent to controlling line wrap and custom fonts. Its future is uncertain.
+
 	./raw.data/vt100/print.control.dat
+
+        print.control.dat contains data definitions for vt100 escape sequences pertaining to print control. Its future is uncertain.
+
 	./raw.data/vt100/query.report.reset.dat
+
+        query.report.reset.dat contains data definitions of vt100 escape sequences pertinent to querying terminals. Its future is uncertain.
+
 	./raw.data/vt100/screen.control.dat
+
+        screen.control.dat contains data definitions for vt100 escape sequences pertinent to controlling the screen, either locally or remotely. Its future is uncertain.
+
 	./raw.data/vt100/tab.control.dat
+
+        tab.control.dat contains data definitions for vt100 escape sequences pertinent to tab control. Its future is uncertain.
+
 	./raw.data/vt100/vt100.dat
 
-
+        The vt100.dat file contains references to all the code contained in the ./raw.data/vt100 directory. This allows for selective development; we don't have to write all our code to one file.

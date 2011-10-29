@@ -1,27 +1,22 @@
 ;=================================================================================================================================================================================================
 ;
-;	line.wrap.and.fonts
+;   line.wrap.and.fonts
 ;
-;	This file contains data definitions for vt100 escape sequences pertinent to controlling line wrap and custom fonts. Its future is uncertain.
+;   This file contains data definitions for vt100 escape sequences pertinent to controlling line wrap and custom fonts. Its future is uncertain.
 ;
 
-en.ln.wrp	db	01Bh, "[7h"				; Enable Line Wrap	<ESC>[7h
-								; Text wraps to next line if longer than the length of the
-								; display area.
+en.ln.wrp       db  01Bh, "[7h"     ; Enable Line Wrap    <ESC>[7h
+                                    ; Text wraps to next line if longer than the length of the display area.
+en.ln.wrp.l     equ $-en.ln.wrp     ; Length of Enable Line Wrap sequence.
 
-en.ln.wrp.l	equ	$-en.ln.wrp				; Length of Enable Line Wrap sequence.
+ds.ln.wrp       db  01Bh, "[7l"     ; Disable Line Wrap    <ESC>[7l
+                                    ; Disables line wrapping.
+ds.ln.wrp.l     equ $-ds.ln.wrp     ; Length of Disable Line Wrap sequence.
 
-ds.ln.wrp	db	01Bh, "[7l"				; Disable Line Wrap	<ESC>[7l
-								; Disables line wrapping.
+fnt.set.g0      db  01Bh, "("       ; Font Set G0        <ESC>(
+                                    ; Set default font.
+fnt.set.g0.l    equ $-fnt.set.g0    ; Length of Font Set G0 sequence.
 
-ds.ln.wrp.l	equ	$-ds.ln.wrp				; Length of Disable Line Wrap sequence.
-
-fnt.set.g0	db	01Bh, "("				; Font Set G0		<ESC>(
-								; Set default font.
-
-fnt.set.g0.l	equ	$-fnt.set.g0				; Length of Font Set G0 sequence.
-
-fnt.set.g1	db	01Bh, ")"				; Font Set G1		<ESC>)
-								; Set alternate font.
-
-fnt.set.g1.l	equ	$-fnt.set.g1				; Length of Font Set G1 sequence.
+fnt.set.g1      db  01Bh, ")"       ; Font Set G1        <ESC>)
+                                    ; Set alternate font.
+fnt.set.g1.l    equ $-fnt.set.g1    ; Length of Font Set G1 sequence.
