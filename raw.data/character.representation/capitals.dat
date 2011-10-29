@@ -1,40 +1,40 @@
 ;=================================================================================================================================================================================================
 ;
-;	capitals
+;   capitals
 ;
-;	This file contains data definitions for esoteric capital letters. Its future is uncertain.
+;   This file contains data definitions for esoteric capital letters. Its future is uncertain.
 ;
 
-char.A				db	"A"	; Uppercase A
-char.latin.cap.a.with.diaresis	db	"Ä"	; latin capital letter a with diaeresis
-char.latin.cap.a.with.ring	db	"Å"	; latin capital letter a with ring above
-char.B				db	"B"	; Uppercase B
-char.C				db	"C"	; Uppercase C
-char.latin.cap.c.with.cedilla	db	"Ç"	; latin capital letter c with cedilla
-char.D				db	"D"	; Uppercase D
-char.E				db	"E"	; Uppercase E
-char.latin.cap.e.with.acute	db	"É"	; latin capital letter e with acute
-char.F				db	"F"	; Uppercase F
-char.G				db	"G"	; Uppercase G
-char.H				db	"H"	; Uppercase H
-char.I				db	"I"	; Uppercase I
-char.J				db	"J"	; Uppercase J
-char.K				db	"K"	; Uppercase K
-char.L				db	"L"	; Uppercase L
-char.M				db	"M"	; Uppercase M
-char.N				db	"N"	; Uppercase N
-char.latin.cap.n.with.tilde	db	"Ñ"	; latin capital letter n with tilde
-char.O				db	"O"	; Uppercase O
-char.latin.cap.o.with.diaresis	db	"Ö"	; latin capital letter o with diaeresis
-char.P				db	"P"	; Uppercase P
-char.Q				db	"Q"	; Uppercase Q
-char.R				db	"R"	; Uppercase R
-char.S				db	"S"	; Uppercase S
-char.T				db	"T"	; Uppercase T
-char.U				db	"U"	; Uppercase U
-char.latin.cap.u.with.diaresis	db	"Ü"	; latin capital letter u with diaeresis
-char.V				db	"V"	; Uppercase V
-char.W				db	"W"	; Uppercase W
-char.X				db	"X"	; Uppercase X
-char.Y				db	"Y"	; Uppercase Y
-char.Z				db	"Z"	; Uppercase Z
+char.A                          db  "A" ; Uppercase A
+char.latin.cap.a.with.diaresis  db  "Ä" ; latin capital letter a with diaeresis
+char.latin.cap.a.with.ring      db  "Å" ; latin capital letter a with ring above
+char.B                          db  "B" ; Uppercase B
+char.C                          db  "C" ; Uppercase C
+char.latin.cap.c.with.cedilla   db  "Ç" ; latin capital letter c with cedilla
+char.D                          db  "D" ; Uppercase D
+char.E                          db  "E" ; Uppercase E
+char.latin.cap.e.with.acute     db  "É" ; latin capital letter e with acute
+char.F                          db  "F" ; Uppercase F
+char.G                          db  "G" ; Uppercase G
+char.H                          db  "H" ; Uppercase H
+char.I                          db  "I" ; Uppercase I
+char.J                          db  "J" ; Uppercase J
+char.K                          db  "K" ; Uppercase K
+char.L                          db  "L" ; Uppercase L
+char.M                          db  "M" ; Uppercase M
+char.N                          db  "N" ; Uppercase N
+char.latin.cap.n.with.tilde     db  "Ñ" ; latin capital letter n with tilde
+char.O                          db  "O" ; Uppercase O
+char.latin.cap.o.with.diaresis  db  "Ö" ; latin capital letter o with diaeresis
+char.P                          db  "P" ; Uppercase P
+char.Q                          db  "Q" ; Uppercase Q
+char.R                          db  "R" ; Uppercase R
+char.S                          db  "S" ; Uppercase S
+char.T                          db  "T" ; Uppercase T
+char.U                          db  "U" ; Uppercase U
+char.latin.cap.u.with.diaresis  db  "Ü" ; latin capital letter u with diaeresis
+char.V                          db  "V" ; Uppercase V
+char.W                          db  "W" ; Uppercase W
+char.X                          db  "X" ; Uppercase X
+char.Y                          db  "Y" ; Uppercase Y
+char.Z                          db  "Z" ; Uppercase Z

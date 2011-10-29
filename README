@@ -367,15 +367,44 @@ Relevant data:
         block.dat contains data definitions for blocks. Its future is uncertain.
 
 	./raw.data/character.representation/box.double.dat
+
+        box.double.dat contains data definitions for box doubles. Its future is uncertain.
+
 	./raw.data/character.representation/box.hybrid.dat
+
+        box.hybrid.dat contains data definitions for box hybrids. Its future is uncertain.
+
 	./raw.data/character.representation/box.light.dat
+
+        box.light.dat contains data definitions for box lights. Its future is uncertain.
+
 	./raw.data/character.representation/capitals.dat
+
+        capitals.dat contains data definitions for capitals. Its future is uncertain.
+
 	./raw.data/character.representation/character.representation.dat
+
+        character.representation.dat contains data definitions for character representation. Its future is uncertain.
+
 	./raw.data/character.representation/control.characters.dat
+
+        The character.representation.dat file contains references to all the code contained in the ./character.representation directory. This allows for selective development; we don't have to write all our code to one file.
+
 	./raw.data/character.representation/esoterics.dat
+
+        esoterics.dat contains data definitions for esoterics. Its future is uncertain.
+
 	./raw.data/character.representation/lowercase.dat
+
+        lowercase.dat contains data definitions for lowercases. Its future is uncertain.
+
 	./raw.data/character.representation/punctuation.dat
+
+        punctuation.dat contains data definitions for punctuation. Its future is uncertain.
+
 	./raw.data/character.representation/stone.dat
+
+        stone.dat contains data definitions for stone. Its future is uncertain.
 
     ------------------------------------------------------------------------
 
