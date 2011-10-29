@@ -1,2 +1,2 @@
-%include	"/home/chamlin/gylf/raw.data/messages/messages.local.dat"
-%include	"/home/chamlin/gylf/raw.data/messages/messages.out.dat"
+%include	"./raw.data/messages/messages.local.dat"
+%include	"./raw.data/messages/messages.out.dat"

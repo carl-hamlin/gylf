@@ -388,7 +388,7 @@ Relevant data:
 
 	./raw.data/character.representation/control.characters.dat
 
-        The character.representation.dat file contains references to all the code contained in the ./character.representation directory. This allows for selective development; we don't have to write all our code to one file.
+        The character.representation.dat file contains references to all the code contained in the ./raw.data/character.representation directory. This allows for selective development; we don't have to write all our code to one file.
 
 	./raw.data/character.representation/esoterics.dat
 
@@ -436,16 +436,29 @@ Relevant data:
 
         file.indicator.dat contains a definition that tells write.indicator whether it's writing to a file or the screen.
 
+    ------------------------------------------------------------------------
+
 	./raw.data/item.data
 
-        item.data seems to have gone missing. This is perplexing.
+        The ./raw.data/item.data does not currently contain data. The intention is that when items are fully implemented, it will contain data pertinent to their implementation.
 
     ------------------------------------------------------------------------
 
 	./raw.data/messages
+
+        The ./raw.data/messages directory contains data pertinent to the formation and delivery ofmessages to the server admin and participants.
+
 	./raw.data/messages/messages.dat
+
+        The messages.dat file contains references to all the code contained in the ./raw.data/messages directory. This allows for selective development; we don't have to write all our code to one file.
+
 	./raw.data/messages/messages.local.dat
+
+         messages.local.dat contains data definitions for messages to be sent locally to the server admin.
+
 	./raw.data/messages/messages.out.dat
+
+        messages.out.dat contains data definitions for messages to be sent on a connected socket to remote users.
 
     ------------------------------------------------------------------------
 
