@@ -27,7 +27,7 @@ command.area.bad:                   pop     esi                                 
                                     mov     ebx, dword [esi+connection.descriptor.index]                                ; ebx - Descriptor associated with current connection.
                                     mov     dword [socket.data.send.socket.descriptor], ebx                             ; Store socket descriptor for send function. 
                                     mov     dword [socket.data.send.buffer.pointer], socket.data.area.bad.syntax.message; Point send function to message indicating that the command was
-                                                                ; bad.
+                                                                                                                        ; bad.
                                     mov     dword [socket.data.send.buffer.l], socket.data.area.bad.syntax.message.l    ; Store length of message for send function.
                                     call    socket.send                                                                 ; Tell the user that the command doesn't have a current analogue.
 
@@ -77,7 +77,7 @@ command.area.name.l                 mov     dword [area.name.l], edx            
                                     mov     ecx, area.description.field.l                                               ; ecx - Size of description field. Used as loop counter.
 
 command.area.find.second.argument:  cmp     byte [esi], 020h                                                            ; Did the user put a space between the command and the first
-                                                                ; argument?
+                                                                                                                        ; argument?
                                     jnz     command.area.loop.2                                                         ; Nope. Let's get started. Otherwise...
 
                                     cmp     byte [esi], 00h                                                             ; Have we hit the end of the command string?
