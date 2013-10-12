@@ -10,6 +10,7 @@
 %include    "./code/commands/command.think.asm"
 
 %include	"./code/comms/send.to.area.asm"
+%include    "./code/comms/send.to.player.asm"
 %include	"./code/comms/send.to.world.asm"
 
 %include	"./code/functions/bail.asm"
