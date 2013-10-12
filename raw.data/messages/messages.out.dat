@@ -52,7 +52,7 @@ socket.data.area.bad.syntax.message.l   equ $-socket.data.area.bad.syntax.messag
 socket.data.area.created.message        db  "Your new area has been created successfully.", 0Ah, 0Dh                                                                                                                                                        ; Area creation message.
 socket.data.area.created.message.l      equ $-socket.data.area.created.message                                                                                                                                                                              ; Length of message.
 
-socket.data.out.of.areas.message        db  "An attempt was made to create your new area, but there are currently no available area files." 0Ah, 0Dh                                                                                                        ; Out of areas message.
+socket.data.out.of.areas.message        db  "An attempt was made to create your new area, but there are currently no available area files.", 0Ah, 0Dh                                                                                                        ; Out of areas message.
 socket.data.out.of.areas.message.l      equ $-socket.data.out.of.areas.message                                                                                                                                                                              ; Length of message.
 
 socket.data.bad.area.id.message         db  "Your area id is all screwed up. The admin has been notified.", 0Ah, 0Dh                                                                                                                                        ; Bad area id message.
