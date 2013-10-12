@@ -10,8 +10,7 @@
 ;   Returns:        None.
 ;
 
-	check.login:		int 3
-				pusha					; Preserve all caller registers.
+	check.login:		pusha					; Preserve all caller registers.
 
 				mov	esi, ebx			; esi - pointer to received participant data file name.
 				mov	edi, buffer.2			; edi - pointer to secondary buffer.
