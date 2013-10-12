@@ -5,7 +5,7 @@
 ;   This table associates the keywords for commands with pointers to their handlers.
 ;
 
-%define number.of.commands  0Ah                 ; Number of commands in table.
+%define number.of.commands  0Bh                 ; Number of commands in table.
 
 command.table       equ $                       ; Placeholder for beginning of command table.
 
@@ -43,6 +43,11 @@ command.help.w      db  command.help.l          ; Indicator of length of command
 command.help.s      db  'help'                  ; Common command string for displaying help information.
 command.help.l      equ $-command.help.s        ; Length of command 'help'.
 command.help.p      dd  command.help            ; Pointer to handler for command 'help'.
+
+command.logout.w	db	command.logout.l	; Indicator of length of command 'logout'.
+command.logout.s	db	'logout'		; Common command string for logging a participant out and returning control of their avatar to the artificial intelligence.
+command.logout.l	equ	$-command.logout.s	; Length of command 'logout'.
+command.logout.p	dd	command.logout		; Pointer to handler for command 'logout'.
 
 command.look.w      db  command.look.l          ; Indicator of length of command 'look'.
 command.look.s      db  'look'                  ; Common command string for displaying information about the target argument.

@@ -5,6 +5,7 @@
 %include	"./code/commands/command.egg.asm"
 %include	"./code/commands/command.gylf.asm"
 %include	"./code/commands/command.help.asm"
+%include	"./code/commands/command.logout.asm"
 %include	"./code/commands/command.look.asm"
 %include	"./code/commands/command.shutdown.asm"
 %include    "./code/commands/command.think.asm"

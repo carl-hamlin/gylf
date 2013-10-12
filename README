@@ -58,6 +58,10 @@ Relevant data:
 
         command.help.asm contains code pertinent to the implementation of the 'help' command; a player-level command whose sole purpose is to display context-sensitive help.
 
+	./code/commands/command.logout.asm
+
+	command.logout.asm contains code pertinent to the implementation of the 'logout' command; a common command that removes a participant from the server and leaves their avatar under the control of an artificial intelligence.
+
     ./code/commands/command.look.asm
 
         command.look.asm contains code pertinent to the implementation of the 'look' command; a player-level command that displays information about the target.
