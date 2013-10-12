@@ -1,4 +1,4 @@
-;================================================================================================================================================================================================
+;========================================================================================================================================================================================================================================================================================================================
 ;
 ;   command.area.asm
 ;
@@ -10,7 +10,8 @@
 ;   Returns:        None.
 ;
 
-command.area:                       push    eax                                                                         ; Preserve length of received data.
+command.area:                       push    esi                                                                         ; Preserve index to connection entry.
+                                    push    eax                                                                         ; Preserve length of received data.
 
                                     call    check.admin                                                                 ; See if the calling socket is controlled by an admin.
                                     jc      command.area.admin                                                          ; If so, go create the area. Otherwise...
@@ -21,21 +22,17 @@ command.area.bad:                   pop     esi                                 
 
                                     mov     ecx, local.data.area.bad.syntax.message                                     ; Pointer to local message indicating an admin bounced on syntax.
                                     mov     edx, local.data.area.bad.syntax.message.l                                   ; Length of message.
-                                    call    write.descriptor                                                            ; Tell the admin there's someone online with admin priviledges that needs an
-                                                                                                                        ; education.
+                                    call    write.descriptor                                                            ; Tell the admin there's someone online with admin priviledges that needs an education.
 
                                     mov     ebx, dword [esi+connection.descriptor.index]                                ; ebx - Descriptor associated with current connection.
                                     mov     dword [socket.data.send.socket.descriptor], ebx                             ; Store socket descriptor for send function. 
-                                    mov     dword [socket.data.send.buffer.pointer], socket.data.area.bad.syntax.message; Point send function to message indicating that the command was
-                                                                                                                        ; bad.
+                                    mov     dword [socket.data.send.buffer.pointer], socket.data.area.bad.syntax.message; Point send function to message indicating that the command was bad.
                                     mov     dword [socket.data.send.buffer.l], socket.data.area.bad.syntax.message.l    ; Store length of message for send function.
                                     call    socket.send                                                                 ; Tell the user that the command doesn't have a current analogue.
 
                                     ret                                                                                 ; Return to caller.
 
 command.area.admin:                 pop     eax                                                                         ; Restore length of received data.
-
-                                    push    esi                                                                         ; Preserve index to connection entry.
 
                                     mov     esi, buffer.1                                                               ; ecx - Pointer to received command string.
                                     add     esi, command.area.l                                                         ; ecx - Potential pointer to argument for command.
@@ -65,8 +62,7 @@ command.area.loop.1:                cmp     byte [esi], "|"                     
 
                                     loop    command.area.loop.1                                                         ; Go move the rest of the first argument.
 
-                                    jmp     command.area.bad                                                            ; Looks like the argument is longer than the field to which it is to be stored.
-                                                                                                                        ; Go educate the user on the fine points of syntax.
+                                    jmp     command.area.bad                                                            ; Looks like the argument is longer than the field to which it is to be stored. Go educate the user on the fine points of syntax.
 
 command.area.name.l                 mov     dword [area.name.l], edx                                                    ; Store the length of the first argument.
                                     sub     edx, edx                                                                    ; edx - Prepared to count bytes again...
@@ -76,8 +72,7 @@ command.area.name.l                 mov     dword [area.name.l], edx            
 
                                     mov     ecx, area.description.field.l                                               ; ecx - Size of description field. Used as loop counter.
 
-command.area.find.second.argument:  cmp     byte [esi], 020h                                                            ; Did the user put a space between the command and the first
-                                                                                                                        ; argument?
+command.area.find.second.argument:  cmp     byte [esi], 020h                                                            ; Did the user put a space between the command and the first argument?
                                     jnz     command.area.loop.2                                                         ; Nope. Let's get started. Otherwise...
 
                                     cmp     byte [esi], 00h                                                             ; Have we hit the end of the command string?
@@ -88,11 +83,9 @@ command.area.find.second.argument:  cmp     byte [esi], 020h                    
                                     jmp     command.area.find.second.argument                                           ; Go see if we've hit the argument yet.
 
 command.area.loop.2                 cmp     byte [esi], 00h                                                             ; Have we hit the end of the command string?
-                                    jz      command.area.description.l                                                  ; Yes. Go process the description and get started finding a filename to which
-                                                                                                                        ; to store this data.
+                                    jz      command.area.description.l                                                  ; Yes. Go process the description and get started finding a filename to which to store this data.
 
-                                    movsb                                                                               ; Move a byte of the first argument over to the description field
-                                                                                                                        ; in the area header.
+                                    movsb                                                                               ; Move a byte of the first argument over to the description field in the area header.
                                     inc     edx                                                                         ; edx - Count of how many bytes we've moved so far.
 
                                     loop    command.area.loop.2                                                         ; Go move the rest of the second argument.
