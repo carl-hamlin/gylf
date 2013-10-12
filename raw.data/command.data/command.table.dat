@@ -5,7 +5,7 @@
 ;   This table associates the keywords for commands with pointers to their handlers.
 ;
 
-%define number.of.commands  08h                 ; Number of commands in table.
+%define number.of.commands  0Ah                 ; Number of commands in table.
 
 command.table       equ $                       ; Placeholder for beginning of command table.
 
