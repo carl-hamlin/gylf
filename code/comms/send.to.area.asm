@@ -19,7 +19,7 @@ send.to.area:                   push    esi                                     
                                 mov     esi, connection.table                           ; esi - pointer to table of handles associated with active connections.
                                 mov     ecx, socket.number                              ; ecx - number of connections to poll.
 
-send.to.area.connection.poll:   cmp     dword [esi+connection.descriptor.index], eax    ; Does the area id associated with this connection match the area id to be broadcast?
+send.to.area.connection.poll:   cmp     dword [esi+connection.area.id.index], eax	; Does the area id associated with this connection match the area id to be broadcast?
                                 jz      send.to.area.broadcast                          ; Yes. Go broadcast to this connection.
 
 send.to.area.broadcast.done:    add     esi, connection.entry.size                      ; esi - pointer to next connection handle in table.
