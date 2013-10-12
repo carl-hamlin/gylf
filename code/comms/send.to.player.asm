@@ -10,7 +10,7 @@
 ;                   edx - Length of message to be broadcast.
 ;
 ;   Returns:        eax - 0 on success
-                    eax - out of area indicator if target recipient is out of area
+;                   eax - out of area indicator if target recipient is out of area
 ;
 
 send.to.player:                     push    esi                                             ; Preserve caller's esi.
