@@ -22,7 +22,8 @@
 command.think:              mov     ecx, buffer.1                                                           ; ecx - Pointer to received command string.
                             add     ecx, command.think.l                                                    ; ecx - Pointer to first argument for command.
 
-                            mov     ebx, ecx+1                                                              ; ebx - Pointer to first byte of first argument.
+                            mov     ebx, ecx                                                                ; ebx - Pointer to first argument for command.
+                            inc     ebx                                                                     ; ebx - Pointer to first byte of first argument.
                             cmp     byte [ebx], '"'                                                         ; Is the first byte a quotation mark?
                             jz      command.think.untargetted                                               ; Yes - send the message to the entire area.
 
