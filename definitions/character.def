@@ -7,8 +7,7 @@
 
 %define     number.of.parents                   0002h                                       ; Number of parents required to contribute to the fertilization of an egg.
 %define     child.attribute.computation.factor  000Ah                                       ; Arbitrary factor for the computation of certain attributes during egg conversion.
-%define     new.char.sig                        0AFFh                                       ; Indicator that the file read by address.login.status is in fact an egg, rather than an established
-                                                                                            ; character.
+%define     new.char.sig                        0AFFh                                       ; Indicator that the file read by address.login.status is in fact an egg, rather than an established character.
 
 %define     admin.character                     00000001b                                   ; Mask for administrative byte indicating character has admin privileges.
 
@@ -195,4 +194,3 @@ character.base.fur.quality.number           equ     $-character.base.fur.quality
 
 character.secondary.fur.quality.table       equ     $                                       ; Placeholder for secondary fur quality table entry point.
 character.secondary.fur.quality.number      equ     $-character.secondary.fur.quality.table ; Number of secondary fur qualities in table.
-
