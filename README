@@ -29,6 +29,10 @@ Relevant data:
     ./code/commands
 
         The ./code/commands directory contains code pertaining to commands available to users depending on their access level.
+    
+    ./code/commands/command.ai.asm
+
+        command.ai.asm contains code pertinent to the implementation of the 'ai' command; a player-level command that allows for the invoker to adjust parameters associated with their avatar's behaviour while they are signed out.
 
     ./code/commands/command.area.asm
 
@@ -62,6 +66,10 @@ Relevant data:
 
         commmand.shutdown.asm contains code pertinent to the implementation of the 'shutdown' command; an administrator command that shuts down the server from within the environment.
 
+    ./code/commands/command.think.asm
+
+        command.think.asm contains code pertinent to the implementation of the 'think' command; a player-level command that allows for communication between players in a local environment.
+
     ------------------------------------------------------------------------
 
     ./code/comms
@@ -71,6 +79,10 @@ Relevant data:
     ./code/comms/send.to.area.asm
 
         send.to.area.asm contains code that sends a provided message to a specified area. Everyone in the specified area will receive the message. This code is used to facilitate communication between users in a given area of the environment, as well as facilitating communications between administrators and a given area.
+
+    ./code/comms/send.tp.player.asm
+
+        send.to.player.asm contains code that sends a provided message to a specified player. Only the specified player will received this message. This code is used to facilitate private communication between players.
 
     ./code/comms/send.to.world.asm
 
