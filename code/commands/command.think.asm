@@ -1,6 +1,6 @@
 ;================================================================================================================================================================================================
 ;
-;   command.look.asm
+;   command.think.asm
 ;
 ;   This function is used by players and admins to communicate with one another.
 ;
@@ -19,4 +19,23 @@
 ;   Returns:        None.
 ;
 
-command.think:      ret     ; Do nothing for the moment.
+command.think:              mov     ecx, buffer.1                                                           ; ecx - Pointer to received command string.
+                            add     ecx, command.think.l                                                    ; ecx - Pointer to first argument for command.
+
+                            mov     ebx, ecx+1                                                              ; ebx - Pointer to first byte of first argument.
+                            cmp     byte [ebx], '"'                                                         ; Is the first byte a quotation mark?
+                            jz      command.think.untargetted                                               ; Yes - send the message to the entire area.
+
+                            ; Skill evaluation goes here - failure shunts to command.think.untargetted.
+                            
+                            ; TODO - Figure out how to get a valid connection ID from user input to send in eax.
+
+                            call    send.to.player                                                          ; Send message to targetted player.
+
+                            ret                                                                             ; Return to caller.
+
+command.think.untargetted:  mov     edx, eax                                                                ; edx - Length of command string minus terminator(s).
+                            sub     edx, command.think.l                                                    ; edx - Length of command string minus terminator(s) and command.
+                            call    send.to.area                                                            ; Broadcast the message.
+
+                            ret                                                                             ; Return to caller.
