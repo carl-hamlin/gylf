@@ -12,7 +12,7 @@ command.table       equ $                       ; Placeholder for beginning of c
 command.ai.w        db  command.ai.l            ; Indicator of length of command 'ai'.
 command.ai.s        db 'ai'                     ; Common command string for setting parameters for the offline ai.
 command.ai.l        equ $-command.ai.s          ; Length of command 'ai'.
-command.ai.p        db command.ai               ; pointer to handler for command 'ai'.
+command.ai.p        dd command.ai               ; pointer to handler for command 'ai'.
 
 command.area.w      db  command.area.l          ; Indicator of length of command 'area'.
 command.area.s      db  'area'                  ; Admin command string for creating an area.
