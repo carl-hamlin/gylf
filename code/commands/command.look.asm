@@ -30,7 +30,7 @@ command.look:                           cmp     eax, command.look.l             
                                         call    open.descriptor                                                         ; Associate a descriptor with the area id.
 
                                         or      eax, eax                                                                ; Did the descriptor associate properly?
-                                        jnz     command.look.targetted.good.descriptor                                  ; Yes. Go have a look at contained objects.
+                                        jz     command.look.targetted.good.descriptor                                   ; Yes. Go have a look at contained objects.
 
                                         jmp     command.look.bad.descriptor                                             ; No. Go inform the user that the descriptor is invalid.
 
@@ -61,15 +61,14 @@ command.look.default:                   mov     ebx, esi                        
                                         call    open.descriptor                                                         ; Associate a descriptor with the file containing current area info.
 
                                         or      eax, eax                                                                ; Were we able to properly associate a descriptor?
-                                        jnz     command.look.default.good.descriptor                                    ; Yes. Go execute default behaviour.
+                                        jz     command.look.default.good.descriptor                                     ; Yes. Go execute default behaviour.
 
 command.look.bad.descriptor:            mov     ecx, local.data.bad.area.id.indicator.message                           ; No. ecx - pointer to message indicating the local area id is bad.
                                         mov     edx, local.data.bad.area.id.indicator.message.l                         ; edx - Length of message.
                                         call    write.descriptor                                                        ; Tell the admin that the local area id got screwed up somehow.
 
                                         mov     ebx, dword [esi+connection.descriptor.index]                            ; ebx - Pointer to descriptor associated with active connection.
-                                        mov     dword [socket.data.send.socket.descriptor], ebx                         ; Point socket.send to the descriptor associated with the active
-                                                                ; connection.
+                                        mov     dword [socket.data.send.socket.descriptor], ebx                         ; Point socket.send to the descriptor associated with the active connection.
                                         mov     dword [socket.data.send.buffer.pointer], socket.data.bad.area.id.message; Point socket.send to the remote bad area id message.
                                         mov     dword [socket.data.send.buffer.l], socket.data.bad.area.id.message.l    ; Tell socket.send the length of the message.
                                         call    socket.send                                                             ; Put the message on the socket.
@@ -87,8 +86,7 @@ command.look.default.good.descriptor:   mov     ebx, eax                        
                                         mov     edx, dword [buffer.1]                                                   ; edx - Length of the name entry.
                                         call    read.descriptor                                                         ; Read the name entry.
 
-                                        mov     ecx, buffer.1                                                           ; ecx - Pointer to buffer into which to read the length of the description
-                                                                                                                        ; entry.
+                                        mov     ecx, buffer.1                                                           ; ecx - Pointer to buffer into which to read the length of the description entry.
                                         mov     edx, dword.l                                                            ; edx - Dword length.
                                         call    read.descriptor                                                         ; Read the length of the description entry.
 
