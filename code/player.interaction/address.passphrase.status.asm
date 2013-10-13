@@ -10,61 +10,65 @@
 ;
 ;   Returns:        None.
 
-address.passphrase.status:  call    recv.from.socket                                                            ; Grab the data from the socket.
+	address.passphrase.status:	call	recv.from.socket								; Grab the data from the socket.
 
-                            mov     ebx, buffer.1                                                               ; ebx = Pointer to received data.
-                            call    buffer.strip                                                                ; Strip extra characters from the received data.
+					mov	ebx, buffer.1									; ebx = Pointer to received data.
+					call	buffer.strip									; Strip extra characters from the received data.
 
-                            mov     ebx, esi                                                                    ; ebx = Pointer to connection tables.
-                            add     ebx, connection.filename.index                                              ; ebx = Pointer to file path associated with user credentials.
-                            call    open.descriptor                                                             ; Associate a descriptor with the user's credential file.
+					mov	ebx, esi									; ebx = Pointer to connection tables.
+					add	ebx, connection.filename.index							; ebx = Pointer to file path associated with user credentials.
+					call	open.descriptor									; Associate a descriptor with the user's credential file.
 
-                            mov     ebx, eax                                                                    ; ebx = Descriptor associated with user credential file.
-                            mov     ecx, buffer.2                                                               ; ecx = Pointer to buffer into which to read data from the user's credential file.
-                            mov     edx, byte.l                                                                 ; edx = Number of bytes to read.
-                            call    read.descriptor                                                             ; Read the number of bytes to query.
+					mov	ebx, eax									; ebx = Descriptor associated with user credential file.
+					mov	ecx, buffer.2									; ecx = Pointer to buffer into which to read data from the user's credential file.
+					mov	edx, byte.l									; edx = Number of bytes to read.
+					call	read.descriptor									; Read the number of bytes to query.
 
-                            mov     ecx, buffer.2                                                               ; ecx = Pointer to read buffer.
-                            sub     edx, edx                                                                    ; edx - Prepared for number of bytes to read.
-                            mov     dl, byte [buffer.2]                                                         ; edx = Number of bytes to read.
-                            call    read.descriptor                                                             ; Read the passphrase.
+					mov	ecx, buffer.2									; ecx = Pointer to read buffer.
+					sub	edx, edx									; edx - Prepared for number of bytes to read.
+					mov	dl, byte [buffer.2]								; edx = Number of bytes to read.
+					call	read.descriptor									; Read the passphrase.
 
-                            push    eax                                                                         ; Preserve number of bytes read.
+					push	eax										; Preserve number of bytes read.
 
-                            call    close.descriptor                                                            ; Disassociate the descriptor.
+					call	close.descriptor								; Disassociate the descriptor.
 
-                            pop     eax                                                                         ; Restore number of bytes read.
+					pop	eax										; Restore number of bytes read.
 
-                            mov     ebx, buffer.2                                                               ; Pointer to read data.
+					mov	ebx, buffer.2									; Pointer to read data.
 
-                            push    esi                                                                         ; Preserve index to connection tables.
+					push	esi										; Preserve index to connection tables.
 
-                            mov     ecx, eax                                                                    ; ecx = Number of bytes read.
-                            mov     esi, buffer.1                                                               ; esi = Pointer to data received from socket.
-                            mov     edi, buffer.2                                                               ; edi = Pointer to data read from file.
-
-passphrase.cmp.loop         repz    cmpsb                                                                       ; See if they match.
-                            jcxz    good.passphrase                                                             ; If ecx iz zero, we got all the way through. Go send a welcome.
-
-                            jmp     bad.passphrase                                                              ; Otherwise, go tell the user he's SOL and smoke his connection.
-
-good.passphrase:            pop     esi                                                                         ; Restore index to connection tables.
-
-                            mov     byte [esi+connection.status.index], active.status                           ; Set connection status to 'active'.
-                            call    write.welcome                                                               ; Print the welcome screen.
-
-                            ret                                                                                 ; Return to caller.
+					mov	ecx, eax									; ecx = Number of bytes read.
+					mov	esi, buffer.1									; esi = Pointer to data received from socket.
+					mov	edi, buffer.2									; edi = Pointer to data read from file.
 
 ;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-bad.passphrase:             pop     esi                                                                         ; Restore index to connection tables.
+	passphrase.cmp.loop:		repz	cmpsb										; See if they match.
+					jcxz	good.passphrase									; If ecx iz zero, we got all the way through. Go send a welcome.
 
-                            mov     eax, dword [esi+connection.descriptor.index]                                ; eax - descriptor associated with active connection.
-                            mov     dword [socket.data.send.socket.descriptor], eax                             ; Store descriptor associated with active connection.
-                            mov     dword [socket.data.send.buffer.pointer], socket.data.bad.passphrase.message ; Point send function to message indicating that the passphrase was bad.
-                            mov     dword [socket.data.send.buffer.l], socket.data.bad.passphrase.message.l     ; Store length of message for send function.
-                            call    socket.send                                                                 ; Tell the user that he's SOL.
+					jmp	bad.passphrase									; Otherwise, go tell the user he's SOL and smoke his connection.
 
-                            call    clean.socket                                                                ; Smoke that connection!
+;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-                            ret                                                                                 ; Return to caller.
+	good.passphrase:		pop	esi										; Restore index to connection tables.
+
+					mov	byte [esi+connection.status.index], active.status				; Set connection status to 'active'.
+					call	write.welcome									; Print the welcome screen.
+
+					ret											; Return to caller.
+
+;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	bad.passphrase:			pop	esi										; Restore index to connection tables.
+
+					mov	eax, dword [esi+connection.descriptor.index]					; eax - descriptor associated with active connection.
+					mov	dword [socket.data.send.socket.descriptor], eax					; Store descriptor associated with active connection.
+					mov	dword [socket.data.send.buffer.pointer], socket.data.bad.passphrase.message	; Point send function to message indicating that the passphrase was bad.
+					mov	dword [socket.data.send.buffer.l], socket.data.bad.passphrase.message.l		; Store length of message for send function.
+					call	socket.send									; Tell the user that he's SOL.
+
+					call	clean.socket									; Smoke that connection!
+
+					ret											; Return to caller.
