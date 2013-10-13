@@ -10,9 +10,9 @@
 ;                   No Carry - Not Admin
 ;
 
-check.admin:    call    get.character.data              ; Populate character data.
+	check.admin:	call	get.character.data		; Populate character data.
 
-                mov     al, byte [administrative.byte]  ; al - Administrative byte.
-                shr     al, 01h                         ; Set carry if the least significant bit is high.
+			mov	al, byte [administrative.byte]	; al - Administrative byte.
+			shr	al, 01h				; Set carry if the least significant bit is high.
 
-                ret                                     ; Return to caller.
+			ret					; Return to caller.
