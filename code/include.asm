@@ -1,4 +1,4 @@
-%include    "./code/commands/command.ai.asm"
+%include	"./code/commands/command.ai.asm"
 %include	"./code/commands/command.area.asm"
 %include	"./code/commands/command.broadcast.asm"
 %include	"./code/commands/command.dig.asm"
@@ -8,10 +8,10 @@
 %include	"./code/commands/command.logout.asm"
 %include	"./code/commands/command.look.asm"
 %include	"./code/commands/command.shutdown.asm"
-%include    "./code/commands/command.think.asm"
+%include	"./code/commands/command.think.asm"
 
 %include	"./code/comms/send.to.area.asm"
-%include    "./code/comms/send.to.player.asm"
+%include	"./code/comms/send.to.player.asm"
 %include	"./code/comms/send.to.world.asm"
 
 %include	"./code/functions/bail.asm"
@@ -39,10 +39,10 @@
 %include	"./code/functions/write.prompt.asm"
 %include	"./code/functions/write.welcome.asm"
 
-%include	"./code/player.interaction/address.active.status.asm"
-%include	"./code/player.interaction/address.login.status.asm"
-%include	"./code/player.interaction/address.passphrase.status.asm"
-%include	"./code/player.interaction/address.set.passphrase.status.asm"
+%include	"./code/participant.interaction/address.active.status.asm"
+%include	"./code/participant.interaction/address.login.status.asm"
+%include	"./code/participant.interaction/address.passphrase.status.asm"
+%include	"./code/participant.interaction/address.set.passphrase.status.asm"
 
 %include	"./code/socket/accept.socket.asm"
 %include	"./code/socket/active.socket.poll.asm"

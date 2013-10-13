@@ -12,9 +12,6 @@
 
 	address.passphrase.status:	call	recv.from.socket								; Grab the data from the socket.
 
-					mov	ebx, buffer.1									; ebx = Pointer to received data.
-					call	buffer.strip									; Strip extra characters from the received data.
-
 					mov	ebx, esi									; ebx = Pointer to connection tables.
 					add	ebx, connection.filename.index							; ebx = Pointer to file path associated with user credentials.
 					call	open.descriptor									; Associate a descriptor with the user's credential file.

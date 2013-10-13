@@ -12,9 +12,6 @@
 
 	address.login.status:	call	recv.from.socket							; Get the data from the socket.
 
-				mov	ebx, buffer.1								; ebx - Pointer to received data.
-				call	buffer.strip								; Strip extra characters from the received data.
-
 				call	check.login								; Make sure this character isn't already logged in.
 				jnc	not.logged.in								; If the character isn't already logged in, proceed to the login code.
 

@@ -13,24 +13,30 @@
 ;   Returns:        eax = Revised number of characters.
 ;
 
-buffer.strip:   push    ebx             ; Save pointer to buffer.
-                mov     ecx, eax        ; ecx = Number of characters to check.
+	buffer.strip:	push	ebx		; Save pointer to buffer.
+			mov	ecx, eax	; ecx = Number of characters to check.
 
-strip.loop:     cmp     byte [ebx], 0Ah ; Is the current character 0Ah?
-                jz      strip.char      ; Yes. Go strip it.
+;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-                cmp     byte [ebx], 0Dh ; Is the current character 0Dh?
-                jz      strip.char      ; Yes. Go strip it.
+	strip.loop:	cmp	byte [ebx], 0Ah	; Is the current character 0Ah?
+			jz	strip.char	; Yes. Go strip it.
 
-                inc     ebx             ; esi = Pointer to the next element in the data buffer.
-                loop    strip.loop      ; Go check the next element.
+			cmp	byte [ebx], 0Dh	; Is the current character 0Dh?
+			jz	strip.char	; Yes. Go strip it.
 
-                jmp     strip.done      ; All finished here. Go return to caller.
+			inc	ebx		; esi = Pointer to the next element in the data buffer.
+			loop	strip.loop	; Go check the next element.
 
-strip.char:     mov     byte [ebx], 00h ; Strip the current character.
-                inc     ebx             ; esi = Pointer to the next element in the data buffer.
-                dec     eax             ; eax = Revised number of characters.
-                loop    strip.loop      ; Go check the next element.
+			jmp	strip.done	; All finished here. Go return to caller.
 
-strip.done:     pop     ebx             ; Restore pointer to buffer.
-                ret                     ; Return to caller.
+;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	strip.char:	mov	byte [ebx], 00h	; Strip the current character.
+			inc	ebx		; esi = Pointer to the next element in the data buffer.
+			dec	eax		; eax = Revised number of characters.
+			loop	strip.loop	; Go check the next element.
+
+;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	strip.done:	pop	ebx		; Restore pointer to buffer.
+			ret			; Return to caller.
