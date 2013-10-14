@@ -1,6 +1,7 @@
 gylf
 
-An MMO Server for linux implemented entirely in x86 assembly language, using the linux kernel services for Berkeley Sockets.
+An MMO Server for linux implemented entirely in x86 assembly language, using
+the linux kernel services for Berkeley Sockets.
 
 Relevant data:
 
@@ -8,21 +9,26 @@ Relevant data:
 
     ./build.gylf.sh
 
-        This is the build script. It depends on the presence of nasm and ld. Run the build script to produce an executable binary called 'gylf' from the existing codebase, which it then places in the root directory.
+    This is the build script. It depends on the presence of nasm and ld. Run
+    the build script to produce an executable binary called 'gylf' from the
+    existing codebase, which it then places in the root directory.
 
     ========================================================================
 
     ./code
 
-        The ./code directory acts as the root directory for the code implemented in the gylf project.
+    The ./code directory acts as the root directory for the code implemented
+    in the gylf project.
 
     ./code/gylf.asm
 
-        gylf.asm is the main program - it cycles through the main loop.
+    gylf.asm is the main program - it cycles through the main loop.
 
     ./code/include.asm
 
-        The include.asm file contains references to all the code contained in the ./code directory. This allows for selective development; we don't have to write all our code to one file.
+    The include.asm file contains references to all the code contained in
+    the ./code directory. This allows for selective development; we don't
+    have to write all our code to one file.
 
     ------------------------------------------------------------------------
 
