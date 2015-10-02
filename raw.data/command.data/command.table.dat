@@ -5,61 +5,61 @@
 ;   This table associates the keywords for commands with pointers to their handlers.
 ;
 
-%define number.of.commands  0Bh                 ; Number of commands in table.
+    %define number.of.commands  0Bh               ; Number of commands in table.
 
-command.table       equ $                       ; Placeholder for beginning of command table.
+    command.table       equ $                     ; Placeholder for beginning of command table.
 
-command.ai.w        db  command.ai.l            ; Indicator of length of command 'ai'.
-command.ai.s        db 'ai'                     ; Common command string for setting parameters for the offline ai.
-command.ai.l        equ $-command.ai.s          ; Length of command 'ai'.
-command.ai.p        dd command.ai               ; pointer to handler for command 'ai'.
+    command.ai.w        db  command.ai.l          ; Indicator of length of command 'ai'.
+    command.ai.s        db 'ai'                   ; Common command string for setting parameters for the offline ai.
+    command.ai.l        equ $-command.ai.s        ; Length of command 'ai'.
+    command.ai.p        dd command.ai             ; pointer to handler for command 'ai'.
 
-command.area.w      db  command.area.l          ; Indicator of length of command 'area'.
-command.area.s      db  'area'                  ; Admin command string for creating an area.
-command.area.l      equ $-command.area.s        ; Length of command 'area'.
-command.area.p      dd  command.area            ; Pointer to handler for command 'area'.
+    command.area.w      db  command.area.l        ; Indicator of length of command 'area'.
+    command.area.s      db  'area'                ; Admin command string for creating an area.
+    command.area.l      equ $-command.area.s      ; Length of command 'area'.
+    command.area.p      dd  command.area          ; Pointer to handler for command 'area'.
 
-command.broadcast.w db  command.broadcast.l     ; Indicator of length of command 'broadcast'.
-command.broadcast.s db  'broadcast'             ; Admin command string for broadcasting a message to the entire world.
-command.broadcast.l equ $-command.broadcast.s   ; Length of command 'broadcast'.
-command.broadcast.p dd  command.broadcast       ; Pointer to handler for command 'broadcast'.
+    command.broadcast.w db  command.broadcast.l   ; Indicator of length of command 'broadcast'.
+    command.broadcast.s db  'broadcast'           ; Admin command string for broadcasting a message to the entire world.
+    command.broadcast.l equ $-command.broadcast.s ; Length of command 'broadcast'.
+    command.broadcast.p dd  command.broadcast     ; Pointer to handler for command 'broadcast'.
 
-command.dig.w       db  command.dig.l           ; Indicator of length of command 'dig'.
-command.dig.s       db  'dig'                   ; Common command string for creating a warren.
-command.dig.l       equ $-command.dig.s         ; Length of command 'dig'.
-command.dig.p       dd  command.dig             ; Pointer to handler for command 'dig'.
+    command.dig.w       db  command.dig.l         ; Indicator of length of command 'dig'.
+    command.dig.s       db  'dig'                 ; Common command string for creating a warren.
+    command.dig.l       equ $-command.dig.s       ; Length of command 'dig'.
+    command.dig.p       dd  command.dig           ; Pointer to handler for command 'dig'.
 
-command.egg.w       db  command.egg.l           ; Indicator of length of command 'egg'
-command.egg.s       db  'egg'                   ; Admin command string for creating an egg and placing it.
-command.egg.l       equ $-command.egg.s         ; Length of command 'egg'.
-command.egg.p       dd  command.egg             ; Pointer to handler for command 'egg'
+    command.egg.w       db  command.egg.l         ; Indicator of length of command 'egg'
+    command.egg.s       db  'egg'                 ; Admin command string for creating an egg and placing it.
+    command.egg.l       equ $-command.egg.s       ; Length of command 'egg'.
+    command.egg.p       dd  command.egg           ; Pointer to handler for command 'egg'
 
-command.gylf.w      db  command.gylf.l          ; Indicator fo length of command 'gylf'.
-command.gylf.s      db  'gylf'                  ; Admin command string for creating new gylf.
-command.gylf.l      equ $-command.gylf.s        ; Length of command 'gylf'.
-command.gylf.p      dd  command.gylf            ; Pointer to handler for command 'gylf'.
+    command.gylf.w      db  command.gylf.l        ; Indicator fo length of command 'gylf'.
+    command.gylf.s      db  'gylf'                ; Admin command string for creating new gylf.
+    command.gylf.l      equ $-command.gylf.s      ; Length of command 'gylf'.
+    command.gylf.p      dd  command.gylf          ; Pointer to handler for command 'gylf'.
 
-command.help.w      db  command.help.l          ; Indicator of length of command 'help'.
-command.help.s      db  'help'                  ; Common command string for displaying help information.
-command.help.l      equ $-command.help.s        ; Length of command 'help'.
-command.help.p      dd  command.help            ; Pointer to handler for command 'help'.
+    command.help.w      db  command.help.l        ; Indicator of length of command 'help'.
+    command.help.s      db  'help'                ; Common command string for displaying help information.
+    command.help.l      equ $-command.help.s      ; Length of command 'help'.
+    command.help.p      dd  command.help          ; Pointer to handler for command 'help'.
 
-command.logout.w	db	command.logout.l	; Indicator of length of command 'logout'.
-command.logout.s	db	'logout'		; Common command string for logging a participant out and returning control of their avatar to the artificial intelligence.
-command.logout.l	equ	$-command.logout.s	; Length of command 'logout'.
-command.logout.p	dd	command.logout		; Pointer to handler for command 'logout'.
+    command.logout.w	db	command.logout.l	  ; Indicator of length of command 'logout'.
+    command.logout.s	db	'logout'		      ; Common command string for logging a participant out and returning control of their avatar to the artificial intelligence.
+    command.logout.l	equ	$-command.logout.s	  ; Length of command 'logout'.
+    command.logout.p	dd	command.logout		  ; Pointer to handler for command 'logout'.
 
-command.look.w      db  command.look.l          ; Indicator of length of command 'look'.
-command.look.s      db  'look'                  ; Common command string for displaying information about the target argument.
-command.look.l      equ $-command.look.s        ; Length of command 'look'.
-command.look.p      dd  command.look            ; Pointer to handler for command 'look'.
+    command.look.w      db  command.look.l        ; Indicator of length of command 'look'.
+    command.look.s      db  'look'                ; Common command string for displaying information about the target argument.
+    command.look.l      equ $-command.look.s      ; Length of command 'look'.
+    command.look.p      dd  command.look          ; Pointer to handler for command 'look'.
 
-command.shutdown.w  db  command.shutdown.l      ; Indicator of length of command 'shutdown'.
-command.shutdown.s  db  'shutdown'              ; Admin command string for shutting down the server.
-command.shutdown.l  equ $-command.shutdown.s    ; Length of command 'shutdown'.
-command.shutdown.p  dd  command.shutdown        ; Pointer to handler for command 'shutdown'.
+    command.shutdown.w  db  command.shutdown.l    ; Indicator of length of command 'shutdown'.
+    command.shutdown.s  db  'shutdown'            ; Admin command string for shutting down the server.
+    command.shutdown.l  equ $-command.shutdown.s  ; Length of command 'shutdown'.
+    command.shutdown.p  dd  command.shutdown      ; Pointer to handler for command 'shutdown'.
 
-command.think.w     db command.think.l          ; Indicator of length of command 'think'.
-command.think.s     db 'think'                  ; Common command string for communicating with other players.
-command.think.l     equ $-command.think.s       ; Length of command 'think'.
-command.think.p     dd command.think            ; Pointer to handler for command 'think'.
+    command.think.w     db command.think.l        ; Indicator of length of command 'think'.
+    command.think.s     db 'think'                ; Common command string for communicating with other players.
+    command.think.l     equ $-command.think.s     ; Length of command 'think'.
+    command.think.p     dd command.think          ; Pointer to handler for command 'think'.

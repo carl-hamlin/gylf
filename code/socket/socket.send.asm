@@ -14,11 +14,11 @@
 ;   Returns:        None.
 ;
 
-socket.send:    push    ecx                                     ; Preserve caller's ecx register.
-                mov     eax, sys.socket.call                    ; eax = Socket call indicator.
-                mov     ebx, sys.socket.send                    ; ebx = Send data out on a socket.
-                mov     ecx, socket.data.send.socket.descriptor ; ecx = Pointer to arguments package for send function.
-                int     sys.system.call                         ; Send data out on a socket.
-                pop     ecx                                     ; Restore caller's ecx register.
+    socket.send: push ecx                                     ; Preserve caller's ecx register.
+                 mov  eax, sys.socket.call                    ; eax = Socket call indicator.
+                 mov  ebx, sys.socket.send                    ; ebx = Send data out on a socket.
+                 mov  ecx, socket.data.send.socket.descriptor ; ecx = Pointer to arguments package for send function.
+                 int  sys.system.call                         ; Send data out on a socket.
+                 pop  ecx                                     ; Restore caller's ecx register.
 
-                ret                                             ; Return to caller.
+                 ret                                          ; Return to caller.

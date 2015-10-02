@@ -9,13 +9,13 @@
 ;   Returns:        None.
 ;
 
-print.socket.number:    pusha                                   ; Preserve caller registers.
+    print.socket.number: pusha                             ; Preserve caller registers.
 
-                        mov     ecx, esi                        ; ecx - index to socket entry.
-                        add     ecx, connection.number.index    ; ecx - pointer to socket number.
-                        mov     edx, dword.l                    ; edx - size of socket number.
-                        call    write.descriptor                ; Write the socket number locally.
+                         mov  ecx, esi                     ; ecx - index to socket entry.
+                         add  ecx, connection.number.index ; ecx - pointer to socket number.
+                         mov  edx, dword.l                 ; edx - size of socket number.
+                         call write.descriptor             ; Write the socket number locally.
 
-                        popa                                    ; Restore caller registers.
+                         popa                              ; Restore caller registers.
 
-                        ret                                     ; Return to caller.
+                         ret                               ; Return to caller.

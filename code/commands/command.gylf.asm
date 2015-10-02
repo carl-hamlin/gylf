@@ -4,10 +4,10 @@
 ;
 ;   This function creates a complete user profile without the intervening process of eggdom.
 ;
-;   Assumptions:    eax - Length of received data.
-;                   esi - Pointer to descriptor associated with target socket.
+;   Assumptions:     eax - Length of received data.
+;                    esi - Pointer to descriptor associated with target socket.
 ;
-;   Returns:        None.
+;   Returns:         None.
 ;
 
-command.gylf:   ret
+    command.gylf: ret ; Return to caller.

@@ -8,5 +8,5 @@
 ;
 ;   Returns:        None.
 
-bail:   mov     eax, sys.exit.call  ; eax = Suspend execution and return control to linux.
-        int     sys.system.call     ; Call the kernel and let it know we're done here.
+    bail: mov  eax, sys.exit.call ; eax = Suspend execution and return control to linux.
+          int  sys.system.call    ; Call the kernel and let it know we're done here.

@@ -10,8 +10,8 @@
 ;                   eax = Error indicator.
 ;
 
-open.descriptor:    mov     eax, sys.open.call  ; eax = Associate a descriptor with a file on disk.
-                    mov     ecx, sys.read.write ; ecx = Apply read/write permissions to the descriptor.
-                    sub     edx, edx            ; edx = No special modes.
-                    int     sys.system.call     ; Associate a descriptor with a file on disk.
-                    ret                         ; Return to caller.
+    open.descriptor: mov  eax, sys.open.call  ; eax = Associate a descriptor with a file on disk.
+                     mov  ecx, sys.read.write ; ecx = Apply read/write permissions to the descriptor.
+                     sub  edx, edx            ; edx = No special modes.
+                     int  sys.system.call     ; Associate a descriptor with a file on disk.
+                     ret                      ; Return to caller.

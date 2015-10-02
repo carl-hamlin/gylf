@@ -4,4 +4,4 @@
 ;
 ;   This dword tells write.indicator whether it's writing to a file or the screen.
 
-file.indicator  dd  sys.standard.output ; Indicator for write.descriptor.
+    file.indicator  dd  sys.standard.output ; Indicator for write.descriptor.

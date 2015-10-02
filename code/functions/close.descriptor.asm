@@ -9,6 +9,6 @@
 ;   Returns:        eax = Error indicator.
 ;
 
-close.descriptor:   mov     eax, sys.close.call ; eax = Disassociate descriptor specified in ebx.
-                    int     sys.system.call     ; Call the kernel and have it perform the disassociation.
-                    ret                         ; return to caller.
+    close.descriptor:  mov  eax, sys.close.call ; eax = Disassociate descriptor specified in ebx.
+                       int  sys.system.call     ; Call the kernel and have it perform the disassociation.
+                       ret                      ; return to caller.
