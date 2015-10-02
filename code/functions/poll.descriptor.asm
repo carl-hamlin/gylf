@@ -15,6 +15,6 @@
 ;    Returns:       eax = Returned event(s)
 ;
 
-poll.descriptor:    mov     eax, sys.poll.call  ; eax = Ask a connected socket if it has data on it.
-                    int     sys.system.call     ; Ask a connected socket if it has data on it.
-                    ret                         ; Return to caller.
+    poll.descriptor: mov eax, sys.poll.call ; eax = Ask a connected socket if it has data on it.
+                     int sys.system.call    ; Ask a connected socket if it has data on it.
+                     ret                    ; Return to caller.

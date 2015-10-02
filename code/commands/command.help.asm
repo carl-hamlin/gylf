@@ -4,10 +4,14 @@
 ;
 ;   This function displays context-sensitive help.
 ;
-;   Assumptions:    eax - Length of received data.
-;                   esi - Pointer to descriptor associated with target socket.
+;   Assumptions:     eax - Length of received data.
+;                    esi - Pointer to descriptor associated with target socket.
 ;
-;   Returns:        None.
+;   Returns:         None.
+;
+;   Crossreferences: Location Symbol
+;
+;                    none     none
 ;
 
-command.help:   ret
+    command.help: ret ; Return to caller.

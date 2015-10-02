@@ -11,10 +11,10 @@
 ;   Returns:        eax = Error indicator.
 ;
 
-write.descriptor:   mov    eax, sys.write.call                          ; eax = Write data to an active descriptor.
-                    mov    ebx, dword [file.indicator]                  ; ebx = Write to descriptor specified.
-                    int    sys.system.call                              ; Write data to an active descriptor.
+    write.descriptor: mov  eax, sys.write.call                         ; eax = Write data to an active descriptor.
+                      mov  ebx, dword [file.indicator]                 ; ebx = Write to descriptor specified.
+                      int  sys.system.call                             ; Write data to an active descriptor.
 
-                    mov    dword [file.indicator], sys.standard.output  ; Reset the file indicator to default.
+                      mov  dword [file.indicator], sys.standard.output ; Reset the file indicator to default.
 
-                    ret                                                 ; Return to caller.
+                      ret                                              ; Return to caller.

@@ -11,6 +11,6 @@
 ;                   [ebx] - number of clock ticks since boot time if function entered with non-null ebx.
 ;
 
-get.ticks:  mov     eax, sys.get.ticks  ; eax - get number of ticks since boot time.
-            int     sys.system.call     ; get the numberof ticks since boot time and put them in the eax register.
-            ret                         ; Return to caller.
+    get.ticks: mov eax, sys.get.ticks ; eax - get number of ticks since boot time.
+               int sys.system.call    ; get the numberof ticks since boot time and put them in the eax register.
+               ret                    ; Return to caller.

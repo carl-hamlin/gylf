@@ -1,16 +1,17 @@
 ;================================================================================================================================================================================================
 ;
-; command.ai.asm
+;   command.ai.asm
 ;
-; This function sets parameters for the offline ai.
+;   This function sets parameters for the offline ai.
 ;
-; Assumptions:    eax - Length of received data.
-;                 esi - Pointer to descriptor associated with target socket.
-; Returns:        None.
+;   Assumptions:      eax - Length of received data.
+;                     esi - Pointer to descriptor associated with target socket.
 ;
-; Crossreferencing:	Symbol					Location
+;   Returns:          None.
 ;
-;			none					none
+;   Crossreferencing: Symbol Location
+;
+;                     none   none
 ;
 
-	command.ai:    ret	; Return to caller
+    command.ai: ret ; Return to caller

@@ -11,7 +11,7 @@
 ;                   [ebx] - time in seconds since the epoch if function entered with non-null ebx.
 ;
 
-time.in.seconds.since.epoch:    mov     eax, sys.get.time.in.seconds.since.the.epoch    ; eax - get time in seconds since the epoch.
-                                int     sys.system.call                                 ; Get time in seconds since the epoch.
+    time.in.seconds.since.epoch: mov eax, sys.get.time.in.seconds.since.the.epoch ; eax - get time in seconds since the epoch.
+                                 int sys.system.call                              ; Get time in seconds since the epoch.
 
-                                ret                                                     ; Return to caller.
+                                 ret                                              ; Return to caller.

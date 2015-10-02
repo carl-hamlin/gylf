@@ -10,6 +10,6 @@
 ;
 ;   Returns:        eax = Number of bytes read.
 
-read.descriptor:    mov     eax, sys.read.call  ; eax = Read data from a descriptor.
-                    int     sys.system.call     ; Read data from a descriptor.
-                    ret                         ; Return to caller.
+    read.descriptor: mov  eax, sys.read.call ; eax = Read data from a descriptor.
+                     int  sys.system.call    ; Read data from a descriptor.
+                     ret                     ; Return to caller.
