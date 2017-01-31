@@ -10,4 +10,5 @@
 ;   Returns:          None.
 ;
 
-    command.dig: ret ; Return to caller.
+    command.dig:  call  write.bad.command.error ; Let the user know that they've entered a bad command and suggest HELP.
+                  ret                           ; Return to caller.
