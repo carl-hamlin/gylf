@@ -10,4 +10,5 @@
 ;   Returns:         None.
 ;
 
-    command.egg: ret ; Return to caller.
+    command.egg:  call  write.bad.command.error ; Let the user know that they've entered a bad command and suggest HELP.
+                  ret                           ; Return to caller.

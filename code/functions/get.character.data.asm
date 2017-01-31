@@ -26,7 +26,7 @@
                         mov  ecx, character.data            ; ecx - pointer to buffer into which to read the character data.
                         mov  edx, character.data.l          ; edx - Length of character data.
                         call read.descriptor                ; Read the character data.
-
+                        
                         call close.descriptor               ; Disassociate the descriptor.
 
                         ret                                 ; Return to caller.

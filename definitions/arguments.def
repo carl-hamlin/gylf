@@ -6,7 +6,7 @@
 ;   should not happen.
 ;
 
-	arguments.packet	 equ	$
+	argument.packet	 equ	$
 	arguments.num		 resb	0001h
 
 	argument.01.size	 resb	0001h

@@ -1,8 +1,8 @@
 ;====================================================================================================================================================================================================
 ;
-;   write.welcome
+;   write.prompt
 ;
-;   This function builds the initial welcome screen.
+;   This function prints a command prompt.
 ;
 ;   Assumptions:    eax - Descriptor associated with target connection.
 ;
