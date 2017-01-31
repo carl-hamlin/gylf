@@ -6,39 +6,39 @@
 ;   should not happen.
 ;
 
-	arguments.packet	 equ	$
-	arguments.num		 resb	0001h
+	arguments.packet	    equ	  $
+	arguments.num		      resb	0001h
 
-	argument.01.size	 resb	0001h
-	argument.01.location resd	0001h
+	argument.01.size	    resb	0001h
+	argument.01.location  resd	0001h
 
-	argument.entry.size	 equ	$-arguments.num
+	argument.entry.size	  equ	  $-arguments.num
 
-	argument.02.size	 resb	0001h
-	argument.02.location resd	0001h
+	argument.02.size	    resb	0001h
+	argument.02.location  resd	0001h
 
-	argument.03.size	 resb	0001h
-	argument.03.location resd	0001h
+	argument.03.size	    resb	0001h
+	argument.03.location  resd	0001h
 
-	argument.04.size	 resb	0001h
-	argument.04.location resd	0001h
+	argument.04.size	    resb	0001h
+	argument.04.location  resd	0001h
 
-	argument.05.size	 resb	0001h
-	argument.05.location resd	0001h
+	argument.05.size	    resb	0001h
+	argument.05.location  resd	0001h
 
-	argument.06.size	 resb	0001h
-	argument.06.location resd	0001h
+	argument.06.size	    resb	0001h
+	argument.06.location  resd	0001h
 
-	argument.07.size	 resb	0001h
-	argument.07.location resd	0001h
+	argument.07.size	    resb	0001h
+	argument.07.location  resd	0001h
 
-	argument.08.size	 resb	0001h
-	argument.08.location resd	0001h
+	argument.08.size	    resb	0001h
+	argument.08.location  resd	0001h
 
-	argument.09.size	 resb	0001h
-	argument.09.location resd	0001h
+	argument.09.size	    resb	0001h
+	argument.09.location  resd	0001h
 
-	argument.10.size	 resb	0001h
-	argument.10.location resd	0001h
+	argument.10.size	    resb	0001h
+	argument.10.location  resd	0001h
 
-	argument.packet.l	 equ	$-argument.packet
+	argument.packet.l	    equ	  $-argument.packet
