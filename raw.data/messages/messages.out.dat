@@ -5,59 +5,59 @@
 ;   This file contains data definitions for messages to be sent on a connected socket to remote users.
 ;
 
-	socket.data.login.message		db	"Gylf v0.0001", 0Ah, 0Dh, "Please enter your username: "								; Storage for login message.
-	socket.data.login.message.l		equ	$-socket.data.login.message												; Length of login message.
+	socket.data.login.message		          db	"Gylf v0.0001", 0Ah, 0Dh, "Please enter your username: "								                                      ; Storage for login message.
+	socket.data.login.message.l		        equ	$-socket.data.login.message												                                                            ; Length of login message.
 
-	socket.data.passphrase.message		db	"Please enter your passphrase: "											; Storage for passphrase message.
-	socket.data.passphrase.message.l	equ	$-socket.data.passphrase.message											; Length of passphrase message.
+	socket.data.passphrase.message		    db	"Please enter your passphrase: "											                                                        ; Storage for passphrase message.
+	socket.data.passphrase.message.l	    equ	$-socket.data.passphrase.message											                                                        ; Length of passphrase message.
 
-	socket.data.bad.passphrase.message	db	"Oop. That's not it. Please call back and try again.", 0Ah, 0Dh								; Storage for bad passphrase message.
-	socket.data.bad.passphrase.message.l	equ	$-socket.data.bad.passphrase.message											; Length of message.
+	socket.data.bad.passphrase.message	  db	"Oop. That's not it. Please call back and try again.", 0Ah, 0Dh								                                ; Storage for bad passphrase message.
+	socket.data.bad.passphrase.message.l  equ	$-socket.data.bad.passphrase.message											                                                    ; Length of message.
 
-	socket.data.welcome.message		db	"Ah, a new player! Welcome.", 0Ah, 0Dh, "Please enter a string of characters to use as a passphrase: "			; Storage for new user welcome message.
-	socket.data.welcome.message.l		equ	$-socket.data.welcome.message												; Length of message.
+	socket.data.welcome.message		        db	"Ah, a new player! Welcome.", 0Ah, 0Dh, "Please enter a string of characters to use as a passphrase: "			  ; Storage for new user welcome message.
+	socket.data.welcome.message.l		      equ	$-socket.data.welcome.message												                                                          ; Length of message.
 
-	socket.data.session.open.error		db	"The server was unable to open a session for you. The administrator has been notified. Please try again "		; Storage for session open error message.
-						db	"later.", 0Ah, 0Dh
-	socket.data.session.open.error.l	equ	$-socket.data.session.open.error											; Length of session open error message.
+	socket.data.session.open.error		    db	"The server was unable to open a session for you. The administrator has been notified. Please try again "		  ; Storage for session open error message.
+						                            db	"later.", 0Ah, 0Dh
+	socket.data.session.open.error.l	    equ	$-socket.data.session.open.error											                                                        ; Length of session open error message.
 
-	no.connection.available			db	"The server is currently full.", 0Ah, 0Dh										; Storage for server currently full message.
-	no.connection.available.l		equ	$-no.connection.available												; Length of message.
+	no.connection.available			          db	"The server is currently full.", 0Ah, 0Dh										                                                  ; Storage for server currently full message.
+	no.connection.available.l		          equ	$-no.connection.available												                                                              ; Length of message.
 
-	prompt.message				db	0Ah, 0Dh, "> "														; Storage for prompt.
-	prompt.message.l			equ	$-prompt.message													; Length of message.
+	prompt.message				                db	0Ah, 0Dh, "> "														                                                                    ; Storage for prompt.
+	prompt.message.l			                equ	$-prompt.message													                                                                    ; Length of message.
 
-	socket.data.bad.login.error		db	"That name corresponds neither to a current participant or an egg. Please verify your credentials and try "		; Bad login error.
-						db	"again.", 0Ah, 0Dh
-	socket.data.bad.login.error.l		equ	$-socket.data.bad.login.error												; Length of message.
+	socket.data.bad.login.error		        db	"That name corresponds neither to a current participant or an egg. Please verify your credentials and try "   ; Bad login error.
+						                            db	"again.", 0Ah, 0Dh
+	socket.data.bad.login.error.l		      equ	$-socket.data.bad.login.error												                                                          ; Length of message.
 
-	egg.hatch.message			db	"The egg is beginning to hatch!", 0Ah, 0Dh										; Message indicating an egg is hatching in the local vicinity.
-	egg.hatch.message.l			equ	$-egg.hatch.message													; Length of message.
+	egg.hatch.message			                db	"The egg is beginning to hatch!", 0Ah, 0Dh										                                                ; Message indicating an egg is hatching in the local vicinity.
+	egg.hatch.message.l			              equ	$-egg.hatch.message													                                                                  ; Length of message.
 
-	socket.data.out.of.area.ids.message	db	"System error: Out of area IDs. Disconnecting...", 0Ah, 0Dh								; Message indicating the server has run out of area ids.
-	socket.data.out.of.area.ids.message.l	equ	$-socket.data.out.of.area.ids.message											; Length of message.
+	socket.data.out.of.area.ids.message	  db	"System error: Out of area IDs. Disconnecting...", 0Ah, 0Dh								                                    ; Message indicating the server has run out of area ids.
+	socket.data.out.of.area.ids.message.l	equ	$-socket.data.out.of.area.ids.message											                                                    ; Length of message.
 
-	socket.data.bad.command.error		db	"For a better idea of what you're doing, try HELP.", 0Ah, 0Dh, "> "							; Message indicating that an entered command has no current analogue.
-	socket.data.bad.command.error.l		equ	$-socket.data.bad.command.error												; Length of message.
+	socket.data.bad.command.error		      db	"For a better idea of what you're doing, try HELP.", 0Ah, 0Dh, "> "							                              ; Message indicating that an entered command has no current analogue.
+	socket.data.bad.command.error.l		    equ	$-socket.data.bad.command.error												                                                        ; Length of message.
 
-	socket.data.shutdown.message		db	"G'night, Gracie...", 0Ah, 0Dh												; Message indicating the server is about to go down.
-	socket.data.shutdown.message.l		equ	$-socket.data.shutdown.message												; Length of message.
+	socket.data.shutdown.message		      db	"G'night, Gracie...", 0Ah, 0Dh												                                                        ; Message indicating the server is about to go down.
+	socket.data.shutdown.message.l		    equ	$-socket.data.shutdown.message												                                                        ; Length of message.
 
-	socket.data.second.login.error		db	"That username is currently logged in. If this is you, disconnect from your current session and try again, "		; Message indicating duped login.
-						db	"please.", 0Ah, 0Dh
-	socket.data.second.login.error.l	equ	$-socket.data.second.login.error											; Length of message.
+	socket.data.second.login.error		    db	"That username is currently logged in. If this is you, disconnect from your current session and try again, "  ; Message indicating duped login.
+						                            db	"please.", 0Ah, 0Dh
+	socket.data.second.login.error.l	    equ	$-socket.data.second.login.error											                                                        ; Length of message.
 
-	socket.data.area.bad.syntax.message	db	"area", 0Ah, 0Dh													; Message indicating an admin bounced area on bad syntax.
-						db	"syntax: area <arg1>|<arg2>", 0Ah, 0Dh, 0Ah, 0Dh
-						db	"Arguments must fit in their respective fields. If you're using the area command, it's vanishingly unlikely that this "
-						db	"information has not yet been given to you. Check with another admin to be sure.", 0Ah, 0Dh
-	socket.data.area.bad.syntax.message.l	equ	$-socket.data.area.bad.syntax.message											; Length of message.
+	socket.data.area.bad.syntax.message	  db	"area", 0Ah, 0Dh													                                                                    ; Message indicating an admin bounced area on bad syntax.
+						                            db	"syntax: area <arg1>|<arg2>", 0Ah, 0Dh, 0Ah, 0Dh
+						                            db	"Arguments must fit in their respective fields. If you're using the area command, it's vanishingly unlikely "
+						                            db  "that this information has not yet been given to you. Check with another admin to be sure.", 0Ah, 0Dh
+	socket.data.area.bad.syntax.message.l	equ	$-socket.data.area.bad.syntax.message											                                                    ; Length of message.
 
-	socket.data.area.created.message	db	"Your new area has been created successfully.", 0Ah, 0Dh								; Area creation message.
-	socket.data.area.created.message.l	equ	$-socket.data.area.created.message											; Length of message.
+	socket.data.area.created.message	    db	"Your new area has been created successfully.", 0Ah, 0Dh								                                      ; Area creation message.
+	socket.data.area.created.message.l	  equ	$-socket.data.area.created.message											                                                      ; Length of message.
 
-	socket.data.out.of.areas.message	db	"An attempt was made to create your new area, but there are currently no available area files.", 0Ah, 0Dh		; Out of areas message.
-	socket.data.out.of.areas.message.l	equ	$-socket.data.out.of.areas.message											; Length of message.
+	socket.data.out.of.areas.message	    db	"An attempt was made to create your new area, but there are currently no available area files.", 0Ah, 0Dh		  ; Out of areas message.
+	socket.data.out.of.areas.message.l	  equ	$-socket.data.out.of.areas.message											                                                      ; Length of message.
 
-	socket.data.bad.area.id.message		db	"Your area id is all screwed up. The admin has been notified.", 0Ah, 0Dh						; Bad area id message.
-	socket.data.bad.area.id.message.l	equ	$-socket.data.bad.area.id.message											; Length of message.
+	socket.data.bad.area.id.message		    db	"Your area id is all screwed up. The admin has been notified.", 0Ah, 0Dh						                          ; Bad area id message.
+	socket.data.bad.area.id.message.l	    equ	$-socket.data.bad.area.id.message											                                                        ; Length of message.
