@@ -32,6 +32,9 @@
                                         mov  dword [socket.data.send.buffer.l], socket.data.area.bad.syntax.message.l     ; Store length of message for send function.
                                         call socket.send                                                                  ; Tell the user that the command doesn't have a current analogue.
 
+                                        mov  eax, [esi+connection.descriptor.index]                                       ; eax - Descriptor associated with active connection.
+                                        call write.prompt                                                                 ; Restore the user's prompt.
+
                                         ret                                                                               ; Return to caller.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
