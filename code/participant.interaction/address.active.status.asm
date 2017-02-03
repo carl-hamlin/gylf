@@ -4,7 +4,8 @@
 ;
 ;   This function performs further processing on data submitted by a socket with status 'active'.
 ;
-;   Assumptions:    esi = Pointer to descriptor associated with target socket.
+;   Assumptions:    ea  = Length of received data.
+;                   esi = Pointer to descriptor associated with target socket.
 ;
 ;   Returns:        None.
 ;
