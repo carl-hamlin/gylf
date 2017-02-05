@@ -11,8 +11,19 @@
     aggregate.arguments:                        push  eax                                         ; Preserve caller's eax register.
                                                 push  ebx                                         ; Preserve caller's ebx register.
                                                 push  esi                                         ; Preserve pointer to data received from the socket.
-
+                                                
                                                 sub   eax, eax                                    ; eax - Prepared to be used for counting.
+
+    aggregate.arguments.strip.command.loop:     cmp   byte [ebx], 00h                             ; Are we looking at a zero terminator?
+                                                jz    aggregate.arguments.arguments.aggregated    ; Yes - this indicates that there are no arguments. Finish aggregating.
+     
+                                                cmp   byte [ebx], 20h                             ; Are we looking at a space?
+                                                jz    aggregate.arguments.argument.found          ; Yes. This indicates that there is at least one argument. Proceed to the aggregator.
+                                                
+                                                inc   ebx                                         ; ebx - Pointer to next byte in command.
+                                                jmp   aggregate.arguments.strip.command.loop      ; Check the next byte.
+                      
+    aggregate.arguments.argument.found:         inc   ebx                                         ; ebx - Pointer to first argument.
                                                 
                                                 mov   esi, argument.01.location                   ; esi - Pointer to first location.
                                                 mov   [esi], ebx                                  ; Populate location of first argument.
