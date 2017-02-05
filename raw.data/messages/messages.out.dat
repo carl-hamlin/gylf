@@ -66,7 +66,10 @@
 	  socket.data.bad.area.id.message		    db	"Your area id is all screwed up. The admin has been notified.", 0Ah, 0Dh						                          ; Bad area id message.
 	  socket.data.bad.area.id.message.l	    equ	$-socket.data.bad.area.id.message											                                                        ; Length of message.
 	
-	  socket.data.command.ai.help           db  ""                                                                                                            ; Command ai help message.
+	  socket.data.command.ai.help           db  "ai", 0Ah, 0Dh, 0Ah, 0Dh                                                                                      ; Command ai help message.
+	                                        db  "Syntax: ai <set | clear> <behaviour> <options>", 0Ah, 0Dh, 0Ah, 0Dh
+	                                        db  "Sets the expected behaviours within a range of options for when a character's patron is not online."
+	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.ai.help.l         equ $-socket.data.command.ai.help                                                                                 ; Length of message.
 	
 	  socket.data.command.area.help         db  ""                                                                                                            ; Command area help message.
@@ -87,8 +90,8 @@
 	  socket.data.command.help.help         db  ""                                                                                                            ; Command help help message.
 	  socket.data.command.help.help.l       equ $-socket.data.command.help.help                                                                               ; Length of message.
 	
-	  socket.data.command.logout.help       db  "logout", 0Ah, 0Dh                                                                                            ; Command logout help message.
-	                                        db  "syntax: logout", 0Ah, 0Dh, 0Ah, 0Dh
+	  socket.data.command.logout.help       db  "logout", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command logout help message.
+	                                        db  "Syntax: logout", 0Ah, 0Dh, 0Ah, 0Dh
 	                                        db  "Returns a character to AI mode and disconnects the performing participant from the server.", 0Ah, 0Dh
 	                                        db  0Ah, 0Dh, "> "
 	  socket.data.command.logout.help.l     equ $-socket.data.command.logout.help                                                                             ; Length of message.
