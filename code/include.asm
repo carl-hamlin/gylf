@@ -37,6 +37,7 @@
 %include "./code/functions/system.check.asm"
 %include "./code/functions/time.in.seconds.since.epoch.asm"
 %include "./code/functions/write.bad.command.error.asm"
+%include "./code/functions/write.bad.help.command.error.asm"
 %include "./code/functions/write.descriptor.asm"
 %include "./code/functions/write.prompt.asm"
 %include "./code/functions/write.welcome.asm"
