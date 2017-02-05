@@ -131,7 +131,10 @@
 	                                        db  "  features.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.look.help.l       equ $-socket.data.command.look.help                                                                               ; Length of message.
 	
-	  socket.data.command.shutdown.help     db  ""                                                                                                            ; Command shutdown help message.
+	  socket.data.command.shutdown.help     db  "  shutdown", 0Ah, 0Dh, 0Ah, 0Dh                                                                              ; Command shutdown help message.
+	                                        db  "  Syntax: shutdown", 0Ah, 0Dh, 0Ah, 0Dh
+	                                        db  "  The shutdown command disconnects all participants and shuts down the server. This command is", 0Ah, 0Dh
+	                                        db  "  restricted to administrator privileged participants.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.shutdown.help.l   equ $-socket.data.command.shutdown.help                                                                           ; Length of message.
 	
 	  socket.data.command.think.help        db  ""                                                                                                            ; Command think help message.
