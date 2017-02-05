@@ -66,32 +66,39 @@
 	  socket.data.bad.area.id.message		    db	"Your area id is all screwed up. The admin has been notified.", 0Ah, 0Dh						                          ; Bad area id message.
 	  socket.data.bad.area.id.message.l	    equ	$-socket.data.bad.area.id.message											                                                        ; Length of message.
 	
-	  socket.data.command.ai.help           db  "  ai", 0Ah, 0Dh, 0Ah, 0Dh                                                                                      ; Command ai help message.
+	  socket.data.command.ai.help           db  "  ai", 0Ah, 0Dh, 0Ah, 0Dh                                                                                    ; Command ai help message.
 	                                        db  "  Syntax: ai <set | clear> <behaviour> <options>", 0Ah, 0Dh, 0Ah, 0Dh
 	                                        db  "  Sets the expected behaviours within a range of options for when a character's patron is not online."
 	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.ai.help.l         equ $-socket.data.command.ai.help                                                                                 ; Length of message.
 	
-	  socket.data.command.area.help         db  "  area", 0Ah, 0Dh, 0Ah, 0Dh                                                                                    ; Command area help message.
+	  socket.data.command.area.help         db  "  area", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command area help message.
 	                                        db  "  Syntax: area <name> <quoted description>", 0Ah, 0Dh, 0Ah, 0Dh
 	                                        db  "  Creates a new area. This command is restricted to administrator privileged participants."
 	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.area.help.l       equ $-socket.data.command.area.help                                                                               ; Length of message.
 	
-	  socket.data.command.broadcast.help    db  "  broadcast", 0Ah, 0Dh, 0Ah, 0Dh                                                                               ; Command broadcast help message.
+	  socket.data.command.broadcast.help    db  "  broadcast", 0Ah, 0Dh, 0Ah, 0Dh                                                                             ; Command broadcast help message.
 	                                        db  "  Syntax: broadcast <quoted message>", 0Ah, 0Dh, 0Ah, 0Dh
 	                                        db  "  Broadcasts a message to the entire world. This command is restricted to administrator privileged", 0Ah, 0Dh
 	                                        db  "  participants.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.broadcast.help.l  equ $-socket.data.command.broadcast.help                                                                          ; Length of message.
 	
-	  socket.data.command.dig.help          db  "  dig", 0Ah, 0Dh, 0Ah, 0Dh                                                                                     ; Command dig help message.
+	  socket.data.command.dig.help          db  "  dig", 0Ah, 0Dh, 0Ah, 0Dh                                                                                   ; Command dig help message.
 	                                        db  "  Syntax: dig <direction, full or abbreviated to first letter>", 0Ah, 0Dh, 0Ah, 0Dh
 	                                        db  "  Sets an entity to digging a new area in the specified direction, pursuant to a series of", 0Ah, 0Dh
 	                                        db  "  environmental checks to ensure that it makes sense for the character to be able to dig",0Ah, 0Dh
 	                                        db  "  in the specified direction.", 0Ah, 0Dh, 0Ah, 0Dh, "> "	                                        
 	  socket.data.command.dig.help.l        equ $-socket.data.command.dig.help                                                                                ; Length of message.
 	
-	  socket.data.command.egg.help          db  ""                                                                                                            ; Command egg help message.
+	  socket.data.command.egg.help          db  "  egg", 0Ah, 0Dh, 0Ah, 0Dh                                                                                   ; Command egg help message.
+	                                        db  "  Syntax: egg <name of known participant>", 0Ah, 0Dh, 0Ah, 0Dh
+	                                        db  "  The egg command takes as an argument the name of a known participant, then uses the DNA Lab to", 0Ah, 0Dh
+	                                        db  "  implant that participant with an egg using the performing participant as the secondary parent", 0Ah, 0Dh
+	                                        db  "  and the implantee as the primary parent.", 0Ah, 0Dh, 0Ah, 0Dh
+	                                        db  "  The implantee is informed of it's new expecting status, and is also given the name of the", 0Ah, 0Dh
+	                                        db  "  implanter. This command is, of course, restricted to administrator privileged participants."
+	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.egg.help.l        equ $-socket.data.command.egg.help                                                                                ; Length of message.
 	
 	  socket.data.command.gylf.help         db  ""                                                                                                            ; Command gylf help message.
