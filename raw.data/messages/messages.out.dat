@@ -72,7 +72,10 @@
 	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.ai.help.l         equ $-socket.data.command.ai.help                                                                                 ; Length of message.
 	
-	  socket.data.command.area.help         db  ""                                                                                                            ; Command area help message.
+	  socket.data.command.area.help         db  "area", 0Ah, 0Dh, 0Ah, 0Dh                                                                                    ; Command area help message.
+	                                        db  "Syntax: area <name> <quoted description>", 0Ah, 0Dh, 0Ah, 0Dh
+	                                        db  "Creates a new area. This command is restricted to administrator privileged participants."
+	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.area.help.l       equ $-socket.data.command.area.help                                                                               ; Length of message.
 	
 	  socket.data.command.broadcast.help    db  ""                                                                                                            ; Command broadcast help message.
