@@ -110,7 +110,11 @@
 	                                        db  0Ah, 0Dh, 0Ah, 0Dh,  "> "
 	  socket.data.command.gylf.help.l       equ $-socket.data.command.gylf.help                                                                               ; Length of message.
 	
-	  socket.data.command.help.help         db  ""                                                                                                            ; Command help help message.
+	  socket.data.command.help.help         db  "  help", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command help help message.
+	                                        db  "  Syntax: help (command argument)", 0Ah, 0Dh, 0Ah, 0Dh
+	                                        db  "  The Help command provides detailed information on the use of specific commands available to", 0Ah, 0Dh
+	                                        db  "  participants. It takes an optional argument in the form of the command concerning which the", 0Ah, 0Dh
+	                                        db  "  performing participant needs help.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.help.help.l       equ $-socket.data.command.help.help                                                                               ; Length of message.
 	
 	  socket.data.command.logout.help       db  "logout", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command logout help message.
