@@ -44,8 +44,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.help.found.command:       int 3
-                                      pop   ecx                                             ; Restore loop counter.
+    command.help.found.command:       pop   ecx                                             ; Restore loop counter.
                                       pop   edi                                             ; Restore caller's edi register...
                                       
                                       mov   ebx, esi                                        ; ebx - Pointer to help message data.
