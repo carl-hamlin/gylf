@@ -26,7 +26,7 @@
                                       push  edi                                             ; Preserve caller's edi.
 
                                       mov   esi, command.table                              ; esi - Index to command table.
-                                      mov   edi, [argument.02.location]                     ; edi - Pointer to argument.
+                                      mov   edi, [argument.01.location]                     ; edi - Pointer to argument.
                                       
                                       mov   ecx, number.of.commands                         ; ecx - Loop counter for iteration through possible commands.
                   
@@ -67,7 +67,7 @@
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     command.help.next.command.jcxnz:  sub   edx, ecx                                        ; edx - number of bytes received minus the number of bytes run through by cmpsb before a mismatch was discovered.
-                                      mov   edi, [argument.02.location]                     ; edi - Pointer to argument.
+                                      mov   edi, [argument.01.location]                     ; edi - Pointer to argument.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
