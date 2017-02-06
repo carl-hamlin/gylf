@@ -58,15 +58,3 @@
 
     local.data.carriage.return                              db  0Ah, 0Dh                                                                                            ; Carriage return.
     local.data.carriage.return.l                            equ $-local.data.carriage.return                                                                        ; Length of message.
-
-    local.data.area.bad.syntax.message                      db  "An admin bounced the area command on bad syntax.", 0Ah, 0Dh                                        ; Area syntax error.
-    local.data.area.bad.syntax.message.l                    equ $-local.data.area.bad.syntax.message                                                                ; Length of message.
-
-    local.data.area.created.message                         db  "An admin has created a new area.", 0Ah, 0Dh                                                        ; Area creation message.
-    local.data.area.created.message.l                       equ $-local.data.area.created.message                                                                   ; Length of message.
-
-    local.data.out.of.areas.message                         db  "An admin tried to create an area, but we're fresh out of area filenames.", 0Ah, 0Dh                ; Area filename bounce.
-    local.data.out.of.areas.message.l                       equ $-local.data.out.of.areas.message                                                                   ; Length of message.
-
-    local.data.bad.area.id.indicator.message                db    "Bad area id error.", 0Ah, 0Dh                                                                    ; Bad area id message.
-    local.data.bad.area.id.indicator.message.l              equ    $-local.data.bad.area.id.indicator.message                                                       ; Length of message.
