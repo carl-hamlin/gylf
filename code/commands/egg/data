@@ -1,0 +1,19 @@
+;====================================================================================================================================================================================================
+;
+;   ./code/commands/egg/data
+;
+;   This file contains data pertinent to the egg command.
+;
+
+	  egg.hatch.message			                db	"The egg is beginning to hatch!", 0Ah, 0Dh										                                                ; Message indicating an egg is hatching in the local vicinity.
+	  egg.hatch.message.l			              equ	$-egg.hatch.message													                                                                  ; Length of message.
+
+	  socket.data.command.egg.help          db  "  egg", 0Ah, 0Dh, 0Ah, 0Dh                                                                                   ; Command egg help message.
+	                                        db  "  Syntax: egg <name of known participant>", 0Ah, 0Dh, 0Ah, 0Dh
+	                                        db  "  The egg command takes as an argument the name of a known participant, then uses the DNA Lab to", 0Ah, 0Dh
+	                                        db  "  implant that participant with an egg using the performing participant as the secondary parent", 0Ah, 0Dh
+	                                        db  "  and the implantee as the primary parent.", 0Ah, 0Dh, 0Ah, 0Dh
+	                                        db  "  The implantee is informed of it's new expecting status, and is also given the name of the", 0Ah, 0Dh
+	                                        db  "  implanter. This command is, of course, restricted to administrator privileged participants."
+	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> "
+	  socket.data.command.egg.help.l        equ $-socket.data.command.egg.help                                                                                ; Length of message.
