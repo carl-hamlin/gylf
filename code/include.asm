@@ -3,7 +3,7 @@
 %include "./code/commands/command.broadcast.asm"
 %include "./code/commands/command.dig.asm"
 %include "./code/commands/command.egg.asm"
-%include "./code/commands/command.gylf.asm"
+%include "./code/commands/gylf/code"
 %include "./code/commands/command.help.asm"
 %include "./code/commands/command.logout.asm"
 %include "./code/commands/command.look.asm"

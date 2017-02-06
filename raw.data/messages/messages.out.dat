@@ -101,15 +101,6 @@
 	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.egg.help.l        equ $-socket.data.command.egg.help                                                                                ; Length of message.
 	
-	  socket.data.command.gylf.help         db  "  gylf", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command gylf help message.
-	                                        db  "  Syntax: gylf <primary parent> <secondary parent> <name of target profile>", 0Ah, 0Dh, 0Ah, 0Dh
-	                                        db  "  The Gylf command takes three arguments; a primary parent, a secondary parent, and the name of a", 0Ah, 0Dh
-	                                        db  "  profile to be created using the DNA Lab from the DNA of the supplied parents. This profile will", 0Ah, 0Dh
-	                                        db  "  be created as a complete profile, without the intervening process of eggdom.", 0Ah, 0Dh, 0Ah, 0Dh
-	                                        db  "  This command is, of course, restricted to administrator privileged participants."
-	                                        db  0Ah, 0Dh, 0Ah, 0Dh,  "> "
-	  socket.data.command.gylf.help.l       equ $-socket.data.command.gylf.help                                                                               ; Length of message.
-	
 	  socket.data.command.help.help         db  "  help", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command help help message.
 	                                        db  "  Syntax: help (command argument)", 0Ah, 0Dh, 0Ah, 0Dh
 	                                        db  "  The Help command provides detailed information on the use of specific commands available to", 0Ah, 0Dh
