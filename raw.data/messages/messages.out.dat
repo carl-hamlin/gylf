@@ -66,12 +66,6 @@
 	  socket.data.bad.area.id.message		    db	"Your area id is all screwed up. The admin has been notified.", 0Ah, 0Dh						                          ; Bad area id message.
 	  socket.data.bad.area.id.message.l	    equ	$-socket.data.bad.area.id.message											                                                        ; Length of message.
 	
-	  socket.data.command.ai.help           db  "  ai", 0Ah, 0Dh, 0Ah, 0Dh                                                                                    ; Command ai help message.
-	                                        db  "  Syntax: ai <set | clear> <behaviour> <options>", 0Ah, 0Dh, 0Ah, 0Dh
-	                                        db  "  Sets the expected behaviours within a range of options for when a character's patron is not online."
-	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> "
-	  socket.data.command.ai.help.l         equ $-socket.data.command.ai.help                                                                                 ; Length of message.
-	
 	  socket.data.command.area.help         db  "  area", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command area help message.
 	                                        db  "  Syntax: area <name> <quoted description>", 0Ah, 0Dh, 0Ah, 0Dh
 	                                        db  "  Creates a new area. This command is restricted to administrator privileged participants."
