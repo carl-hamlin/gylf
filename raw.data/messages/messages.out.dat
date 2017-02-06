@@ -84,13 +84,6 @@
 	                                        db  "  participants.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.broadcast.help.l  equ $-socket.data.command.broadcast.help                                                                          ; Length of message.
 	
-	  socket.data.command.dig.help          db  "  dig", 0Ah, 0Dh, 0Ah, 0Dh                                                                                   ; Command dig help message.
-	                                        db  "  Syntax: dig <direction, full or abbreviated to first letter>", 0Ah, 0Dh, 0Ah, 0Dh
-	                                        db  "  Sets an entity to digging a new area in the specified direction, pursuant to a series of", 0Ah, 0Dh
-	                                        db  "  environmental checks to ensure that it makes sense for the character to be able to dig",0Ah, 0Dh
-	                                        db  "  in the specified direction.", 0Ah, 0Dh, 0Ah, 0Dh, "> "	                                        
-	  socket.data.command.dig.help.l        equ $-socket.data.command.dig.help                                                                                ; Length of message.
-	
 	  socket.data.command.egg.help          db  "  egg", 0Ah, 0Dh, 0Ah, 0Dh                                                                                   ; Command egg help message.
 	                                        db  "  Syntax: egg <name of known participant>", 0Ah, 0Dh, 0Ah, 0Dh
 	                                        db  "  The egg command takes as an argument the name of a known participant, then uses the DNA Lab to", 0Ah, 0Dh
