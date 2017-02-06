@@ -1,6 +1,6 @@
 %include "./code/commands/command.ai.asm"
 %include "./code/commands/command.area.asm"
-%include "./code/commands/command.broadcast.asm"
+%include "./code/commands/broadcast/code"
 %include "./code/commands/command.dig.asm"
 %include "./code/commands/command.egg.asm"
 %include "./code/commands/command.gylf.asm"

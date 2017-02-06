@@ -78,12 +78,6 @@
 	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.area.help.l       equ $-socket.data.command.area.help                                                                               ; Length of message.
 	
-	  socket.data.command.broadcast.help    db  "  broadcast", 0Ah, 0Dh, 0Ah, 0Dh                                                                             ; Command broadcast help message.
-	                                        db  "  Syntax: broadcast <quoted message>", 0Ah, 0Dh, 0Ah, 0Dh
-	                                        db  "  Broadcasts a message to the entire world. This command is restricted to administrator privileged", 0Ah, 0Dh
-	                                        db  "  participants.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
-	  socket.data.command.broadcast.help.l  equ $-socket.data.command.broadcast.help                                                                          ; Length of message.
-	
 	  socket.data.command.dig.help          db  "  dig", 0Ah, 0Dh, 0Ah, 0Dh                                                                                   ; Command dig help message.
 	                                        db  "  Syntax: dig <direction, full or abbreviated to first letter>", 0Ah, 0Dh, 0Ah, 0Dh
 	                                        db  "  Sets an entity to digging a new area in the specified direction, pursuant to a series of", 0Ah, 0Dh
