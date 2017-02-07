@@ -8,7 +8,7 @@
 %include "./code/commands/command.logout.asm"
 %include "./code/commands/command.look.asm"
 %include "./code/commands/command.shutdown.asm"
-%include "./code/commands/command.think.asm"
+%include "./code/commands/think/code"
 
 %include "./code/comms/send.to.area.asm"
 %include "./code/comms/send.to.player.asm"

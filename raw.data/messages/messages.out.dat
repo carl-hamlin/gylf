@@ -136,11 +136,3 @@
 	                                        db  "  The shutdown command disconnects all participants and shuts down the server. This command is", 0Ah, 0Dh
 	                                        db  "  restricted to administrator privileged participants.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.shutdown.help.l   equ $-socket.data.command.shutdown.help                                                                           ; Length of message.
-	
-	  socket.data.command.think.help        db  "  think", 0Ah, 0Dh, 0Ah, 0Dh                                                                                 ; Command think help message.
-	                                        db  "  Syntax: think <quoted message> (participant)", 0Ah, 0Dh, 0Ah, 0Dh
-	                                        db  "  The think command minus the participant argument sends a message to the participant's current", 0Ah, 0Dh
-	                                        db  "  area. When the participant argument is included, Mental Projection is contested to send the", 0Ah, 0Dh
-	                                        db  "  message only to the named participant. If that contest fails, then the default behaviour occurs."
-	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> " 
-	  socket.data.command.think.help.l      equ $-socket.data.command.think.help                                                                              ; Length of message.
