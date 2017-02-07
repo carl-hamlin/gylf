@@ -64,13 +64,6 @@
     command.egg.h         dd  socket.data.command.egg.help          ; Pointer to help message for command 'egg'.
     command.egg.h.l       dd  socket.data.command.egg.help.l        ; Length of help message for command 'help'.
 
-    command.gylf.w        db  command.gylf.l                        ; Indicator fo length of command 'gylf'.
-    command.gylf.s        db  'gylf'                                ; Admin command string for creating new gylf.
-    command.gylf.l        equ $-command.gylf.s                      ; Length of command 'gylf'.
-    command.gylf.p        dd  command.gylf                          ; Pointer to handler for command 'gylf'.
-    command.gylf.h        dd  socket.data.command.gylf.help         ; Pointer to help message for command 'gylf'.
-    command.gylf.h.l      dd  socket.data.command.gylf.help.l       ; Length of help message for command 'gylf'.
-
     command.help.w        db  command.help.l                        ; Indicator of length of command 'help'.
     command.help.s        db  'help'                                ; Common command string for displaying help information.
     command.help.l        equ $-command.help.s                      ; Length of command 'help'.
