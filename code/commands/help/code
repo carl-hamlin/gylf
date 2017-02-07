@@ -70,10 +70,10 @@
                                       mov   eax, dword [esi+connection.descriptor.index]    ; eax - Pointer to socket data for outgoing message.
                                       mov   dword [socket.data.send.socket.descriptor], eax ; Point send function to active socket.
                                       
-                                      mov   eax, dword [ebx+command.help.m]                 ; eax - Pointer to help message.
+                                      mov   eax, dword [ebx+04h]                            ; eax - Pointer to help message.
                                       mov   dword [socket.data.send.buffer.pointer], eax    ; Point send function to the help message for the selected argument.
                                       
-                                      mov   eax, [ebx+command.help.m.l]                     ; eax - Length of message.
+                                      mov   eax, [ebx+08h]                                  ; eax - Length of message.
                                       mov   dword [socket.data.send.buffer.l], eax          ; Tell the send function how long the message is.
                                       
                                       call  socket.send                                     ; Send the message.
