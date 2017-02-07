@@ -10,8 +10,7 @@
 ;   Returns:        None.
 ;
 
-    address.active.status:                    int 3
-    call  recv.from.socket                          ; Get the data from the socket.
+    address.active.status:                    call  recv.from.socket                          ; Get the data from the socket.
                                               call  aggregate.arguments                       ; Aggregate arguments received.
 
                                               mov   ecx, number.of.commands                   ; ecx - Number of commands in command table. This number acts as our loop counter.
