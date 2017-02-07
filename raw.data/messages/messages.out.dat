@@ -117,12 +117,6 @@
 	                                        db  "  performing participant needs help.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.help.help.l       equ $-socket.data.command.help.help                                                                               ; Length of message.
 	
-	  socket.data.command.logout.help       db  "  logout", 0Ah, 0Dh, 0Ah, 0Dh                                                                                ; Command logout help message.
-	                                        db  "  Syntax: logout", 0Ah, 0Dh, 0Ah, 0Dh
-	                                        db  "  Returns a character to AI mode and disconnects the performing participant from the server.", 0Ah, 0Dh
-	                                        db  0Ah, 0Dh, "> "
-	  socket.data.command.logout.help.l     equ $-socket.data.command.logout.help                                                                             ; Length of message.
-	
 	  socket.data.command.look.help         db  "  look", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command look help message.
 	                                        db  "  Syntax: look (participant | object | terrain feature)", 0Ah, 0Dh, 0Ah, 0Dh
 	                                        db  "  The look command by default returns information regarding the performing participant's current", 0Ah, 0Dh
