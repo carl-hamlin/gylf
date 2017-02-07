@@ -50,13 +50,6 @@
     command.broadcast.h   dd  socket.data.command.broadcast.help    ; Pointer to help message for command 'broadcast'.
     command.broadcast.h.l dd  socket.data.command.broadcast.help.l  ; Length of help message for command 'broadcast'.
 
-    command.dig.w         db  command.dig.l                         ; Indicator of length of command 'dig'.
-    command.dig.s         db  'dig'                                 ; Common command string for creating a warren.
-    command.dig.l         equ $-command.dig.s                       ; Length of command 'dig'.
-    command.dig.p         dd  command.dig                           ; Pointer to handler for command 'dig'.
-    command.dig.h         dd  socket.data.command.dig.help          ; Pointer to help message for command 'dig'.
-    command.dig.h.l       dd  socket.data.command.dig.help.l        ; Length of help message for command 'dig'.
-
     command.egg.w         db  command.egg.l                         ; Indicator of length of command 'egg'
     command.egg.s         db  'egg'                                 ; Admin command string for creating an egg and placing it.
     command.egg.l         equ $-command.egg.s                       ; Length of command 'egg'.
