@@ -5,35 +5,57 @@
 ;   This file contains data pertaining to the area command.
 ;
 
-    local.data.area.bad.syntax.message          db  "An admin bounced the area command on bad syntax.", 0Ah, 0Dh                                                  ; Area syntax error.
-    local.data.area.bad.syntax.message.l        equ $-local.data.area.bad.syntax.message                                                                          ; Length of message.
+;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Local Data
+;
 
-    local.data.area.created.message             db  "An admin has created a new area.", 0Ah, 0Dh                                                                  ; Area creation message.
-    local.data.area.created.message.l           equ $-local.data.area.created.message                                                                             ; Length of message.
+    local.data.area.bad.syntax.message          db  "An admin bounced the area command on bad syntax.", 0Ah, 0Dh                                              ; Area syntax error.
+    local.data.area.bad.syntax.message.l        equ $-local.data.area.bad.syntax.message                                                                      ; Length of message.
 
-    local.data.out.of.areas.message             db  "An admin tried to create an area, but we're fresh out of area filenames.", 0Ah, 0Dh                          ; Area filename bounce.
-    local.data.out.of.areas.message.l           equ $-local.data.out.of.areas.message                                                                             ; Length of message.
+    local.data.area.created.message             db  "An admin has created a new area.", 0Ah, 0Dh                                                              ; Area creation message.
+    local.data.area.created.message.l           equ $-local.data.area.created.message                                                                         ; Length of message.
 
-    local.data.bad.area.id.indicator.message    db    "Bad area id error.", 0Ah, 0Dh                                                                              ; Bad area id message.
-    local.data.bad.area.id.indicator.message.l  equ    $-local.data.bad.area.id.indicator.message                                                                 ; Length of message.
+    local.data.out.of.areas.message             db  "An admin tried to create an area, but we're fresh out of area filenames.", 0Ah, 0Dh                      ; Area filename bounce.
+    local.data.out.of.areas.message.l           equ $-local.data.out.of.areas.message                                                                         ; Length of message.
+
+    local.data.bad.area.id.indicator.message    db    "Bad area id error.", 0Ah, 0Dh                                                                          ; Bad area id message.
+    local.data.bad.area.id.indicator.message.l  equ    $-local.data.bad.area.id.indicator.message                                                             ; Length of message.
     
 ;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Remote Data
+;
 
-	  socket.data.area.created.message	          db	"Your new area has been created successfully.", 0Ah, 0Dh								                                      ; Area creation message.
-	  socket.data.area.created.message.l	        equ	$-socket.data.area.created.message											                                                      ; Length of message.
+	  socket.data.area.created.message	          db	"Your new area has been created successfully.", 0Ah, 0Dh								                                  ; Area creation message.
+	  socket.data.area.created.message.l	        equ	$-socket.data.area.created.message											                                                  ; Length of message.
 
-	  socket.data.out.of.areas.message	          db	"An attempt was made to create your new area, but there are currently no available area files.", 0Ah, 0Dh		  ; Out of areas message.
-	  socket.data.out.of.areas.message.l	        equ	$-socket.data.out.of.areas.message											                                                      ; Length of message.
+	  socket.data.out.of.areas.message	          db	"An attempt was made to create your new area, but there are currently no available area files.", 0Ah, 0Dh ; Out of areas message.
+	  socket.data.out.of.areas.message.l	        equ	$-socket.data.out.of.areas.message											                                                  ; Length of message.
 
-	  socket.data.bad.area.id.message		          db	"Your area id is all screwed up. The admin has been notified.", 0Ah, 0Dh						                          ; Bad area id message.
-	  socket.data.bad.area.id.message.l	          equ	$-socket.data.bad.area.id.message											                                                        ; Length of message.
+	  socket.data.bad.area.id.message		          db	"Your area id is all screwed up. The admin has been notified.", 0Ah, 0Dh						                      ; Bad area id message.
+	  socket.data.bad.area.id.message.l	          equ	$-socket.data.bad.area.id.message											                                                    ; Length of message.
     
 ;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
 
-	  socket.data.command.area.help               db  "  area", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command area help message.
+	  socket.data.command.area.help               db  "  area", 0Ah, 0Dh, 0Ah, 0Dh                                                                              ; Command area help message.
 	                                              db  "  Syntax: area <name> <quoted description>", 0Ah, 0Dh, 0Ah, 0Dh
 	                                              db  "  Creates a new area. This command is restricted to administrator privileged participants."
 	                                              db  0Ah, 0Dh, 0Ah, 0Dh, "> "
-	  socket.data.command.area.help.l             equ $-socket.data.command.area.help                                                                               ; Length of message.
+	  socket.data.command.area.help.l             equ $-socket.data.command.area.help                                                                           ; Length of message.
 	
+;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Command Table Entry
+;
+
+    command.area.w                              db  command.area.l                                                                                            ; Indicator of length of command 'area'.
+    command.area.s                              db  'area'                                                                                                    ; Admin command string for creating an area.
+    command.area.l                              equ $-command.area.s                                                                                          ; Length of command 'area'.
+    command.area.p                              dd  command.area                                                                                              ; Pointer to handler for command 'area'.
+    command.area.h                              dd  socket.data.command.area.help                                                                             ; Pointer to help message for command 'area'.
+    command.area.h.l                            dd  socket.data.command.area.help.l                                                                           ; Length of help message for command 'ai'.
 
