@@ -4,7 +4,7 @@
 %include "./code/commands/command.dig.asm"
 %include "./code/commands/command.egg.asm"
 %include "./code/commands/command.gylf.asm"
-%include "./code/commands/command.help.asm"
+%include "./code/commands/help/code"
 %include "./code/commands/command.logout.asm"
 %include "./code/commands/command.look.asm"
 %include "./code/commands/command.shutdown.asm"
