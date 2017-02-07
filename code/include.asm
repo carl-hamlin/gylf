@@ -7,7 +7,7 @@
 %include "./code/commands/command.help.asm"
 %include "./code/commands/command.logout.asm"
 %include "./code/commands/command.look.asm"
-%include "./code/commands/command.shutdown.asm"
+%include "./code/commands/shutdown/code"
 %include "./code/commands/command.think.asm"
 
 %include "./code/comms/send.to.area.asm"

@@ -44,9 +44,6 @@
   	                                      db  "For a listing of possible help topics, just type 'help' without arguments.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
     socket.data.bad.help.command.error.l  equ $-socket.data.bad.help.command.error                                                                          ; Length of message.
 
-	  socket.data.shutdown.message		      db	"G'night, Gracie...", 0Ah, 0Dh												                                                        ; Message indicating the server is about to go down.
-	  socket.data.shutdown.message.l		    equ	$-socket.data.shutdown.message												                                                        ; Length of message.
-
 	  socket.data.second.login.error		    db	"That username is currently logged in. If this is you, disconnect from your current session and try again, "  ; Message indicating duped login.
   						                            db	"please.", 0Ah, 0Dh
 	  socket.data.second.login.error.l	    equ	$-socket.data.second.login.error											                                                        ; Length of message.
@@ -130,12 +127,6 @@
 	                                        db  "  command returns obvious features of the argument, and contests Search to return non-obvious", 0Ah, 0Dh
 	                                        db  "  features.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.look.help.l       equ $-socket.data.command.look.help                                                                               ; Length of message.
-	
-	  socket.data.command.shutdown.help     db  "  shutdown", 0Ah, 0Dh, 0Ah, 0Dh                                                                              ; Command shutdown help message.
-	                                        db  "  Syntax: shutdown", 0Ah, 0Dh, 0Ah, 0Dh
-	                                        db  "  The shutdown command disconnects all participants and shuts down the server. This command is", 0Ah, 0Dh
-	                                        db  "  restricted to administrator privileged participants.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
-	  socket.data.command.shutdown.help.l   equ $-socket.data.command.shutdown.help                                                                           ; Length of message.
 	
 	  socket.data.command.think.help        db  "  think", 0Ah, 0Dh, 0Ah, 0Dh                                                                                 ; Command think help message.
 	                                        db  "  Syntax: think <quoted message> (participant)", 0Ah, 0Dh, 0Ah, 0Dh
