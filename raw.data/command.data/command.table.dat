@@ -57,13 +57,6 @@
     command.dig.h         dd  socket.data.command.dig.help          ; Pointer to help message for command 'dig'.
     command.dig.h.l       dd  socket.data.command.dig.help.l        ; Length of help message for command 'dig'.
 
-    command.egg.w         db  command.egg.l                         ; Indicator of length of command 'egg'
-    command.egg.s         db  'egg'                                 ; Admin command string for creating an egg and placing it.
-    command.egg.l         equ $-command.egg.s                       ; Length of command 'egg'.
-    command.egg.p         dd  command.egg                           ; Pointer to handler for command 'egg'
-    command.egg.h         dd  socket.data.command.egg.help          ; Pointer to help message for command 'egg'.
-    command.egg.h.l       dd  socket.data.command.egg.help.l        ; Length of help message for command 'help'.
-
     command.gylf.w        db  command.gylf.l                        ; Indicator fo length of command 'gylf'.
     command.gylf.s        db  'gylf'                                ; Admin command string for creating new gylf.
     command.gylf.l        equ $-command.gylf.s                      ; Length of command 'gylf'.

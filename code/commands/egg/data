@@ -5,8 +5,18 @@
 ;   This file contains data pertinent to the egg command.
 ;
 
+;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Outgoing Data
+;
+
 	  egg.hatch.message			                db	"The egg is beginning to hatch!", 0Ah, 0Dh										                                                ; Message indicating an egg is hatching in the local vicinity.
 	  egg.hatch.message.l			              equ	$-egg.hatch.message													                                                                  ; Length of message.
+
+;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
 
 	  socket.data.command.egg.help          db  "  egg", 0Ah, 0Dh, 0Ah, 0Dh                                                                                   ; Command egg help message.
 	                                        db  "  Syntax: egg <name of known participant>", 0Ah, 0Dh, 0Ah, 0Dh
@@ -17,3 +27,16 @@
 	                                        db  "  implanter. This command is, of course, restricted to administrator privileged participants."
 	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.egg.help.l        equ $-socket.data.command.egg.help                                                                                ; Length of message.
+
+;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Command Table Entry
+;
+
+    command.egg.w                         db  command.egg.l                                                                                                 ; Indicator of length of command 'egg'
+    command.egg.s                         db  'egg'                                                                                                         ; Admin command string for creating an egg and placing it.
+    command.egg.l                         equ $-command.egg.s                                                                                               ; Length of command 'egg'.
+    command.egg.p                         dd  command.egg                                                                                                   ; Pointer to handler for command 'egg'
+    command.egg.h                         dd  socket.data.command.egg.help                                                                                  ; Pointer to help message for command 'egg'.
+    command.egg.h.l                       dd  socket.data.command.egg.help.l                                                                                ; Length of help message for command 'help'.
+
