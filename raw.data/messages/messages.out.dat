@@ -51,33 +51,6 @@
   						                            db	"please.", 0Ah, 0Dh
 	  socket.data.second.login.error.l	    equ	$-socket.data.second.login.error											                                                        ; Length of message.
 
-	  socket.data.area.bad.syntax.message	  db	"area", 0Ah, 0Dh													                                                                    ; Message indicating an admin bounced area on bad syntax.
-  						                            db	"syntax: area <arg1>|<arg2>", 0Ah, 0Dh, 0Ah, 0Dh
-  						                            db	"Arguments must fit in their respective fields. If you're using the area command, it's vanishingly unlikely "
-  						                            db  "that this information has not yet been given to you. Check with another admin to be sure.", 0Ah, 0Dh
-	  socket.data.area.bad.syntax.message.l	equ	$-socket.data.area.bad.syntax.message											                                                    ; Length of message.
-
-	  socket.data.area.created.message	    db	"Your new area has been created successfully.", 0Ah, 0Dh								                                      ; Area creation message.
-	  socket.data.area.created.message.l	  equ	$-socket.data.area.created.message											                                                      ; Length of message.
-
-	  socket.data.out.of.areas.message	    db	"An attempt was made to create your new area, but there are currently no available area files.", 0Ah, 0Dh		  ; Out of areas message.
-	  socket.data.out.of.areas.message.l	  equ	$-socket.data.out.of.areas.message											                                                      ; Length of message.
-
-	  socket.data.bad.area.id.message		    db	"Your area id is all screwed up. The admin has been notified.", 0Ah, 0Dh						                          ; Bad area id message.
-	  socket.data.bad.area.id.message.l	    equ	$-socket.data.bad.area.id.message											                                                        ; Length of message.
-	
-	  socket.data.command.ai.help           db  "  ai", 0Ah, 0Dh, 0Ah, 0Dh                                                                                    ; Command ai help message.
-	                                        db  "  Syntax: ai <set | clear> <behaviour> <options>", 0Ah, 0Dh, 0Ah, 0Dh
-	                                        db  "  Sets the expected behaviours within a range of options for when a character's patron is not online."
-	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> "
-	  socket.data.command.ai.help.l         equ $-socket.data.command.ai.help                                                                                 ; Length of message.
-	
-	  socket.data.command.area.help         db  "  area", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command area help message.
-	                                        db  "  Syntax: area <name> <quoted description>", 0Ah, 0Dh, 0Ah, 0Dh
-	                                        db  "  Creates a new area. This command is restricted to administrator privileged participants."
-	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> "
-	  socket.data.command.area.help.l       equ $-socket.data.command.area.help                                                                               ; Length of message.
-	
 	  socket.data.command.dig.help          db  "  dig", 0Ah, 0Dh, 0Ah, 0Dh                                                                                   ; Command dig help message.
 	                                        db  "  Syntax: dig <direction, full or abbreviated to first letter>", 0Ah, 0Dh, 0Ah, 0Dh
 	                                        db  "  Sets an entity to digging a new area in the specified direction, pursuant to a series of", 0Ah, 0Dh

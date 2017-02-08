@@ -23,26 +23,6 @@
 
     ; Everything hereafter to be migrated during code reorganization
 
-    command.ai.w          db  command.ai.l                          ; Indicator of length of command 'ai'.
-    command.ai.s          db  'ai'                                  ; Common command string for setting parameters for the offline ai.
-    command.ai.l          equ $-command.ai.s                        ; Length of command 'ai'.
-    command.ai.p          dd  command.ai                            ; Pointer to handler for command 'ai'.
-
-    command.help.m        equ $-command.ai.p                        ; Define position of help message pointer in table entry.
-
-    command.ai.h          dd  socket.data.command.ai.help           ; Pointer to help message for command 'ai'.
-    
-    command.help.m.l      equ $-command.ai.p                        ; Define position of help message length in table entry.
-    
-    command.ai.h.l        dd  socket.data.command.ai.help.l         ; Length of help message for command 'ai'.
-
-    command.area.w        db  command.area.l                        ; Indicator of length of command 'area'.
-    command.area.s        db  'area'                                ; Admin command string for creating an area.
-    command.area.l        equ $-command.area.s                      ; Length of command 'area'.
-    command.area.p        dd  command.area                          ; Pointer to handler for command 'area'.
-    command.area.h        dd  socket.data.command.area.help         ; Pointer to help message for command 'area'.
-    command.area.h.l      dd  socket.data.command.area.help.l       ; Length of help message for command 'ai'.
-
     command.dig.w         db  command.dig.l                         ; Indicator of length of command 'dig'.
     command.dig.s         db  'dig'                                 ; Common command string for creating a warren.
     command.dig.l         equ $-command.dig.s                       ; Length of command 'dig'.
