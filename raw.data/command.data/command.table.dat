@@ -85,13 +85,6 @@
     command.logout.h      dd  socket.data.command.logout.help       ; Pointer to help message for command 'logout'.
     command.logout.h.l    dd  socket.data.command.logout.help.l     ; Length of help message for command 'logout'.
 
-    command.look.w        db  command.look.l                        ; Indicator of length of command 'look'.
-    command.look.s        db  'look'                                ; Common command string for displaying information about the target argument.
-    command.look.l        equ $-command.look.s                      ; Length of command 'look'.
-    command.look.p        dd  command.look                          ; Pointer to handler for command 'look'.
-    command.look.h        dd  socket.data.command.look.help         ; Pointer to help message for command 'look'.
-    command.look.h.l      dd  socket.data.command.look.help.l       ; Length of help message for command 'look'.
-
     command.shutdown.w    db  command.shutdown.l                    ; Indicator of length of command 'shutdown'.
     command.shutdown.s    db  'shutdown'                            ; Admin command string for shutting down the server.
     command.shutdown.l    equ $-command.shutdown.s                  ; Length of command 'shutdown'.
