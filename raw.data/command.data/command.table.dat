@@ -78,13 +78,6 @@
     command.help.h        dd  socket.data.command.help.help         ; Pointer to help message for command 'help'.
     command.help.h.l      dd  socket.data.command.help.help.l       ; Length of help message for command 'help'.
 
-    command.logout.w	    db	command.logout.l	                    ; Indicator of length of command 'logout'.
-    command.logout.s	    db	'logout'		                          ; Common command string for logging a participant out and returning control of their avatar to the artificial intelligence.
-    command.logout.l	    equ	$-command.logout.s	                  ; Length of command 'logout'.
-    command.logout.p	    dd	command.logout		                    ; Pointer to handler for command 'logout'.
-    command.logout.h      dd  socket.data.command.logout.help       ; Pointer to help message for command 'logout'.
-    command.logout.h.l    dd  socket.data.command.logout.help.l     ; Length of help message for command 'logout'.
-
     command.look.w        db  command.look.l                        ; Indicator of length of command 'look'.
     command.look.s        db  'look'                                ; Common command string for displaying information about the target argument.
     command.look.l        equ $-command.look.s                      ; Length of command 'look'.
