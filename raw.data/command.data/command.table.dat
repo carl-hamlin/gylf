@@ -78,13 +78,6 @@
     command.look.h        dd  socket.data.command.look.help         ; Pointer to help message for command 'look'.
     command.look.h.l      dd  socket.data.command.look.help.l       ; Length of help message for command 'look'.
 
-    command.shutdown.w    db  command.shutdown.l                    ; Indicator of length of command 'shutdown'.
-    command.shutdown.s    db  'shutdown'                            ; Admin command string for shutting down the server.
-    command.shutdown.l    equ $-command.shutdown.s                  ; Length of command 'shutdown'.
-    command.shutdown.p    dd  command.shutdown                      ; Pointer to handler for command 'shutdown'.
-    command.shutdown.h    dd  socket.data.command.shutdown.help     ; Pointer to help message for command 'look'.
-    command.shutdown.h.l  dd  socket.data.command.shutdown.help.l   ; Length of help message for command 'look'.
-
     command.think.w       db  command.think.l                       ; Indicator of length of command 'think'.
     command.think.s       db  'think'                               ; Common command string for communicating with other players.
     command.think.l       equ $-command.think.s                     ; Length of command 'think'.
