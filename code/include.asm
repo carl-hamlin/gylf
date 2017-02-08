@@ -1,5 +1,4 @@
 %include "./code/commands/i"
-%include "./code/commands/command.area.asm"
 %include "./code/commands/command.broadcast.asm"
 %include "./code/commands/command.dig.asm"
 %include "./code/commands/command.egg.asm"
