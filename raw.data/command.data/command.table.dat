@@ -5,9 +5,23 @@
 ;   This table associates the keywords for commands with pointers to their handlers.
 ;
 
-    %define number.of.commands  0Bh                             ; Number of commands in table.
+    command.table       equ $                               ; Placeholder for beginning of command table.
 
-    command.table         equ $                                     ; Placeholder for beginning of command table.
+                        dd  command.ai.w                    ; Pointer to table entry for command 'ai'.
+                        dd  command.area.w                  ; Pointer to table entry for command 'area'.
+                        dd  command.broadcast.w             ; Pointer to table entry for command 'broadcast'.
+                        dd  command.dig.w                   ; Pointer to table entry for command 'dig'.
+                        dd  command.egg.w                   ; Pointer to table entry for command 'egg'.
+                        dd  command.gylf.w                  ; Pointer to table entry for command 'gylf'.
+                        dd  command.help.w                  ; Pointer to table entry for command 'help'.
+                        dd  command.logout.w                ; Pointer to table entry for command 'logout'.
+                        dd  command.look.w                  ; Pointer to table entry for command 'look'.
+                        dd  command.shutdown.w              ; Pointer to table entry for command 'shutdown'.
+                        dd  command.think.w                 ; Pointer to table entry for command 'think'.
+
+    number.of.commands  equ (($ - command.table) / dword.l)
+
+    ; Everything hereafter to be migrated during code reorganization
 
     command.ai.w          db  command.ai.l                          ; Indicator of length of command 'ai'.
     command.ai.s          db  'ai'                                  ; Common command string for setting parameters for the offline ai.
