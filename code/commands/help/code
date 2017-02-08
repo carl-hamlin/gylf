@@ -4,14 +4,14 @@
 ;
 ;   This function displays context-sensitive help.
 ;
-;   Assumptions:     eax - Length of received data.
-;                    esi - Pointer to descriptor associated with target socket.
+;   Assumptions:      eax - Length of received data.
+;                     esi - Pointer to descriptor associated with target socket.
 ;
-;   Returns:         None.
+;   Returns:          None.
 ;
-;   Crossreferences: Location Symbol
+;   Crossreferences:  Location Symbol
 ;
-;                    none     none
+;                     none     none
 ;
 
 ;==================================================================================================================================================================================================================
@@ -41,7 +41,8 @@
                                       push  esi                                             ; Preserve caller's esi.
                                       push  edi                                             ; Preserve caller's edi.
 
-                                      mov   esi, command.table                              ; esi - Index to command table.
+                                      mov   ebx, command.table                              ; ebx - Index to command table.
+                                      mov   esi, dword [ebx]                                ; esi - Pointer to command table entry.
                                       mov   edi, [argument.01.location]                     ; edi - Pointer to argument.
                                       
                                       mov   ecx, number.of.commands                         ; ecx - Loop counter for iteration through possible commands.
@@ -70,10 +71,10 @@
                                       mov   eax, dword [esi+connection.descriptor.index]    ; eax - Pointer to socket data for outgoing message.
                                       mov   dword [socket.data.send.socket.descriptor], eax ; Point send function to active socket.
                                       
-                                      mov   eax, dword [ebx+04h]                            ; eax - Pointer to help message.
+                                      mov   eax, dword [ebx+dword.l]                        ; eax - Pointer to help message.
                                       mov   dword [socket.data.send.buffer.pointer], eax    ; Point send function to the help message for the selected argument.
                                       
-                                      mov   eax, [ebx+08h]                                  ; eax - Length of message.
+                                      mov   eax, [ebx+qword.l]                              ; eax - Length of message.
                                       mov   dword [socket.data.send.buffer.l], eax          ; Tell the send function how long the message is.
                                       
                                       call  socket.send                                     ; Send the message.
@@ -82,14 +83,13 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.help.next.command.jcxnz:  sub   edx, ecx                                        ; edx - number of bytes received minus the number of bytes run through by cmpsb before a mismatch was discovered.
-                                      mov   edi, [argument.01.location]                     ; edi - Pointer to argument.
+    command.help.next.command.jcxnz:  mov   edi, [argument.01.location]                     ; edi - Pointer to argument.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.help.next.command:        add   esi, ecx                                        ; esi - Pointer to handler for command currently being referenced in the table.
-                                      add   esi, dword.l
-                                      add   esi, qword.l                                    ; esi - Pointer to size of next command in the table.
+    command.help.next.command:        add   ebx, dword.l                                    ; ebx - Pointer to next entry pointer.
+                                      mov   esi, dword [ebx]                                ; esi - Pointer to next entry.
+
                                       pop   ecx                                             ; Restore loop counter.
                                       loop  command.help.parse.arguments                    ; Go check the next command.
 
