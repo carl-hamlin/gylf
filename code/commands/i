@@ -1,2 +1,3 @@
 %include "./code/commands/ai/i"
 %include "./code/commands/area/i"
+%include "./code/commands/broadcast/i"
