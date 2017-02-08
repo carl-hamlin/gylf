@@ -98,10 +98,3 @@
     command.shutdown.p    dd  command.shutdown                      ; Pointer to handler for command 'shutdown'.
     command.shutdown.h    dd  socket.data.command.shutdown.help     ; Pointer to help message for command 'look'.
     command.shutdown.h.l  dd  socket.data.command.shutdown.help.l   ; Length of help message for command 'look'.
-
-    command.think.w       db  command.think.l                       ; Indicator of length of command 'think'.
-    command.think.s       db  'think'                               ; Common command string for communicating with other players.
-    command.think.l       equ $-command.think.s                     ; Length of command 'think'.
-    command.think.p       dd  command.think                         ; Pointer to handler for command 'think'.
-    command.think.h       dd  socket.data.command.think.help        ; Pointer to help message for command 'think'.
-    command.think.h.l     dd  socket.data.command.think.help.l      ; Length of help message for command 'think'.
