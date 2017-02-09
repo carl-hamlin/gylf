@@ -1,8 +1,8 @@
 ;================================================================================================================================================================================================
 ;
-;   command.ai.asm
+;   ./code/commands/ai/code
 ;
-;   This function sets parameters for the offline ai.
+;   The command.ai function sets parameters for the offline ai.
 ;
 ;   Assumptions:      eax - Length of received data.
 ;                     esi - Pointer to descriptor associated with target socket.
