@@ -1,5 +1,4 @@
 %include "./code/commands/i"
-%include "./code/commands/egg/code"
 %include "./code/commands/command.gylf.asm"
 %include "./code/commands/command.help.asm"
 %include "./code/commands/command.logout.asm"
