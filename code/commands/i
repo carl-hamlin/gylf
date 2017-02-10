@@ -4,3 +4,4 @@
 %include "./code/commands/dig/i"
 %include "./code/commands/egg/i"
 %include "./code/commands/gylf/i"
+%include "./code/commands/help/i"
