@@ -1,8 +1,8 @@
 ;====================================================================================================================================================================================================
 ;
-;   area
+;   ./code/commands/area/definitions
 ;
-;   This file contains definitions for all aspects of area data.
+;   This file contains definitions pertaining to the area command.
 ;
 
     %define    available.areas          05F5E0FFh                   ; Number of areas available.
