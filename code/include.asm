@@ -1,5 +1,4 @@
 %include "./code/commands/i"
-%include "./code/commands/think/code"
 
 %include "./code/comms/send.to.area.asm"
 %include "./code/comms/send.to.player.asm"

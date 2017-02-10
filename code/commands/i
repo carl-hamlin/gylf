@@ -8,3 +8,4 @@
 %include "./code/commands/logout/i"
 %include "./code/commands/look/i"
 %include "./code/commands/shutdown/i"
+%include "./code/commands/think/i"
