@@ -1,5 +1,4 @@
 %include "./code/commands/i"
-%include "./code/commands/logout/code"
 %include "./code/commands/command.look.asm"
 %include "./code/commands/command.shutdown.asm"
 %include "./code/commands/command.think.asm"

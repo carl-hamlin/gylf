@@ -5,3 +5,4 @@
 %include "./code/commands/egg/i"
 %include "./code/commands/gylf/i"
 %include "./code/commands/help/i"
+%include "./code/commands/logout/i"
