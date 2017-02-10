@@ -23,54 +23,6 @@
 
     ; Everything hereafter to be migrated during code reorganization
 
-    command.ai.w          db  command.ai.l                          ; Indicator of length of command 'ai'.
-    command.ai.s          db  'ai'                                  ; Common command string for setting parameters for the offline ai.
-    command.ai.l          equ $-command.ai.s                        ; Length of command 'ai'.
-    command.ai.p          dd  command.ai                            ; Pointer to handler for command 'ai'.
-
-    command.help.m        equ $-command.ai.p                        ; Define position of help message pointer in table entry.
-
-    command.ai.h          dd  socket.data.command.ai.help           ; Pointer to help message for command 'ai'.
-    
-    command.help.m.l      equ $-command.ai.p                        ; Define position of help message length in table entry.
-    
-    command.ai.h.l        dd  socket.data.command.ai.help.l         ; Length of help message for command 'ai'.
-
-    command.area.w        db  command.area.l                        ; Indicator of length of command 'area'.
-    command.area.s        db  'area'                                ; Admin command string for creating an area.
-    command.area.l        equ $-command.area.s                      ; Length of command 'area'.
-    command.area.p        dd  command.area                          ; Pointer to handler for command 'area'.
-    command.area.h        dd  socket.data.command.area.help         ; Pointer to help message for command 'area'.
-    command.area.h.l      dd  socket.data.command.area.help.l       ; Length of help message for command 'ai'.
-
-    command.broadcast.w   db  command.broadcast.l                   ; Indicator of length of command 'broadcast'.
-    command.broadcast.s   db  'broadcast'                           ; Admin command string for broadcasting a message to the entire world.
-    command.broadcast.l   equ $-command.broadcast.s                 ; Length of command 'broadcast'.
-    command.broadcast.p   dd  command.broadcast                     ; Pointer to handler for command 'broadcast'.
-    command.broadcast.h   dd  socket.data.command.broadcast.help    ; Pointer to help message for command 'broadcast'.
-    command.broadcast.h.l dd  socket.data.command.broadcast.help.l  ; Length of help message for command 'broadcast'.
-
-    command.dig.w         db  command.dig.l                         ; Indicator of length of command 'dig'.
-    command.dig.s         db  'dig'                                 ; Common command string for creating a warren.
-    command.dig.l         equ $-command.dig.s                       ; Length of command 'dig'.
-    command.dig.p         dd  command.dig                           ; Pointer to handler for command 'dig'.
-    command.dig.h         dd  socket.data.command.dig.help          ; Pointer to help message for command 'dig'.
-    command.dig.h.l       dd  socket.data.command.dig.help.l        ; Length of help message for command 'dig'.
-
-    command.egg.w         db  command.egg.l                         ; Indicator of length of command 'egg'
-    command.egg.s         db  'egg'                                 ; Admin command string for creating an egg and placing it.
-    command.egg.l         equ $-command.egg.s                       ; Length of command 'egg'.
-    command.egg.p         dd  command.egg                           ; Pointer to handler for command 'egg'
-    command.egg.h         dd  socket.data.command.egg.help          ; Pointer to help message for command 'egg'.
-    command.egg.h.l       dd  socket.data.command.egg.help.l        ; Length of help message for command 'help'.
-
-    command.gylf.w        db  command.gylf.l                        ; Indicator fo length of command 'gylf'.
-    command.gylf.s        db  'gylf'                                ; Admin command string for creating new gylf.
-    command.gylf.l        equ $-command.gylf.s                      ; Length of command 'gylf'.
-    command.gylf.p        dd  command.gylf                          ; Pointer to handler for command 'gylf'.
-    command.gylf.h        dd  socket.data.command.gylf.help         ; Pointer to help message for command 'gylf'.
-    command.gylf.h.l      dd  socket.data.command.gylf.help.l       ; Length of help message for command 'gylf'.
-
     command.logout.w	    db	command.logout.l	                    ; Indicator of length of command 'logout'.
     command.logout.s	    db	'logout'		                          ; Common command string for logging a participant out and returning control of their avatar to the artificial intelligence.
     command.logout.l	    equ	$-command.logout.s	                  ; Length of command 'logout'.
