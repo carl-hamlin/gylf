@@ -1,4 +1,3 @@
-%include	"./definitions/area.def"
 %include	"./definitions/arguments.def"
 %include	"./definitions/buffers.def"
 %include	"./definitions/character.def"
