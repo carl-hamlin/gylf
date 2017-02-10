@@ -1,5 +1,4 @@
 %include "./code/commands/i"
-%include "./code/commands/shutdown/code"
 %include "./code/commands/command.think.asm"
 
 %include "./code/comms/send.to.area.asm"

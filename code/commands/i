@@ -7,3 +7,4 @@
 %include "./code/commands/help/i"
 %include "./code/commands/logout/i"
 %include "./code/commands/look/i"
+%include "./code/commands/shutdown/i"
