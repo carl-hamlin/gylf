@@ -14,7 +14,7 @@
 
     section   .text
 
-    %include  "./code/commands/i"
+    %include  "./commands/i"
 
     %include  "./code/comms/send.to.area.asm"
     %include  "./code/comms/send.to.player.asm"
