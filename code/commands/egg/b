@@ -1,8 +1,8 @@
 ;====================================================================================================================================================================================================
 ;
-;   egg
+;   ./code/commands/egg/definitions
 ;
-;   This file contains definitions for all aspects of egg data.
+;   This file contains definitions pertinent to the egg command.
 ;
 
     egg.data        equ     $           ; Placeholder for beginning of egg data.
