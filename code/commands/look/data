@@ -10,8 +10,8 @@
 ;   Local Data
 ;
 
-    local.data.bad.area.id.indicator.message    db    "Bad area id error.", 0Ah, 0Dh                                                                              ; Bad area id message.
-    local.data.bad.area.id.indicator.message.l  equ    $-local.data.bad.area.id.indicator.message                                                                 ; Length of message.
+    local.data.bad.area.id.indicator.message    db  "Bad area id error.", 0Ah, 0Dh                                                                                ; Bad area id message.
+    local.data.bad.area.id.indicator.message.l  equ $-local.data.bad.area.id.indicator.message                                                                    ; Length of message.
     
 ;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
