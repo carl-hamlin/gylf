@@ -1,9 +1,8 @@
-;==================================================================================================================================================================================================================
+;====================================================================================================================================================================================================
 ;
-;   arguments.def
+;   ./functions/aggegate.arguments/b
 ;
-;   This file contains definitions pertaining to the aggregation of arguments from the socket. At the time of this writing, there is support for ten arguments, and room for more if the necessity arises, which
-;   should not happen.
+;   This file contains all definitions pertinent to the aggregate.arguments funtcion.
 ;
 
 	  arguments.packet	    equ	  $
