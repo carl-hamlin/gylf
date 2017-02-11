@@ -15,6 +15,7 @@
     section   .text
 
     %include  "./commands/i"
+    %include  "./functions/i"
 
     %include  "./code/comms/send.to.area.asm"
     %include  "./code/comms/send.to.player.asm"
@@ -34,7 +35,6 @@
     %include  "./code/functions/get.character.data.asm"
     %include  "./code/functions/get.external.data.asm"
     %include  "./code/functions/get.ticks.asm"
-    %include  "./code/functions/gylf.asm"
     %include  "./code/functions/open.descriptor.asm"
     %include  "./code/functions/poll.descriptor.asm"
     %include  "./code/functions/print.socket.number.asm"
@@ -49,11 +49,6 @@
     %include  "./code/functions/write.prompt.asm"
     %include  "./code/functions/write.welcome.asm"
 
-    %include  "./code/participant.interaction/address.active.status.asm"
-    %include  "./code/participant.interaction/address.login.status.asm"
-    %include  "./code/participant.interaction/address.passphrase.status.asm"
-    %include  "./code/participant.interaction/address.set.passphrase.status.asm"
-
     %include  "./code/socket/accept.socket.asm"
     %include  "./code/socket/active.socket.poll.asm"
     %include  "./code/socket/answer.active.socket.asm"
@@ -65,5 +60,3 @@
     %include  "./code/socket/recv.from.socket.asm"
     %include  "./code/socket/socket.errors.asm"
     %include  "./code/socket/socket.send.asm"
-
-    %include  "./code/world.maintenance/maintain.asm"

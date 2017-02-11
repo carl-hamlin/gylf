@@ -6,6 +6,5 @@
 %include	"./definitions/numerals.def"
 %include	"./definitions/polling.def"
 %include	"./definitions/socket.def"
-%include	"./definitions/statii.def"
 %include	"./definitions/miscellaneous.indicators.def"
 %include	"./definitions/miscellaneous.lengths.def"

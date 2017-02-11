@@ -32,14 +32,8 @@
     local.data.system.check.done                            db  "System checks completed.", 0Ah, 0Dh                                                                ; System check completed message.
     local.data.system.check.done.l                          equ $-local.data.system.check.done                                                                      ; Length of message.
 
-    local.data.bad.login.error                              db  "A login attempt failed.", 0Ah, 0Dh                                                                 ; Login failure message.
-    local.data.bad.login.error.l                            equ $-local.data.bad.login.error                                                                        ; Length of message.
-
     local.data.out.of.area.ids.message                      db  "An attempt was made to hatch an egg, but the server was out of area ids.", 0Ah, 0Dh                ; Out of area ids message.
     local.data.out.of.area.ids.message.l                    equ $-local.data.out.of.area.ids.message                                                                ; Length of message.
-
-    local.data.second.login.error                           db  "Dupe login attempt. disconnecting.", 0Ah, 0Dh                                                      ; Dupe login message.
-    local.data.second.login.error.l                         equ $-local.data.second.login.error                                                                     ; Length of message.
 
     local.data.active.socket.message                        db  "Activity detected on socket "                                                                      ; Answering active socket message.
     local.data.active.socket.message.l                      equ $-local.data.active.socket.message                                                                  ; Length of message.
