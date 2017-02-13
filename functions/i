@@ -1,2 +1,2 @@
 %include  "./functions/main/i"
-%include  "./functions/buffer.strip/t"
+%include  "./functions/buffer.strip/i"
