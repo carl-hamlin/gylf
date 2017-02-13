@@ -2,3 +2,4 @@
 %include  "./functions/aggregate.arguments/i"
 %include  "./functions/bail/t"
 %include  "./functions/buffer.strip/t"
+%include  "./functions/check.admin/i"

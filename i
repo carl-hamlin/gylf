@@ -21,7 +21,6 @@
     %include  "./code/comms/send.to.player.asm"
     %include  "./code/comms/send.to.world.asm"
 
-    %include  "./code/functions/check.admin.asm"
     %include  "./code/functions/check.login.asm"
     %include  "./code/functions/clear.screen.asm"
     %include  "./code/functions/close.descriptor.asm"
