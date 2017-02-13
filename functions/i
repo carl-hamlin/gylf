@@ -1,4 +1,4 @@
 %include  "./functions/main/i"
 %include  "./functions/aggregate.arguments/i"
-%include  "./functions/bail/t"
+%include  "./functions/bail/i"
 %include  "./functions/buffer.strip/t"
