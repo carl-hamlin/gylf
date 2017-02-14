@@ -27,7 +27,6 @@
     %include  "./code/functions/check.admin.asm"
     %include  "./code/functions/check.login.asm"
     %include  "./code/functions/clear.screen.asm"
-    %include  "./code/functions/close.descriptor.asm"
     %include  "./code/functions/create.character.asm"
     %include  "./code/functions/create.file.asm"
     %include  "./code/functions/create.lock.file.asm"
