@@ -1,0 +1,195 @@
+;====================================================================================================================================================================================================
+;
+;   ./functions/create.character/b
+;
+;   This file contains all definitions pertinent to the create.character function.
+;
+
+    %define     number.of.parents                   0002h                                       ; Number of parents required to contribute to the fertilization of an egg.
+    %define     child.attribute.computation.factor  000Ah                                       ; Arbitrary factor for the computation of certain attributes during egg conversion.
+
+    %define     admin.character                     00000001b                                   ; Mask for administrative byte indicating character has admin privileges.
+
+;=================================================================================================================================================================================================
+;
+; Character Data Definition
+;
+;=================================================================================================================================================================================================
+
+    character.data                              equ     $                                       ; Placeholder for beginning of character data.
+
+    character.base.color                        resb    0001h                                   ; Byte indicator for base color.
+    character.secondary.color                   resb    0001h                                   ; Byte indicator for secondary color.
+
+    character.base.fur.quality                  resb    0001h                                   ; Byte indicator for base fur quality.
+    character.secondary.fur.quality             resb    0001h                                   ; Byte indicator for secondary fur quality.
+
+    character.strength                          resb    0001h                                   ; Byte indicator for character strength.
+    character.endurance                         resb    0001h                                   ; Byte indicator for character endurance.
+    character.agility                           resb    0001h                                   ; Byte indicator for character agility.
+
+    character.mother.l                          resb    0001h                                   ; Byte indicator for length of mother's name.
+    character.mother                            resb    00ffh                                   ; Buffer for the name of the character's mother.
+
+    character.father.l                          resb    0001h                                   ; Byte indicator for length of father's name.
+    character.father                            resb    00ffh                                   ; Buffer for the name of the character's father.
+
+    character.age                               resd    0001h                                   ; Dword indicator for character age.
+
+    character.pouch                             resd    0001h                                   ; Dword placeholder for area id correspondent to character's pouch.
+    character.location.id                       resd    0001h                                   ; Dword indicator for area id.
+
+    character.right.ear.wound.level             resb    0001h                                   ; Byte indicator for right ear wound level.
+    character.left.ear.wound.level              resb    0001h                                   ; Byte indicator for left ear wound level.
+    character.right.eye.wound.level             resb    0001h                                   ; Byte indicator for right eye wound level.
+    character.left.eye.wound.level              resb    0001h                                   ; Byte indicator for left eye wound level.
+    character.scalp.wound.level                 resb    0001h                                   ; Byte indicator for scalp wound level.
+    character.right.cheek.wound.level           resb    0001h                                   ; Byte indicator for right cheek wound level.
+    character.left.cheek.wound.level            resb    0001h                                   ; Byte indicator for left cheek wound level.
+    character.nose.wound.level                  resb    0001h                                   ; Byte indicator for nose wound level.
+    character.chin.wound.level                  resb    0001h                                   ; Byte indicator for chin wound level.
+    character.neck.wound.level                  resb    0001h                                   ; Byte indicator for neck wound level.
+    character.right.shoulder.wound.level        resb    0001h                                   ; Byte indicator for right shoulder wound level.
+    character.left.shoulder.wound.level         resb    0001h                                   ; Byte indicator for left shoulder wound level.
+    character.right.upper.arm.wound.level       resb    0001h                                   ; Byte indicator for right upper arm wound level.
+    character.left.upper.arm.wound.level        resb    0001h                                   ; Byte indicator for left upper arm wound level.
+    character.right.forearm.wound.level         resb    0001h                                   ; Byte indicator for right forearm wound level.
+    character.left.forearm.wound.level          resb    0001h                                   ; Byte indicator for left forearm wound level.
+    character.right.wrist.wound.level           resb    0001h                                   ; Byte indicator for right wrist wound level.
+    character.left.wrist.wound.level            resb    0001h                                   ; Byte indicator for left wrist wound level.
+    character.right.hand.wound.level            resb    0001h                                   ; Byte indicator for right hand wound level.
+    character.left.hand.wound.level             resb    0001h                                   ; Byte indicator for left hand wound level.
+    character.right.index.finger.wound.level    resb    0001h                                   ; Byte indicator for right index finger wound level.
+    character.right.middle.finger.wound.level   resb    0001h                                   ; Byte indicator for right middle finger wound level.
+    character.right.ring.finger.wound.level     resb    0001h                                   ; Byte indicator for right ring finger wound level.
+    character.right.thumb.wound.level           resb    0001h                                   ; Byte indicator for right thumb wound level.
+    character.left.index.finger.wound.level     resb    0001h                                   ; Byte indicator for left index finger wound level.
+    character.left.middle.finger.wound.level    resb    0001h                                   ; Byte indicator for left middle finger wound level.
+    character.left.ring.finger.wound.level      resb    0001h                                   ; Byte indicator for left ring finger wound level.
+    character.left.thumb.wound.level            resb    0001h                                   ; Byte indicator for left thumb wound level.
+    character.right.chest.wound.level           resb    0001h                                   ; Byte indicator for right chest wound level.
+    character.left.chest.wound.level            resb    0001h                                   ; Byte indicator for left chest wound level.
+    character.back.wound.level                  resb    0001h                                   ; Byte indicator for back wound level.
+    character.abdomen.wound.level               resb    0001h                                   ; Byte indicator for abdomen wound level.
+    character.pouch.wound.level                 resb    0001h                                   ; Byte indicator for pouch wound level.
+    character.right.outside.thigh.wound.level   resb    0001h                                   ; Byte indicator for right outside thigh wound level.
+    character.right.inside.thigh.wound.level    resb    0001h                                   ; Byte indicator for right inside thigh wound level.
+    character.left.outside.thigh.wound.level    resb    0001h                                   ; Byte indicator for left outside thigh wound level.
+    character.left.inside.thigh.wound.level     resb    0001h                                   ; Byte indicator for left inside thigh wound level.
+    character.right.lower.leg.wound.level       resb    0001h                                   ; Byte indicator for right lower leg wound level.
+    character.left.lower.leg.wound.level        resb    0001h                                   ; Byte indicator for left lower leg wound level.
+    character.right.dew.talon.wound.level       resb    0001h                                   ; Byte indicator for right dew talon wound level.
+    character.right.main.fore.talon.wound.level resb    0001h                                   ; Byte indicator for right main fore talon wound level.
+    character.right.middle.talon.wound.level    resb    0001h                                   ; Byte indicator for right middle talon wound level.
+    character.right.low.talon.wound.level       resb    0001h                                   ; Byte indicator for right low talon wound level.
+    character.left.dew.talon.wound.level        resb    0001h                                   ; Byte indicator for left dew talon wound level.
+    character.left.main.fore.talon.wound.level  resb    0001h                                   ; Byte indicator for left main fore talon wound level.
+    character.left.middle.talon.wound.level     resb    0001h                                   ; Byte indicator for left middle talon wound level.
+    character.left.low.talon.wound.level        resb    0001h                                   ; Byte indicator for left low talon wound level.
+
+    character.brain.wound.level                 resb    0001h                                   ; Byte indicator for brain wound level.
+    character.neck.spinal.wound.level           resb    0001h                                   ; Byte indicator for neck spinal wound level.
+    character.back.spinal.wound.level           resb    0001h                                   ; Byte indicator for back spinal wound level.
+    character.heart.wound.level                 resb    0001h                                   ; Byte indicator for heart wound level.
+    character.right.lung.wound.level            resb    0001h                                   ; Byte indicator for right lung wound level.
+    character.left.lung.wound.level             resb    0001h                                   ; Byte indicator for left lung wound level.
+    character.liver.wound.level                 resb    0001h                                   ; Byte indicator for liver wound level.
+    character.stomach.wound.level               resb    0001h                                   ; Byte indicator for stomach wound level.
+    character.large.intestine.wound.level       resb    0001h                                   ; Byte indicator for large intestine wound level.
+    character.small.intestine.wound.level       resb    0001h                                   ; Byte indicator for small intestine wound level.
+    character.ovary.wound.level                 resb    0001h                                   ; Byte indicator for ovary wound level.
+    character.testicle.wound.level              resb    0001h                                   ; Byte indicator for testicle wound level.
+    character.inseminator.wound.level           resb    0001h                                   ; Byte indicator for inseminator wound level.
+
+    head.worn.item.id                           resd    0001h                                   ; Item id for item worn on head.
+    right.ear.worn.item.id                      resd    0001h                                   ; Item id for item worn on right ear.
+    left.ear.worn.item.id                       resd    0001h                                   ; Item id for item worn on left ear.
+    neck.worn.item.id                           resd    0001h                                   ; Item id for item worn on neck.
+    chest.worn.item.id                          resd    0001h                                   ; Item id for item worn on chest.
+    back.worn.item.id                           resd    0001h                                   ; Item id for item worn on back.
+    abdomen.worn.item.id                        resd    0001h                                   ; Item id for item worn on abdomen.
+    right.thigh.worn.item.id                    resd    0001h                                   ; Item id for item worn on right thigh.
+    left.thigh.worn.item.id                     resd    0001h                                   ; Item id for item worn on left thigh.
+
+    right.hand.inventory.id                     resd    0001h                                   ; Item id for item held in right hand.
+    left.hand.inventory.id                      resd    0001h                                   ; Item id for item held in left hand.
+
+    administrative.byte                         resb    0001h                                   ; Reserved for administrative data
+
+    character.data.l                            equ     $-character.data                        ; Length of character data.
+
+;=================================================================================================================================================================================================
+;
+; Father's DNA
+;
+;=================================================================================================================================================================================================
+
+    character.father.data                       equ     $                                       ; Placeholder for beginning of character data.
+
+    character.father.base.color                 resb    0001h                                   ; Byte indicator for base color.
+    character.father.secondary.color            resb    0001h                                   ; Byte indicator for secondary color.
+
+    character.father.base.fur.quality           resb    0001h                                   ; Byte indicator for base fur quality.
+    character.father.secondary.fur.quality      resb    0001h                                   ; Byte indicator for secondary fur quality.
+
+    character.father.strength                   resb    0001h                                   ; Byte indicator for character strength.
+    character.father.endurance                  resb    0001h                                   ; Byte indicator for character endurance.
+    character.father.agility                    resb    0001h                                   ; Byte indicator for character agility.
+
+    character.father.dna.l                      equ     $-character.father.data                 ; Length of DNA information
+
+;=================================================================================================================================================================================================
+;
+; Mother's DNA
+;
+;=================================================================================================================================================================================================
+
+    character.mother.data                       equ     $                                       ; Placeholder for beginning of character data.
+
+    character.mother.base.color                 resb    0001h                                   ; Byte indicator for base color.
+    character.mother.secondary.color            resb    0001h                                   ; Byte indicator for secondary color.
+
+    character.mother.base.fur.quality           resb    0001h                                   ; Byte indicator for base fur quality.
+    character.mother.secondary.fur.quality      resb    0001h                                   ; Byte indicator for secondary fur quality.
+
+    character.mother.strength                   resb    0001h                                   ; Byte indicator for character strength.
+    character.mother.endurance                  resb    0001h                                   ; Byte indicator for character endurance.
+    character.mother.agility                    resb    0001h                                   ; Byte indicator for character agility.
+
+    character.mother.dna.l                      equ     $-character.mother.data                 ; Length of DNA information
+
+;=================================================================================================================================================================================================
+;
+; Base Colors
+;
+;=================================================================================================================================================================================================
+
+    character.base.color.table                  equ     $                                       ; Placeholder for base color table entry point.
+    character.base.color.number                 equ     $-character.base.color.table            ; Number of base colors in table.
+
+;=================================================================================================================================================================================================
+;
+; Secondary Colors
+;
+;=================================================================================================================================================================================================
+
+    character.secondary.color.table             equ     $                                       ; Placeholder for secondary color table entry point.
+    character.secondary.color.number            equ     $-character.secondary.color.table       ; Number of secondary colors in table.
+
+;=================================================================================================================================================================================================
+;
+; Base Fur Qualities
+;
+;=================================================================================================================================================================================================
+
+    character.base.fur.quality.table            equ     $                                       ; Placeholder for base fur quality table entry point.
+    character.base.fur.quality.number           equ     $-character.base.fur.quality.table      ; Number of base fur qualities in table.
+
+;=================================================================================================================================================================================================
+;
+; Secondary Fur Qualities
+;
+;=================================================================================================================================================================================================
+
+    character.secondary.fur.quality.table       equ     $                                       ; Placeholder for secondary fur quality table entry point.
+    character.secondary.fur.quality.number      equ     $-character.secondary.fur.quality.table ; Number of secondary fur qualities in table.
