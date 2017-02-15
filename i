@@ -32,7 +32,6 @@
     %include  "./code/functions/create.file.asm"
     %include  "./code/functions/create.lock.file.asm"
     %include  "./code/functions/dna.lab.asm"
-    %include  "./code/functions/get.character.data.asm"
     %include  "./code/functions/get.external.data.asm"
     %include  "./code/functions/get.ticks.asm"
     %include  "./code/functions/open.descriptor.asm"

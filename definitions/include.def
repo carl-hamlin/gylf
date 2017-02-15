@@ -1,5 +1,4 @@
 %include	"./definitions/arguments.def"
-%include	"./definitions/buffers.def"
 %include	"./definitions/character.def"
 %include	"./definitions/functions.def"
 %include	"./definitions/id.def"
