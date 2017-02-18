@@ -5,7 +5,6 @@
 ;   This file contains definitions for function calls. Without these definitions, the program would run on magic numbers and be difficult to read.
 ;
 
-    %define     sys.system.call                         080h     ; The big Kahuna. 080h is the call we use to access kernel functions.
     %define     sys.socket.call                         066h     ; The little Kahuna. 066h indicates socket functionality.
     %define     sys.poll.call                           0A8h     ; 0A8h is the call to poll active descriptors and see if they're asking for action.
 
@@ -31,7 +30,6 @@
     %define     sys.unlink                              00Ah    ; 00Ah is the modifier for 080h that tells the kernel we want to smoke a file.
     %define     sys.get.time.in.seconds.since.the.epoch 00Dh    ; 00Dh is the modifer for 080h that tells the kernel we want the time in seconds since the epoch.
     %define     sys.lseek.call                          013h    ; 013h is the modifier for 080h that tells the kernel we'd like to move the file pointer.
-    %define     sys.get.ticks                           02Bh    ; 02Bh is the modifer for 080h that tells the kernel to return the numberof ticks since boot time in the eax register.
 
 ;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
