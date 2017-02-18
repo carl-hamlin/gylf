@@ -1,0 +1,8 @@
+;====================================================================================================================================================================================================
+;
+;   ./functions/get.external.data/b
+;
+;   This file contains definitions for the get.external.data function.
+;
+
+    external.data.buffer  resb  00FFh ; Buffer for external data.
