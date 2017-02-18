@@ -1,8 +1,6 @@
 ;====================================================================================================================================================================================================
 ;
-;   ./functions/b
+;   ./functions/open.descriptor/d
 ;
-;   This file contains shared definitions for downstream functions.
+;   This file contains data for the open.descriptor function.
 ;
-
-    %define sys.system.call 080h  ; The big Kahuna. 080h is the call we use to access kernel functions.
