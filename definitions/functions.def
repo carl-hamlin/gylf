@@ -20,7 +20,6 @@
 
 ;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    %define     sys.read.call                           003h    ; 003h is the modifier for 080h that tells the kernel we want to read data from a specified descriptor.
     %define     sys.write.call                          004h    ; 004h is the modifier for 080h that tells the kernel we want to write data to a specified descriptor.
     %define     sys.unlink                              00Ah    ; 00Ah is the modifier for 080h that tells the kernel we want to smoke a file.
     %define     sys.get.time.in.seconds.since.the.epoch 00Dh    ; 00Dh is the modifer for 080h that tells the kernel we want the time in seconds since the epoch.
