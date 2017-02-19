@@ -24,7 +24,6 @@
     %define     sys.read.call                           003h    ; 003h is the modifier for 080h that tells the kernel we want to read data from a specified descriptor.
     %define     sys.write.call                          004h    ; 004h is the modifier for 080h that tells the kernel we want to write data to a specified descriptor.
     %define     sys.open.call                           005h    ; 005h is the modifier for 080h that tells the kernel we want to prepare a descriptor and associate it with local data or a socket.
-    %define     sys.create.call                         008h    ; 008h is the modifier for 080h that tells the kernel we want to create a new file instead of opening an existing one.
     %define     sys.unlink                              00Ah    ; 00Ah is the modifier for 080h that tells the kernel we want to smoke a file.
     %define     sys.get.time.in.seconds.since.the.epoch 00Dh    ; 00Dh is the modifer for 080h that tells the kernel we want the time in seconds since the epoch.
     %define     sys.lseek.call                          013h    ; 013h is the modifier for 080h that tells the kernel we'd like to move the file pointer.
@@ -35,5 +34,4 @@
     %define     sys.lseek.current.position              001h    ; 001h indicates to the lseek function that we're seeking from the current position.
     %define     sys.lseek.eof                           002h    ; 002h indicates to the lseek function that we're seeking to the end of the file.
     %define     sys.standard.output                     001h    ; 001h is the descriptor we pass to the write function when we want to write to the screen.
-    %define     sys.read.write                          002h    ; 002h is the parameter passed to the open function when we want to be able to read from and write to the resulting descriptor.
     %define     sys.no.bytes.read                       000h    ; Indicator for no bytes having been read during the read function.
