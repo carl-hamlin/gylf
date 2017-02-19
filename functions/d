@@ -1,8 +1,8 @@
 ;====================================================================================================================================================================================================
 ;
-;   file.paths
+;   ./functions/d
 ;
-;   This file contains data definitions for files used by the system.
+;   This file contains all data	pertinent to downstream functions.
 ;
 
     current.directory.marker   db  './'
@@ -10,6 +10,7 @@
 
     area.filename              db  './external.data/areas/00000000', 00h
     area.filename.l            equ $-area.filename
+
     item.filename              db  './external.data/items/00000000', 00h
     item.filename.l            equ $-item.filename
 
@@ -17,4 +18,4 @@
     lock.extension.l           equ $-lock.extension
 
     external.data.cursor.home  db  "./external.data/cursor.control/cursor.home", 00h
-    external.data.clear.screen db  "./external.data/cursor.control/clear.screen", 00h
+    external.data.clear.screen db  "./external.data/cursor.control/clear.screen", 00h	
