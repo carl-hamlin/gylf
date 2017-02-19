@@ -46,7 +46,6 @@
     %include  "./code/functions/write.bad.command.error.asm"
     %include  "./code/functions/write.bad.help.command.error.asm"
     %include  "./code/functions/write.descriptor.asm"
-    %include  "./code/functions/write.prompt.asm"
     %include  "./code/functions/write.welcome.asm"
 
     %include  "./code/socket/accept.socket.asm"
