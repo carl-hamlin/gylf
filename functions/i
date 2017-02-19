@@ -39,3 +39,4 @@
     %include  "./functions/write.bad.command.error/i"
     %include  "./functions/write.bad.help.command.error/i"
     %include  "./functions/write.descriptor/i"
+    %include  "./functions/write.prompt/i"
