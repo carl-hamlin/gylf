@@ -2,5 +2,7 @@
 ;
 ;   ./functions/b
 ;
-;   This file contains shared definitions for downstream functions.
+;   This file contains all definitions pertinent to downstream functions.
 ;
+
+    %define sys.system.call 080h  ; The big Kahuna. 080h is the call we use to access kernel functions.
