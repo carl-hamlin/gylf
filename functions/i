@@ -35,3 +35,4 @@
     %include  "./functions/print.socket.number/i"
     %include  "./functions/read.descriptor/i"
     %include  "./functions/set.single.attribute/i"
+    %include  "./functions/time.in.seconds.since.the.epoch/i"
