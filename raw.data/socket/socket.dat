@@ -43,8 +43,3 @@
     socket.data.send.buffer.pointer         dd  0000h                                   ; Storage for pointer to buffer containing data to be sent.
     socket.data.send.buffer.l               dd  0000h                                   ; Storage for length of buffer.
     socket.data.send.flags                  dd  0000h                                   ; Storage for communications semantics.
-
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    socket.numbers                          db  "0000"                                  ; Placeholder for socket numbers to populate connection table.
-    socket.numbers.l                        equ  $-socket.numbers                       ; Length of placeholder.

@@ -2,6 +2,7 @@
 
     section   .bss
 
+    %include  "./b"
     %include  "./definitions/include.def"
 
 ;==================================================================================================================================================================================================================
@@ -21,7 +22,6 @@
     %include  "./code/comms/send.to.player.asm"
     %include  "./code/comms/send.to.world.asm"
 
-    %include  "./code/functions/system.check.asm"
     %include  "./code/functions/time.in.seconds.since.epoch.asm"
     %include  "./code/functions/write.bad.command.error.asm"
     %include  "./code/functions/write.bad.help.command.error.asm"

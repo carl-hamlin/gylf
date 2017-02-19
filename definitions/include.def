@@ -1,6 +1,5 @@
 %include	"./definitions/functions.def"
 %include	"./definitions/id.def"
-%include	"./definitions/numerals.def"
 %include	"./definitions/polling.def"
 %include	"./definitions/socket.def"
 %include	"./definitions/miscellaneous.indicators.def"
