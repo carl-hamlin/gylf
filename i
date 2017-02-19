@@ -40,7 +40,6 @@
     %include  "./code/functions/print.socket.number.asm"
     %include  "./code/functions/read.descriptor.asm"
     %include  "./code/functions/set.single.attribute.asm"
-    %include  "./code/functions/set.up.listener.asm"
     %include  "./code/functions/system.check.asm"
     %include  "./code/functions/time.in.seconds.since.epoch.asm"
     %include  "./code/functions/write.bad.command.error.asm"
