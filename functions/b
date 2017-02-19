@@ -1,8 +1,8 @@
 ;====================================================================================================================================================================================================
 ;
-;   character
+;   ./functions/b
 ;
-;   This file contains definitions for all aspects of character data.
+;   This file contains all definitions pertinent to downstream functions.
 ;
 
     %define     number.of.parents                   0002h                                       ; Number of parents required to contribute to the fertilization of an egg.
