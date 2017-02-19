@@ -2,22 +2,16 @@
 
     section   .bss
 
-    %include  "./functions/b"
+    %include  "./functions/clear.screen/b"
 
 ;==================================================================================================================================================================================================================
 
     section   .data
 
-    %include  "./functions/d"
+    %include  "./functions/clear.screen/d"
 
 ;==================================================================================================================================================================================================================
 
     section   .text
 
-    %include  "./functions/main/i"
-    %include  "./functions/aggregate.arguments/i"
-    %include  "./functions/bail/i"
-    %include  "./functions/buffer.strip/i"
-    %include  "./functions/check.admin/i"
-    %include  "./functions/check.login/i"
-    %include  "./functions/clear.screen/i"
+    %include  "./functions/clear.screen/t"
