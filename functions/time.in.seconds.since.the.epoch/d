@@ -1,8 +1,6 @@
 ;====================================================================================================================================================================================================
 ;
-;   ./functions/b
+;   ./functions/time.in.seconds.since.the.epoch/d
 ;
-;   This file contains shared definitions for downstream functions.
+;   This file contains data for the time.in.seconds.since.the.epoch function.
 ;
-
-    %define sys.system.call 080h  ; The big Kahuna. 080h is the call we use to access kernel functions.
