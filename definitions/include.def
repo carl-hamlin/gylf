@@ -1,4 +1,3 @@
-%include	"./definitions/buffers.def"
 %include	"./definitions/functions.def"
 %include	"./definitions/id.def"
 %include	"./definitions/numerals.def"
