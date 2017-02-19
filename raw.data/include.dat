@@ -1,7 +1,6 @@
 %include	"/home/chamlin/gylf/raw.data/area.data/area.dat"
 %include	"/home/chamlin/gylf/raw.data/command.data/command.table.dat"
 %include	"/home/chamlin/gylf/raw.data/file.paths/file.paths.dat"
-%include	"/home/chamlin/gylf/raw.data/function.data/file.indicator.dat"
 %include	"/home/chamlin/gylf/raw.data/messages/messages.dat"
 %include	"/home/chamlin/gylf/raw.data/socket/socket.dat"
 %include	"/home/chamlin/gylf/raw.data/vt100/vt100.dat"
