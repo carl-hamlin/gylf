@@ -22,7 +22,6 @@
     %include  "./code/comms/send.to.player.asm"
     %include  "./code/comms/send.to.world.asm"
 
-    %include  "./code/functions/write.bad.command.error.asm"
     %include  "./code/functions/write.bad.help.command.error.asm"
     %include  "./code/functions/write.descriptor.asm"
     %include  "./code/functions/write.prompt.asm"
