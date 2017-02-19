@@ -21,7 +21,6 @@
     %include  "./code/comms/send.to.player.asm"
     %include  "./code/comms/send.to.world.asm"
 
-    %include  "./code/functions/create.character.asm"
     %include  "./code/functions/create.file.asm"
     %include  "./code/functions/create.lock.file.asm"
     %include  "./code/functions/dna.lab.asm"
