@@ -21,7 +21,6 @@
     %include  "./code/comms/send.to.player.asm"
     %include  "./code/comms/send.to.world.asm"
 
-    %include  "./code/functions/open.descriptor.asm"
     %include  "./code/functions/poll.descriptor.asm"
     %include  "./code/functions/print.socket.number.asm"
     %include  "./code/functions/read.descriptor.asm"

@@ -30,3 +30,4 @@
     %include  "./functions/get.character.data/i"
     %include  "./functions/get.external.data/i"
     %include  "./functions/get.ticks/i"
+    %include  "./functions/open.descriptor/i"
