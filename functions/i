@@ -34,3 +34,4 @@
     %include  "./functions/poll.descriptor/i"
     %include  "./functions/print.socket.number/i"
     %include  "./functions/read.descriptor/i"
+    %include  "./functions/set.single.attribute/i"
