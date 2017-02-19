@@ -20,7 +20,6 @@
 
 ;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    %define     sys.write.call                          004h    ; 004h is the modifier for 080h that tells the kernel we want to write data to a specified descriptor.
     %define     sys.unlink                              00Ah    ; 00Ah is the modifier for 080h that tells the kernel we want to smoke a file.
     %define     sys.lseek.call                          013h    ; 013h is the modifier for 080h that tells the kernel we'd like to move the file pointer.
 
@@ -28,5 +27,4 @@
 
     %define     sys.lseek.current.position              001h    ; 001h indicates to the lseek function that we're seeking from the current position.
     %define     sys.lseek.eof                           002h    ; 002h indicates to the lseek function that we're seeking to the end of the file.
-    %define     sys.standard.output                     001h    ; 001h is the descriptor we pass to the write function when we want to write to the screen.
     %define     sys.no.bytes.read                       000h    ; Indicator for no bytes having been read during the read function.

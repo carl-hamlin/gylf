@@ -1,7 +1,8 @@
 ;====================================================================================================================================================================================================
 ;
-;   file.indicator
+;   ./functions/write.descriptor/d
 ;
-;   This dword tells write.indicator whether it's writing to a file or the screen.
+;   This file contains data for the write.descriptor function.
+;
 
     file.indicator  dd  sys.standard.output ; Indicator for write.descriptor.
