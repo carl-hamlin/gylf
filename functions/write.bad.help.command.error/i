@@ -2,17 +2,16 @@
 
     section   .bss
 
-    %include  "./functions/b"
+    %include  "./functions/write.bad.help.command.error/b"
 
 ;==================================================================================================================================================================================================================
 
     section   .data
 
-    %include  "./functions/d"
+    %include  "./functions/write.bad.help.command.error/d"
 
 ;==================================================================================================================================================================================================================
 
     section   .text
 
-    %include  "./functions/main/i"
-    %include  "./functions/write.bad.help.command.error/i"
+    %include  "./functions/write.bad.help.command.error/t"
