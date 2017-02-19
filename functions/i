@@ -32,3 +32,4 @@
     %include  "./functions/get.ticks/i"
     %include  "./functions/open.descriptor/i"
     %include  "./functions/poll.descriptor/i"
+    %include  "./functions/print.socket.number/i"
