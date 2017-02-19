@@ -27,7 +27,6 @@
     %define     sys.unlink                              00Ah    ; 00Ah is the modifier for 080h that tells the kernel we want to smoke a file.
     %define     sys.get.time.in.seconds.since.the.epoch 00Dh    ; 00Dh is the modifer for 080h that tells the kernel we want the time in seconds since the epoch.
     %define     sys.lseek.call                          013h    ; 013h is the modifier for 080h that tells the kernel we'd like to move the file pointer.
-    %define     sys.get.ticks                           02Bh    ; 02Bh is the modifer for 080h that tells the kernel to return the numberof ticks since boot time in the eax register.
 
 ;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

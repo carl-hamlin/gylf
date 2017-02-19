@@ -29,3 +29,4 @@
     %include  "./functions/dna.lab/i"
     %include  "./functions/get.character.data/i"
     %include  "./functions/get.external.data/i"
+    %include  "./functions/get.ticks/i"
