@@ -2,17 +2,16 @@
 
     section   .bss
 
-    %include  "./functions/b"
+    %include  "./functions/set.single.attribute/b"
 
 ;==================================================================================================================================================================================================================
 
     section   .data
 
-    %include  "./functions/d"
+    %include  "./functions/set.single.attribute/d"
 
 ;==================================================================================================================================================================================================================
 
     section   .text
 
-    %include  "./functions/main/i"
-    %include  "./functions/set.single.attribute/i"
+    %include  "./functions/set.single.attribute/t"

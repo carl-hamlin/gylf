@@ -1,8 +1,8 @@
-;=================================================================================================================================================================================================
+;====================================================================================================================================================================================================
 ;
-;   attribute.control
+;   ./functions/set.single.attribute/d
 ;
-;   This file contains data definitions for attribute control vt100 escape sequences. Its future is uncertain.
+;   This file contains data for the set.single.attribute function.
 ;
 
     set.att.mod.1   db  01Bh, "["   ; Set Attribute Mode    <ESC>[{attr1};...;{attrn}m
