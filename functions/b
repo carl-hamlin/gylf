@@ -1,0 +1,10 @@
+;====================================================================================================================================================================================================
+;
+;   ./functions/b
+;
+;   This file contains all definitions pertinent to downstream functions.
+;
+
+    %define sys.system.call 080h  ; The big Kahuna. 080h is the call we use to access kernel functions.
+    %define sys.read.write  002h  ; 002h is the parameter passed to the open function when we want to be able to read from and write to the resulting descriptor.
+
