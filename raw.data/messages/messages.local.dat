@@ -32,20 +32,8 @@
     local.data.system.check.done                            db  "System checks completed.", 0Ah, 0Dh                                                                ; System check completed message.
     local.data.system.check.done.l                          equ $-local.data.system.check.done                                                                      ; Length of message.
 
-    local.data.bad.login.error                              db  "A login attempt failed.", 0Ah, 0Dh                                                                 ; Login failure message.
-    local.data.bad.login.error.l                            equ $-local.data.bad.login.error                                                                        ; Length of message.
-
     local.data.out.of.area.ids.message                      db  "An attempt was made to hatch an egg, but the server was out of area ids.", 0Ah, 0Dh                ; Out of area ids message.
     local.data.out.of.area.ids.message.l                    equ $-local.data.out.of.area.ids.message                                                                ; Length of message.
-
-    local.data.shutdown.message                             db  "Server shutdown has been initiated from within the environment.", 0Ah, 0Dh                         ; Shutdown message.
-    local.data.shutdown.message.l                           equ $-local.data.shutdown.message                                                                       ; Length of message.
-
-    local.data.smoked.sockets.message                       db  "All sockets have been smoked.", 0Ah, 0Dh                                                           ; Smoked sockets message.
-    local.data.smoked.sockets.message.l                     equ $-local.data.smoked.sockets.message                                                                 ; Length of message.
-
-    local.data.second.login.error                           db  "Dupe login attempt. disconnecting.", 0Ah, 0Dh                                                      ; Dupe login message.
-    local.data.second.login.error.l                         equ $-local.data.second.login.error                                                                     ; Length of message.
 
     local.data.active.socket.message                        db  "Activity detected on socket "                                                                      ; Answering active socket message.
     local.data.active.socket.message.l                      equ $-local.data.active.socket.message                                                                  ; Length of message.
@@ -58,15 +46,3 @@
 
     local.data.carriage.return                              db  0Ah, 0Dh                                                                                            ; Carriage return.
     local.data.carriage.return.l                            equ $-local.data.carriage.return                                                                        ; Length of message.
-
-    local.data.area.bad.syntax.message                      db  "An admin bounced the area command on bad syntax.", 0Ah, 0Dh                                        ; Area syntax error.
-    local.data.area.bad.syntax.message.l                    equ $-local.data.area.bad.syntax.message                                                                ; Length of message.
-
-    local.data.area.created.message                         db  "An admin has created a new area.", 0Ah, 0Dh                                                        ; Area creation message.
-    local.data.area.created.message.l                       equ $-local.data.area.created.message                                                                   ; Length of message.
-
-    local.data.out.of.areas.message                         db  "An admin tried to create an area, but we're fresh out of area filenames.", 0Ah, 0Dh                ; Area filename bounce.
-    local.data.out.of.areas.message.l                       equ $-local.data.out.of.areas.message                                                                   ; Length of message.
-
-    local.data.bad.area.id.indicator.message                db    "Bad area id error.", 0Ah, 0Dh                                                                    ; Bad area id message.
-    local.data.bad.area.id.indicator.message.l              equ    $-local.data.bad.area.id.indicator.message                                                       ; Length of message.
