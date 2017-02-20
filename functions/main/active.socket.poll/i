@@ -2,20 +2,16 @@
 
     section   .bss
 
-    %include  "./functions/main/b"
+    %include  "./functions/main/active.socket.poll/b"
 
 ;==================================================================================================================================================================================================================
 
     section   .data
 
-    %include  "./functions/main/d"
+    %include  "./functions/main/active.socket.poll/d"
 
 ;==================================================================================================================================================================================================================
 
     section   .text
 
-    %include  "./functions/main/participant.interaction/i"
-    %include  "./functions/main/world.maintenance/i"
-    %include  "./functions/main/active.socket.poll/i"
-    
-    %include  "./functions/main/t"
+    %include  "./functions/main/active.socket.poll/t"

@@ -21,18 +21,6 @@
 
 ;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    socket.data.event.socket.descriptor     dd  0000h                                   ; Data storage for descriptor associated with bound, active, and listening socket.
-    socket.data.event.requested             dd  sys.poll.in                             ; Storage for requested event(s).
-    socket.data.event.returned              dd  0000h                                   ; Storage for returned event(s).
-
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    socket.data.active.socket.descriptor    dd  0000h                                   ; Data storage for descriptor associated with active connected socket.
-    socket.data.active.requested            dd  sys.poll.in                             ; Storage for requested event(s).
-    socket.data.active.returned             dd  0000h                                   ; Storage for returned event(s).
-
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
     socket.data.accept.socket.descriptor    dd  0000h                                   ; Data storage for descriptor associated with bound, active, and listening socket.
     socket.data.accept.sockaddr.pointer     dd  socket.data.sockaddr.protocol.family    ; Storage for pointer to sockaddr structure.
     socket.data.accept.buffer.pointer       dd  socket.data.connected.socket.descriptor ; Storage for pointer to storage for descriptor returned by accept function.

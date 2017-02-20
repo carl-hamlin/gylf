@@ -57,5 +57,3 @@
                                                 resb    0001h                   ; Placeholder for status.
                                                 resb    socket.filename.entry.l ; Placeholder for character data filename.
     %endrep                                                                     ; End preprocessor driven repetition.
-        
-    sockets.left                                resd    0001h                   ; Storage for sockets left to poll.
