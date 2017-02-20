@@ -9,9 +9,6 @@
   						                            db	"later.", 0Ah, 0Dh
 	  socket.data.session.open.error.l	    equ	$-socket.data.session.open.error											                                                        ; Length of session open error message.
 
-	  no.connection.available			          db	"The server is currently full.", 0Ah, 0Dh										                                                  ; Storage for server currently full message.
-	  no.connection.available.l		          equ	$-no.connection.available												                                                              ; Length of message.
-
 	  prompt.message				                db	0Ah, 0Dh, "> "														                                                                    ; Storage for prompt.
 	  prompt.message.l			                equ	$-prompt.message													                                                                    ; Length of message.
 
