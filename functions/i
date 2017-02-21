@@ -15,6 +15,7 @@
     section   .text
 
     %include  "./functions/main/i"
+    %include  "./functions/socket/i"
 
     %include  "./functions/aggregate.arguments/i"
     %include  "./functions/bail/i"
