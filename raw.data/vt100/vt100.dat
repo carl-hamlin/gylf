@@ -1,4 +1,3 @@
-%include	"./raw.data/vt100/attribute.control.dat"
 %include	"./raw.data/vt100/cursor.control.dat"
 %include	"./raw.data/vt100/key.definition.control.dat"
 %include	"./raw.data/vt100/line.wrap.and.fonts.dat"
