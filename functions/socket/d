@@ -4,3 +4,9 @@
 ;
 ;   This file contains all data	pertinent to downstream socket functions.
 ;
+
+    socket.data.sockaddr.protocol.family  dw  sys.socket.protocol.family.inet         ; Sockaddr element for storing the protocol family.
+    socket.data.sockaddr.port.number      dw  sys.socket.port.number                  ; Sockaddr element for storing the port number in little-endian order.
+    socket.data.sockaddr.address          dd  sys.socket.address                      ; Sockaddr element for storing the socket address.
+    socket.data.sockaddr.padding          dq  sys.socket.padding                      ; Padded sockaddr element.
+    socket.data.sockaddr.l                equ $-socket.data.sockaddr.protocol.family  ; Length of sockaddr structure.
