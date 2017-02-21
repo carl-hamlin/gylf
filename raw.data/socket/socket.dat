@@ -13,26 +13,7 @@
 
 ;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    socket.data.sockaddr.protocol.family    dw  sys.socket.protocol.family.inet         ; Sockaddr element for storing the protocol family.
-    socket.data.sockaddr.port.number        dw  sys.socket.port.number                  ; Sockaddr element for storing the port number in little-endian order.
-    socket.data.sockaddr.address            dd  sys.socket.address                      ; Sockaddr element for storing the socket address.
-    socket.data.sockaddr.padding            dq  sys.socket.padding                      ; Padded sockaddr element.
-    socket.data.sockaddr.l                  equ $-socket.data.sockaddr.protocol.family  ; Length of sockaddr structure.
-
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    socket.data.accept.socket.descriptor    dd  0000h                                   ; Data storage for descriptor associated with bound, active, and listening socket.
-    socket.data.accept.sockaddr.pointer     dd  socket.data.sockaddr.protocol.family    ; Storage for pointer to sockaddr structure.
-    socket.data.accept.buffer.pointer       dd  socket.data.connected.socket.descriptor ; Storage for pointer to storage for descriptor returned by accept function.
-
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
     socket.data.send.socket.descriptor      dd  0000h                                   ; Storage for descriptor associated with socket upon which to send data.
     socket.data.send.buffer.pointer         dd  0000h                                   ; Storage for pointer to buffer containing data to be sent.
     socket.data.send.buffer.l               dd  0000h                                   ; Storage for length of buffer.
     socket.data.send.flags                  dd  0000h                                   ; Storage for communications semantics.
-
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    socket.numbers                          db  "0000"                                  ; Placeholder for socket numbers to populate connection table.
-    socket.numbers.l                        equ  $-socket.numbers                       ; Length of placeholder.

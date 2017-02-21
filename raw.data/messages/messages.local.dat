@@ -17,32 +17,17 @@
     local.data.bind.error.message                           db  "There was a problem binding the socket to the specified port.", 0Ah, 0Dh                           ; Binding error message.
     local.data.bind.error.message.l                         equ $-local.data.bind.error.message                                                                     ; Length of message.
 
-    local.data.listen.error.message                         db  "There was a problem getting the socket to listen on the specified port.", 0Ah, 0Dh                 ; Listen error message.
-    local.data.listen.error.message.l                       equ $-local.data.listen.error.message                                                                   ; Length of message.
-
     local.data.accept.error.message                         db  "There was a problem accepting an incoming connection.", 0Ah, 0Dh                                   ; Accept error message.
     local.data.accept.error.message.l                       equ $-local.data.accept.error.message                                                                   ; Length of message.
 
     local.data.session.open.error                           db  "A user file could not be created.", 0Ah, 0Dh                                                       ; Session open error message.
     local.data.session.open.error.l                         equ $-local.data.session.open.error                                                                     ; Length of message.
 
-    local.data.system.check.message                         db  "Performing system check...", 0Ah, 0Dh                                                              ; System check message.
-    local.data.system.check.message.l                       equ $-local.data.system.check.message                                                                   ; Length of message.
-
-    local.data.system.check.done                            db  "System checks completed.", 0Ah, 0Dh                                                                ; System check completed message.
-    local.data.system.check.done.l                          equ $-local.data.system.check.done                                                                      ; Length of message.
-
     local.data.out.of.area.ids.message                      db  "An attempt was made to hatch an egg, but the server was out of area ids.", 0Ah, 0Dh                ; Out of area ids message.
     local.data.out.of.area.ids.message.l                    equ $-local.data.out.of.area.ids.message                                                                ; Length of message.
 
     local.data.active.socket.message                        db  "Activity detected on socket "                                                                      ; Answering active socket message.
     local.data.active.socket.message.l                      equ $-local.data.active.socket.message                                                                  ; Length of message.
-
-    local.data.populating.connection.table.message          db  "Populating connection table", 0Ah, 0Dh                                                             ; Populating connection table message.
-    local.data.populating.connection.table.message.l        equ $-local.data.populating.connection.table.message                                                    ; Length of message.
-
-    local.data.populate.connection.numbers.over.message     db  "Bounds error populating connection table. shutting down", 0Ah, 0Dh                                 ; Bounds error message.
-    local.data.populate.connection.numbers.over.message.l   equ $-local.data.populate.connection.numbers.over.message                                               ; Length of message.
 
     local.data.carriage.return                              db  0Ah, 0Dh                                                                                            ; Carriage return.
     local.data.carriage.return.l                            equ $-local.data.carriage.return                                                                        ; Length of message.

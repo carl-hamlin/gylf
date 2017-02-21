@@ -1,0 +1,9 @@
+;====================================================================================================================================================================================================
+;
+;   ./functions/write.prompt/d
+;
+;   This file contains data for the write.prompt function.
+;
+
+	  prompt.message    db	0Ah, 0Dh, "> "    ; Storage for prompt.
+	  prompt.message.l  equ	$-prompt.message  ; Length of message.
