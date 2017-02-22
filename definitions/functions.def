@@ -7,7 +7,6 @@
 
     %define     sys.socket.create                       001h    ; 001h is the modifier for 066h that tells the kernel we want to create a new socket. Here, we use it to build the listening socket for
                                                                 ; incoming connections.
-    %define     sys.socket.bind                         002h    ; 002h is the modifier for 066h that tells the kernel we want to bind an existing socket to a port.
     %define     sys.socket.listen                       004h    ; 004h is the modifier for 066h that tells the kernel we want the bound socket to listen for incoming connections.
     %define     sys.socket.accept                       005h    ; 005h is the modifier for 066h that tells the kernel we want the listening socket to accept an inbound connection.    %define     sys.socket.send                         009h    ; 009h is the modifier for 066h that tells the kernel we're attempting to send data to an active, connected socket. We don't use this much
                                                                 ; here, preferring kernel function 004h to write directly to the socket descriptor.
