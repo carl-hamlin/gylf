@@ -20,3 +20,4 @@
     %include  "./functions/socket/clean.socket/i"
     %include  "./functions/socket/create.socket/i"
     %include  "./functions/socket/listen.socket/i"
+    %include  "./functions/socket/recv.from.socket/i"
