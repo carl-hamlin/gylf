@@ -23,3 +23,5 @@
     %include  "./functions/socket/recv.from.socket/i"
     %include  "./functions/socket/socket.errors/i"
     %include  "./functions/socket/socket.send/i"
+    
+    %include  "./functions/socket/communications/i"
