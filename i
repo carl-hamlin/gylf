@@ -26,7 +26,6 @@
     %include  "./code/socket/active.socket.poll.asm"
     %include  "./code/socket/answer.active.socket.asm"
     %include  "./code/socket/bind.socket.asm"
-    %include  "./code/socket/clean.socket.asm"
     %include  "./code/socket/create.socket.asm"
     %include  "./code/socket/listening.socket.poll.asm"
     %include  "./code/socket/listen.socket.asm"
