@@ -1,4 +1,0 @@
-%include	"./definitions/functions.def"
-%include	"./definitions/id.def"
-%include	"./definitions/miscellaneous.indicators.def"
-%include	"./definitions/miscellaneous.lengths.def"

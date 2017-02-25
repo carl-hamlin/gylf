@@ -1,8 +1,6 @@
 ;====================================================================================================================================================================================================
 ;
-;   id
+;   ./d
 ;
-;   This file contains definitions for all aspects of id data.
+;   This file contains all data	pertinent to downstream functions.
 ;
-
-    id.buffer   resd    0001h   ; Buffer for id data.
