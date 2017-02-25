@@ -9,8 +9,5 @@
   						                            db	"later.", 0Ah, 0Dh
 	  socket.data.session.open.error.l	    equ	$-socket.data.session.open.error											                                                        ; Length of session open error message.
 
-	  no.connection.available			          db	"The server is currently full.", 0Ah, 0Dh										                                                  ; Storage for server currently full message.
-	  no.connection.available.l		          equ	$-no.connection.available												                                                              ; Length of message.
-
 	  socket.data.out.of.area.ids.message	  db	"System error: Out of area IDs. Disconnecting...", 0Ah, 0Dh								                                    ; Message indicating the server has run out of area ids.
 	  socket.data.out.of.area.ids.message.l	equ	$-socket.data.out.of.area.ids.message											                                                    ; Length of message.
