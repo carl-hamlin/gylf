@@ -23,7 +23,6 @@
     %include  "./code/comms/send.to.world.asm"
 
     %include  "./code/socket/listening.socket.poll.asm"
-    %include  "./code/socket/listen.socket.asm"
     %include  "./code/socket/recv.from.socket.asm"
     %include  "./code/socket/socket.errors.asm"
     %include  "./code/socket/socket.send.asm"
