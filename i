@@ -22,7 +22,6 @@
     %include  "./code/comms/send.to.player.asm"
     %include  "./code/comms/send.to.world.asm"
 
-    %include  "./code/socket/create.socket.asm"
     %include  "./code/socket/listening.socket.poll.asm"
     %include  "./code/socket/listen.socket.asm"
     %include  "./code/socket/recv.from.socket.asm"
