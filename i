@@ -29,7 +29,6 @@
     %include  "./code/socket/clean.socket.asm"
     %include  "./code/socket/create.socket.asm"
     %include  "./code/socket/listening.socket.poll.asm"
-    %include  "./code/socket/listen.socket.asm"
     %include  "./code/socket/recv.from.socket.asm"
     %include  "./code/socket/socket.errors.asm"
     %include  "./code/socket/socket.send.asm"
