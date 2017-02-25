@@ -5,10 +5,6 @@
 ;   This file contains definitions for function calls. Without these definitions, the program would run on magic numbers and be difficult to read.
 ;
 
-    %define     sys.socket.send                         009h    ; 009h is the modifier for 066h that tells the kernel we're attempting to send data to an active, connected socket. We don't use this much
-                                                                ; here, preferring kernel function 004h to write directly to the socket descriptor.
- ;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
     %define     sys.lseek.call                          013h    ; 013h is the modifier for 080h that tells the kernel we'd like to move the file pointer.
 
 ;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
