@@ -1,0 +1,8 @@
+;====================================================================================================================================================================================================
+;
+;   ./functions/write.descriptor/d
+;
+;   This file contains data for the write.descriptor function.
+;
+
+    file.indicator  dd  sys.standard.output ; Indicator for write.descriptor.
