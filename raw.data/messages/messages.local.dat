@@ -28,6 +28,3 @@
 
     local.data.active.socket.message                        db  "Activity detected on socket "                                                                      ; Answering active socket message.
     local.data.active.socket.message.l                      equ $-local.data.active.socket.message                                                                  ; Length of message.
-
-    local.data.carriage.return                              db  0Ah, 0Dh                                                                                            ; Carriage return.
-    local.data.carriage.return.l                            equ $-local.data.carriage.return                                                                        ; Length of message.

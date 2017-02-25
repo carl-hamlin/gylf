@@ -18,8 +18,6 @@
     %include  "./commands/i"
     %include  "./functions/i"
 
-    %include  "./code/comms/send.to.world.asm"
-
     %include  "./code/socket/accept.socket.asm"
     %include  "./code/socket/active.socket.poll.asm"
     %include  "./code/socket/answer.active.socket.asm"
