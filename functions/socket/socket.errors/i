@@ -2,24 +2,16 @@
 
     section   .bss
 
-    %include  "./b"
-    %include  "./definitions/include.def"
+    %include  "./functions/socket/socket.errors/b"
 
 ;==================================================================================================================================================================================================================
 
     section   .data
 
-    %include  "./raw.data/include.dat"
+    %include  "./functions/socket/socket.errors/d"
 
 ;==================================================================================================================================================================================================================
 
     section   .text
-
-    %include  "./commands/i"
-    %include  "./functions/i"
-
-    %include  "./code/comms/send.to.area.asm"
-    %include  "./code/comms/send.to.player.asm"
-    %include  "./code/comms/send.to.world.asm"
-
-    %include  "./code/socket/socket.send.asm"
+    
+    %include  "./functions/socket/socket.errors/t"
