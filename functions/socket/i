@@ -16,3 +16,4 @@
 
     %include  "./functions/socket/accept.socket/i"
     %include  "./functions/socket/answer.active.socket/i"
+    %include  "./functions/socket/bind.socket/i"
