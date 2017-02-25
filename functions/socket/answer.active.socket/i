@@ -2,17 +2,16 @@
 
     section   .bss
 
-    %include  "./functions/socket/b"
+    %include  "./functions/socket/answer.active.socket/b"
 
 ;==================================================================================================================================================================================================================
 
     section   .data
 
-    %include  "./functions/socket/d"
+    %include  "./functions/socket/answer.active.socket/d"
 
 ;==================================================================================================================================================================================================================
 
     section   .text
 
-    %include  "./functions/socket/accept.socket/i"
-    %include  "./functions/socket/answer.active.socket/i"
+    %include  "./functions/socket/answer.active.socket/t"
