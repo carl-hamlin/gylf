@@ -2,5 +2,17 @@
 ;
 ;   ./functions/d
 ;
-;   This file contains shared data for downstream functions.
+;   This file contains all data	pertinent to downstream functions.
 ;
+
+    current.directory.marker   db  './'
+    current.directory.marker.l equ $-current.directory.marker
+
+    area.filename              db  './external.data/areas/00000000', 00h
+    area.filename.l            equ $-area.filename
+
+    item.filename              db  './external.data/items/00000000', 00h
+    item.filename.l            equ $-item.filename
+
+    external.data.cursor.home  db  "./external.data/cursor.control/cursor.home", 00h
+    external.data.clear.screen db  "./external.data/cursor.control/clear.screen", 00h	
