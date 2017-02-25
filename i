@@ -18,7 +18,6 @@
     %include  "./commands/i"
     %include  "./functions/i"
 
-    %include  "./code/comms/send.to.player.asm"
     %include  "./code/comms/send.to.world.asm"
 
     %include  "./code/socket/accept.socket.asm"
