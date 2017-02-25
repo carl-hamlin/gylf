@@ -28,7 +28,7 @@
                                       jz   send.to.player.broadcast                        ; Yes - Go broadcast the message.
 
     send.to.player.broadcast.done:    add  esi, connection.entry.size                      ; esi - pointer to next connection handle in table.
-                                      loop send.to.area.connection.poll                    ; Go check the next connection.
+                                      loop send.to.player.connection.poll                  ; Go check the next connection.
 
                                       pop  esi                                             ; Restore caller's esi.
 
