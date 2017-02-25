@@ -13,18 +13,6 @@
 
 ;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    socket.data.event.socket.descriptor     dd  0000h                                   ; Data storage for descriptor associated with bound, active, and listening socket.
-    socket.data.event.requested             dd  sys.poll.in                             ; Storage for requested event(s).
-    socket.data.event.returned              dd  0000h                                   ; Storage for returned event(s).
-
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    socket.data.active.socket.descriptor    dd  0000h                                   ; Data storage for descriptor associated with active connected socket.
-    socket.data.active.requested            dd  sys.poll.in                             ; Storage for requested event(s).
-    socket.data.active.returned             dd  0000h                                   ; Storage for returned event(s).
-
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
     socket.data.send.socket.descriptor      dd  0000h                                   ; Storage for descriptor associated with socket upon which to send data.
     socket.data.send.buffer.pointer         dd  0000h                                   ; Storage for pointer to buffer containing data to be sent.
     socket.data.send.buffer.l               dd  0000h                                   ; Storage for length of buffer.

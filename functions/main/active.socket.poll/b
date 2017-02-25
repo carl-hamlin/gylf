@@ -1,8 +1,6 @@
 ;====================================================================================================================================================================================================
 ;
-;   Miscellaneous Indicators.
+;   ./functions/main/active.socket.poll/b
 ;
-;   The following defined elements represent various indicators used in the program.
+;   This file contains all definitions pertinent to the active.socket.poll function.
 ;
-
-    %define     id.size     0008h   ; Size of area/item ids.

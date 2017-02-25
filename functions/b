@@ -11,6 +11,8 @@
 ;
     %define     socket.filename.entry.l               040h                                      ; Length of filename entry.
 
+    sockets.left                              resd    0001h                                     ; Storage for sockets left to poll.
+
 ;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Function Data
