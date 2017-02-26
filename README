@@ -1,705 +1,662 @@
 gylf
 
-An MMO Server for linux implemented entirely in x86 assembly language, using
-the linux kernel services for Berkeley Sockets.
+An MMO Server for linux implemented entirely in x86 assembly language, using the linux kernel services for Berkeley Sockets.
 
 Relevant data:
 
-    ========================================================================
-
-    ./build.gylf.sh
-
-    This is the build script. It depends on the presence of nasm and ld. Run
-    the build script to produce an executable binary called 'gylf' from the
-    existing codebase, which it then places in the root directory.
-
-    ========================================================================
-
-    ./code
-
-    The ./code directory acts as the root directory for the code implemented
-    in the gylf project.
-
-    ./code/gylf.asm
-
-    gylf.asm is the main program - it cycles through the main loop.
-
-    ./code/include.asm
-
-    The include.asm file contains references to all the code contained in
-    the ./code directory. This allows for selective development; we don't
-    have to write all our code to one file.
-
-    ------------------------------------------------------------------------
-
-    ./code/commands
-
-    The ./code/commands directory contains code pertaining to commands
-    available to users depending on their access level.
+    =================================================================================================================================================================================================
     
-    ./code/commands/command.ai.asm
+    ./b                                                                             Standard definitions shared by all downstream code.
 
-    command.ai.asm contains code pertinent to the implementation of the 'ai'
-    command; a player-level command that allows for the invoker to adjust
-    parameters associated with their avatar's behaviour while they are
-    signed out.
+    =================================================================================================================================================================================================
 
-    ./code/commands/command.area.asm
+    ./build.gylf.sh                                                                 This is the build script. It depends on the presence of nasm and ld. Run the build script to produce an
+                                                                                    executable binary called 'gylf' from the existing codebase, which it then places in the root directory.
 
-    command.area.asm contains code pertinent to the implementation of the
-    'area' command; an administrator command that allows for administrators
-    to create new areas without having to dig them out using the player
-    interface.
+    =================================================================================================================================================================================================
 
-    ./code/commands/command.broadcast.asm
+    ./commands                                                                      Contains code pertaining to commands available to users depending on their access level.
 
-    command.broadcast.asm contains code pertinent to the implementation of
-    the 'broadcast' command; an administrator command that allows for
-    administrators to send a message to the entire participant base all at
-    once, regardless of their locations in the simulation.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/commands/command.dig.asm
+      ./commands/ai                                                                 Contains code pertinent to the implementation of the 'ai' command; a player-level command that allows for the
+                                                                                    invoker to adjust parameters associated with their avatar's behaviour while they are signed out.
 
-    command.dig.asm contains code pertinent to the implementation of the
-   'dig' command; a player-level command that allows for player to, under
-   certain circumstances, extend the wworld by creating new areas.
+        ./commands/ai/b                                                             Standard definitions for the 'ai' command.
+        ./commands/ai/d                                                             Data declarations for the 'ai' command.
+        ./commands/ai/i                                                             Inclusion file tying the ASM, data, and definitions together for the 'ai' command.
+        ./commands/ai/t                                                             ASM code outlining the 'ai' command.
 
-    ./code/commands/command.egg.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.egg.asm contains code pertinent to the implementation of the
-    'egg' command; an administrator command that allows for the forced
-    implantation and fertilization of an egg in the womb of the target
-    gylf without having to go through the normal channels of fertilization
-    through mating.
+      ./commands/area                                                               Contains code pertinent to the implementation of the 'area' command; an administrator command that allows for
+                                                                                    administrators to create new areas without having to dig them out using the player interface.
+      
+        ./commands/area/b                                                           Standard definitions for the 'area' command.
+        ./commands/area/d                                                           Data declarations for the 'area' command.
+        ./commands/area/i                                                           Inclusion file tying the ASM, data, and definitions together for the 'area' command.
+        ./commands/area/t                                                           ASM code outlining the 'area' command.
 
-    ./code/commands/command.gylf.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.gylf.asm contains code pertinent to the implementation of the
-    'gylf' command; an administrator command that allows for the creation
-    of a complete new gylf without the intervening process of mating,
-    fertilization, gestation, laying, and hatching.
+      ./commands/broadcast                                                          Contains code pertinent to the implementation of the 'broadcast' command; an administrator command that allows
+                                                                                    for administrators to send a message to the entire participant base all at once, regardless of their locations in
+                                                                                    the simulation.
+      
+        ./commands/broadcast/b                                                      Standard definitions for the 'broadcast' command.
+        ./commands/broadcast/d                                                      Data declarations for the 'broadcast' command.
+        ./commands/broadcast/i                                                      Inclusion file tying the ASM, data, and definitions together for the 'broadcast' command.
+        ./commands/broadcast/t                                                      ASM code outlining the 'broadcast' command.
+        
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/commands/command.help.asm
+      ./commands/dig                                                                Contains code pertinent to the implementation of the 'dig' command; a player-level command that allows for player
+                                                                                    to, under certain circumstances, extend the world by creating new areas.
 
-    command.help.asm contains code pertinent to the implementation of the
-    'help' command; a player-level command whose sole purpose is to
-    display context-sensitive help.
+        ./command/dig/b                                                             Standard definitions for the 'dig' command.
+        ./command/dig/d                                                             Data declarations for the 'dig' command.
+        ./command/dig/i                                                             Inclusion file tying the ASM, data, and definitions together for the 'dig' command.
+        ./command/dig/t                                                             ASM code outlining the 'dig' command.
 
-    ./code/commands/command.logout.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.logout.asm contains code pertinent to the implementation of the
-    'logout' command; a common command that removes a participant from the
-    server and leaves their avatar under the control of an artificial
-    intelligence.
+      ./commands/egg                                                                Contains code pertinent to the implementation of the 'egg' command; an administrator command that allows for the
+                                                                                    forced implantation and fertilization of an egg in the womb of the target gylf without having to go through the
+                                                                                    normal channels of fertilization through mating.
 
-    ./code/commands/command.look.asm
+        ./command/egg/b                                                             Standard definitions for the 'egg' command.
+        ./command/egg/d                                                             Data declarations for the 'egg' command.
+        ./command/egg/i                                                             Inclusion file tying the ASM, data, and definitions together for the 'egg' command.
+        ./command/egg/t                                                             ASM code outlining the 'egg' command.
 
-    command.look.asm contains code pertinent to the implementation of the
-    'look' command; a player-level command that displays information about
-    the target.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/commands/command.shutdown.asm
+      ./commands/gylf                                                               Contains code pertinent to the implementation of the 'gylf' command; an administrator command that allows for the
+                                                                                    creation of a complete new gylf without the intervening process of mating, fertilization, gestation, laying, and
+                                                                                    hatching.
 
-    commmand.shutdown.asm contains code pertinent to the implementation of
-    the 'shutdown' command; an administrator command that shuts down the
-    server from within the environment.
+        ./command/gylf/b                                                            Standard definitions for the 'gylf' command.
+        ./command/gylf/d                                                            Data declarations for the 'gylf' command.
+        ./command/gylf/i                                                            Inclusion file tying the ASM, data, and definitions together for the 'gylf' command.
+        ./command/gylf/t                                                            ASM code outlining the 'gylf' command.
 
-    ./code/commands/command.think.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.think.asm contains code pertinent to the implementation of the
-    'think' command; a player-level command that allows for communication
-    between players in a local environment.
+      ./commands/help                                                               Contains code pertinent to the implementation of the 'help' command; a player-level command whose sole purpose is
+                                                                                    to display context-sensitive help.
 
-    ------------------------------------------------------------------------
+        ./command/help/b                                                            Standard definitions for the 'help' command.
+        ./command/help/d                                                            Data declarations for the 'help' command.
+        ./command/help/i                                                            Inclusion file tying the ASM, data, and definitions together for the 'help' command.
+        ./command/help/t                                                            ASM code outlining the 'help' command.
 
-    ./code/comms
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    The ./code/comms directory contains code pertaining to the behind the
-    scenes mechanisms surrounding communications between users.
+      ./commands/logout                                                             Contains code pertinent to the implementation of the 'logout' command; a common command that removes a
+                                                                                    participant from the server and leaves their avatar under the control of an artificial intelligence.
 
-    ./code/comms/send.to.area.asm
+        ./command/logout/b                                                          Standard definitions for the 'logout' command.
+        ./command/logout/d                                                          Data declarations for the 'logout' command.
+        ./command/logout/i                                                          Inclusion file tying the ASM, data, and definitions together for the 'logout' command.
+        ./command/logout/t                                                          ASM code outlining the 'logout' command.
 
-    send.to.area.asm contains code that sends a provided message to a
-    specified area. Everyone in the specified area will receive the message.
-    This code is used to facilitate communication between users in a given
-    area of the environment, as well as facilitating communications between
-    administrators and a given area.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/comms/send.tp.player.asm
+      ./commands/look                                                               Contains code pertinent to the implementation of the 'look' command; a player-level command that displays
+                                                                                    information about the target.
 
-    send.to.player.asm contains code that sends a provided message to a
-    specified player. Only the specified player will received this message.
-    This code is used to facilitate private communication between players.
+        ./command/look/b                                                            Standard definitions for the 'look' command.
+        ./command/look/d                                                            Data declarations for the 'look' command.
+        ./command/look/i                                                            Inclusion file tying the ASM, data, and definitions together for the 'look' command.
+        ./command/look/t                                                            ASM code outlining the 'look' command.
 
-    ./code/comms/send.to.world.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.world.asm contains code that sends a provided message to the
-    entire environment. This code is used to facilitate administrator
-    communications that need to be addressed to everyone in the environment.
+      ./commands/shutdown                                                           Contains code pertinent to the implementation of the 'shutdown' command; an administrator command that shuts down
+                                                                                    the server from within the environment.
 
-    ------------------------------------------------------------------------
+        ./command/shutdown/b                                                        Standard definitions for the 'shutdown' command.
+        ./command/shutdown/d                                                        Data declarations for the 'shutdown' command.
+        ./command/shutdown/i                                                        Inclusion file tying the ASM, data, and definitions together for the 'shutdown' command.
+        ./command/shutdown/t                                                        ASM code outlining the 'shutdown' command.
 
-    ./code/functions
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    The ./code/functions directory contains code pertaining to the
-    background mechanisms that contribute to the overall functioning of the
-    codebase. Things like writing to files, reading user input, etc... are
-    all kept here.
+      ./commands/think                                                              Contains code pertinent to the implementation of the 'think' command; a player-level command that allows for
+                                                                                    communication between players in a local environment.
 
-    ./code/functions/bail.asm
+        ./command/think/b                                                           Standard definitions for the 'think' command.
+        ./command/think/d                                                           Data declarations for the 'think' command.
+        ./command/think/i                                                           Inclusion file tying the ASM, data, and definitions together for the 'think' command.
+        ./command/think/t                                                           ASM code outlining the 'think' command.
 
-    bail.asm contains code that suspends execution of the code, unloads
-    from memory, and returns control to Linux.
+    =================================================================================================================================================================================================
+    
+    ./d                                                                             Data declarations shared by all downstream code.
+    
+    =================================================================================================================================================================================================
+    
+    ./functions                                                                     Contains code pertaining to the background mechanisms that contribute to the overall functioning of the codebase.
+                                                                                    Things like writing to files, reading user input, etc... are all kept here.
+    
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/functions/buffer.strip.asm
+      ./functions/aggregate.arguments                                               Contains code that collects arguments from the participant command line and segregates them into a predefined
+                                                                                    structure.
 
-    buffer.strip.asm contains code that strips buffered data of carriage
-    returns and line feeds and replaces them with zeroes.
+        ./functions/aggregate.arguments/b                                           Standard definitions for the 'aggregate.arguments' function.
+        ./functions/aggregate.arguments/d                                           Data declarations for the 'aggregate.arguments' function.
+        ./functions/aggregate.arguments/i                                           Inclusion file tying the ASM, data, and defintions together for the 'aggregate.arguments' function.
+        ./functions/aggregate.arguments/t                                           ASM code outlining the 'aggregate.arguments' function.
 
-    ./code/functions/check.admin.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    check.admin.asm contains code that checks to see if the user on the
-    current socket has administrative privileges.
+      ./functions/b                                                                 Standard definitions shared by all downstream code.
 
-    ./code/functions/check.login.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    check.login.asm contains code that checks to see if a user attempting to
-    log in is already logged in from a different location.
+      ./functions/bail                                                              Contains code that suspends execution of the code, unloads from memory, and returns control to Linux.
 
-    ./code/functions/clear.screen.asm
+        ./functions/bail/b                                                          Standard definitions for the 'bail' function.
+        ./functions/bail/d                                                          Data declarations for the 'bail' function.
+        ./functions/bail/i                                                          Inclusion file tying the ASM, data, and definitions together for the 'bail' function.
+        ./functions/bail/t                                                          ASM code outlining the 'bail' function.
 
-    clear.screen.asm contains code that remotely clears the user's screen
-    and places their cursor in the upper left hand corner.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/functions/close.descriptor.asm
+      ./functions/buffer.strip                                                      Contains code that strips buffered data of carriage returns and line feeds and replaces them with zeroes.
 
-    close.descriptor.asm contains code that tells linux that we're finished
-    with a descriptor, causing it to become disassociated with the dataset
-    to which it currently points.
+        ./functions/buffer.strip/b                                                  Standard definitions for the 'buffer.strip' function.
+        ./functions/buffer.strip/d                                                  Data declarations for the 'buffer.strip' function.
+        ./functions/buffer.strip/i                                                  Inclusion file tying the ASM, data, and definitions together for the 'buffer.strip' function.
+        ./functions/buffer.strip/t                                                  ASM code outlining the 'buffer.strip' function.
 
-    ./code/functions/create.character.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    create.character.asm builds out character data on the basis of DNA
-    sequences left behind by either parent on the associated egg.
+      ./functions/check.admin                                                       Contains code that checks to see if the user on the current socket has administrative privileges.
 
-    ./code/functions/create.file.asm
+        ./functions/check.admin/b                                                   Standard definitions for the 'check.admin' function.
+        ./functions/check.admin/d                                                   Data declarations for the 'check.admin' function.
+        ./functions/check.admin/i                                                   Inclusion file tying the ASM, data, and definitions together for the 'check.admin' function.
+        ./functions/check.admin/t                                                   ASM code outlining the 'check.admin' function.
 
-    create.file.asm contains code that builds a dataset on the drive, to
-    which it associates a logical descriptor.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/functions/create.lock.file.asm
+      ./functions/check.login                                                       Contains code that checks to see if a user attempting to log in is already logged in from a different location.
 
-    create.lock.file.asm contains code that creates a lock file for use in
-    preventing multiple instances of the same login from different locations.
+        ./functions/check.login/b                                                   Standard definitions for the 'check.login' function.
+        ./functions/check.login/d                                                   Data declarations for the 'check.login' function.
+        ./functions/check.login/i                                                   Inclusion file tying the ASM, data, and definitions together for the 'check.login' function.
+        ./functions/check.login/t                                                   ASM code outlining the 'check.login' function.
 
-    ./code/functions/dna.lab.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.asm contains code which combines the DNA left behind on an egg
-    by both parents to create an entirely new gylf.
+      ./functions/clear.screen                                                      Contains code that remotely clears the user's screen and places their cursor in the upper left hand corner.
 
-    ./code/functions/get.character.data.asm
+        ./functions/clear.screen/b                                                  Standard definitions for the 'clear.screen' function.
+        ./functions/clear.screen/d                                                  Data declarations for the 'clear.screen' function.
+        ./functions/clear.screen/i                                                  Inclusion file tying the ASM, data, and definitions together for the 'clear.screen' function.
+        ./functions/clear.screen/t                                                  ASM code outlining the 'clear.screen' function.
 
-    get.character.data.asm contains code which populates the character data
-    in memory from file for the character on the current socket.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/functions/get.external.data.asm
+      ./functions/close.descriptor                                                  Contains code that tells linux that we're finished with a descriptor, causing it to become disassociated with the
+                                                                                    dataset to which it currently points.
 
-    get.external.data.asm contains code which reads data that exists
-    outside the codebase and memory.
+        ./functions/close.descriptor/b                                              Standard definitions for the 'close.descriptor' function.
+        ./functions/close.descriptor/d                                              Data declarations for the 'close.descriptor' function.
+        ./functions/close.descriptor/i                                              Inclusion file tying the ASM, data, and definitions together for the 'close.descriptor' function.
+        ./functions/close.descriptor/t                                              ASM code outlining the 'close.descriptor' function.
 
-    ./code/functions/get.ticks.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    get.ticks.asm contains code that returns the number of clock ticks
-    since the environment was booted.
+      ./functions/create.character                                                  Contains code that builds out character data on the basis of DNA sequences left behind by either parent on the
+                                                                                    associated egg.
 
-    ./code/functions/open.descriptor.asm
+        ./functions/create.character/b                                              Standard definitions for the 'create.character' function.
+        ./functions/create.character/d                                              Data declarations for the 'create.character' function.
+        ./functions/create.character/i                                              Inclusion file tying the ASM, data, and definitions together for the 'create.character' function.
+        ./functions/create.character/t                                              ASM code outlining the 'create.character' function.
 
-    open.descriptor.asm contains code that associates a logical descriptor
-    with an existing dataset on disk. If the code is unable to associate a
-    descriptor, it instead returns an error code, which is detectable via
-    a check on the sign of eax.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/functions/poll.descriptor.asm
+      ./functions/create.file                                                       Contains code that builds a dataset on the drive, to which it associates a logical descriptor.
 
-    poll.descriptor.asm contains code that uses a logical descriptor
-    associated with a Berkely Socket to ask the socket whether or not
-    there is currently data on it that requires the attention of a
-    handler.
+        ./functions/create.file/b                                                   Standard definitions for the 'create.file' function.
+        ./functions/create.file/d                                                   Data declarations for the 'create.file' function.
+        ./functions/create.file/i                                                   Inclusion file tying the ASM, data, and definitions together for the 'create.file' function.
+        ./functions/create.file/t                                                   ASM code outlining the 'create.file' function.
 
-    ./code/functions/print.socket.number.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    print.socket.number.asm contains code that prints a socket number
-    associated with an event in the administrator console.
+      ./functions/create.lock.file                                                  Contains code that creates a lock file for use in preventing multiple instances of the same login from different
+                                                                                    locations.
 
-    ./code/functions/read.descriptor.asm
+        ./functions/create.lock.file/b                                              Standard definitions for the 'create.lock.file' function.
+        ./functions/create.lock.file/d                                              Data declarations for the 'create.lock.file' function.
+        ./functions/create.lock.file/i                                              Inclusion file tying the ASM, data, and definitions together for the 'create.lock.file' function.
+        ./functions/create.lock.file/t                                              ASM code outlining the 'create.lock.file' function.
 
-    read.descriptor.asm contains code that pulls data from an existing
-    dataset using a logical descriptor previously associated with the
-    dataset in question.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/functions/set.single.attribute.asm
+      ./functions/d                                                                 Data declarations shared by all downstream code.
 
-    set.single.attribute.asm contains code that sends a vt100 escape
-    sequence to the remote terminal which changes a single attribute about
-    the printed text. Attributes can be found in the file
-    "attribute.control.dat".
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/functions/set.up.listener.asm
+      ./functions/dna.lab                                                           Contains code which combines the DNA left behind on an egg by both parents to create an entirely new gylf.
 
-    set.up.listener.asm contains code that builds a socket, binds it to a
-    specified hardware port, and tells it to listen for incoming
-    connections. When it's finished, it displays a message to the admin
-    indicating that we're online and ready to go. If at any point an error
-    occurs, the function displays an error message and passes control to
-    the bail function so we can suspend execution and return control to
-    linux in the hopes that the admin can figure out what's clogging up
-    the works.
+        ./functions/dna.lab/b                                                       Standard definitions for the 'dna.lab' function.
+        ./functions/dna.lab/d                                                       Data declarations for the 'dna.lab' function.
+        ./functions/dna.lab/i                                                       Inclusion file tying the ASM, data, and definitions together for the 'dna.lab' function.
+        ./functions/dna.lab/t                                                       ASM code outlining the 'dna.lab' function.
 
-    ./code/functions/system.check.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    system.check.asm contains code that performs checks to ensure the
-    environment is ready to go live, prior to instantiation.
+      ./functions/get.character.data                                                Contains code which populates the character data in memory from file for the character on the current socket.
 
-    ./code/functions/time.in.seconds.since.epoch.asm
+        ./functions/get.character.data/b                                            Standard definitions for the 'get.character.data' function.
+        ./functions/get.character.data/d                                            Data declarations for the 'get.character.data' function.
+        ./functions/get.character.data/i                                            Inclusion file tying the ASM, data, and definitions together for the 'get.character.data' function.
+        ./functions/get.character.data/t                                            ASM code outlining the 'get.character.data' function.
 
-    time.in.seconds.since.epoch.asm contains code that returns the time in
-    seconds since the epoch.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/functions/write.descriptor.asm
+      ./functions/get.external.data                                                 Contains code which reads data that exists outside the codebase and memory.
 
-    write.descriptor.asm contains code that adds data to an existing
-    dataset on disk using a logical descriptor previously associated with
-    the dataset.
+        ./functions/get.external.data/b                                             Standard definitions for the 'get.external.data' function.
+        ./functions/get.external.data/d                                             Data declarations for the 'get.external.data' function.
+        ./functions/get.external.data/i                                             Inclusion file tying the ASM, data, and definitions together for the 'get.external.data' function.
+        ./functions/get.external.data/t                                             ASM code outlining the 'get.external.data' function.
 
-    ./code/functions/write.prompt.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    write.prompt.asm contains code that displays a command prompt to the
-    user.
+      ./functions/get.ticks                                                         Contains code that returns the number of clock ticks since the environment was booted.
 
-    ./code/functions/write.welcome.asm
+        ./functions/get.ticks/b                                                     Standard definitions for the 'get.ticks' function.
+        ./functions/get.ticks/d                                                     Data declarations for the 'get.ticks' function.
+        ./functions/get.ticks/i                                                     Inclusion file tying the ASM, data, and definitions together for the 'get.ticks' function.
+        ./functions/get.ticks/t                                                     ASM code outlining the 'get.ticks' function.
 
-    write.welcome.asm contains code that builds and displays the initial
-    welcome screen to the user.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ------------------------------------------------------------------------
+      ./functions/i                                                                 Inclusion anchor point for tying together downstream code.
 
-    ./code/player.interaction
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    The ./code/participant.interaction directory contains code that has to do
-    with interaction between the user and the infractructure of the
-    environment. Essentially, this code addresses all user statii and how to
-    handle them.
+      ./functions/main                                                              Contains all pertinent first level code, definitions, and data for the main loop.
 
-    ./code/participant.interaction/address.active.status.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    address.active.status.asm parses commands issued by users with an active
-    status and sends them to the appropriate handler.
+        ./functions/main/active.socket.poll                                         Contains code that runs through the list of potentially active connections and checks each of them for activity.
+                                                                                    Upon discovering activity in a connection, the function then passes control off to the answer.active.socket
+                                                                                    function for more specialized treatment.
 
-    ./code/participant.interaction/address.login.status.asm
+          ./functions/main/active.socket.poll/b                                     Standard definitions for the 'active.socket.poll' function.
+          ./functions/main/active.socket.poll/d                                     Data declarations for the 'active.socket.poll' function.
+          ./functions/main/active.socket.poll/i                                     Inclusion file tying the ASM, data, and definitions together for the 'active.socket.poll' function.
+          ./functions/main/active.socket.poll/t                                     ASM code outlining the 'active.socket.poll' function.
 
-    address.login.status parses commands issued by users with a login status
-    and sends them to the appropriate handler.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/participant.interaction/address.passphrase.status.asm
+        ./functions/main/b                                                          Standard definitions shared by all downstream code.
 
-    address.passphrase.status.asm parses commands issues by users with a
-    passphrase status and sends them to the appropriate handler.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/participant.interaction/address.set.passphrase.status.asm
+        ./functions/main/d                                                          Data declarations shared by all downstream code.
 
-    address.set.passphrase.status parses commands issued by users with a set
-    passphrase status and sends them to the appropriate handler.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ------------------------------------------------------------------------
+        ./functions/main/i                                                          Inclusion anchor point for tying together downstream code.
 
-    ./code/socket
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    The ./code/socket directory contains code that governs the 'behind the
-    scenes' mechanisms surround the operation of Berkeley Sockets under
-    Linux in X86 ASM.
+        ./functions/main/listening.socket.poll                                      Contains code that polls the listening socket for new connection attempts and sends the login message when it
+                                                                                    finds them.
 
-    ./code/socket/accept.socket.asm
+          ./functions/main/listening.socket.poll/b                                  Standard definitions for the 'listening.socket.poll' function.
+          ./functions/main/listening.socket.poll/d                                  Data declarations for the 'listening.socket.poll' function.
+          ./functions/main/listening.socket.poll/i                                  Inclusion file tying the ASM, data, and definitions together for the 'listening.socket.poll' function.
+          ./functions/main/listening.socket.poll/t                                  ASM code outlining the 'listening.socket.poll' function.
 
-    accept.socket.asm contains code that calls the linux kernel to associate
-    a descriptor with an incoming Berkeley Socket.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/socket/active.socket.poll.asm
+        ./functions/main/participant.interaction                                    Contains code that has to do with interaction between the user and the infractructure of the environment.
+                                                                                    Essentially, this code addresses all user statii and how to handle them.
 
-    active.socket.poll.asm contains code that runs through the list of
-    potentially active connections and checks each of them for activity.
-    Upon discovering activity in a connection, the function then passes
-    control off to the answer.active.socket function for more specialized
-    treatment.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/socket/answer.active.socket.asm
+          ./functions/main/participant.interaction/address.active.status            Contains code that parses commands issued by users with an active status and sends them to the appropriate
+                                                                                    handler.
 
-    answer.active.socket.asm contains code that determines the status of an
-    active socket and routes the data to the appropriate handler.
 
-    ./code/socket/bind.socket.asm
+          ./functions/main/participant.interaction/address.active.status/b          Standard definitions for the 'address.active.status' function.
+          ./functions/main/participant.interaction/address.active.status/d          Data declarations for the 'address.active.status' function.
+          ./functions/main/participant.interaction/address.active.status/i          Inclusion file tying the ASM, data, and definitions together for the 'address.active.status' function.
+          ./functions/main/participant.interaction/address.active.status/t          ASM code outlining the 'address.active.status' function.
 
-    bind.socket.asm contains code that binds a socket to a specified
-    hardware port.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/socket/clean.socket.asm
+          ./functions/main/participant.interaction/address.login.status             Contains code that parses commands issued by users with a login status and sends them to the appropriate handler.
 
-    clean.socket.asm contains code that removes the data associated with an
-    active socket from memory, smokes the lock file, and uses the
-    close.descriptor function to close out the socket. This function does
-    not closeout other files associated with the socket - that responsibility
-    is left to the caller.
+          ./functions/main/participant.interaction/address.login.status/b           Standard definitions for the 'address.login.status' function.
+          ./functions/main/participant.interaction/address.login.status/d           Data declarations for the 'address.login.status' function.
+          ./functions/main/participant.interaction/address.login.status/i           Inclusion file tying the ASM, data, and definitions together for the 'address.login.status' function.
+          ./functions/main/participant.interaction/address.login.status/t           ASM code outlining the 'address.login.status' function.
 
-    ./code/socket/create.socket.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    create.socket.asm contains code that builds a socket for further use.
+          ./functions/main/participant.interaction/address.passphrase.status        Contains code that parses commands issues by users with a passphrase status and sends them to the appropriate
+                                                                                    handler.
 
-    ./code/socket/listen.socket.asm
+          ./functions/main/participant.interaction/address.passphrase.status/b      Standard definitions for the 'address.passphrase.status' function.
+          ./functions/main/participant.interaction/address.passphrase.status/d      Data declarations for the 'address.passphrase.status' function.
+          ./functions/main/participant.interaction/address.passphrase.status/i      Inclusion file tying the ASM, data, and definitions together for the 'address.passphrase.status' function.
+          ./functions/main/participant.interaction/address.passphrase.status/t      ASM code outlining the 'address.passphrase.status' function.
 
-    listen.socket.asm contains code that tells a created and bound socket
-    to listen for incoming connections.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/socket/listening.socket.poll.asm
+          ./functions/main/participant.interaction/address.set.passphrase.status    Contains code that parses commands issued by users with a set passphrase status and sends them to the appropriate
+                                                                                    handler.
 
-    listening.socket.poll.asm contains code that polls the listening socket
-    for new connection attempts and sends the login message when it finds
-    them.
+          ./functions/main/participant.interaction/address.set.passphrase.status/b  Standard definitions for the 'address.set.passphrase.status' function.
+          ./functions/main/participant.interaction/address.set.passphrase.status/d  Data declarations for the 'address.set.passphrase.status' function.
+          ./functions/main/participant.interaction/address.set.passphrase.status/i  Inclusion file tying the ASM, data, and definitions together for the 'address.set.passphrase.status' function.
+          ./functions/main/participant.interaction/address.set.passphrase.status/t  ASM code outlining the 'address.set.passphrase.status' function.
 
-    ./code/socket/recv.from.socket.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    recv.from.socket.asm contains code that receives data from a connected
-    socket and places it in a specified buffer.
+          ./functions/main/participant.interaction/i                                Inclusion anchor point for tying together downstream code.
 
-    ./code/socket/socket.errors.asm
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    socket.error.asm contains code that sets up error messages to be
-    displayed to the admin in the event that something goes awry while
-    building the listening socket. If any of these are ever executed, we're
-    beyond the point of no return, so each of them passes control to the
-    bail function after displaying their unique message.
+        ./functions/main/set.up.listener                                            Contains code that builds a socket, binds it to a specified hardware port, and tells it to listen for incoming
+                                                                                    connections. When it's finished, it displays a message to the admin indicating that we're online and ready to go.
+                                                                                    If at any point an error occurs, the function displays an error message and passes control to the bail function so
+                                                                                    we can suspend execution and return control to linux in the hopes that the admin can figure out what's clogging up
+                                                                                    the works.
 
-    ./code/socket/socket.send.asm
+          ./functions/main/set.up.listener/b                                        Standard definitions for the 'set.up.listener' function.
+          ./functions/main/set.up.listener/d                                        Data declarations for the 'set.up.listener' function.
+          ./functions/main/set.up.listener/i                                        Inclusion file tying the ASM, data, and definitions together for the 'set.up.listener' function.
+          ./functions/main/set.up.listener/t                                        ASM code outlining the 'set.up.listener' function.
 
-    socket.send.asm containsn code that sends data out on a connected socket.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ------------------------------------------------------------------------
+        ./functions/main/system.check                                               Contains code that performs checks to ensure the environment is ready to go live, prior to instantiation.
 
-    ./code/world.maintenance
+          ./functions/main/system.check/b                                           Standard definitions for the 'system.check' function.
+          ./functions/main/system.check/d                                           Data declarations for the 'system.check' function.
+          ./functions/main/system.check/i                                           Inclusion file tying the ASM, data, and definitions together for the 'system.check' function.
+          ./functions/main/system.check/t                                           ASM code outlining the 'system.check' function.
 
-    The ./code/world.maintenance directory contains code pertinent to the
-    passage of time in the environment.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ./code/world.maintenance/maintain.asm
+        ./functions/main/t                                                          The main program - it cycles through the main loop.
 
-    maintain.asm contains code that governs the passage of time in the
-    environment.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ========================================================================
+        ./functions/main/world.maintenance                                          Contains code pertinent to the passage of time in the environment.
 
-    ./definitions
+          ./functions/main/world.maintenance/b                                      Standard definitions for the 'world.maintenance' function.
+          ./functions/main/world.maintenance/d                                      Data declarations for the 'world.maintenance' function.
+          ./functions/main/world.maintenance/i                                      Inclusion file tying the ASM, data, and definitions together for the 'world.maintenance' function.
+          ./functions/main/world.maintenance/t                                      ASM code outlining the 'world.maintenance' function.
 
-    The ./definitions directory contains defined data.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	./definitions/area.def
+      ./functions/open.descriptor                                                   Contains code that associates a logical descriptor with an existing dataset on disk. If the code is unable to
+                                                                                    associate a descriptor, it instead returns an error code, which is detectable via a check on the sign of eax.
 
-    area.def contains definitions for all aspects of area data.
+        ./functions/open.descriptor/b                                               Standard definitions for the 'open.descriptor' function.
+        ./functions/open.descriptor/d                                               Data declarations for the 'open.descriptor' function.
+        ./functions/open.descriptor/i                                               Inclusion file tying the ASM, data, and definitions together for the 'open.descriptor' function.
+        ./functions/open.descriptor/t                                               ASM code outlining the 'open.descriptor' function.
 
-	./definitions/buffers.def
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    buffers.def contains definitions of data buffers.
+      ./functions/poll.descriptor                                                   Contains code that uses a logical descriptor associated with a Berkely Socket to ask the socket whether or not
+                                                                                    there is currently data on it that requires the attention of a handler.
 
-	./definitions/character.def
+        ./functions/poll.descriptor/b                                               Standard definitions for the 'poll.descriptor' function.
+        ./functions/poll.descriptor/d                                               Data declarations for the 'poll.descriptor' function.
+        ./functions/poll.descriptor/i                                               Inclusion file tying the ASM, data, and definitions together for the 'poll.descriptor' function.
+        ./functions/poll.descriptor/t                                               ASM code outlining the 'poll.descriptor' function.
 
-    character.def contains definitions for all aspects of character data.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	./definitions/egg.def
+      ./functions/print.socket.number                                               Contains code that prints a socket number associated with an event in the administrator console.
 
-    egg.def contains definitions for all aspects of egg data.
+        ./functions/print.socket.number/b                                           Standard definitions for the 'print.socket.number' function.
+        ./functions/print.socket.number/d                                           Data declarations for the 'print.socket.number' function.
+        ./functions/print.socket.number/i                                           Inclusion file tying the ASM, data, and definitions together for the 'print.socket.number' function.
+        ./functions/print.socket.number/t                                           ASM code outlining the 'print.socket.number' function.
 
-	./definitions/functions.def
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    functions.def contains definitions for function calls. Without these
-    definitions, the program would run on magic numbers and be difficult to
-    read.
+      ./functions/read.descriptor                                                   Contains code that pulls data from an existing dataset using a logical descriptor previously associated with the
+                                                                                    dataset in question.
 
-	./definitions/id.def
+        ./functions/read.descriptor/b                                               Standard definitions for the 'read.descriptor' function.
+        ./functions/read.descriptor/d                                               Data declarations for the 'read.descriptor' function.
+        ./functions/read.descriptor/i                                               Inclusion file tying the ASM, data, and definitions together for the 'read.descriptor' function.
+        ./functions/read.descriptor/t                                               ASM code outlining the 'read.descriptor' function.
 
-    id.def contains definitions for all aspects of id data.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	./definitions/include.def
+      ./functions/set.single.attribute                                              Contains code that sends a vt100 escape sequence to the remote terminal which changes a single attribute about
+                                                                                    the printed text. Attributes can be found in external data.
 
-    The include.def file contains references to all the code contained in the
-    ./definitions directory. This allows for selective development; we don't
-    have to write all our code to one file.
+        ./functions/set.single.attribute/b                                          Standard definitions for the 'set.single.attribute' function.
+        ./functions/set.single.attribute/d                                          Data declarations for the 'set.single.attribute' function.
+        ./functions/set.single.attribute/i                                          Inclusion file tying the ASM, data, and definitions together for the 'set.single.attribute' function.
+        ./functions/set.single.attribute/t                                          ASM code outlining the 'set.single.attribute' function.
 
-	./definitions/miscellaneous.indicators.def
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    miscellaneous.indicators.def contains defined elements which represent
-    various indicators used in the program.
+      ./functions/socket                                                            Contains code that governs the 'behind the scenes' mechanisms surround the operation of Berkeley Sockets under
+                                                                                    Linux in X86 ASM.
 
-	./definitions/miscellaneous.lengths.def
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    miscellaneous.lengths.def contains defined elements which represent
-    various sizes used in the program.
+        ./functions/socket/accept.socket                                            Contains code that calls the linux kernel to associate a descriptor with an incoming Berkeley Socket.
 
-	./definitions/numerals.def
+          ./functions/socket/accept.socket/b                                        Standard definitions for the 'accept.socket' function.
+          ./functions/socket/accept.socket/d                                        Data declarations for the 'accept.socket' function.
+          ./functions/socket/accept.socket/i                                        Inclusion file tying the ASM, data, and definitions together for the 'accept.socket' function.
+          ./functions/socket/accept.socket/t                                        ASM code outlining the 'accept.socket' function.
 
-    numerals.def contains data definitions of numerals.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	./definitions/polling.def
+        ./functions/socket/answer.active.socket                                     Contains code that determines the status of an active socket and routes the data to the appropriate handler.
 
-    polling.def contains definitions made use of when polling descriptors.
+          ./functions/socket/answer.active.socket/b                                 Standard definitions for the 'answer.active.socket' function.
+          ./functions/socket/answer.active.socket/d                                 Data declarations for the 'answer.active.socket' function.
+          ./functions/socket/answer.active.socket/i                                 Inclusion file tying the ASM, data, and definitions together for the 'answer.active.socket' function.
+          ./functions/socket/answer.active.socket/t                                 ASM code outlining the 'answer.active.socket' function.
 
-	./definitions/socket.def
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    socket.def contains various definitions made use of by socket functions.
+        ./functions/socket/b                                                        Standard definitions shared by all downstream code.
 
-	./definitions/statii.def
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    statii.def contains definitions of various connection statii for use in
-    determining how to interpret data received from a connected socket.
+        ./functions/socket/bind.socket                                              Contains code that binds a socket to a specified hardware port.
 
-    ========================================================================
+          ./functions/socket/bind.socket/b                                          Standard definitions for the 'bind.socket' function.
+          ./functions/socket/bind.socket/d                                          Data declarations for the 'bind.socket' function.
+          ./functions/socket/bind.socket/i                                          Inclusion file tying the ASM, data, and definitions together for the 'bind.socket' function.
+          ./functions/socket/bind.socket/t                                          ASM code outlining the 'bind.socket' function.
 
-    ./external.data
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    The ./external.data directory contains data that is read from the disk
-    at runtime, rather than being stored in memory.
+        ./functions/socket/clean.socket                                             Contains code that removes the data associated with an active socket from memory, smokes the lock file, and uses
+                                                                                    the close.descriptor function to close out the socket. This function does not closeout other files associated
+                                                                                    with the socket - that responsibility is left to the caller.
 
-	./external.data/cursor.control
+          ./functions/socket/clean.socket/b                                         Standard definitions for the 'clean.socket' function.
+          ./functions/socket/clean.socket/d                                         Data declarations for the 'clean.socket' function.
+          ./functions/socket/clean.socket/i                                         Inclusion file tying the ASM, data, and definitions together for the 'clean.socket' function.
+          ./functions/socket/clean.socket/t                                         ASM code outlining the 'clean.socket' function.
 
-    The ./external.data/cursor.control directory contains external cursor
-    control information made use of at runtime, but unable to be reliably
-    stored in memory.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	./external.data/cursor.control/clear.screen
+        ./functions.socket/communications                                           Contains code pertaining to the behind the scenes mechanisms surrounding communications between users.
 
-    clear.screen contains the escape sequence pertinent to remotely clearing
-    a user's screen.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	./external.data/cursor.control/cursor.home
+          ./functions/socket/communications/b                                       Standard definitions shared by all downstream code.
 
-    cursor.home contains the escape sequence pertinent to remotely sending a
-    user's cursor to the upper left corner of their screen.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ========================================================================
+          ./functions/socket/communications/d                                       Data declarations shared by all downstream code.
 
-    ./raw.data
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    The ./raw.data directory contains data defined in binary and stored in
-    memory at runtime.
+          ./functions/socket/communications/i                                       Inclusion anchor for tying together downstream code.
 
-	./raw.data/include.dat
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    The include.dat file contains references to all the code contained in
-    the ./definitions directory. This allows for selective development; we
-    don't have to write all our code to one file.
+          ./functions/socket/communications/send.to.area                            Contains code that sends a provided message to a specified area. Everyone in the specified area will receive the
+                                                                                    message. This code is used to facilitate communication between users in a given area of the environment, as well
+                                                                                    as facilitating communications between administrators and a given area.
 
-    ------------------------------------------------------------------------
+          ./functions/socket/communications/send.to.area/b                          Standard definitions for the 'send.to.area' function.
+          ./functions/socket/communications/send.to.area/d                          Data declarations for the 'send.to.area' function.
+          ./functions/socket/communications/send.to.area/i                          Inclusion file tying the ASM, data, and definitions together for the 'send.to.area' function.
+          ./functions/socket/communications/send.to.area/t                          ASM code outlining the 'send.to.area' function.
 
-	./raw.data/area.data
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    The ./raw.data/area.data directory contains data pertinent to the
-    definition and implementation of areas in the environment.
+          ./functions/socket/communications/send.to.player                          Contains code that sends a provided message to a specified player. Only the specified player will received this
+                                                                                    message. This code is used to facilitate private communication between players.
 
-	./raw.data/area.data/area.dat
+          ./functions/socket/communications/send.to.player/b                        Standard definitions for the 'send.to.player' function.
+          ./functions/socket/communications/send.to.player/d                        Data declarations for the 'send.to.player' function.
+          ./functions/socket/communications/send.to.player/i                        Inclusion file tying the ASM, data, and definitions together for the 'send.to.player' function.
+          ./functions/socket/communications/send.to.player/t                        ASM code outlining the 'send.to.player' function.
 
-    area.dat contains data definitions for data pertaining to areas.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ------------------------------------------------------------------------
+          ./functions/socket/communications/send.to.world                           Contains code that sends a provided message to the entire environment. This code is used to facilitate
+                                                                                    administrator communications that need to be addressed to everyone in the environment.
 
-	./raw.data/character.representation
+          ./functions/socket/communications/send.to.world/b                         Standard definitions for the 'send.to.world' function.
+          ./functions/socket/communications/send.to.world/d                         Data declarations for the 'send.to.world' function.
+          ./functions/socket/communications/send.to.world/i                         Inclusion file tying the ASM, data, and definitions together for the 'send.to.world' function.
+          ./functions/socket/communications/send.to.world/t                         ASM code outlining the 'send.to.world' function.
 
-    The ./raw.data/character.representation directory contains data
-    pertinent to the definition of specific character representations via
-    remote connections. The need for this data is currently under review.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	./raw.data/character.representation/block.dat
+        ./functions/socket/create.socket                                            Contains code that builds a socket for further use.
 
-    block.dat contains data definitions for blocks. Its future is
-    uncertain.
+          ./functions/socket/create.socket/b                                        Standard definitions for the 'create.socket' function.
+          ./functions/socket/create.socket/d                                        Data declarations for the 'create.socket' function.
+          ./functions/socket/create.socket/i                                        Inclusion file tying the ASM, data, and definitions together for the 'create.socket' function.
+          ./functions/socket/create.socket/t                                        ASM code outlining the 'create.socket' function.
 
-	./raw.data/character.representation/box.double.dat
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    box.double.dat contains data definitions for box doubles. Its future
-    is uncertain.
+        ./functions/socket/d                                                        Data declarations shared by all downstream code.
 
-	./raw.data/character.representation/box.hybrid.dat
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    box.hybrid.dat contains data definitions for box hybrids. Its future
-    is uncertain.
+        ./functions/socket/i                                                        Inclusion ancher for tying together downstream code.
 
-	./raw.data/character.representation/box.light.dat
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    box.light.dat contains data definitions for box lights. Its future is
-    uncertain.
+        ./functions/socket/listen.socket                                            Contains code that tells a created and bound socket to listen for incoming connections.
 
-	./raw.data/character.representation/capitals.dat
+          ./functions/socket/listen.socket/b                                        Standard definitions for the 'listen.socket' function.
+          ./functions/socket/listen.socket/d                                        Data declarations for the 'listen.socket' function.
+          ./functions/socket/listen.socket/i                                        Inclusion file tying the ASM, data, and definitions together for the 'listen.socket' function.
+          ./functions/socket/listen.socket/t                                        ASM code outlining the 'listen.socket' function.
 
-    capitals.dat contains data definitions for capitals. Its future is
-    uncertain.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	./raw.data/character.representation/character.representation.dat
+        ./functions/socket/recv.from.socket                                         Contains code that receives data from a connected socket and places it in a specified buffer.
 
-    character.representation.dat contains data definitions for character
-    representation. Its future is uncertain.
+          ./functions/socket/recv.from.socket/b                                     Standard definitions for the 'recv.from.socket' function.
+          ./functions/socket/recv.from.socket/d                                     Data declarations for the 'recv.from.socket' function.
+          ./functions/socket/recv.from.socket/i                                     Inclusion file tying the ASM, data, and definitions together for the 'recv.from.socket' function.
+          ./functions/socket/recv.from.socket/t                                     ASM code outlining the 'recv.from.socket' function.
 
-	./raw.data/character.representation/control.characters.dat
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    The character.representation.dat file contains references to all the
-    code contained in the ./raw.data/character.representation directory.
-    This allows for selective development; we don't have to write all our
-    code to one file.
+        ./functions/socket/socket.error                                             Contains code that sets up error messages to be displayed to the admin in the event that something goes awry
+                                                                                    while building the listening socket. If any of these are ever executed, we're beyond the point of no return, so
+                                                                                    each of them passes control to the bail function after displaying their unique message.
 
-	./raw.data/character.representation/esoterics.dat
+          ./functions/socket/socket.error/b                                         Standard definitions for the 'socket.error' function.
+          ./functions/socket/socket.error/d                                         Data declarations for the 'socket.error' function.
+          ./functions/socket/socket.error/i                                         Inclusion file tying the ASM, data, and definitions together for the 'socket.error' function.
+          ./functions/socket/socket.error/t                                         ASM code outlining the 'socket.error' function.
 
-    esoterics.dat contains data definitions for esoterics. Its future is
-    uncertain.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	./raw.data/character.representation/lowercase.dat
+        ./functions/socket/socket.send                                              Contains code that sends data out on a connected socket.
 
-    lowercase.dat contains data definitions for lowercases. Its future is
-    uncertain.
+          ./functions/socket/socket.send/b                                          Standard definitions for the 'socket.send' function.
+          ./functions/socket/socket.send/d                                          Data declarations for the 'socket.send' function.
+          ./functions/socket/socket.send/i                                          Inclusion file tying the ASM, data, and definitions together for the 'socket.send' function.
+          ./functions/socket/socket.send/t                                          ASM code outlining the 'socket.send' function.
 
-	./raw.data/character.representation/punctuation.dat
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    punctuation.dat contains data definitions for punctuation. Its future
-    is uncertain.
+      ./functions/time.in.seconds.since.the.epoch                                   Contains code that returns the time in seconds since the epoch.
 
-	./raw.data/character.representation/stone.dat
+        ./functions/time.in.seconds.since.the.epoch/b                               Standard definitions for the 'time.in.seconds.since.the.epoch' function.
+        ./functions/time.in.seconds.since.the.epoch/d                               Data declarations for the 'time.in.seconds.since.the.epoch' function.
+        ./functions/time.in.seconds.since.the.epoch/i                               Inclusion file tying the ASM, data, and definitions together for the 'time.in.seconds.since.the.epoch' function.
+        ./functions/time.in.seconds.since.the.epoch/t                               ASM code outlining the 'time.in.seconds.since.the.epoch' function.
 
-    stone.dat contains data definitions for stone. Its future is uncertain.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    ------------------------------------------------------------------------
+      ./functions/write.bad.command.error                                           Contains code that lets the user know whan they've attempted to send a string to the server that doesn't
+                                                                                    correspond to a recognized command.
 
-	./raw.data/command.data
+        ./functions/write.bad.command.error/b                                       Standard definitions for the 'write.bad.command.error' function.
+        ./functions/write.bad.command.error/d                                       Data declarations for the 'write.bad.command.error' function.
+        ./functions/write.bad.command.error/i                                       Inclusion file tying the ASM, data, and definitions together for the 'write.bad.command.error' function.
+        ./functions/write.bad.command.error/t                                       ASM code outlining the 'write.bad.command.error' function.
 
-    The ./raw.data/command.data directory contains data pertinent to the
-    implementation of commnands.
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	./raw.data/command.data/command.table.dat
+      ./functions/write.bad.help.command.error                                      Contains code that lets the user know when they've requested help for a command that does not belong to the
+                                                                                    recognized command set.
 
-    command.table.dat associates the keywords for commands with pointers to
-    their handlers.
+        ./functions/write.bad.help.command.error/b                                  Standard definitions for the 'write.bad.help.command.error' function.
+        ./functions/write.bad.help.command.error/d                                  Data declarations for the 'write.bad.help.command.error' function.
+        ./functions/write.bad.help.command.error/i                                  Inclusion file tying the ASM, data, and definitions together for the 'write.bad.help.command.error' function.
+        ./functions/write.bad.help.command.error/t                                  ASM code outlining the 'write.bad.help.command.error' function.
 
-    ------------------------------------------------------------------------
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	./raw.data/file.paths
+      ./functions/write.descriptor                                                  Contains code that adds data to an existing dataset on disk using a logical descriptor previously associated with
+                                                                                    the dataset.
 
-    The ./raw.data/file.paths directory contains data pertinent to the
-    definitions of paths to files used by the system.
+        ./functions/write.descriptor/b                                              Standard definitions for the 'write.descriptor' function.
+        ./functions/write.descriptor/d                                              Data declarations for the 'write.descriptor' function.
+        ./functions/write.descriptor/i                                              Inclusion file tying the ASM, data, and definitions together for the 'write.descriptor' function.
+        ./functions/write.descriptor/t                                              ASM code outlining the 'write.descriptor' function.
 
-	./raw.data/file.paths/file.paths.dat
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    file.paths.dat contains data definitions for files used by the system.
+      ./functions/write.prompt                                                      Contains code that displays a command prompt to the user.
 
-    ------------------------------------------------------------------------
+        ./functions/write.prompt/b                                                  Standard definitions for the 'write.prompt' function.
+        ./functions/write.prompt/d                                                  Data declarations for the 'write.prompt' function.
+        ./functions/write.prompt/i                                                  Inclusion file tying the ASM, data, and definitions together for the 'write.prompt' function.
+        ./functions/write.prompt/t                                                  ASM code outlining the 'write.prompt' function.
 
-	./raw.data/function.data
+    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    The ./raw.data/function.data directory contains data pertinent to the
-    operation of certain functions.
+      ./functions/write.welcome                                                     Contains code that builds and displays the initial welcome screen to the user.
 
-	./raw.data/function.data/file.indicator.dat
+        ./functions/write.welcome/b                                                 Standard definitions for the 'write.welcome' function.
+        ./functions/write.welcome/d                                                 Data declarations for the 'write.welcome' function.
+        ./functions/write.welcome/i                                                 Inclusion file tying the ASM, data, and definitions together for the 'write.welcome' function.
+        ./functions/write.welcome/t                                                 ASM code outlining the 'write.welcome' function.
 
-    file.indicator.dat contains a definition that tells write.indicator
-    whether it's writing to a file or the screen.
+    =================================================================================================================================================================================================
 
-    ------------------------------------------------------------------------
-
-	./raw.data/item.data
-
-    The ./raw.data/item.data does not currently contain data. The intention
-    is that when items are fully implemented, it will contain data pertinent
-    to their implementation.
-
-    ------------------------------------------------------------------------
-
-	./raw.data/messages
-
-    The ./raw.data/messages directory contains data pertinent to the
-    formation and delivery of messages to the server admin and participants.
-
-	./raw.data/messages/messages.dat
-
-    The messages.dat file contains references to all the code contained in
-    the ./raw.data/messages directory. This allows for selective
-    development; we don't have to write all our code to one file.
-
-	./raw.data/messages/messages.local.dat
-
-    messages.local.dat contains data definitions for messages to be sent
-    locally to the server admin.
-
-	./raw.data/messages/messages.out.dat
-
-    messages.out.dat contains data definitions for messages to be sent on a
-    connected socket to remote users.
-
-    ------------------------------------------------------------------------
-
-	./raw.data/socket
-
-    The ./raw.data/socket directory contains data related to the
-    implementation of Berkeley Sockets.
-
-	./raw.data/socket/socket.dat
-
-    socket.dat contains data definitions pertinent to the functions
-    surrounding socket management.
-
-    ------------------------------------------------------------------------
-
-	./raw.data/vt100
-
-    The ./raw.data/vt100 directory contains data pertinent to the
-    implementation of remote terminal manipulation.
-
-	./raw.data/vt100/attribute.control.dat
-
-    attribute.control.dat contains data definitions for attribute control
-    vt100 escape sequences. Its future is uncertain.
-
-	./raw.data/vt100/cursor.control.dat
-
-    cursor.control.dat contains data definitions for vt100 escape sequences
-    pertinent to moving the cursor about on the screen, locally or remotely.
-    Its future is uncertain.
-
-	./raw.data/vt100/key.definition.control.dat
-
-    key.definition.control.dat contains data definitions for vt100 escape
-    sequences pertinent to the definition of key macros. Its future is
-    uncertain.
-
-	./raw.data/vt100/line.wrap.and.fonts.dat
-
-    line.wrap.and.fonts.dat contains data definitions for vt100 escape
-    sequences pertinent to controlling line wrap and custom fonts. Its
-    future is uncertain.
-
-	./raw.data/vt100/print.control.dat
-
-    print.control.dat contains data definitions for vt100 escape sequences
-    pertaining to print control. Its future is uncertain.
-
-	./raw.data/vt100/query.report.reset.dat
-
-    query.report.reset.dat contains data definitions of vt100 escape
-    sequences pertinent to querying terminals. Its future is uncertain.
-
-	./raw.data/vt100/screen.control.dat
-
-    screen.control.dat contains data definitions for vt100 escape
-    sequences pertinent to controlling the screen, either locally or
-    remotely. Its future is uncertain.
-
-	./raw.data/vt100/tab.control.dat
-
-    tab.control.dat contains data definitions for vt100 escape
-    sequences pertinent to tab control. Its future is uncertain.
-
-	./raw.data/vt100/vt100.dat
-
-    The vt100.dat file contains references to all the code contained
-    in the ./raw.data/vt100 directory. This allows for selective
-    development; we don't have to write all our code to one file.
+    ./i                                                                             Inclusion anchor point for tying together downstream code.
