@@ -21,6 +21,8 @@
 ;   socket.data.command.area.help.l     ./commands/area/d
 ;   socket.data.out.of.areas.message    ./commands/area/d
 ;
+;   command.area                        ./commands/area/t
+;
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
