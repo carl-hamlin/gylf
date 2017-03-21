@@ -95,6 +95,23 @@ Relevant data:
                               parameters associated with their avatar's behaviour while they are
                               signed out.
 
+      d   socket.data.command.ai.help   ./commands/ai/d
+
+          socket.data.command.ai.help.l ./commands/ai/d
+
+          command.ai.w                  ./commands/ai/d
+                                        ./functions/d
+
+          command.ai.s                  ./commands/ai/d
+
+          command.ai.l                  ./commands/ai/d
+
+          command.ai.p                  No references.
+
+          command.ai.h                  No references.
+
+          command.ai.h.l                No references.
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'area' command;
