@@ -13,6 +13,67 @@ Relevant data:
                               directory name.
 
     ==============================================================================================
+    
+    ./                        This is the root directory for the project. the README and build
+                              script live here.
+
+    Symbolic Cross-Referencing
+    
+      b   char.0    ./commands/area/t
+                    ./functions/main/system.check/t
+
+          char.1    No references.
+          
+          char.2    No references.
+          
+          char.3    No references.
+          
+          char.4    No references.
+          
+          char.5    No references.
+          
+          char.6    No references.
+          
+          char.7    No references.
+
+          char.8    No references.
+          
+          char.9    ./commands/area/t
+                    ./functions/main/system.check/t
+          
+          char.A    No references.
+          
+          char.B    No references.
+          
+          char.C    No references.
+          
+          char.D    No references.
+          
+          char.E    No references.
+          
+          char.F    No references.
+          
+          qword.l   ./commands/help/t
+
+          dword.l   ./commands/area/t
+                    ./commands/help/t
+                    ./commands/look/t
+                    ./functions/create.character/t
+                    ./functions/d
+                    ./functions/main/system.check/t
+                    ./functions/main/participant.interaction/address.active.status/t
+                    ./functions/print.socket.number/t
+
+          word.l    ./commands/area/t
+                    ./functions/b
+
+          byte.l    ./functions/get.character.data/t
+                    ./functions/get.external.data/t
+                    ./functions/main/participant.interaction/address.passphrase.status/t
+
+          nibble.l  No references.
+
+    ==============================================================================================
 
     ./build.gylf.sh           This is the build script. It depends on the presence of nasm and ld.
                               Run the build script to produce an executable binary called 'gylf'
