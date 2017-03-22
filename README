@@ -95,6 +95,9 @@ Relevant data:
                               parameters associated with their avatar's behaviour while they are
                               signed out.
 
+      b   No references.
+
+
       d   socket.data.command.ai.help   ./commands/ai/d
 
           socket.data.command.ai.help.l ./commands/ai/d
