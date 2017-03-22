@@ -115,6 +115,9 @@ Relevant data:
 
           command.ai.h.l                No references.
 
+
+      t   command.ai                    ./commands/ai/d
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'area' command;
