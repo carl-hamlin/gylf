@@ -90,8 +90,8 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'ai' command; a
-        /ai                   player-level command that allows for the invoker to adjust
+      /ai                     Contains code pertinent to the implementation of the 'ai' command; a
+                              player-level command that allows for the invoker to adjust
                               parameters associated with their avatar's behaviour while they are
                               signed out.
 
@@ -120,39 +120,96 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'area' command;
-        /area                 an administrator command that allows for administrators to create
+      /area                   Contains code pertinent to the implementation of the 'area' command;
+                              an administrator command that allows for administrators to create
                               new areas without having to dig them out using the player interface.
 
-      b   available.areas           ./commands/area/t
+      b   available.areas                       ./commands/area/t
 
-          area.name.field.l         ./commands/area/b
-                                    ./commands/area/t
+          area.name.field.l                     ./commands/area/b
+                                                ./commands/area/t
 
-          area.description.field.l  ./commands/area/b
-                                    ./commands/area/t
+          area.description.field.l              ./commands/area/b
+                                                ./commands/area/t
 
-          area.header               ./commands/area/b
-                                    ./commands/look/t
-                                    ./functions/create.character/t
+          area.header                           ./commands/area/b
+                                                ./commands/look/t
+                                                ./functions/create.character/t
 
-          area.name.l               ./commands/area/t
-                                    ./functions/create.character/t
+          area.name.l                           ./commands/area/t
+                                                ./functions/create.character/t
 
-          area.name                 ./commands/area/t
-                                    ./functions/create.character/t
+          area.name                             ./commands/area/t
+                                                ./functions/create.character/t
 
-          area.description.l        ./commands/area/t
-                                    ./functions/create.character/t
+          area.description.l                    ./commands/area/t
+                                                ./functions/create.character/t
 
-          area.description          ./commands/area/t
-                                    ./functions/create.character/t
+          area.description                      ./commands/area/t
+                                                ./functions/create.character/t
 
-          area.num.contained.items  ./commands/area/t
-                                    ./commands/look/t
+          area.num.contained.items              ./commands/area/t
+                                                ./commands/look/t
 
-          area.header.l             ./commands/look/t
-                                    ./functions/create.character/t
+          area.header.l                         ./commands/look/t
+                                                ./functions/create.character/t
+
+      d   local.data.area.bad.syntax.message    ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.area.bad.syntax.message.l  ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.area.created.message       ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.area.created.message.l     ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.out.of.areas.message       ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.out.of.areas.message.l     ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.area.created.message      ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.area.created.message.l    ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.out.of.areas.message      ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.out.of.areas.message.l    ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.bad.area.id.message       ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.bad.area.id.message.l     ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.command.area.help         ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.command.area.help.l       ./commands/area/d
+                                                ./commands/area/t
+
+          command.area.w                        ./commands/area/d
+                                                ./functions/d
+
+          command.area.s                        ./commands/area/d
+                                                ./commands/area/t
+
+          command.area.l                        ./commands/area/d
+                                                ./commands/area/t
+
+          command.area.p                        ./commands/area/t
+
+          command.area.h                        No references.
+
+          command.area.h.l                      No references.
 
     ----------------------------------------------------------------------------------------------
 
