@@ -211,6 +211,37 @@ Relevant data:
 
           command.area.h.l                      No references.
 
+
+      t   command.area                          ./commands/area/d
+
+          command.area.bad                      ./commands/area/t
+
+          command.area.admin                    ./commands/area/t
+
+          command.area.find.first.argument      ./commands/area.t
+
+          command.area.start                    ./commands/area/t
+
+          command.area.loop.1                   ./commands/area/t
+
+          command.area.name.l                   ./commands/area/t
+
+          command.area.find.second.argument     ./commands/area/t
+
+          command.area.loop.2                   ./commands/area/t
+
+          command.area.description.l            ./commands/area/t
+
+          command.area.filename.loop            ./commands/area/t
+
+          command.area.next.file                ./commands/area/t
+
+          command.area.filename.finder          ./commands/area/t
+
+          command.area.filename.out.of.areas    ./commands/area/t
+
+          command.area.prep.next                ./commands/area/t
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'broadcast'
