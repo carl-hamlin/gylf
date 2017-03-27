@@ -269,6 +269,11 @@ Relevant data:
 
           command.broadcast.h.l                 No references.
 
+
+      t   command.broadcast                     ./commands/broadcast/d
+
+          command.broadcast.admin               ./commands/broadcast/t
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'dig' command;
