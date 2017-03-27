@@ -282,6 +282,23 @@ Relevant data:
 
       b   No defined symbols.
 
+
+      d   socket.data.command.dig.help          ./commands/dig/d
+
+          socket.data.command.dig.help.l        ./commands/dig/d
+
+          command.dig.w                         ./functions/d
+
+          command.dig.s                         ./commands/dig/d
+
+          command.dig.l                         ./commands/dig/d
+
+          command.dig.p                         No references.
+
+          command.dig.h                         No references.
+
+          command.dig.h.l                       No references.
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'egg' command;
