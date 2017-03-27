@@ -299,6 +299,9 @@ Relevant data:
 
           command.dig.h.l                       No references.
 
+
+      t   command.dig                           ./commands/dig/d
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'egg' command;
