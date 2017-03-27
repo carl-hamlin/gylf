@@ -251,6 +251,24 @@ Relevant data:
 
       b   No references.
 
+
+      d   socket.data.command.broadcast.help    ./commands/broadcast/d
+
+          socket.data.command.broadcast.help.l  ./commands/broadcast/d
+
+          command.broadcast.w                   ./functions/d
+
+          command.broadcast.s                   ./commands/broadcast/d
+
+          command.broadcast.l                   ./commands/broadcast/d
+                                                ./commands/broadcast/t
+
+          command.broadcast.p                   No references.
+
+          command.broadcast.h                   No references.
+
+          command.broadcast.h.l                 No references.
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'dig' command;
