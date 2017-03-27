@@ -244,10 +244,12 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'broadcast'
-        /broadcast            command; an administrator command that allows for administrators to
+      /broadcast              Contains code pertinent to the implementation of the 'broadcast'
+                              command; an administrator command that allows for administrators to
                               send a message to the entire participant base all at once,
                               regardless of their locations in the simulation.
+
+      b   No references.
 
     ----------------------------------------------------------------------------------------------
 
