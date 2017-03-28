@@ -304,11 +304,32 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'egg' command;
-        /egg                  an administrator command that allows for the forced implantation and
+      /egg                    Contains code pertinent to the implementation of the 'egg' command;
+                              an administrator command that allows for the forced implantation and
                               fertilization of an egg in the womb of the target gylf without
                               having to go through the normal channels of fertilization through
                               mating.
+
+      b   egg.data                              ./commands/egg/b
+                                                ./functions/create.character/t
+
+          egg.signature                         No references.
+
+          egg.item.id                           No references.
+
+          egg.area.id                           ./functions/create.character/t
+
+          egg.mother.l                          ./functions/create.character/t
+
+          egg.mother                            ./functions/create.character/t
+                                                ./functions/dna.lab/t
+
+          egg.father.l                          ./functions/create.character/t
+
+          egg.father                            ./functions/create.character/t
+                                                ./functions/dna.lab/t
+
+          egg.data.l                            No references.
 
     ----------------------------------------------------------------------------------------------
 
