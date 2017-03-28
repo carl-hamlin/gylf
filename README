@@ -95,7 +95,7 @@ Relevant data:
                               parameters associated with their avatar's behaviour while they are
                               signed out.
 
-      b   No references.
+      b   No defined symbols.
 
 
       d   socket.data.command.ai.help   ./commands/ai/d
@@ -249,7 +249,7 @@ Relevant data:
                               send a message to the entire participant base all at once,
                               regardless of their locations in the simulation.
 
-      b   No references.
+      b   No defined symbols.
 
 
       d   socket.data.command.broadcast.help    ./commands/broadcast/d
@@ -304,11 +304,57 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'egg' command;
-        /egg                  an administrator command that allows for the forced implantation and
+      /egg                    Contains code pertinent to the implementation of the 'egg' command;
+                              an administrator command that allows for the forced implantation and
                               fertilization of an egg in the womb of the target gylf without
                               having to go through the normal channels of fertilization through
                               mating.
+
+      b   egg.data                              ./commands/egg/b
+                                                ./functions/create.character/t
+
+          egg.signature                         No references.
+
+          egg.item.id                           No references.
+
+          egg.area.id                           ./functions/create.character/t
+
+          egg.mother.l                          ./functions/create.character/t
+
+          egg.mother                            ./functions/create.character/t
+                                                ./functions/dna.lab/t
+
+          egg.father.l                          ./functions/create.character/t
+
+          egg.father                            ./functions/create.character/t
+                                                ./functions/dna.lab/t
+
+          egg.data.l                            No references.
+
+
+      d   egg.hatch.message                     ./commands/egg/d
+                                                ./functions/create.character/t
+
+          egg.hatch.message.l                   ./functions/create.character/t
+
+          socket.data.command.egg.help          ./commands/egg/d
+
+          socket.data.command.egg.help.l        ./commands/egg/d
+
+          command.egg.w                         ./functions/d
+
+          command.egg.s                         ./commands/egg/d
+
+          command.egg.l                         ./commands/egg/d
+
+          command.egg.p                         No references.
+
+          command.egg.h                         No references.
+
+          command.egg.h.l                       No references.
+
+
+      t   command.egg                           ./commands/egg/d
 
     ----------------------------------------------------------------------------------------------
 
