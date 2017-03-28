@@ -540,6 +540,13 @@ Relevant data:
 
           command.shutdown.h.l                  No references.
 
+
+      t   command.shutdown                      ./commands/shutdown/d
+
+          command.shutdown.admin                ./commands/shutdown/t
+
+          command.shutdown.loop                 ./commands/shutdown/t
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'think'
