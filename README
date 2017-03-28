@@ -387,9 +387,11 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'help' command;
-        /help                 a participant-level command whose sole purpose is to display
+      /help                   Contains code pertinent to the implementation of the 'help' command;
+                              a participant-level command whose sole purpose is to display
                               context-sensitive help.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
