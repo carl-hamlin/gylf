@@ -415,6 +415,19 @@ Relevant data:
 
           command.help.h.l                      No references.
 
+
+      t   command.help                          ./commands/help/d
+
+          command.help.parse.arguments          ./commands/help/t
+
+          command.help.found.command            ./comamnds/help/t
+
+          command.help.next.command.jcxnz       ./commands/help/t
+
+          command.help.next.command             ./commands/help/t
+
+          command.help.no.arguments             ./commands/help/t
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'logout'
