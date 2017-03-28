@@ -459,9 +459,11 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'look' command;
-        /look                 a participant-level command that displays information about the
+      /look                   Contains code pertinent to the implementation of the 'look' command;
+                              a participant-level command that displays information about the
                               target.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
