@@ -365,6 +365,23 @@ Relevant data:
 
       b   No defined symbols.
 
+
+      d   socket.data.command.gylf.help         ./commands/gylf/d
+
+          socket.data.command.gylf.help.l       ./commands/gylf/d
+
+          command.gylf.w                        ./functions/d
+
+          command.gylf.s                        ./commands/gylf/d
+
+          command.gylf.l                        ./commands/gylf/d
+
+          command.gylf.p                        No references.
+
+          command.gylf.h                        No references.
+
+          command.gylf.h.l                      No references.
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'help' command;
