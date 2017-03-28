@@ -465,6 +465,28 @@ Relevant data:
 
       b   No defined symbols.
 
+
+      d   local.data.bad.area.id.indicator.message    ./commands/look/d
+                                                      ./commands/look/t
+
+          local.data.bad.area.id.indicator.message.l  ./commands/look/t
+
+          socket.data.command.look.help         ./commands/look/d
+
+          socket.data.command.look.help.l       ./commands/look/d
+
+          command.look.w                        ./functions/d
+
+          command.look.s                        ./commands/look/d
+
+          command.look.l                        ./commands/look/d
+
+          command.look.p                        No references.
+
+          command.look.h                        No references.
+
+          command.look.h.l                      No references.
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'shutdown'
