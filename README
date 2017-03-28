@@ -572,6 +572,11 @@ Relevant data:
 
           command.think.h.l                     No references.
 
+
+      t   command.think                         ./commands/think/d
+
+          command.think.untargetted             ./commands/think/t
+
     ==============================================================================================
     
     ./functions               Contains code pertaining to the background mechanisms that
