@@ -430,10 +430,12 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'logout'
-        /logout               command; a common command that removes a participant from the server
+      /logout                 Contains code pertinent to the implementation of the 'logout'
+                              command; a common command that removes a participant from the server
                               and leaves their avatar under the control of an artificial
                               intelligence.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
