@@ -393,6 +393,28 @@ Relevant data:
 
       b   No defined symbols.
 
+
+      d   socket.data.bad.help.command.error    ./commands/help/d
+                                                ./functions/write.bad.help.command.error/t
+
+          socket.data.bad.help.command.error.l  ./functions/write.bad.help.command.error/t
+
+          socket.data.command.help.help         ./commands/help/d
+
+          socket.data.command.help.help.l       ./commands/help/d
+
+          command.help.w                        ./functions/d
+
+          command.help.s                        ./commands/help/d
+
+          command.help.l                        ./commands/help/d
+
+          command.help.p                        No references.
+
+          command.help.h                        No references.
+
+          command.help.h.l                      No references.
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'logout'
