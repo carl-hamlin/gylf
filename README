@@ -502,9 +502,11 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'shutdown'
-        /shutdown             command; an administrator command that shuts down the server from
+      /shutdown               Contains code pertinent to the implementation of the 'shutdown'
+                              command; an administrator command that shuts down the server from
                               within the environment.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
