@@ -95,7 +95,7 @@ Relevant data:
                               parameters associated with their avatar's behaviour while they are
                               signed out.
 
-      b   No references.
+      b   No defined symbols.
 
 
       d   socket.data.command.ai.help   ./commands/ai/d
@@ -249,7 +249,7 @@ Relevant data:
                               send a message to the entire participant base all at once,
                               regardless of their locations in the simulation.
 
-      b   No references.
+      b   No defined symbols.
 
 
       d   socket.data.command.broadcast.help    ./commands/broadcast/d
