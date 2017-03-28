@@ -331,6 +331,28 @@ Relevant data:
 
           egg.data.l                            No references.
 
+
+      d   egg.hatch.message                     ./commands/egg/d
+                                                ./functions/create.character/t
+
+          egg.hatch.message.l                   ./functions/create.character/t
+
+          socket.data.command.egg.help          ./commands/egg/d
+
+          socket.data.command.egg.help.l        ./commands/egg/d
+
+          command.egg.w                         ./functions/d
+
+          command.egg.s                         ./commands/egg/d
+
+          command.egg.l                         ./commands/egg/d
+
+          command.egg.p                         No references.
+
+          command.egg.h                         No references.
+
+          command.egg.h.l                       No references.
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'gylf' command;
