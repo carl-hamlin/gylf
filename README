@@ -387,9 +387,46 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'help' command;
-        /help                 a participant-level command whose sole purpose is to display
+      /help                   Contains code pertinent to the implementation of the 'help' command;
+                              a participant-level command whose sole purpose is to display
                               context-sensitive help.
+
+      b   No defined symbols.
+
+
+      d   socket.data.bad.help.command.error    ./commands/help/d
+                                                ./functions/write.bad.help.command.error/t
+
+          socket.data.bad.help.command.error.l  ./functions/write.bad.help.command.error/t
+
+          socket.data.command.help.help         ./commands/help/d
+
+          socket.data.command.help.help.l       ./commands/help/d
+
+          command.help.w                        ./functions/d
+
+          command.help.s                        ./commands/help/d
+
+          command.help.l                        ./commands/help/d
+
+          command.help.p                        No references.
+
+          command.help.h                        No references.
+
+          command.help.h.l                      No references.
+
+
+      t   command.help                          ./commands/help/d
+
+          command.help.parse.arguments          ./commands/help/t
+
+          command.help.found.command            ./comamnds/help/t
+
+          command.help.next.command.jcxnz       ./commands/help/t
+
+          command.help.next.command             ./commands/help/t
+
+          command.help.no.arguments             ./commands/help/t
 
     ----------------------------------------------------------------------------------------------
 
