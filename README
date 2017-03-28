@@ -437,6 +437,23 @@ Relevant data:
 
       b   No defined symbols.
 
+
+      d   socket.data.command.logout.help       ./commands/logout/d
+
+          socket.data.command.logout.help.l     ./commands/logout/d
+
+          command.logout.w                      ./functions/d
+
+          command.logout.s                      ./commands/logout/d
+
+          command.logout.l                      ./commands/logout/d
+
+          command.logout.p                      No references.
+
+          command.logout.h                      No references.
+
+          command.logout.h.l                    No references.
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'look' command;
