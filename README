@@ -549,9 +549,11 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'think'
-        /think                command; a participant-level command that allows for communication
+      /think                  Contains code pertinent to the implementation of the 'think'
+                              command; a participant-level command that allows for communication
                               between players in a local environment.
+
+      b   No defined symbols.
 
     ==============================================================================================
     
