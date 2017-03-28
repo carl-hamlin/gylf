@@ -382,6 +382,9 @@ Relevant data:
 
           command.gylf.h.l                      No references.
 
+
+      t   command.gylf                          ./commands/gylf/d
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'help' command;
