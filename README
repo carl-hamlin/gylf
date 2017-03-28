@@ -353,6 +353,9 @@ Relevant data:
 
           command.egg.h.l                       No references.
 
+
+      t   command.egg                           ./commands/egg/d
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'gylf' command;
