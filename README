@@ -508,6 +508,38 @@ Relevant data:
 
       b   No defined symbols.
 
+
+      d   local.data.smoked.sockets.message     ./commands/shutdown/d
+                                                ./commands/shutdown/t
+
+          local.data.smoked.sockets.message.l   ./commands/shutdown/t
+
+          local.data.shutdown.message           ./commands/shutdown/d
+                                                ./commands/shutdown/t
+
+          local.data.shutdown.message.l         ./commands/shutdown/t
+
+          socket.data.shutdown.message          ./commands/shutdown/d
+                                                ./commands/shutdown/t
+
+          socket.data.shutdown.message.l        ./commands/shutdown/t
+
+          socket.data.command.shutdown.help     ./commands/shutdown/d
+
+          socket.data.command.shutdown.help.l   ./commands/shutdown/d
+
+          command.shutdown.w                    ./functions/d
+
+          command.shutdown.s                    ./commands/shutdown/d
+
+          command.shutdown.l                    ./commands/shutdown/d
+
+          command.shutdown.p                    No references.
+
+          command.shutdown.h                    No references.
+
+          command.shutdown.h.l                  No references.
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'think'
