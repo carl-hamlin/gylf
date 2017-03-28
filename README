@@ -549,9 +549,33 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'think'
-        /think                command; a participant-level command that allows for communication
+      /think                  Contains code pertinent to the implementation of the 'think'
+                              command; a participant-level command that allows for communication
                               between players in a local environment.
+
+      b   No defined symbols.
+
+
+      d   socket.data.command.think.help        ./commands/think/d
+
+          socket.data.command.think.help.l      ./commands/think/d
+
+          command.think.w                       ./functions/d
+
+          command.think.s                       ./commands/think/d
+
+          command.think.l                       ./commands/think/d
+
+          command.think.p                       No references.
+
+          command.think.h                       No references.
+
+          command.think.h.l                     No references.
+
+
+      t   command.think                         ./commands/think/d
+
+          command.think.untargetted             ./commands/think/t
 
     ==============================================================================================
     
