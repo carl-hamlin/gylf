@@ -454,6 +454,9 @@ Relevant data:
 
           command.logout.h.l                    No references.
 
+
+      t   command.logout                        ./commands/logout/d
+
     ----------------------------------------------------------------------------------------------
 
       ./commands              Contains code pertinent to the implementation of the 'look' command;
