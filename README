@@ -585,8 +585,58 @@ Relevant data:
     
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that collects arguments from the participant command
-        /aggregate.arguments  line and segregates them into a predefined structure.
+      /aggregate.arguments    Contains code that collects arguments from the participant command
+                              line and segregates them into a predefined structure.
+
+      b   arguments.packet                      ./functions/aggregate.arguments/b
+
+          arguments.num                         ./commands/help/t
+                                                ./functions/aggregate.arguments/t
+
+          argument.01.size                      ./functions/aggregate.arguments/b
+
+          argument.01.location                  ./commands/help/t
+                                                ./functions/aggregate.arguments/t
+
+          argument.entry.size                   ./functions/aggregate.arguments/t
+
+          argument.02.size                      No references.
+
+          argument.02.location                  No references.
+
+          argument.03.size                      No references.
+
+          argument.03.location                  No references.
+
+          argument.04.size                      No references.
+
+          argument.04.location                  No references.
+
+          argument.05.size                      No references.
+
+          argument.05.location                  No references.
+
+          argument.06.size                      No references.
+
+          argument.06.location                  No references.
+
+          argument.07.size                      No references.
+
+          argument.07.location                  No references.
+
+          argument.08.size                      No references.
+
+          argument.08.location                  No references.
+
+          argument.09.size                      No references.
+
+          argument.09.location                  No references.
+
+          argument.10.size                      No references.
+
+          argument.10.location                  No references.
+
+          arguments.packet.l                    No references.
 
     ----------------------------------------------------------------------------------------------
 
