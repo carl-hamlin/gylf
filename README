@@ -641,6 +641,24 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   aggregate.arguments                   ./functions/main/participant.interaction
+                                                  /address.active.status/t
+
+          aggregate.arguments.strip.command.loop  ./functions/aggregate.arguments/t
+
+          aggregate.arguments.argument.found      ./functions/aggregate.arguments/t
+
+          aggregate.arguments.loop                ./functions/aggregate.arguments/t
+
+          aggregate.arguments.prep.for.next.argument  ./functions/aggregate.arguments/t
+
+          aggregate.arguments.arguments.aggregated  ./functions/aggregate.arguments/t
+
+          aggregate.arguments.quote.mode        ./functions/aggregate.arguments/t
+
+          aggregate.arguments.quote.mode.l      ./functions/aggregate.arguments/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that suspends execution of the code, unloads from
