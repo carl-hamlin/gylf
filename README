@@ -638,6 +638,9 @@ Relevant data:
 
           arguments.packet.l                    No references.
 
+
+      d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that suspends execution of the code, unloads from
