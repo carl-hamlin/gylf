@@ -987,8 +987,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that strips buffered data of carriage returns and line
-        /buffer.strip         feeds and replaces them with zeroes.
+      /buffer.strip           Contains code that strips buffered data of carriage returns and line
+                              feeds and replaces them with zeroes.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
