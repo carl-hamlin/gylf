@@ -978,6 +978,9 @@ Relevant data:
 
       b   sys.exit.call                         ./functions/bail/t
 
+
+      d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that strips buffered data of carriage returns and line
