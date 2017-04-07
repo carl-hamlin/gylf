@@ -973,8 +973,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that suspends execution of the code, unloads from
-        /bail                 memory, and returns control to Linux.
+      /bail                   Contains code that suspends execution of the code, unloads from
+                              memory, and returns control to Linux.
+
+      b   sys.exit.call                         ./functions/bail/t
 
     ----------------------------------------------------------------------------------------------
 
