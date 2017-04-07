@@ -981,6 +981,10 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   bail                                  ./commands/shutdown/t
+                                                ./functions/socket/socket.errors/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that strips buffered data of carriage returns and line
