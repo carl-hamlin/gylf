@@ -995,6 +995,15 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   buffer.strip                          ./functions/socket/recv.from.socket/t
+
+          strip.loop                            ./functions/buffer.strip/t
+
+          strip.char                            ./functions/buffer.strip/t
+
+          strip.done                            ./functions/buffer.strip/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that checks to see if the user on the current socket
