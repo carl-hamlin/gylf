@@ -1006,8 +1006,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that checks to see if the user on the current socket
-        /check.admin          has administrative privileges.
+      /check.admin            Contains code that checks to see if the user on the current socket
+                              has administrative privileges.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
