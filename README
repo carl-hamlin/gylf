@@ -1021,8 +1021,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that checks to see if a user attempting to log in is
-        /check.login          already logged in from a different location.
+      /check.login            Contains code that checks to see if a user attempting to log in is
+                              already logged in from a different location.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
