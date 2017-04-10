@@ -1014,6 +1014,11 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   check.admin                           ./commands/area/t
+                                                ./commands/broadcast/t
+                                                ./commands/shutdown/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that checks to see if a user attempting to log in is
