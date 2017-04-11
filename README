@@ -1051,9 +1051,11 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that tells linux that we're finished with a
-        /close.descriptor     descriptor, causing it to become disassociated with the dataset to
+      /close.descriptor       Contains code that tells linux that we're finished with a
+                              descriptor, causing it to become disassociated with the dataset to
                               which it currently points.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
