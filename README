@@ -1042,6 +1042,9 @@ Relevant data:
 
       b   No defined symbols.
 
+
+      d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that tells linux that we're finished with a
