@@ -1,6 +1,6 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   create.character
+;   ./functions/create.character/t
 ;
 ;   This function builds out character data on the basis of the DNA sequences provided by the parents of the egg.
 ;
@@ -9,6 +9,125 @@
 ;
 ;   Returns:        None.
 ;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   area.description                      ./commands/area/b
+;
+;   area.description.l                    ./commands/area/b
+;
+;   area.filename                         ./functions/d
+;
+;   area.filename.increment.cmp           ./functions/create.character/t
+;
+;   area.filename.next.digit.increment    ./functions/create.character/t
+;
+;   area.filename.out.of.ids              ./functions/create.character/t
+;
+;   area.header                           ./commands/area/b
+;
+;   area.header.l                         ./commands/area/b
+;
+;   area.name                             ./functions/create.character/t
+;
+;   area.name.l                           ./functions/create.character/t
+;
+;   buffer.1                              ./functions/b
+;
+;   buffer.2                              ./functions/b
+;
+;   build.pouch                           ./functions/create.character/t
+;
+;   build.pouch.area.name                 ./functions/create.character/t
+;
+;   build.pouch.found.open.id             ./functions/create.character/t
+;
+;   build.pouch.increment.byte            ./functions/create.character/t
+;
+;   character.data                        ./functions/b
+;
+;   character.data.l                      ./functions/b
+;
+;   character.father                      ./functions/b
+;
+;   character.father.l                    ./functions/b
+;
+;   character.mother                      ./functions/b
+;
+;   character.mother.l                    ./functions/b
+;
+;   character.pouch                       ./functions/b
+;
+;   clean.socket                          ./functions/clean.socket/t
+;
+;   close.descriptor                      ./functions/close.descriptor/t
+;
+;   connection.descriptor.index           ./functions/main/system.check/b
+;
+;   connection.filename.index             ./functions/main/system.check/b
+;
+;   create.file                           ./functions/create.file/t
+;
+;   dna.lab                               ./functions/dna.lab/t
+;
+;   dword.l                               ./b
+;
+;   egg.area.id                           ./commands/egg/d
+;
+;   egg.data                              ./commands/egg/b
+;
+;   egg.data.l                            ./commands/egg/b
+;
+;   egg.father                            ./commands/egg/b
+;
+;   egg.father.l                          ./commands/egg/b
+;
+;   egg.hatch.message                     ./commands/egg/d
+;
+;   egg.hatch.message.l                   ./commands/egg/d
+;
+;   egg.mother                            ./commands/egg/b
+;
+;   egg.mother.l                          ./commands/egg/b
+;
+;   file.indicator                        ./functions/write.descriptor/d
+;
+;   id.size                               ./functions/b
+;
+;   local.data.out.of.area.ids.message    ./functions/d
+;
+;   local.data.out.of.area.ids.message.l  ./functions/d
+;
+;   open.descriptor                       ./functions/open.descriptor/t
+;
+;   pouch.declaration                     ./functions/d
+;
+;   pouch.declaration.l                   ./functions/d
+;
+;   pouch.description                     ./functions/d
+;
+;   pouch.description.l                   ./functions/d
+;
+;   read.descriptor                       ./functions/read.descriptor/t
+;
+;   send.to.area                          ./functions/socket/communications/send.to.area/t
+;
+;   socket.data.out.of.area.ids.message   ./functions/d
+;
+;   socket.data.out.of.area.ids.message.l ./functions/d
+;
+;   socket.data.send.buffer.l             ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.buffer.pointer       ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.socket.descriptor    ./functions/socket/recv.from.socket/d
+;
+;   socket.send                           ./functions/socket/socket.send/t
+;
+;   write.descriptor                      ./functions/write.descriptor/t
+;
+
 
     create.character:                   push  eax                                                                          ; Preserve descriptor associated with the egg file.
 

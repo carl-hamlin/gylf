@@ -1086,6 +1086,24 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   area.filename.increment.cmp           ./functions/create.character/t
+
+          area.filename.next.digit.increment    ./functions/create.character/t
+
+          area.filename.out.of.ids              ./functions/create.character/t
+
+          build.pouch                           ./functions/create.character/t
+
+          build.pouch.area.name                 ./functions/create.character/t
+
+          build.pouch.found.open.id             ./functions/create.character/t
+
+          build.pouch.increment.byte            ./functions/create.character/t
+
+          create.character                      ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that builds a dataset on the drive, to which it
