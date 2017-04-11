@@ -1037,8 +1037,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that remotely clears the user's screen and places
-        /clear.screen         their cursor in the upper left hand corner.
+      /clear.screen           Contains code that remotely clears the user's screen and places
+                              their cursor in the upper left hand corner.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
