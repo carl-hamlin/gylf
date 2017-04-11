@@ -1045,6 +1045,10 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   clear.screen                          ./functions/main/listening.socket.poll/t
+                                                ./functions/write.welcome/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that tells linux that we're finished with a
