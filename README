@@ -1029,6 +1029,12 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   check.login                           ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+          check.login.logged                    ./functions/check.login/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that remotely clears the user's screen and places
