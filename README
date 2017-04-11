@@ -1078,8 +1078,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that builds out character data on the basis of DNA
-        /create.character     sequences left behind by either parent on the associated egg.
+      /create.character       Contains code that builds out character data on the basis of DNA
+                              sequences left behind by either parent on the associated egg.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
