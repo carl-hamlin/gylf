@@ -1055,7 +1055,7 @@ Relevant data:
                               descriptor, causing it to become disassociated with the dataset to
                               which it currently points.
 
-      b   No defined symbols.
+      b   sys.close.call                        ./functions/close.descriptor/t
 
 
       d   No defined symbols.
