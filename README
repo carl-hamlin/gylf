@@ -1111,6 +1111,9 @@ Relevant data:
 
       b   No defined symbols.
 
+
+      d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that creates a lock file for use in preventing
