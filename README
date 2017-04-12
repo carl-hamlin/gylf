@@ -1213,8 +1213,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code which combines the DNA left behind on an egg by both
-        /dna.lab              parents to create an entirely new gylf.
+      /dna.lab                Contains code which combines the DNA left behind on an egg by both
+                              parents to create an entirely new gylf.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
