@@ -1106,8 +1106,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that builds a dataset on the drive, to which it
-        /create.file          associates a logical descriptor.
+      /create.file            Contains code that builds a dataset on the drive, to which it
+                              associates a logical descriptor.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
