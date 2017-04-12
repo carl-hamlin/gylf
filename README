@@ -1135,6 +1135,9 @@ Relevant data:
                                                 ./functions/create.lock.file/t
                                                 ./functions/socket/clean.socket/t
 
+      t   create.lock.file                      ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code which combines the DNA left behind on an egg by both
