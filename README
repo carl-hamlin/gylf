@@ -1114,6 +1114,11 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   create.file                           ./commands/area/t
+                                                ./functions/create.lock.file/t
+                                                ./functions/create.character/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that creates a lock file for use in preventing
