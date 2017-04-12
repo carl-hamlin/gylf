@@ -895,6 +895,79 @@ Relevant data:
 
           character.secondary.fur.quality.number  ./functions/dna.lab/t
 
+
+      d   area.filename                         ./commands/area/t
+                                                ./functions/create.character/t
+                                                ./functions/d
+
+          area.filename.l                       ./commands/area/t
+
+          command.table                         ./commands/help/t
+                                                ./functions/d
+                                                ./functions/main/participant.interaction
+                                                  /address.active.status/t
+
+          current.directory.marker              ./functions/check.login/t
+
+          current.directory.marker.l            ./functions/check.login/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+          external.data.cursor.home             ./functions/clear.screen/t
+
+          external.data.clear.screen            ./functions/clear.screen/t
+
+          item.filename                         ./functions/d
+
+          item.filename.l                       No references.
+
+          local.data.carriage.return            ./commands/area/t
+                                                ./functions/d
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/communications/send.to.world/t
+
+          local.data.carriage.return.l          ./commands/area/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/communications/send.to.world/t
+
+          local.data.listening.message          ./functions/d
+                                                ./functions/main/set.up.listener/t
+
+          local.data.listening.message.l        ./functions/main/set.up.listener/t
+
+          local.data.out.of.area.ids.message    ./functions/d
+                                                ./functions/create.character/t
+
+          local.data.out.of.area.ids.message.l  ./functions/create.character/t
+
+          local.data.session.open.error         ./functions/d
+
+          local.data.session.open.error.l       No references.
+
+          number.of.commands                    ./commands/help/t
+                                                ./functions/d
+                                                ./functions/main/participant.interaction
+                                                  /address.active.status/t
+
+          pouch.declaration                     ./functions/d
+                                                ./functions/create.character/t
+
+          pouch.declaration.l                   ./functions/create.character/t
+
+          pouch.description                     ./functions/d
+                                                ./functions/create.character/t
+
+          pouch.description.l                   ./functions/create.character/t
+
+       	  socket.data.session.open.error        ./functions/d
+
+      	  socket.data.session.open.error.l      No references.
+
+      	  socket.data.out.of.area.ids.message   ./functions/d
+      	                                        ./functions/create.character/t
+
+      	  socket.data.out.of.area.ids.message.l ./functions/create.character/t
+
     ----------------------------------------------------------------------------------------------
 
       /aggregate.arguments    Contains code that collects arguments from the participant command
