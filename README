@@ -1126,6 +1126,15 @@ Relevant data:
 
       b   No external references.
 
+
+      d   lock.extension                        ./functions/check.login/t
+                                                ./functions/create.lock.file/t
+                                                ./functions/socket/clean.socket/t
+
+          lock.extension.l                      ./functions/check.login/t
+                                                ./functions/create.lock.file/t
+                                                ./functions/socket/clean.socket/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code which combines the DNA left behind on an egg by both
