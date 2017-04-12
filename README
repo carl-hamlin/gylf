@@ -1218,6 +1218,9 @@ Relevant data:
 
       b   No defined symbols.
 
+
+      d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code which populates the character data in memory from file
