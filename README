@@ -1221,6 +1221,55 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   dna.lab                               ./functions/create.character/t
+
+          dna.lab.agility                       ./functions/dna.lab/t
+
+          dna.lab.base.color                    ./functions/dna.lab/t
+
+          dna.lab.base.fur.quality              ./functions/dna.lab/t
+
+          dna.lab.endurance                     ./functions/dna.lab/t
+
+          dna.lab.father.base.color             ./functions/dna.lab/t
+
+          dna.lab.father.base.fur.quality       ./functions/dna.lab/t
+
+          dna.lab.father.secondary.color        ./functions/dna.lab/t
+
+          dna.lab.father.secondary.fur.quality  ./functions/dna.lab/t
+
+          dna.lab.mother.base.color             ./functions/dna.lab/t
+
+          dna.lab.mother.base.fur.quality       ./functions/dna.lab/t
+
+          dna.lab.mother.secondary.color        ./functions/dna.lab/t
+
+          dna.lab.mother.secondary.fur.quality  ./functions/dna.lab/t
+
+          dna.lab.mutation.base.color           ./functions/dna.lab/t
+
+          dna.lab.mutation.base.color.fix       ./functions/dna.lab/t
+
+          dna.lab.mutation.base.fur.quality     ./functions/dna.lab/t
+
+          dna.lab.mutation.base.fur.quality.fix ./functions/dna.lab/t
+
+          dna.lab.mutation.secondary.color      ./functions/dna.lab/t
+
+          dna.lab.mutation.secondary.color.fix  ./functions/dna.lab/t
+
+          dna.lab.mutation.secondary.fur.quality  ./functions/dna.lab/t
+
+          dna.lab.mutation.secondary.fur.quality.fix  ./functions/dna.lab/t
+
+          dna.lab.secondary.color               ./functions/dna.lab/t
+
+          dna.lab.secondary.fur.quality         ./functions/dna.lab/t
+
+          dna.lab.strength                      ./functions/dna.lab/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code which populates the character data in memory from file
