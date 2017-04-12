@@ -1121,8 +1121,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that creates a lock file for use in preventing
-        /create.lock.file     multiple instances of the same login from different locations.
+      /create.lock.file       Contains code that creates a lock file for use in preventing
+                              multiple instances of the same login from different locations.
+
+      b   No external references.
 
     ----------------------------------------------------------------------------------------------
 
