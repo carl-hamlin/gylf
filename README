@@ -1452,9 +1452,11 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that sends a vt100 escape sequence to the remote
-        /set.single.attribute terminal which changes a single attribute about the printed text.
+      /set.single.attribute   Contains code that sends a vt100 escape sequence to the remote
+                              terminal which changes a single attribute about the printed text.
                               Attributes can be found in external data.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
