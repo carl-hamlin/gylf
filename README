@@ -1389,6 +1389,9 @@ Relevant data:
           sys.read.write                        ./functions/create.file/t
                                                 ./functions/open.descriptor/t
 
+
+      d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that uses a logical descriptor associated with a
