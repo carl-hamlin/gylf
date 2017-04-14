@@ -1410,6 +1410,9 @@ Relevant data:
 
       b   sys.poll.call                         ./functions/poll.descriptor/t
 
+
+      d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that prints a socket number associated with an event
