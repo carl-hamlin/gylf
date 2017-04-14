@@ -1392,6 +1392,16 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   open.descriptor                       ./commands/area/t
+                                                ./commands/look/t
+                                                ./functions/check.login/t
+                                                ./functions/create.character/t
+                                                ./functions/dna.lab/t
+                                                ./functions/get.character.data/t
+                                                ./functions/get.external.data/t
+                                                ./functions/main/participant.interaction/address.set.passphrase.status/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that uses a logical descriptor associated with a
