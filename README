@@ -1686,6 +1686,13 @@ Relevant data:
 
           prompt.message.l                      ./functions/write.prompt/t
 
+
+      t   write.prompt                          ./commands/area/t
+                                                ./commands/look/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/write.bad.help.command.error/t
+                                                
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that builds and displays the initial welcome screen to
