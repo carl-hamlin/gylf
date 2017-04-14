@@ -1293,6 +1293,9 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   get.external.data                     ./functions/clear.screen/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that returns the number of clock ticks since the
