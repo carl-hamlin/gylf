@@ -1298,8 +1298,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that returns the number of clock ticks since the
-        /get.ticks            environment was booted.
+      /get.ticks              Contains code that returns the number of clock ticks since the
+                              environment was booted.
+
+      b   sys.get.ticks                         ./functions/get.ticks/t
 
     ----------------------------------------------------------------------------------------------
 
