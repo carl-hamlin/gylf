@@ -1458,6 +1458,59 @@ Relevant data:
 
       b   No defined symbols.
 
+
+      d   set.att.b.blk                         No references.
+
+          set.att.b.blu                         No references.
+
+          set.att.b.cyn                         No references.
+
+          set.att.b.grn                         No references.
+
+          set.att.b.mag                         No references.
+
+          set.att.b.red                         No references.
+
+          set.att.b.yel                         No references.
+
+          set.att.b.wht                         No references.
+
+          set.att.bnk                           No references.
+
+          set.att.brt                           No references.
+
+          set.att.dim                           No references.
+
+          set.att.f.blk                         No references.
+
+          set.att.f.blu                         No references.
+
+          set.att.f.cyn                         No references.
+
+          set.att.f.grn                         No references.
+
+          set.att.f.mag                         No references.
+
+          set.att.f.red                         No references.
+
+          set.att.f.yel                         No references.
+
+          set.att.f.wht                         No references.
+
+          set.att.hdn                           No references.
+
+          set.att.mod.1                         No references.
+
+          set.att.mod.2                         No references.
+
+          set.att.mod.3                         No references.
+
+          set.att.rst                           No references.
+
+          set.att.rvs                           No references.
+
+          set.att.und                           No references.
+
     ----------------------------------------------------------------------------------------------
 
       ./functions/socket      Contains code that governs the 'behind the scenes' mechanisms
