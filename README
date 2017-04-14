@@ -1621,6 +1621,16 @@ Relevant data:
 
       d   socket.data.bad.command.error         ./functions/write.bad.command.error/d
 
+
+      t   write.bad.command.error               ./commands/ai/t
+                                                ./commands/dig/t
+                                                ./commands/egg/t
+                                                ./commands/gylf/t
+                                                ./commands/help/t
+                                                ./commands/logout/t
+                                                ./functions/main/participant.interaction
+                                                  /address.active.status/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions                     Contains code that lets the user know when they've requested
