@@ -1306,6 +1306,9 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   get.ticks                             ./functions/dna.lab/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions/main        Contains all pertinent first level code, definitions, and data for
