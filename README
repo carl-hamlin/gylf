@@ -1676,8 +1676,9 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that displays a command prompt to the user.
-        /write.prompt
+      /write.prompt           Contains code that displays a command prompt to the user.
+
+      b   No external references.
 
     ----------------------------------------------------------------------------------------------
 
