@@ -1655,6 +1655,11 @@ Relevant data:
           sys.standard.output                   ./functions/write.descriptor/d
                                                 ./functions/write.descriptor/t
 
+
+      d   file.indicator                        ./commands/area/t
+                                                ./functions/write.descriptor/t
+                                                ./functions/create.character/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that displays a command prompt to the user.
