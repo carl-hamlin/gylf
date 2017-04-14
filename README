@@ -1612,6 +1612,13 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
+      /translate.name.to.socket.number  Contains code which allows for a given participant name
+                                        to be translated to a socket ID for use internally.
+
+      b   No defined symbols.
+
+    ----------------------------------------------------------------------------------------------
+
       ./functions                 Contains code that lets the user know whan they've attempted to
         /write.bad.command.error  send a string to the server that doesn't correspond to a
                                   recognized command.
