@@ -1290,6 +1290,9 @@ Relevant data:
 
       b   No defined symbols.
 
+
+      d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that returns the number of clock ticks since the
