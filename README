@@ -1432,9 +1432,11 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that pulls data from an existing dataset using a
-        /read.descriptor      logical descriptor previously associated with the dataset in
+      /read.descriptor        Contains code that pulls data from an existing dataset using a
+                              logical descriptor previously associated with the dataset in
                               question.
+
+      b   sys.read.call                         ./functions/read.descriptor/t
 
     ----------------------------------------------------------------------------------------------
 
