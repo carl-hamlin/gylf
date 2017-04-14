@@ -1660,6 +1660,20 @@ Relevant data:
                                                 ./functions/write.descriptor/t
                                                 ./functions/create.character/t
 
+
+      t   write.descriptor                      ./commands/shutdown/t
+                                                ./commands/look/t
+                                                ./commands/area/t
+                                                ./functions/print.socket.number/t
+                                                ./functions/main/system.check/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/set.up.listener/t
+                                                ./functions/socket/socket.errors/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/create.character/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that displays a command prompt to the user.
