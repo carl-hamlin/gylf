@@ -1379,10 +1379,15 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that associates a logical descriptor with an existing
-        /open.descriptor      dataset on disk. If the code is unable to associate a descriptor, it
+      /open.descriptor        Contains code that associates a logical descriptor with an existing
+                              dataset on disk. If the code is unable to associate a descriptor, it
                               instead returns an error code, which is detectable via a check on
                               the sign of eax.
+
+      b   sys.open.call                         ./functions/open.descriptor/t
+
+          sys.read.write                        ./functions/create.file/t
+                                                ./functions/open.descriptor/t
 
     ----------------------------------------------------------------------------------------------
 
