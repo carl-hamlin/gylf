@@ -1,6 +1,6 @@
-;==========================================================================================================================================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   translate.name.to.socket.number
+;   ./functions/translate.name.to.socket.number/t
 ;
 ;   This function translates a given name to a connected socket number.
 ;
@@ -8,6 +8,24 @@
 ;                   esi = Pointer to a given name.
 ;
 ;   Returns:        eax - pointer to socket associated with the given name, or error.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   connection.entry.size                         ./functions/main/system.check/b
+;
+;   connection.pname.index                        ./functions/main/system.check/b
+;
+;   connection.table                              ./functions/main/system.check/b
+;
+;   socket.number                                 ./b
+;
+;   translate.name.to.socket.number.cleanup       ./functions/translate.name.to.socket.number/t
+;
+;   translate.name.to.socket.number.found.socket  ./functions/translate.name.to.socket.number/t
+;
+;   translate.name.to.socket.number.search.loop   ./functions/translate.name.to.socket.number/t
 ;
 
     translate.name.to.socket.number:              push  esi                                           ; Preserve caller's esi.
