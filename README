@@ -1280,6 +1280,9 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   get.character.data                    ./functions/check.admin/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code which reads data that exists outside the codebase and
