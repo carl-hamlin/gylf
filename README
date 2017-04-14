@@ -1499,11 +1499,11 @@ Relevant data:
 
           set.att.hdn                           No references.
 
-          set.att.mod.1                         No references.
+          set.att.mod.1                         ./functions/set.single.attribute/t
 
           set.att.mod.2                         No references.
 
-          set.att.mod.3                         No references.
+          set.att.mod.3                         ./functions/set.single.attribute/t
 
           set.att.rst                           No references.
 
