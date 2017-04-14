@@ -1272,8 +1272,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code which populates the character data in memory from file
-        /get.character.data   for the character on the current socket.
+      /get.character.data     Contains code which populates the character data in memory from file
+                              for the character on the current socket.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
