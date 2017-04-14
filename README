@@ -1285,8 +1285,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code which reads data that exists outside the codebase and
-        /get.external.data    memory.
+      /get.external.data      Contains code which reads data that exists outside the codebase and
+                              memory.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
