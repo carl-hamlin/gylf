@@ -1277,6 +1277,9 @@ Relevant data:
 
       b   No defined symbols.
 
+
+      d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code which reads data that exists outside the codebase and
