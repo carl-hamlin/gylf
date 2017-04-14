@@ -1413,6 +1413,10 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   poll.descriptor                       ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that prints a socket number associated with an event
