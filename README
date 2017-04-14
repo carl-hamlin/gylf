@@ -1419,8 +1419,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that prints a socket number associated with an event
-        /print.socket.number  in the administrator console.
+      /print.socket.number    Contains code that prints a socket number associated with an event
+                              in the administrator console.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
