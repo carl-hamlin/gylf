@@ -1618,6 +1618,9 @@ Relevant data:
 
       b   No defined symbols.
 
+
+      d   socket.data.bad.command.error         ./functions/write.bad.command.error/d
+
     ----------------------------------------------------------------------------------------------
 
       ./functions                     Contains code that lets the user know when they've requested
