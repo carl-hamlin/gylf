@@ -1303,6 +1303,9 @@ Relevant data:
 
       b   sys.get.ticks                         ./functions/get.ticks/t
 
+
+      d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
       ./functions/main        Contains all pertinent first level code, definitions, and data for
