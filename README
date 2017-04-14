@@ -1680,6 +1680,12 @@ Relevant data:
 
       b   No external references.
 
+
+      d   prompt.message                        ./functions/write.prompt/d
+                                                ./functions/write.prompt/t
+
+          prompt.message.l                      ./functions/write.prompt/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that builds and displays the initial welcome screen to
