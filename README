@@ -1599,8 +1599,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that returns the time in seconds since the epoch.
-        /time.in.seconds.since.the.epoch
+      /time.in.seconds.since.the.epoch  Contains code that returns the time in seconds since the
+                                        epoch.
+
+      b   sys.get.time.in.seconds.since.the.epoch ./functions/time.in.seconds.since.the.epoch/t
 
     ----------------------------------------------------------------------------------------------
 
