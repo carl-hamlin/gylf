@@ -1427,6 +1427,9 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   print.socket.number                   ./functions/socket/answer.active.socket/t
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that pulls data from an existing dataset using a
