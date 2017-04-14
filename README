@@ -1438,6 +1438,9 @@ Relevant data:
 
       b   sys.read.call                         ./functions/read.descriptor/t
 
+
+      d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
       ./functions             Contains code that sends a vt100 escape sequence to the remote
