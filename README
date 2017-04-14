@@ -1633,9 +1633,11 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions                     Contains code that lets the user know when they've requested
-        /write.bad.help.command.error help for a command that does not belong to the recognized
-                                      command set.
+      /write.bad.help.command.error Contains code that lets the user know when they've requested
+                                    help for a command that does not belong to the recognized
+                                    command set.
+
+      b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
