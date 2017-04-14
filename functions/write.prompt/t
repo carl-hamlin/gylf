@@ -1,12 +1,28 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   write.prompt
+;   ./functions/write.prompt/t
 ;
 ;   This function prints a command prompt.
 ;
 ;   Assumptions:    eax - Descriptor associated with target connection.
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   prompt.message                      ./functions/write.prompt/d
+;
+;   prompt.message.l                    ./functions/write.prompt/d
+;
+;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
+;
+;   socket.send                         ./functions/socket/socket.send/t
 ;
 
     write.prompt: mov  dword [socket.data.send.socket.descriptor], eax         ; Point socket.send to target connection.
