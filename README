@@ -1404,9 +1404,11 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that uses a logical descriptor associated with a
-        /poll.descriptor      Berkeley Socket to ask the socket whether or not there is currently
+      /poll.descriptor        Contains code that uses a logical descriptor associated with a
+                              Berkeley Socket to ask the socket whether or not there is currently
                               data on it that requires the attention of a handler.
+
+      b   sys.poll.call                         ./functions/poll.descriptor/t
 
     ----------------------------------------------------------------------------------------------
 
