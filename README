@@ -1702,3 +1702,10 @@ Relevant data:
 
 
       d   No defined symbols.
+
+
+      t   write.welcome                         ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+
