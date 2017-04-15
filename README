@@ -1695,5 +1695,7 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that builds and displays the initial welcome screen to
-        /write.welcome        the user.
+      /write.welcome          Contains code that builds and displays the initial welcome screen to
+                              the user.
+
+      b   No defined symbols.
