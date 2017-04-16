@@ -1323,6 +1323,19 @@ Relevant data:
 
         b   No defines symbols.
 
+
+        d   socket.data.active.requested        No references.
+
+            socket.data.active.returned         No references.
+
+            socket.data.active.socket.descriptor  ./functions/main/active.socket.poll/t
+
+            socket.data.event.requested         No references.
+
+            socket.data.event.returned          No references.
+
+            socket.data.event.socket.descriptor ./functions/socket/bind.socket/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/main          Contains code that polls the listening socket for new connection
