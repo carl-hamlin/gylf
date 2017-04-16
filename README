@@ -1336,6 +1336,17 @@ Relevant data:
 
             socket.data.event.socket.descriptor ./functions/socket/bind.socket/t
 
+
+        t   active.socket.poll                  ./functions/main/t
+
+            active.socket.poll.loop             ./functions/main/active.socket.poll/t
+
+            active.socket.poll.loop.done        ./functions/main/active.socket.poll/t
+
+            poll.active.socket                  ./functions/main/active.socket.poll/t
+
+            poll.active.socket.done             ./functions/main/active.socket.poll/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/main          Contains code that polls the listening socket for new connection
