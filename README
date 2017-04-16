@@ -1342,6 +1342,9 @@ Relevant data:
           sys.poll.timeout                      ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
 
+
+      d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
         /active.socket.poll   Contains code that runs through the list of potentially active
