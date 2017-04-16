@@ -1314,6 +1314,34 @@ Relevant data:
       ./functions/main        Contains all pertinent first level code, definitions, and data for
                               the main loop.
 
+      b   active.status                         ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+
+          dead.socket                           ./functions/main/listening.socket.poll/t
+                                                ./functions/socket/active.socket.poll/t
+
+          login.status                          ./functions/main/listening.socket.poll/t
+                                                ./functions/socket/active.socket.poll/t
+
+          new.char.sig                          ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+          passphrase.status                     ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+          set.passphrase.status                 ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+          sys.poll.in                           ./functions/main/active.socket.poll/d
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+
+          sys.poll.number.of.structures         ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+
+          sys.poll.timeout                      ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+
     ----------------------------------------------------------------------------------------------
 
         /active.socket.poll   Contains code that runs through the list of potentially active
