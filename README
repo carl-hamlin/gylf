@@ -1380,8 +1380,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/main          Contains code that polls the listening socket for new connection
-          /listening.socket.poll  attempts and sends the login message when it finds them.
+        /listening.socket.poll  Contains code that polls the listening socket for new connection
+                                attempts and sends the login message when it finds them.
+
+        b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
