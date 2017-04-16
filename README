@@ -1316,10 +1316,12 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/main      Contains code that runs through the list of potentially active
-          /active.socket.poll connections and checks each of them for activity. Upon discovering
+        /active.socket.poll   Contains code that runs through the list of potentially active
+                              connections and checks each of them for activity. Upon discovering
                               activity in a connection, the function then passes control off to
                               the answer.active.socket function for more specialized treatment.
+
+        b   No defines symbols.
 
     ----------------------------------------------------------------------------------------------
 
