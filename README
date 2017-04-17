@@ -1423,6 +1423,21 @@ Relevant data:
 
           d   No defined symbols.
 
+
+          t   address.active.status             ./functions/socket/answer.active.socket/t
+
+              address.active.status.found.command ./functions/main/participant.interaction
+                                                    /address.active.status/t
+
+              address.active.status.next.command.jcxnz  ./functions/main/participant.interaction
+                                                          /address.active.status/t
+
+              address.active.status.next.command  ./functions/main/participant.interaction
+                                                    /address.active.status/t
+
+              address.active.status.read.command.table  ./functions/main/participant.interaction
+                                                          /address.active.status/t
+
     ----------------------------------------------------------------------------------------------
 
           ./functions/main            Contains code that parses commands issued by users with a
