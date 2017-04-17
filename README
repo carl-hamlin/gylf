@@ -1396,6 +1396,17 @@ Relevant data:
 
             no.connection.available.l           ./functions/main/listening.socket.poll/t
 
+
+        t   greet                               ./functions/main/listening.socket.poll/t
+
+            greet.add.socket                    ./functions/main/listening.socket.poll/t
+
+            greet.loop                          ./functions/main/listening.socket.poll/t
+
+            listening.socket.poll               ./functions/main/t
+
+            listening.socket.poll.done          ./functions/main/listening.socket.poll/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/main            Contains code that has to do with interaction between the user
