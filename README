@@ -1415,9 +1415,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-          ./functions/main            Contains code that parses commands issued by users with an
-            /participant.interaction  active status and sends them to the appropriate handler.
-              /address.active.status
+          /address.active.status    Contains code that parses commands issued by users with an
+                                    active status and sends them to the appropriate handler.
+
+          b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
