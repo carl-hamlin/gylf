@@ -1385,6 +1385,17 @@ Relevant data:
 
         b   No defined symbols.
 
+
+        d   local.data.connection.notifier      ./functions/main/listening.socket.poll/d
+                                                ./functions/main/listening.socket.poll/t
+
+            local.data.connection.notifier.l    ./functions/main/listening.socket.poll/t
+
+            no.connection.available             ./functions/main/listening.socket.poll/d
+                                                ./functions/main/listening.socket.poll/t
+
+            no.connection.available.l           ./functions/main/listening.socket.poll/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/main            Contains code that has to do with interaction between the user
