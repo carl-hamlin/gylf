@@ -1420,6 +1420,9 @@ Relevant data:
 
           b   No defined symbols.
 
+
+          d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
           ./functions/main            Contains code that parses commands issued by users with a
