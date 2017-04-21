@@ -1532,6 +1532,18 @@ Relevant data:
           	  socket.data.passphrase.message.l  ./functions/main/participant.interaction
           	                                      /address.passphrase.status/d
 
+
+          t   address.passphrase.status         ./functions/socket/answer.active.socket/t
+
+              bad.passphrase                    ./functions/main/participant.interaction
+          	                                      /address.passphrase.status/t
+
+              good.passphrase                   ./functions/main/participant.interaction
+          	                                      /address.passphrase.status/t
+
+              passphrase.cmp.loop               ./functions/main/participant.interaction
+          	                                      /address.passphrase.status/t
+
     ----------------------------------------------------------------------------------------------
 
           ./functions/main                    Contains code that parses commands issued by users
