@@ -1446,35 +1446,51 @@ Relevant data:
           b   No defined symbols.
 
 
-          d   local.data.bad.login.error        ./functions/main/participant.interaction/address.login.status/d
-                                                ./functions/main/participant.interaction/address.login.status/t
+          d   local.data.bad.login.error        ./functions/main/participant.interaction
+                                                  /address.login.status/d
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
 
-              local.data.bad.login.error.l      ./functions/main/participant.interaction/address.login.status/t
+              local.data.bad.login.error.l      ./functions/main/participant.interaction
+                                                  /address.login.status/t
 
-              local.data.second.login.error     ./functions/main/participant.interaction/address.login.status/d
-                                                ./functions/main/participant.interaction/address.login.status/t
+              local.data.second.login.error     ./functions/main/participant.interaction
+                                                  /address.login.status/d
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
 
-              local.data.second.login.error.l   ./functions/main/participant.interaction/address.login.status/t
+              local.data.second.login.error.l   ./functions/main/participant.interaction
+                                                  /address.login.status/t
 
-              socket.data.bad.login.error       ./functions/main/participant.interaction/address.login.status/d
-                                                ./functions/main/participant.interaction/address.login.status/t
+              socket.data.bad.login.error       ./functions/main/participant.interaction
+                                                  /address.login.status/d
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
 
-              socket.data.bad.login.error.l     ./functions/main/participant.interaction/address.login.status/t
+              socket.data.bad.login.error.l     ./functions/main/participant.interaction
+                                                  /address.login.status/t
 
               socket.data.login.message         ./functions/main/listening.socket.poll/t
-                                                ./functions/main/participnat.interaction/address.login.status/d
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/d
 
               socket.data.login.message.l       ./functions/main/listening.socket.poll/t
 
-              socket.data.second.login.error    ./functions/main/participant.interaction/address.login.status/d
-                                                ./functions/main/participant.interaction/address.login.status/t
+              socket.data.second.login.error    ./functions/main/participant.interaction
+                                                  /address.login.status/d
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
 
-              socket.data.second.login.error.l  ./functions/main/participant.interaction/address.login.status/t
+              socket.data.second.login.error.l  ./functions/main/participant.interaction
+                                                  /address.login.status/t
 
-              socket.data.welcome.message       ./functions/main/participant.interaction/address.login.status/d
-                                                ./functions/main/participant.interaction/address.login.status/t
+              socket.data.welcome.message       ./functions/main/participant.interaction
+                                                  /address.login.status/d
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
 
-              socket.data.welcome.message.l     ./functions/main/participant.interaction/address.login.status/t
+              socket.data.welcome.message.l     ./functions/main/participant.interaction
+                                                  /address.login.status/t
 
 
           t   address.login.status              ./functions/socket/answer.active.socket/t
