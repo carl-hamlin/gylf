@@ -1495,6 +1495,23 @@ Relevant data:
 
           b   No defined symbols.
 
+
+          d   socket.data.bad.passphrase.message  ./functions/main/participant.interaction
+                                                    /address.passphrase.status/d
+                                                  ./functions/main/participant.interaction
+                                                    /address.passphrase.status/t
+
+          	  socket.data.bad.passphrase.message.l  ./functions/main/participant.interaction
+          	                                          /address.passphrase.status/d
+
+          	  socket.data.passphrase.message    ./functions/main/participant.interaction
+          	                                      /address.passphrase.status/d
+          	                                    ./functions/main/participant.interaction
+          	                                      /address.passphrase.status/t
+
+          	  socket.data.passphrase.message.l  ./functions/main/participant.interaction
+          	                                      /address.passphrase.status/d
+
     ----------------------------------------------------------------------------------------------
 
           ./functions/main                    Contains code that parses commands issued by users
