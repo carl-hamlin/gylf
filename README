@@ -1546,9 +1546,11 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-          ./functions/main                    Contains code that parses commands issued by users
-            /participant.interaction          with a set passphrase status and sends them to the
-              /address.set.passphrase.status  appropriate handler.
+          /address.set.passphrase.status  Contains code that parses commands issued by users
+                                          with a set passphrase status and sends them to the
+                                          appropriate handler.
+
+          b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
