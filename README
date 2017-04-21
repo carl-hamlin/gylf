@@ -1552,6 +1552,9 @@ Relevant data:
 
           b   No defined symbols.
 
+
+          d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/main      Contains code that builds a socket, binds it to a specified hardware
