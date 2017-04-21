@@ -1476,6 +1476,17 @@ Relevant data:
 
               socket.data.welcome.message.l     ./functions/main/participant.interaction/address.login.status/t
 
+
+          t   address.login.status              ./functions/socket/answer.active.socket/t
+
+              bad.login                         ./functions/main/participant.interaction/address.login.status/t
+
+              new.login                         ./functions/main/participant.interaction/address.login.status/t
+
+              not.logged.in                     ./functions/main/participant.interaction/address.login.status/t
+
+              returning.login                   ./functions/main/participant.interaction/address.login.status/t
+
     ----------------------------------------------------------------------------------------------
 
           ./functions/main                Contains code that parses commands issues by users with
