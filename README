@@ -1440,9 +1440,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-          ./functions/main            Contains code that parses commands issued by users with a
-            /participant.interaction  login status and sends them to the appropriate handler.
-              /address.login.status
+          /address.login.status     Contains code that parses commands issued by users with a
+                                    login status and sends them to the appropriate handler.
+
+          b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
