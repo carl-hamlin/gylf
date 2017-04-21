@@ -1555,6 +1555,9 @@ Relevant data:
 
           d   No defined symbols.
 
+
+          t   address.set.passphrase.status     ./functions/socket/answer.active.socket/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/main      Contains code that builds a socket, binds it to a specified hardware
