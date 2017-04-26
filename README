@@ -1560,13 +1560,13 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        /set.up.listener    Contains code that builds a socket, binds it to a specified hardware
-                            port, and tells it to listen for incoming connections. When it's
-                            finished, it displays a message to the admin indicating that we're
-                            online and ready to go. If at any point an error occurs, the
-                            function displays an error message and passes control to the bail
-                            function so we can suspend execution and return control to linux in
-                            the hopes that the admin can figure out what's clogging up the works.
+        /set.up.listener  Contains code that builds a socket, binds it to a specified hardware
+                          port, and tells it to listen for incoming connections. When it's
+                          finished, it displays a message to the admin indicating that we're
+                          online and ready to go. If at any point an error occurs, the function
+                          displays an error message and passes control to the bail function so we
+                          can suspend execution and return control to linux in the hopes that the
+                          admin can figure out what's clogging up the works.
 
         b   No defined symbols.
 
@@ -1587,8 +1587,79 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/main      Contains code that performs checks to ensure the environment is
-          /system.check       ready to go live, prior to instantiation.
+        /system.check   Contains code that performs checks to ensure the environment is ready to
+                        go live, prior to instantiation.
+
+        b   connection.area.id.index            ./commands/look/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+
+            connection.descriptor.index         ./commands/area/t
+                                                ./commands/broadcast/t
+                                                ./commands/look/t
+                                                ./commands/shutdown/t
+                                                ./functions/create.character/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/socket/clean.socket/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/socket/recv.from.socket/t
+                                                ./functions/write.bad.command.error/t
+                                                ./functions/write.bad.help.command.error/t
+                                                ./functions/write.welcome/t
+
+            connection.entry.size               ./commands/shutdown/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+
+            connection.external.index           No references.
+
+            connection.filename.index           ./functions/create.character/t
+                                                ./functions/get.character.data/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/socket/clean.socket/t
+
+            connection.number.index             ./functions/main/system.check/t
+                                                ./functions/print.socket.number/t
+                                                ./functions/socket/communications/send.to.player/t
+
+            connection.status.index             
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/clean.socket/t
+
+            connection.table                    ./commands/shutdown/t
+                                                ./functions/main/system.check/b
+                                                ./functions/main/system.check/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
 
     ----------------------------------------------------------------------------------------------
 
