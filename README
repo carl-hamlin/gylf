@@ -1560,14 +1560,15 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/main      Contains code that builds a socket, binds it to a specified hardware
-          /set.up.listener    port, and tells it to listen for incoming connections. When it's
-                              finished, it displays a message to the admin indicating that we're
-                              online and ready to go. If at any point an error occurs, the
-                              function displays an error message and passes control to the bail
-                              function so we can suspend execution and return control to linux in
-                              the hopes that the admin can figure out what's clogging up the
-                              works.
+        /set.up.listener    Contains code that builds a socket, binds it to a specified hardware
+                            port, and tells it to listen for incoming connections. When it's
+                            finished, it displays a message to the admin indicating that we're
+                            online and ready to go. If at any point an error occurs, the
+                            function displays an error message and passes control to the bail
+                            function so we can suspend execution and return control to linux in
+                            the hopes that the admin can figure out what's clogging up the works.
+
+        b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
