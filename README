@@ -1576,6 +1576,15 @@ Relevant data:
 
             local.data.listen.error.message.l   ./functions/socket/socket.errors/t
 
+
+        t   set.up.listener                     ./functions/main/t
+
+            socket.bind                         ./functions/main/set.up.listener/t
+
+            socket.display.success              ./functions/main/set.up.listener/t
+
+            socket.listen                       ./functions/main/set.up.listener/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/main      Contains code that performs checks to ensure the environment is
