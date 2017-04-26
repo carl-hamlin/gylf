@@ -1570,6 +1570,12 @@ Relevant data:
 
         b   No defined symbols.
 
+
+        d   local.data.listen.error.message     ./functions/main/set.up.listener/d
+                                                ./functions/socket/socket.errors/t
+
+            local.data.listen.error.message.l   ./functions/socket/socket.errors/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/main      Contains code that performs checks to ensure the environment is
