@@ -1409,8 +1409,8 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/main            Contains code that has to do with interaction between the user
-          /participant.interaction  and the infractructure of the environment. Essentially, this
+        /participant.interaction    Contains code that has to do with interaction between the user
+                                    and the infractructure of the environment. Essentially, this
                                     code addresses all user statii and how to handle them.
 
     ----------------------------------------------------------------------------------------------
