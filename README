@@ -1709,8 +1709,9 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/main      Contains code pertinent to the passage of time in the environment.
-          /world.maintenance
+        /world.maintenance    Contains code pertinent to the passage of time in the environment.
+
+        b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
