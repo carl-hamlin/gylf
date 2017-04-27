@@ -1742,7 +1742,8 @@ Relevant data:
                                                 ./functions/dna.lab/t
                                                 ./functions/get.character.data/t
                                                 ./functions/get.external.data/t
-                                                ./functions/main/participant.interaction/address.set.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
 
     ----------------------------------------------------------------------------------------------
 
