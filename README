@@ -1409,8 +1409,8 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/main            Contains code that has to do with interaction between the user
-          /participant.interaction  and the infractructure of the environment. Essentially, this
+        /participant.interaction    Contains code that has to do with interaction between the user
+                                    and the infractructure of the environment. Essentially, this
                                     code addresses all user statii and how to handle them.
 
     ----------------------------------------------------------------------------------------------
@@ -1440,37 +1440,226 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-          ./functions/main            Contains code that parses commands issued by users with a
-            /participant.interaction  login status and sends them to the appropriate handler.
-              /address.login.status
+          /address.login.status     Contains code that parses commands issued by users with a
+                                    login status and sends them to the appropriate handler.
+
+          b   No defined symbols.
+
+
+          d   local.data.bad.login.error        ./functions/main/participant.interaction
+                                                  /address.login.status/d
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+              local.data.bad.login.error.l      ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+              local.data.second.login.error     ./functions/main/participant.interaction
+                                                  /address.login.status/d
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+              local.data.second.login.error.l   ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+              socket.data.bad.login.error       ./functions/main/participant.interaction
+                                                  /address.login.status/d
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+              socket.data.bad.login.error.l     ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+              socket.data.login.message         ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/d
+
+              socket.data.login.message.l       ./functions/main/listening.socket.poll/t
+
+              socket.data.second.login.error    ./functions/main/participant.interaction
+                                                  /address.login.status/d
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+              socket.data.second.login.error.l  ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+              socket.data.welcome.message       ./functions/main/participant.interaction
+                                                  /address.login.status/d
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+              socket.data.welcome.message.l     ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+
+          t   address.login.status              ./functions/socket/answer.active.socket/t
+
+              bad.login                         ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+              new.login                         ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+              not.logged.in                     ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+              returning.login                   ./functions/main/participant.interaction
+                                                  /address.login.status/t
 
     ----------------------------------------------------------------------------------------------
 
-          ./functions/main                Contains code that parses commands issues by users with
-            /participant.interaction      a passphrase status and sends them to the appropriate
-              /address.passphrase.status  handler.
+          /address.passphrase.status  Contains code that parses commands issued by users with
+                                      a passphrase status and sends them to the appropriate
+                                      handler.
+
+          b   No defined symbols.
+
+
+          d   socket.data.bad.passphrase.message  ./functions/main/participant.interaction
+                                                    /address.passphrase.status/d
+                                                  ./functions/main/participant.interaction
+                                                    /address.passphrase.status/t
+
+          	  socket.data.bad.passphrase.message.l  ./functions/main/participant.interaction
+          	                                          /address.passphrase.status/d
+
+          	  socket.data.passphrase.message    ./functions/main/participant.interaction
+          	                                      /address.passphrase.status/d
+          	                                    ./functions/main/participant.interaction
+          	                                      /address.passphrase.status/t
+
+          	  socket.data.passphrase.message.l  ./functions/main/participant.interaction
+          	                                      /address.passphrase.status/d
+
+
+          t   address.passphrase.status         ./functions/socket/answer.active.socket/t
+
+              bad.passphrase                    ./functions/main/participant.interaction
+          	                                      /address.passphrase.status/t
+
+              good.passphrase                   ./functions/main/participant.interaction
+          	                                      /address.passphrase.status/t
+
+              passphrase.cmp.loop               ./functions/main/participant.interaction
+          	                                      /address.passphrase.status/t
 
     ----------------------------------------------------------------------------------------------
 
-          ./functions/main                    Contains code that parses commands issued by users
-            /participant.interaction          with a set passphrase status and sends them to the
-              /address.set.passphrase.status  appropriate handler.
+          /address.set.passphrase.status  Contains code that parses commands issued by users
+                                          with a set passphrase status and sends them to the
+                                          appropriate handler.
+
+          b   No defined symbols.
+
+
+          d   No defined symbols.
+
+
+          t   address.set.passphrase.status     ./functions/socket/answer.active.socket/t
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/main      Contains code that builds a socket, binds it to a specified hardware
-          /set.up.listener    port, and tells it to listen for incoming connections. When it's
-                              finished, it displays a message to the admin indicating that we're
-                              online and ready to go. If at any point an error occurs, the
-                              function displays an error message and passes control to the bail
-                              function so we can suspend execution and return control to linux in
-                              the hopes that the admin can figure out what's clogging up the
-                              works.
+        /set.up.listener  Contains code that builds a socket, binds it to a specified hardware
+                          port, and tells it to listen for incoming connections. When it's
+                          finished, it displays a message to the admin indicating that we're
+                          online and ready to go. If at any point an error occurs, the function
+                          displays an error message and passes control to the bail function so we
+                          can suspend execution and return control to linux in the hopes that the
+                          admin can figure out what's clogging up the works.
+
+        b   No defined symbols.
+
+
+        d   local.data.listen.error.message     ./functions/main/set.up.listener/d
+                                                ./functions/socket/socket.errors/t
+
+            local.data.listen.error.message.l   ./functions/socket/socket.errors/t
+
+
+        t   set.up.listener                     ./functions/main/t
+
+            socket.bind                         ./functions/main/set.up.listener/t
+
+            socket.display.success              ./functions/main/set.up.listener/t
+
+            socket.listen                       ./functions/main/set.up.listener/t
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/main      Contains code that performs checks to ensure the environment is
-          /system.check       ready to go live, prior to instantiation.
+        /system.check   Contains code that performs checks to ensure the environment is ready to
+                        go live, prior to instantiation.
+
+        b   connection.area.id.index            ./commands/look/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+
+            connection.descriptor.index         ./commands/area/t
+                                                ./commands/broadcast/t
+                                                ./commands/look/t
+                                                ./commands/shutdown/t
+                                                ./functions/create.character/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/socket/clean.socket/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/socket/recv.from.socket/t
+                                                ./functions/write.bad.command.error/t
+                                                ./functions/write.bad.help.command.error/t
+                                                ./functions/write.welcome/t
+
+            connection.entry.size               ./commands/shutdown/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+
+            connection.external.index           No references.
+
+            connection.filename.index           ./functions/create.character/t
+                                                ./functions/get.character.data/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/socket/clean.socket/t
+
+            connection.number.index             ./functions/main/system.check/t
+                                                ./functions/print.socket.number/t
+                                                ./functions/socket/communications/send.to.player/t
+
+            connection.status.index             
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/clean.socket/t
+
+            connection.table                    ./commands/shutdown/t
+                                                ./functions/main/system.check/b
+                                                ./functions/main/system.check/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
 
     ----------------------------------------------------------------------------------------------
 
