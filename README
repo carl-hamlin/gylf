@@ -1878,6 +1878,9 @@ Relevant data:
             socket.data.accept.socket.descriptor  ./functions/socket/accept.socket/t
                                                   ./functions/socket/bind.socket/t
 
+
+        t   accept.socket                       ./functions/main/listening.socket.poll/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket      Contains code that determines the status of an active socket and
