@@ -1870,6 +1870,14 @@ Relevant data:
 
         b   sys.socket.accept                   ./functions/socket/accept.socket/t
 
+
+        d   socket.data.accept.buffer.pointer   No references.
+
+            socket.data.accept.sockaddr.pointer No references.
+
+            socket.data.accept.socket.descriptor  ./functions/socket/accept.socket/t
+                                                  ./functions/socket/bind.socket/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket      Contains code that determines the status of an active socket and
