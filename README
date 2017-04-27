@@ -1687,6 +1687,21 @@ Relevant data:
 
             socket.numbers.l                    ./functions/main/system.check/t
 
+
+        t   system.check                        ./functions/main/system.check/t
+
+            system.check.populate.connection.numbers.0010 ./functions/main/system.check/t
+
+            system.check.populate.connection.numbers.0100 ./functions/main/system.check/t
+
+            system.check.populate.connection.numbers.1000 ./functions/main/system.check/t
+
+            system.check.populate.connection.numbers.done ./functions/main/system.check/t
+
+            system.check.populate.connection.numbers.loop ./functions/main/system.check/t
+
+            system.check.populate.connection.numbers.over ./functions/main/system.check/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/main      Contains code pertinent to the passage of time in the environment.
