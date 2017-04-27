@@ -1345,6 +1345,11 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   _start                                No references.
+
+          main.loop                             ./functions/main/t
+
     ----------------------------------------------------------------------------------------------
 
         /active.socket.poll   Contains code that runs through the list of potentially active
