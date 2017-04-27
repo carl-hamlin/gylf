@@ -1716,6 +1716,9 @@ Relevant data:
 
         d   No defined symbols.
 
+
+        t   maintain                            ./functions/main/t
+
     ----------------------------------------------------------------------------------------------
 
       /open.descriptor        Contains code that associates a logical descriptor with an existing
