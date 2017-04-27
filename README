@@ -1865,8 +1865,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/socket    Contains code that calls the linux kernel to associate a descriptor
-          /accept.socket      with an incoming Berkeley Socket.
+        /accept.socket        Contains code that calls the linux kernel to associate a descriptor
+                              with an incoming Berkeley Socket.
+
+        b   sys.socket.accept                   ./functions/socket/accept.socket/t
 
     ----------------------------------------------------------------------------------------------
 
