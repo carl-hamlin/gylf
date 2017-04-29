@@ -1345,6 +1345,11 @@ Relevant data:
 
       d   No defined symbols.
 
+
+      t   _start                                No references.
+
+          main.loop                             ./functions/main/t
+
     ----------------------------------------------------------------------------------------------
 
         /active.socket.poll   Contains code that runs through the list of potentially active
@@ -1661,10 +1666,58 @@ Relevant data:
                                                 ./functions/socket/communications/send.to.player/t
                                                 ./functions/socket/communications/send.to.world/t
 
+
+        d   local.data.populate.connection.numbers.over.message ./functions/main/system.check/d
+                                                                ./functions/main/system.check/t
+
+            local.data.populate.connection.numbers.over.message.l ./functions/main/system.check/t
+
+            local.data.populating.connection.table.message  ./functions/main/system.check/d
+                                                            ./functions/main/system.check/t
+
+            local.data.populating.connection.table.message.l  ./functions/main/system.check/t
+
+            local.data.system.check.done        ./functions/main/system.check/d
+                                                ./functions/main/system.check/t
+
+            local.data.system.check.done.l      ./functions/main/system.check/t
+
+            local.data.system.check.message     ./functions/main/system.check/d
+                                                ./functions/main/system.check/t
+
+            local.data.system.check.message.l   ./functions/main/system.check/t
+
+            socket.numbers                      ./functions/main/system.check/d
+                                                ./functions/main/system.check/t
+
+            socket.numbers.l                    ./functions/main/system.check/t
+
+
+        t   system.check                        ./functions/main/system.check/t
+
+            system.check.populate.connection.numbers.0010 ./functions/main/system.check/t
+
+            system.check.populate.connection.numbers.0100 ./functions/main/system.check/t
+
+            system.check.populate.connection.numbers.1000 ./functions/main/system.check/t
+
+            system.check.populate.connection.numbers.done ./functions/main/system.check/t
+
+            system.check.populate.connection.numbers.loop ./functions/main/system.check/t
+
+            system.check.populate.connection.numbers.over ./functions/main/system.check/t
+
     ----------------------------------------------------------------------------------------------
 
-        ./functions/main      Contains code pertinent to the passage of time in the environment.
-          /world.maintenance
+        /world.maintenance    Contains code pertinent to the passage of time in the environment.
+
+        b   No defined symbols.
+
+
+        d   No defined symbols.
+
+
+        t   maintain                            ./functions/main/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -1689,7 +1742,8 @@ Relevant data:
                                                 ./functions/dna.lab/t
                                                 ./functions/get.character.data/t
                                                 ./functions/get.external.data/t
-                                                ./functions/main/participant.interaction/address.set.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -1811,13 +1865,28 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/socket    Contains code that calls the linux kernel to associate a descriptor
-          /accept.socket      with an incoming Berkeley Socket.
+        /accept.socket        Contains code that calls the linux kernel to associate a descriptor
+                              with an incoming Berkeley Socket.
+
+        b   sys.socket.accept                   ./functions/socket/accept.socket/t
+
+
+        d   socket.data.accept.buffer.pointer   No references.
+
+            socket.data.accept.sockaddr.pointer No references.
+
+            socket.data.accept.socket.descriptor  ./functions/socket/accept.socket/t
+                                                  ./functions/socket/bind.socket/t
+
+
+        t   accept.socket                       ./functions/main/listening.socket.poll/t
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/socket      Contains code that determines the status of an active socket and
-          /answer.active.socket routes the data to the appropriate handler.
+        /answer.active.socket Contains code that determines the status of an active socket and
+                              routes the data to the appropriate handler.
+
+        b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
