@@ -1863,6 +1863,44 @@ Relevant data:
                               surrounding the operation of Berkeley Sockets under Linux in X86
                               ASM.
 
+      b   active.socket.descriptor              No references.
+
+          session.descriptor                    No references.
+
+          socket.data.address                   ./functions/socket/create.socket/t
+
+          socket.data.connected.socket.descriptor ./functions/socket/accept.socket/d
+
+          socket.data.flags                     ./functions/socket/create.socket/t
+
+          socket.data.listening.socket.descriptor ./functions/socket/bind.socket/t
+                                                  ./functions/socket/listen.socket/t
+
+          socket.data.protocol.family           ./functions/socket/create.socket/t
+
+          socket.data.queue.l                   ./functions/socket/listen.socket/t
+
+          sys.socket.address                    ./functions/socket/create.socket/t
+                                                ./functions/socket/d
+
+          sys.socket.call                       ./functions/socket/accept.socket/t
+                                                ./functions/socket/bind.socket/t
+                                                ./functions/socket/create.socket/t
+                                                ./functions/socket/listen.socket/t
+                                                ./functions/socket/recv.from.socket/t
+                                                ./functions/socket/send.socket/t
+
+          sys.socket.padding                    ./functions/socket/d
+
+          sys.socket.port.number                ./functions/socket/d
+
+          sys.socket.protocol.family.inet       ./functions/socket/create.socket/t
+                                                ./functions/socket/d
+
+          sys.socket.queue.l                    ./functions/socket/listen.socket/t
+
+          sys.socket.type.stream                ./functions/socket/create.socket/t
+
     ----------------------------------------------------------------------------------------------
 
         /accept.socket        Contains code that calls the linux kernel to associate a descriptor
