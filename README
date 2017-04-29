@@ -1888,6 +1888,12 @@ Relevant data:
 
         b   No defined symbols.
 
+
+        d   local.data.active.socket.message    ./functions/socket/answer.active.socket/d
+                                                ./functions/socket/answer.active.socket/t
+
+            local.data.active.socket.message.l  ./functions/socket/answer.active.socket/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket    Contains code that binds a socket to a specified hardware port.
