@@ -1894,6 +1894,13 @@ Relevant data:
 
             local.data.active.socket.message.l  ./functions/socket/answer.active.socket/t
 
+
+        t   answer.active.socket                ./functions/main/active.socket.poll/t
+
+            not.login.status                    ./functions/socket/answer.active.socket/t
+
+            not.passphrase.status               ./functions/socket/answer.active.socket/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket    Contains code that binds a socket to a specified hardware port.
