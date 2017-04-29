@@ -1816,8 +1816,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/socket      Contains code that determines the status of an active socket and
-          /answer.active.socket routes the data to the appropriate handler.
+        /answer.active.socket Contains code that determines the status of an active socket and
+                              routes the data to the appropriate handler.
+
+        b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
