@@ -1957,11 +1957,13 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/socket    Contains code that removes the data associated with an active socket
-          /clean.socket       from memory, smokes the lock file, and uses the close.descriptor
+        /clean.socket         Contains code that removes the data associated with an active socket
+                              from memory, smokes the lock file, and uses the close.descriptor
                               function to close out the socket. This function does not closeout
                               other files associated with the socket - that responsibility is left
                               to the caller.
+
+        b   sys.unlink                          ./functions/socket/clean.socket/t
 
     ----------------------------------------------------------------------------------------------
 
