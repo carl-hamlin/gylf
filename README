@@ -2059,6 +2059,9 @@ Relevant data:
 
         b   sys.socket.create                   ./functions/socket/create.socket/t
 
+
+        d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket    Contains code that tells a created and bound socket to listen for
