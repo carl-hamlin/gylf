@@ -1941,8 +1941,9 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/socket    Contains code that binds a socket to a specified hardware port.
-          /bind.socket
+        /bind.socket          Contains code that binds a socket to a specified hardware port.
+
+        b   sys.socket.bind                     ./functions/socket/bind.socket/t
 
     ----------------------------------------------------------------------------------------------
 
