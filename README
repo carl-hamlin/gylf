@@ -1985,6 +1985,8 @@ Relevant data:
         ./functions/socket    Contains code pertaining to the behind the scenes mechanisms
           /communications     surrounding communications between users.
 
+        b   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
           ./functions/socket  Contains code that sends a provided message to a specified area.
