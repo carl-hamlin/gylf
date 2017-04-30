@@ -2219,6 +2219,25 @@ Relevant data:
 
         d   No defined symbols.
 
+
+        t   socket.send                         ./commands/area/t
+                                                ./commands/broadcast/t
+                                                ./commands/help/t
+                                                ./commands/look/t
+                                                ./commands/shutdown/t
+                                                ./functions/clear.screen/t
+                                                ./functions/create.character/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction/address.login.status/t
+                                                ./functions/main/participant.interaction/address.passphrase.status/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/write.bad.command.error/t
+                                                ./functions/write.bad.help.command.error/t
+                                                ./functions/write.prompt/t
+
     ----------------------------------------------------------------------------------------------
 
       /time.in.seconds.since.the.epoch  Contains code that returns the time in seconds since the
