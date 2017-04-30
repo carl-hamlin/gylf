@@ -2201,6 +2201,15 @@ Relevant data:
 
             local.data.create.error.message.l   ./functions/socket/socket.errors/t
 
+
+        t   socket.accept.error                 ./functions/main/listening.socket.poll/t
+
+            socket.bind.error                   ./functions/main/set.up.listener/t
+
+            socket.create.error                 ./functions/main/set.up.listener/t
+
+            socket.listen.error                 ./functions/main/set.up.listener/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket    Contains code that sends data out on a connected socket.
