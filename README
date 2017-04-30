@@ -1952,6 +1952,9 @@ Relevant data:
 
             socket.data.bind.socket.descriptor  ./functions/socket/bind.socket/t
 
+
+        t   bind.socket                         ./functions/main/set.up.listener/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket    Contains code that removes the data associated with an active socket
