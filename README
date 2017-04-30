@@ -2185,6 +2185,22 @@ Relevant data:
 
         b   No defined symbols.
 
+
+        d   local.data.accept.error.message     ./functions/socket/socket.errors/d
+                                                ./functions/socket/socket.errors/t
+
+            local.data.accept.error.message.l   ./functions/socket/socket.errors/t
+
+            local.data.bind.error.message       ./functions/socket/socket.errors/d
+                                                ./functions/socket/socket.errors/t
+
+            local.data.bind.error.message.l     ./functions/socket/socket.errors/t
+
+            local.data.create.error.message     ./functions/socket/socket.errors/d
+                                                ./functions/socket/socket.errors/t
+
+            local.data.create.error.message.l   ./functions/socket/socket.errors/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket    Contains code that sends data out on a connected socket.
