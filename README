@@ -2081,8 +2081,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/socket    Contains code that tells a created and bound socket to listen for
-          /listen.socket      incoming connections.
+        /listen.socket        Contains code that tells a created and bound socket to listen for
+                              incoming connections.
+
+        b   sys.socket.listen                   ./functions/socket/listen.socket/t
 
     ----------------------------------------------------------------------------------------------
 
