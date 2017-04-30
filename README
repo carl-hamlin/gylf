@@ -1945,6 +1945,13 @@ Relevant data:
 
         b   sys.socket.bind                     ./functions/socket/bind.socket/t
 
+
+        d   socket.data.bind.l.sockaddr         No references.
+
+            socket.data.bind.pointer.sockaddr   No references.
+
+            socket.data.bind.socket.descriptor  ./functions/socket/bind.socket/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket    Contains code that removes the data associated with an active socket
