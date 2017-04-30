@@ -2165,6 +2165,16 @@ Relevant data:
                                                 ./functions/write.bad.help.command.error/t
                                                 ./functions/write.prompt/t
 
+
+        t   recv.from.socket                    ./functions/main/participant.interaction
+                                                  /address.active.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket    Contains code that sets up error messages to be displayed to the
