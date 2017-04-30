@@ -1990,16 +1990,6 @@ Relevant data:
 
         d   No defined symbols.
 
-
-        t   send.to.area                        ./commands/think/t
-                                                ./functions/create.character/t
-
-            send.to.area.broadcast              ./functions/socket/communications/send.to.area/t
-
-            send.to.area.broadcast.done         ./functions/socket/communications/send.to.area/t
-
-            send.to.area.connection.poll        ./functions/socket/communications/send.to.area/t
-
     ----------------------------------------------------------------------------------------------
 
           /send.to.area       Contains code that sends a provided message to a specified area.
@@ -2013,11 +2003,23 @@ Relevant data:
 
           d   No defined symbols.
 
+
+          t   send.to.area                      ./commands/think/t
+                                                ./functions/create.character/t
+
+              send.to.area.broadcast            ./functions/socket/communications/send.to.area/t
+
+              send.to.area.broadcast.done       ./functions/socket/communications/send.to.area/t
+
+              send.to.area.connection.poll      ./functions/socket/communications/send.to.area/t
+
     ----------------------------------------------------------------------------------------------
 
-          ./functions/socket  Contains code that sends a provided message to a specified player.
-            /communications   Only the specified player will received this message. This code is
-              /send.to.player used to facilitate private communication between players.
+          /send.to.player     Contains code that sends a provided message to a specified player.
+                              Only the specified player will received this message. This code is
+                              used to facilitate private communication between players.
+
+          b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
