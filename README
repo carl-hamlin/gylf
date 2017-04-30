@@ -1965,6 +1965,9 @@ Relevant data:
 
         b   sys.unlink                          ./functions/socket/clean.socket/t
 
+
+        d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket    Contains code pertaining to the behind the scenes mechanisms
