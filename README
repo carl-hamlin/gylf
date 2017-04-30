@@ -2044,6 +2044,9 @@ Relevant data:
 
           b   No defined symbols.
 
+
+          d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket    Contains code that builds a socket for further use.
