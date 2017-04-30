@@ -1901,6 +1901,20 @@ Relevant data:
 
           sys.socket.type.stream                ./functions/socket/create.socket/t
 
+
+      d   socket.data.sockaddr.address          No references.
+
+          socket.data.sockaddr.l                ./functions/socket/bind.socket/d
+                                                ./functions/socket/d
+
+          socket.data.sockaddr.padding          No references.
+
+          socket.data.sockaddr.port.number      No references.
+
+          socket.data.sockaddr.protocol.family  ./functions/socket/accept.socket/d
+                                                ./functions/socket/bind.socket/d
+                                                ./functions/socket/d
+
     ----------------------------------------------------------------------------------------------
 
         /accept.socket        Contains code that calls the linux kernel to associate a descriptor
