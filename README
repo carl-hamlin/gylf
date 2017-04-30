@@ -2062,6 +2062,9 @@ Relevant data:
 
         d   No defined symbols.
 
+
+        t   create.socket                       ./functions/main/set.up.listener/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket    Contains code that tells a created and bound socket to listen for
