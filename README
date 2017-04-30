@@ -2094,8 +2094,10 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/socket    Contains code that receives data from a connected socket and places
-          /recv.from.socket   it in a specified buffer.
+        /recv.from.socket     Contains code that receives data from a connected socket and places
+                              it in a specified buffer.
+
+        b   sys.socket.recv                     ./function/socket/recv.from.socket/t
 
     ----------------------------------------------------------------------------------------------
 
