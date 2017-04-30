@@ -1,4 +1,4 @@
-;=================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
 ;   address.set.passphrase.status
 ;
@@ -7,6 +7,28 @@
 ;   Assumptions:    esi = Pointer to descriptor associated with target socket
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   active.status                 ./functions/main/b
+;
+;   buffer.2                      ./functions/b
+;
+;   connection.descriptor.index   ./functions/main/system.check/b
+;
+;   connection.filename.index     ./functions/main/system.check/b
+;
+;   connection.status.index       ./functions/main/system.check/b
+;
+;   create.character              ./functions/create.character/t
+;
+;   open.descriptor               ./functions/open.descriptor/t
+;
+;   recv.from.socket              ./functions/recv.from.socket/t
+;
+;   write.welcome                 ./functions/write.welcome/t
 ;
 
   section .text

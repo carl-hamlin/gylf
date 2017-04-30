@@ -1,12 +1,30 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   bind.socket
+;   ./functions/socket/bind.socket/t
 ;
 ;   This function binds the socket to a specified hardware port.
 ;
 ;   Assumptions:    eax = Descriptor associated with a created socket.
 ;
 ;   Returns:        eax = Error indicator.
+;
+;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   socket.data.accept.socket.descriptor    ./functions/socket/accept.socket/d
+;
+;   socket.data.bind.socket.descriptor      ./functions/socket/bind.socket/d
+;
+;   socket.data.event.socket.descriptor     ./functions/main/active.socket.poll/d
+;
+;   socket.data.listening.socket.descriptor ./functions/socket/b
+;
+;   sys.socket.bind                         ./functions/socket/bind.socket/b
+;
+;   sys.socket.call                         ./functions/socket/b
+;
+;   sys.system.call                         ./functions/b
 ;
 
     bind.socket: mov dword [socket.data.bind.socket.descriptor], eax      ; Store the bind descriptor.

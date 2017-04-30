@@ -1,10 +1,12 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
 ;   ./functions/main/participant.interaction/address.set.passphrase.status/b
 ;
 ;   This file contains all definitions pertinent to the address.set.passphrase.status function.
 ;
-
-  section .bss
-  
-  %define set.passphrase.status 0003h ; This status indicates that the system has identified you as a new user, and is asking you to enter a passphrase with which to protect your account.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
