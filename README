@@ -2047,6 +2047,12 @@ Relevant data:
 
           d   No defined symbols.
 
+
+          t   send.to.world                     ./commands/broadcast/t
+                                                ./commands/shutdown/t
+
+              send.to.world.loop                ./functions/socket/communications/send.to.world/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket    Contains code that builds a socket for further use.
