@@ -2086,6 +2086,9 @@ Relevant data:
 
         b   sys.socket.listen                   ./functions/socket/listen.socket/t
 
+
+        d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket    Contains code that receives data from a connected socket and places
