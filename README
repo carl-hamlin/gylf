@@ -2099,6 +2099,72 @@ Relevant data:
 
         b   sys.socket.recv                     ./function/socket/recv.from.socket/t
 
+
+        d   socket.data.send.buffer.l           ./commands/area/t
+                                                ./commands/broadcast/t
+                                                ./commands/help/t
+                                                ./commands/look/t
+                                                ./commands/shutdown/t
+                                                ./functions/clear.screen/t
+                                                ./functions/create.character/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/socket/recv.from.socket/t
+                                                ./functions/write.bad.command.error/t
+                                                ./functions/write.bad.help.command.error/t
+                                                ./functions/write.prompt/t
+
+            socket.data.send.buffer.pointer     ./commands/area/t
+                                                ./commands/broadcast/t
+                                                ./commands/help/t
+                                                ./commands/look/t
+                                                ./commands/shutdown/t
+                                                ./functions/clear.screen/t
+                                                ./functions/create.character/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/socket/recv.from.socket/t
+                                                ./functions/write.bad.command.error/t
+                                                ./functions/write.bad.help.command.error/t
+                                                ./functions/write.prompt/t
+
+            socket.data.send.flags              No references.
+
+            socket.data.send.socket.descriptor  ./commands/area/t
+                                                ./commands/broadcast/t
+                                                ./commands/help/t
+                                                ./commands/look/t
+                                                ./commands/shutdown/t
+                                                ./functions/clear.screen/t
+                                                ./functions/create.character/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/socket/recv.from.socket/t
+                                                ./functions/write.bad.command.error/t
+                                                ./functions/write.bad.help.command.error/t
+                                                ./functions/write.prompt/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/socket    Contains code that sets up error messages to be displayed to the
