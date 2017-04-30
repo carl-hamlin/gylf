@@ -2177,11 +2177,13 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/socket    Contains code that sets up error messages to be displayed to the
-          /socket.error       admin in the event that something goes awry while building the
+        /socket.error         Contains code that sets up error messages to be displayed to the
+                              admin in the event that something goes awry while building the
                               listening socket. If any of these are ever executed, we're beyond
                               the point of no return, so each of them passes control to the bail
                               function after displaying their unique message.
+
+        b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
