@@ -2212,8 +2212,9 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/socket    Contains code that sends data out on a connected socket.
-          /socket.send
+        /socket.send          Contains code that sends data out on a connected socket.
+
+        b   sys.socket.send                     ./functions/socket/socket.send/t
 
     ----------------------------------------------------------------------------------------------
 
