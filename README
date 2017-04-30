@@ -2216,6 +2216,9 @@ Relevant data:
 
         b   sys.socket.send                     ./functions/socket/socket.send/t
 
+
+        d   No defined symbols.
+
     ----------------------------------------------------------------------------------------------
 
       /time.in.seconds.since.the.epoch  Contains code that returns the time in seconds since the
