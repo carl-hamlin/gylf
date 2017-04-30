@@ -1992,11 +1992,13 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-          ./functions/socket  Contains code that sends a provided message to a specified area.
-            /communications   Everyone in the specified area will receive the message. This code
-              /send.to.area   is used to facilitate communication between users in a given area of
+          /send.to.area       Contains code that sends a provided message to a specified area.
+                              Everyone in the specified area will receive the message. This code
+                              is used to facilitate communication between users in a given area of
                               the environment, as well as facilitating communications between
                               administrators and a given area.
+
+          b   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
