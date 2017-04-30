@@ -1990,6 +1990,16 @@ Relevant data:
 
         d   No defined symbols.
 
+
+        t   send.to.area                        ./commands/think/t
+                                                ./functions/create.character/t
+
+            send.to.area.broadcast              ./functions/socket/communications/send.to.area/t
+
+            send.to.area.broadcast.done         ./functions/socket/communications/send.to.area/t
+
+            send.to.area.connection.poll        ./functions/socket/communications/send.to.area/t
+
     ----------------------------------------------------------------------------------------------
 
           /send.to.area       Contains code that sends a provided message to a specified area.
