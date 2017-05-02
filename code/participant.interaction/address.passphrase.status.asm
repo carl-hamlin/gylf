@@ -1,6 +1,6 @@
 ;=================================================================================================================================================================================================
 ;
-;   address.passphrase.status
+;   ./functions/main/participant.interaction/address.passphrase.status/t
 ;
 ;   This code performs detailed processing of data received from sockets with the 'passphrase' status. Essentially, it assumes the received data is intended to represent a passphrase, and
 ;   compares the data to the stored passphrase for the user. If they match, then the user's status is set to 'active' and control is passed back to the caller. If they do not match, then the
