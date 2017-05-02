@@ -61,7 +61,8 @@ Relevant data:
                                                 ./functions/create.character/t
                                                 ./functions/d
                                                 ./functions/main/system.check/t
-                                                ./functions/main/participant.interaction/address.active.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.active.status/t
                                                 ./functions/print.socket.number/t
 
           word.l                                ./commands/area/t
@@ -69,7 +70,8 @@ Relevant data:
 
           byte.l                                ./functions/get.character.data/t
                                                 ./functions/get.external.data/t
-                                                ./functions/main/participant.interaction/address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
 
           nibble.l                              No references.
 
