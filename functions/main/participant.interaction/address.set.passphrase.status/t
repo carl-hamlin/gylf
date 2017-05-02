@@ -1,6 +1,6 @@
 ;================================================================================================================================================================================================
 ;
-;   address.set.passphrase.status
+;   ./functions/main/participant.interaction/address.set.passphrase.status/t
 ;
 ;   This function handles data received from a socket in 'setting passphrase' status.
 ;
