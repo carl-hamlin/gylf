@@ -174,28 +174,28 @@ Relevant data:
           local.data.out.of.areas.message.l     ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.area.created.message      ./commands/area/d
+          socket.data.area.created.message      ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.area.created.message.l    ./commands/area/d
+          socket.data.area.created.message.l    ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.out.of.areas.message      ./commands/area/d
+          socket.data.out.of.areas.message      ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.out.of.areas.message.l    ./commands/area/d
+          socket.data.out.of.areas.message.l    ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.bad.area.id.message       ./commands/area/d
+          socket.data.bad.area.id.message       ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.bad.area.id.message.l     ./commands/area/d
+          socket.data.bad.area.id.message.l     ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.command.area.help         ./commands/area/d
+          socket.data.command.area.help         ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.command.area.help.l       ./commands/area/d
+          socket.data.command.area.help.l       ./commands/area/d
                                                 ./commands/area/t
 
           command.area.w                        ./commands/area/d
