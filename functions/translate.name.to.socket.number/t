@@ -67,4 +67,3 @@
                                                   mov   eax, edi                                      ; eax - Pointer to socket name.
                                                   sub   eax, connection.pname.index                   ; eax - Pointer to referenced socket.
                                                   jmp   translate.name.to.socket.number.cleanup       ; Go cleanup after ourselves and return to caller.
-                                                  
