@@ -28,11 +28,7 @@
 ;   translate.name.to.socket.number.search.loop   ./functions/translate.name.to.socket.number/t
 ;
 
-    translate.name.to.socket.number:              push  esi                                           ; Preserve caller's esi.
-                                                  push  edi                                           ; Preserve caller's edi.
-                                                  push  ecx                                           ; Preserve caller's ecx.
-
-                                                  mov   edi, connection.table+connection.pname.index  ; edi - Pointer to socket name.
+    translate.name.to.socket.number:              mov   edi, connection.table+connection.pname.index  ; edi - Pointer to socket name.
                                                   mov   ecx, socket.number                            ; ecx - Number of total sockets for loop counter.
 
     translate.name.to.socket.number.search.loop:  push  ecx                                           ; Preserve loop counter.
@@ -42,7 +38,7 @@
 
                                                   mov   ecx, edx                                      ; ecx - Length of given name.
 
-                                                  repnz cmpsb                                         ; Is this socket occupied by the participant referenced by the given name?
+                                                  repz  cmpsb                                         ; Is this socket occupied by the participant referenced by the given name?
 
                                                   pop   edi                                           ; Restore pointer to socket name.
                                                   pop   esi                                           ; Restore pointer to given name.
@@ -56,11 +52,7 @@
 
                                                   mov   eax, 0FFFFh                                   ; eax - Error indicator.
 
-    translate.name.to.socket.number.cleanup:      pop   ecx                                           ; Restore caller's ecx.
-                                                  pop   edi                                           ; Restore caller's edi.
-                                                  pop   esi                                           ; Restore caller's esi.
-
-                                                  ret                                                 ; Return to caller
+    translate.name.to.socket.number.cleanup:      ret                                                 ; Return to caller
 
     translate.name.to.socket.number.found.socket: pop   ecx                                           ; Restore caller's ecx.
 

@@ -559,8 +559,10 @@ Relevant data:
 
 
       d   socket.data.command.think.help        ./commands/think/d
+                                                ./commands/think/t
 
           socket.data.command.think.help.l      ./commands/think/d
+                                                ./commands/think/t
 
           command.think.w                       ./functions/d
 
@@ -576,6 +578,10 @@ Relevant data:
 
 
       t   command.think                         ./commands/think/d
+
+          command.think.arguments               ./commands/think/t
+
+          command.think.help.msg                ./commands/think/t
 
           command.think.untargetted             ./commands/think/t
 
@@ -1605,6 +1611,7 @@ Relevant data:
                                                 ./commands/broadcast/t
                                                 ./commands/look/t
                                                 ./commands/shutdown/t
+                                                ./commands/think/t
                                                 ./functions/create.character/t
                                                 ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
@@ -2109,6 +2116,7 @@ Relevant data:
                                                 ./commands/help/t
                                                 ./commands/look/t
                                                 ./commands/shutdown/t
+                                                ./commands/think/t
                                                 ./functions/clear.screen/t
                                                 ./functions/create.character/t
                                                 ./functions/main/listening.socket.poll/t
@@ -2130,6 +2138,7 @@ Relevant data:
                                                 ./commands/help/t
                                                 ./commands/look/t
                                                 ./commands/shutdown/t
+                                                ./commands/think/t
                                                 ./functions/clear.screen/t
                                                 ./functions/create.character/t
                                                 ./functions/main/listening.socket.poll/t
@@ -2153,6 +2162,7 @@ Relevant data:
                                                 ./commands/help/t
                                                 ./commands/look/t
                                                 ./commands/shutdown/t
+                                                ./commands/think/t
                                                 ./functions/clear.screen/t
                                                 ./functions/create.character/t
                                                 ./functions/main/listening.socket.poll/t
