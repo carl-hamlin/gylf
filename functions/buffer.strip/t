@@ -1,6 +1,6 @@
 ;================================================================================================================================================================================================
 ;
-;   buffer.strip
+;   ./functions/buffer.strip/t
 ;
 ;   This function strips the following characters from the data buffer and replaces them with zeroes:
 ;

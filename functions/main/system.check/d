@@ -1,8 +1,22 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
 ;   ./functions/main/system.check/d
 ;
 ;   This file contains all data	pertinent to the system.check function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   local.data.populate.connection.numbers.over.message ./functions/main/system.check/d
+;
+;   local.data.populating.connection.table.message      ./functions/main/system.check/d
+;
+;   local.data.system.check.done                        ./functions/main/system.check/d
+;
+;   local.data.system.check.message                     ./functions/main/system.check/d
+;
+;   socket.numbers                                      ./functions/main/system.check/d
 ;
 
     local.data.system.check.message                       db  "Performing system check...", 0Ah, 0Dh                              ; System check message.
