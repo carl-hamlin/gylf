@@ -19,7 +19,11 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   buffer.1                            ./functions/b
+;   argument.02.location                ./functions/aggregate.arguments/b
+;
+;   argument.02.size                    ./functions/aggregate.arguments/b
+;
+;   arguments.num                       ./functions/aggregate.arguments/b
 ;
 ;   command.think.arguments             ./command/think/t
 ;
@@ -46,7 +50,8 @@
 ;   socket.send                         ./functions/socket/socket.send/t
 ;
 
-    command.think:              cmp   eax, command.think.l
+    command.think:              int 3
+    cmp   eax, command.think.l
                                 jnz   command.think.arguments
 
     command.think.help.msg:     mov   ebx, dword [esi+connection.descriptor.index]                            ; ebx - Descriptor associated with current connection.
@@ -57,26 +62,16 @@
 
                                 ret                                                                           ; Return to caller.
 
-    command.think.arguments:    mov   ebx, buffer.1                                                           ; ecx - Pointer to received command string.
-                                add   ebx, command.think.l                                                    ; ecx - Pointer to first argument for command.
+    command.think.arguments:    mov   al, 01h                                                                 ; al - Signifier for only one argument.
 
-                                inc   ebx                                                                     ; ebx - Pointer to first byte of first argument.
-                                cmp   byte [ebx], '"'                                                         ; Is the first byte a quotation mark?
+                                cmp   al, byte [arguments.num]                                                ; Was there only one argument?
                                 jz    command.think.untargetted                                               ; Yes - send the message to the entire area.
 
                                 ; Skill evaluation goes here - failure shunts to command.think.untargetted.
-                                
-                                mov   al, ' '                                                                 ; al - A space, which is what we're looking for to indicate that we've got the length of the provided name.
-                                mov   ecx, 0FFFFh                                                             ; ecx - Counter for name length.
-                                mov   edi, ebx                                                                ; edi - Pointer to given name.
 
-                                repnz scasb                                                                   ; Find the length of the name, and put it in ecx.
-
-                                mov   edx, edi                                                                ; edx - Pointer to given name.
-                                sub   edx, ebx                                                                ; edx - Number of comparisons made by scasb.
-                                dec   edx                                                                     ; edx - Length of given name.
-                                mov   esi, ebx                                                                ; esi - Pointer to given name.
-                                    
+                                sub   edx, edx                                                                ; edx - Prepped for receiving size of provided name.
+                                mov   dl, byte [argument.02.size]                                             ; edx - Size of provided name.
+                                mov   esi, dword [argument.02.location]                                       ; esi - Pointer to provided name.
                                 call  translate.name.to.socket.number                                         ; eax - Error, or pointer to socket associated with the given name.
 
                                 cmp   eax, 0FFFFh
