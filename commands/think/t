@@ -50,8 +50,7 @@
 ;   socket.send                         ./functions/socket/socket.send/t
 ;
 
-    command.think:              int 3
-    cmp   eax, command.think.l
+    command.think:              cmp   eax, command.think.l
                                 jnz   command.think.arguments
 
     command.think.help.msg:     mov   ebx, dword [esi+connection.descriptor.index]                            ; ebx - Descriptor associated with current connection.
