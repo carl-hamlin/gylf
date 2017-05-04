@@ -126,35 +126,31 @@ Relevant data:
                               an administrator command that allows for administrators to create
                               new areas without having to dig them out using the player interface.
 
-      b   available.areas                       ./commands/area/t
+      b   area.description.field.l              ./commands/area/b
 
-          area.name.field.l                     ./commands/area/b
-                                                ./commands/area/t
+          area.description                      ./functions/create.character/t
 
-          area.description.field.l              ./commands/area/b
-                                                ./commands/area/t
+          area.description.l                    ./functions/create.character/t
 
           area.header                           ./commands/area/b
                                                 ./commands/look/t
                                                 ./functions/create.character/t
 
-          area.name.l                           ./commands/area/t
+          area.header.l                         ./commands/look/t
                                                 ./functions/create.character/t
 
-          area.name                             ./commands/area/t
-                                                ./functions/create.character/t
+          area.name.field.l                     ./commands/area/b
+                                                ./commands/area/t
 
-          area.description.l                    ./commands/area/t
-                                                ./functions/create.character/t
+          area.name                             ./functions/create.character/t
 
-          area.description                      ./commands/area/t
-                                                ./functions/create.character/t
+          area.name.l                           ./functions/create.character/t
 
           area.num.contained.items              ./commands/area/t
                                                 ./commands/look/t
 
-          area.header.l                         ./commands/look/t
-                                                ./functions/create.character/t
+          available.areas                       ./commands/area/t
+
 
       d   local.data.area.bad.syntax.message    ./commands/area/d
                                                 ./commands/area/t
@@ -205,7 +201,6 @@ Relevant data:
                                                 ./commands/area/t
 
           command.area.l                        ./commands/area/d
-                                                ./commands/area/t
 
           command.area.p                        ./commands/area/t
 
@@ -216,31 +211,17 @@ Relevant data:
 
       t   command.area                          ./commands/area/d
 
-          command.area.bad                      ./commands/area/t
-
           command.area.admin                    ./commands/area/t
 
-          command.area.find.first.argument      ./commands/area.t
-
-          command.area.start                    ./commands/area/t
-
-          command.area.loop.1                   ./commands/area/t
-
-          command.area.name.l                   ./commands/area/t
-
-          command.area.find.second.argument     ./commands/area/t
-
-          command.area.loop.2                   ./commands/area/t
-
-          command.area.description.l            ./commands/area/t
-
-          command.area.filename.loop            ./commands/area/t
-
-          command.area.next.file                ./commands/area/t
+          command.area.bad                      ./commands/area/t
 
           command.area.filename.finder          ./commands/area/t
 
+          command.area.filename.loop            ./commands/area/t
+
           command.area.filename.out.of.areas    ./commands/area/t
+
+          command.area.next.file                ./commands/area/t
 
           command.area.prep.next                ./commands/area/t
 
@@ -980,14 +961,18 @@ Relevant data:
       /aggregate.arguments    Contains code that collects arguments from the participant command
                               line and segregates them into a predefined structure.
 
-      b   argument.01.location                  ./commands/help/t
+      b   argument.01.location                  ./commands/area/t
+                                                ./commands/help/t
                                                 ./functions/aggregate.arguments/t
 
-          argument.01.size                      ./functions/aggregate.arguments/b
+          argument.01.size                      ./commands/area/t
+                                                ./functions/aggregate.arguments/b
 
-          argument.02.location                  ./commands/think/t
+          argument.02.location                  ./commands/area/t
+                                                ./commands/think/t
 
-          argument.02.size                      ./commands/think/t
+          argument.02.size                      ./commands/area/t
+                                                ./commands/think/t
 
           argument.03.location                  No references.
 
@@ -1023,7 +1008,8 @@ Relevant data:
 
           argument.entry.size                   ./functions/aggregate.arguments/t
 
-          arguments.num                         ./commands/help/t
+          arguments.num                         ./commands/area/t
+                                                ./commands/help/t
                                                 ./commands/think/t
                                                 ./functions/aggregate.arguments/t
 
