@@ -863,8 +863,7 @@ Relevant data:
 
           sys.no.bytes.read                     No references.
 
-          sys.read.write                        ./functions/create.file/t
-                                                ./functions/open.descriptor/t
+          sys.read.write                        ./functions/open.descriptor/t
 
           sys.system.call                       ./functions/bail/t
                                                 ./functions/close.descriptor/t
@@ -1176,7 +1175,9 @@ Relevant data:
       /create.file            Contains code that builds a dataset on the drive, to which it
                               associates a logical descriptor.
 
-      b   No defined symbols.
+      b   sys.create.call                       ./functions/create.file/t
+
+          sys.rw.r.r                            ./functions/create.file/t
 
 
       d   No defined symbols.
