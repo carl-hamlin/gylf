@@ -109,3 +109,46 @@
                                           dd  command.think.w                                                                                           ; Pointer to table entry for command 'think'.
 
     number.of.commands                    equ (($ - command.table) / dword.l)
+
+;================================================================================================================================================================================================
+;
+; Secondary Colors
+;
+;================================================================================================================================================================================================
+
+    character.secondary.color.table      equ  $                                       ; Placeholder for secondary color table entry point.
+                                         db   05h, 'Amber'
+                                         db   06h, 'Auburn'
+                                         db   05h, 'Beige'
+                                         db   05h, 'Black'
+                                         db   05h, 'Brass'
+                                         db   06h, 'Bronze'
+                                         db   05h, 'Brown'
+                                         db   0Ch, 'Burnt Orange'
+                                         db   0Ch, 'Burnt Sienna'
+                                         db   0Bh, 'Burnt Umber'
+                                         db   08h, 'Cardinal'
+                                         db   09h, 'Champagne'
+                                         db   08h, 'Charcoal'
+                                         db   08h, 'Chestnut'
+                                         db   09h, 'Chocolate'
+                                         db   06h, 'Copper'
+                                         db   05h, 'Cream'
+                                         db   04h, 'Grey'
+                                         db   05h, 'Ivory'
+                                         db   05h, 'Khaki'
+                                         db   07h, 'Mustard'
+                                         db   05h, 'Ochre'
+                                         db   0Bh, 'Quartz Grey'
+                                         db   09h, 'Raw Umber'
+                                         db   06h, 'Russet'
+                                         db   04h, 'Rust'
+                                         db   0Bh, 'Sandy Brown'
+                                         db   05h, 'Sepia'
+                                         db   06h, 'Silver'
+                                         db   0Ah, 'Slate Grey'
+                                         db   03h, 'Tan'
+                                         db   05h, 'Tawny'
+                                         db   05h, 'Wheat'
+                                         db   05h, 'White'
+
