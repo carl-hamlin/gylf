@@ -12,8 +12,6 @@
 ;
 ;   buffer.2.l                            ./functions/b
 ;
-;   character.base.color.table            ./functions/b
-;
 ;   character.base.fur.quality.table      ./functions/b
 ;
 ;   character.data                        ./functions/b
