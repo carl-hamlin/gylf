@@ -109,3 +109,15 @@
                                           dd  command.think.w                                                                                           ; Pointer to table entry for command 'think'.
 
     number.of.commands                    equ (($ - command.table) / dword.l)
+
+;================================================================================================================================================================================================
+;
+; Secondary Fur Qualities
+;
+;================================================================================================================================================================================================
+
+    character.secondary.fur.quality.table       equ     $                                       ; Placeholder for secondary fur quality table entry point.
+                                                db      06h, 'glossy'
+                                                db      05h, 'matte'
+                                                db      05h, 'shiny'
+                                                db      05h, 'thick'
