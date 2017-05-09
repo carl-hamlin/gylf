@@ -902,7 +902,7 @@ Relevant data:
 
           area.filename.l                       ./commands/area/t
 
-          character.base.color.table            ./functions/b
+          character.base.color.table            No references.
 
           command.table                         ./commands/help/t
                                                 ./functions/d
