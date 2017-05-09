@@ -881,8 +881,6 @@ Relevant data:
 
           character.mother.dna.l                ./functions/dna.lab/t
 
-          character.base.color.table            ./functions/b
-
           character.base.color.number           ./functions/dna.lab/t
 
           character.secondary.color.table       ./functions/b
@@ -903,6 +901,8 @@ Relevant data:
                                                 ./functions/d
 
           area.filename.l                       ./commands/area/t
+
+          character.base.color.table            ./functions/b
 
           command.table                         ./commands/help/t
                                                 ./functions/d
