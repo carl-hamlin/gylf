@@ -22,8 +22,6 @@
 ;
 ;   character.mother.data                 ./functions/b
 ;
-;   character.secondary.color.table       ./functions/b
-;
 ;   character.secondary.fur.quality.table ./functions/b
 ;
 ;   word.l                                ./b
