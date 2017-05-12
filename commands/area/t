@@ -91,6 +91,7 @@
                                         jc    command.area.admin                                                        ; If so, go create the area. Otherwise...
 
                                         pop   eax                                                                       ; Restore length of received data.
+                                        pop   esi                                                                       ; Restore index to connection entry.
 
                                         call  write.bad.command.error                                                   ; Tell the user no.
 
