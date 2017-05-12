@@ -91,22 +91,24 @@
   						                            db	"later.", 0Ah, 0Dh
 	  socket.data.session.open.error.l	    equ	$-socket.data.session.open.error											                                                    ; Length of session open error message.
 
-	  socket.data.out.of.area.ids.message	  db	"System error: Out of area IDs. Disconnecting...", 0Ah, 0Dh								                                ; Message indicating the server has run out of area ids.
-	  socket.data.out.of.area.ids.message.l equ	$-socket.data.out.of.area.ids.message											                                                ; Length of message.
+	  socket.data.out.of.area.ids.message	  db	"System error: Out of area IDs. Disconnecting...", 0Ah, 0Dh								                                ; Message indicating the server has run
+	                                                                                                                                                      ; out of area ids.
+	  socket.data.out.of.area.ids.message.l	equ	$-socket.data.out.of.area.ids.message											                                                ; Length of message.
 
-    command.table                         equ $                                                                                                         ; Placeholder for beginning of command table.
+    command.table                         equ $                                                                                                         ; Placeholder for beginning of command
+                                                                                                                                                        ; table.
 
-                                          dd  command.ai.w                                                                                              ; Pointer to table entry for command 'ai'.
-                                          dd  command.area.w                                                                                            ; Pointer to table entry for command 'area'.
-                                          dd  command.broadcast.w                                                                                       ; Pointer to table entry for command 'broadcast'.
-                                          dd  command.dig.w                                                                                             ; Pointer to table entry for command 'dig'.
-                                          dd  command.egg.w                                                                                             ; Pointer to table entry for command 'egg'.
-                                          dd  command.gylf.w                                                                                            ; Pointer to table entry for command 'gylf'.
-                                          dd  command.help.w                                                                                            ; Pointer to table entry for command 'help'.
-                                          dd  command.logout.w                                                                                          ; Pointer to table entry for command 'logout'.
-                                          dd  command.look.w                                                                                            ; Pointer to table entry for command 'look'.
-                                          dd  command.shutdown.w                                                                                        ; Pointer to table entry for command 'shutdown'.
-                                          dd  command.think.w                                                                                           ; Pointer to table entry for command 'think'.
+                                          dd  command.ai.w                                                                                              ; Pointer to table entry for 'ai'.
+                                          dd  command.area.w                                                                                            ; Pointer to table entry for 'area'.
+                                          dd  command.broadcast.w                                                                                       ; Pointer to table entry for 'broadcast'.
+                                          dd  command.dig.w                                                                                             ; Pointer to table entry for 'dig'.
+                                          dd  command.egg.w                                                                                             ; Pointer to table entry for 'egg'.
+                                          dd  command.gylf.w                                                                                            ; Pointer to table entry for 'gylf'.
+                                          dd  command.help.w                                                                                            ; Pointer to table entry for 'help'.
+                                          dd  command.logout.w                                                                                          ; Pointer to table entry for 'logout'.
+                                          dd  command.look.w                                                                                            ; Pointer to table entry for 'look'.
+                                          dd  command.shutdown.w                                                                                        ; Pointer to table entry for 'shutdown'.
+                                          dd  command.think.w                                                                                           ; Pointer to table entry for 'think'.
 
     number.of.commands                    equ (($ - command.table) / dword.l)
 
@@ -193,4 +195,16 @@
                                           db  05h, 'Tawny'
                                           db  05h, 'Wheat'
                                           db  05h, 'White'
+
+;================================================================================================================================================================================================
+;
+; Base Fur Qualities
+;
+;================================================================================================================================================================================================
+
+    character.base.fur.quality.table      equ $                                       ; Placeholder for base fur quality table entry point.
+                                          db  06h, 'glossy'
+                                          db  05h, 'matte'
+                                          db  05h, 'shiny'
+                                          db  05h, 'thick'
 

@@ -12,8 +12,6 @@
 ;
 ;   buffer.2.l                            ./functions/b
 ;
-;   character.base.fur.quality.table      ./functions/b
-;
 ;   character.data                        ./functions/b
 ;
 ;   character.father.data                 ./functions/b
@@ -40,7 +38,8 @@
 ;
 
     %define     sys.system.call                       080h                                      ; The big Kahuna. 080h is the call we use to access kernel functions.
-    %define     sys.read.write                        002h                                      ; 002h is the parameter passed to the open function when we want to be able to read from and write to the resulting descriptor.
+    %define     sys.read.write                        002h                                      ; 002h is the parameter passed to the open function when we want to be able to read from and
+                                                                                                ; write to the resulting descriptor.
 
     %define     sys.lseek.call                        013h                                      ; 013h is the modifier for 080h that tells the kernel we'd like to move the file pointer.
 
@@ -76,13 +75,16 @@
  
     %define     number.of.parents                     0002h                                     ; Number of parents required to contribute to the fertilization of an egg.
     %define     child.attribute.computation.factor    000Ah                                     ; Arbitrary factor for the computation of certain attributes during egg conversion.
-    %define     new.char.sig                          0AFFh                                     ; Indicator that the file read by address.login.status is in fact an egg, rather than an established character.
+    %define     new.char.sig                          0AFFh                                     ; Indicator that the file read by address.login.status is in fact an egg, rather than an
+                                                                                                ; established character.
 
     %define     admin.character                       00000001b                                 ; Mask for administrative byte indicating character has admin privileges.
     
     %define     character.base.color.number           35d                                       ; Number of current character base colors.
 
     %define     character.secondary.color.number      35d                                       ; Number of current character base colors.
+
+    %define     character.base.fur.quality.number     04d                                       ; Number of base fur qualities in table.
 
 ;================================================================================================================================================================================================
 ;
@@ -231,15 +233,6 @@
     character.mother.agility                    resb    0001h                                   ; Byte indicator for character agility.
 
     character.mother.dna.l                      equ     $-character.mother.data                 ; Length of DNA information
-
-;================================================================================================================================================================================================
-;
-; Base Fur Qualities
-;
-;================================================================================================================================================================================================
-
-    character.base.fur.quality.table            equ     $                                       ; Placeholder for base fur quality table entry point.
-    character.base.fur.quality.number           equ     $-character.base.fur.quality.table      ; Number of base fur qualities in table.
 
 ;================================================================================================================================================================================================
 ;
