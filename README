@@ -129,11 +129,7 @@ Relevant data:
       b   area.description                      ./commands/area/t
                                                 ./functions/create.character/t
 
-          area.description.field.l              ./commands/area/b
-                                                ./commands/area/t
-
-          area.description.l                    ./commands/area/t
-                                                ./functions/create.character/t
+          area.description.l                    ./functions/create.character/t
 
           area.header                           ./commands/area/b
                                                 ./commands/look/t
@@ -142,14 +138,11 @@ Relevant data:
           area.header.l                         ./commands/look/t
                                                 ./functions/create.character/t
 
-          area.name                             ./commands/area/t
-                                                ./functions/create.character/t
+          area.name                             ./functions/create.character/t
 
           area.name.field.l                     ./commands/area/b
-                                                ./commands/area/t
 
-          area.name.l                           ./commands/area/t
-                                                ./functions/create.character/t
+          area.name.l                           ./functions/create.character/t
 
           area.num.contained.items              ./commands/area/t
                                                 ./commands/look/t
@@ -162,7 +155,6 @@ Relevant data:
           command.area.h.l                      No references.
 
           command.area.l                        ./commands/area/d
-                                                ./commands/area/t
 
           command.area.p                        ./commands/area/t
 
@@ -171,7 +163,6 @@ Relevant data:
 
           command.area.w                        ./commands/area/d
                                                 ./functions/d
-
           local.data.area.bad.syntax.message    ./commands/area/d
                                                 ./commands/area/t
 
@@ -221,29 +212,13 @@ Relevant data:
 
           command.area.bad                      ./commands/area/t
 
-          command.area.description.l            ./commands/area/t
-
           command.area.filename.finder          ./commands/area/t
 
-          command.area.filename.loop            ./commands/area/t
-
           command.area.filename.out.of.areas    ./commands/area/t
-
-          command.area.find.first.argument      ./commands/area.t
-
-          command.area.find.second.argument     ./commands/area/t
-
-          command.area.loop.1                   ./commands/area/t
-
-          command.area.loop.2                   ./commands/area/t
-
-          command.area.name.l                   ./commands/area/t
 
           command.area.next.file                ./commands/area/t
 
           command.area.prep.next                ./commands/area/t
-
-          command.area.start                    ./commands/area/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -559,7 +534,17 @@ Relevant data:
       b   No defined symbols.
 
 
+<<<<<<< HEAD
       d   command.think.h                       No references.
+=======
+      d   socket.data.command.think.help        ./commands/think/d
+                                                ./commands/think/t
+
+          socket.data.command.think.help.l      ./commands/think/d
+                                                ./commands/think/t
+
+          command.think.w                       ./functions/d
+>>>>>>> issue.314
 
           command.think.h.l                     No references.
 
@@ -578,6 +563,10 @@ Relevant data:
 
       t   command.think                         ./commands/think/d
 
+          command.think.arguments               ./commands/think/t
+
+          command.think.help.msg                ./commands/think/t
+
           command.think.untargetted             ./commands/think/t
 
     ==============================================================================================
@@ -586,8 +575,12 @@ Relevant data:
                               contribute to the overall functioning of the codebase. Things like
                               writing to files, reading user input, etc... are all kept here.
 
+<<<<<<< HEAD
       b   
           abdomen.worn.item.id                  No references.
+=======
+      b   abdomen.worn.item.id                  No references.
+>>>>>>> issue.314
 
           admin.character                       No references.
 
@@ -597,7 +590,6 @@ Relevant data:
 
           buffer.1                              ./commands/broadcast/t
                                                 ./commands/look/t
-                                                ./commands/think/t
                                                 ./functions/check.login/t
                                                 ./functions/create.lock.file/t
                                                 ./functions/create.character/t
@@ -633,10 +625,20 @@ Relevant data:
 
           character.base.color                  ./functions/dna.lab/t
 
+<<<<<<< HEAD
+=======
+          character.base.color.table            ./functions/b
+
+>>>>>>> issue.314
           character.base.color.number           ./functions/dna.lab/t
 
           character.base.fur.quality            ./functions/dna.lab/t
 
+<<<<<<< HEAD
+=======
+          character.base.fur.quality.table      ./functions/b
+
+>>>>>>> issue.314
           character.base.fur.quality.number     ./functions/dna.lab/t
 
           character.brain.wound.level           No references.
@@ -807,6 +809,7 @@ Relevant data:
 
           character.secondary.color             ./functions/dna.lab/t
 
+<<<<<<< HEAD
           character.secondary.color.number      ./functions/dna.lab/t
 
           character.secondary.fur.quality       ./functions/dna.lab/t
@@ -867,12 +870,82 @@ Relevant data:
 
           sys.lseek.call                        No references.
 
+=======
+          character.secondary.color.table       ./functions/b
+
+          character.secondary.color.number      ./functions/dna.lab/t
+
+          character.secondary.fur.quality       ./functions/dna.lab/t
+
+          character.secondary.fur.quality.table ./functions/b
+
+          character.secondary.fur.quality.number  ./functions/dna.lab/t
+
+          character.small.intestine.wound.level No references.
+
+          character.stomach.wound.level         No references.
+
+          character.strength                    ./functions/dna.lab/t
+
+          character.testicle.wound.level        No references.
+
+          chest.worn.item.id                    No references.
+
+          child.attribute.computation.factor    ./functions/dna.lab/t
+
+          external.data.buffer                  ./functions/clear.screen/t
+                                                ./functions/get.external.data/t
+
+          head.worn.item.id                     No references.
+
+          id.buffer                             No references.
+
+          id.size                               ./functions/create.character/t
+
+          left.ear.worn.item.id                 No references.
+
+          left.hand.inventory.id                No references.
+
+          left.thigh.worn.item.id               No references.
+
+          neck.worn.item.id                     No references.
+
+          new.char.sig                          No references.
+
+          new.char.sig.buffer                   No references.
+
+          new.char.sig.l                        ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+          number.of.parents                     ./functions/dna.lab/t
+
+          right.ear.worn.item.id                No references.
+
+          right.hand.inventory.id               No references.
+
+          right.thigh.worn.item.id              No references.
+
+          socket.filename.entry.l               ./functions/b
+                                                ./functions/main/system.check.b
+                                                ./functions/socket/clean.socket/t
+
+          sockets.left                          ./functions/main/active.socket.poll/t
+
+          sys.lseek.call                        No references.
+
+          sys.lseek.current.position            No references.
+
+>>>>>>> issue.314
           sys.lseek.eof                         No references.
 
           sys.no.bytes.read                     No references.
 
+<<<<<<< HEAD
           sys.read.write                        ./functions/create.file/t
                                                 ./functions/open.descriptor/t
+=======
+          sys.read.write                        ./functions/open.descriptor/t
+>>>>>>> issue.314
 
           sys.system.call                       ./functions/bail/t
                                                 ./functions/close.descriptor/t
@@ -977,15 +1050,27 @@ Relevant data:
       /aggregate.arguments    Contains code that collects arguments from the participant command
                               line and segregates them into a predefined structure.
 
+<<<<<<< HEAD
       b   
           argument.01.location                  ./commands/help/t
+=======
+      b   argument.01.location                  ./commands/area/t
+                                                ./commands/help/t
+>>>>>>> issue.314
                                                 ./functions/aggregate.arguments/t
 
-          argument.01.size                      ./functions/aggregate.arguments/b
+          argument.01.size                      ./commands/area/t
+                                                ./functions/aggregate.arguments/b
 
+<<<<<<< HEAD
           argument.02.location                  No references.
+=======
+          argument.02.location                  ./commands/area/t
+                                                ./commands/think/t
+>>>>>>> issue.314
 
-          argument.02.size                      No references.
+          argument.02.size                      ./commands/area/t
+                                                ./commands/think/t
 
           argument.03.location                  No references.
 
@@ -999,9 +1084,14 @@ Relevant data:
 
           argument.05.size                      No references.
 
+<<<<<<< HEAD
           argument.06.location                  No references.
 
+=======
+>>>>>>> issue.314
           argument.06.size                      No references.
+
+          argument.07.location                  No references.
 
           argument.07.location                  No references.
 
@@ -1021,7 +1111,13 @@ Relevant data:
 
           argument.entry.size                   ./functions/aggregate.arguments/t
 
+<<<<<<< HEAD
           arguments.num                         ./commands/help/t
+=======
+          arguments.num                         ./commands/area/t
+                                                ./commands/help/t
+                                                ./commands/think/t
+>>>>>>> issue.314
                                                 ./functions/aggregate.arguments/t
 
           arguments.packet                      ./functions/aggregate.arguments/b
@@ -1187,7 +1283,9 @@ Relevant data:
       /create.file            Contains code that builds a dataset on the drive, to which it
                               associates a logical descriptor.
 
-      b   No defined symbols.
+      b   sys.create.call                       ./functions/create.file/t
+
+          sys.rw.r.r                            ./functions/create.file/t
 
 
       d   No defined symbols.
@@ -1608,6 +1706,7 @@ Relevant data:
                                                 ./commands/broadcast/t
                                                 ./commands/look/t
                                                 ./commands/shutdown/t
+                                                ./commands/think/t
                                                 ./functions/create.character/t
                                                 ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
@@ -2112,6 +2211,7 @@ Relevant data:
                                                 ./commands/help/t
                                                 ./commands/look/t
                                                 ./commands/shutdown/t
+                                                ./commands/think/t
                                                 ./functions/clear.screen/t
                                                 ./functions/create.character/t
                                                 ./functions/main/listening.socket.poll/t
@@ -2133,6 +2233,7 @@ Relevant data:
                                                 ./commands/help/t
                                                 ./commands/look/t
                                                 ./commands/shutdown/t
+                                                ./commands/think/t
                                                 ./functions/clear.screen/t
                                                 ./functions/create.character/t
                                                 ./functions/main/listening.socket.poll/t
@@ -2156,6 +2257,7 @@ Relevant data:
                                                 ./commands/help/t
                                                 ./commands/look/t
                                                 ./commands/shutdown/t
+                                                ./commands/think/t
                                                 ./functions/clear.screen/t
                                                 ./functions/create.character/t
                                                 ./functions/main/listening.socket.poll/t
@@ -2262,6 +2364,25 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
+      /translate.name.to.socket.number  Contains code which allows for a given participant name
+                                        to be translated to a socket ID for use internally.
+
+      b   No defined symbols.
+
+
+      d   No defined symbols.
+
+
+      t   translate.name.to.socket.number       No references.
+
+          translate.name.to.socket.number.search.loop ./functions/translate.name.to.socket.number/t
+
+          translate.name.to.socket.number.cleanup     ./functions/translate.name.to.socket.number/t
+
+          translate.name.to.socket.number.found.socket  ./functions/translate.name.to.socket.number/t
+
+    ----------------------------------------------------------------------------------------------
+
       /write.bad.command.error    Contains code that lets the user know whan they've attempted to
                                   send a string to the server that doesn't correspond to a
                                   recognized command.
@@ -2358,4 +2479,3 @@ Relevant data:
                                                   /address.set.passphrase.status/t
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
-
