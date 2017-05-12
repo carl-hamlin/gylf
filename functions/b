@@ -18,8 +18,6 @@
 ;
 ;   character.mother.data                 ./functions/b
 ;
-;   character.secondary.fur.quality.table ./functions/b
-;
 ;   word.l                                ./b
 ;
 
@@ -56,35 +54,35 @@
 ;   Buffer Data
 ;
 
-    %define     buffer.1.l                            010103h                                   ; Length of first buffer.
-    %define     buffer.2.l                            0064h                                     ; Length of second buffer.
+    %define     buffer.1.l                              010103h                                 ; Length of first buffer.
+    %define     buffer.2.l                              0064h                                   ; Length of second buffer.
 
-    buffer.1                                    resb  buffer.1.l                                ; Buffer for incoming and outgoing data.
-    buffer.2                                    resb  buffer.2.l                                ; Buffer for incoming and outgoing data.
+    buffer.1                                      resb  buffer.1.l                              ; Buffer for incoming and outgoing data.
+    buffer.2                                      resb  buffer.2.l                              ; Buffer for incoming and outgoing data.
 
-    id.buffer                                   resd  0001h                                     ; Buffer for id data.
+    id.buffer                                     resd  0001h                                   ; Buffer for id data.
 
-    new.char.sig.buffer                         resw  0001h                                     ; Buffer for new character signature.
+    new.char.sig.buffer                           resw  0001h                                   ; Buffer for new character signature.
 
-    external.data.buffer                        resb  00FFh                                     ; Buffer for external data.
+    external.data.buffer                          resb  00FFh                                   ; Buffer for external data.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;  Character Data
 ;
  
-    %define     number.of.parents                     0002h                                     ; Number of parents required to contribute to the fertilization of an egg.
-    %define     child.attribute.computation.factor    000Ah                                     ; Arbitrary factor for the computation of certain attributes during egg conversion.
-    %define     new.char.sig                          0AFFh                                     ; Indicator that the file read by address.login.status is in fact an egg, rather than an
+    %define     number.of.parents                       0002h                                   ; Number of parents required to contribute to the fertilization of an egg.
+    %define     child.attribute.computation.factor      000Ah                                   ; Arbitrary factor for the computation of certain attributes during egg conversion.
+    %define     new.char.sig                            0AFFh                                   ; Indicator that the file read by address.login.status is in fact an egg, rather than an
                                                                                                 ; established character.
 
-    %define     admin.character                       00000001b                                 ; Mask for administrative byte indicating character has admin privileges.
+    %define     admin.character                         00000001b                               ; Mask for administrative byte indicating character has admin privileges.
     
-    %define     character.base.color.number           35d                                       ; Number of current character base colors.
+    %define     character.base.color.number             35d                                     ; Number of current character base colors.
+    %define     character.secondary.color.number        35d                                     ; Number of current character base colors.
 
-    %define     character.secondary.color.number      35d                                       ; Number of current character base colors.
-
-    %define     character.base.fur.quality.number     04d                                       ; Number of base fur qualities in table.
+    %define     character.base.fur.quality.number       04d                                     ; Number of base fur qualities in table.
+    %define     character.secondary.fur.quality.number  04d                                     ; Number of secondary fur qualities in table.
 
 ;================================================================================================================================================================================================
 ;
@@ -234,11 +232,3 @@
 
     character.mother.dna.l                      equ     $-character.mother.data                 ; Length of DNA information
 
-;================================================================================================================================================================================================
-;
-; Secondary Fur Qualities
-;
-;================================================================================================================================================================================================
-
-    character.secondary.fur.quality.table       equ     $                                       ; Placeholder for secondary fur quality table entry point.
-    character.secondary.fur.quality.number      equ     $-character.secondary.fur.quality.table ; Number of secondary fur qualities in table.

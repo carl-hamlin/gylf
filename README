@@ -813,8 +813,6 @@ Relevant data:
 
           character.secondary.fur.quality.number  ./functions/dna.lab/t
 
-          character.secondary.fur.quality.table ./functions/b
-
           character.small.intestine.wound.level No references.
 
           character.stomach.wound.level         No references.
@@ -905,6 +903,8 @@ Relevant data:
           character.base.fur.quality.table      No references.
 
           character.secondary.color.table       No references.
+
+          character.secondary.fur.quality.table No references.
 
           command.table                         ./commands/help/t
                                                 ./functions/d
