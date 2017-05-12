@@ -13,8 +13,84 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   write.bad.command.error ./functions/write.bad.command.error/t
+;   arguments.num                         ./functions/aggregate.arguments/b
+;
+;   check.admin                           ./functions/check.admin/t
+;
+;   command.gylf.admin                    ./functions/gylf/t
+;
+;   command.gylf.dna.mode                 ./functions/gylf/t
+;
+;   command.gylf.nsp.mode                 ./functions/gylf/t
+;
+;   connection.decsriptor.index           ./functions/main/system.check/b
+;
+;   local.data.gylf.bad.syntax.message    ./functions/gylf/d
+;
+;   local.data.gylf.bad.syntax.message.l  ./functions/gylf/d
+;
+;   socket.data.command.gylf.help         ./commands/gylf/d
+;
+;   socket.data.command.gylf.help.l       ./commands/gylf/d
+;
+;   socket.data.send.buffer.l             ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.buffer.pointer       ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.socket.descriptor    ./functions/socket/recv.from.socket/d
+;
+;   write.bad.command.error               ./functions/write.bad.command.error/t
+;
+;   write.descriptor                      ./functions/write.descriptor/t
 ;
 
-    command.gylf: call  write.bad.command.error ; Let the user know that they've entered a bad command and suggest HELP.
-                  ret                           ; Return to caller.
+    command.gylf:           push  esi                                                                     ; Preserve index to connection entry.
+                            push  eax                                                                     ; Preserve length of received data.
+
+                            call  check.admin                                                             ; Is the user an admin?
+                            jc    command.gylf.admin                                                      ; Yes. Go check their syntax.
+
+                            pop   eax                                                                     ; Restore length of received data.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.gylf.bad:       pop   esi                                                                     ; Restore index to connection entry.
+
+                            call  write.bad.command.error                                                 ; Give non-admin users a generic bad command message.
+                            ret                                                                           ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.gylf.admin:     pop   eax                                                                     ; Restore length of received data.
+
+                            mov   eax, 03h                                                                ; eax - Prepped to indicate 3 arguments.
+
+                            cmp   eax, arguments.num                                                      ; Are we operating in DNA mode?
+                            jz    command.gylf.dna.mode                                                   ; Yes. Go take care of that.
+
+                            dec   eax                                                                     ; eax - Prepped to indicate two arguments.
+
+                            cmp   eax, arguments.num                                                      ; Are we operating in named secondary parent mode?
+                            jz    command.gylf.nsp.mode                                                   ; Yes. Go take care of that.
+
+                            pop   esi                                                                     ; Restore index to connection entry.
+
+                            mov   ecx, local.data.gylf.bad.syntax.message                                 ; Pointer to local message indicating that an admin bounced on syntax.
+                            mov   edx, local.data.gylf.bad.syntax.message.l                               ; Length of message.
+                            call  write.descriptor                                                        ; Let the server admin know there's someone trying to use the gylf command that doesn't know how.
+
+                            mov   ebx, dword [esi+connection.descriptor.index]                            ; ebx - Descriptor associated with current connection.
+                            mov   dword [socket.data.send.socket.descriptor], ebx                         ; Store socket descriptor for send function.
+                            mov   dword [socket.data.send.buffer.pointer], socket.data.command.gylf.help  ; Point send function to help message for command.
+                            mov   dword [socket.data.send.buffer.l], socket.data.command.gylf.help.l      ; Store length of message for send function.
+                            call  socket.send                                                             ; Let the user know that they need to brush up on syntax.
+
+                            ret                                                                           ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.gylf.dna.mode:  ret                                                                           ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.gylf.nsp.mode:  ret                                                                           ; Return to caller.
