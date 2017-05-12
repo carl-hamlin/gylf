@@ -288,9 +288,11 @@ Relevant data:
                               having to go through the normal channels of fertilization through
                               mating.
 
-      b   egg.area.id                           ./functions/create.character/t
+      b   egg.area.id                           ./commands/gylf/t
+                                                ./functions/create.character/t
 
           egg.data                              ./commands/egg/b
+                                                ./commands/gylf/t
                                                 ./functions/create.character/t
 
           egg.data.l                            No references.
@@ -1178,6 +1180,8 @@ Relevant data:
           create.character                      ./functions/main/participant.interaction
                                                   /address.set.passphrase.status/t
 
+          create.character.gylf.command         No references.
+
     ----------------------------------------------------------------------------------------------
 
       /create.file            Contains code that builds a dataset on the drive, to which it
@@ -1598,7 +1602,8 @@ Relevant data:
         /system.check   Contains code that performs checks to ensure the environment is ready to
                         go live, prior to instantiation.
 
-        b   connection.area.id.index            ./commands/look/t
+        b   connection.area.id.index            ./commands/gylf/t
+                                                ./commands/look/t
                                                 ./functions/socket/communications/send.to.area/t
                                                 ./functions/socket/communications/send.to.player/t
 
@@ -1650,8 +1655,11 @@ Relevant data:
                                                 ./functions/print.socket.number/t
                                                 ./functions/socket/communications/send.to.player/t
 
-            connection.status.index             
-                                                ./functions/main/active.socket.poll/t
+            connection.pname.index              ./functions/translate.name.to.socket.number/t
+
+            connection.pname.index.l            No references.
+
+            connection.status.index             ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t

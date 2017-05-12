@@ -23,7 +23,13 @@
 ;
 ;   command.gylf.nsp.mode                 ./functions/gylf/t
 ;
-;   connection.decsriptor.index           ./functions/main/system.check/b
+;   connection.area.id.index              ./functions/main/system/check/b
+;
+;   connection.descriptor.index           ./functions/main/system.check/b
+;
+;   egg.area.id                           ./commands/egg/b
+;
+;   egg.data                              ./commands/egg/b
 ;
 ;   local.data.gylf.bad.syntax.message    ./functions/gylf/d
 ;
@@ -89,7 +95,13 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.gylf.dna.mode:  ret                                                                           ; Return to caller.
+    command.gylf.dna.mode:  mov   ebx, egg.data                                                           ; ebx - Index into egg data.
+                            mov   eax, dword [esi+connection.area.id.index]                               ; eax - Pointer to area in which the command is being performed.
+                            mov   dword [ebx+egg.area.id], eax                                            ; Store area id in egg data.
+                            
+                            ; FIX FUCKING CONNECTION DATA - WE NEED A LENGTH FOR FILENAMES
+
+                            ret                                                                           ; Return to caller.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

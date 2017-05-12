@@ -67,6 +67,8 @@
 ;
 ;   connection.filename.index             ./functions/main/system.check/b
 ;
+;   create.character.gylf.command         No references.
+;
 ;   create.file                           ./functions/create.file/t
 ;
 ;   dna.lab                               ./functions/dna.lab/t
@@ -140,7 +142,7 @@
                 
                                         call  close.descriptor                                                             ; Close the egg file.
 
-                                        push  esi                                                                          ; Preserve index to socket entry.
+    create.character.gylf.command:      push  esi                                                                          ; Preserve index to socket entry.
 
                                         sub   ecx, ecx                                                                     ; ecx - Prepared for loading.
                                         mov   cl, byte [egg.mother.l]                                                      ; ecx - length of mother's name.
