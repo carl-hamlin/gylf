@@ -81,15 +81,20 @@
 ;
 ;   file.indicator                        ./functions.write.descriptor/d
 ;
+;   write.bad.command.error               ./functions/write.bad.command.error/t
+;
 
-    command.area:                       push esi                                                                        ; Preserve index to connection entry.
-                                        push eax                                                                        ; Preserve length of received data.
+    command.area:                       push  esi                                                                       ; Preserve index to connection entry.
+                                        push  eax                                                                       ; Preserve length of received data.
 
-                                        call check.admin                                                                ; See if the calling socket is controlled by an admin.
-                                        jc   command.area.admin                                                         ; If so, go create the area. Otherwise...
+                                        call  check.admin                                                               ; See if the calling socket is controlled by an admin.
+                                        jc    command.area.admin                                                        ; If so, go create the area. Otherwise...
 
-                                        pop  eax                                                                        ; Restore length of received data.
+                                        pop   eax                                                                       ; Restore length of received data.
 
+                                        call  write.bad.command.error                                                   ; Tell the user no.
+
+                                        ret                                                                             ; Return to caller.
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     command.area.bad:                   pop  esi                                                                        ; Restore index to connection entry.

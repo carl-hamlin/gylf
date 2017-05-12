@@ -2270,6 +2270,7 @@ Relevant data:
 
 
       t   write.bad.command.error               ./commands/ai/t
+                                                ./commands/area/t
                                                 ./commands/dig/t
                                                 ./commands/egg/t
                                                 ./commands/gylf/t
