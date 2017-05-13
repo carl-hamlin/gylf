@@ -6,7 +6,8 @@
 ;
 ;   Assumptions:  Populated socket.data.accept.socket.descriptor.
 ;
-;   Returns:      None, although the passed socket will have been accepted and will be ready to be communicated upon.
+;   Returns:      eax - Descriptor associated with the nex connection.
+;                 eax - Error as a signed value.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
