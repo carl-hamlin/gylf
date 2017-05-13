@@ -1871,16 +1871,10 @@ Relevant data:
 
           session.descriptor                    No references.
 
-          socket.data.address                   ./functions/socket/create.socket/t
-
           socket.data.connected.socket.descriptor ./functions/socket/accept.socket/d
-
-          socket.data.flags                     ./functions/socket/create.socket/t
 
           socket.data.listening.socket.descriptor ./functions/socket/bind.socket/t
                                                   ./functions/socket/listen.socket/t
-
-          socket.data.protocol.family           ./functions/socket/create.socket/t
 
           socket.data.queue.l                   ./functions/socket/listen.socket/t
 
