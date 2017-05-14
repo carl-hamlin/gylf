@@ -1716,7 +1716,8 @@ Relevant data:
       d   break.pointer                         ./functions/memory.switch/t
 
 
-      t   memory.switch                         ./functions/socket/recv.from.socket/t
+      t   memory.switch                         ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/recv.from.socket/t
                                                 ./functions/socket/send.socket/t
 
           memory.switch.initialize              ./functions/memory.switch/t
