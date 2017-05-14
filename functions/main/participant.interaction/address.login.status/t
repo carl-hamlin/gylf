@@ -23,8 +23,6 @@
 ;
 ;   close.descriptor                    ./functions/close.descriptor/t
 ;
-;   connection.descriptor.index         ./functions/main/system.check/b
-;
 ;   connection.filename.index           ./functions/main/system.check/b
 ;
 ;   connection.status.index             ./functions/main/system.check/b
@@ -71,12 +69,6 @@
 ;
 ;   socket.data.second.login.error.l    ./functions/main/participant.interaction/address.login.status/d
 ;
-;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
-;
 ;   socket.data.welcome.message         ./functions/main/participant.interaction/address.login.status/d
 ;
 ;   socket.data.welcome.message.l       ./functions/main/participant.interaction/address.login.status/d
@@ -91,11 +83,8 @@
                           call  check.login                                                             ; Make sure this character isn't already logged in.
                           jnc   not.logged.in                                                           ; If the character isn't already logged in, proceed to the login code.
 
-                          mov   ebx, dword [esi+connection.descriptor.index]                            ; ebx - Descriptor associated with connected socket.
-
-                          mov   dword [socket.data.send.socket.descriptor], ebx                         ; Store socket descriptor for send function. 
-                          mov   dword [socket.data.send.buffer.pointer], socket.data.second.login.error ; Point send function to message indicating that the login was bad.
-                          mov   dword [socket.data.send.buffer.l], socket.data.second.login.error.l     ; Store length of message for send function.
+                          push  socket.data.second.login.error.l                                        ; Store length of message for send function.
+                          push  socket.data.second.login.error                                          ; Point send function to message indicating that the login was bad.
                           call  socket.send                                                             ; Tell the petitioner that they're trying to log in a second time.
 
                           call  clean.socket                                                            ; Clean up the socket data and get it ready for a new connection.
@@ -148,11 +137,8 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    bad.login:            mov   ebx, dword [esi+connection.descriptor.index]                            ; ebx - Descriptor associated with connected socket.
-
-                          mov   dword [socket.data.send.socket.descriptor], ebx                         ; Store socket descriptor for send function.
-                          mov   dword [socket.data.send.buffer.pointer], socket.data.bad.login.error    ; Point send function to message indicating that the login was bad.
-                          mov   dword [socket.data.send.buffer.l], socket.data.bad.login.error.l        ; Store length of message for send function.
+    bad.login:            push  socket.data.bad.login.error.l                                           ; Store length of message for send function.
+                          push  socket.data.bad.login.error                                             ; Point send function to message indicating that the login was bad.
                           call  socket.send                                                             ; Tell the petitioner that their credentials aren't good here.
 
                           call  clean.socket                                                            ; Clean up the socket data and get it ready for a new connection.
@@ -168,11 +154,8 @@
     new.login:            mov   ebx, eax                                                                ; ebx - Descriptor associated with user's credential file.
                           call  close.descriptor                                                        ; Disassociate the descriptor.
 
-                          mov   eax, dword [esi+connection.descriptor.index]                            ; eax - Descriptor associated with target socket.
-
-                          mov   dword [socket.data.send.socket.descriptor], eax                         ; Store socket descriptor for send function.
-                          mov   dword [socket.data.send.buffer.pointer], socket.data.welcome.message    ; Point send function to welcome message.
-                          mov   dword [socket.data.send.buffer.l], socket.data.welcome.message.l        ; Store length of message for send function.
+                          push  socket.data.welcome.message.l                                           ; Store length of message for send function.
+                          push  socket.data.welcome.message                                             ; Point send function to welcome message.
                           call  socket.send                                                             ; Send the welcome message on the socket.
 
                           mov   dword [esi+connection.status.index], set.passphrase.status              ; Set status of target socket to 'setting passphrase'.
@@ -183,11 +166,8 @@
 
     returning.login:      call  close.descriptor                                                        ; Disassociate the descriptor.
 
-                          mov   eax, dword [esi+connection.descriptor.index]                            ; eax - Descriptor associated with target socket.
-
-                          mov   dword [socket.data.send.socket.descriptor], eax                         ; Store socket descriptor for send function.
-                          mov   dword [socket.data.send.buffer.pointer], socket.data.passphrase.message ; Point send function to message indicating a request for a passphrase.
-                          mov   dword [socket.data.send.buffer.l], socket.data.passphrase.message.l     ; Store length of message for send function.
+                          push  socket.data.passphrase.message.l                                        ; Store length of message for send function.
+                          push  socket.data.passphrase.message                                          ; Point send function to message indicating a request for a passphrase.
                           call  socket.send                                                             ; Send the passphrase request on the socket.
 
                           mov   byte [esi+connection.status.index], passphrase.status                   ; Set status of target socket to 'passphrase'.
