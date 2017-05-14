@@ -2120,7 +2120,6 @@ Relevant data:
                                                 ./functions/socket/communications/send.to.area/t
                                                 ./functions/socket/communications/send.to.player/t
                                                 ./functions/socket/communications/send.to.world/t
-                                                ./functions/socket/recv.from.socket/t
                                                 ./functions/write.bad.command.error/t
                                                 ./functions/write.bad.help.command.error/t
                                                 ./functions/write.prompt/t
@@ -2141,7 +2140,6 @@ Relevant data:
                                                 ./functions/socket/communications/send.to.area/t
                                                 ./functions/socket/communications/send.to.player/t
                                                 ./functions/socket/communications/send.to.world/t
-                                                ./functions/socket/recv.from.socket/t
                                                 ./functions/write.bad.command.error/t
                                                 ./functions/write.bad.help.command.error/t
                                                 ./functions/write.prompt/t
@@ -2164,7 +2162,6 @@ Relevant data:
                                                 ./functions/socket/communications/send.to.area/t
                                                 ./functions/socket/communications/send.to.player/t
                                                 ./functions/socket/communications/send.to.world/t
-                                                ./functions/socket/recv.from.socket/t
                                                 ./functions/write.bad.command.error/t
                                                 ./functions/write.bad.help.command.error/t
                                                 ./functions/write.prompt/t
