@@ -4,10 +4,10 @@
 ;
 ;   This function sends a provided message out to a provided area.
 ;
-;   Assumptions:    eax - Connection ID to which to broadcast.
-;                   ebx - Area from which broadcast is being generated.
-;                   ebp - Pointer to message to be broadcast.
-;                   edx - Length of message to be broadcast.
+;   Assumptions:    Stack frame:  dword - Length of message to be broadcast.
+;                                 dword - Pointer to message to be broadcast.
+;                                 dword - Area from which broadcast is being generated.
+;                                 dword - Connection ID to which to broadcast.
 ;
 ;   Returns:        eax - 0 on success
 ;                   eax - out of area indicator if target recipient is out of area
@@ -24,6 +24,8 @@
 ;
 ;   connection.number.index             ./functions/main/system.check/b
 ;
+;   memory.switch                       ./functions/memory.switch/t
+;
 ;   send.to.player.broadcast            ./functions/socket/communications/send.to.player/t
 ;
 ;   send.to.player.connection.poll      ./functions/socket/communications/send.to.player/t
@@ -35,7 +37,19 @@
 ;   socket.send                         ./functions/socket/socket.send/t
 ;
 
-    send.to.player:                   push  esi                                       ; Preserve caller's esi.
+    send.to.player:                   pop   edx                                       ; Preserve return address.
+
+                                      push  16                                        ; Request 16 extra bytes of memory.
+                                      call  memory.switch                             ; Extend memory.
+
+                                      pop   dword [ebx]                               ; Point send function to connection id to which to be broadcast.
+                                      pop   dword [ebx+4]                             ; Point send function to area id to which to be broadcast.
+                                      pop   dword [ebx+8]                             ; Point send function to message to be broadcast.
+                                      pop   dword [ebx+12]                            ; Tell send function how long the message is.
+
+                                      push  edx                                       ; Restore return address.
+
+                                      push  esi                                       ; Preserve caller's esi.
 
                                       mov   esi, connection.table                     ; esi - pointer to table of handles associated with active connections.
                                       mov   ecx, socket.number                        ; ecx - number of connections to poll.
@@ -49,6 +63,9 @@
     send.to.player.broadcast.done:    add   esi, connection.entry.size                ; esi - pointer to next connection handle in table.
                                       loop  send.to.player.connection.poll            ; Go check the next connection.
 
+                                      push  0                                         ; Tell memory.switch to free memory.
+                                      call  memory.switch                             ; Free memory.
+
                                       pop   esi                                       ; Restore caller's esi.
 
                                       ret                                             ; Return to caller.
@@ -57,8 +74,14 @@
                                       push  ebp                                       ; Point send function to the message.
                                       call  socket.send                               ; Send the message to the indicated descriptor.
 
+                                      push  0                                         ; Tell memory.switch to free memory.
+                                      call  memory.switch                             ; Free memory.
+
                                       ret                                             ; Return to caller.
 
     send.to.player.out.of.area.error: mov   eax, 0FFFFh                               ; eax - Out of area indicator
+
+                                      push  0                                         ; Tell memory.switch to free memory.
+                                      call  memory.switch                             ; Free memory.
 
                                       ret                                             ; Return to caller.
