@@ -45,10 +45,14 @@
                       mov   ebx, sys.socket.recv                    ; ebx - Receive from socket.
                       int   sys.system.call                         ; Receive from socket.
 
-                      mov   ebx, dword [esp+dword.l]                ; ebx - pointer to received data
-                      call  buffer.strip                            ; Strip carriage returns from received data.
+                      push  eax                                     ; Preserve number of characters received.
 
                       push  0                                       ; Tell memory switch to free the temporary memory.
                       call  memory.switch                           ; Free up the temporary memory.
+
+                      pop   eax                                     ; Restore number of characters received.
+
+                      mov   ebx, buffer.1                           ; ebx - pointer to received data
+                      call  buffer.strip                            ; Strip carriage returns from received data.
 
                       ret                                           ; Return to caller.
