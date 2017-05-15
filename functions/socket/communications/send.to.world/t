@@ -4,8 +4,8 @@
 ;
 ;   This function sends a provided message out to the whole world.
 ;
-;   Assumptions:    ebx - Pointer to message to be broadcast.
-;                   edx - Length of message to be broadcast.
+;   Assumptions:    Stack Frame:  dword - Length of message to be broadcast.
+;                                 dword - Pointer to message to be broadcast.
 ;
 ;   Returns:        None.
 ;
@@ -36,31 +36,43 @@
 ;   write.prompt                        ./functions/write.prompt/t
 ;
 
-    send.to.world:      push  esi                                           ; Preserve caller's esi register.
+    send.to.world:      pop   edx                           ; Preserve return address.
 
-                        mov   esi, connection.table                         ; esi - Index to socket entries.
-                        mov   ecx, socket.number                            ; ecx - Number of sockets in table; we use this number as our loop counter.
+                        pop   ebx                           ; ebx - Pointer to message.
+                        pop   eax                           ; eax - Length of message.
 
+                        push  esi                           ; Preserve caller's esi register.
+
+                        mov   esi, connection.table         ; esi - Index to socket entries.
+                        mov   ecx, socket.number            ; ecx - Number of sockets in table; we use this number as our loop counter.
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.world.loop: push  ecx                                           ; Preserve number of sockets.
+    send.to.world.loop: push  eax                           ; Preserve length of message..
+                        push  ebx                           ; Preserve pointer to message.
+                        push  ecx                           ; Preserve number of sockets.
+                        push  edx                           ; Preserve return address.
 
-                        push  edx                                           ; Tell send function how long the message is.
-                        push  ebx                                           ; Point send function to the message.
-                        call  socket.send                                   ; Send the message to the socket.
+                        push  eax                           ; Tell send function how long the message is.
+                        push  ebx                           ; Point send function to the message.
+                        call  socket.send                   ; Send the message to the socket.
 
-                        push  local.data.carriage.return.l                  ; Tell send function how long the message is.
-                        push  local.data.carriage.return                    ; Point send function to a carriage return.
-                        call  socket.send                                   ; Broadcast a carriage return.
+                        push  local.data.carriage.return.l  ; Tell send function how long the message is.
+                        push  local.data.carriage.return    ; Point send function to a carriage return.
+                        call  socket.send                   ; Broadcast a carriage return.
 
-                        call  write.prompt                                  ; Send a prompt.
+                        call  write.prompt                  ; Send a prompt.
 
-                        add   esi, connection.entry.size                    ; esi - Pointer to next descriptor in table.
+                        add   esi, connection.entry.size    ; esi - Pointer to next descriptor in table.
 
-                        pop   ecx                                           ; Restore number of sockets.
+                        pop   edx                           ; Restore return address.
+                        pop   ecx                           ; Restore number of sockets.
+                        pop   ebx                           ; Restore pointer to message.
+                        pop   eax                           ; Restore length of message.
                         
-                        loop  send.to.world.loop                            ; Go broadcast to the next socket in the table.
+                        loop  send.to.world.loop            ; Go broadcast to the next socket in the table.
 
-                        pop   esi                                           ; Restore caller's esi register.
+                        pop   esi                           ; Restore caller's esi register.
 
-                        ret                                                 ; Return to caller.
+                        push  edx                           ; Restore return address.
+
+                        ret                                 ; Return to caller.

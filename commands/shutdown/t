@@ -47,8 +47,6 @@
 ;   write.descriptor                    ./functions/write.descriptor/t
 ;
 
-
-
     command.shutdown:       call  check.admin                               ; See if the calling socket is controlled by an admin.
                             jc    command.shutdown.admin                    ; If so, go run the shutdown sequence. Otherwise...
 
@@ -58,8 +56,8 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.shutdown.admin: mov   ebx, socket.data.shutdown.message         ; ebx - Pointer to socket shutdown message.
-                            mov   edx, socket.data.shutdown.message.l       ; edx - Length of message.
+    command.shutdown.admin: push  socket.data.shutdown.message.l            ; edx - Length of message.
+                            push  socket.data.shutdown.message              ; ebx - Pointer to socket shutdown message.
                             call  send.to.world                             ; Send the shutdown message to the world.
 
                             mov   ecx, local.data.shutdown.message          ; ecx - Pointer to message indicating that shutdown has been initiated from within the environment.
