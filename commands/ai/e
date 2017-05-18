@@ -1,0 +1,15 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/ai/e
+;
+;   This file defines the external textual data associated with the command 'ai'.
+
+    section .data
+
+    socket.data.command.ai.help.l   db  socket.data.command.ai.help.end                                                                         ; Length of message.
+	  socket.data.command.ai.help     db  "  ai", 0Ah, 0Dh, 0Ah, 0Dh                                                                              ; Command ai help message.
+	                                  db  "  Syntax: ai <set | clear> <behaviour> <options>", 0Ah, 0Dh, 0Ah, 0Dh
+	                                  db  "  Sets the expected behaviours within a range of options for when a character's patron is not online."
+	                                  db  0Ah, 0Dh, 0Ah, 0Dh, "> "
+	  socket.data.command.ai.help.end equ $-socket.data.command.ai.help                                                                           ; Pointer to end of message.
+
