@@ -7,6 +7,11 @@
 
     section .data
 
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
+
     socket.data.command.ai.help.l   dd  socket.data.command.ai.help.end                                                                         ; Length of message.
 	  socket.data.command.ai.help     db  "  ai", 0Ah, 0Dh, 0Ah, 0Dh                                                                              ; Command ai help message.
 	                                  db  "  Syntax: ai <set | clear> <behaviour> <options>", 0Ah, 0Dh, 0Ah, 0Dh
