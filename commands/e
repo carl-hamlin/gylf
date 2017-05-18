@@ -8,3 +8,4 @@
     %include  "./commands/dig/e"
     %include  "./commands/egg/e"
     %include  "./commands/gylf/e"
+    %include  "./commands/help/e"
