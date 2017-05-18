@@ -20,7 +20,7 @@
     local.data.area.created.message         db  "An admin has created a new area.", 0Ah, 0Dh                                                              ; Area creation message.
     local.data.area.created.message.end     equ $-local.data.area.created.message                                                                         ; Pointer to end of message.
 
-    local.data.out.of.areas.message.l       db  local.data.out.of.areas.message.end                                                                       ; Length of message.
+    local.data.out.of.areas.message.l       dd  local.data.out.of.areas.message.end                                                                       ; Length of message.
     local.data.out.of.areas.message         db  "An admin tried to create an area, but we're fresh out of area filenames.", 0Ah, 0Dh                      ; Area filename bounce.
     local.data.out.of.areas.message.end     equ $-local.data.out.of.areas.message                                                                         ; Pointer to end of message.
 
