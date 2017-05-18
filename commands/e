@@ -6,3 +6,4 @@
     %include  "./commands/area/e"
     %include  "./commands/broadcast/e"
     %include  "./commands/dig/e"
+    %include  "./commands/egg/e"
