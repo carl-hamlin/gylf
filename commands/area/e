@@ -1,0 +1,55 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/area/e
+;
+;   This file defines the external textual data associated with the command 'area'.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Local Data
+;
+
+    local.data.area.bad.syntax.message.l    dd  local.data.area.bad.syntax.message.end                                                                    ; Length of message.
+    local.data.area.bad.syntax.message      db  "An admin bounced the area command on bad syntax.", 0Ah, 0Dh                                              ; Area syntax error.
+    local.data.area.bad.syntax.message.end  equ $-local.data.area.bad.syntax.message                                                                      ; Pointer to end of message.
+
+    local.data.area.created.message.l       dd  local.data.area.created.message.end                                                                        ; Length of message.
+    local.data.area.created.message         db  "An admin has created a new area.", 0Ah, 0Dh                                                              ; Area creation message.
+    local.data.area.created.message.end     equ $-local.data.area.created.message                                                                         ; Pointer to end of message.
+
+    local.data.out.of.areas.message.l       db  local.data.out.of.areas.message.end                                                                       ; Length of message.
+    local.data.out.of.areas.message         db  "An admin tried to create an area, but we're fresh out of area filenames.", 0Ah, 0Dh                      ; Area filename bounce.
+    local.data.out.of.areas.message.end     equ $-local.data.out.of.areas.message                                                                         ; Pointer to end of message.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Remote Data
+;
+
+	  socket.data.area.created.message.l      dd  socket.data.area.created.message.end                                                                      ; Length of message.
+	  socket.data.area.created.message	      db  "Your new area has been created successfully.", 0Ah, 0Dh								                                  ; Area creation message.
+	  socket.data.area.created.message.end	  equ $-socket.data.area.created.message											                                                  ; Pointer to end of message.
+
+	  socket.data.out.of.areas.message.l      dd  socket.data.out.of.areas.message.end                                                                      ; Length of message.
+	  socket.data.out.of.areas.message	      db  "An attempt was made to create your new area, but there are currently no available area files.", 0Ah, 0Dh ; Out of areas message.
+	  socket.data.out.of.areas.message.end	  equ $-socket.data.out.of.areas.message											                                                  ; Pointer to end of message.
+
+	  socket.data.bad.area.id.message.l       dd  socket.data.bad.area.id.message.end                                                                       ; Length of message.  
+	  socket.data.bad.area.id.message		      db  "Your area id is all screwed up. The admin has been notified.", 0Ah, 0Dh						                      ; Bad area id message.
+	  socket.data.bad.area.id.message.end	    equ $-socket.data.bad.area.id.message											                                                    ; Pointer to end of message.
+    
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
+
+	  socket.data.command.area.help.l         dd  socket.data.command.area.help.end                                                                         ; Length of message.
+	  socket.data.command.area.help           db  "  area", 0Ah, 0Dh, 0Ah, 0Dh                                                                              ; Command area help message.
+	                                          db  "  Syntax: area <name> <quoted description>", 0Ah, 0Dh, 0Ah, 0Dh
+	                                          db  "  Creates a new area. This command is restricted to administrator privileged participants."
+	                                          db  0Ah, 0Dh, 0Ah, 0Dh, "> "
+	  socket.data.command.area.help.end       equ $-socket.data.command.area.help                                                                           ; Pointer to end of message.
+

@@ -3,3 +3,4 @@
     section   .data
 
     %include  "./commands/ai/e"
+    %include  "./commands/area/e"
