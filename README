@@ -1251,12 +1251,6 @@ Relevant data:
       /dna.lab                Contains code which combines the DNA left behind on an egg by both
                               parents to create an entirely new gylf.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   dna.lab                               ./functions/create.character/t
 
           dna.lab.agility                       ./functions/dna.lab/t
