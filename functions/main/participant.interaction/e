@@ -2,7 +2,4 @@
 
     section   .data
 
-    %include  "./functions/main/listening.socket.poll/e"
-    %include  "./functions/main/participant.interaction/e"
-    %include  "./functions/main/set.up.listener/e"
-    %include  "./functions/main/system.check/e"
+    %include  "./functions/main/participant.interaction/address.login.status/e"
