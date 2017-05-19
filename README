@@ -1097,12 +1097,6 @@ Relevant data:
       /buffer.strip           Contains code that strips buffered data of carriage returns and line
                               feeds and replaces them with zeroes.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   buffer.strip                          ./functions/socket/recv.from.socket/t
 
           strip.loop                            ./functions/buffer.strip/t
