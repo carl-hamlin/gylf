@@ -1721,6 +1721,10 @@ Relevant data:
 
             text.data.index.local.data.area.out.of.areas.message  No references.
 
+            text.data.index.local.data.shutdown.message No references.
+
+            text.data.index.local.data.smoked.sockets.message No references.
+
             text.data.index.socket.data.area.created.message  No references.
 
             text.data.index.socket.data.bad.area.id.message No references.
@@ -1745,9 +1749,13 @@ Relevant data:
 
             text.data.index.socket.data.command.look.help No references.
 
+            text.data.index.socket.data.command.shutdown.help No references.
+
             text.data.index.socket.data.egg.hatch.message No references.
 
             text.data.index.socket.data.out.of.areas.message  No references.
+
+            text.data.index.socket.data.shutdown.message  No references.
 
 
         d   local.data.populating.textual.data.indices.message  ./functions/main/text.init/d
