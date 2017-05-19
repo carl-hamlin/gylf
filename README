@@ -1165,9 +1165,6 @@ Relevant data:
       b   sys.close.call                        ./functions/close.descriptor/t
 
 
-      d   No defined symbols.
-
-
       t   close.descriptor                      ./commands/area/t
                                                 ./commands/look/t                                                
                                                 ./functions/check.login/t
