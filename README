@@ -1325,12 +1325,6 @@ Relevant data:
       /get.external.data      Contains code which reads data that exists outside the codebase and
                               memory.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   get.external.data                     ./functions/clear.screen/t
 
     ----------------------------------------------------------------------------------------------
