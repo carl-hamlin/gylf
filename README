@@ -77,9 +77,6 @@ Relevant data:
 
           nibble.l                              No references.
 
-
-      d   No defined symbols.
-
     ==============================================================================================
 
     ./build.gylf.sh           This is the build script. It depends on the presence of nasm and ld.
@@ -1051,9 +1048,6 @@ Relevant data:
           argument.10.location                  No references.
 
           arguments.packet.l                    No references.
-
-
-      d   No defined symbols.
 
 
       t   aggregate.arguments                   ./functions/main/participant.interaction
