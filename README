@@ -1116,12 +1116,6 @@ Relevant data:
       /check.admin            Contains code that checks to see if the user on the current socket
                               has administrative privileges.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   check.admin                           ./commands/area/t
                                                 ./commands/broadcast/t
                                                 ./commands/shutdown/t
