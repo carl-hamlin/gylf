@@ -1751,6 +1751,8 @@ Relevant data:
 
             text.data.index.socket.data.command.shutdown.help No references.
 
+            text.data.index.socket.data.command.think.help  No references.
+
             text.data.index.socket.data.egg.hatch.message No references.
 
             text.data.index.socket.data.out.of.areas.message  No references.
