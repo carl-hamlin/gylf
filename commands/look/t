@@ -66,55 +66,57 @@
 ;
 
 
-    command.look:                           cmp  eax, command.look.l                              ; Has the user invoked the command with no arguments?
-                                            jz   command.look.default                             ; Yes. Go execute default behaviour.
+    command.look:                           cmp   eax, command.look.l                             ; Has the user invoked the command with no arguments?
+                                            jz    command.look.default                            ; Yes. Go execute default behaviour.
 
                                             ; Here's where the targetted code goes.
 
-                                            mov  ebx, esi                                         ; ebx - Pointer to descriptor associated with target socket.
-                                            add  ebx, connection.area.id.index                    ; ebx - Pointer to area id associated with active connection.
+                                            mov   ebx, esi                                        ; ebx - Pointer to descriptor associated with target socket.
+                                            add   ebx, connection.area.id.index                   ; ebx - Pointer to area id associated with active connection.
 
-                                            call open.descriptor                                  ; Associate a descriptor with the area id.
+                                            push  ebx                                             ; Point open.descriptor to the area id assocaited with the active connection.
+                                            call  open.descriptor                                 ; Associate a descriptor with the area id.
 
-                                            or   eax, eax                                         ; Did the descriptor associate properly?
-                                            jz   command.look.targetted.good.descriptor           ; Yes. Go have a look at contained objects.
+                                            or    eax, eax                                        ; Did the descriptor associate properly?
+                                            jz    command.look.targetted.good.descriptor          ; Yes. Go have a look at contained objects.
 
-                                            jmp  command.look.bad.descriptor                      ; No. Go inform the user that the descriptor is invalid.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    command.look.targetted.good.descriptor: mov  ebx, eax                                         ; Descriptor associated with area id.
-                                            mov  ecx, area.header                                 ; ecx - Pointer to storage for area header.
-                                            mov  edx, area.header.l                               ; edx - Length of area header.
-
-                                            call read.descriptor                                  ; Read area header from descriptor associated with area id.
-
-                                            mov  ecx, dword [area.num.contained.items]            ; ecx - number of items to check targetting argument against.
+                                            jmp   command.look.bad.descriptor                     ; No. Go inform the user that the descriptor is invalid.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.look.targetted.find.target:     push ecx                                              ; Preserve number of items.
+    command.look.targetted.good.descriptor: mov   ebx, eax                                        ; Descriptor associated with area id.
+                                            mov   ecx, area.header                                ; ecx - Pointer to storage for area header.
+                                            mov   edx, area.header.l                              ; edx - Length of area header.
 
-                                            mov  ecx, buffer.1                                    ; ecx - Pointer to buffer into which to read item id.
-                                            mov  edx, dword.l                                     ; edx - Length of item id.
+                                            call  read.descriptor                                 ; Read area header from descriptor associated with area id.
 
-                                            call read.descriptor                                  ; Read an item id.
+                                            mov   ecx, dword [area.num.contained.items]           ; ecx - number of items to check targetting argument against.
 
-                                            pop  ecx                                              ; Restore number of items.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-                                            loop command.look.targetted.find.target               ; Go check the next item.
+    command.look.targetted.find.target:     push  ecx                                             ; Preserve number of items.
+
+                                            mov   ecx, buffer.1                                   ; ecx - Pointer to buffer into which to read item id.
+                                            mov   edx, dword.l                                    ; edx - Length of item id.
+
+                                            call  read.descriptor                                 ; Read an item id.
+
+                                            pop   ecx                                             ; Restore number of items.
+
+                                            loop  command.look.targetted.find.target              ; Go check the next item.
 
                                             ret                                                   ; Return to caller.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.look.default:                   mov  ebx, esi                                         ; ebx - Index to connection table entry.
-                                            add  ebx, connection.area.id.index                    ; ebx - Pointer to area id associated with active connection.
+    command.look.default:                   mov   ebx, esi                                        ; ebx - Index to connection table entry.
+                                            add   ebx, connection.area.id.index                   ; ebx - Pointer to area id associated with active connection.
 
-                                            call open.descriptor                                  ; Associate a descriptor with the file containing current area info.
+                                            push  ebx                                             ; Point open.descriptor to the file containing the current area info.
+                                            call  open.descriptor                                 ; Associate a descriptor with the file containing current area info.
 
-                                            or   eax, eax                                         ; Were we able to properly associate a descriptor?
-                                            jz   command.look.default.good.descriptor             ; Yes. Go execute default behaviour.
+                                            or    eax, eax                                        ; Were we able to properly associate a descriptor?
+                                            jz    command.look.default.good.descriptor            ; Yes. Go execute default behaviour.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
