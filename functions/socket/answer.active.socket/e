@@ -1,0 +1,17 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket.answer.active.socket/e
+;
+;   This file defines the external textual data associated with the system.check function.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Local Data
+;
+
+    local.data.active.socket.message.l    dd  local.data.active.socket.message.end  ; Length of message.
+    local.data.active.socket.message      db  "Activity detected on socket "        ; Answering active socket message.
+    local.data.active.socket.message.end  equ $-local.data.active.socket.message    ; Pointer to end of message.

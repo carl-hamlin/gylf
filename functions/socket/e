@@ -2,8 +2,4 @@
 
     section   .data
 
-    %include  "./functions/main/e"
-    %include  "./functions/socket/e"
-    %include  "./functions/write.bad.command.error/e"
-    %include  "./functions/write.prompt/e"
-
+    %include  "./functions/socket/answer.active.socket/e"

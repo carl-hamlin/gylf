@@ -1713,13 +1713,15 @@ Relevant data:
 
             text.data.index.num                 ./functions/main/text.init/t
 
-            text.data.index.local.data.bad.area.id.indicator.message  No references.
+            text.data.index.local.data.active.socket.message  No references.
 
             text.data.index.local.data.area.bad.syntax.message  No references.
 
             text.data.index.local.data.area.created.message No references.
 
             text.data.index.local.data.area.out.of.areas.message  No references.
+
+            text.data.index.local.data.bad.area.id.indicator.message  No references.
 
             text.data.index.local.data.connection.notifier.message  No references,
 
