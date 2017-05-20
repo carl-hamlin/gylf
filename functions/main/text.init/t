@@ -76,9 +76,9 @@
                         pop   eax                                                       ; Restore descriptor associated with external data file.
                         push  eax                                                       ; Preserve descriptor associated with external data file.
 
-                        mov   ecx, ebx                                                  ; ecx - Pointer to extended memory buffer.
-                        mov   ebx, eax                                                  ; ebx - Descriptor associated with external data file.
-                        mov   edx, 4                                                    ; edx - Read four bytes.
+                        push  4                                                         ; Tell read.descriptor to read four bytes.
+                        push  ebx                                                       ; Point read.descriptor to extended memory buffer.
+                        push  eax                                                       ; Point read.descriptor to descriptor associated with external data file.
                         call  read.descriptor                                           ; Read the length of the message at this index.
 
                         mov   ebx, ecx                                                  ; ebx - Pointer to read data.
@@ -99,11 +99,14 @@
 
                         pop   eax                                                       ; Restore descriptor associated with external data file.
 
-                        mov   ecx, ebx                                                  ; ecx - Pointer to extended memory buffer.
-                        mov   ebx, eax                                                  ; ebx - Descriptor associated with external data file.
-                        pop   edx                                                       ; edx - Number of bytes to be read till next index.
-                        add   esi, dword.l                                              ; esi - Pointer to storage for next index.
+                        pop   edx
+
+                        push  edx                                                       ; Tell read.descriptor the number of bytes to be read till next index.
+                        push  ebx                                                       ; Point read.descriptor to extended memory buffer.
+                        push  eax                                                       ; Point read.descriptor to descriptor associated with external data file.
                         call  read.descriptor                                           ; Read those bytes.
+
+                        add   esi, dword.l                                              ; esi - Pointer to storage for next index.
 
                         pop   edx                                                       ; Restore index counter.
                         pop   ecx                                                       ; Restore counter for population of textual indices.
