@@ -1997,12 +1997,6 @@ Relevant data:
       /print.socket.number    Contains code that prints a socket number associated with an event
                               in the administrator console.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   print.socket.number                   ./functions/socket/answer.active.socket/t
 
     ----------------------------------------------------------------------------------------------
