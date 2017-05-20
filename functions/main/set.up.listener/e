@@ -1,0 +1,17 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/main/set.up.listener/e
+;
+;   This file defines the external textual data associated with the set.up.listener function.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Local Data
+;
+
+    local.data.listen.error.message.l   dd  local.data.listen.error.message.end                                                 ; Length of message.
+    local.data.listen.error.message     db  "There was a problem getting the socket to listen on the specified port.", 0Ah, 0Dh ; Listen error message.
+    local.data.listen.error.message.end equ $-local.data.listen.error.message                                                   ; Pointer to end of message.

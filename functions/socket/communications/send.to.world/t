@@ -4,7 +4,7 @@
 ;
 ;   This function sends a provided message out to the whole world.
 ;
-;   Assumptions:    ecx - Pointer to message to be broadcast.
+;   Assumptions:    ebx - Pointer to message to be broadcast.
 ;                   edx - Length of message to be broadcast.
 ;
 ;   Returns:        None.
@@ -12,8 +12,6 @@
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
-;
-;   connection.descriptor.index         ./functions/main/system.check/b
 ;
 ;   connection.entry.size               ./functions/main/system.check/b
 ;
@@ -38,41 +36,31 @@
 ;   write.prompt                        ./functions/write.prompt/t
 ;
 
-    send.to.world:      push esi                                                                 ; Preserve caller's esi register.
+    send.to.world:      push  esi                                           ; Preserve caller's esi register.
 
-                        mov  dword [socket.data.send.buffer.pointer], ecx                        ; Point send function to provided message.
-                        mov  dword [socket.data.send.buffer.l], edx                              ; Provide length of message to send function.
+                        mov   esi, connection.table                         ; esi - Index to socket entries.
+                        mov   ecx, socket.number                            ; ecx - Number of sockets in table; we use this number as our loop counter.
 
-                        mov  esi, connection.table                                               ; esi - Index to socket entries.
-                        mov  ecx, socket.number                                                  ; ecx - Number of sockets in table; we use this number as our loop counter.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.world.loop: push eax                                                                 ; Preserve caller's eax register.
-                        mov  eax, dword [esi+connection.descriptor.index]                        ; eax - Descriptor associated with socket to be broadcast.
-                        mov  dword [socket.data.send.socket.descriptor], eax                     ; Point send function to the socket to be broadcast.
-                        pop  eax                                                                 ; Restore caller's eax register.
-                        call socket.send                                                         ; Send the message to the socket.
+    send.to.world.loop: push  ecx                                           ; Preserve number of sockets.
 
-                        push ecx                                                                 ; Preserve loop counter.
+                        push  edx                                           ; Tell send function how long the message is.
+                        push  ebx                                           ; Point send function to the message.
+                        call  socket.send                                   ; Send the message to the socket.
 
-                        mov  ecx, dword [socket.data.send.buffer.pointer]                        ; ecx - Provided message.
+                        push  local.data.carriage.return.l                  ; Tell send function how long the message is.
+                        push  local.data.carriage.return                    ; Point send function to a carriage return.
+                        call  socket.send                                   ; Broadcast a carriage return.
 
-                        mov  dword [socket.data.send.buffer.pointer], local.data.carriage.return ; Point send function to the carriage return.
-                        mov  dword [socket.data.send.buffer.l], local.data.carriage.return.l     ; Provide the length of the carriage return.
-                        call socket.send                                                         ; Broadcast a carriage return.
+                        call  write.prompt                                  ; Send a prompt.
 
-                        mov  dword [socket.data.send.buffer.pointer], ecx                        ; Point send function to provided message.
-                        mov  dword [socket.data.send.buffer.l], edx                              ; Provide length of message to send function.
+                        add   esi, connection.entry.size                    ; esi - Pointer to next descriptor in table.
 
-                        pop  ecx                                                                 ; Restore loop counter.
+                        pop   ecx                                           ; Restore number of sockets.
+                        
+                        loop  send.to.world.loop                            ; Go broadcast to the next socket in the table.
 
-                        push eax                                                                 ; Preserve caller's eax register.
-                        mov  eax, dword [esi+connection.descriptor.index]                        ; eax - Descriptor associated with active socket.
-                        call write.prompt                                                        ; Send a prompt.
-                        pop  eax                                                                 ; Restore caller's eax register.
+                        pop   esi                                           ; Restore caller's esi register.
 
-                        add  esi, connection.entry.size                                          ; esi - Pointer to next descriptor in table.
-                        loop send.to.world.loop                                                  ; Go broadcast to the next socket in the table.
-
-                        pop  esi                                                                 ; Restore caller's esi register.
-
-                        ret                                                                      ; Return to caller.
+                        ret                                                 ; Return to caller.

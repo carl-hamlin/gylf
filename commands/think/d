@@ -8,12 +8,15 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.think.l                   ./commands/think/d
-;   command.think.s                   ./commands/think/d
-;   socket.data.command.think.help    ./commands/think/d
-;   socket.data.command.think.help.l  ./commands/think/d
-;
 ;   command.think                     ./commands/think/t
+;
+;   command.think.l                   ./commands/think/d
+;
+;   command.think.s                   ./commands/think/d
+;
+;   socket.data.command.think.help    ./commands/think/d
+;
+;   socket.data.command.think.help.l  ./commands/think/d
 ;
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
