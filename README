@@ -2458,12 +2458,6 @@ Relevant data:
                                     help for a command that does not belong to the recognized
                                     command set.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   write.bad.help.command.error          ./commands/help/t
 
     ----------------------------------------------------------------------------------------------
