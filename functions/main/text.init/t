@@ -32,6 +32,8 @@
 ;
 ;   read.descriptor                                       ./functions/read.descriptor/t
 ;
+;   sys.standard.output                                   ./b
+;
 ;   text.data.filename                                    ./functions/main/text.init/d
 ;
 ;   text.data.index.num                                   ./functions/main/text.init/b
@@ -42,90 +44,94 @@
 ;
 ;   text.init.pop.loop                                    ./functions/main/text.init/t
 ;
+;   write.descriptor                                      ./functions/write.descriptor/t
+;
 
-    text.init:          mov   ecx, local.data.populating.textual.data.indices.message   ; ecx - Pointer to message indicating that we're about to populate the textual data indices.
-                        mov   edx, local.data.populating.textual.data.indices.message.l ; edx - Length of message.
-                        call  write.descriptor                                          ; Tell the admin that we're populating the textual data indices.
+    text.init:          push  sys.standard.output                                   ; Write to console.
+                        push  local.data.populating.textual.data.indices.message    ; Pointer to message indicating that we're about to populate the textual data indices.
+                        push  local.data.populating.textual.data.indices.message.l  ; Length of message.
+                        call  write.descriptor                                      ; Tell the admin that we're populating the textual data indices.
 
-                        push  text.data.filename                                        ; Point open.descriptor to filename for external text data.
-                        call  open.descriptor                                           ; Open the file for reading.
+                        push  text.data.filename                                    ; Point open.descriptor to filename for external text data.
+                        call  open.descriptor                                       ; Open the file for reading.
 
-                        or    eax, eax                                                  ; Did we get the descriptor?
-                        js    text.init.fail                                            ; No. Go fail with error.
+                        or    eax, eax                                              ; Did we get the descriptor?
+                        js    text.init.fail                                        ; No. Go fail with error.
 
-                        mov   ecx, text.data.index.num                                  ; ecx - Counter for population of textual indices.
-                        dec   ecx                                                       ; First index is always zero - no need to compute it.
-                        sub   edx, edx                                                  ; edx - Index counter.
-                        
-                        mov   esi, text.data.indices                                    ; esi - Pointer to indices.
-                        mov   dword [esi], 00000000h                                    ; Populate the first index.
+                        mov   ecx, text.data.index.num                              ; ecx - Counter for population of textual indices.
+                        dec   ecx                                                   ; First index is always zero - no need to compute it.
+                        sub   edx, edx                                              ; edx - Index counter.
 
-                        add   esi, dword.l                                              ; esi - Pointer to storage for second index.
+                        mov   esi, text.data.indices                                ; esi - Pointer to indices.
+                        mov   dword [esi], 00000000h                                ; Populate the first index.
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    text.init.pop.loop: push  eax                                                       ; Preserve descriptor associated with external data file.
-                        push  ecx                                                       ; Preserve counter for population of textual indices.
-                        push  edx                                                       ; Preserve index counter.
-
-                        push  eax                                                       ; Preserve descriptor associated with external data file.
-
-                        push  4                                                         ; Request 4 bytes of extra memory.
-                        call  memory.switch                                             ; Extend memory.
-
-                        pop   eax                                                       ; Restore descriptor associated with external data file.
-                        push  eax                                                       ; Preserve descriptor associated with external data file.
-
-                        push  4                                                         ; Tell read.descriptor to read four bytes.
-                        push  ebx                                                       ; Point read.descriptor to extended memory buffer.
-                        push  eax                                                       ; Point read.descriptor to descriptor associated with external data file.
-                        call  read.descriptor                                           ; Read the length of the message at this index.
-
-                        mov   ebx, ecx                                                  ; ebx - Pointer to read data.
-
-                        pop   eax                                                       ; Restore descriptor associated with external data file.
-
-                        pop   edx                                                       ; Restore index counter.
-                        add   edx, dword [ebx]                                          ; Add new bytes to last index.
-                        mov   dword [esi], edx                                          ; Store new index.
-                        push  edx                                                       ; Preserve index counter.
-
-                        push  dword [ebx]                                               ; Preserve number of bytes to be read to the next index.
-
-                        push  eax                                                       ; Preserve descriptor associated with external data file.
-
-                        push  dword [ebx]                                               ; Request the number of bytes necessary to read to the next index.
-                        call  memory.switch                                             ; Extend memory.
-
-                        pop   eax                                                       ; Restore descriptor associated with external data file.
-
-                        pop   edx
-
-                        push  edx                                                       ; Tell read.descriptor the number of bytes to be read till next index.
-                        push  ebx                                                       ; Point read.descriptor to extended memory buffer.
-                        push  eax                                                       ; Point read.descriptor to descriptor associated with external data file.
-                        call  read.descriptor                                           ; Read those bytes.
-
-                        add   esi, dword.l                                              ; esi - Pointer to storage for next index.
-
-                        pop   edx                                                       ; Restore index counter.
-                        pop   ecx                                                       ; Restore counter for population of textual indices.
-                        pop   eax                                                       ; Restore descriptor associated with external data file.
-
-                        loop  text.init.pop.loop                                        ; Populate the remainder of the indices.
-
-                        mov   ebx, eax                                                  ; ebx - Descriptor associated with external data file.
-                        call  close.descriptor                                          ; Close the external data file.
-
-                        push  0                                                         ; Tell memory.switch to free up memory.
-                        call  memory.switch                                             ; Free memory.
-
-                        ret                                                             ; Return to caller.
+                        add   esi, dword.l                                          ; esi - Pointer to storage for second index.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    text.init.fail:     mov   ecx, local.data.text.data.failed                          ; ecx - Message indicating that we've failed to initialize messaging and need to shut down.
-                        mov   edx, local.data.text.data.failed.l                        ; Length of message.
-                        call  write.descriptor                                          ; Let the admin know that we've failed to initialize messaging and need to shut down.
+    text.init.pop.loop: push  eax                                                   ; Preserve descriptor associated with external data file.
+                        push  ecx                                                   ; Preserve counter for population of textual indices.
+                        push  edx                                                   ; Preserve index counter.
 
-                        jmp   bail                                                      ; Go shut the server down.
+                        push  eax                                                   ; Preserve descriptor associated with external data file.
+
+                        push  dword.l                                               ; Request 4 bytes of extra memory.
+                        call  memory.switch                                         ; Extend memory.
+
+                        pop   eax                                                   ; Restore descriptor associated with external data file.
+                        push  eax                                                   ; Preserve descriptor associated with external data file.
+
+                        push  4                                                     ; Tell read.descriptor to read four bytes.
+                        push  ebx                                                   ; Point read.descriptor to extended memory buffer.
+                        push  eax                                                   ; Point read.descriptor to descriptor associated with external data file.
+                        call  read.descriptor                                       ; Read the length of the message at this index.
+
+                        mov   ebx, ecx                                              ; ebx - Pointer to read data.
+
+                        pop   eax                                                   ; Restore descriptor associated with external data file.
+
+                        pop   edx                                                   ; Restore index counter.
+                        add   edx, dword [ebx]                                      ; Add new bytes to last index.
+                        mov   dword [esi], edx                                      ; Store new index.
+                        push  edx                                                   ; Preserve index counter.
+
+                        push  dword [ebx]                                           ; Preserve number of bytes to be read to the next index.
+
+                        push  eax                                                   ; Preserve descriptor associated with external data file.
+
+                        push  dword [ebx]                                           ; Request the number of bytes necessary to read to the next index.
+                        call  memory.switch                                         ; Extend memory.
+
+                        pop   eax                                                   ; Restore descriptor associated with external data file.
+
+                        pop   edx                                                   ; Restore index counter.
+
+                        push  edx                                                   ; Tell read.descriptor the number of bytes to be read till next index.
+                        push  ebx                                                   ; Point read.descriptor to extended memory buffer.
+                        push  eax                                                   ; Point read.descriptor to descriptor associated with external data file.
+                        call  read.descriptor                                       ; Read those bytes.
+
+                        add   esi, dword.l                                          ; esi - Pointer to storage for next index.
+
+                        pop   edx                                                   ; Restore index counter.
+                        pop   ecx                                                   ; Restore counter for population of textual indices.
+                        pop   eax                                                   ; Restore descriptor associated with external data file.
+
+                        loop  text.init.pop.loop                                    ; Populate the remainder of the indices.
+
+                        mov   ebx, eax                                              ; ebx - Descriptor associated with external data file.
+                        call  close.descriptor                                      ; Close the external data file.
+
+                        push  0                                                     ; Tell memory.switch to free up memory.
+                        call  memory.switch                                         ; Free memory.
+
+                        ret                                                         ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    text.init.fail:     push  sys.standard.output                                   ; Write to console.
+                        push  local.data.text.data.failed                           ; Message indicating that we've failed to initialize messaging and need to shut down.
+                        push  local.data.text.data.failed.l                         ; Length of message.
+                        call  write.descriptor                                      ; Let the admin know that we've failed to initialize messaging and need to shut down.
+
+                        jmp   bail                                                  ; Go shut the server down.
