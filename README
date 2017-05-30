@@ -2174,9 +2174,6 @@ Relevant data:
         /answer.active.socket Contains code that determines the status of an active socket and
                               routes the data to the appropriate handler.
 
-        b   No defined symbols.
-
-
         d   local.data.active.socket.message    ./functions/socket/answer.active.socket/d
                                                 ./functions/socket/answer.active.socket/t
 
