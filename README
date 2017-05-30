@@ -1670,7 +1670,7 @@ Relevant data:
 
             text.data.index.num                 ./functions/main/text.init/t
 
-            text.data.index.local.data.accept   ./functions/socket/socket.errors/t
+            text.data.index.local.data.accept   ./functions/main/listening.socket.poll/t
               .error.message
 
             text.data.index.local.data.active   ./functions/socket/answer.active.socket/t
@@ -1691,7 +1691,7 @@ Relevant data:
             text.data.index.local.data.bad      ./functions/main/participant.interaction
               .login.error.message                /address.login.status/t
 
-            text.data.index.local.data.bind     ./functions/socket/socket.errors/t
+            text.data.index.local.data.bind     ./functions/main/set.up.listener/t
               .error.message
 
             text.data.index.local.data.carriage ./commands/area/t
@@ -1700,10 +1700,10 @@ Relevant data:
             text.data.index.local.data          ./functions/main/listening.socket.poll/t
               .connection.notifier.message
 
-            text.data.index.local.data.create   ./functions/socket/socket.errors/t
+            text.data.index.local.data.create   ./functions/main/set.up.listener/t
               .error.message
 
-            text.data.index.local.data.listen   ./functions/socket/socket.errors/t
+            text.data.index.local.data.listen   ./functions/main/set.up.listener/t
               .error.message
 
             text.data.index.local.data          ./functions/main/set.up.listener/t
@@ -2264,22 +2264,15 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        /socket.error         Contains code that sets up error messages to be displayed to the
+        /socket.errors        Contains code that sets up error messages to be displayed to the
                               admin in the event that something goes awry while building the
                               listening socket. If any of these are ever executed, we're beyond
                               the point of no return, so each of them passes control to the bail
                               function after displaying their unique message.
 
-        b   No defined symbols.
 
-
-        t   socket.accept.error                 ./functions/main/listening.socket.poll/t
-
-            socket.bind.error                   ./functions/main/set.up.listener/t
-
-            socket.create.error                 ./functions/main/set.up.listener/t
-
-            socket.listen.error                 ./functions/main/set.up.listener/t
+        t   socket.error                        ./functions/main/listening.socket.poll/t
+                                                ./functions/main/set.up.listener/t
 
     ----------------------------------------------------------------------------------------------
 

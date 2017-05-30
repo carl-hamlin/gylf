@@ -44,7 +44,7 @@
 ;
 ;   poll.descriptor                                         ./functions/poll.descriptor/t
 ;
-;   socket.accept.error                                     ./functions/socket/socket.errors/t
+;   socket.error                                            ./functions/socket/socket.errors/t
 ;
 ;   socket.data.event.socket.descriptor                     ./functions/main/active.socket.poll/d
 ;
@@ -61,6 +61,8 @@
 ;   sys.poll.number.of.structures                           ./functions/main/b
 ;
 ;   sys.poll.timeout                                        ./functions/main/b
+;
+;   text.data.index.local.data.accept.error.message         ./functions/main/text.init/b
 ;
 ;   text.data.index.local.data.connection.notifier.message  ./functions/main/text.init/b
 ;
@@ -80,7 +82,8 @@
                                 or    eax, eax                                                        ; Did a descriptor successfully manage to become associated with the new socket?
                                 jns   greet                                                           ; Yes! Go tell the new guy it's time to log in!
 
-                                jmp   socket.accept.error                                             ; Nope. Something is seriously wrong here. Go tell the admin we're screwed and bail out.
+                                push  dword [text.data.index.local.data.accept.error.message]         ; Pointer to accept failure error message.
+                                jmp   socket.error                                                    ; Nope. Something is seriously wrong here. Go tell the admin we're screwed and bail out.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
