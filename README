@@ -1593,12 +1593,6 @@ Relevant data:
                                           with a set passphrase status and sends them to the
                                           appropriate handler.
 
-          b   No defined symbols.
-
-
-          d   No defined symbols.
-
-
           t   address.set.passphrase.status     ./functions/socket/answer.active.socket/t
 
     ----------------------------------------------------------------------------------------------
