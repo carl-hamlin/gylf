@@ -2072,9 +2072,6 @@ Relevant data:
         b   sys.socket.create                   ./functions/socket/create.socket/t
 
 
-        d   No defined symbols.
-
-
         t   create.socket                       ./functions/main/set.up.listener/t
 
     ----------------------------------------------------------------------------------------------
