@@ -23,11 +23,11 @@
 
     print.socket.number: pusha                              ; Preserve caller registers.
 
-                         push sys.standard.output           ; Write to console.
+                         push dword.l                       ; Size of socket number.
                          mov  ecx, esi                      ; ecx - Index to socket entry.
                          add  ecx, connection.number.index  ; ecx - Pointer to socket number.
                          push ecx                           ; Pointer to socket number.
-                         push dword.l                       ; Size of socket number.
+                         push sys.standard.output           ; Write to console.
                          call write.descriptor              ; Write the socket number locally.
 
                          popa                               ; Restore caller registers.
