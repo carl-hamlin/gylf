@@ -2216,9 +2216,6 @@ Relevant data:
         b   sys.unlink                          ./functions/socket/clean.socket/t
 
 
-        d   No defined symbols.
-
-
         t   clean.socket                        ./commands/shutdown/t
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t
