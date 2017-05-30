@@ -1556,9 +1556,6 @@ Relevant data:
                                       a passphrase status and sends them to the appropriate
                                       handler.
 
-          b   No defined symbols.
-
-
           d   socket.data.bad.passphrase        ./functions/main/participant.interaction
                 .message                          /address.passphrase.status/d
                                                 ./functions/main/participant.interaction
