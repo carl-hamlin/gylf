@@ -1923,12 +1923,6 @@ Relevant data:
 
         /world.maintenance    Contains code pertinent to the passage of time in the environment.
 
-        b   No defined symbols.
-
-
-        d   No defined symbols.
-
-
         t   maintain                            ./functions/main/t
 
     ----------------------------------------------------------------------------------------------
