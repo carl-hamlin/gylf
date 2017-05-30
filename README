@@ -1394,9 +1394,6 @@ Relevant data:
                               activity in a connection, the function then passes control off to
                               the answer.active.socket function for more specialized treatment.
 
-        b   No defines symbols.
-
-
         d   socket.data.active.requested        No references.
 
             socket.data.active.returned         No references.
