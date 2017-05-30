@@ -1,0 +1,17 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/write.prompt/e
+;
+;   This file defines the external textual data associated with the write.prompt function.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Outgoing Data
+;
+
+	  socket.data.prompt.message.l    dd  socket.data.prompt.message.end  ; Length of message.
+	  socket.data.prompt.message      db	0Ah, 0Dh, "> "                  ; Storage for prompt.
+	  socket.data.prompt.message.end  equ	$-socket.data.prompt.message    ; Pointer to end of message.
