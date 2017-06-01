@@ -63,7 +63,7 @@
 ;
 ;   text.data.index.socket.data.passphrase.message          ./functions/main/text.init/b
 ;
-;   text.data.index.socket.data.second.login.error.message  ./functions/main/text.init/b
+;   text.data.index.socket.data.second.login.message        ./functions/main/text.init/b
 ;
 ;   text.data.index.socket.data.welcome.message             ./functions/main/text.init/b
 ;
@@ -75,7 +75,7 @@
                           call  check.login                                                             ; Make sure this character isn't already logged in.
                           jnc   not.logged.in                                                           ; If the character isn't already logged in, proceed to the login code.
 
-                          push  dword [text.data.index.socket.data.second.login.error]                  ; Point send function to message indicating that the login was bad.
+                          push  dword [text.data.index.socket.data.second.login.message]                ; Point send function to message indicating that the login was bad.
                           call  socket.send                                                             ; Tell the petitioner that they're trying to log in a second time.
 
                           call  clean.socket                                                            ; Clean up the socket data and get it ready for a new connection.
@@ -128,7 +128,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    bad.login:            push  dword [text.data.index.socket.data.bad.login.error]                     ; Point send function to message indicating that the login was bad.
+    bad.login:            push  dword [text.data.index.socket.data.bad.login.error.message]             ; Point send function to message indicating that the login was bad.
                           call  socket.send                                                             ; Tell the petitioner that their credentials aren't good here.
 
                           call  clean.socket                                                            ; Clean up the socket data and get it ready for a new connection.

@@ -93,8 +93,8 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.world.buf.s     push  dword [esp+(dword.l * 4)                                    ; Tell socket.send.buf how long the data is.
-                            push  dword [esp+(dword.l * 3)                                    ; Point socket.send.buf to the data.
+    send.to.world.buf.s     push  dword [esp+(dword.l * 4)]                                   ; Tell socket.send.buf how long the data is.
+                            push  dword [esp+(dword.l * 3)]                                   ; Point socket.send.buf to the data.
                             call  socket.send.buf                                             ; Send the data.
 
                             jmp   send.to.world.buf.sret                                      ; Resume loop.
