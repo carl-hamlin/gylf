@@ -17,3 +17,4 @@
     socket.send.d resd  00000001h ; Storage for descriptor for socket to which to send data.
     socket.send.p resd  00000001h ; Storage for pointer to data to be sent.
     socket.send.l resd  00000001h ; Storage for length of data to be sent.
+    socket.send.f resd  00000001h ; Storage for socket.send flags.
