@@ -34,14 +34,13 @@
 
                             call  get.text.data                           ; Retrieve indexed data.
 
-    socket.send.buf.splice: push  dword [esi+connection.descriptor.index] ; Point send function to active descriptor
+    socket.send.buf.splice: push  edx                                     ; Tell send function how long the data string is.
                             push  ecx                                     ; Point send function to the data to be sent.
-                            push  edx                                     ; Tell send function how long the data string is.
+                            push  dword [esi+connection.descriptor.index] ; Point send function to active descriptor
 
                             mov   eax, sys.socket.call                    ; eax - Socket call indicator.
                             mov   ebx, sys.socket.send                    ; ebx - Send data out on a socket.
                             mov   ecx, esp                                ; ecx - Prepared to be used as pointer to arguments package for send function.
-                            add   ecx, (dword.l * 3)                      ; ecx - Pointer to arguments package for send function.
                             int   sys.system.call                         ; Send data out on a socket.
                   
                             push  ebp                                     ; Restore return address.
@@ -49,7 +48,7 @@
 
     socket.send.buf:        pop   ebp                                     ; Preserve return address.
 
-                            pop   edx                                     ; edx - Length of buffered data.
                             pop   ecx                                     ; ecx - Pointer to buffered data.
+                            pop   edx                                     ; edx - Length of buffered data.
 
                             jmp   socket.send.buf.splice                  ; Splice the buffered data into the arguments package.

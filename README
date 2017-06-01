@@ -60,12 +60,17 @@ Relevant data:
                                                 ./commands/look/t
                                                 ./functions/create.character/t
                                                 ./functions/d
+                                                ./functions/get.text.data/t
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
                                                 ./functions/main/system.check/t
                                                 ./functions/main/text.init/b
                                                 ./functions/main/text.init/t
                                                 ./functions/print.socket.number/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/socket/socket.send/t
 
           word.l                                ./commands/area/t
                                                 ./functions/b
@@ -82,6 +87,7 @@ Relevant data:
                                                 ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/system.check/b
+                                                ./functions/main/system.check/t
                                                 ./functions/socket/communications/send.to.area/t
                                                 ./functions/socket/communications/sent.to.player/t
                                                 ./functions/socket/communications/send.to.world/t
