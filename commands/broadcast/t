@@ -52,10 +52,8 @@
 
     command.broadcast.admin: pop  eax                                                                    ; Restore length of received data.
 
-                             mov  ecx, buffer.1                                                          ; ecx - Pointer to received command string.
-                             add  ecx, command.broadcast.l                                               ; ecx - Pointer to argument for command.
-                             mov  edx, eax                                                               ; edx - Length of command string minus terminator(s).
-                             sub  edx, command.broadcast.l                                               ; edx - Length of command string minus terminator(s) and command.
+                             mov  ecx, dword [argument.01.location]                                      ; ecx - Pointer to received command string.
+                             mov  edx, dword [argument.01.size]                                          ; edx - Length of command string minus terminator(s) and command.
                              call send.to.world                                                          ; Broadcast the message.
 
                              ret                                                                         ; Return to caller.
