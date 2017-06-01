@@ -26,23 +26,21 @@
 ;   write.bad.command.error             ./functions/write.bad.command.error/t
 ;
 
-    command.broadcast:        push  eax                                                                    ; Preserve length of received data.
+    command.broadcast:        push  eax                               ; Preserve length of received data.
 
-                              call  check.admin                                                            ; See if the calling socket is controlled by an admin.
-                              jc    command.broadcast.admin                                                ; If so, go run the broadcast. Otherwise...
+                              call  check.admin                       ; See if the calling socket is controlled by an admin.
+                              jc    command.broadcast.admin           ; If so, go run the broadcast. Otherwise...
 
-                              pop   eax                                                                    ; Restore length of received data.
+                              pop   eax                               ; Restore length of received data.
 
-                              call  write.bad.command.error                                               ; Tell the user that the command doesn't have a current analogue.
+                              call  write.bad.command.error           ; Tell the user that the command doesn't have a current analogue.
 
-                              ret                                                                         ; Return to caller.
+                              ret                                     ; Return to caller.
 
-    command.broadcast.admin:  pop   eax                                                                    ; Restore length of received data.
+    command.broadcast.admin:  pop   eax                               ; Restore length of received data.
 
-                              mov   ebx, buffer.1                                                          ; ebx - Pointer to received command string.
-                              add   ebx, command.broadcast.l                                               ; ebx - Pointer to argument for command.
-                              mov   edx, eax                                                               ; edx - Length of command string minus terminator(s).
-                              sub   edx, command.broadcast.l                                               ; edx - Length of command string minus terminator(s) and command.
-                              call  send.to.world                                                          ; Broadcast the message.
+                              mov   ecx, dword [argument.01.location] ; ecx - Pointer to received command string.
+                              mov   edx, dword [argument.01.size]     ; edx - Length of command string minus terminator(s) and command.
+                              call  send.to.world                     ; Broadcast the message.
 
-                              ret                                                                         ; Return to caller.
+                              ret                                     ; Return to caller.
