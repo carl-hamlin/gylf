@@ -66,6 +66,7 @@ Relevant data:
                                                 ./functions/main/system.check/t
                                                 ./functions/main/text.init/b
                                                 ./functions/main/text.init/t
+                                                ./functions/memory.switch/t
                                                 ./functions/print.socket.number/t
                                                 ./functions/set.single.attribute/t
                                                 ./functions/socket/communications/send.to.area/t
@@ -1705,8 +1706,11 @@ Relevant data:
       d   break.pointer                         ./functions/memory.switch/t
 
 
-      t   memory.switch                         ./functions/main/text.init/t
+      t   memory.switch                         ./functions/get.text.data/t
+                                                ./functions/main/text.init/t
                                                 ./functions/socket/recv.from.socket/t
+                                                ./functions/socket/socket.send/t
+                                                ./functions/write.console/t
 
           memory.switch.initialize              ./functions/memory.switch/t
 
