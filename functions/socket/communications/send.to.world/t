@@ -61,6 +61,8 @@
     send.to.world.loop:     push  ecx                                                         ; Preserve number of sockets.
                             push  edx                                                         ; Preserve index to message.
 
+                            push  ebp                                                         ; Preserve return address.
+
                             cmp   al, 1                                                       ; Buffered mode?
                             jz    send.to.world.buf.s                                         ; Yes - go activate socket.send.buf instead.
 
@@ -71,6 +73,8 @@
                             call  socket.send                                                 ; Broadcast a carriage return.
 
                             call  write.prompt                                                ; Send a prompt.
+
+                            pop   ebp                                                         ; Restore return address.
 
                             add   esi, connection.entry.size                                  ; esi - Pointer to next descriptor in table.
 
