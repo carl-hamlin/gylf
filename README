@@ -1977,9 +1977,6 @@ Relevant data:
         /answer.active.socket Contains code that determines the status of an active socket and
                               routes the data to the appropriate handler.
 
-        b   No defined symbols.
-
-
         t   answer.active.socket                ./functions/main/active.socket.poll/t
 
             not.login.status                    ./functions/socket/answer.active.socket/t
