@@ -14,63 +14,68 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   bind.socket                                   ./functions/socket/bind.socket/t
+;   bind.socket                                     ./functions/socket/bind.socket/t
 ;
-;   create.socket                                 ./functions/socket/create.socket/t
+;   create.socket                                   ./functions/socket/create.socket/t
 ;
-;   listen.socket                                 ./functions/socket/listen.socket/t
+;   listen.socket                                   ./functions/socket/listen.socket/t
 ;
-;   socket.bind                                   ./functions/main/set.up.listener/t
+;   socket.bind                                     ./functions/main/set.up.listener/t
 ;
-;   socket.bind.error                             ./functions/socket/socket.errors/t
+;   socket.error                                    ./functions/socket/socket.errors/t
 ;
-;   socket.create.error                           ./functions/socket/socket.errors/t
+;   socket.display.success                          ./functions/main/set.up.listener/t
 ;
-;   socket.display.success                        ./functions/main/set.up.listener/t
+;   socket.listen                                   ./functions/main/set.up.listener/t
 ;
-;   socket.listen                                 ./functions/main/set.up.listener/t
+;   text.data.index.local.data.bind.error.message   ./functions/main/text.init/b
 ;
-;   socket.listen.error                           ./functions/socket/socket.errors/t
+;   text.data.index.local.data.create.error.message ./functions/main/text.init/b
 ;
-;   text.data.index.local.data.listening.message  ./functions/main/text.ini/b
+;   text.data.index.local.data.listen.error.message ./functions/main/text.init/b
 ;
-;   write.console                                 ./functions/write.console/t
+;   text.data.index.local.data.listening.message    ./functions/main/text.init/b
+;
+;   write.console                                   ./functions/write.console/t
 ;
 
-    set.up.listener:        call  create.socket                                         ; Create the socket we're going to be using to listen for incoming connections.
+    set.up.listener:        call  create.socket                                           ; Create the socket we're going to be using to listen for incoming connections.
 
-                            or    eax, eax                                              ; If the socket creation process failed, or'ing eax against itself will produce a negative number, with a
-                            jns   socket.bind                                           ; sign. We can use that sign to determine if an error occured. If it didn't, then we'll move on to
-                                                                                        ; binding the socket to a port.
+                            or    eax, eax                                                ; If the socket creation process failed, or'ing eax against itself will produce a negative number, with a
+                            jns   socket.bind                                             ; sign. We can use that sign to determine if an error occured. If it didn't, then we'll move on to
+                                                                                          ; binding the socket to a port.
 
-                            jmp   socket.create.error                                   ; Looks like the socket creation process failed somehow. Go display the error message and return control
-                                                                                        ; to linux so the admin can figure out what's up.
+                            push  dword [text.data.index.local.data.create.error.message] ; Pointer to socket creation failure error message.
+                            jmp   socket.error                                            ; Looks like the socket creation process failed somehow. Go display the error message and return
+                                                                                          ; control to linux so the admin can figure out what's up.
 
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    socket.bind:            call  bind.socket                                           ; Bind the socket to a port specified elsewhere.
+    socket.bind:            call  bind.socket                                             ; Bind the socket to a port specified elsewhere.
 
-                            or    eax, eax                                              ; If the socket binding process failed, or'ing eax against itself will produce a negative number, with a
-                            jns   socket.listen                                         ; sign. We can use that sign to determine if an error occurred. If it didn't, then we'll move on to
-                                                                                        ; telling the bound socket to start listening for connections.
+                            or    eax, eax                                                ; If the socket binding process failed, or'ing eax against itself will produce a negative number, with a
+                            jns   socket.listen                                           ; sign. We can use that sign to determine if an error occurred. If it didn't, then we'll move on to
+                                                                                          ; telling the bound socket to start listening for connections.
 
-                            jmp   socket.bind.error                                     ; Looks like the socket binding process failed somehow. Go display the error message and return control to
-                                                                                        ; linux so the admin can figure out what's up.
+                            push  dword [text.data.index.local.data.bind.error.message]   ; Pointer to bind failure error message.
+                            jmp   socket.error                                            ; Looks like the socket binding process failed somehow. Go display the error message and return control
+                                                                                          ; to linux so the admin can figure out what's up.
 
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    socket.listen:          call  listen.socket                                         ; Tell the socket to start listening for incoming connections.
+    socket.listen:          call  listen.socket                                           ; Tell the socket to start listening for incoming connections.
 
-                            or    eax, eax                                              ; If the process of telling the socket to start listening failed, or'ing eax against itself will produce a
-                            jns   socket.display.success                                ; negative number, with a sign. We can use that sign to determine whether or not an error occurred. If it
-                                                                                        ; didn't, we'll tell the admin the socket is ready and hop into the main loop.
+                            or    eax, eax                                                ; If the process of telling the socket to start listening failed, or'ing eax against itself will produce a
+                            jns   socket.display.success                                  ; negative number, with a sign. We can use that sign to determine whether or not an error occurred. If it
+                                                                                          ; didn't, we'll tell the admin the socket is ready and hop into the main loop.
 
-                            jmp   socket.listen.error                                   ; Looks like the process of telling the socket to listen failed somehow. Go display the error message and
-                                                                                        ; return control to linux so the admin can figure out what's up.
+                            push  dword [text.data.index.local.data.listen.error.message] ; Pointer to listen failure error message.
+                            jmp   socket.error                                            ; Looks like the process of telling the socket to listen failed somehow. Go display the error message
+                                                                                          ; and return control to linux so the admin can figure out what's up.
 
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    socket.display.success: push  dword [text.data.index.local.data.listening.message]  ; Pointer to message indicating the socket has been established.
-                            call  write.console                                         ; Tell the admin the socket has been established.
+    socket.display.success: push  dword [text.data.index.local.data.listening.message]    ; Pointer to message indicating the socket has been established.
+                            call  write.console                                           ; Tell the admin the socket has been established.
 
-                            ret                                                         ; Return to caller.
+                            ret                                                           ; Return to caller.
