@@ -65,6 +65,7 @@ Relevant data:
                                                 ./functions/main/system.check/t
                                                 ./functions/main/text.init/b
                                                 ./functions/main/text.init/t
+                                                ./functions/poll.descriptor/t
                                                 ./functions/print.socket.number/t
                                                 ./functions/socket/bind.socket/t
                                                 ./functions/socket/create.socket/t
@@ -1408,7 +1409,8 @@ Relevant data:
 
             socket.data.event.returned          No references.
 
-            socket.data.event.socket.descriptor ./functions/socket/bind.socket/t
+            socket.data.event.socket.descriptor ./functions/main/listening.socket.poll/t
+                                                ./functions/socket/bind.socket/t
 
 
         t   active.socket.poll                  ./functions/main/t
@@ -2099,7 +2101,7 @@ Relevant data:
 
           session.descriptor                    No references.
 
-          socket.data.connected.socket          ./functions/socket/accept.socket/d
+          socket.data.connected.socket          ./functions/socket/accept.socket/t
             .descriptor
 
           socket.data.queue.l                   ./functions/socket/listen.socket/t
@@ -2128,15 +2130,13 @@ Relevant data:
 
       d   socket.data.sockaddr.address          No references.
 
-          socket.data.sockaddr.l                ./functions/socket/bind.socket/d
-                                                ./functions/socket/d
+          socket.data.sockaddr.l                ./functions/socket/bind.socket/t
 
           socket.data.sockaddr.padding          No references.
 
           socket.data.sockaddr.port.number      No references.
 
-          socket.data.sockaddr.protocol.family  ./functions/socket/accept.socket/d
-                                                ./functions/socket/bind.socket/d
+          socket.data.sockaddr.protocol.family  ./functions/socket/bind.socket/t
                                                 ./functions/socket/d
 
     ----------------------------------------------------------------------------------------------
