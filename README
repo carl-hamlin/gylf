@@ -1175,10 +1175,7 @@ Relevant data:
       /create.file            Contains code that builds a dataset on the drive, to which it
                               associates a logical descriptor.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
+      b   sys.create.call                       ./functions/create.file/t
 
 
       t   create.file                           ./commands/area/t
