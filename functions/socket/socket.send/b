@@ -13,8 +13,3 @@
 
     %define sys.socket.send 009h  ; 009h is the modifier for 066h that tells the kernel we're attempting to send data to an active, connected socket. We don't use this much here, preferring
                                   ; kernel function 004h to write directly to the socket descriptor.
-
-    socket.send.d resd  00000001h ; Storage for descriptor for socket to which to send data.
-    socket.send.p resd  00000001h ; Storage for pointer to data to be sent.
-    socket.send.l resd  00000001h ; Storage for length of data to be sent.
-    socket.send.f resd  00000001h ; Storage for socket.send flags.
