@@ -60,6 +60,7 @@ Relevant data:
                                                 ./commands/look/t
                                                 ./functions/create.character/t
                                                 ./functions/d
+                                                ./functions/get.external.data/t
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
                                                 ./functions/main/system.check/t
@@ -1933,9 +1934,6 @@ Relevant data:
                               question.
 
       b   sys.read.call                         ./functions/read.descriptor/t
-
-
-      d   No defined symbols.
 
 
       t   read.descriptor                       ./commands/look/t
