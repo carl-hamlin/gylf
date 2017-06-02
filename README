@@ -1078,9 +1078,6 @@ Relevant data:
       b   sys.exit.call                         ./functions/bail/t
 
 
-      d   No defined symbols.
-
-
       t   bail                                  ./commands/shutdown/t
                                                 ./functions/main/text.init/t
                                                 ./functions/main/system.check/t
