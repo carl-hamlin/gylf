@@ -2071,6 +2071,9 @@ Relevant data:
 
         b   sys.socket.create                   ./functions/socket/create.socket/t
 
+            socket.data.general.socket          ./functions/socket/create.socket/t
+              .descriptor
+
 
         t   create.socket                       ./functions/main/set.up.listener/t
 
