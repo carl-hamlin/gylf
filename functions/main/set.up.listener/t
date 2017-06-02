@@ -40,9 +40,8 @@
     set.up.listener:        call  create.socket                                         ; Create the socket we're going to be using to listen for incoming connections.
 
                             or    eax, eax                                              ; If the socket creation process failed, or'ing eax against itself will produce a negative number, with a
-                                                                                        ; sign. We can use that sign to determine if an error occured. If it didn't, then we'll move on to
+                            jns   socket.bind                                           ; sign. We can use that sign to determine if an error occured. If it didn't, then we'll move on to
                                                                                         ; binding the socket to a port.
-                            jns   socket.bind
 
                             jmp   socket.create.error                                   ; Looks like the socket creation process failed somehow. Go display the error message and return control
                                                                                         ; to linux so the admin can figure out what's up.
@@ -52,9 +51,8 @@
     socket.bind:            call  bind.socket                                           ; Bind the socket to a port specified elsewhere.
 
                             or    eax, eax                                              ; If the socket binding process failed, or'ing eax against itself will produce a negative number, with a
-                                                                                        ; sign. We can use that sign to determine if an error occurred. If it didn't, then we'll move on to
+                            jns   socket.listen                                         ; sign. We can use that sign to determine if an error occurred. If it didn't, then we'll move on to
                                                                                         ; telling the bound socket to start listening for connections.
-                            jns   socket.listen
 
                             jmp   socket.bind.error                                     ; Looks like the socket binding process failed somehow. Go display the error message and return control to
                                                                                         ; linux so the admin can figure out what's up.
@@ -64,9 +62,8 @@
     socket.listen:          call  listen.socket                                         ; Tell the socket to start listening for incoming connections.
 
                             or    eax, eax                                              ; If the process of telling the socket to start listening failed, or'ing eax against itself will produce a
-                                                                                        ; negative number, with a sign. We can use that sign to determine whether or not an error occurred. If it
+                            jns   socket.display.success                                ; negative number, with a sign. We can use that sign to determine whether or not an error occurred. If it
                                                                                         ; didn't, we'll tell the admin the socket is ready and hop into the main loop.
-                            jns   socket.display.success
 
                             jmp   socket.listen.error                                   ; Looks like the process of telling the socket to listen failed somehow. Go display the error message and
                                                                                         ; return control to linux so the admin can figure out what's up.
