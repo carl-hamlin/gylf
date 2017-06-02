@@ -1318,9 +1318,6 @@ Relevant data:
         /listening.socket.poll  Contains code that polls the listening socket for new connection
                                 attempts and sends the login message when it finds them.
 
-        b   No defined symbols.
-
-
         d   local.data.connection.notifier      ./functions/main/listening.socket.poll/d
 
             local.data.connection.notifier.l    No references.
