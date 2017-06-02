@@ -1,0 +1,33 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/look/e
+;
+;   This file defines the external textual data associated with the command 'look'.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Local Data
+;
+
+    local.data.bad.area.id.indicator.message.l    dd  local.data.bad.area.id.indicator.message.end                                                                  ; Length of message.
+    local.data.bad.area.id.indicator.message      db  "Bad area id error.", 0Ah, 0Dh                                                                                ; Bad area id message.
+    local.data.bad.area.id.indicator.message.end  equ $-local.data.bad.area.id.indicator.message                                                                    ; Pointer to end of message.
+    
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
+
+	  socket.data.command.look.help.l               dd  socket.data.command.look.help.end                                                                             ; Length of message.
+	  socket.data.command.look.help                 db  "  look", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command look help message.
+	                                                db  "  Syntax: look (participant | object | terrain feature)", 0Ah, 0Dh, 0Ah, 0Dh
+	                                                db  "  The look command by default returns information regarding the performing participant's current", 0Ah, 0Dh
+	                                                db  "  area. The command may also be fed an argument - a participant, object, or terrain feature. The ", 0Ah, 0Dh
+	                                                db  "  command returns obvious features of the argument, and contests Search to return non-obvious", 0Ah, 0Dh
+	                                                db  "  features.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
+	  socket.data.command.look.help.end             equ $-socket.data.command.look.help                                                                               ; Pointer to end of message.
+
+
