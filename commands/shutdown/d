@@ -14,27 +14,12 @@
 ;
 ;   command.shutdown.s                  ./commands/shutdown/d
 ;
-;   local.data.shutdown.message         ./commands/shutdown/d
-;
-;   local.data.smoked.sockets.message   ./commands/shutdown/d
-;
 ;   socket.data.command.shutdown.help   ./commands/shutdown/d
 ;
 ;   socket.data.command.shutdown.help.l ./commands/shutdown/d
 ;
 ;   socket.data.shutdown.message        ./commands/shutdown/d
 ;
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-;
-;   Local Data
-;
-
-    local.data.smoked.sockets.message   db  "All sockets have been smoked.", 0Ah, 0Dh                                                                   ; Smoked sockets message.
-    local.data.smoked.sockets.message.l equ $-local.data.smoked.sockets.message                                                                         ; Length of message.
-
-    local.data.shutdown.message         db  "Server shutdown has been initiated from within the environment.", 0Ah, 0Dh                                 ; Shutdown message.
-    local.data.shutdown.message.l       equ $-local.data.shutdown.message                                                                               ; Length of message.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;

@@ -79,6 +79,20 @@ Relevant data:
 
           nibble.l                              No references.
 
+          socket.number                         ./commands/shutdown/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/answer.active.socket/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/system.check/b
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/sent.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+
+          sys.standard.output                   ./commands/area/t
+                                                ./functions/main/text.init/t
+                                                ./functions/print.socket.number/t
+                                                ./functions/write.console/t
+
     ==============================================================================================
 
     ./build.gylf.sh           This is the build script. It depends on the presence of nasm and ld.
@@ -162,25 +176,7 @@ Relevant data:
           area.header.l                         ./commands/look/t
                                                 ./functions/create.character/t
 
-      d   local.data.area.bad.syntax.message    ./commands/area/d
-                                                ./commands/area/t
-
-          local.data.area.bad.syntax.message.l  ./commands/area/d
-                                                ./commands/area/t
-
-          local.data.area.created.message       ./commands/area/d
-                                                ./commands/area/t
-
-          local.data.area.created.message.l     ./commands/area/d
-                                                ./commands/area/t
-
-          local.data.out.of.areas.message       ./commands/area/d
-                                                ./commands/area/t
-
-          local.data.out.of.areas.message.l     ./commands/area/d
-                                                ./commands/area/t
-
-          socket.data.area.created.message      ./commands/area/d
+      d   socket.data.area.created.message      ./commands/area/d
                                                 ./commands/area/t
 
           socket.data.area.created.message.l    ./commands/area/d
@@ -474,14 +470,7 @@ Relevant data:
       b   No defined symbols.
 
 
-      d   local.data.bad.area.id.indicator      ./commands/look/d
-            .message                            ./commands/look/t
-                                                      
-
-          local.data.bad.area.id.indicator      ./commands/look/t
-            .message.l
-
-          socket.data.command.look.help         ./commands/look/d
+      d   socket.data.command.look.help         ./commands/look/d
 
           socket.data.command.look.help.l       ./commands/look/d
 
@@ -520,17 +509,7 @@ Relevant data:
       b   No defined symbols.
 
 
-      d   local.data.smoked.sockets.message     ./commands/shutdown/d
-                                                ./commands/shutdown/t
-
-          local.data.smoked.sockets.message.l   ./commands/shutdown/t
-
-          local.data.shutdown.message           ./commands/shutdown/d
-                                                ./commands/shutdown/t
-
-          local.data.shutdown.message.l         ./commands/shutdown/t
-
-          socket.data.shutdown.message          ./commands/shutdown/d
+      d   socket.data.shutdown.message          ./commands/shutdown/d
                                                 ./commands/shutdown/t
 
           socket.data.shutdown.message.l        ./commands/shutdown/t
@@ -627,6 +606,9 @@ Relevant data:
           sys.lseek.eof                         No references.
 
           sys.no.bytes.read                     No references.
+
+          sys.write.call                        ./functions/write.console/t
+                                                ./functions/write.descriptor/t
 
           id.size                               ./functions/create.character/t
 
@@ -949,28 +931,10 @@ Relevant data:
 
           item.filename.l                       No references.
 
-          local.data.carriage.return            ./commands/area/t
-                                                ./functions/d
-                                                ./functions/socket/answer.active.socket/t
+          local.data.carriage.return            ./functions/d
                                                 ./functions/socket/communications/send.to.world/t
 
-          local.data.carriage.return.l          ./commands/area/t
-                                                ./functions/socket/answer.active.socket/t
-                                                ./functions/socket/communications/send.to.world/t
-
-          local.data.listening.message          ./functions/d
-                                                ./functions/main/set.up.listener/t
-
-          local.data.listening.message.l        ./functions/main/set.up.listener/t
-
-          local.data.out.of.area.ids.message    ./functions/d
-                                                ./functions/create.character/t
-
-          local.data.out.of.area.ids.message.l  ./functions/create.character/t
-
-          local.data.session.open.error         ./functions/d
-
-          local.data.session.open.error.l       No references.
+          local.data.carriage.return.l          ./functions/socket/communications/send.to.world/t
 
           number.of.commands                    ./commands/help/t
                                                 ./functions/d
@@ -1361,9 +1325,8 @@ Relevant data:
 
 
         d   local.data.connection.notifier      ./functions/main/listening.socket.poll/d
-                                                ./functions/main/listening.socket.poll/t
 
-            local.data.connection.notifier.l    ./functions/main/listening.socket.poll/t
+            local.data.connection.notifier.l    No references.
 
             no.connection.available             ./functions/main/listening.socket.poll/d
                                                 ./functions/main/listening.socket.poll/t
@@ -1420,23 +1383,7 @@ Relevant data:
           b   No defined symbols.
 
 
-          d   local.data.bad.login.error        ./functions/main/participant.interaction
-                                                  /address.login.status/d
-                                                ./functions/main/participant.interaction
-                                                  /address.login.status/t
-
-              local.data.bad.login.error.l      ./functions/main/participant.interaction
-                                                  /address.login.status/t
-
-              local.data.second.login.error     ./functions/main/participant.interaction
-                                                  /address.login.status/d
-                                                ./functions/main/participant.interaction
-                                                  /address.login.status/t
-
-              local.data.second.login.error.l   ./functions/main/participant.interaction
-                                                  /address.login.status/t
-
-              socket.data.bad.login.error       ./functions/main/participant.interaction
+          d   socket.data.bad.login.error       ./functions/main/participant.interaction
                                                   /address.login.status/d
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t
@@ -1546,9 +1493,8 @@ Relevant data:
 
 
         d   local.data.listen.error.message     ./functions/main/set.up.listener/d
-                                                ./functions/socket/socket.errors/t
 
-            local.data.listen.error.message.l   ./functions/socket/socket.errors/t
+            local.data.listen.error.message.l   No references.
 
 
         t   set.up.listener                     ./functions/main/t
@@ -1620,29 +1566,7 @@ Relevant data:
                                                 ./functions/socket/communications/send.to.world/t
 
 
-        d   local.data.populate.connection      ./functions/main/system.check/d
-              .numbers.over.message             ./functions/main/system.check/t
-
-            local.data.populate.connection      ./functions/main/system.check/t
-              .numbers.over.message.l
-
-            local.data.populating.connection    ./functions/main/system.check/d
-              .table.message                    ./functions/main/system.check/t
-
-            local.data.populating.connection    ./functions/main/system.check/t
-              .table.message.l
-
-            local.data.system.check.done        ./functions/main/system.check/d
-                                                ./functions/main/system.check/t
-
-            local.data.system.check.done.l      ./functions/main/system.check/t
-
-            local.data.system.check.message     ./functions/main/system.check/d
-                                                ./functions/main/system.check/t
-
-            local.data.system.check.message.l   ./functions/main/system.check/t
-
-            socket.numbers                      ./functions/main/system.check/d
+        d   socket.numbers                      ./functions/main/system.check/d
                                                 ./functions/main/system.check/t
 
             socket.numbers.l                    ./functions/main/system.check/t
@@ -1678,71 +1602,71 @@ Relevant data:
 
             text.data.index.num                 ./functions/main/text.init/t
 
-            text.data.index.local.data.accept   No references.
+            text.data.index.local.data.accept   ./functions/socket/socket.errors/t
               .error.message
 
-            text.data.index.local.data.active   No references.
+            text.data.index.local.data.active   ./functions/socket/answer.active.socket/t
               .socket.message
 
-            text.data.index.local.data.area.bad No references.
+            text.data.index.local.data.area.bad ./commands/area/t
               .syntax.message
 
-            text.data.index.local.data.area     No references.
+            text.data.index.local.data.area     ./commands/area/t
               .created.message
 
-            text.data.index.local.data.area.out No references.
+            text.data.index.local.data.area.out ./commands/area/t
               .of.areas.message
 
-            text.data.index.local.data.bad.area No references.
+            text.data.index.local.data.bad.area ./commands/look/t
               .id.indicator.message
 
-            text.data.index.local.data.bad      No references.
-              .login.error.message
+            text.data.index.local.data.bad      ./functions/main/participant.interaction
+              .login.error.message                /address.login.status/t
 
-            text.data.index.local.data.bind     No references.
+            text.data.index.local.data.bind     ./functions/socket/socket.errors/t
               .error.message
 
-            text.data.index.local.data.carriage No references.
-              .return.message
+            text.data.index.local.data.carriage ./commands/area/t
+              .return.message                   ./functions/socket/answer.active.socket/t
 
-            text.data.index.local.data          No references,
+            text.data.index.local.data          ./functions/main/listening.socket.poll/t
               .connection.notifier.message
 
-            text.data.index.local.data.create   No references.
+            text.data.index.local.data.create   ./functions/socket/socket.errors/t
               .error.message
 
-            text.data.index.local.data.listen   No references.
+            text.data.index.local.data.listen   ./functions/socket/socket.errors/t
               .error.message
 
-            text.data.index.local.data          No references.
+            text.data.index.local.data          ./functions/main/set.up.listener/t
               .listening.message
 
-            text.data.index.local.data.out.of   No references.
+            text.data.index.local.data.out.of   ./functions/create.character/t
               .area.ids.message
 
-            text.data.index.local.data.populate No references.
+            text.data.index.local.data.populate ./functions/main/system.check/t
               .connection.numbers.over.message
 
-            text.data.index.local.data          No references.
+            text.data.index.local.data          ./functions/main/system.check/t
               .populating.connection.table
               .message
 
-            text.data.index.local.data.second   No references.
-              .login.error.message
+            text.data.index.local.data.second   ./functions/main/participant.interaction
+              .login.error.message                /address.login.status/t
 
             text.data.index.local.data.session  No references.
               .open.error.message
 
-            text.data.index.local.data.shutdown No references.
+            text.data.index.local.data.shutdown ./commands/shutdown/t
               .message
 
-            text.data.index.local.data.smoked   No references.
+            text.data.index.local.data.smoked   ./commands/shutdown/t
               .sockets.message
 
-            text.data.index.local.data.system   No references.
+            text.data.index.local.data.system   ./functions/system.check/t
               .check.message
 
-            text.data.index.local.data.system   No references.
+            text.data.index.local.data.system   ./functions/system.check/t
               .check.done.message
 
             text.data.index.socket.data.area    No references.
@@ -2096,12 +2020,6 @@ Relevant data:
         b   No defined symbols.
 
 
-        d   local.data.active.socket.message    ./functions/socket/answer.active.socket/d
-                                                ./functions/socket/answer.active.socket/t
-
-            local.data.active.socket.message.l  ./functions/socket/answer.active.socket/t
-
-
         t   answer.active.socket                ./functions/main/active.socket.poll/t
 
             not.login.status                    ./functions/socket/answer.active.socket/t
@@ -2278,22 +2196,6 @@ Relevant data:
         b   No defined symbols.
 
 
-        d   local.data.accept.error.message     ./functions/socket/socket.errors/d
-                                                ./functions/socket/socket.errors/t
-
-            local.data.accept.error.message.l   ./functions/socket/socket.errors/t
-
-            local.data.bind.error.message       ./functions/socket/socket.errors/d
-                                                ./functions/socket/socket.errors/t
-
-            local.data.bind.error.message.l     ./functions/socket/socket.errors/t
-
-            local.data.create.error.message     ./functions/socket/socket.errors/d
-                                                ./functions/socket/socket.errors/t
-
-            local.data.create.error.message.l   ./functions/socket/socket.errors/t
-
-
         t   socket.accept.error                 ./functions/main/listening.socket.poll/t
 
             socket.bind.error                   ./functions/main/set.up.listener/t
@@ -2375,31 +2277,29 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
+      /write.console          Contains code that writes indexed external data strings to the admin
+                              console.
+
+      t   write.console                         ./commands/area/t
+                                                ./commands/look/t
+                                                ./commands/shutdown/t
+                                                ./functions/create.character/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/set.up.listener/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/socket.errors/t
+
+    ----------------------------------------------------------------------------------------------
+
       /write.descriptor       Contains code that adds data to an existing dataset on disk using a
                               logical descriptor previously associated with the dataset.
 
-      b   sys.write.call                        ./functions/write.descriptor/t
-
-          sys.standard.output                   ./functions/write.descriptor/d
-                                                ./functions/write.descriptor/t
-
-
-      d   file.indicator                        ./commands/area/t
-                                                ./functions/write.descriptor/t
-                                                ./functions/create.character/t
-
-
-      t   write.descriptor                      ./commands/shutdown/t
-                                                ./commands/look/t
-                                                ./commands/area/t
+      t   write.descriptor                      ./commands/area/t
                                                 ./functions/print.socket.number/t
-                                                ./functions/main/system.check/t
-                                                ./functions/main/participant.interaction
-                                                  /address.login.status/t
-                                                ./functions/main/listening.socket.poll/t
-                                                ./functions/main/set.up.listener/t
-                                                ./functions/socket/socket.errors/t
-                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/main/text.init/t
                                                 ./functions/create.character/t
 
     ----------------------------------------------------------------------------------------------
@@ -2436,4 +2336,3 @@ Relevant data:
                                                   /address.set.passphrase.status/t
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
-
