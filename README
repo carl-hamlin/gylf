@@ -2323,12 +2323,6 @@ Relevant data:
       /write.welcome          Contains code that builds and displays the initial welcome screen to
                               the user.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   write.welcome                         ./functions/main/participant.interaction
                                                   /address.set.passphrase.status/t
                                                 ./functions/main/participant.interaction
