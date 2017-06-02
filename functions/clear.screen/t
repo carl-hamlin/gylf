@@ -20,10 +20,6 @@
 ;
 ;   get.external.data               ./functions/get.external.data/t
 ;
-;   socket.data.send.buffer.pointer ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.buffer.l       ./functions/socket/recv.from.socket/d
-;
 ;   socket.send                     ./functions/socket/socket.send/t
 ;
 

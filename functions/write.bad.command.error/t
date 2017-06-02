@@ -16,12 +16,6 @@
 ;
 ;   socket.data.bad.command.error.l     ./functions/write.bad.command.error/d
 ;
-;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
-;
 ;   socket.send                         ./functions/socket/socket.send/t
 ;
 ;   write.prompt                        ./functions/write.prompt/t

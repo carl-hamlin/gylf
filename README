@@ -71,6 +71,7 @@ Relevant data:
                                                 ./functions/print.socket.number/t
                                                 ./functions/socket/bind.socket/t
                                                 ./functions/socket/create.socket/t
+                                                ./functions/socket/recv.from.socket/t
 
           word.l                                ./commands/area/t
                                                 ./functions/b
@@ -2116,9 +2117,6 @@ Relevant data:
                               it in a specified buffer.
 
         b   sys.socket.recv                     ./function/socket/recv.from.socket/t
-
-
-        d   No defined symbols.
 
 
         t   recv.from.socket                    ./functions/main/participant.interaction

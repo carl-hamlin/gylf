@@ -23,12 +23,6 @@
 ;
 ;   send.to.world.loop                  ./functions/socket/communications/send.to.world/t
 ;
-;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
-;
 ;   socket.number                       ./b
 ;
 ;   socket.send                         ./functions/socket/socket.send/t

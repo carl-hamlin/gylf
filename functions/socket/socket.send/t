@@ -19,8 +19,6 @@
 ;
 ;   memory.switch                       ./functions/allocate.memory/t
 ;
-;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
-;
 ;   sys.socket.call                     ./functions/socket/b
 ;
 ;   sys.socket.send                     ./functions/socket/socket.send/b
