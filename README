@@ -1349,12 +1349,6 @@ Relevant data:
           /address.active.status    Contains code that parses commands issued by users with an
                                     active status and sends them to the appropriate handler.
 
-          b   No defined symbols.
-
-
-          d   No defined symbols.
-
-
           t   address.active.status             ./functions/socket/answer.active.socket/t
 
               address.active.status.found       ./functions/main/participant.interaction
