@@ -2102,17 +2102,11 @@ Relevant data:
 
           session.descriptor                    No references.
 
-          socket.data.address                   ./functions/socket/create.socket/t
-
           socket.data.connected.socket          ./functions/socket/accept.socket/d
             .descriptor
 
-          socket.data.flags                     ./functions/socket/create.socket/t
-
           socket.data.listening.socket          ./functions/socket/bind.socket/t
             .descriptor                         ./functions/socket/listen.socket/t
-
-          socket.data.protocol.family           ./functions/socket/create.socket/t
 
           socket.data.queue.l                   ./functions/socket/listen.socket/t
 
@@ -2308,9 +2302,6 @@ Relevant data:
         /create.socket        Contains code that builds a socket for further use.
 
         b   sys.socket.create                   ./functions/socket/create.socket/t
-
-
-        d   No defined symbols.
 
 
         t   create.socket                       ./functions/main/set.up.listener/t
