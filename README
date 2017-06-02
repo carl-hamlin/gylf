@@ -1305,11 +1305,9 @@ Relevant data:
                                                 ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
 
-          sys.poll.number.of.structures         ./functions/main/active.socket.poll/t
-                                                ./functions/main/listening.socket.poll/t
+          sys.poll.number.of.structures         ./functions/poll.descriptor/t
 
-          sys.poll.timeout                      ./functions/main/active.socket.poll/t
-                                                ./functions/main/listening.socket.poll/t
+          sys.poll.timeout                      ./functions/poll.descriptor/t
 
 
       d   No defined symbols.
@@ -1916,9 +1914,6 @@ Relevant data:
                               data on it that requires the attention of a handler.
 
       b   sys.poll.call                         ./functions/poll.descriptor/t
-
-
-      d   No defined symbols.
 
 
       t   poll.descriptor                       ./functions/main/active.socket.poll/t
