@@ -10,8 +10,3 @@
 ;
 ;   No external references.
 ;
-
-    socket.data.send.socket.descriptor  dd  0000h ; Storage for descriptor associated with socket upon which to send data.
-    socket.data.send.buffer.pointer     dd  0000h ; Storage for pointer to buffer containing data to be sent.
-    socket.data.send.buffer.l           dd  0000h ; Storage for length of buffer.
-    socket.data.send.flags              dd  0000h ; Storage for communications semantics.

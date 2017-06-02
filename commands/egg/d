@@ -8,11 +8,16 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   egg.hatch.message               ./commands/egg/d
-;   socket.data.command.egg.help    ./commands/egg/d
-;   command.egg.l                   ./commands/egg/d
-;   command.egg.s                   ./commands/egg/d
 ;   command.egg                     ./commands/egg/t
+;
+;   command.egg.l                   ./commands/egg/d
+;
+;   command.egg.s                   ./commands/egg/d
+;
+;   egg.hatch.message               ./commands/egg/d
+;
+;   socket.data.command.egg.help    ./commands/egg/d
+;
 ;   socket.data.command.egg.help.l  ./commands/egg/d
 ;
 
