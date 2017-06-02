@@ -1258,12 +1258,6 @@ Relevant data:
       /get.character.data     Contains code which populates the character data in memory from file
                               for the character on the current socket.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   get.character.data                    ./functions/check.admin/t
 
     ----------------------------------------------------------------------------------------------
