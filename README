@@ -1120,12 +1120,6 @@ Relevant data:
       /clear.screen           Contains code that remotely clears the user's screen and places
                               their cursor in the upper left hand corner.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   clear.screen                          ./functions/main/listening.socket.poll/t
                                                 ./functions/write.welcome/t
 
