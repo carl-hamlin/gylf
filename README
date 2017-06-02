@@ -2306,9 +2306,6 @@ Relevant data:
 
       /write.prompt           Contains code that displays a command prompt to the user.
 
-      b   No defined symbols.
-
-
       d   prompt.message                        ./functions/write.prompt/d
                                                 ./functions/write.prompt/t
 
