@@ -1275,9 +1275,6 @@ Relevant data:
       b   sys.get.ticks                         ./functions/get.ticks/t
 
 
-      d   No defined symbols.
-
-
       t   get.ticks                             ./functions/dna.lab/t
 
     ----------------------------------------------------------------------------------------------
