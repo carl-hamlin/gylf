@@ -14,6 +14,8 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   dword.l                               ./b
+;
 ;   socket.data.general.socket.descriptor ./functions/socket/create.socket/b
 ;
 ;   sys.socket.address                    ./functions/socket/b
@@ -37,11 +39,11 @@
 
                     mov   eax, sys.socket.call                                ; eax = Socket call indicator.
                     mov   ebx, sys.socket.create                              ; ebx = Create a socket.
-                    mov   ecx, esp                                            ; ecx - pointer to arguments package.
+                    mov   ecx, esp                                            ; ecx - Pointer to arguments package.
                     int   sys.system.call                                     ; Create a socket.
 
                     mov   dword [socket.data.general.socket.descriptor], eax  ; Store socket descriptor.
 
                     push  edx                                                 ; Restore return address.
 
-                    ret   12                                                  ; Return to caller.
+                    ret   (dword.l * 3)                                       ; Return to caller.
