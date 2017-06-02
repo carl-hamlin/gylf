@@ -1483,9 +1483,6 @@ Relevant data:
                           can suspend execution and return control to linux in the hopes that the
                           admin can figure out what's clogging up the works.
 
-        b   No defined symbols.
-
-
         d   local.data.listen.error.message     ./functions/main/set.up.listener/d
 
             local.data.listen.error.message.l   No references.
