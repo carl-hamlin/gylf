@@ -20,8 +20,6 @@
 ;
 ;   connection.table                    ./functions/main/system.check/b
 ;
-;   memory.switch                       ./functions/memory.switch/t
-;
 ;   send.to.area.broadcast              ./functions/socket/communications/send.to.area/t
 ;
 ;   send.to.area.broadcast.done         ./functions/socket/communications/send.to.area/t
@@ -33,17 +31,8 @@
 ;   socket.send                         ./functions/socket/socket.send/t
 ;
 
-    send.to.area:                 pop   edx                                       ; Preserve return address.
+    send.to.area:                 pop   ebp                                       ; Preserve return address.
     
-                                  push  12                                        ; Request 12 extra bytes of memory.
-                                  call  memory.switch                             ; Extend memory.
-
-                                  pop   dword [ebx]                               ; Point send function to area ID to be broadcast.
-                                  pop   dword [ebx+4]                             ; Point send function to the message to be broadcast.
-                                  pop   dword [ebx+8]                             ; Tell send function how long the message is.
-
-                                  push  edx                                       ; Restore return address.
-
                                   push  esi                                       ; Preserve caller's esi.
 
                                   mov   esi, connection.table                     ; esi - Pointer to table of handles associated with active connections.
@@ -51,7 +40,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.area.connection.poll: mov   eax, dword [ebx]                          ; eax - Area id to be broadcast.
+    send.to.area.connection.poll: mov   eax, dword [esp]                          ; eax - Area id to be broadcast.
                                   cmp   dword [esi+connection.area.id.index], eax ; Does the area id associated with this connection match the area id to be broadcast?
                                   jz    send.to.area.broadcast                    ; Yes. Go broadcast to this connection.
 
@@ -60,17 +49,16 @@
     send.to.area.broadcast.done:  add   esi, connection.entry.size                ; esi - Pointer to next connection handle in table.
                                   loop  send.to.area.connection.poll              ; Go check the next connection.
 
-                                  push  0                                         ; Tell memory.swith to free memory.
-                                  call  memory.switch                             ; Free temporary memory.
-
                                   pop   esi                                       ; Restore caller's esi.
 
-                                  ret                                             ; Return to caller.
+                                  push  ebp                                       ; Restore return address.
+
+                                  ret   (dword * 3)                               ; Return to caller.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.area.broadcast:       push  edx                                       ; Tell send function how long the message is.
-                                  push  ebx                                       ; Point send function to the message.
+    send.to.area.broadcast:       push  dword [esp+(dword.l*2)]                   ; Tell send function how long the message is.
+                                  push  dword [esp+dword.l]                       ; Point send function to the message.
                                   call  socket.send                               ; Send the message to the indicated descriptor.
 
                                   jmp   send.to.area.broadcast.done               ; Go set up for the next connection.
