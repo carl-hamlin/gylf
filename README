@@ -2347,9 +2347,6 @@ Relevant data:
                                   send a string to the server that doesn't correspond to a
                                   recognized command.
 
-      b   No defined symbols.
-
-
       d   socket.data.bad.command.error         ./functions/write.bad.command.error/d
                                                 ./functions/write.bad.command.error/t
 
