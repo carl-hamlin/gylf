@@ -1110,12 +1110,6 @@ Relevant data:
       /check.login            Contains code that checks to see if a user attempting to log in is
                               already logged in from a different location.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   check.login                           ./functions/main/participant.interaction
                                                   /address.login.status/t
 
