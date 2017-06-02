@@ -112,6 +112,7 @@
                           pop   esi                                                                     ; Restore index to connection table.
 
                           mov   ebp, eax                                                                ; ebp - Size of received data.
+                          push  ebx                                                                     ; Point open.descriptor to socket filename.
                           call  open.descriptor                                                         ; See if there's already a user credentials file named after the data received. If so,
                                                                                                         ; associate a descriptor with it.
 

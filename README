@@ -65,6 +65,7 @@ Relevant data:
                                                 ./functions/main/system.check/t
                                                 ./functions/main/text.init/b
                                                 ./functions/main/text.init/t
+                                                ./functions/open.descriptor/t
                                                 ./functions/print.socket.number/t
 
           word.l                                ./commands/area/t

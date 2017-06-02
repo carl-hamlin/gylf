@@ -28,7 +28,7 @@
                         push  ebx                             ; Preserve caller's ebx register.
                         push  ecx                             ; Preserve caller's ecx register.
 
-                        mov   ebx, [esp+16]                   ; ebx - Pointer to ASCIIZ filename for external data file.
+                        push  dword [esp+16]                  ; Point to ASCIIZ filename for external data file.
                         call  open.descriptor                 ; Associate a descriptor with the external data file.
             
                         mov   ebx, eax                        ; ebx - Descriptor associated with the file.
