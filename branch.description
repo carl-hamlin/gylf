@@ -1,0 +1,5 @@
+Issue #31: Dig Should Take Some Time to Complete
+
+If Dig succeeds, then the process of creating the new area should take some time based on environmental factors.
+
+The digging participant should not be able to perform most other actions during the time period without first stopping their dig.
