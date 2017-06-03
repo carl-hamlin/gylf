@@ -1,0 +1,4 @@
+%include  "./functions/main/participant.interaction/address.active.status/i"
+%include  "./functions/main/participant.interaction/address.login.status/i"
+%include  "./functions/main/participant.interaction/address.passphrase.status/i"
+%include  "./functions/main/participant.interaction/address.set.passphrase.status/i"
