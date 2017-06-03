@@ -1,0 +1,4 @@
+Issue #34: Egg Command Should Be Privilege Restricted
+
+
+The Egg command should only be available to users with administrative privileges.
