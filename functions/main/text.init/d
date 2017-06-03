@@ -1,0 +1,23 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/main/text.init/d
+;
+;   This file contains all data	pertinent to the text.init function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   local.data.populating.textual.data.indices.message  ./functions/main/text.init/d
+;
+;   local.data.text.data.failed                         ./functions/main/text.init/d
+;
+
+    local.data.populating.textual.data.indices.message    db  "Populating textual data indices...", 0Ah, 0Dh                          ; Message indicating that we're populating the textual
+                                                                                                                                      ; data indices.
+    local.data.populating.textual.data.indices.message.l  equ $-local.data.populating.textual.data.indices.message                    ; Length of message.
+
+    local.data.text.data.failed                           db  "A problem occurred while reading external data. Exiting...", 0Ah, 0Dh  ; Message indicating failure to load data.
+    local.data.text.data.failed.l                         equ $-local.data.text.data.failed                                           ; Length of message.
+
+    text.data.filename                                    db  "./external.data/m/d", 00h                                              ; ASCIIZ terminated filename for textual data.
