@@ -1,0 +1,3 @@
+Issue #28: Dig Should Take a Direction as an Argument
+
+The Dig command should take a direction as an argument, supported by the argument cluster mechanism.
