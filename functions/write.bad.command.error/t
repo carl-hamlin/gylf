@@ -1,0 +1,27 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/write.bad.command.error/t
+;
+;   This function lets the user know that they've entered a bad command and suggests that they try HELP.
+;
+;   Assumptions:    esi = Pointer to descriptor associated with target socket.
+;
+;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   socket.send                                           ./functions/socket/socket.send/t
+;
+;   text.data.index.socket.data.bad.command.error.message ./functions/main/text.init/b
+;
+;   write.prompt                                          ./functions/write.prompt/t
+;
+
+    write.bad.command.error:  push  dword [text.data.index.socket.data.bad.command.error.message] ; Point send command to the bad command error message.
+                              call  socket.send                                                   ; Tell the user that the command doesn't have a current analogue.
+
+                              call  write.prompt                                                  ; Give the user a command prompt.
+
+                              ret                                                                 ; Return to caller.
