@@ -1,0 +1,5 @@
+Issue #30: Dig Should Create a New Area in Specified Direction
+
+Barring contraindicators arising from environmental factors,
+the Dig command should create a new area in the direction
+specified as an argument by the participant.
