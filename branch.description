@@ -1,0 +1,5 @@
+Issue #38: Gylf Command Should take a Coded Argument String Representing DNA Infor For Resulting Profile
+
+The Gylf command should take a single argument comprised of a string of numeric data representing coded
+DNA info to be parsed against the performing entity's own profile by the DNA Lab to create the finalized
+profile data.
