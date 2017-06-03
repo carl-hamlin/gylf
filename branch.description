@@ -1,0 +1,7 @@
+Issue #33: Other Participants Should Be Able to Help With Digging
+
+While a dig is occurring, other participants in the area, having noticed the dig, should be able to help the digging participant with the syntax:
+
+'dig help '
+
+Doing so should shorten the time required to complete the dig.
