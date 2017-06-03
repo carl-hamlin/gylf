@@ -1,0 +1,8 @@
+Issue #29: Dig Should Ensure Argument Make Sense Within the Parameters of the Environment.
+
+The Dig command should parse incoming directional arguments and check against the hosting
+environment to ensure that it makes sense within the parameters thereof for a participant
+to dig in the specified direction.
+
+If it does not make sense, then the command should provide specific messaging indicating
+the reason the participant may not dig in that direction.
