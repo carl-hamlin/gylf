@@ -12,19 +12,16 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   socket.data.bad.command.error       ./functions/write.bad.command.error/d
+;   socket.send                                           ./functions/socket/socket.send/t
 ;
-;   socket.data.bad.command.error.l     ./functions/write.bad.command.error/d
+;   text.data.index.socket.data.bad.command.error.message ./functions/main/text.init/b
 ;
-;   socket.send                         ./functions/socket/socket.send/t
-;
-;   write.prompt                        ./functions/write.prompt/t
+;   write.prompt                                          ./functions/write.prompt/t
 ;
 
-    write.bad.command.error:  push  socket.data.bad.command.error.l ; Tell send function how long the message is.
-                              push  socket.data.bad.command.error   ; point send command to the bad command error message.
-                              call  socket.send                     ; Tell the user that the command doesn't have a current analogue.
+    write.bad.command.error:  push  dword [text.data.index.socket.data.bad.command.error.message] ; Point send command to the bad command error message.
+                              call  socket.send                                                   ; Tell the user that the command doesn't have a current analogue.
 
-                              call  write.prompt                    ; Give the user a command prompt.
+                              call  write.prompt                                                  ; Give the user a command prompt.
 
-                              ret                                   ; Return to caller.
+                              ret                                                                 ; Return to caller.

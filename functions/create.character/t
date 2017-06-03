@@ -81,10 +81,6 @@
 ;
 ;   egg.father.l                                        ./commands/egg/b
 ;
-;   egg.hatch.message                                   ./commands/egg/d
-;
-;   egg.hatch.message.l                                 ./commands/egg/d
-;
 ;   egg.mother                                          ./commands/egg/b
 ;
 ;   egg.mother.l                                        ./commands/egg/b
@@ -105,13 +101,11 @@
 ;
 ;   send.to.area                                        ./functions/socket/communications/send.to.area/t
 ;
-;   socket.data.out.of.area.ids.message                 ./functions/d
-;
-;   socket.data.out.of.area.ids.message.l               ./functions/d
-;
 ;   socket.send                                         ./functions/socket/socket.send/t
 ;
 ;   text.data.index.local.data.out.of.area.ids.message  ./functions/main/text.init/b
+;
+;   text.data.index.socket.data.out.of.area.ids.message ./functions/main/text.init/b
 ;
 ;   write.console                                       ./functions/write.console/t
 ;
@@ -192,8 +186,7 @@
 
     area.filename.out.of.ids:           pop   esi                                                         ; esi - Index to socket entry.
 
-                                        push  socket.data.out.of.area.ids.message.l                       ; Store length of message for send function.
-                                        push  socket.data.out.of.area.ids.message                         ; Point send function to message indicating that we're fresh out of area ids.
+                                        push  dword [text.data.index.socket.data.out.of.area.ids.message] ; Point send function to message indicating that we're fresh out of area ids.
                                         call  socket.send                                                 ; Send the message on the socket.
 
                                         call  clean.socket                                                ; Disconnect the current socket.
@@ -205,9 +198,8 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    build.pouch.found.open.id:          mov   eax, egg.area.id                                            ; eax - area id associated with egg.
-                                        mov   ebx, egg.hatch.message                                      ; ebx - pointer to message indicating that the egg is about to hatch.
-                                        mov   edx, egg.hatch.message.l                                    ; edx - length of message.
+    build.pouch.found.open.id:          push  dword [text.data.index.socket.data.egg.hatch.message]       ; Point send function to index for message indicating an egg is about to hatch.
+                                        push  egg.area.id                                                 ; Tell send function what area to send to.
                                         call  send.to.area                                                ; Tell the area where the egg is sitting that the egg is beginning to hatch.
                 
                                         pop   esi                                                         ; esi - Index to socket entry.
