@@ -1,0 +1,22 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/main/participant.interaction/address.passphrase.status/e
+;
+;   This file defines the external textual data associated with the address.passphrase.status function.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Outgoing Data
+;
+
+    socket.data.bad.passphrase.message.l    dd  socket.data.bad.passphrase.message.end                          ; Length of message.
+	  socket.data.bad.passphrase.message	    db  "Oop. That's not it. Please call back and try again.", 0Ah, 0Dh ; Storage for bad passphrase message.
+	  socket.data.bad.passphrase.message.end  equ $-socket.data.bad.passphrase.message											      ; Pointer to end of message.
+
+    socket.data.passphrase.message.l        dd  socket.data.passphrase.message.end                              ; Length of message.
+	  socket.data.passphrase.message		      db  "Please enter your passphrase: "											          ; Storage for passphrase message.
+	  socket.data.passphrase.message.end      equ $-socket.data.passphrase.message											          ; Length of passphrase message.
+

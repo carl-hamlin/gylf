@@ -1,0 +1,14 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/recv.from.socket/b
+;
+;   This file contains all definitions pertinent to the recv.from.socket function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+   %define  sys.socket.recv 00Ah  ; 00Ah is the modifier for 066h that tells the kernel we want to read the data waiting on an active socket.
