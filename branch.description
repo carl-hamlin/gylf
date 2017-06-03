@@ -1,0 +1,5 @@
+Issue #26: Logout Should Clean Impacted Connection Socket
+
+Logout command should clean and restore connection socket to unused socket repository.
+
+With upcoming changes to the way connections work, this branch might become obsolete.
