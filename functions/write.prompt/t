@@ -1,0 +1,23 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/write.prompt/t
+;
+;   This function prints a command prompt.
+;
+;   Assumptions:    eax - Descriptor associated with target connection.
+;
+;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   socket.send                                 ./functions/socket/socket.send/t
+;
+;   text.data.index.socket.data.prompt.message  ./functions/main/text.init/b
+;
+
+    write.prompt: push dword [text.data.index.socket.data.prompt.message] ; Point the send function to the prompt.
+                  call socket.send                                        ; Send the prompt to the socket.
+
+                  ret                                                     ; Return to caller.
