@@ -1,0 +1,3 @@
+Issue #36: Egg Command Should Inform Implantee of Their New Status Upon Success
+
+If the command is successful, the implantee should be given a notification indicating that they're expecting.
