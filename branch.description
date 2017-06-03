@@ -1,0 +1,5 @@
+Issue #23: Client Dismissal via Ctrl + Break Crashes the Server
+
+This is one reason we're not running an open test server.
+
+We need to figure out how to capture Ctrl + Break disconnections in a way that is safe for the server.
