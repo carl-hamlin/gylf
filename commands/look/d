@@ -1,0 +1,27 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/look/d
+;
+;   This file contains data pertinent to the look command.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   command.look    ./commands/look/t
+;
+;   command.look.l  ./commands/look/d
+;
+;   command.look.s  ./commands/look/d
+;
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Command Table Entry
+;
+
+    command.look.w  db  command.look.l                                ; Indicator of length of command 'look'.
+    command.look.s  db  'look'                                        ; Common command string for displaying information about the target argument.
+    command.look.l  equ $-command.look.s                              ; Length of command 'look'.
+    command.look.p  dd  command.look                                  ; Pointer to handler for command 'look'.
+    command.look.h  dd  text.data.index.socket.data.command.look.help ; Pointer to help message for command 'look'.

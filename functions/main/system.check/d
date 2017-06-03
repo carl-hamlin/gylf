@@ -1,0 +1,15 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/main/system.check/d
+;
+;   This file contains all data	pertinent to the system.check function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   socket.numbers                                      ./functions/main/system.check/d
+;
+
+    socket.numbers                                        db  "0000"                                                              ; Placeholder for socket numbers to populate connection table.
+    socket.numbers.l                                      equ  $-socket.numbers                                                   ; Length of placeholder.
