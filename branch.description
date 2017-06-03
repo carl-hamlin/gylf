@@ -1,0 +1,3 @@
+Issue #27: Logout SHould Revert Entity to AI Mode
+
+Logout command does not currently revert the impacted entity to AI mode.
