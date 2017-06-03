@@ -1,0 +1,27 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/area/d
+;
+;   This file contains data pertaining to the area command.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   command.area    ./commands/area/t
+;
+;   command.area.l  ./commands/area/d
+;
+;   command.area.s  ./commands/area/d
+;
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Command Table Entry
+;
+
+    command.area.w  db  command.area.l                                ; Indicator of length of command 'area'.
+    command.area.s  db  'area'                                        ; Admin command string for creating an area.
+    command.area.l  equ $-command.area.s                              ; Length of command 'area'.
+    command.area.p  dd  command.area                                  ; Pointer to handler for command 'area'.
+    command.area.h  dd  text.data.index.socket.data.command.area.help ; Pointer to help message for command 'area'.

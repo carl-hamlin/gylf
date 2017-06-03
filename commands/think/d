@@ -1,0 +1,27 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/think/d
+;
+;   This file contains data pertinent to the think command.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   command.think   ./commands/think/t
+;
+;   command.think.l ./commands/think/d
+;
+;   command.think.s ./commands/think/d
+;
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Command Table Entry
+;
+
+    command.think.w db  command.think.l                                 ; Indicator of length of command 'think'.
+    command.think.s db  'think'                                         ; Common command string for communicating with other players.
+    command.think.l equ $-command.think.s                               ; Length of command 'think'.
+    command.think.p dd  command.think                                   ; Pointer to handler for command 'think'.
+    command.think.h dd  text.data.index.socket.data.command.think.help  ; Pointer to help message for command 'think'.
