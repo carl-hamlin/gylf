@@ -1,0 +1,7 @@
+Issue #35: Egg Command Should Take an Implantee's Name as an Argument
+
+The Egg command should have, as it's first argument, the name of a participant within whom the egg shall be implanted.
+
+If the named participant is already carrying an egg, the command should detect that condition, and respond to the
+initiating participant with an error message to that effect; current egg carriers are not eligible to be implanted
+in this way.
