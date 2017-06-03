@@ -1,0 +1,14 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/read.descriptor/b
+;
+;   This file contains definitions for the read.descriptor function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+    %define sys.read.call 003h  ; 003h is the modifier for 080h that tells the kernel we want to read data from a specified descriptor.
