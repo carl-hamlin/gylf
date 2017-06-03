@@ -1,0 +1,3 @@
+Issue #25: Logout Should Disconnect User
+
+Logout command does not currently disconnect the invoking user.
