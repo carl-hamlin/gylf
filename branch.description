@@ -1,0 +1,5 @@
+Issue #62: Look Command - Object
+
+When an object is provided to the look command as an argument, it should return obvious features of the object, then contest the Search skill to return non-obvious features of the object.
+
+This contest should train the Search skill slightly.
