@@ -1,0 +1,6 @@
+Issue #61: Look Command - Named Participant
+
+When a named participant is provided to the Look command as an argument, it should return a basic synopsis of the obvious features of the participant, and then contest search skill to return
+non-obvious features.
+
+This contest should train the Search skill slightly.
