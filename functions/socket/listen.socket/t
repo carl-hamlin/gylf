@@ -1,0 +1,41 @@
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   ./functions/socket/listen.socket/t
+;
+;   This function tells a created and bound socket to listen for incoming connections.
+;
+;   Assumptions:    None.
+;
+;   Returns:        eax - Error indicator.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   dword.l                               ./b
+;
+;   socket.data.general.socket.descriptor ./functions/socket/create.socket/b
+;
+;   socket.data.queue.l                   ./functions/socket/b
+;
+;   sys.socket.call                       ./functions/socket/b
+;
+;   sys.socket.listen                     ./functions/socket/listen.socket/b
+;
+;   sys.socket.queue.l                    ./functions/socket/b
+;
+;   sys.system.call                       ./functions/b
+;
+
+    listen.socket:  pop   ebp                                           ; Preserve return address.
+
+                    push  sys.socket.queue.l                            ; Set socket queue length.
+                    push  dword [socket.data.general.socket.descriptor] ; Point to listening socket.
+
+                    mov   eax, sys.socket.call                          ; eax - Socket call indicator.
+                    mov   ebx, sys.socket.listen                        ; ebx - Tell the socket to listen.
+                    mov   ecx, esp                                      ; ecx - Pointer to arguments package for the listen function.
+                    int   sys.system.call                               ; Tell the socket to listen.
+
+                    push  ebp                                           ; Restore return address.
+                    ret   (dword.l * 2)                                 ; Return to caller.
