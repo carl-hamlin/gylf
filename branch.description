@@ -1,0 +1,3 @@
+Issue #60: Look Command - No Argument
+
+When no argument is provided to the Look command, it should provide a basic synopsis of the area inhabited by the performing entity.
