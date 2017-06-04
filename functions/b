@@ -22,8 +22,6 @@
 ;
 ;   character.mother.data                 ./functions/b
 ;
-;   character.secondary.color.table       ./functions/b
-;
 ;   character.secondary.fur.quality.table ./functions/b
 ;
 ;   word.l                                ./b
@@ -86,6 +84,8 @@
     %define     new.char.sig                          0AFFh                                     ; Indicator that the file read by address.login.status is in fact an egg, rather than an established character.
 
     %define     admin.character                       00000001b                                 ; Mask for administrative byte indicating character has admin privileges.
+
+    %define     character.secondary.color.number      35d                                       ; Number of current character base colors.
 
 ;================================================================================================================================================================================================
 ;
@@ -243,15 +243,6 @@
 
     character.base.color.table                  equ     $                                       ; Placeholder for base color table entry point.
     character.base.color.number                 equ     $-character.base.color.table            ; Number of base colors in table.
-
-;================================================================================================================================================================================================
-;
-; Secondary Colors
-;
-;================================================================================================================================================================================================
-
-    character.secondary.color.table             equ     $                                       ; Placeholder for secondary color table entry point.
-    character.secondary.color.number            equ     $-character.secondary.color.table       ; Number of secondary colors in table.
 
 ;================================================================================================================================================================================================
 ;
