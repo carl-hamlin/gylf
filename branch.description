@@ -1,0 +1,5 @@
+Issue #55: Think Command Should Direct to Named Participant Per Mental Projection Skill
+
+The Think command should take an optional argument in the form of a named participant, then contest Mental Projection to send the specified message to that participant.
+
+Contest should increase in difficulty in direct proportion to the distance between the two participants.
