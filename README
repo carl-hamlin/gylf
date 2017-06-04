@@ -798,19 +798,11 @@ Relevant data:
 
           character.mother.dna.l                ./functions/dna.lab/t
 
-          character.base.color.table            ./functions/b
-
           character.base.color.number           ./functions/dna.lab/t
-
-          character.secondary.color.table       ./functions/b
 
           character.secondary.color.number      ./functions/dna.lab/t
 
-          character.base.fur.quality.table      ./functions/b
-
           character.base.fur.quality.number     ./functions/dna.lab/t
-
-          character.secondary.fur.quality.table ./functions/b
 
           character.secondary.fur.quality       ./functions/dna.lab/t
             .number
@@ -821,6 +813,14 @@ Relevant data:
                                                 ./functions/d
 
           area.filename.l                       ./commands/area/t
+
+          character.base.color.table            No references.
+
+          character.base.fur.quality.table      No references.
+
+          character.secondary.color.table       No references.
+
+          character.secondary.fur.quality.table No references.
 
           command.table                         ./commands/help/t
                                                 ./functions/d
