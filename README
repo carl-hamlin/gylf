@@ -804,8 +804,6 @@ Relevant data:
 
           character.secondary.color.number      ./functions/dna.lab/t
 
-          character.base.fur.quality.table      ./functions/b
-
           character.base.fur.quality.number     ./functions/dna.lab/t
 
           character.secondary.fur.quality.table ./functions/b
@@ -819,6 +817,8 @@ Relevant data:
                                                 ./functions/d
 
           area.filename.l                       ./commands/area/t
+
+          character.base.fur.quality.table      No references.
 
           character.secondary.color.table       No references.
 
