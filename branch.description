@@ -1,0 +1,4 @@
+Issue #66: Help Command Should Restrict Info on Admin Commands to Admins
+
+Currently, information on administrator-privileged commands is available to anyone with access to HELP. Ideally, we'd like to keep even the knowledge of the syntax of those commands out of the
+hands of folk who don't have those privileges.
