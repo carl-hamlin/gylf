@@ -1,0 +1,6 @@
+Issue #64: Look Command - Terrain Feature
+
+When a real terrain feature is provided to the Look command as an argument it should return obvious features of the terrain feature, then contest the Search skill to return non-obvious
+features.
+
+This contest should train the Search skill slightly.
