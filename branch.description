@@ -1,0 +1,3 @@
+Issue #41: Help Command Should Be Context-Sensitive
+
+Help command should take a look at the performing entity's situation and make a determination as to how to best help when no arguments are present.
