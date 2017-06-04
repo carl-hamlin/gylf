@@ -1,0 +1,3 @@
+Issue #52: Think Command Should Broadcast to the Participant's Current Area When Invoked Without an Argument
+
+When the Think command is invoked without an argument, the message should be broadcast to the performing participant's current area.
