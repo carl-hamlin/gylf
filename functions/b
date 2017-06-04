@@ -12,8 +12,6 @@
 ;
 ;   buffer.2.l                            ./functions/b
 ;
-;   character.base.color.table            ./functions/b
-;
 ;   character.data                        ./functions/b
 ;
 ;   character.father.data                 ./functions/b
@@ -83,6 +81,8 @@
                                                                                                 ; established character.
 
     %define     admin.character                       00000001b                                 ; Mask for administrative byte indicating character has admin privileges.
+    
+    %define     character.base.color.number           35d                                       ; Number of current character base colors.
 
     %define     character.secondary.color.number      35d                                       ; Number of current character base colors.
 
@@ -235,15 +235,6 @@
     character.mother.agility                    resb    0001h                                   ; Byte indicator for character agility.
 
     character.mother.dna.l                      equ     $-character.mother.data                 ; Length of DNA information
-
-;================================================================================================================================================================================================
-;
-; Base Colors
-;
-;================================================================================================================================================================================================
-
-    character.base.color.table                  equ     $                                       ; Placeholder for base color table entry point.
-    character.base.color.number                 equ     $-character.base.color.table            ; Number of base colors in table.
 
 ;================================================================================================================================================================================================
 ;
