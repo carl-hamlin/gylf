@@ -31,21 +31,9 @@
 ;
 ;   command.think.untargetted           ./commands/think/t
 ;
-;   connection.descriptor.index         ./functions/main.system.check/b
-;
 ;   send.to.area                        ./functions/socket/communications/send.to.area/t
 ;
 ;   send.to.player                      ./functions/socket/communications/send.to.player/t
-;
-;   socket.data.command.think.help      ./commands/think/d
-;
-;   socket.data.command.think.help.l    ./commands/think/d
-;
-;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
 ;
 ;   socket.send                         ./functions/socket/socket.send/t
 ;
@@ -53,10 +41,7 @@
     command.think:              cmp   eax, command.think.l
                                 jnz   command.think.arguments
 
-    command.think.help.msg:     mov   ebx, dword [esi+connection.descriptor.index]                            ; ebx - Descriptor associated with current connection.
-                                mov   dword [socket.data.send.socket.descriptor], ebx                         ; Store socket descriptor for send function.
-                                mov   dword [socket.data.send.buffer.pointer], socket.data.command.think.help ; Point send function to message indicating that the command was bad.
-                                mov   dword [socket.data.send.buffer.l], socket.data.command.think.help.l     ; Store length of message for send function.
+    command.think.help.msg:     push  dword [text.data.index.socket.data.command.think.help]                  ; Point send function to message indicating that the command was bad.
                                 call  socket.send                                                             ; Tell the user that the command doesn't have a current analogue.
 
                                 ret                                                                           ; Return to caller.
@@ -73,8 +58,11 @@
                                 mov   esi, dword [argument.02.location]                                       ; esi - Pointer to provided name.
                                 call  translate.name.to.socket.number                                         ; eax - Error, or pointer to socket associated with the given name.
 
-                                cmp   eax, 0FFFFh
-                                jz    command.think.help.msg
+                                cmp   eax, 0FFFFh                                                             ; Were we able to translate the argument?
+                                jz    command.think.help.msg                                                  ; No. Go educate the user.
+
+                                cmp  byte [esi], '"'                                                          ; Is the first byte a quotation mark?
+                                jz   command.think.untargetted                                                ; Yes - send the message to the entire area.
 
                                 ; TODO - Populate fields for send.to.player. Still need to figure out areas.
 
@@ -82,8 +70,7 @@
 
                                 ret                                                                           ; Return to caller.
 
-    command.think.untargetted:  mov   edx, eax                                                                ; edx - Length of command string minus terminator(s).
-                                sub   edx, command.think.l                                                    ; edx - Length of command string minus terminator(s) and command.
+    command.think.untargetted:  push  dword [esi]                                                             ; Point to message.
                                 call  send.to.area                                                            ; Broadcast the message.
 
                                 ret                                                                           ; Return to caller.
