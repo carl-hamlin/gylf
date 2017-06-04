@@ -1,0 +1,23 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/gylf/e
+;
+;   This file defines the external textual data associated with the command 'gylf'.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
+
+	  socket.data.command.gylf.help.l   dd  socket.data.command.gylf.help.end                                                                             ; Length of message.
+	  socket.data.command.gylf.help     db  "  gylf", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command gylf help message.
+	                                    db  "  Syntax: gylf <primary parent> <secondary parent> <name of target profile>", 0Ah, 0Dh, 0Ah, 0Dh
+	                                    db  "  The Gylf command takes three arguments; a primary parent, a secondary parent, and the name of a", 0Ah, 0Dh
+	                                    db  "  profile to be created using the DNA Lab from the DNA of the supplied parents. This profile will", 0Ah, 0Dh
+	                                    db  "  be created as a complete profile, without the intervening process of eggdom.", 0Ah, 0Dh, 0Ah, 0Dh
+	                                    db  "  This command is, of course, restricted to administrator privileged participants."
+	                                    db  0Ah, 0Dh, 0Ah, 0Dh,  "> "
+	  socket.data.command.gylf.help.end equ $-socket.data.command.gylf.help                                                                               ; Pointer to end of message.
