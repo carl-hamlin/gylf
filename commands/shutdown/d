@@ -1,0 +1,27 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/shutdown/d
+;
+;   This file contains data pertinent to the shutdown command.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   command.shutdown    ./commands/shutdown/t
+;
+;   command.shutdown.l  ./commands/shutdown/d
+;
+;   command.shutdown.s  ./commands/shutdown/d
+;
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Command Table Entry
+;
+
+    command.shutdown.w  db  command.shutdown.l                                ; Indicator of length of command 'shutdown'.
+    command.shutdown.s  db  'shutdown'                                        ; Admin command string for shutting down the server.
+    command.shutdown.l  equ $-command.shutdown.s                              ; Length of command 'shutdown'.
+    command.shutdown.p  dd  command.shutdown                                  ; Pointer to handler for command 'shutdown'.
+    command.shutdown.h  dd  text.data.index.socket.data.command.shutdown.help ; Pointer to help message for command 'look'.
