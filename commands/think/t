@@ -19,58 +19,46 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   argument.02.location                ./functions/aggregate.arguments/b
+;   argument.02.location                            ./functions/aggregate.arguments/b
 ;
-;   argument.02.size                    ./functions/aggregate.arguments/b
+;   argument.02.size                                ./functions/aggregate.arguments/b
 ;
-;   arguments.num                       ./functions/aggregate.arguments/b
+;   arguments.num                                   ./functions/aggregate.arguments/b
 ;
-;   command.think.arguments             ./command/think/t
+;   command.think.arguments                         ./commands/think/t
 ;
-;   command.think.l                     ./commands/think/d
+;   command.think.help.msg                          ./commands/think/t
 ;
-;   command.think.untargetted           ./commands/think/t
+;   command.think.untargetted                       ./commands/think/t
 ;
-;   connection.descriptor.index         ./functions/main.system.check/b
+;   connection.descriptor.index                     ./functions/main.system.check/b
 ;
-;   send.to.area                        ./functions/socket/communications/send.to.area/t
+;   send.to.area                                    ./functions/socket/communications/send.to.area/t
 ;
-;   send.to.player                      ./functions/socket/communications/send.to.player/t
+;   send.to.player                                  ./functions/socket/communications/send.to.player/t
 ;
-;   socket.data.command.think.help      ./commands/think/d
+;   socket.send                                     ./functions/socket/socket.send/t
 ;
-;   socket.data.command.think.help.l    ./commands/think/d
+;   text.data.index.socket.data.command.think.help  ./functions/main/text.init/b
 ;
-;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
-;
-;   socket.send                         ./functions/socket/socket.send/t
+;   translate.name.to.socket.number                 ./functions/translate.name.to.socket.number/t
 ;
 
-    command.think:              cmp   eax, command.think.l
-                                jnz   command.think.arguments
+    command.think:              cmp   dword [arguments.num], 00000000h                                        ; Do we have arguments?
+                                jnz   command.think.arguments                                                 ; Yes. Go take care of them.
 
-    command.think.help.msg:     mov   ebx, dword [esi+connection.descriptor.index]                            ; ebx - Descriptor associated with current connection.
-                                mov   dword [socket.data.send.socket.descriptor], ebx                         ; Store socket descriptor for send function.
-                                mov   dword [socket.data.send.buffer.pointer], socket.data.command.think.help ; Point send function to message indicating that the command was bad.
-                                mov   dword [socket.data.send.buffer.l], socket.data.command.think.help.l     ; Store length of message for send function.
+    command.think.help.msg:     push  dword [text.data.index.socket.data.command.think.help]                  ; Point send function to message indicating that the command was bad.
                                 call  socket.send                                                             ; Tell the user that the command doesn't have a current analogue.
 
                                 ret                                                                           ; Return to caller.
 
-    command.think.arguments:    mov   al, 01h                                                                 ; al - Signifier for only one argument.
-
-                                cmp   al, byte [arguments.num]                                                ; Was there only one argument?
+    command.think.arguments:    cmp   dword [arguments.num], 00000001h                                        ; Was there only one argument?
                                 jz    command.think.untargetted                                               ; Yes - send the message to the entire area.
 
                                 ; Skill evaluation goes here - failure shunts to command.think.untargetted.
 
-                                sub   edx, edx                                                                ; edx - Prepped for receiving size of provided name.
-                                mov   dl, byte [argument.02.size]                                             ; edx - Size of provided name.
-                                mov   esi, dword [argument.02.location]                                       ; esi - Pointer to provided name.
+                                push  dword [argument.02.size]                                                ; Size of provided name.
+                                push  dword [argument.02.location]                                            ; Pointer to provided name.
                                 call  translate.name.to.socket.number                                         ; eax - Error, or pointer to socket associated with the given name.
 
                                 cmp   eax, 0FFFFh
@@ -78,12 +66,14 @@
 
                                 ; TODO - Populate fields for send.to.player. Still need to figure out areas.
 
+                                push  esi
+                                push  eax
                                 call  send.to.player                                                          ; Send message to targetted player.
 
                                 ret                                                                           ; Return to caller.
 
-    command.think.untargetted:  mov   edx, eax                                                                ; edx - Length of command string minus terminator(s).
-                                sub   edx, command.think.l                                                    ; edx - Length of command string minus terminator(s) and command.
+    command.think.untargetted:  push  eax                                                                     ; Length of command string minus terminator(s).
+                                push  dword [argument.02.size]                                                ; Length of command string minus terminator(s) and command.
                                 call  send.to.area                                                            ; Broadcast the message.
 
                                 ret                                                                           ; Return to caller.

@@ -8,44 +8,19 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.gylf.l                  ./commands/gylf/d
-;   command.gylf.s                  ./commands/gylf/d
-;   socket.data.command.gylf.help   ./commands/gylf/d
-;   socket.data.command.gylf.help.l ./commands/gylf/d
+;   command.gylf    ./commands/gylf/t
 ;
-;   command.gylf                    ./commands/gylf/t
+;   command.gylf.l  ./commands/gylf/d
 ;
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;   command.gylf.s  ./commands/gylf/d
 ;
-;   Local Data
-;
-
-    local.data.gylf.bad.syntax.message    db  "An admin bounced the gylf command on bad syntax.", 0Ah, 0Dh                                                  ; gylf syntax error.
-    local.data.gylf.bad.syntax.message.l  equ $-local.data.gylf.bad.syntax.message                                                                          ; Length of message.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-;
-;   Help Message
-;
-
-	  socket.data.command.gylf.help         db  "  gylf", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command gylf help message.
-	                                        db  "  Syntax: gylf <secondary parent | -d DNA sequence> <name of target profile>", 0Ah, 0Dh, 0Ah, 0Dh
-	                                        db  "  The Gylf command takes three arguments; a primary parent, a secondary parent, and the name of a", 0Ah, 0Dh
-	                                        db  "  profile to be created using the DNA Lab from the DNA of the supplied parents. This profile will", 0Ah, 0Dh
-	                                        db  "  be created as a complete profile, without the intervening process of eggdom.", 0Ah, 0Dh, 0Ah, 0Dh
-	                                        db  "  This command is, of course, restricted to administrator privileged participants."
-	                                        db  0Ah, 0Dh, 0Ah, 0Dh,  "> "
-	  socket.data.command.gylf.help.l       equ $-socket.data.command.gylf.help                                                                               ; Length of message.
-
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Command Table Entry
 ;
 
-    command.gylf.w                        db  command.gylf.l                                                                                                ; Indicator fo length of command 'gylf'.
-    command.gylf.s                        db  'gylf'                                                                                                        ; Admin command string for creating new gylf.
-    command.gylf.l                        equ $-command.gylf.s                                                                                              ; Length of command 'gylf'.
-    command.gylf.p                        dd  command.gylf                                                                                                  ; Pointer to handler for command 'gylf'.
-    command.gylf.h                        dd  socket.data.command.gylf.help                                                                                 ; Pointer to help message for command 'gylf'.
-    command.gylf.h.l                      dd  socket.data.command.gylf.help.l                                                                               ; Length of help message for command 'gylf'.
+    command.gylf.w  db  command.gylf.l                                ; Indicator fo length of command 'gylf'.
+    command.gylf.s  db  'gylf'                                        ; Admin command string for creating new gylf.
+    command.gylf.l  equ $-command.gylf.s                              ; Length of command 'gylf'.
+    command.gylf.p  dd  command.gylf                                  ; Pointer to handler for command 'gylf'.
+    command.gylf.h  dd  text.data.index.socket.data.command.gylf.help ; Pointer to help message for command 'gylf'.

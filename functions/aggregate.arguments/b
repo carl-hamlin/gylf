@@ -10,7 +10,7 @@
 ;
 ;   argument.01.size  ./functions/aggregate.arguments/b
 ;
-;   arguments.packet  ./functions/aggregate.agruments/b
+;   arguments.packet  ./functions/aggregate.arguments/b
 ;
 
 	  arguments.packet	    equ	  $

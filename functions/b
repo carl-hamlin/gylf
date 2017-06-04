@@ -39,6 +39,8 @@
     %define     sys.read.write                        002h                                      ; 002h is the parameter passed to the open function when we want to be able to read from and
                                                                                                 ; write to the resulting descriptor.
 
+    %define     sys.write.call                        004h                                      ; 004h is the modifier for 080h that tells the kernel we want to write data to a specified
+                                                                                                ; descriptor.
     %define     sys.lseek.call                        013h                                      ; 013h is the modifier for 080h that tells the kernel we'd like to move the file pointer.
 
     %define     sys.lseek.current.position            001h                                      ; 001h indicates to the lseek function that we're seeking from the current position.
@@ -231,4 +233,3 @@
     character.mother.agility                    resb    0001h                                   ; Byte indicator for character agility.
 
     character.mother.dna.l                      equ     $-character.mother.data                 ; Length of DNA information
-

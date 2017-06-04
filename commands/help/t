@@ -13,28 +13,27 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   dword.l                             ./b
-;   qword.l                             ./b
+;   argument.01.location                ./functions/aggregate.arguments/b
 ;
-;   command.help.found.command          ./commands/help/t
-;   command.help.next.command           ./commands/help/t
-;   command.help.next.command.jcxnz     ./commands/help/t
-;   command.help.no.arguments           ./commands/help/t
-;   command.help.parse.arguments        ./commands/help/t
-;
-;   argument.01.locations               ./functions/aggregate.arguments/b
 ;   arguments.num                       ./functions/aggregate.arguments/b
 ;
+;   command.help.found.command          ./commands/help/t
+;
+;   command.help.next.command           ./commands/help/t
+;
+;   command.help.next.command.jcxnz     ./commands/help/t
+;
+;   command.help.no.arguments           ./commands/help/t
+;
+;   command.help.parse.arguments        ./commands/help/t
+;
 ;   command.table                       ./functions/d
+;
+;   dword.l                             ./b
+;
 ;   number.of.commands                  ./functions/d
 ;
-;   connection.descriptor.index         ./functions/main/system.check/b
-;
-;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
-;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
-;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
-;
-;   socket.send                         ./functions/socket/socket/send/t
+;   socket.send.buf                     ./functions/socket/socket.send/t
 ;
 ;   write.bad.command.error             ./functions/write.bad.command.error/t
 ;
@@ -74,20 +73,13 @@
 
     command.help.found.command:       pop   ecx                                             ; Restore loop counter.
                                       pop   edi                                             ; Restore caller's edi register...
-                                      
-                                      mov   ebx, esi                                        ; ebx - Pointer to help message data.
+
+                                      mov   ebx, esi                                        ; ebx - Pointer to command entry.
+                                      mov   ebx, dword [ebx+dword.l]                        ; ebx - Pointer to index for help entry.
 
                                       pop   esi                                             ; esi - Index to socket entry.
 
-                                      mov   eax, dword [esi+connection.descriptor.index]    ; eax - Pointer to socket data for outgoing message.
-                                      mov   dword [socket.data.send.socket.descriptor], eax ; Point send function to active socket.
-                                      
-                                      mov   eax, dword [ebx+dword.l]                        ; eax - Pointer to help message.
-                                      mov   dword [socket.data.send.buffer.pointer], eax    ; Point send function to the help message for the selected argument.
-                                      
-                                      mov   eax, [ebx+qword.l]                              ; eax - Length of message.
-                                      mov   dword [socket.data.send.buffer.l], eax          ; Tell the send function how long the message is.
-                                      
+                                      push  dword [ebx]                                     ; Point send function to help message index.
                                       call  socket.send                                     ; Send the message.
                                       
                                       ret                                                   ; Return to caller.
