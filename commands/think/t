@@ -50,16 +50,17 @@
 ;   socket.send                         ./functions/socket/socket.send/t
 ;
 
-    command.think:              cmp   eax, command.think.l
-                                jnz   command.think.arguments
+    command.think:              cmp   eax, command.think.l                                                    ; Do we have arguments?
+                                jnz   command.think.arguments                                                 ; Yes. Go deal with them.
 
-    command.think.help.msg:     mov   ebx, dword [esi+connection.descriptor.index]                            ; ebx - Descriptor associated with current connection.
-                                mov   dword [socket.data.send.socket.descriptor], ebx                         ; Store socket descriptor for send function.
-                                mov   dword [socket.data.send.buffer.pointer], socket.data.command.think.help ; Point send function to message indicating that the command was bad.
-                                mov   dword [socket.data.send.buffer.l], socket.data.command.think.help.l     ; Store length of message for send function.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.think.help.msg:     push  dword [text.data.index.socket.data.command.think.help]                  ; Point send function to message indicating that the command was bad.
                                 call  socket.send                                                             ; Tell the user that the command doesn't have a current analogue.
 
                                 ret                                                                           ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     command.think.arguments:    mov   al, 01h                                                                 ; al - Signifier for only one argument.
 
@@ -73,8 +74,8 @@
                                 mov   esi, dword [argument.02.location]                                       ; esi - Pointer to provided name.
                                 call  translate.name.to.socket.number                                         ; eax - Error, or pointer to socket associated with the given name.
 
-                                cmp   eax, 0FFFFh
-                                jz    command.think.help.msg
+                                cmp   eax, 0FFFFh                                                             ; Were we able to make the translation?
+                                jz    command.think.help.msg                                                  ; No. Go tell the participant that they've made a typo.
 
                                 ; TODO - Populate fields for send.to.player. Still need to figure out areas.
 
@@ -82,8 +83,8 @@
 
                                 ret                                                                           ; Return to caller.
 
-    command.think.untargetted:  mov   edx, eax                                                                ; edx - Length of command string minus terminator(s).
-                                sub   edx, command.think.l                                                    ; edx - Length of command string minus terminator(s) and command.
-                                call  send.to.area                                                            ; Broadcast the message.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.think.untargetted:  call send.to.area                                                             ; Broadcast the message.
 
                                 ret                                                                           ; Return to caller.

@@ -81,14 +81,11 @@
 
                             pop   esi                                                                     ; Restore index to connection entry.
 
-                            mov   ecx, local.data.gylf.bad.syntax.message                                 ; Pointer to local message indicating that an admin bounced on syntax.
-                            mov   edx, local.data.gylf.bad.syntax.message.l                               ; Length of message.
-                            call  write.descriptor                                                        ; Let the server admin know there's someone trying to use the gylf command that doesn't know how.
+                            push  dword [text.data.index.local.data.gylf.bad.syntax.message]              ; Index to local message indicating that an admin bounced on syntax.
+                            call  write.descriptor                                                        ; Let the server admin know there's someone trying to use the gylf command that doesn't
+                                                                                                          ; know how.
 
-                            mov   ebx, dword [esi+connection.descriptor.index]                            ; ebx - Descriptor associated with current connection.
-                            mov   dword [socket.data.send.socket.descriptor], ebx                         ; Store socket descriptor for send function.
-                            mov   dword [socket.data.send.buffer.pointer], socket.data.command.gylf.help  ; Point send function to help message for command.
-                            mov   dword [socket.data.send.buffer.l], socket.data.command.gylf.help.l      ; Store length of message for send function.
+                            push  dword [text.data.index.socket.data.command.gylf.help]                   ; Index to help message for cgylf command.
                             call  socket.send                                                             ; Let the user know that they need to brush up on syntax.
 
                             ret                                                                           ; Return to caller.

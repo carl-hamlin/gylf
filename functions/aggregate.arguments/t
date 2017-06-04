@@ -4,9 +4,10 @@
 ;
 ;   This file contains code pertinent to the separation and filing of commands and arguments received from an incoming socket.
 ;
-;   Assumptions: ebx - Pointer to data received from the socket.
-;   Returns:     aggregated arguments at [argument.packet]
+;   Assumptions: [esp+4] - Pointer to data received from the socket.
 ;
+;   Returns:      ebx               - Pointer to original arguments.
+;                [argument.packet]  - Aggregated arguments.
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
@@ -32,9 +33,12 @@
 ;   arguments.num                               ./functions/aggregate.arguments/b
 ;
 
-    aggregate.arguments:                        push  eax                                         ; Preserve caller's eax register.
-                                                push  ebx                                         ; Preserve caller's ebx register.
-                                                push  edx                                         ; Preserve caller's edx register.
+    aggregate.arguments:                        pop   edx                                         ; Preserve return address.
+                                                pop   ebx                                         ; ebx - Pointer to arguments to be aggregated.
+                                                push  edx                                         ; Restore return address.
+
+                                                push  eax                                         ; Preserve caller's eax register.
+                                                push  ebx                                         ; Preserve pointer to arguments.
                                                 push  esi                                         ; Preserve pointer to data received from the socket.
                                                 
                                                 sub   eax, eax                                    ; eax - Prepared to be used for counting.
@@ -84,8 +88,7 @@
     aggregate.arguments.arguments.aggregated:   mov   dword [arguments.num], edx                  ; Store the number of arguments.
 
                                                 pop   esi                                         ; Restore pointer to data received from the socket.
-                                                pop   edx                                         ; Restore caller's edx register.
-                                                pop   ebx                                         ; Restore caller's ebx register.
+                                                pop   ebx                                         ; Restore pointer to arguments.
                                                 pop   eax                                         ; Restore caller's eax register.
 
                                                 ret                                               ; Return to caller.
