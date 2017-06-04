@@ -1,0 +1,3 @@
+Issue #39: Gylf Command Should Assume Performing Entity is the Primary Source Parent
+
+The Gylf command will take the supplied coded DNA info and parse it in the DNA Lab against the performing entity's own encoding as the primary source parent.
