@@ -1,0 +1,26 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/d
+;
+;   This file contains all data	pertinent to downstream socket functions.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   socket.data.sockaddr.protocol.family  ./functions/socket/d
+;
+;   sys.socket.address                    ./functions/socket/b
+;
+;   sys.socket.padding                    ./functions/socket/b
+;
+;   sys.socket.port.number                ./functions/socket/b
+;
+;   sys.socket.protocol.family.inet       ./functions/socket/b
+;
+
+    socket.data.sockaddr.protocol.family  dw  sys.socket.protocol.family.inet         ; Sockaddr element for storing the protocol family.
+    socket.data.sockaddr.port.number      dw  sys.socket.port.number                  ; Sockaddr element for storing the port number in little-endian order.
+    socket.data.sockaddr.address          dd  sys.socket.address                      ; Sockaddr element for storing the socket address.
+    socket.data.sockaddr.padding          dq  sys.socket.padding                      ; Padded sockaddr element.
+    socket.data.sockaddr.l                equ $-socket.data.sockaddr.protocol.family  ; Length of sockaddr structure.
