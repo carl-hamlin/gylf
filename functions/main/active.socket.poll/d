@@ -1,0 +1,21 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/main/active.socket.poll/d
+;
+;   This file contains all data	pertinent to the active.socket.poll function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   sys.poll.in ./functions/main/b
+;
+
+    socket.data.event.socket.descriptor   dd  0000h       ; Data storage for descriptor associated with bound, active, and listening socket.
+    socket.data.event.requested           dd  sys.poll.in ; Storage for requested event(s).
+    socket.data.event.returned            dd  0000h       ; Storage for returned event(s).
+
+    socket.data.active.socket.descriptor  dd  0000h       ; Data storage for descriptor associated with active connected socket.
+    socket.data.active.requested          dd  sys.poll.in ; Storage for requested event(s).
+    socket.data.active.returned           dd  0000h       ; Storage for returned event(s).
+
