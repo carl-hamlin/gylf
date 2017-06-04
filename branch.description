@@ -1,0 +1,3 @@
+Issue #40: Profile Data Resulting From Use of Gylf Command Shall Be Available for Immediate Use
+
+There should be no pragmatic delay between the point in time whereupon the data is created and the point in time whereupon the data may be used to activate an open socket.
