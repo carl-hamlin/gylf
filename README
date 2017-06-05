@@ -327,18 +327,15 @@ Relevant data:
                               and leaves their avatar under the control of an artificial
                               intelligence.
 
-      b   No defined symbols.
-
-
-      d   command.logout.w                      ./functions/d
-
-          command.logout.s                      ./commands/logout/d
+      d   command.logout.h                      No references.
 
           command.logout.l                      ./commands/logout/d
 
           command.logout.p                      No references.
 
-          command.logout.h                      No references.
+          command.logout.s                      ./commands/logout/d
+
+          command.logout.w                      ./functions/d
 
 
       t   command.logout                        ./commands/logout/d
