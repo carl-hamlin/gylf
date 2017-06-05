@@ -1122,9 +1122,6 @@ Relevant data:
           sys.poll.timeout                      ./functions/poll.descriptor/t
 
 
-      d   No defined symbols.
-
-
       t   _start                                No references.
 
           main.loop                             ./functions/main/t
@@ -1303,8 +1300,7 @@ Relevant data:
                                                 ./functions/print.socket.number/t
                                                 ./functions/socket/communications/send.to.player/t
 
-            connection.status.index             
-                                                ./functions/main/active.socket.poll/t
+            connection.status.index             ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t
@@ -1331,7 +1327,7 @@ Relevant data:
             socket.numbers.l                    ./functions/main/system.check/t
 
 
-        t   system.check                        ./functions/main/system.check/t
+        t   system.check                        ./functions/main/t
 
             system.check.populate.connection    ./functions/main/system.check/t
               .numbers.0010
