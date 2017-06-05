@@ -399,18 +399,16 @@ Relevant data:
                               command; a participant-level command that allows for communication
                               between players in a local environment.
 
-      b   No defined symbols.
-
-
-      d   command.think.w                       ./functions/d
-
-          command.think.s                       ./commands/think/d
+      d   
+          command.think.h                       No references.
 
           command.think.l                       ./commands/think/d
 
           command.think.p                       No references.
 
-          command.think.h                       No references.
+          command.think.s                       ./commands/think/d
+
+          command.think.w                       ./functions/d
 
 
       t   command.think                         ./commands/think/d
