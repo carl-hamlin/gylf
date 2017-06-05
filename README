@@ -241,37 +241,37 @@ Relevant data:
                               having to go through the normal channels of fertilization through
                               mating.
 
-      b   egg.data                              ./commands/egg/b
+      b   egg.area.id                           ./functions/create.character/t
+
+          egg.data                              ./commands/egg/b
                                                 ./functions/create.character/t
 
-          egg.signature                         No references.
-
-          egg.item.id                           No references.
-
-          egg.area.id                           ./functions/create.character/t
-
-          egg.mother.l                          ./functions/create.character/t
-
-          egg.mother                            ./functions/create.character/t
-                                                ./functions/dna.lab/t
-
-          egg.father.l                          ./functions/create.character/t
+          egg.data.l                            ./functions/create.character/t
 
           egg.father                            ./functions/create.character/t
                                                 ./functions/dna.lab/t
 
-          egg.data.l                            No references.
+          egg.father.l                          ./functions/create.character/t
+
+          egg.item.id                           No references.
+
+          egg.mother                            ./functions/create.character/t
+                                                ./functions/dna.lab/t
+
+          egg.mother.l                          ./functions/create.character/t
+
+          egg.signature                         No references.
 
 
-      d   command.egg.w                         ./functions/d
-
-          command.egg.s                         ./commands/egg/d
+      d   command.egg.h                         No references.
 
           command.egg.l                         ./commands/egg/d
 
           command.egg.p                         No references.
 
-          command.egg.h                         No references.
+          command.egg.s                         ./commands/egg/d
+
+          command.egg.w                         ./functions/d
 
 
       t   command.egg                           ./commands/egg/d
