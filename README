@@ -197,18 +197,16 @@ Relevant data:
                               send a message to the entire participant base all at once,
                               regardless of their locations in the simulation.
 
-      b   No defined symbols.
-
-
-      d   command.broadcast.w                   ./functions/d
-
-          command.broadcast.s                   ./commands/broadcast/d
+      d   
+          command.broadcast.h                   No references.
 
           command.broadcast.l                   ./commands/broadcast/d
 
           command.broadcast.p                   No references.
 
-          command.broadcast.h                   No references.
+          command.broadcast.s                   ./commands/broadcast/d
+
+          command.broadcast.w                   ./functions/d
 
 
       t   command.broadcast                     ./commands/broadcast/d
