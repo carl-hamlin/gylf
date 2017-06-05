@@ -115,48 +115,49 @@ Relevant data:
                               an administrator command that allows for administrators to create
                               new areas without having to dig them out using the player interface.
 
-      b   available.areas                       ./commands/area/t
-
-          area.name.field.l                     ./commands/area/b
+      b   area.description.field.l              ./commands/area/b
                                                 ./commands/area/t
 
-          area.description.field.l              ./commands/area/b
-                                                ./commands/area/t
-
-          area.header                           ./commands/area/b
-                                                ./commands/look/t
-                                                ./functions/create.character/t
-
-          area.name.l                           ./commands/area/t
-                                                ./functions/create.character/t
-
-          area.name                             ./commands/area/t
+          area.description                      ./commands/area/t
                                                 ./functions/create.character/t
 
           area.description.l                    ./commands/area/t
                                                 ./functions/create.character/t
 
-          area.description                      ./commands/area/t
+          area.header                           ./commands/area/b
+                                                ./commands/look/t
+                                                ./functions/create.character/t
+
+          area.header.l                         ./commands/look/t
+                                                ./functions/create.character/t
+
+          area.name.field.l                     ./commands/area/b
+                                                ./commands/area/t
+
+          area.name                             ./commands/area/t
+                                                ./functions/create.character/t
+
+          area.name.l                           ./commands/area/t
                                                 ./functions/create.character/t
 
           area.num.contained.items              ./commands/area/t
                                                 ./commands/look/t
 
-          area.header.l                         ./commands/look/t
-                                                ./functions/create.character/t
+          available.areas                       ./commands/area/t
 
-      d   command.area.w                        ./commands/area/d
-                                                ./functions/d
 
-          command.area.s                        ./commands/area/d
-                                                ./commands/area/t
+      d   command.area.h                        No references.
 
           command.area.l                        ./commands/area/d
                                                 ./commands/area/t
 
           command.area.p                        ./commands/area/t
 
-          command.area.h                        No references.
+          command.area.s                        ./commands/area/d
+                                                ./commands/area/t
+
+          command.area.w                        ./commands/area/d
+                                                ./functions/d
 
 
       t   command.area                          ./commands/area/d
