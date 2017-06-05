@@ -23,6 +23,7 @@ Relevant data:
                                                 ./commands/help/t
                                                 ./commands/look/t
                                                 ./functions/create.character/t
+                                                ./functions/create.file/t
                                                 ./functions/d
                                                 ./functions/get.external.data/t
                                                 ./functions/get.text.data/t
