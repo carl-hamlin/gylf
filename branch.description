@@ -1,3 +1,0 @@
-Issue #371: Review Need for 'raw.data' and 'external.data' Directories in the Codebase
-
-These directories don't seem to serve a function currently. Please review them and dispose of them if they don't serve a function.
