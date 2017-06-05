@@ -283,18 +283,15 @@ Relevant data:
                               new gylf without the intervening process of mating, fertilization,
                               gestation, laying, and hatching.
 
-      b   No defined symbols.
-
-
-      d   command.gylf.w                        ./functions/d
-
-          command.gylf.s                        ./commands/gylf/d
+      d   command.gylf.h                        No references.
 
           command.gylf.l                        ./commands/gylf/d
 
           command.gylf.p                        No references.
 
-          command.gylf.h                        No references.
+          command.gylf.s                        ./commands/gylf/d
+
+          command.gylf.w                        ./functions/d
 
 
       t   command.gylf                          ./commands/gylf/d
