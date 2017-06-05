@@ -1,4 +1,0 @@
-Issue #372: README and SCR Review
-
-Somehow, the README and SCR tables have become unsynced. We could potentially fix this issue with Git Blame, but I strongly suspect a basic review will take less time, and perhaps be a more
-effective solution.
