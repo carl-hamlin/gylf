@@ -92,9 +92,6 @@ Relevant data:
                               parameters associated with their avatar's behaviour while they are
                               signed out.
 
-      b   No defined symbols.
-
-
       d   command.ai.h                          No references.
 
           command.ai.l                          ./commands/ai/d
@@ -197,8 +194,7 @@ Relevant data:
                               send a message to the entire participant base all at once,
                               regardless of their locations in the simulation.
 
-      d   
-          command.broadcast.h                   No references.
+      d   command.broadcast.h                   No references.
 
           command.broadcast.l                   ./commands/broadcast/d
 
@@ -219,8 +215,7 @@ Relevant data:
                               a participant-level command that allows for player to, under certain
                               circumstances, extend the environment by creating new areas.
 
-      d   
-          command.dig.h                         No references.
+      d   command.dig.h                         No references.
 
           command.dig.l                         ./commands/dig/d
 
@@ -302,18 +297,15 @@ Relevant data:
                               a participant-level command whose sole purpose is to display
                               context-sensitive help.
 
-      b   No defined symbols.
-
-
-      d   command.help.w                        ./functions/d
-
-          command.help.s                        ./commands/help/d
+      d   command.help.h                        No references.
 
           command.help.l                        ./commands/help/d
 
           command.help.p                        No references.
 
-          command.help.h                        No references.
+          command.help.s                        ./commands/help/d
+
+          command.help.w                        ./functions/d
 
 
       t   command.help                          ./commands/help/d
