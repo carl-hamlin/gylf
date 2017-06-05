@@ -346,32 +346,29 @@ Relevant data:
                               a participant-level command that displays information about the
                               target.
 
-      b   No defined symbols.
-
-
-      d   command.look.w                        ./functions/d
-
-          command.look.s                        ./commands/look/d
+      d   command.look.h                        No references.
 
           command.look.l                        ./commands/look/d
 
           command.look.p                        No references.
 
-          command.look.h                        No references.
+          command.look.s                        ./commands/look/d
+
+          command.look.w                        ./functions/d
 
 
       t   command.look                          ./commands/look/d
 
-          command.look.targetted.good           ./commands/look/t
-            .descriptor
-
-          command.look.targetted.find.target    ./commands/look/t
+          command.look.bad.descriptor           ./commands/look/t
 
           command.look.default                  ./commands/look/t
 
-          command.look.bad.descriptor           ./commands/look/t
-
           command.look.default.good.descriptor  ./commands/look/t
+
+          command.look.targetted.find.target    ./commands/look/t
+
+          command.look.targetted.good           ./commands/look/t
+            .descriptor
 
     ----------------------------------------------------------------------------------------------
 
