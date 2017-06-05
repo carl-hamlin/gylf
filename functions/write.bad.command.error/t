@@ -1,10 +1,10 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/write.bad.command.error/t
 ;
 ;   This function lets the user know that they've entered a bad command and suggests that they try HELP.
 ;
-;   Assumptions:    esi = Pointer to descriptor associated with target socket.
+;   Assumptions:    esi - Pointer to descriptor associated with target socket.
 ;
 ;   Returns:        None.
 ;
