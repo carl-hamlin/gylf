@@ -219,18 +219,16 @@ Relevant data:
                               a participant-level command that allows for player to, under certain
                               circumstances, extend the environment by creating new areas.
 
-      b   No defined symbols.
-
-
-      d   command.dig.w                         ./functions/d
-
-          command.dig.s                         ./commands/dig/d
+      d   
+          command.dig.h                         No references.
 
           command.dig.l                         ./commands/dig/d
 
           command.dig.p                         No references.
 
-          command.dig.h                         No references.
+          command.dig.s                         ./commands/dig/d
+
+          command.dig.w                         ./functions/d
 
 
       t   command.dig                           ./commands/dig/d
