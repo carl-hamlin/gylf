@@ -33,7 +33,7 @@
 ;
 ;   number.of.commands                  ./functions/d
 ;
-;   socket.send.buf                     ./functions/socket/socket.send/t
+;   socket.send                         ./functions/socket/socket.send/t
 ;
 ;   write.bad.command.error             ./functions/write.bad.command.error/t
 ;
