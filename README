@@ -376,18 +376,15 @@ Relevant data:
                               command; an administrator command that shuts down the server from
                               within the environment.
 
-      b   No defined symbols.
-
-
-      d   command.shutdown.w                    ./functions/d
-
-          command.shutdown.s                    ./commands/shutdown/d
+      d   command.shutdown.h                    No references.
 
           command.shutdown.l                    ./commands/shutdown/d
 
           command.shutdown.p                    No references.
 
-          command.shutdown.h                    No references.
+          command.shutdown.s                    ./commands/shutdown/d
+
+          command.shutdown.w                    ./functions/d
 
 
       t   command.shutdown                      ./commands/shutdown/d
