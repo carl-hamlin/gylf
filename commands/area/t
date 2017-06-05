@@ -73,6 +73,8 @@
 ;
 ;   create.file                                         ./functions/create.file/t
 ;
+;   dword.l                                             ./b
+;
 ;   open.descriptor                                     ./functions/open.descriptor/t
 ;
 ;   socket.send                                         ./functions/socket/socket.send/t

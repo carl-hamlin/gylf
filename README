@@ -19,43 +19,7 @@ Relevant data:
 
     Symbolic Cross-Referencing
     
-      b   char.0                                ./commands/area/t
-                                                ./functions/main/system.check/t
-
-          char.1                                No references.
-          
-          char.2                                No references.
-          
-          char.3                                No references.
-          
-          char.4                                No references.
-          
-          char.5                                No references.
-          
-          char.6                                No references.
-          
-          char.7                                No references.
-
-          char.8                                No references.
-          
-          char.9                                ./commands/area/t
-                                                ./functions/main/system.check/t
-          
-          char.A                                No references.
-          
-          char.B                                No references.
-          
-          char.C                                No references.
-          
-          char.D                                No references.
-          
-          char.E                                No references.
-          
-          char.F                                No references.
-          
-          qword.l                               No references.
-
-          dword.l                               ./commands/area/t
+      b   dword.l                               ./commands/area/t
                                                 ./commands/help/t
                                                 ./commands/look/t
                                                 ./functions/create.character/t
@@ -75,6 +39,7 @@ Relevant data:
                                                 ./functions/socket/accept.socket/t
                                                 ./functions/socket/bind.socket/t
                                                 ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
                                                 ./functions/socket/communications/send.to.world/t
                                                 ./functions/socket/create.socket/t
                                                 ./functions/socket/listen.socket/t
@@ -89,11 +54,8 @@ Relevant data:
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
 
-          nibble.l                              No references.
-
           socket.number                         ./commands/shutdown/t
                                                 ./functions/main/active.socket.poll/t
-                                                ./functions/main/answer.active.socket/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/system.check/b
                                                 ./functions/main/system.check/t
