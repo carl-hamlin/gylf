@@ -46,6 +46,7 @@ Relevant data:
                                                 ./functions/socket/listen.socket/t
                                                 ./functions/socket/recv.from.socket/t
                                                 ./functions/socket/socket.send/t
+                                                ./functions/write.console/t
 
           word.l                                ./commands/area/t
                                                 ./functions/b
@@ -1566,9 +1567,6 @@ Relevant data:
       b   sys.open.call                         ./functions/open.descriptor/t
 
 
-      d   No defined symbols.
-
-
       t   open.descriptor                       ./commands/area/t
                                                 ./commands/look/t
                                                 ./functions/check.login/t
@@ -1576,6 +1574,11 @@ Relevant data:
                                                 ./functions/dna.lab/t
                                                 ./functions/get.character.data/t
                                                 ./functions/get.external.data/t
+                                                ./functions/get.text.data/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
                                                 ./functions/main/participant.interaction
                                                   /address.set.passphrase.status/t
                                                 ./functions/main/text.init/t
@@ -1624,9 +1627,6 @@ Relevant data:
       /set.single.attribute   Contains code that sends a vt100 escape sequence to the remote
                               terminal which changes a single attribute about the printed text.
                               Attributes can be found in external data.
-
-      b   No defined symbols.
-
 
       d   set.att.b.blk                         No references.
 
@@ -1689,11 +1689,7 @@ Relevant data:
                               surrounding the operation of Berkeley Sockets under Linux in X86
                               ASM.
 
-      b   active.socket.descriptor              No references.
-
-          session.descriptor                    No references.
-
-          socket.data.connected.socket          ./functions/socket/accept.socket/t
+      b   socket.data.connected.socket          ./functions/socket/accept.socket/t
             .descriptor
 
           socket.data.queue.l                   ./functions/socket/listen.socket/t
@@ -1796,11 +1792,6 @@ Relevant data:
         ./functions/socket    Contains code pertaining to the behind the scenes mechanisms
           /communications     surrounding communications between users.
 
-        b   No defined symbols.
-
-
-        d   No defined symbols.
-
     ----------------------------------------------------------------------------------------------
 
           /send.to.area       Contains code that sends a provided message to a specified area.
@@ -1808,12 +1799,6 @@ Relevant data:
                               is used to facilitate communication between users in a given area of
                               the environment, as well as facilitating communications between
                               administrators and a given area.
-
-          b   No defined symbols.
-
-
-          d   No defined symbols.
-
 
           t   send.to.area                      ./commands/think/t
                                                 ./functions/create.character/t
@@ -1829,12 +1814,6 @@ Relevant data:
           /send.to.player     Contains code that sends a provided message to a specified player.
                               Only the specified player will received this message. This code is
                               used to facilitate private communication between players.
-
-          b   No defined symbols.
-
-
-          d   No defined symbols.
-
 
           t   send.to.player                    ./commands/think/t
 
@@ -1852,12 +1831,6 @@ Relevant data:
                               environment. This code is used to facilitate administrator
                               communications that need to be addressed to everyone in the
                               environment.
-
-          b   No defined symbols.
-
-
-          d   No defined symbols.
-
 
           t   send.to.world                     ./commands/broadcast/t
                                                 ./commands/shutdown/t
@@ -1933,6 +1906,7 @@ Relevant data:
 
         t   socket.send                         ./commands/area/t
                                                 ./commands/look/t
+                                                ./commands/help/t
                                                 ./functions/create.character/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/participant.interaction
@@ -1940,14 +1914,12 @@ Relevant data:
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
                                                 ./functions/socket/communications/send.to.world/t
                                                 ./functions/write.bad.command.error/t
                                                 ./functions/write.bad.help.command.error/t
                                                 ./functions/write.prompt/t
 
             socket.send.buf                     ./commands/look/t
-                                                ./commands/help/t
                                                 ./functions/clear.screen/t
                                                 ./functions/set.single.attribute/t
                                                 ./functions/socket/communications/send.to.area/t
