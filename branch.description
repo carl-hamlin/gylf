@@ -1,3 +1,3 @@
-Issue #367: Connection Table Overhaul
+Issue #373: Connection / Participant Data: Egg Data
 
-Connection table is memory intensive. Let's take a look at streamlining it by potentially moving it to a disk based system instead.
+Design and implement egg data files that also contain their own connection data.
