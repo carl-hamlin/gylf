@@ -1,11 +1,11 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/main/participant.interaction/address.login.status/t
 ;
 ;   This code performs handling for data submitted by a socket with 'login' status. Essentially, it determines whether or not the connection belongs to a new player or an old one, creates
 ;   player credentials in the case of a new player, and sets the connection status to 'passphrase'.
 ;
-;   Assumptions:    esi = Pointer to descriptor associated with target socket
+;   Assumptions:    esi - Pointer to descriptor associated with target socket
 ;
 ;   Returns:        None.
 ;
@@ -87,8 +87,8 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    not.logged.in:        mov   edi, esi                                                                ; edi = Pointer to connection table.
-                          add   edi, connection.filename.index                                          ; edi = Pointer to empty socket filename entry.
+    not.logged.in:        mov   edi, esi                                                                ; edi - Pointer to connection table.
+                          add   edi, connection.filename.index                                          ; edi - Pointer to empty socket filename entry.
 
                           push  esi                                                                     ; Preserve index to connection table.
 

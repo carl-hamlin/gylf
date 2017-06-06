@@ -37,12 +37,9 @@
 ;
 
     command.gylf:           push  esi                                                                     ; Preserve index to connection entry.
-                            push  eax                                                                     ; Preserve length of received data.
 
                             call  check.admin                                                             ; Is the user an admin?
                             jc    command.gylf.admin                                                      ; Yes. Go check their syntax.
-
-                            pop   eax                                                                     ; Restore length of received data.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -53,16 +50,10 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.gylf.admin:     pop   eax                                                                     ; Restore length of received data.
-
-                            mov   eax, 03h                                                                ; eax - Prepped to indicate 3 arguments.
-
-                            cmp   eax, arguments.num                                                      ; Are we operating in DNA mode?
+    command.gylf.admin:     cmp   byte [arguments.num], 03h                                               ; Are we operating in DNA mode?
                             jz    command.gylf.dna.mode                                                   ; Yes. Go take care of that.
 
-                            dec   eax                                                                     ; eax - Prepped to indicate two arguments.
-
-                            cmp   eax, arguments.num                                                      ; Are we operating in named secondary parent mode?
+                            cmp   byte [arguments.num], 02h                                               ; Are we operating in named secondary parent mode?
                             jz    command.gylf.nsp.mode                                                   ; Yes. Go take care of that.
 
                             pop   esi                                                                     ; Restore index to connection entry.

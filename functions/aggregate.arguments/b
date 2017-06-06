@@ -14,7 +14,7 @@
 ;
 
 	  arguments.packet	    equ	  $
-	  arguments.num		      resd	0001h
+	  arguments.num		      resb	0001h
 
 	  argument.01.size	    resd	0001h
 	  argument.01.location  resd	0001h

@@ -56,11 +56,6 @@
                             mov   esi, connection.table                                       ; esi - Index to socket entries.
                             mov   ecx, socket.number                                          ; ecx - Number of sockets in table; we use this number as our loop counter.
 
-                            push  esi                                                         ; Preserve caller's esi register.
-
-                            mov   esi, connection.table                                       ; esi - Index to socket entries.
-                            mov   ecx, socket.number                                          ; ecx - Number of sockets in table; we use this number as our loop counter.
-
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     send.to.world.loop:     push  ecx                                                         ; Preserve number of sockets.
@@ -74,10 +69,14 @@
                             push  edx                                                         ; Point socket.send to index.
                             call  socket.send                                                 ; Send the message to the socket.
 
-    send.to.world.buf.sret: push  dword [text.data.index.local.data.carriage.return.message]  ; Point send function to a carriage return.
+    send.to.world.buf.sret: push  eax                                                         ; Preserve buffered indicator.
+    
+                            push  dword [text.data.index.local.data.carriage.return.message]  ; Point send function to a carriage return.
                             call  socket.send                                                 ; Broadcast a carriage return.
 
                             call  write.prompt                                                ; Send a prompt.
+
+                            pop   eax                                                         ; Restore buffered indicator.
 
                             pop   ebp                                                         ; Restore return address.
 
@@ -94,7 +93,7 @@
                             pop   ecx                                                         ; Killing the pointer to the buffer...
                             pop   ecx                                                         ; Killing the size of the buffered data...
 
-    send.to.world.c         pop   esi                                                         ; Restore caller's esi register.
+    send.to.world.c:        pop   esi                                                         ; Restore caller's esi register.
 
                             push  ebp                                                         ; Restore return address.
 
@@ -102,8 +101,12 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.world.buf.s     push  dword [esp+(dword.l * 4)]                                   ; Tell socket.send.buf how long the data is.
-                            push  dword [esp+(dword.l * 3)]                                   ; Point socket.send.buf to the data.
+    send.to.world.buf.s:    push  eax                                                         ; Preserve buffered indicator.
+
+                            push  dword [esp+(dword.l * 5)]                                   ; Tell socket.send.buf how long the data is.
+                            push  dword [esp+(dword.l * 7)]                                   ; Point socket.send.buf to the data.
                             call  socket.send.buf                                             ; Send the data.
+
+                            pop   eax                                                         ; Restore buffered indicator.
 
                             jmp   send.to.world.buf.sret                                      ; Resume loop.

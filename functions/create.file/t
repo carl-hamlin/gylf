@@ -23,7 +23,7 @@
 ;
 
     create.file:  mov eax, sys.create.call  ; eax - Build a file on disk and associate a descriptor with it.
-                  mov ebx, [esp+4]          ; ebx - Pointer to filename to create.
+                  mov ebx, [esp+dword.l]    ; ebx - Pointer to filename to create.
                   mov ecx, sys.rw.r.r       ; ecx - Apply read/write access permissions to the built file.
                   sub edx, edx              ; edx - No special modes.
                   int sys.system.call       ; Build a file on disk and associate a descriptor with it.
