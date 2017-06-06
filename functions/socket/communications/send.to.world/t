@@ -46,17 +46,12 @@
 
     send.to.world:          pop   ebp                                                         ; Preserve return address.
 
-                            pop   edx                                                         ; edx - Index to message.
-
                             cmp   al, 1                                                       ; Buffered mode?
                             jz    send.to.world.buf.p                                         ; Yes. Skip popping the index.
 
+                            pop   edx                                                         ; edx - Index to message.
+
     send.to.world.buf.p     push  esi                                                         ; Preserve caller's esi register.
-
-                            mov   esi, connection.table                                       ; esi - Index to socket entries.
-                            mov   ecx, socket.number                                          ; ecx - Number of sockets in table; we use this number as our loop counter.
-
-                            push  esi                                                         ; Preserve caller's esi register.
 
                             mov   esi, connection.table                                       ; esi - Index to socket entries.
                             mov   ecx, socket.number                                          ; ecx - Number of sockets in table; we use this number as our loop counter.
@@ -98,7 +93,7 @@
                             pop   ecx                                                         ; Killing the pointer to the buffer...
                             pop   ecx                                                         ; Killing the size of the buffered data...
 
-    send.to.world.c         pop   esi                                                         ; Restore caller's esi register.
+    send.to.world.c:        pop   esi                                                         ; Restore caller's esi register.
 
                             push  ebp                                                         ; Restore return address.
 
@@ -106,10 +101,10 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.world.buf.s     push  eax                                                         ; Preserve buffered indicator.
+    send.to.world.buf.s:    push  eax                                                         ; Preserve buffered indicator.
 
-                            push  dword [esp+(dword.l * 4)]                                   ; Tell socket.send.buf how long the data is.
-                            push  dword [esp+(dword.l * 3)]                                   ; Point socket.send.buf to the data.
+                            push  dword [esp+(dword.l * 5)]                                   ; Tell socket.send.buf how long the data is.
+                            push  dword [esp+(dword.l * 7)]                                   ; Point socket.send.buf to the data.
                             call  socket.send.buf                                             ; Send the data.
 
                             pop   eax                                                         ; Restore buffered indicator.

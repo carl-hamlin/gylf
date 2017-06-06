@@ -22,6 +22,7 @@ Relevant data:
       b   dword.l                               ./commands/area/t
                                                 ./commands/help/t
                                                 ./commands/look/t
+                                                ./functions/aggregate.arguments/t
                                                 ./functions/create.character/t
                                                 ./functions/create.file/t
                                                 ./functions/d
@@ -868,7 +869,9 @@ Relevant data:
 
           aggregate.arguments.quote.mode        ./functions/aggregate.arguments/t
 
-          aggregate.arguments.quote.mode.l      ./functions/aggregate.arguments/t
+          aggregate.arguments.quote.mode.e      ./functions/aggregate.arguments/t
+
+          aggregate.arguments.guote.mode.l.bump ./functions/aggregate.arguments/t
 
           aggregate.arguments.strip.command     ./functions/aggregate.arguments/t
             .loop
