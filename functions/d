@@ -38,7 +38,13 @@
 ;
 ;   dword.l                             ./b
 ;
+;   egg.filename                        ./functions/d
+;
+;   ghost.filename                      ./functions/d
+;
 ;   item.filename                       ./functions/d
+;
+;   participant.filename                ./functions/d
 ;
 ;   pouch.declaration                   ./functions/d
 ;
@@ -52,14 +58,23 @@
     current.directory.marker              db  './'
     current.directory.marker.l            equ $-current.directory.marker
 
-    area.filename                         db  './external.data/areas/00000000', 00h
+    area.filename                         db  './d/a/00000000', 00h
     area.filename.l                       equ $-area.filename
 
-    item.filename                         db  './external.data/items/00000000', 00h
+    item.filename                         db  './d/i/00000000', 00h
     item.filename.l                       equ $-item.filename
 
-    external.data.cursor.home             db  "./external.data/cursor.control/cursor.home", 00h
-    external.data.clear.screen            db  "./external.data/cursor.control/clear.screen", 00h	
+    external.data.cursor.home             db  "./d/c/h", 00h
+    external.data.clear.screen            db  "./d/c/s", 00h	
+
+    egg.filename                          db  './e/'
+    egg.filename.l                        equ $-egg.filename
+
+    participant.filename                  db  './p/'
+    participant.filename.l                equ $-participant.filename
+
+    ghost.filename                        db  './g/'
+    ghost.filename.l                      equ $-ghost.filename
 
     pouch.declaration                     db  27h, 's pouch'
     pouch.declaration.l                   equ $-pouch.declaration

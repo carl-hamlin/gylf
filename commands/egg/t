@@ -13,8 +13,124 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   write.bad.command.error ./functions/write.bad.command.error/t
+;   memory.switch ./functions/memory.switch/t
 ;
 
-    command.egg:  call  write.bad.command.error ; Let the user know that they've entered a bad command and suggest HELP.
-                  ret                           ; Return to caller.
+    command.egg:                  call  check.admin
+                                  jc    command.egg.admin
+
+                                  call  write.bad.command.error
+
+                                  ret                           ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.egg.admin:            push  participant.filename
+                                  push  participant.filename.l
+                                  push  dword [argument.01.location]
+                                  push  dword [argument.01.size]
+                                  call  assemble.path
+
+                                  push  buffer.1
+                                  call  open.descriptor
+
+                                  or    eax, eax
+                                  jns   command.egg.bad.name
+
+                                  push  eax
+
+                                  push  egg_size
+                                  call  memory.switch
+
+                                  pop   eax
+
+                                  push  eax
+                                  push  ebx
+
+                                  push  egg_size
+                                  push  ebx
+                                  push  eax
+                                  call  read.descriptor
+
+                                  pop   ebx
+                                  pop   eax
+
+                                  push  ebx
+
+                                  mov   ebx, eax
+                                  call  close.descriptor
+
+                                  pop   ebx
+
+                                  push  ebx.egg.item.id
+                                  call  get.new.item.id
+
+                                  push  ebx.egg.area.id
+                                  call  get.new.area.id
+
+                                  mov   al, 00h
+                                  mov   ecx, 29h
+                                  mov   edi, ebx.participant.name.l
+
+                                  repnz stosb
+
+                                  mov   eax, dword [argument.01.size]
+                                  mov   byte [ebx.egg.e.parent.l], al
+
+                                  push  esi
+
+                                  mov   ecx, eax
+                                  mov   esi, dword [argument.01.location]
+                                  mov   edi, ebx.egg.e.parent
+
+                                  repnz movsb
+
+                                  pop   esi
+
+                                  mov   cl, byte [esi.participant.name.l]
+                                  mov   byte [ebx.egg.f.parent.l], cl
+
+                                  push  esi
+
+                                  mov   esi, esi.participant.name
+                                  mov   edi, ebx.egg.f.parent
+
+                                  repnz movsb
+
+                                  pop   esi
+
+                                  sub   eax, eax
+
+                                  mov   dword [egg.connection.descriptor.index], eax
+                                  mov   dword [egg.external.descriptor.index], eax
+                                  mov   byte [egg.connection.status.index], al
+
+                                  push  egg.filename
+                                  push  egg.filename.l
+                                  push  dword [argument.01.location]
+                                  push  dword [argument.01.size]
+                                  call  assemble.path
+
+                                  push  buffer.1
+                                  call  create.file
+
+                                  push  eax
+
+                                  push  eax
+                                  push  ebx
+                                  push  egg_size
+                                  call  write.descriptor
+
+                                  pop   ebx
+                                  call  close.descriptor
+
+                                  ; Inform recipient that they're expecting.
+
+                                  ret
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.egg.bad.name:         push  dword [text.data.index.command.egg.bad.name.message]
+                                  call  send.socket
+
+                                  ret

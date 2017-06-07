@@ -73,6 +73,15 @@ Relevant data:
                                                 ./functions/print.socket.number/t
                                                 ./functions/write.console/t
 
+
+      s   egg
+
+          participant
+
+          ghost
+
+          connection          
+
     ==============================================================================================
 
     ./build.gylf.sh           This is the build script. It depends on the presence of nasm and ld.
@@ -223,27 +232,6 @@ Relevant data:
                               fertilization of an egg in the womb of the target gylf without
                               having to go through the normal channels of fertilization through
                               mating.
-
-      b   egg.area.id                           ./commands/gylf/t
-                                                ./functions/create.character/t
-
-          egg.data                              ./commands/egg/b
-                                                ./commands/gylf/t
-                                                ./functions/create.character/t
-
-          egg.data.l                            No references.
-
-          egg.father                            ./functions/create.character/t
-                                                ./functions/dna.lab/t
-
-          egg.father.l                          ./functions/create.character/t
-
-          egg.item.id                           No references.
-
-          egg.mother.l                          ./functions/create.character/t
-
-          egg.signature                         No references.
-
 
       d   command.egg.h                         No references.
 
@@ -450,259 +438,6 @@ Relevant data:
 
           buffer.2.l                            ./functions/b
 
-          character.abdomen.wound.level         No references.
-
-          character.age                         No references.
-
-          character.agility                     ./functions/dna.lab/t
-
-          character.back.spinal.wound.level     No references.
-
-          character.back.wound.level            No references.
-
-          character.base.color                  ./functions/dna.lab/t
-
-          character.base.color.number           ./functions/dna.lab/t
-
-          character.base.fur.quality            ./functions/dna.lab/t
-
-          character.base.fur.quality.number     ./functions/dna.lab/t
-
-          character.brain.wound.level           No references.
-
-          character.chin.wound.level            No references.
-
-          character.data                        ./functions/b
-                                                ./functions/create.character/t
-                                                ./functions/get.character.data/t
-
-          character.data.l                      ./functions/get.character.data/t
-
-          character.endurance                   ./functions/dna.lab/t
-
-          character.father                      ./functions/create/character/t
-
-          character.father.agility              ./functions/dna.lab/t
-
-          character.father.base.color           ./functions/dna.lab/t
-
-          character.father.base.fur.quality     ./functions/dna.lab/t
-
-          character.father.data                 ./functions/b
-                                                ./functions/dna.lab/t
-
-          character.father.dna.l                ./functions/dna.lab/t
-
-          character.father.endurance            ./functions/dna.lab/t
-
-          character.father.l                    ./functions/create.character/t
-
-          character.father.secondary.color      ./functions/dna.lab/t
-
-          character.father.secondary.fur        ./functions/dna.lab/t
-            .quality
-
-          character.father.strength             ./functions/dna.lab/t
-
-          character.heart.wound.level           No references.
-
-          character.inseminator.wound.level     No references.
-
-          character.large.intestine.wound.level No references.
-
-          character.left.cheek.wound.level      No references.
-
-          character.left.chest.wound.level      No references.
-
-          character.left.dew.talon.wound.level  No references.
-
-          character.left.ear.wound.level        No references.
-
-          character.left.eye.wound.level        No references.
-
-          character.left.forearm.wound.level    No references.
-
-          character.left.hand.wound.level       No references.
-
-          character.left.index.finger.wound     No references.
-            .level
-
-          character.left.inside.thigh.wound     No references.
-            .level
-
-          character.left.lower.leg.wound.level  No references.
-
-          character.left.low.talon.wound.level  No references.
-
-          character.left.lung.wound.level       No references.
-
-          character.left.main.fore.talon.wound  No references.
-            .level
-
-          character.left.middle.finger.wound    No references.
-            .level
-
-          character.left.middle.talon.wound     No references.
-            .level
-
-          character.left.outside.thigh.wound    No references.
-            .level
-
-          character.left.ring.finger.wound      No references.
-            .level
-
-          character.left.shoulder.wound.level   No references.
-
-          character.left.thumb.wound.level      No references.
-
-          character.left.upper.arm.wound.level  No references.
-
-          character.left.wrist.wound.level      No references.
-
-          character.liver.wound.level           No references.
-
-          character.location.id                 No references.
-
-          character.mother                      ./functions/create.character/t
-
-          character.mother.agility              ./functions/dna.lab/t
-
-          character.mother.base.color           ./functions/dna.lab/t
-
-          character.mother.base.fur.quality     ./functions/dna.lab/t
-
-          character.mother.data                 ./functions/b
-                                                ./functions/dna.lab/t
-
-          character.mother.dna.l                ./functions/dna.lab/t
-
-          character.mother.endurance            ./functions/dna.lab/t
-
-          character.mother.l                    ./functions/create.character/t
-
-          character.mother.secondary.color      ./functions/dna.lab/t
-
-          character.mother.secondary.fur        ./functions/dna.lab/t
-            .quality
-
-          character.mother.strength             ./functions/dna.lab/t
-
-          character.neck.spinal.wound.level     No references.
-
-          character.neck.wound.level            No references.
-
-          character.nose.wound.level            No references.
-
-          character.ovary.wound.level           No references.
-
-          character.pouch                       ./functions/create.character/t
-
-          character.pouch.wound.level           No references.
-
-          character.right.cheek.wound.level     No references.
-
-          character.right.chest.wound.level     No references.
-
-          character.right.dew.talon.wound.level No references.
-
-          character.right.ear.wound.level       No references.
-
-          character.right.eye.wound.level       No references.
-
-          character.right.forearm.wound.level   No references.
-
-          character.right.hand.wound.level      No references,
-
-          character.right.index.finger.wound    No references.
-            .level
-
-          character.right.inside.thigh.wound    No references.
-            .level
-
-          character.right.low.talon.wound.level No references.
-
-          character.right.lower.leg.wound.level No references.
-
-          character.right.lung.wound.level      No references.
-
-          character.right.main.fore.talon.wound No references.
-            .level
-
-          character.right.middle.finger.wound   No references.
-            .level
-
-          character.right.middle.talon.wound    No references.
-            .level
-
-          character.right.outside.thigh.wound   No references.
-            .level
-
-          character.right.ring.finger.wound     No references.
-            .level
-
-          character.right.shoulder.wound.level  No references.
-
-          character.right.thumb.wound.level     No references.
-
-          character.right.upper.arm.wound.level No references.
-
-          character.right.wrist.wound.level     No references.
-
-          character.scalp.wound.level           No references.
-
-          character.secondary.color             ./functions/dna.lab/t
-
-          character.secondary.color.number      ./functions/dna.lab/t
-
-          character.secondary.fur.quality       ./functions/dna.lab/t
-
-          character.secondary.fur.quality       ./functions/dna.lab/t
-            .number
-
-          character.small.intestine.wound.level No references.
-
-          character.stomach.wound.level         No references.
-
-          character.strength                    ./functions/dna.lab/t
-
-          character.testicle.wound.level        No references.
-
-          chest.worn.item.id                    No references.
-
-          child.attribute.computation.factor    ./functions/dna.lab/t
-
-          external.data.buffer                  ./functions/clear.screen/t
-                                                ./functions/get.external.data/t
-
-          head.worn.item.id                     No references.
-
-          id.buffer                             No references.
-
-          id.size                               ./functions/create.character/t
-
-          left.ear.worn.item.id                 No references.
-
-          left.hand.inventory.id                No references.
-
-          left.thigh.worn.item.id               No references.
-
-          neck.worn.item.id                     No references.
-
-          new.char.sig                          No references.
-
-          new.char.sig.buffer                   No references.
-
-          new.char.sig.l                        ./functions/main/participant.interaction
-                                                  /address.login.status/t
-
-          number.of.parents                     ./functions/dna.lab/t
-
-          right.ear.worn.item.id                No references.
-
-          right.hand.inventory.id               No references.
-
-          right.thigh.worn.item.id              No references.
-
           socket.filename.entry.l               ./functions/b
                                                 ./functions/main/system.check.b
                                                 ./functions/socket/clean.socket/t
@@ -767,9 +502,17 @@ Relevant data:
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t
 
+          egg.filename                          ./functions/d
+
+          egg.filename.l                        No references.
+
           external.data.cursor.home             ./functions/clear.screen/t
 
           external.data.clear.screen            ./functions/clear.screen/t
+
+          ghost.filename                        ./functions/d
+
+          ghost.filename.l                      No references.
 
           item.filename                         ./functions/d
 
@@ -778,6 +521,10 @@ Relevant data:
           number.of.commands                    ./commands/help/t
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
+
+          participant.filename                  ./functions/d
+
+          participant.filename.l                No references.
 
           pouch.declaration                     ./functions/d
                                                 ./functions/create.character/t
@@ -1118,9 +865,6 @@ Relevant data:
 
           login.status                          ./functions/main/listening.socket.poll/t
                                                 ./functions/socket/active.socket.poll/t
-
-          new.char.sig                          ./functions/main/participant.interaction
-                                                  /address.login.status/t
 
           passphrase.status                     ./functions/main/participant.interaction
                                                   /address.login.status/t
