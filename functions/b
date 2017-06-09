@@ -58,8 +58,6 @@
 
     id.buffer                                     resd  0001h       ; Buffer for id data.
 
-    new.char.sig.buffer                           resw  0001h       ; Buffer for new character signature.
-
     external.data.buffer                          resb  00FFh       ; Buffer for external data.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -502,17 +502,17 @@ Relevant data:
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t
 
-          egg.filename                          ./functions/d
+          egg.directory                         ./functions/d
 
-          egg.filename.l                        No references.
+          egg.directory.l                       No references.
 
           external.data.cursor.home             ./functions/clear.screen/t
 
           external.data.clear.screen            ./functions/clear.screen/t
 
-          ghost.filename                        ./functions/d
+          ghost.directory                       ./functions/d
 
-          ghost.filename.l                      No references.
+          ghost.directory.l                     No references.
 
           item.filename                         ./functions/d
 
@@ -522,9 +522,9 @@ Relevant data:
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
 
-          participant.filename                  ./functions/d
+          participant.directory                 ./functions/d
 
-          participant.filename.l                No references.
+          participant.directory.l               No references.
 
           pouch.declaration                     ./functions/d
                                                 ./functions/create.character/t
