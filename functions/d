@@ -68,13 +68,13 @@
     external.data.clear.screen            db  "./d/c/s", 00h	
 
     egg.directory                         db  './e/'
-    egg.directory.l                       equ $-egg.filename
+    egg.directory.l                       equ $-egg.directory
 
     gylf.directory                        db  './p/'
-    gylf.directory.l                      equ $-participant.filename
+    gylf.directory.l                      equ $-participant.directory
 
     ghost.directory                       db  './g/'
-    ghost.directory.l                     equ $-ghost.filename
+    ghost.directory.l                     equ $-ghost.directory
 
     pouch.declaration                     db  27h, 's pouch'
     pouch.declaration.l                   equ $-pouch.declaration
