@@ -4,13 +4,18 @@
 ;
 ;   This function implants a fertilized egg in the target participant.
 ;
-;   Assumptions:     esi - Pointer to data associated with active participant.
+;   Assumptions:  dword [argument.01.location] - Pointer to name of target gylf.
+;                 dword [argument.01.size]     - Length of name of target gylf.
 ;
-;   Returns:         None.
+;                 Active participant data populated by previous processes.
+;
+;   Returns:      None.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
+;
+;   a.g.data                                                ./b
 ;
 ;   argument.01.location                                    ./functions/aggregate.arguments/b
 ;
@@ -40,9 +45,7 @@
 ;
 ;   egg_size                                                ./s
 ;
-;   egg.directory                                           ./functions/d
-;
-;   egg.directory.l                                         ./functions/d
+;   e.data                                                  ./b
 ;
 ;   egg.area.id                                             ./s
 ;
@@ -60,25 +63,21 @@
 ;
 ;   get.new.item.id                                         ./functions/get.new.item.id/t
 ;
-;   memory.switch                                           ./functions/memory.switch/t
+;   get.participant.data                                    ./functions/get.participant.data/t
 ;
 ;   notify.in.absentia                                      ./functions/notify.in.absentia/t
 ;
 ;   open.descriptor                                         ./functions/open.descriptor/t
 ;
-;   participant_size                                        ./s
+;   g.data                                                  ./b
 ;
 ;   participant.connection.descriptor.index                 ./s
-;
-;   participant.directory                                   ./functions/d
-;
-;   participant.directory.l                                 ./functions/d
 ;
 ;   participant.name                                        ./s
 ;
 ;   participant.name.l                                      ./s
 ;
-;   read.descriptor                                         ./functions/read.descriptor/t
+;   sterilize.memory                                        ./functions/sterilize.memory/t
 ;
 ;   text.data.index.command.egg.already.fertilized.message  ./functions/main/text.init/b
 ;
@@ -99,161 +98,111 @@
 ;   write.descriptor                                        ./functions/write.descriptor/t
 ;
 
-    command.egg:                    call  check.admin                                                       ; Is the performing participant a privileged user?
-                                    jc    command.egg.admin                                                 ; Yes. Go process the command.
+    command.egg:                    call  check.admin                                                     ; Is the performing participant a privileged user?
+                                    jc    command.egg.admin                                               ; Yes. Go process the command.
 
-                                    call  write.bad.command.error                                           ; No. Tell the user that this command is bad.
+                                    call  write.bad.command.error                                         ; No. Tell the user that this command is bad.
 
-                                    ret                                                                     ; Return to caller.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    command.egg.admin:              push  participant.directory                                             ; Point assemble.path to participant directory.
-                                    push  participant.directory.l                                           ; Tell assemble.path how long the directory string is.
-                                    push  dword [argument.01.location]                                      ; Point assemble.path to the name of the target for fertilization.
-                                    push  dword [argument.01.size]                                          ; Tell assemble.path how long the name is.
-                                    call  assemble.path                                                     ; Assemble the path to the target participant data file at buffer.1
-
-                                    push  buffer.1                                                          ; Point open.descriptor to the target participant data file.
-                                    call  open.descriptor                                                   ; Attempt to open the target participant data file.
-
-                                    or    eax, eax                                                          ; Did we successfully open the target participant data file?
-                                    jns   command.egg.bad.name                                              ; No. Go tell the performing user that the target name is bad.
-
-                                    mov   ebx, eax                                                          ; ebx - Descriptor associated with the target participant data file.
-                                    call  close.descriptor                                                  ; Close the target participant data file.
-
-                                    push  egg.directory                                                     ; Point assemble.path to the egg directory.
-                                    push  egg.directory.l                                                   ; Tell assemble.path how long the egg directory string is.
-                                    push  dword [argument.01.location]                                      ; Point assemble.path to the name of the target for fertilization.
-                                    push  dword [argument.01.size]                                          ; Tell assemble.path how long the name is.
-                                    call  assemble.path                                                     ; Assemble the path to the egg data file at buffer.1.
-
-                                    push  buffer.1                                                          ; Point open.descriptor to the egg data file.
-                                    call  open.descriptor                                                   ; Attempt to open the egg data file.
-
-                                    or    eax, eax                                                          ; Did we successfully open the egg data file?
-                                    js    command.egg.already.fertilized                                    ; Yes. Looks like the target participant is already carrying a fertilized egg, but
-                                                                                                            ; hasn't named it yet. Abort.
-
-                                    push  egg_size                                                          ; Tell memory switch to reserve enough memory for a new egg.
-                                    call  memory.switch                                                     ; Extend memory.
-
-                                    push  [text.data.index.egg.item.description]                            ; Point get.new.item.id to the standard egg item description.
-                                    push  [text.data.index.egg.item.name]                                   ; Point get.new.item.id to the standard egg item name.
-                                    push  ebx.egg.item.id                                                   ; Point get.new.item.id to the new egg item id.
-                                    call  get.new.item.id                                                   ; Populate the new egg's item id.
-
-                                    push  [text.data.index.egg.area.description]                            ; Point get.new.area.id to the standard egg area description.
-                                    push  [text.data.index.egg.area.name]                                   ; Point get.new.area.id to the standard egg area name.
-                                    push  ebx.egg.area.id                                                   ; Point get.new.area.id to the new egg area id.
-                                    call  get.new.area.id                                                   ; Populate the new egg's area id.
-
-                                    mov   ecx, dword [argument.01.size]                                     ; ecx - Length of target participant's name.
-                                    mov   byte [ebx.egg.e.parent.l], cl                                     ; Populate new egg's egg parent name length field.
-
-                                    push  esi                                                               ; Preserve pointer to current socket.
-
-                                    mov   esi, dword [argument.01.location]                                 ; esi - Pointer to the name of the new egg's egg parent.
-                                    mov   edi, ebx.egg.e.parent                                             ; edi - Pointer to the new egg's egg parent field.
-
-                                    repnz movsb                                                             ; Populate the new egg's egg parent field.
-
-                                    pop   esi                                                               ; Restore pointer to current socket.
-
-                                    mov   cl, byte [esi.participant.name.l]                                 ; ecx - Length of performing participant's name.
-                                    mov   byte [ebx.egg.f.parent.l], cl                                     ; Populate new egg's fertilizing parent name length field.
-
-                                    push  esi                                                               ; Preserve pointer to current socket.
-
-                                    mov   esi, esi.participant.name                                         ; esi - Pointer to the name of the new egg's fertilizing parent.
-                                    mov   edi, ebx.egg.f.parent                                             ; edi - Pointer to the new egg's fertilizing parent field.
-
-                                    repnz movsb                                                             ; Populate the new egg's fertilizing parent field.
-
-                                    pop   esi                                                               ; Restore pointer to current socket.
-
-                                    push  egg.directory                                                     ; Point assemble.path to the egg directory.
-                                    push  egg.directory.l                                                   ; Tell assemble.path how long the egg directory string is.
-                                    push  dword [argument.01.location]                                      ; Point assemble.path to the name of the target for fertilization.
-                                    push  dword [argument.01.size]                                          ; Tell assemble.path how long the name is.
-                                    call  assemble.path                                                     ; Assemble the path to the egg data file at buffer.1.
-
-                                    push  buffer.1                                                          ; Point create.file to assembled path to egg data file.
-                                    call  create.file                                                       ; Create the new egg data file.
-
-                                    push  eax                                                               ; Preserve descriptor associated with new egg data file.
-
-                                    push  eax                                                               ; Point write.descriptor to new egg data file.
-                                    push  ebx                                                               ; Point write descriptor to new egg data.
-                                    push  egg_size                                                          ; Tell write descriptor to write the entire data set.
-                                    call  write.descriptor                                                  ; Write the new egg data to the new egg data file.
-
-                                    pop   ebx                                                               ; Restore descriptor associated with the new egg data file.
-                                    call  close.descriptor                                                  ; Close the new egg data file.
-
-                                    push  participant_size                                                  ; Request enough new memory to store the target participant's data.
-                                    call  memory.switch                                                     ; Extend memory.
-
-                                    push  participant.directory                                             ; Point assemble.path to participant directory.
-                                    push  participant.directory.l                                           ; Tell assemble.path how long the directory string is.
-                                    push  dword [argument.01.location]                                      ; Point assemble.path to the name of the target for fertilization.
-                                    push  dword [argument.01.size]                                          ; Tell assemble.path how long the name is.
-                                    call  assemble.path                                                     ; Assemble the path to the target participant data file at buffer.1
-
-                                    push  buffer.1                                                          ; Point open.descriptor to the target participant data file.
-                                    call  open.descriptor                                                   ; Attempt to open the target participant data file.
-
-                                    push  ebx                                                               ; Preserve pointer to new memory.
-                                    push  eax                                                               ; Preserve descriptor associated with the target participant data file.
-
-                                    push  participant_size                                                  ; Tell read.descriptor to read the entire participant record.
-                                    push  ebx                                                               ; Point read.descriptor to new memory.
-                                    push  eax                                                               ; Point read.descriptor to the target participant data file.
-                                    call  read.descriptor                                                   ; Read the entire target participant record.
-
-                                    pop   ebx                                                               ; Restore descriptor associated with the target participant data file.
-                                    call  close.descriptor                                                  ; Close the target participant data file.
-
-                                    pop   ebx                                                               ; Restore pointer to new memory.
-
-                                    cmp   dword [ebx.participant.connection.descriptor.index], dead.socket  ; Is the target participant online?
-                                    jnz   command.egg.notify.absent.target
-
-                                    push  dword [ebx.participant.connection.descriptor.index]               ; Point send.socket to the socket descriptor associated with the target participant.
-                                    push  dword [text.data.index.command.egg.f.notification.message]        ; Point send.socket to the fertilization notifier message.
-                                    call  send.socket                                                       ; Notify the target participant of their new status.
+                                    ret                                                                   ; Return to caller.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.egg.nat.ret:            push  0                                                                 ; Tell memory.switch to free memory.
-                                    call  memory.switch                                                     ; Free memory.
+    command.egg.admin:              push  g.data                                                          ; Tell get.participant.data to get gylf data.
+                                    push  dword [argument.01.location]                                    ; Point get.participant.data to the name of the target for fertilization.
+                                    push  dword [argument.01.size]                                        ; Tell get.participant.data how long the name is.
+                                    call  get.participant.data                                            ; Store gylf data at g.data.
 
-                                    ret                                                                     ; Return to caller.
+                                    or    eax, eax                                                        ; Did we successfully open the target participant data file?
+                                    jns   command.egg.bad.name                                            ; No. Go tell the performing user that the target name is bad.
+
+                                    push  e.data                                                          ; Tell get.participant.data to get egg data.
+                                    push  dword [argument.01.location]                                    ; Point get.egg.data to the name of the target for fertilization.
+                                    push  dword [argument.01.size]                                        ; Tell get.egg.data how long the name is.
+                                    call  get.participant.data                                            ; Store egg data at e.data.
+
+                                    or    eax, eax                                                        ; Did we successfully open the egg data file?
+                                    js    command.egg.already.fertilized                                  ; Yes. Looks like the target participant is already carrying a fertilized egg, but
+                                                                                                          ; hasn't named it yet. Abort.
+
+                                    push  egg_size                                                        ; Tell sterilize.memory to sterilize enough memory for a new egg.
+                                    push  e.data                                                          ; Point sterilize.memory to e.data
+                                    call  sterilize.memory                                                ; Sterilize the egg data storage area.
+
+                                    push  [text.data.index.egg.item.description]                          ; Point get.new.item.id to the standard egg item description.
+                                    push  [text.data.index.egg.item.name]                                 ; Point get.new.item.id to the standard egg item name.
+                                    push  e.data.item.id                                                  ; Point get.new.item.id to the new egg item id.
+                                    call  get.new.item.id                                                 ; Populate the new egg's item id.
+
+                                    push  [text.data.index.egg.area.description]                          ; Point get.new.area.id to the standard egg area description.
+                                    push  [text.data.index.egg.area.name]                                 ; Point get.new.area.id to the standard egg area name.
+                                    push  e.data.area.id                                                  ; Point get.new.area.id to the new egg area id.
+                                    call  get.new.area.id                                                 ; Populate the new egg's area id.
+
+                                    mov   ecx, dword [argument.01.size]                                   ; ecx - Length of target participant's name.
+                                    mov   byte [e.data.e.parent.l], cl                                    ; Populate new egg's egg parent name length field.
+
+                                    mov   esi, dword [argument.01.location]                               ; esi - Pointer to the name of the new egg's egg parent.
+                                    mov   edi, e.data.e.parent                                            ; edi - Pointer to the new egg's egg parent field.
+
+                                    repnz movsb                                                           ; Populate the new egg's egg parent field.
+
+                                    mov   cl, byte [a.g.data.participant.name.l]                          ; ecx - Length of performing participant's name.
+                                    mov   byte [e.data.f.parent.l], cl                                    ; Populate new egg's fertilizing parent name length field.
+
+                                    mov   esi, a.g.data.participant.name                                  ; esi - Pointer to the name of the new egg's fertilizing parent.
+                                    mov   edi, e.data.f.parent                                            ; edi - Pointer to the new egg's fertilizing parent field.
+
+                                    repnz movsb                                                           ; Populate the new egg's fertilizing parent field.
+
+                                    push  egg.directory                                                   ; Point assemble.path to the egg directory.
+                                    push  egg.directory.l                                                 ; Tell assemble.path how long the egg directory string is.
+                                    push  dword [argument.01.location]                                    ; Point assemble.path to the name of the target for fertilization.
+                                    push  dword [argument.01.size]                                        ; Tell assemble.path how long the name is.
+                                    call  assemble.path                                                   ; Assemble the path to the egg data file at buffer.1.
+
+                                    push  buffer.1                                                        ; Point create.file to assembled path to egg data file.
+                                    call  create.file                                                     ; Create the new egg data file.
+
+                                    push  eax                                                             ; Preserve descriptor associated with new egg data file.
+
+                                    push  eax                                                             ; Point write.descriptor to new egg data file.
+                                    push  e.data                                                          ; Point write descriptor to new egg data.
+                                    push  egg_size                                                        ; Tell write descriptor to write the entire data set.
+                                    call  write.descriptor                                                ; Write the new egg data to the new egg data file.
+
+                                    pop   ebx                                                             ; Restore descriptor associated with the new egg data file.
+                                    call  close.descriptor                                                ; Close the new egg data file.
+
+                                    cmp   dword [g.data.connection.descriptor.index], dead.socket         ; Is the target participant online?
+                                    jnz   command.egg.notify.absent.target                                ; No. Go notifiy in absentia.
+
+                                    push  dword [g.data.connection.descriptor.index]                      ; Point send.socket to the socket descriptor associated with the target participant.
+                                    push  dword [text.data.index.command.egg.f.notification.message]      ; Point send.socket to the fertilization notifier message.
+                                    call  send.socket                                                     ; Notify the target participant of their new status.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.egg.bad.name:           push  dword [esi.participant.connection.descriptor.index]               ; Point send.socket to the socket descriptor associated with the performing user.
-                                    push  dword [text.data.index.command.egg.bad.name.message]              ; Point send.socket to the bad name message.
-                                    call  send.socket                                                       ; Tell the performing user that the indicated target is bad.
+    command.egg.bad.name:           push  dword [a.g.data.connection.descriptor.index]                    ; Point send.socket to the socket descriptor associated with the performing user.
+                                    push  dword [text.data.index.command.egg.bad.name.message]            ; Point send.socket to the bad name message.
+                                    call  send.socket                                                     ; Tell the performing user that the indicated target is bad.
 
-                                    ret                                                                     ; Return to caller.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    command.egg.already.fertilized: mov   ebx, eax                                                          ; ebx - Descriptor associated with the extant egg data file.
-                                    call  close.descriptor                                                  ; Close extant egg data file.
-
-                                    push  dword [text.data.index.command.egg.already.fertilized.message]    ; Point send.socket to the egg already fertilized message.
-                                    call  send.socket                                                       ; Tell the performing user that the target recipient is already carrying a fertilized
-                                                                                                            ; egg.
-
-                                    ret                                                                     ; Return to caller.
+                                    ret                                                                   ; Return to caller.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.egg.nat:                push  buffer.1                                                          ; Point notify.in.absentia to target recipient.
-                                    push  dword [text.data.index.command.egg.f.notification.message]        ; Point notify.in.absentia to fertilization notification message.
-                                    call  notify.in.absentia                                                ; Notify the target recipient in absentia.
+    command.egg.already.fertilized: mov   ebx, eax                                                        ; ebx - Descriptor associated with the extant egg data file.
+                                    call  close.descriptor                                                ; Close extant egg data file.
 
-                                    jmp   command.egg.nat.ret                                               ; Go free up memory and return to caller.
+                                    push  dword [text.data.index.command.egg.already.fertilized.message]  ; Point send.socket to the egg already fertilized message.
+                                    call  send.socket                                                     ; Tell the performing user that the target recipient is already carrying a fertilized
+                                                                                                          ; egg.
+
+                                    ret                                                                   ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.egg.nat:                push  buffer.1                                                        ; Point notify.in.absentia to target recipient.
+                                    push  dword [text.data.index.command.egg.f.notification.message]      ; Point notify.in.absentia to fertilization notification message.
+                                    call  notify.in.absentia                                              ; Notify the target recipient in absentia.
+
+                                    ret                                                                   ; Return to caller.

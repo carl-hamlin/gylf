@@ -46,7 +46,7 @@ Relevant data:
                                                 ./functions/socket/accept.socket/t
                                                 ./functions/socket/bind.socket/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.participant/t
                                                 ./functions/socket/communications/send.to.world/t
                                                 ./functions/socket/create.socket/t
                                                 ./functions/socket/listen.socket/t
@@ -65,7 +65,7 @@ Relevant data:
                                                 ./functions/main/system.check/b
                                                 ./functions/main/system.check/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/sent.to.player/t
+                                                ./functions/socket/communications/sent.to.participant/t
                                                 ./functions/socket/communications/send.to.world/t
 
           sys.standard.output                   ./commands/area/t
@@ -102,7 +102,7 @@ Relevant data:
     ----------------------------------------------------------------------------------------------
 
       /ai                     Contains code pertinent to the implementation of the 'ai' command; a
-                              player-level command that allows for the invoker to adjust
+                              participant-level command that allows for the invoker to adjust
                               parameters associated with their avatar's behaviour while they are
                               signed out.
 
@@ -124,7 +124,7 @@ Relevant data:
 
       /area                   Contains code pertinent to the implementation of the 'area' command;
                               an administrator command that allows for administrators to create
-                              new areas without having to dig them out using the player interface.
+                              new areas without having to dig them out using the participant interface.
 
       b   area.description                      ./commands/area/t
                                                 ./functions/create.character/t
@@ -209,7 +209,7 @@ Relevant data:
     ----------------------------------------------------------------------------------------------
 
       /dig                    Contains code pertinent to the implementation of the 'dig' command;
-                              a participant-level command that allows for player to, under certain
+                              a participant-level command that allows for participant to, under certain
                               circumstances, extend the environment by creating new areas.
 
       d   command.dig.h                         No references.
@@ -378,7 +378,7 @@ Relevant data:
 
       /think                  Contains code pertinent to the implementation of the 'think'
                               command; a participant-level command that allows for communication
-                              between players in a local environment.
+                              between participants in a local environment.
 
       d   command.think.h                       No references.
 
@@ -835,12 +835,12 @@ Relevant data:
 
       /get.text.data          Contains code that pulls string data from an external repository.
 
-      t   get.text.data       ./functions/socket/socket.send/t
-                              ./functions/write.console/t
+      t   get.text.data                         ./functions/socket/socket.send/t
+                                                ./functions/write.console/t
 
-          get.text.data.nz    ./functions/get.text.data/t
+          get.text.data.nz                      ./functions/get.text.data/t
 
-          get.text.data.z     ./functions/get.text.data/t
+          get.text.data.z                       ./functions/get.text.data/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -1027,7 +1027,8 @@ Relevant data:
         b   connection.area.id.index            ./commands/gylf/t
                                                 ./commands/look/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications
+                                                  /send.to.participant/t
 
             connection.descriptor.index         ./commands/area/t
                                                 ./commands/broadcast/t
@@ -1053,7 +1054,8 @@ Relevant data:
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/system.check/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications
+                                                  /send.to.participant/t
                                                 ./functions/socket/communications/send.to.world/t
 
             connection.external.index           No references.
@@ -1070,7 +1072,8 @@ Relevant data:
 
             connection.number.index             ./functions/main/system.check/t
                                                 ./functions/print.socket.number/t
-                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications
+                                                  /send.to.participant/t
 
             connection.pname.index              ./functions/translate.name.to.socket.number/t
 
@@ -1093,7 +1096,8 @@ Relevant data:
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/active.socket.poll/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications
+                                                  /send.to.participant/t
                                                 ./functions/socket/communications/send.to.world/t
 
 
@@ -1586,19 +1590,23 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-          /send.to.player     Contains code that sends a provided message to a specified player.
-                              Only the specified player will received this message. This code is
-                              used to facilitate private communication between players.
+          /send.to.participant     Contains code that sends a provided message to a specified participant.
+                              Only the specified participant will received this message. This code is
+                              used to facilitate private communication between participants.
 
-          t   send.to.player                    ./commands/think/t
+          t   send.to.participant               ./commands/think/t
 
-              send.to.player.broadcast          ./functions/socket/communications/send.to.player/t
+              send.to.participant.broadcast     ./functions/socket/communications
+                                                  /send.to.participant/t
 
-              send.to.player.broadcast.done     ./functions/socket/communications/send.to.player/t
+              send.to.participant.broadcast     ./functions/socket/communications
+                .done                             /send.to.participant/t
 
-              send.to.player.connection.poll    ./functions/socket/communications/send.to.player/t
+              send.to.participant.connection    ./functions/socket/communications
+                .poll                             /send.to.participant/t
 
-              send.to.player.out.of.area.error  ./functions/socket/communications/send.to.player/t
+              send.to.participant.out.of.area   ./functions/socket/communications
+                .error                            /send.to.participant/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -1698,7 +1706,7 @@ Relevant data:
                                                 ./functions/clear.screen/t
                                                 ./functions/set.single.attribute/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.participant/t
                                                 ./functions/socket/communications/send.to.world/t
 
             socket.send.buf.splice              ./functions/socket.send/t
@@ -1727,11 +1735,14 @@ Relevant data:
 
       t   translate.name.to.socket.number       No references.
 
-          translate.name.to.socket.number.search.loop ./functions/translate.name.to.socket.number/t
+          translate.name.to.socket.number       ./functions/translate.name.to.socket.number/t
+            .search.loop
 
-          translate.name.to.socket.number.cleanup     ./functions/translate.name.to.socket.number/t
+          translate.name.to.socket.number       ./functions/translate.name.to.socket.number/t
+            .cleanup
 
-          translate.name.to.socket.number.found.socket  ./functions/translate.name.to.socket.number/t
+          translate.name.to.socket.number.found ./functions/translate.name.to.socket.number/t
+            .socket
 
     ----------------------------------------------------------------------------------------------
 

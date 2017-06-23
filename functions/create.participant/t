@@ -1,8 +1,8 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/create.character/t
+;   ./functions/create.participant/t
 ;
-;   This function builds out character data on the basis of the DNA sequences provided by the parents of the egg.
+;   This function builds out participant data on the basis of the DNA sequences provided by the parents of the egg.
 ;
 ;   Assumptions:    eax - Descriptor associated with an egg file.
 ;                   esi - Index to socket entry.

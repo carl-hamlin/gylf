@@ -70,8 +70,8 @@
     egg.directory                         db  './e/'
     egg.directory.l                       equ $-egg.filename
 
-    participant.directory                 db  './p/'
-    participant.directory.l               equ $-participant.filename
+    gylf.directory                        db  './p/'
+    gylf.directory.l                      equ $-participant.filename
 
     ghost.directory                       db  './g/'
     ghost.directory.l                     equ $-ghost.filename

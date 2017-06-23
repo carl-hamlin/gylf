@@ -2,7 +2,7 @@
 ;
 ;   ./commands/think/t
 ;
-;   This function is used by players and admins to communicate with one another.
+;   This function is used by participants and admins to communicate with one another.
 ;
 ;   Syntax:
 ;   think (target)
@@ -35,7 +35,7 @@
 ;
 ;   send.to.area                                    ./functions/socket/communications/send.to.area/t
 ;
-;   send.to.player                                  ./functions/socket/communications/send.to.player/t
+;   send.to.participant                             ./functions/socket/communications/send.to.participant/t
 ;
 ;   socket.send                                     ./functions/socket/socket.send/t
 ;
@@ -64,11 +64,11 @@
                                 cmp   eax, 0FFFFh
                                 jz    command.think.help.msg
 
-                                ; TODO - Populate fields for send.to.player. Still need to figure out areas.
+                                ; TODO - Populate fields for send.to.participant. Still need to figure out areas.
 
                                 push  esi
                                 push  eax
-                                call  send.to.player                                                          ; Send message to targetted player.
+                                call  send.to.participant                                                     ; Send message to targetted participant.
 
                                 ret                                                                           ; Return to caller.
 
