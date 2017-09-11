@@ -15,7 +15,7 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   a.g.data                                                ./b
+;   a.p.data                                                ./b
 ;
 ;   argument.01.location                                    ./functions/aggregate.arguments/b
 ;
@@ -43,21 +43,7 @@
 ;
 ;   dead.socket                                             ./functions/main/b
 ;
-;   egg_size                                                ./s
-;
 ;   e.data                                                  ./b
-;
-;   egg.area.id                                             ./s
-;
-;   egg.e.parent                                            ./s
-;
-;   egg.e.parent.l                                          ./s
-;
-;   egg.f.parent                                            ./s
-;
-;   egg.f.parent.l                                          ./s
-;
-;   egg.item.id                                             ./s
 ;
 ;   get.new.area.id                                         ./functions/get.new.area.id/t
 ;
@@ -70,12 +56,6 @@
 ;   open.descriptor                                         ./functions/open.descriptor/t
 ;
 ;   g.data                                                  ./b
-;
-;   participant.connection.descriptor.index                 ./s
-;
-;   participant.name                                        ./s
-;
-;   participant.name.l                                      ./s
 ;
 ;   sterilize.memory                                        ./functions/sterilize.memory/t
 ;
@@ -124,33 +104,29 @@
                                     js    command.egg.already.fertilized                                  ; Yes. Looks like the target participant is already carrying a fertilized egg, but
                                                                                                           ; hasn't named it yet. Abort.
 
-                                    push  egg_size                                                        ; Tell sterilize.memory to sterilize enough memory for a new egg.
-                                    push  e.data                                                          ; Point sterilize.memory to e.data
-                                    call  sterilize.memory                                                ; Sterilize the egg data storage area.
-
                                     push  [text.data.index.egg.item.description]                          ; Point get.new.item.id to the standard egg item description.
                                     push  [text.data.index.egg.item.name]                                 ; Point get.new.item.id to the standard egg item name.
-                                    push  e.data.item.id                                                  ; Point get.new.item.id to the new egg item id.
+                                    push  e.data + egg.item.id                                            ; Point get.new.item.id to the new egg item id.
                                     call  get.new.item.id                                                 ; Populate the new egg's item id.
 
                                     push  [text.data.index.egg.area.description]                          ; Point get.new.area.id to the standard egg area description.
                                     push  [text.data.index.egg.area.name]                                 ; Point get.new.area.id to the standard egg area name.
-                                    push  e.data.area.id                                                  ; Point get.new.area.id to the new egg area id.
+                                    push  e.data + egg.area.id                                            ; Point get.new.area.id to the new egg area id.
                                     call  get.new.area.id                                                 ; Populate the new egg's area id.
 
                                     mov   ecx, dword [argument.01.size]                                   ; ecx - Length of target participant's name.
-                                    mov   byte [e.data.e.parent.l], cl                                    ; Populate new egg's egg parent name length field.
+                                    mov   byte [e.data + egg.e.parent.name.l], cl                         ; Populate new egg's egg parent name length field.
 
                                     mov   esi, dword [argument.01.location]                               ; esi - Pointer to the name of the new egg's egg parent.
-                                    mov   edi, e.data.e.parent                                            ; edi - Pointer to the new egg's egg parent field.
+                                    mov   edi, e.data + egg.e.parent.name                                 ; edi - Pointer to the new egg's egg parent field.
 
                                     repnz movsb                                                           ; Populate the new egg's egg parent field.
 
-                                    mov   cl, byte [a.g.data.participant.name.l]                          ; ecx - Length of performing participant's name.
-                                    mov   byte [e.data.f.parent.l], cl                                    ; Populate new egg's fertilizing parent name length field.
+                                    mov   cl, byte [a.p.data + gylf.name.l]                               ; ecx - Length of performing participant's name.
+                                    mov   byte [e.data + egg.i.parent.name.l], cl                         ; Populate new egg's fertilizing parent name length field.
 
-                                    mov   esi, a.g.data.participant.name                                  ; esi - Pointer to the name of the new egg's fertilizing parent.
-                                    mov   edi, e.data.f.parent                                            ; edi - Pointer to the new egg's fertilizing parent field.
+                                    mov   esi, a.p.data + gylf.name                                       ; esi - Pointer to the name of the new egg's fertilizing parent.
+                                    mov   edi, e.data + egg.i.parent.name                                 ; edi - Pointer to the new egg's fertilizing parent field.
 
                                     repnz movsb                                                           ; Populate the new egg's fertilizing parent field.
 
@@ -173,18 +149,18 @@
                                     pop   ebx                                                             ; Restore descriptor associated with the new egg data file.
                                     call  close.descriptor                                                ; Close the new egg data file.
 
-                                    cmp   dword [g.data.connection.descriptor.index], dead.socket         ; Is the target participant online?
+                                    cmp   dword [g.data + gylf.connection.descriptor.index], dead.socket  ; Is the target participant online?
                                     jnz   command.egg.notify.absent.target                                ; No. Go notifiy in absentia.
 
-                                    push  dword [g.data.connection.descriptor.index]                      ; Point send.socket to the socket descriptor associated with the target participant.
+                                    push  dword [g.data + gylf.connection.descriptor.index]               ; Point send.socket to the socket descriptor associated with the target participant.
                                     push  dword [text.data.index.command.egg.f.notification.message]      ; Point send.socket to the fertilization notifier message.
-                                    call  send.socket                                                     ; Notify the target participant of their new status.
+                                    call  socket.send                                                     ; Notify the target participant of their new status.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.egg.bad.name:           push  dword [a.g.data.connection.descriptor.index]                    ; Point send.socket to the socket descriptor associated with the performing user.
+    command.egg.bad.name:           push  dword [a.p.data + gylf.connection.descriptor.index]             ; Point send.socket to the socket descriptor associated with the performing user.
                                     push  dword [text.data.index.command.egg.bad.name.message]            ; Point send.socket to the bad name message.
-                                    call  send.socket                                                     ; Tell the performing user that the indicated target is bad.
+                                    call  socket.send                                                     ; Tell the performing user that the indicated target is bad.
 
                                     ret                                                                   ; Return to caller.
 
@@ -194,7 +170,7 @@
                                     call  close.descriptor                                                ; Close extant egg data file.
 
                                     push  dword [text.data.index.command.egg.already.fertilized.message]  ; Point send.socket to the egg already fertilized message.
-                                    call  send.socket                                                     ; Tell the performing user that the target recipient is already carrying a fertilized
+                                    call  socket.send                                                     ; Tell the performing user that the target recipient is already carrying a fertilized
                                                                                                           ; egg.
 
                                     ret                                                                   ; Return to caller.
