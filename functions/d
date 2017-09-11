@@ -71,7 +71,7 @@
     egg.directory.l                       equ $-egg.directory
 
     gylf.directory                        db  './p/'
-    gylf.directory.l                      equ $-participant.directory
+    gylf.directory.l                      equ $-gylf.directory
 
     ghost.directory                       db  './g/'
     ghost.directory.l                     equ $-ghost.directory

@@ -438,6 +438,10 @@ Relevant data:
 
           buffer.2.l                            ./functions/b
 
+          e.data                                ./functions/dna.lab/t
+
+          g.data                                ./functions/dna.lab/t
+
           socket.filename.entry.l               ./functions/b
                                                 ./functions/main/system.check.b
                                                 ./functions/socket/clean.socket/t
@@ -631,6 +635,12 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
+      /assemble.path          Contains code to assemble a path to a given file.
+
+      t   assemble.path                         ./functions/get.participant.data/t
+
+    ----------------------------------------------------------------------------------------------
+
       /bail                   Contains code that suspends execution of the code, unloads from
                               memory, and returns control to Linux.
 
@@ -767,7 +777,7 @@ Relevant data:
       /dna.lab                Contains code which combines the DNA left behind on an egg by both
                               parents to create an entirely new gylf.
 
-      t   dna.lab                               ./functions/create.character/t
+      t   dna.lab                               ./functions/create.participant/t
 
           dna.lab.agility                       ./functions/dna.lab/t
 

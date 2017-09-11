@@ -26,11 +26,31 @@
       .name.l                             resb        01h ; Length of egg's name.
       .name                               resb        28h ; Name of the gylf living in the egg.
 
-      .e.parent.l                         resb        01h ; Length of laying parent's name.
-      .e.parent                           resb        28h ; Name of laying parent for DNA retrieval.
+      .i.parent.name.l                    resb        01h ; Length of egg's inseminating parent's name.
+      .i.parent.name                      resb        28h ; Name of egg's inseminating parent.
 
-      .f.parent.l                         resb        01h ; Length of fertilizing parent's name.
-      .f.parent                           resb        28h ; Name of fertilizing parent for DNA retrieval.
+      .i.parent.base.color                resb        01h ; Byte indicator for base color.
+      .i.parent.secondary.color           resb        01h ; Byte indicator for secondary color.
+
+      .i.parent.base.fur.quality          resb        01h ; Byte indicator for base fur quality.
+      .i.parent.secondary.fur.quality     resb        01h ; Byte indicator for secondary fur quality.
+
+      .i.parent.strength                  resb        01h ; Byte indicator for participant strength.
+      .i.parent.endurance                 resb        01h ; Byte indicator for participant endurance.
+      .i.parent.agility                   resb        01h ; Byte indicator for participant agility.
+
+      .e.parent.name.l                    resb        01h ; Length of egg's laying parent's name.
+      .e.parent.name                      resb        28h ; Name of egg's laying parent.
+
+      .e.parent.base.color                resb        01h ; Byte indicator for base color.
+      .e.parent.secondary.color           resb        01h ; Byte indicator for secondary color.
+
+      .e.parent.base.fur.quality          resb        01h ; Byte indicator for base fur quality.
+      .e.parent.secondary.fur.quality     resb        01h ; Byte indicator for secondary fur quality.
+
+      .e.parent.strength                  resb        01h ; Byte indicator for participant strength.
+      .e.parent.endurance                 resb        01h ; Byte indicator for participant endurance.
+      .e.parent.agility                   resb        01h ; Byte indicator for participant agility.
 
       .connection.descriptor.index        resd  00000001h ; Placeholder for connection descriptor.
       .connection.external.index          resd  00000001h ; Placeholder for external descriptor.
@@ -58,11 +78,11 @@
       .name.l                             resb        01h ; Byte indicator for length of gylf's name.
       .name                               resb        28h ; Buffer for the name of this gylf.
 
-      .mother.l                           resb        01h ; Byte indicator for length of mother's name.
-      .mother                             resb        28h ; Buffer for the name of the participant's mother.
+      .e.parent.name.l                    resb        01h ; Byte indicator for length of laying parent's name.
+      .e.parent.name                      resb        28h ; Buffer for the name of the participant's laying parent.
 
-      .father.l                           resb        01h ; Byte indicator for length of father's name.
-      .father                             resb        28h ; Buffer for the name of the participant's father.
+      .i.parent.name.l                    resb        01h ; Byte indicator for length of inseminating parent's name.
+      .i.parent.name                      resb        28h ; Buffer for the name of the participant's inseminating parent.
 
       .age                                resd  00000001h ; Dword indicator for participant age.
 
@@ -147,26 +167,6 @@
       .left.hand.inventory.id             resd  00000001h ; Item id for item held in left hand.
 
       .administrative.byte                resb        01h ; Reserved for administrative data
-
-      .father.base.color                  resb        01h ; Byte indicator for base color.
-      .father.secondary.color             resb        01h ; Byte indicator for secondary color.
-
-      .father.base.fur.quality            resb        01h ; Byte indicator for base fur quality.
-      .father.secondary.fur.quality       resb        01h ; Byte indicator for secondary fur quality.
-
-      .father.strength                    resb        01h ; Byte indicator for participant strength.
-      .father.endurance                   resb        01h ; Byte indicator for participant endurance.
-      .father.agility                     resb        01h ; Byte indicator for participant agility.
-
-      .mother.base.color                  resb        01h ; Byte indicator for base color.
-      .mother.secondary.color             resb        01h ; Byte indicator for secondary color.
-
-      .mother.base.fur.quality            resb        01h ; Byte indicator for base fur quality.
-      .mother.secondary.fur.quality       resb        01h ; Byte indicator for secondary fur quality.
-
-      .mother.strength                    resb        01h ; Byte indicator for participant strength.
-      .mother.endurance                   resb        01h ; Byte indicator for participant endurance.
-      .mother.agility                     resb        01h ; Byte indicator for participant agility.
 
       .connection.descriptor.index        resd  00000001h ; Placeholder for connection descriptor.
       .connection.external.index          resd  00000001h ; Placeholder for external descriptor.

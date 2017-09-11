@@ -1,0 +1,20 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/assemble.path/t
+;
+;   This function populates the participant data for the target participant.
+;
+;   Assumptions:  Stack Frame:  dword - Length of name of target participant.
+;                               dword - Pointer to name of target participant.
+;                               dword - Pointer to destination, and indicator of type.
+;
+;   Returns:      Pointer to ASCIIZ path to target participant.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+
+    assemble.path:     ret
+
