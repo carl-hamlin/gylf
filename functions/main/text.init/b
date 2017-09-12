@@ -57,8 +57,6 @@
     text.data.index.socket.data.passphrase.message                      resd  00000001h                       ; Index to remote message requesting a passphrase.
     text.data.index.local.data.listen.error.message                     resd  00000001h                       ; Index to local message indicating that there was a problem setting up a listener.
     text.data.index.local.data.system.check.message                     resd  00000001h                       ; Index to local message indicating that system checks are about to begin.
-    text.data.index.local.data.populating.connection.table.message      resd  00000001h                       ; Index to local message indicating that the connection table is being populated.
-    text.data.index.local.data.populate.connection.numbers.over.message resd  00000001h                       ; Index to local message indicating a bounds error.
     text.data.index.local.data.system.check.done.message                resd  00000001h                       ; Index to local message indicating that system checks are finished.
     text.data.index.local.data.active.socket.message                    resd  00000001h                       ; Index to local message indicating activity on a connected socket.
     text.data.index.local.data.create.error.message                     resd  00000001h                       ; Index to local message indicating a problem creating a socket.
