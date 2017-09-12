@@ -67,13 +67,13 @@
     external.data.cursor.home             db  "./d/c/h", 00h
     external.data.clear.screen            db  "./d/c/s", 00h	
 
-    egg.filename                          db  './e/00000000'
+    egg.filename                          db  './e/0000'
     egg.filename.l                        equ $-egg.filename
 
-    gylf.filename                         db  './p/00000000'
+    gylf.filename                         db  './p/0000'
     gylf.filename.l                       equ $-gylf.filename
 
-    ghost.filename                        db  './g/00000000'
+    ghost.filename                        db  './g/0000'
     ghost.filename.l                      equ $-ghost.filename
 
     pouch.declaration                     db  27h, 's pouch'
