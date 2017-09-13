@@ -44,7 +44,6 @@
     text.data.index.socket.data.command.shutdown.help                   resd  00000001h                       ; Index to remote help message for the 'shutdown' command.
     text.data.index.socket.data.command.think.help                      resd  00000001h                       ; Index to remote help message for the 'think' command.
     text.data.index.local.data.connection.notifier.message              resd  00000001h                       ; Index to local message indicating that a connection is being attempted.
-    text.data.index.socket.data.no.connection.available.message         resd  00000001h                       ; Index to remote message letting a participant know that no sockets are available.
     text.data.index.local.data.bad.login.error.message                  resd  00000001h                       ; Index to local message indicating that a login attempt failed.
     text.data.index.local.data.second.login.error.message               resd  00000001h                       ; Index to local message indicating a participant is trying to login twice
                                                                                                               ; simultaneously.

@@ -76,6 +76,12 @@
     ghost.filename                        db  './g/0000', 00h
     ghost.filename.l                      equ $-ghost.filename
 
+    login.filename                        db  './d/l/t', 00h
+    login.filename.l                      equ $-login.filename
+
+    login.handle                          dw  0000h
+    login.status                          db  00h
+
     pouch.declaration                     db  27h, 's pouch'
     pouch.declaration.l                   equ $-pouch.declaration
 

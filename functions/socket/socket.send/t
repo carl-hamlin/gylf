@@ -5,13 +5,13 @@
 ;   This function sends data out on a connected socket.
 ;
 ;   Assumptions:    Stack Frame:  dword - Index to data packet.
-;                   esi - Index to active socket.
+;                   [a.p.data + gylf.connection.descriptor.index] - descriptor corresponding to target connection.
 ;
 ;                   - OR -
 ;
 ;                   Stack Frame:  dword - Length of buffered data.
 ;                                 dword - Pointer to buffered data
-;                   esi - Index to active socket.
+;                   [a.p.data + gylf.connection.descriptor.index] - descriptor corresponding to target connection.
 ;
 ;   Returns:        eax - Error indicator.
 ;
