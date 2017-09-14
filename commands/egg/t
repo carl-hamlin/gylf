@@ -109,8 +109,8 @@
                                     push  e.data + egg.item.id                                                        ; Point get.new.item.id to the new egg item id.
                                     call  get.new.item.id                                                             ; Populate the new egg's item id.
 
-                                    push  dword [text.data.index.socket.data.egg.area.description]                          ; Point get.new.area.id to the standard egg area description.
-                                    push  dword [text.data.index.socket.data.egg.area.name]                                 ; Point get.new.area.id to the standard egg area name.
+                                    push  dword [text.data.index.socket.data.egg.area.description]                    ; Point get.new.area.id to the standard egg area description.
+                                    push  dword [text.data.index.socket.data.egg.area.name]                           ; Point get.new.area.id to the standard egg area name.
                                     push  e.data + egg.area.id                                                        ; Point get.new.area.id to the new egg area id.
                                     call  get.new.area.id                                                             ; Populate the new egg's area id.
 
