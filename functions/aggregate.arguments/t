@@ -118,7 +118,7 @@
     aggregate.arguments.quote.mode:             inc   eax                                         ; eax - Incremented to reflect an additional byte in the size of the argument.
     aggregate.arguments.quote.mode.e:           inc   ebx                                         ; ebx - Pointer to next byte in quoted argument.
                                                 
-                                                cmp   byte [ebx] 00h                              ; Have we reached the end of the received data?
+                                                cmp   byte [ebx], 00h                             ; Have we reached the end of the received data?
                                                 jmp   aggregate.arguments.prep.for.next.argument  ; Yes. The user clearly has no real idea of what their doing. Send argument and let the
                                                                                                   ; syntax errors flow.
 
