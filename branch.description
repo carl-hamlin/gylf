@@ -1,0 +1,3 @@
+Issue #384: convert.binary.id.to.ascii.id function
+
+Utility that takes a provided binary id and a buffer, and places the converted ASCII id into the provided buffer.
