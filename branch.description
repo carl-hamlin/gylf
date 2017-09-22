@@ -1,0 +1,3 @@
+Issue #383: get.participant.data.by.id Function
+
+Utility that returns participant data corresponding to a provided id.
