@@ -24,6 +24,7 @@
     %include  "./functions/check.login/i"
     %include  "./functions/clear.screen/i"
     %include  "./functions/close.descriptor/i"
+    %include  "./functions/convert.binary.id.to.ascii.id/i"
     %include  "./functions/create.character/i"
     %include  "./functions/create.file/i"
     %include  "./functions/create.lock.file/i"

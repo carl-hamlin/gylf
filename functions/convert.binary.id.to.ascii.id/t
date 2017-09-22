@@ -1,0 +1,43 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/convert.binary.id.to.ascii.id/t
+;
+;   This function takes a passed binary id and a buffer, and returns the ASCII converted id at the passed buffer.
+;
+;   Assumptions:    Stack Frame:  dword [id to be converted]
+;                                 dword [pointer to buffer]
+;
+;   Returns:        [buffer] - Converted id.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   convert.binary.id.to.ascii.id.conversion.loop ./functions/convert.binary.id.to.ascii.id/t
+;
+
+    convert.binary.id.to.ascii.id:                  pop ebp                                             ; ebp - Return address.
+
+                                                    pop edi                                             ; edi - Pointer to buffer against which to convert.
+                                                    pop edx                                             ; edx - Id to convert.
+
+                                                    mov ecx, 4                                          ; ecx - Counter for conversion loop.
+
+    convert.binary.id.to.ascii.id.conversion.loop:  mov al, dl                                          ; al - First two digits to be converted.
+                                                    shr edx, 8                                          ; Shave edx for next iteration.
+
+                                                    shl ax, 4                                           ; ah - First digit to convert.
+                                                    shr al, 4                                           ; al - Second digit to convert.
+
+                                                    add ah, 30h                                         ; ah - First converted digit.
+                                                    add al, 30h                                         ; al - Second converted digit.
+
+                                                    ror ax, 8                                           ; Swap digit positions.
+
+                                                    stosb                                               ; Store first digit.
+                                                    stosb                                               ; Store second digit.
+
+                                                    loop  convert.binary.id.to.ascii.id.conversion.loop ; Go convert the rest of the digits.
+
+                                                    push  ebp                                           ; Restore return address.
+                                                    ret                                                 ; Return to caller.
