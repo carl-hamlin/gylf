@@ -1,0 +1,3 @@
+Issue #381: notify.in.absentia Function
+
+Utility that queues messages to be relayed to an absent participant at their next login.
