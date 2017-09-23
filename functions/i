@@ -30,7 +30,6 @@
     %include  "./functions/create.participant/i"
     %include  "./functions/dna.lab/i"
     %include  "./functions/get.external.data/i"
-    %include  "./functions/get.participant.data/i"
     %include  "./functions/get.participant.data.by.id/i"
     %include  "./functions/get.ticks/i"
     %include  "./functions/get.text.data/i"
