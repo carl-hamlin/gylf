@@ -1,0 +1,3 @@
+Issue #385: Connection / Participant Unification issues with send.to.participant
+
+send.to.participant updates for conformity with the new connection paradigm.
