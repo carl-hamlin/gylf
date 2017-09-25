@@ -1,6 +1,6 @@
-;=================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   address.set.passphrase.status
+;   ./functions/main/participant.interaction/address.set.passphrase.status/t
 ;
 ;   This function handles data received from a socket in 'setting passphrase' status.
 ;
@@ -8,11 +8,29 @@
 ;
 ;   Returns:        None.
 ;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   active.status                 ./functions/main/b
+;
+;   buffer.2                      ./functions/b
+;
+;   connection.descriptor.index   ./functions/main/system.check/b
+;
+;   connection.filename.index     ./functions/main/system.check/b
+;
+;   connection.status.index       ./functions/main/system.check/b
+;
+;   create.character              ./functions/create.character/t
+;
+;   open.descriptor               ./functions/open.descriptor/t
+;
+;   recv.from.socket              ./functions/recv.from.socket/t
+;
+;   write.welcome                 ./functions/write.welcome/t
+;
 
-  section .bss
-  
-  %define set.passphrase.status 0003h ; This status indicates that the system has identified you as a new user, and is asking you to enter a passphrase with which to protect your account.
-      
   section .text
 
 	address.set.passphrase.status:	call	recv.from.socket					                        ; Receive data from the active socket.
@@ -21,6 +39,7 @@
 
 					                        mov	  ebx, esi						                              ; ebx - Pointer to socket entry.
 					                        add	  ebx, connection.filename.index				            ; ebx - Pointer to file path for user's credential file.
+					                        push  ebx                                               ; Point open.descriptor to credential file.
 					                        call	open.descriptor						                        ; Associate a descriptor with the file.
 
 					                        mov	  eax, dword [esi+connection.descriptor.index]      ; eax - Descriptor associated with egg file.

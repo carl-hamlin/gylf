@@ -1,22 +1,23 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
 ;   ./functions/main/participant.interaction/address.login.status/d
 ;
 ;   This file contains all data	pertinent to the address.login.status function.
 ;
-
-;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
-;   Local Data
+;   Symbolic Cross-Referencing
+;
+;   socket.data.bad.login.error     ./functions/main/participant.interaction/address.login.status/d
+;
+;   socket.data.login.message       ./functions/main/participant.interaction/address.login.status/d
+;
+;   socket.data.second.login.error  ./functions/main/participant.interaction/address.login.status/d
+;
+;   socket.data.welcome.message     ./functions/main/participant.interaction/address.login.status/d
 ;
 
-    local.data.bad.login.error        db  "A login attempt failed.", 0Ah, 0Dh                                                                           ; Login failure message.
-    local.data.bad.login.error.l      equ $-local.data.bad.login.error                                                                                  ; Length of message.
-
-    local.data.second.login.error     db  "Dupe login attempt. disconnecting.", 0Ah, 0Dh                                                                ; Dupe login message.
-    local.data.second.login.error.l   equ $-local.data.second.login.error                                                                               ; Length of message.
-
-;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Outgoing Data
 ;

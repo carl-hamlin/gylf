@@ -1,25 +1,26 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   ./code/commands/area/data
+;   ./commands/area/d
 ;
 ;   This file contains data pertaining to the area command.
 ;
-
-;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
-;   Local Data
+;   Symbolic Cross-Referencing
+;
+;   command.area.l                      ./commands/area/d
+;   command.area.s                      ./commands/area/d
+;
+;   socket.data.area.created.message    ./commands/area/d
+;   socket.data.bad.area.id.message     ./commands/area/d
+;   socket.data.command.area.help       ./commands/area/d
+;   socket.data.command.area.help.l     ./commands/area/d
+;   socket.data.out.of.areas.message    ./commands/area/d
+;
+;   command.area                        ./commands/area/t
 ;
 
-    local.data.area.bad.syntax.message          db  "An admin bounced the area command on bad syntax.", 0Ah, 0Dh                                              ; Area syntax error.
-    local.data.area.bad.syntax.message.l        equ $-local.data.area.bad.syntax.message                                                                      ; Length of message.
-
-    local.data.area.created.message             db  "An admin has created a new area.", 0Ah, 0Dh                                                              ; Area creation message.
-    local.data.area.created.message.l           equ $-local.data.area.created.message                                                                         ; Length of message.
-
-    local.data.out.of.areas.message             db  "An admin tried to create an area, but we're fresh out of area filenames.", 0Ah, 0Dh                      ; Area filename bounce.
-    local.data.out.of.areas.message.l           equ $-local.data.out.of.areas.message                                                                         ; Length of message.
-
-;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Remote Data
 ;
@@ -33,7 +34,7 @@
 	  socket.data.bad.area.id.message		          db	"Your area id is all screwed up. The admin has been notified.", 0Ah, 0Dh						                      ; Bad area id message.
 	  socket.data.bad.area.id.message.l	          equ	$-socket.data.bad.area.id.message											                                                    ; Length of message.
     
-;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Help Message
 ;
@@ -44,7 +45,7 @@
 	                                              db  0Ah, 0Dh, 0Ah, 0Dh, "> "
 	  socket.data.command.area.help.l             equ $-socket.data.command.area.help                                                                           ; Length of message.
 	
-;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Command Table Entry
 ;
