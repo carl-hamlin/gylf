@@ -1,12 +1,80 @@
 ;================================================================================================================================================================================================
 ;
-;   listening.socket.poll
+;   ./functions/main/listening.socket.poll/t
 ;
 ;   This function polls the listening socket for new connection attempts and sends the login message when it finds them.
 ;
 ;   Assumptions:    None.
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   accept.socket                       ./functions/socket/accept.socket/t
+;
+;   clear.screen                        ./functions/clear.screen/t
+;
+;   close.descriptor                    ./functions/close.descriptor/t
+;
+;   connection.descriptor.index         ./functions/main/system.check/b
+;
+;   connection.entry.size               ./functions/main/system.check/b
+;
+;   connection.status.index             ./functions/main/system.check/b
+;
+;   connection.table                    ./functions/main/system.check/b
+;
+;   dead.socket                         ./functions/main/b
+;
+;   greet                               ./functions/main/listening.socket.poll/t
+;
+;   greet.add.socket                    ./functions/main/listening.socket.poll/t
+;
+;   greet.loop                          ./functions/main/listening.socket.poll/t
+;
+;   listening.socket.poll.done          ./functions/main/listening.socket.poll/t
+;
+;   local.data.connection.notifier      ./functions/main/listening.socket.poll/d
+;
+;   local.data.connection.notifier.l    ./functions/main/listening.socket.poll/d
+;
+;   login.status                        ./functions/main/b
+;
+;   no.connection.available             ./functions/main/listening.socket.poll/d
+;
+;   no.connection.available.l           ./functions/main/listening.socket.poll/d
+;
+;   poll.descriptor                     ./functions/poll.descriptor/t
+;
+;   socket.accept.error                 ./functions/socket/socket.errors/t
+;
+;   socket.data.event.socket.descriptor ./functions/main/active.socket.poll/d
+;
+;   socket.data.login.message;          ./functions/main/participant.interaction
+;                                         /address.login.status/d
+;
+;   socket.data.login.message.l         ./functions/main/participant.interaction
+;                                         /address.login.status/d
+;
+;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
+;
+;   socket.number                       ./b
+;
+;   socket.send                         ./functions/socket/socket.send/t
+;
+;   sys.poll.in                         ./functions/main/b
+;
+;   sys.poll.number.of.structures       ./functions/main/b
+;
+;   sys.poll.timeout                    ./functions/main/b
+;
+;   write.descriptor                    ./functions/write.descriptor/t
 ;
 
     listening.socket.poll:      mov  ebx, socket.data.event.socket.descriptor                           ; ebx = Pointer to descriptor associated with listening socket.
@@ -24,11 +92,11 @@
 
                                 jmp  socket.accept.error                                                ; Nope. Something is seriously wrong here. Go tell the admin we're screwed and bail out.
 
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     listening.socket.poll.done: ret                                                                     ; Return to caller.
 
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     greet:                      mov  esi, connection.table                                              ; esi = Index to connection tables.
                                 mov  ecx, socket.number                                                 ; ecx = Number of entries.
@@ -40,7 +108,8 @@
 
                                 loop greet.loop                                                         ; Go check the next entry.
 
-                                push eax                                                                ; Preserve descriptor associated with new connection. If we're here, the table is full up and there's no room for a new person. Bad news, bud.
+                                push eax                                                                ; Preserve descriptor associated with new connection. If we're here, the table is full up
+                                                                                                        ; and there's no room for a new person. Bad news, bud.
 
                                 mov  dword [socket.data.send.socket.descriptor], eax                    ; Store socket descriptor for sending.    
                                 mov  dword [socket.data.send.buffer.pointer], no.connection.available   ; Point send function to message indicating that no connection is available.
@@ -53,7 +122,7 @@
 
                                 ret                                                                     ; Return to caller.
 
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     greet.add.socket:           mov  dword [esi+connection.descriptor.index], eax                       ; Store descriptor as a new entry.
                                 mov  byte [esi+connection.status.index], login.status                   ; Store status as a new entry.
