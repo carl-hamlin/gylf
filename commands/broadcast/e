@@ -1,0 +1,21 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/broadcast/e
+;
+;   This file defines the external textual data associated with the command 'broadcast'.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
+
+	  socket.data.command.broadcast.help.l    dd  socket.data.command.broadcast.help.end                                                                          ; Length of message.
+	  socket.data.command.broadcast.help      db  "  broadcast", 0Ah, 0Dh, 0Ah, 0Dh                                                                               ; Command broadcast help message.
+	                                          db  "  Syntax: broadcast <quoted message>", 0Ah, 0Dh, 0Ah, 0Dh
+	                                          db  "  Broadcasts a message to the entire world. This command is restricted to administrator privileged", 0Ah, 0Dh  
+	                                          db  "  participants.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
+	  socket.data.command.broadcast.help.end  equ $-socket.data.command.broadcast.help                                                                            ; Pointer to end of message.
+
