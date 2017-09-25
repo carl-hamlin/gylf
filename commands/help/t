@@ -35,7 +35,7 @@
 ;
 ;   qword.l                             ./b
 ;
-;   socket.send                         ./functions/socket/socket/send/t
+;   socket.send.buf                     ./functions/socket/socket.send/t
 ;
 ;   write.bad.command.error             ./functions/write.bad.command.error/t
 ;
@@ -82,7 +82,7 @@
 
                                       push  dword [ebx+qword.l]                             ; Tell the send function how long the message is.
                                       push  dword [ebx+dword.l]                             ; Point send function to the help message for the selected argument.
-                                      call  socket.send                                     ; Send the message.
+                                      call  socket.send.buf                                 ; Send the message.
                                       
                                       ret                                                   ; Return to caller.
 

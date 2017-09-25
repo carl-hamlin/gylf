@@ -50,13 +50,11 @@
 ;
 ;   read.descriptor                                           ./functions/read.descriptor/t
 ;
-;   socket.data.bad.area.id.message                           ./commands/area/d
-;
-;   socket.data.bad.area.id.message.l                         ./commands/area/d
-;
 ;   socket.send                                               ./functions/socket/socket.send/t
 ;
 ;   text.data.index.local.data.bad.area.id.indicator.message  ./functions/main/text.init/b
+;
+;   text.data.index.socket.data.bad.area.id.message           ./functions/main/text.init/b
 ;
 ;   write.console                                             ./functions/write.console/t
 ;
@@ -120,8 +118,7 @@
     command.look.bad.descriptor:            push  dword [text.data.index.local.data.bad.area.id.indicator.message]  ; Point write.console to message indicating the local area id is bad.
                                             call  write.console                                                     ; Tell the admin that the local area id got screwed up somehow.
 
-                                            push  socket.data.bad.area.id.message.l                                 ; Tell socket.send the length of the message.
-                                            push  socket.data.bad.area.id.message                                   ; Point socket.send to the remote bad area id message.
+                                            push  dword [text.data.index.socket.data.bad.area.id.message]           ; Point socket.send to the remote bad area id message.
                                             call  socket.send                                                       ; Put the message on the socket.
 
                                             call  write.prompt                                                      ; Restore the user's prompt.
@@ -155,7 +152,7 @@
 
                                             push  eax                                                               ; Tell socket.send the length of the message.
                                             push  buffer.1                                                          ; Point socket.send to the description entry.
-                                            call  socket.send                                                       ; Put the message on the socket.
+                                            call  socket.send.buf                                                   ; Put the message on the socket.
 
                                             call  write.prompt                                                      ; Restore the user's prompt.
 

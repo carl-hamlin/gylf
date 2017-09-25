@@ -16,8 +16,7 @@
 ;   No external references.
 ;
 
-    get.text.data:  ;int   3
-                    pop   ebp                 ; Preserve return address.
+    get.text.data:  pop   ebp                 ; Preserve return address.
                     pop   edi                 ; Preserve index to requested data.
 
                     push  edi                 ; Ask for enough memory for the entire index.
