@@ -20,10 +20,8 @@
 ;   Command Table Entry
 ;
 
-    command.broadcast.w   db  command.broadcast.l                   ; Indicator of length of command 'broadcast'.
-    command.broadcast.s   db  'broadcast'                           ; Admin command string for broadcasting a message to the entire world.
-    command.broadcast.l   equ $-command.broadcast.s                 ; Length of command 'broadcast'.
-    command.broadcast.p   dd  command.broadcast                     ; Pointer to handler for command 'broadcast'.
-    command.broadcast.h   dd  socket.data.command.broadcast.help    ; Pointer to help message for command 'broadcast'.
-    command.broadcast.h.l dd  socket.data.command.broadcast.help.l  ; Length of help message for command 'broadcast'.
-
+    command.broadcast.w db  command.broadcast.l                                 ; Indicator of length of command 'broadcast'.
+    command.broadcast.s db  'broadcast'                                         ; Admin command string for broadcasting a message to the entire world.
+    command.broadcast.l equ $-command.broadcast.s                               ; Length of command 'broadcast'.
+    command.broadcast.p dd  command.broadcast                                   ; Pointer to handler for command 'broadcast'.
+    command.broadcast.h dd  text.data.index.socket.data.command.broadcast.help  ; Pointer to help message for command 'broadcast'.

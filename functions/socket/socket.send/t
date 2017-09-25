@@ -11,7 +11,7 @@
 ;
 ;                   Stack Frame:  dword - Length of buffered data.
 ;                                 dword - Pointer to buffered data
-                    esi - Index to active socket.
+;                   esi - Index to active socket.
 ;
 ;   Returns:        eax - Error indicator.
 ;
