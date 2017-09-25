@@ -2,17 +2,18 @@
 
     section   .bss
 
-    %include  "./b"
+    %include  "./functions/socket/communications/b"
 
 ;==================================================================================================================================================================================================================
 
     section   .data
 
-    %include  "./d"
+    %include  "./functions/socket/communications/d"
 
 ;==================================================================================================================================================================================================================
 
     section   .text
-
-    %include  "./commands/i"
-    %include  "./functions/i"
+    
+    %include  "./functions/socket/communications/send.to.area/i"
+    %include  "./functions/socket/communications/send.to.player/i"
+    %include  "./functions/socket/communications/send.to.world/i"
