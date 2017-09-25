@@ -2,17 +2,26 @@
 
     section   .bss
 
-    %include  "./b"
+    %include  "./functions/socket/b"
 
 ;==================================================================================================================================================================================================================
 
     section   .data
 
-    %include  "./d"
+    %include  "./functions/socket/d"
 
 ;==================================================================================================================================================================================================================
 
     section   .text
 
-    %include  "./commands/i"
-    %include  "./functions/i"
+    %include  "./functions/socket/accept.socket/i"
+    %include  "./functions/socket/answer.active.socket/i"
+    %include  "./functions/socket/bind.socket/i"
+    %include  "./functions/socket/clean.socket/i"
+    %include  "./functions/socket/create.socket/i"
+    %include  "./functions/socket/listen.socket/i"
+    %include  "./functions/socket/recv.from.socket/i"
+    %include  "./functions/socket/socket.errors/i"
+    %include  "./functions/socket/socket.send/i"
+    
+    %include  "./functions/socket/communications/i"
