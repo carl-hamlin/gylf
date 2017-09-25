@@ -1,0 +1,27 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/gylf/d
+;
+;   This file contains data pertinent to the gylf command.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   command.gylf    ./commands/gylf/t
+;
+;   command.gylf.l  ./commands/gylf/d
+;
+;   command.gylf.s  ./commands/gylf/d
+;
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Command Table Entry
+;
+
+    command.gylf.w  db  command.gylf.l                                ; Indicator fo length of command 'gylf'.
+    command.gylf.s  db  'gylf'                                        ; Admin command string for creating new gylf.
+    command.gylf.l  equ $-command.gylf.s                              ; Length of command 'gylf'.
+    command.gylf.p  dd  command.gylf                                  ; Pointer to handler for command 'gylf'.
+    command.gylf.h  dd  text.data.index.socket.data.command.gylf.help ; Pointer to help message for command 'gylf'.
