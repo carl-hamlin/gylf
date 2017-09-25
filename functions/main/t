@@ -28,8 +28,8 @@
 
 ;================================================================================================================================================================================================
 
-    _start:     call  system.check          ; Perform a variety of checks to make sure we're ready to go live.
-                call  text.init             ; Initialize text data system.
+    _start:     call  text.init             ; Initialize text data system.
+                call  system.check          ; Perform a variety of checks to make sure we're ready to go live.
                 call  set.up.listener       ; Build a listening socket, bind it to a hardware port, tell it to listen for incoming connections, and let the admin know we're online.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

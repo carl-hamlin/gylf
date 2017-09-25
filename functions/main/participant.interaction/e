@@ -2,6 +2,5 @@
 
     section   .data
 
-    %include  "./commands/e"
-    %include  "./functions/e"
-
+    %include  "./functions/main/participant.interaction/address.login.status/e"
+    %include  "./functions/main/participant.interaction/address.passphrase.status/e"

@@ -1,0 +1,37 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/write.console/t
+;
+;   This function writes data to an active descriptor.
+;
+;   Assumptions:    Stack Frame:  dword - Index to data packet.
+;
+;   Returns:        eax = Error indicator.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   get.text.data       ./functions/get.text.data/t
+;
+;   memory.switch       ./functions/memory.switch/t
+;
+;   sys.standard.output ./functions/write.descriptor/b
+;
+;   sys.system.call     ./functions/b
+;
+;   sys.write.call      ./functions/b
+;
+
+    write.console:  push  dword [esp+4]             ; Preserve descriptor to be written.
+
+                    call  get.text.data             ; Get indexed data.
+
+                    mov   eax, sys.write.call       ; eax - Write data to an active descriptor.
+                    mov   ebx, sys.standard.output  ; ebx - Write to console.
+                    int   sys.system.call           ; Write data to an active descriptor.
+
+                    push  0                         ; Tell memory.check to free memory.
+                    call  memory.switch             ; Free memory.
+
+                    ret                             ; Return to caller.

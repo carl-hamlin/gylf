@@ -16,16 +16,20 @@
 ;
 ;   dword.l                 ./b
 ;
+;   sys.standard.output     ./b
+;
 ;   write.descriptor        ./functions/write.descriptor/t
 ;
 
-    print.socket.number: pusha                             ; Preserve caller registers.
+    print.socket.number: pusha                              ; Preserve caller registers.
 
-                         mov  ecx, esi                     ; ecx - index to socket entry.
-                         add  ecx, connection.number.index ; ecx - pointer to socket number.
-                         mov  edx, dword.l                 ; edx - size of socket number.
-                         call write.descriptor             ; Write the socket number locally.
+                         push sys.standard.output           ; Write to console.
+                         mov  ecx, esi                      ; ecx - Index to socket entry.
+                         add  ecx, connection.number.index  ; ecx - Pointer to socket number.
+                         push ecx                           ; Pointer to socket number.
+                         push dword.l                       ; Size of socket number.
+                         call write.descriptor              ; Write the socket number locally.
 
-                         popa                              ; Restore caller registers.
+                         popa                               ; Restore caller registers.
 
-                         ret                               ; Return to caller.
+                         ret                                ; Return to caller.
