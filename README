@@ -13,6 +13,70 @@ Relevant data:
                               directory name.
 
     ==============================================================================================
+    
+    ./                        This is the root directory for the project. the README and build
+                              script live here.
+
+    Symbolic Cross-Referencing
+    
+      b   char.0                                ./commands/area/t
+                                                ./functions/main/system.check/t
+
+          char.1                                No references.
+          
+          char.2                                No references.
+          
+          char.3                                No references.
+          
+          char.4                                No references.
+          
+          char.5                                No references.
+          
+          char.6                                No references.
+          
+          char.7                                No references.
+
+          char.8                                No references.
+          
+          char.9                                ./commands/area/t
+                                                ./functions/main/system.check/t
+          
+          char.A                                No references.
+          
+          char.B                                No references.
+          
+          char.C                                No references.
+          
+          char.D                                No references.
+          
+          char.E                                No references.
+          
+          char.F                                No references.
+          
+          qword.l                               ./commands/help/t
+
+          dword.l                               ./commands/area/t
+                                                ./commands/help/t
+                                                ./commands/look/t
+                                                ./functions/create.character/t
+                                                ./functions/d
+                                                ./functions/main/system.check/t
+                                                ./functions/main/participant.interaction/address.active.status/t
+                                                ./functions/print.socket.number/t
+
+          word.l                                ./commands/area/t
+                                                ./functions/b
+
+          byte.l                                ./functions/get.character.data/t
+                                                ./functions/get.external.data/t
+                                                ./functions/main/participant.interaction/address.passphrase.status/t
+
+          nibble.l                              No references.
+
+
+      d   No defined symbols.
+
+    ==============================================================================================
 
     ./build.gylf.sh           This is the build script. It depends on the presence of nasm and ld.
                               Run the build script to produce an executable binary called 'gylf'
@@ -26,75 +90,492 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'ai' command; a
-        /ai                   player-level command that allows for the invoker to adjust
+      /ai                     Contains code pertinent to the implementation of the 'ai' command; a
+                              player-level command that allows for the invoker to adjust
                               parameters associated with their avatar's behaviour while they are
                               signed out.
 
+      b   No defined symbols.
+
+
+      d   socket.data.command.ai.help           ./commands/ai/d
+
+          socket.data.command.ai.help.l         ./commands/ai/d
+
+          command.ai.w                          ./commands/ai/d
+                                                ./functions/d
+
+          command.ai.s                          ./commands/ai/d
+
+          command.ai.l                          ./commands/ai/d
+
+          command.ai.p                          No references.
+
+          command.ai.h                          No references.
+
+          command.ai.h.l                        No references.
+
+
+      t   command.ai                            ./commands/ai/d
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'area' command;
-        /area                 an administrator command that allows for administrators to create
+      /area                   Contains code pertinent to the implementation of the 'area' command;
+                              an administrator command that allows for administrators to create
                               new areas without having to dig them out using the player interface.
 
+      b   available.areas                       ./commands/area/t
+
+          area.name.field.l                     ./commands/area/b
+                                                ./commands/area/t
+
+          area.description.field.l              ./commands/area/b
+                                                ./commands/area/t
+
+          area.header                           ./commands/area/b
+                                                ./commands/look/t
+                                                ./functions/create.character/t
+
+          area.name.l                           ./commands/area/t
+                                                ./functions/create.character/t
+
+          area.name                             ./commands/area/t
+                                                ./functions/create.character/t
+
+          area.description.l                    ./commands/area/t
+                                                ./functions/create.character/t
+
+          area.description                      ./commands/area/t
+                                                ./functions/create.character/t
+
+          area.num.contained.items              ./commands/area/t
+                                                ./commands/look/t
+
+          area.header.l                         ./commands/look/t
+                                                ./functions/create.character/t
+
+      d   local.data.area.bad.syntax.message    ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.area.bad.syntax.message.l  ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.area.created.message       ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.area.created.message.l     ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.out.of.areas.message       ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.out.of.areas.message.l     ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.area.created.message      ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.area.created.message.l    ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.out.of.areas.message      ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.out.of.areas.message.l    ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.bad.area.id.message       ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.bad.area.id.message.l     ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.command.area.help         ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.command.area.help.l       ./commands/area/d
+                                                ./commands/area/t
+
+          command.area.w                        ./commands/area/d
+                                                ./functions/d
+
+          command.area.s                        ./commands/area/d
+                                                ./commands/area/t
+
+          command.area.l                        ./commands/area/d
+                                                ./commands/area/t
+
+          command.area.p                        ./commands/area/t
+
+          command.area.h                        No references.
+
+          command.area.h.l                      No references.
+
+
+      t   command.area                          ./commands/area/d
+
+          command.area.bad                      ./commands/area/t
+
+          command.area.admin                    ./commands/area/t
+
+          command.area.find.first.argument      ./commands/area.t
+
+          command.area.start                    ./commands/area/t
+
+          command.area.loop.1                   ./commands/area/t
+
+          command.area.name.l                   ./commands/area/t
+
+          command.area.find.second.argument     ./commands/area/t
+
+          command.area.loop.2                   ./commands/area/t
+
+          command.area.description.l            ./commands/area/t
+
+          command.area.filename.loop            ./commands/area/t
+
+          command.area.next.file                ./commands/area/t
+
+          command.area.filename.finder          ./commands/area/t
+
+          command.area.filename.out.of.areas    ./commands/area/t
+
+          command.area.prep.next                ./commands/area/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'broadcast'
-        /broadcast            command; an administrator command that allows for administrators to
+      /broadcast              Contains code pertinent to the implementation of the 'broadcast'
+                              command; an administrator command that allows for administrators to
                               send a message to the entire participant base all at once,
                               regardless of their locations in the simulation.
 
+      b   No defined symbols.
+
+
+      d   socket.data.command.broadcast.help    ./commands/broadcast/d
+
+          socket.data.command.broadcast.help.l  ./commands/broadcast/d
+
+          command.broadcast.w                   ./functions/d
+
+          command.broadcast.s                   ./commands/broadcast/d
+
+          command.broadcast.l                   ./commands/broadcast/d
+                                                ./commands/broadcast/t
+
+          command.broadcast.p                   No references.
+
+          command.broadcast.h                   No references.
+
+          command.broadcast.h.l                 No references.
+
+
+      t   command.broadcast                     ./commands/broadcast/d
+
+          command.broadcast.admin               ./commands/broadcast/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'dig' command;
-        /dig                  a participant-level command that allows for player to, under certain
+      /dig                    Contains code pertinent to the implementation of the 'dig' command;
+                              a participant-level command that allows for player to, under certain
                               circumstances, extend the environment by creating new areas.
 
+      b   No defined symbols.
+
+
+      d   socket.data.command.dig.help          ./commands/dig/d
+
+          socket.data.command.dig.help.l        ./commands/dig/d
+
+          command.dig.w                         ./functions/d
+
+          command.dig.s                         ./commands/dig/d
+
+          command.dig.l                         ./commands/dig/d
+
+          command.dig.p                         No references.
+
+          command.dig.h                         No references.
+
+          command.dig.h.l                       No references.
+
+
+      t   command.dig                           ./commands/dig/d
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'egg' command;
-        /egg                  an administrator command that allows for the forced implantation and
+      /egg                    Contains code pertinent to the implementation of the 'egg' command;
+                              an administrator command that allows for the forced implantation and
                               fertilization of an egg in the womb of the target gylf without
                               having to go through the normal channels of fertilization through
                               mating.
 
+      b   egg.data                              ./commands/egg/b
+                                                ./functions/create.character/t
+
+          egg.signature                         No references.
+
+          egg.item.id                           No references.
+
+          egg.area.id                           ./functions/create.character/t
+
+          egg.mother.l                          ./functions/create.character/t
+
+          egg.mother                            ./functions/create.character/t
+                                                ./functions/dna.lab/t
+
+          egg.father.l                          ./functions/create.character/t
+
+          egg.father                            ./functions/create.character/t
+                                                ./functions/dna.lab/t
+
+          egg.data.l                            No references.
+
+
+      d   egg.hatch.message                     ./commands/egg/d
+                                                ./functions/create.character/t
+
+          egg.hatch.message.l                   ./functions/create.character/t
+
+          socket.data.command.egg.help          ./commands/egg/d
+
+          socket.data.command.egg.help.l        ./commands/egg/d
+
+          command.egg.w                         ./functions/d
+
+          command.egg.s                         ./commands/egg/d
+
+          command.egg.l                         ./commands/egg/d
+
+          command.egg.p                         No references.
+
+          command.egg.h                         No references.
+
+          command.egg.h.l                       No references.
+
+
+      t   command.egg                           ./commands/egg/d
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'gylf' command;
-        /gylf                 an administrator command that allows for the creation of a complete
+      /gylf                   Contains code pertinent to the implementation of the 'gylf' command;
+                              an administrator command that allows for the creation of a complete
                               new gylf without the intervening process of mating, fertilization,
                               gestation, laying, and hatching.
 
+      b   No defined symbols.
+
+
+      d   socket.data.command.gylf.help         ./commands/gylf/d
+
+          socket.data.command.gylf.help.l       ./commands/gylf/d
+
+          command.gylf.w                        ./functions/d
+
+          command.gylf.s                        ./commands/gylf/d
+
+          command.gylf.l                        ./commands/gylf/d
+
+          command.gylf.p                        No references.
+
+          command.gylf.h                        No references.
+
+          command.gylf.h.l                      No references.
+
+
+      t   command.gylf                          ./commands/gylf/d
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'help' command;
-        /help                 a participant-level command whose sole purpose is to display
+      /help                   Contains code pertinent to the implementation of the 'help' command;
+                              a participant-level command whose sole purpose is to display
                               context-sensitive help.
 
+      b   No defined symbols.
+
+
+      d   socket.data.bad.help.command.error    ./commands/help/d
+                                                ./functions/write.bad.help.command.error/t
+
+          socket.data.bad.help.command.error.l  ./functions/write.bad.help.command.error/t
+
+          socket.data.command.help.help         ./commands/help/d
+
+          socket.data.command.help.help.l       ./commands/help/d
+
+          command.help.w                        ./functions/d
+
+          command.help.s                        ./commands/help/d
+
+          command.help.l                        ./commands/help/d
+
+          command.help.p                        No references.
+
+          command.help.h                        No references.
+
+          command.help.h.l                      No references.
+
+
+      t   command.help                          ./commands/help/d
+
+          command.help.parse.arguments          ./commands/help/t
+
+          command.help.found.command            ./comamnds/help/t
+
+          command.help.next.command.jcxnz       ./commands/help/t
+
+          command.help.next.command             ./commands/help/t
+
+          command.help.no.arguments             ./commands/help/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'logout'
-        /logout               command; a common command that removes a participant from the server
+      /logout                 Contains code pertinent to the implementation of the 'logout'
+                              command; a common command that removes a participant from the server
                               and leaves their avatar under the control of an artificial
                               intelligence.
 
+      b   No defined symbols.
+
+
+      d   socket.data.command.logout.help       ./commands/logout/d
+
+          socket.data.command.logout.help.l     ./commands/logout/d
+
+          command.logout.w                      ./functions/d
+
+          command.logout.s                      ./commands/logout/d
+
+          command.logout.l                      ./commands/logout/d
+
+          command.logout.p                      No references.
+
+          command.logout.h                      No references.
+
+          command.logout.h.l                    No references.
+
+
+      t   command.logout                        ./commands/logout/d
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'look' command;
-        /look                 a participant-level command that displays information about the
+      /look                   Contains code pertinent to the implementation of the 'look' command;
+                              a participant-level command that displays information about the
                               target.
 
+      b   No defined symbols.
+
+
+      d   local.data.bad.area.id.indicator.message    ./commands/look/d
+                                                      ./commands/look/t
+
+          local.data.bad.area.id.indicator.message.l  ./commands/look/t
+
+          socket.data.command.look.help         ./commands/look/d
+
+          socket.data.command.look.help.l       ./commands/look/d
+
+          command.look.w                        ./functions/d
+
+          command.look.s                        ./commands/look/d
+
+          command.look.l                        ./commands/look/d
+
+          command.look.p                        No references.
+
+          command.look.h                        No references.
+
+          command.look.h.l                      No references.
+
+
+      t   command.look                          ./commands/look/d
+
+          command.look.targetted.good.descriptor  ./commands/look/t
+
+          command.look.targetted.find.target    ./commands/look/t
+
+          command.look.default                  ./commands/look/t
+
+          command.look.bad.descriptor           ./commands/look/t
+
+          command.look.default.good.descriptor  ./commands/look/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'shutdown'
-        /shutdown             command; an administrator command that shuts down the server from
+      /shutdown               Contains code pertinent to the implementation of the 'shutdown'
+                              command; an administrator command that shuts down the server from
                               within the environment.
 
+      b   No defined symbols.
+
+
+      d   local.data.smoked.sockets.message     ./commands/shutdown/d
+                                                ./commands/shutdown/t
+
+          local.data.smoked.sockets.message.l   ./commands/shutdown/t
+
+          local.data.shutdown.message           ./commands/shutdown/d
+                                                ./commands/shutdown/t
+
+          local.data.shutdown.message.l         ./commands/shutdown/t
+
+          socket.data.shutdown.message          ./commands/shutdown/d
+                                                ./commands/shutdown/t
+
+          socket.data.shutdown.message.l        ./commands/shutdown/t
+
+          socket.data.command.shutdown.help     ./commands/shutdown/d
+
+          socket.data.command.shutdown.help.l   ./commands/shutdown/d
+
+          command.shutdown.w                    ./functions/d
+
+          command.shutdown.s                    ./commands/shutdown/d
+
+          command.shutdown.l                    ./commands/shutdown/d
+
+          command.shutdown.p                    No references.
+
+          command.shutdown.h                    No references.
+
+          command.shutdown.h.l                  No references.
+
+
+      t   command.shutdown                      ./commands/shutdown/d
+
+          command.shutdown.admin                ./commands/shutdown/t
+
+          command.shutdown.loop                 ./commands/shutdown/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'think'
-        /think                command; a participant-level command that allows for communication
+      /think                  Contains code pertinent to the implementation of the 'think'
+                              command; a participant-level command that allows for communication
                               between players in a local environment.
+
+      b   No defined symbols.
+
+
+      d   socket.data.command.think.help        ./commands/think/d
+
+          socket.data.command.think.help.l      ./commands/think/d
+
+          command.think.w                       ./functions/d
+
+          command.think.s                       ./commands/think/d
+
+          command.think.l                       ./commands/think/d
+
+          command.think.p                       No references.
+
+          command.think.h                       No references.
+
+          command.think.h.l                     No references.
+
+
+      t   command.think                         ./commands/think/d
+
+          command.think.untargetted             ./commands/think/t
 
     ==============================================================================================
     
@@ -104,8 +585,61 @@ Relevant data:
     
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that collects arguments from the participant command
-        /aggregate.arguments  line and segregates them into a predefined structure.
+      /aggregate.arguments    Contains code that collects arguments from the participant command
+                              line and segregates them into a predefined structure.
+
+      b   arguments.packet                      ./functions/aggregate.arguments/b
+
+          arguments.num                         ./commands/help/t
+                                                ./functions/aggregate.arguments/t
+
+          argument.01.size                      ./functions/aggregate.arguments/b
+
+          argument.01.location                  ./commands/help/t
+                                                ./functions/aggregate.arguments/t
+
+          argument.entry.size                   ./functions/aggregate.arguments/t
+
+          argument.02.size                      No references.
+
+          argument.02.location                  No references.
+
+          argument.03.size                      No references.
+
+          argument.03.location                  No references.
+
+          argument.04.size                      No references.
+
+          argument.04.location                  No references.
+
+          argument.05.size                      No references.
+
+          argument.05.location                  No references.
+
+          argument.06.size                      No references.
+
+          argument.06.location                  No references.
+
+          argument.07.size                      No references.
+
+          argument.07.location                  No references.
+
+          argument.08.size                      No references.
+
+          argument.08.location                  No references.
+
+          argument.09.size                      No references.
+
+          argument.09.location                  No references.
+
+          argument.10.size                      No references.
+
+          argument.10.location                  No references.
+
+          arguments.packet.l                    No references.
+
+
+      d   No defined symbols.
 
     ----------------------------------------------------------------------------------------------
 
