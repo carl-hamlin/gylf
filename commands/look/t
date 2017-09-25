@@ -50,6 +50,8 @@
 ;
 ;   socket.send                                               ./functions/socket/socket.send/t
 ;
+;   socket.send.buf                                           ./functions/socket/socket.send/t
+;
 ;   text.data.index.local.data.bad.area.id.indicator.message  ./functions/main/text.init/b
 ;
 ;   text.data.index.socket.data.bad.area.id.message           ./functions/main/text.init/b

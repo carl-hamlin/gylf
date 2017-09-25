@@ -41,6 +41,8 @@
 ;
 ;   socket.number                   ./b
 ;
+;   socket.send                     ./functions/socket/socket.send/t
+;
 ;   socket.send.buf                 ./functions/socket/socket.send/t
 ;
 
