@@ -47,9 +47,9 @@
 ;   write.descriptor                                      ./functions/write.descriptor/t
 ;
 
-    text.init:          push  sys.standard.output                                   ; Write to console.
+    text.init:          push  local.data.populating.textual.data.indices.message.l  ; Length of message.
                         push  local.data.populating.textual.data.indices.message    ; Pointer to message indicating that we're about to populate the textual data indices.
-                        push  local.data.populating.textual.data.indices.message.l  ; Length of message.
+                        push  sys.standard.output                                   ; Write to console.
                         call  write.descriptor                                      ; Tell the admin that we're populating the textual data indices.
 
                         push  text.data.filename                                    ; Point open.descriptor to filename for external text data.
@@ -63,7 +63,7 @@
                         sub   edx, edx                                              ; edx - Index counter.
 
                         mov   esi, text.data.indices                                ; esi - Pointer to indices.
-                        mov   dword [esi], 00000000h                                ; Populate the first index.
+                        mov   dword [esi], edx                                      ; Populate the first index.
 
                         add   esi, dword.l                                          ; esi - Pointer to storage for second index.
 
@@ -92,6 +92,7 @@
 
                         pop   edx                                                   ; Restore index counter.
                         add   edx, dword [ebx]                                      ; Add new bytes to last index.
+                        add   edx, 4                                                ; Account for size storage in repository.
                         mov   dword [esi], edx                                      ; Store new index.
                         push  edx                                                   ; Preserve index counter.
 
@@ -119,7 +120,6 @@
 
                         loop  text.init.pop.loop                                    ; Populate the remainder of the indices.
 
-                        mov   ebx, eax                                              ; ebx - Descriptor associated with external data file.
                         call  close.descriptor                                      ; Close the external data file.
 
                         push  0                                                     ; Tell memory.switch to free up memory.

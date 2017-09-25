@@ -32,7 +32,7 @@
 ;
 ;   socket.number                       ./b
 ;
-;   socket.send                         ./functions/socket/socket.send/t
+;   socket.send.buf                     ./functions/socket/socket.send/t
 ;
 
     send.to.player:                   push  esi                                       ; Preserve caller's esi.
@@ -55,7 +55,7 @@
 
     send.to.player.broadcast:         push  edx                                       ; Tell the send function how long the message is.
                                       push  ebp                                       ; Point send function to the message.
-                                      call  socket.send                               ; Send the message to the indicated descriptor.
+                                      call  socket.send.buf                           ; Send the message to the indicated descriptor.
 
                                       ret                                             ; Return to caller.
 
