@@ -105,13 +105,11 @@
 ;
 ;   send.to.area                                        ./functions/socket/communications/send.to.area/t
 ;
-;   socket.data.out.of.area.ids.message                 ./functions/d
-;
-;   socket.data.out.of.area.ids.message.l               ./functions/d
-;
 ;   socket.send                                         ./functions/socket/socket.send/t
 ;
 ;   text.data.index.local.data.out.of.area.ids.message  ./functions/main/text.init/b
+;
+;   text.data.index.socket.data.out.of.area.ids.message ./functions/main/text.init/b
 ;
 ;   write.console                                       ./functions/write.console/t
 ;
@@ -192,8 +190,7 @@
 
     area.filename.out.of.ids:           pop   esi                                                         ; esi - Index to socket entry.
 
-                                        push  socket.data.out.of.area.ids.message.l                       ; Store length of message for send function.
-                                        push  socket.data.out.of.area.ids.message                         ; Point send function to message indicating that we're fresh out of area ids.
+                                        push  dword [text.data.index.socket.data.out.of.area.ids.message] ; Point send function to message indicating that we're fresh out of area ids.
                                         call  socket.send                                                 ; Send the message on the socket.
 
                                         call  clean.socket                                                ; Disconnect the current socket.

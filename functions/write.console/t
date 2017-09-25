@@ -34,4 +34,4 @@
                     push  0                         ; Tell memory.check to free memory.
                     call  memory.switch             ; Free memory.
 
-                    ret                             ; Return to caller.
+                    ret   4                         ; Return to caller.
