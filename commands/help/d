@@ -8,13 +8,17 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.help.l                      ./commands/help/d
-;   command.help.s                      ./commands/help/d
-;   socket.data.bad.help.command.error  ./commands/help/d
-;   socket.data.command.help.help       ./commands/help/d
-;   socket.data.command.help.help.l     ./commands/help/d
-;
 ;   command.help                        ./commands/help/t
+;
+;   command.help.l                      ./commands/help/d
+;
+;   command.help.s                      ./commands/help/d
+;
+;   socket.data.bad.help.command.error  ./commands/help/d
+;
+;   socket.data.command.help.help       ./commands/help/d
+;
+;   socket.data.command.help.help.l     ./commands/help/d
 ;
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
