@@ -8,7 +8,7 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   dword.l           ./functions/b
+;   dword.l           ./b
 ;
 ;   text.data.indices ./functions/main/text.init/b
 ;

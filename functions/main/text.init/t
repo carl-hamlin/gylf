@@ -16,7 +16,7 @@
 ;
 ;   close.descriptor                                      ./functions/close.descriptor/t
 ;
-;   dword.l                                               ./functions/b
+;   dword.l                                               ./b
 ;
 ;   local.data.populating.textual.data.indices.message    ./functions/main/text.init/d
 ;
