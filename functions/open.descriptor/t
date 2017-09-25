@@ -13,6 +13,8 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   dword.l         ./b
+;
 ;   sys.open.call   ./functions/open.descriptor/b
 ;
 ;   sys.read.write  ./functions/open.descriptor/b
@@ -21,8 +23,8 @@
 ;
 
     open.descriptor:  mov eax, sys.open.call  ; eax - Associate a descriptor with a file on disk.
-                      mov ebx, [esp+4]        ; ebx - Pointer to ASCIIZ file path.
+                      mov ebx, [esp+dword.l]  ; ebx - Pointer to ASCIIZ file path.
                       mov ecx, sys.read.write ; ecx - Apply read/write permissions to the descriptor.
                       sub edx, edx            ; edx - No special modes.
                       int sys.system.call     ; Associate a descriptor with a file on disk.
-                      ret 4                   ; Return to caller.
+                      ret dword.l             ; Return to caller.

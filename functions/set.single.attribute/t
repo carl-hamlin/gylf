@@ -16,6 +16,8 @@
 ;
 ;   buffer.1        ./functions/b
 ;
+;   dword.l         ./b
+;
 ;   set.att.mod.1   ./functions/set.single.attribute/d
 ;
 ;   set.att.mod.3   ./functions/set.single.attribute/d
@@ -23,7 +25,9 @@
 ;   socket.send.buf ./functions/socket/socket.send/t
 ;
 
-    set.single.attribute: mov   esi, set.att.mod.1  ; esi - Pointer to first portion of the set attribute escape sequence.
+    set.single.attribute: push  esi                 ; Preserve pointer to target connection.
+
+                          mov   esi, set.att.mod.1  ; esi - Pointer to first portion of the set attribute escape sequence.
                           mov   edi, buffer.1       ; edi - Pointer to data buffer.
                           mov   ecx, 002h           ; ecx - Size of first portion of the set attribute escape sequence.
 
@@ -36,6 +40,8 @@
                           mov   esi, set.att.mod.3  ; esi - Pointer to the last portion of the set attribute escape sequence.
 
                           movsb                     ; Copy the last portion of the set attribute escape sequence to the data buffer.
+
+                          pop   esi                 ; Restore pointer to target connection.
 
                           push  dword.l             ; Provide the length of the buffer.
                           push  buffer.1            ; Point socket.send to the data buffer.
