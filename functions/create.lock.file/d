@@ -1,0 +1,10 @@
+;====================================================================================================================================================================================================
+;
+;   ./functions/create.lock.file/d
+;
+;   This file contains all data	pertinent to the create.lock.file function.
+;
+
+    lock.extension    db  '.logged'
+    lock.extension.l  equ $-lock.extension
+

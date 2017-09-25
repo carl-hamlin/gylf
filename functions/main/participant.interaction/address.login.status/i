@@ -2,17 +2,16 @@
 
     section   .bss
 
-    %include  "./b"
+    %include  "./functions/main/participant.interaction/address.login.status/b"
 
 ;==================================================================================================================================================================================================================
 
     section   .data
 
-    %include  "./d"
+    %include  "./functions/main/participant.interaction/address.login.status/d"
 
 ;==================================================================================================================================================================================================================
 
     section   .text
 
-    %include  "./commands/i"
-    %include  "./functions/i"
+    %include  "./functions/main/participant.interaction/address.login.status/t"
