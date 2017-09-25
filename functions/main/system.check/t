@@ -14,10 +14,6 @@
 ;
 ;   bail                                                                ./functions/bail/t
 ;
-;   char.0                                                              ./b
-;
-;   char.9                                                              ./b
-;
 ;   connection.entry.size                                               ./functions/main/system.check/b
 ;
 ;   connection.number.index                                             ./functions/main/system.check/b
@@ -83,7 +79,7 @@
                                                     dec   ebx                                                                         ; ebx - Pointer to last byte of placeholder for socket
                                                                                                                                       ; numbers.
 
-                                                    cmp   byte [ebx], char.9                                                          ; Is the byte at [ebx] "9"?
+                                                    cmp   byte [ebx], "9"                                                             ; Is the byte at [ebx] "9"?
                                                     jz    system.check.populate.connection.numbers.0010                               ; Yes. Go zero it out and address the next place up.
 
                                                     inc   byte [ebx]                                                                  ; No. Increment the byte.
@@ -93,10 +89,10 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    system.check.populate.connection.numbers.0010:  mov   byte [ebx], char.0                                                          ; Zero the byte at [ebx].
+    system.check.populate.connection.numbers.0010:  mov   byte [ebx], "0"                                                             ; Zero the byte at [ebx].
                                                     dec   ebx                                                                         ; ebx - Pointer to byte representing the next place up.
 
-                                                    cmp   byte [ebx], char.9                                                          ; Is the byte at [ebx] a "9"?
+                                                    cmp   byte [ebx], "9"                                                             ; Is the byte at [ebx] a "9"?
                                                     jz    system.check.populate.connection.numbers.0100                               ; Yes. Go zero it out and address the next place up.
 
                                                     inc   byte [ebx]                                                                  ; No. Increment the byte.
@@ -106,10 +102,10 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    system.check.populate.connection.numbers.0100:  mov   byte [ebx], char.0                                                          ; Zero the byte at [ebx].
+    system.check.populate.connection.numbers.0100:  mov   byte [ebx], "0"                                                             ; Zero the byte at [ebx].
                                                     dec   ebx                                                                         ; ebx - Pointer to byte representing the next place up.
 
-                                                    cmp   byte [ebx], char.9                                                          ; Is the byte ate [ebx] a "9"?
+                                                    cmp   byte [ebx], "9"                                                             ; Is the byte ate [ebx] a "9"?
                                                     jz    system.check.populate.connection.numbers.1000                               ; Yes. Go zero it out and address the next place up.
 
                                                     inc   byte [ebx]                                                                  ; No. Increment the byte.
@@ -119,10 +115,10 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    system.check.populate.connection.numbers.1000:  mov   byte [ebx], char.0                                                          ; Zero the byte at [ebx].
+    system.check.populate.connection.numbers.1000:  mov   byte [ebx], "0"                                                             ; Zero the byte at [ebx].
                                                     dec   ebx                                                                         ; ebx - Pointer to byte representing the next place up.
 
-                                                    cmp   byte [ebx], char.9                                                          ; Is the byte at [ebx] a "9"?
+                                                    cmp   byte [ebx], "9"                                                             ; Is the byte at [ebx] a "9"?
                                                     jz    system.check.populate.connection.numbers.over                               ; Yes. At this point, we're experiencing a bounds error, so
                                                                                                                                       ; go tell the admin we're fucked and shut down the server.
 

@@ -56,10 +56,17 @@
                             mov   esi, connection.table                                       ; esi - Index to socket entries.
                             mov   ecx, socket.number                                          ; ecx - Number of sockets in table; we use this number as our loop counter.
 
+                            push  esi                                                         ; Preserve caller's esi register.
+
+                            mov   esi, connection.table                                       ; esi - Index to socket entries.
+                            mov   ecx, socket.number                                          ; ecx - Number of sockets in table; we use this number as our loop counter.
+
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     send.to.world.loop:     push  ecx                                                         ; Preserve number of sockets.
                             push  edx                                                         ; Preserve index to message.
+
+                            push  ebp                                                         ; Preserve return address.
 
                             cmp   al, 1                                                       ; Buffered mode?
                             jz    send.to.world.buf.s                                         ; Yes - go activate socket.send.buf instead.
@@ -71,6 +78,8 @@
                             call  socket.send                                                 ; Broadcast a carriage return.
 
                             call  write.prompt                                                ; Send a prompt.
+
+                            pop   ebp                                                         ; Restore return address.
 
                             add   esi, connection.entry.size                                  ; esi - Pointer to next descriptor in table.
 
