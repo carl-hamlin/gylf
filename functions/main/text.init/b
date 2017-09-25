@@ -28,7 +28,7 @@
                                                                                                               ; vicinity.
     text.data.index.socket.data.command.egg.help                        resd  00000001h                       ; Index to remote help message for 'egg' command.
     text.data.index.socket.data.command.gylf.help                       resd  00000001h                       ; Index to remote help message for 'gylf' command.
-    text.data.index.socket.data.bad.help.command.error                  resd  00000001h                       ; Index to remote message indicating that the user has entered a bad argument for
+    text.data.index.socket.data.bad.help.command.error.message          resd  00000001h                       ; Index to remote message indicating that the user has entered a bad argument for
                                                                                                               ; help.
     text.data.index.socket.data.command.help.help                       resd  00000001h                       ; Index to remote help message for the 'help' command.
     text.data.index.socket.data.command.logout.help                     resd  00000001h                       ; Index to remote help message for the 'logout' command.
