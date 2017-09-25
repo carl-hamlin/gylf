@@ -1,0 +1,42 @@
+;==========================================================================================================================================================================================================================================================================================================================
+;
+;   messages.out
+;
+;   This file contains data definitions for messages to be sent on a connected socket to remote users.
+;
+
+	  socket.data.login.message		          db	"Gylf v0.0001", 0Ah, 0Dh, "Please enter your username: "								                                      ; Storage for login message.
+	  socket.data.login.message.l		        equ	$-socket.data.login.message												                                                            ; Length of login message.
+
+	  socket.data.passphrase.message		    db	"Please enter your passphrase: "											                                                        ; Storage for passphrase message.
+	  socket.data.passphrase.message.l	    equ	$-socket.data.passphrase.message											                                                        ; Length of passphrase message.
+
+	  socket.data.bad.passphrase.message	  db	"Oop. That's not it. Please call back and try again.", 0Ah, 0Dh								                                ; Storage for bad passphrase message.
+	  socket.data.bad.passphrase.message.l  equ	$-socket.data.bad.passphrase.message											                                                    ; Length of message.
+
+	  socket.data.welcome.message		        db	"Ah, a new player! Welcome.", 0Ah, 0Dh, "Please enter a string of characters to use as a passphrase: "			  ; Storage for new user welcome message.
+	  socket.data.welcome.message.l		      equ	$-socket.data.welcome.message												                                                          ; Length of message.
+
+	  socket.data.session.open.error		    db	"The server was unable to open a session for you. The administrator has been notified. Please try again "		  ; Storage for session open error message.
+  						                            db	"later.", 0Ah, 0Dh
+	  socket.data.session.open.error.l	    equ	$-socket.data.session.open.error											                                                        ; Length of session open error message.
+
+	  no.connection.available			          db	"The server is currently full.", 0Ah, 0Dh										                                                  ; Storage for server currently full message.
+	  no.connection.available.l		          equ	$-no.connection.available												                                                              ; Length of message.
+
+	  prompt.message				                db	0Ah, 0Dh, "> "														                                                                    ; Storage for prompt.
+	  prompt.message.l			                equ	$-prompt.message													                                                                    ; Length of message.
+
+	  socket.data.bad.login.error		        db	"That name corresponds neither to a current participant or an egg. Please verify your credentials and try "   ; Bad login error.
+  						                            db	"again.", 0Ah, 0Dh
+	  socket.data.bad.login.error.l		      equ	$-socket.data.bad.login.error												                                                          ; Length of message.
+
+	  socket.data.out.of.area.ids.message	  db	"System error: Out of area IDs. Disconnecting...", 0Ah, 0Dh								                                    ; Message indicating the server has run out of area ids.
+	  socket.data.out.of.area.ids.message.l	equ	$-socket.data.out.of.area.ids.message											                                                    ; Length of message.
+
+	  socket.data.bad.command.error		      db	"For a better idea of what you're doing, try 'help'.", 0Ah, 0Dh, "> "							                            ; Message indicating that an entered command has no current analogue.
+	  socket.data.bad.command.error.l		    equ	$-socket.data.bad.command.error												                                                        ; Length of message.
+	
+	  socket.data.second.login.error		    db	"That username is currently logged in. If this is you, disconnect from your current session and try again, "  ; Message indicating duped login.
+  						                            db	"please.", 0Ah, 0Dh
+	  socket.data.second.login.error.l	    equ	$-socket.data.second.login.error											                                                        ; Length of message.
