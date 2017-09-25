@@ -1,50 +1,100 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   send.to.world
+;   ./functions/socket/communications/send.to.world/t
 ;
 ;   This function sends a provided message out to the whole world.
 ;
-;   Assumptions:    ecx - Pointer to message to be broadcast.
-;                   edx - Length of message to be broadcast.
+;   Assumptions:    Stack Frame:  dword - Index of message to be broadcast.
+;                   al - Buffer mode indicator (!1)
+;
+;                   - OR -
+;
+;                   Stack Frame:  dword - Length of buffered data.
+;                                 dword - Pointer to buffered data.
+;                   al - Buffer mode indicator (1)
 ;
 ;   Returns:        None.
 ;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   connection.entry.size                               ./functions/main/system.check/b
+;
+;   connection.table                                    ./functions/main/system.check/b
+;
+;   dword.l                                             ./b
+;
+;   send.to.world.buf.p                                 ./functions/socket/communications/send.to.world/t
+;
+;   send.to.world.buf.s                                 ./functions/socket/communications/send.to.world/t
+;
+;   send.to.world.buf.sret                              ./functions/socket/communications/send.to.world/t
+;
+;   send.to.world.c                                     ./functions/socket/communications/send.to.world/t
+;
+;   send.to.world.loop                                  ./functions/socket/communications/send.to.world/t
+;
+;   socket.number                                       ./b
+;
+;   socket.send                                         ./functions/socket/socket.send/t
+;
+;   text.data.index.local.data.carriage.return.message  ./functions/main/text.init/b
+;
+;   write.prompt                                        ./functions/write.prompt/t
+;
 
-    send.to.world:      push esi                                                                 ; Preserve caller's esi register.
+    send.to.world:          pop   ebp                                                         ; Preserve return address.
 
-                        mov  dword [socket.data.send.buffer.pointer], ecx                        ; Point send function to provided message.
-                        mov  dword [socket.data.send.buffer.l], edx                              ; Provide length of message to send function.
+                            cmp   al, 1                                                       ; Buffered mode?
+                            jz    send.to.world.buf.p                                         ; Yes. Skip popping the index.
 
-                        mov  esi, connection.table                                               ; esi - Index to socket entries.
-                        mov  ecx, socket.number                                                  ; ecx - Number of sockets in table; we use this number as our loop counter.
+                            pop   edx                                                         ; edx - Index to message.
 
-    send.to.world.loop: push eax                                                                 ; Preserve caller's eax register.
-                        mov  eax, dword [esi+connection.descriptor.index]                        ; eax - Descriptor associated with socket to be broadcast.
-                        mov  dword [socket.data.send.socket.descriptor], eax                     ; Point send function to the socket to be broadcast.
-                        pop  eax                                                                 ; Restore caller's eax register.
-                        call socket.send                                                         ; Send the message to the socket.
+    send.to.world.buf.p     push  esi                                                         ; Preserve caller's esi register.
 
-                        push ecx                                                                 ; Preserve loop counter.
+                            mov   esi, connection.table                                       ; esi - Index to socket entries.
+                            mov   ecx, socket.number                                          ; ecx - Number of sockets in table; we use this number as our loop counter.
 
-                        mov  ecx, dword [socket.data.send.buffer.pointer]                        ; ecx - Provided message.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-                        mov  dword [socket.data.send.buffer.pointer], local.data.carriage.return ; Point send function to the carriage return.
-                        mov  dword [socket.data.send.buffer.l], local.data.carriage.return.l     ; Provide the length of the carriage return.
-                        call socket.send                                                         ; Broadcast a carriage return.
+    send.to.world.loop:     push  ecx                                                         ; Preserve number of sockets.
+                            push  edx                                                         ; Preserve index to message.
 
-                        mov  dword [socket.data.send.buffer.pointer], ecx                        ; Point send function to provided message.
-                        mov  dword [socket.data.send.buffer.l], edx                              ; Provide length of message to send function.
+                            cmp   al, 1                                                       ; Buffered mode?
+                            jz    send.to.world.buf.s                                         ; Yes - go activate socket.send.buf instead.
 
-                        pop  ecx                                                                 ; Restore loop counter.
+                            push  edx                                                         ; Point socket.send to index.
+                            call  socket.send                                                 ; Send the message to the socket.
 
-                        push eax                                                                 ; Preserve caller's eax register.
-                        mov  eax, dword [esi+connection.descriptor.index]                        ; eax - Descriptor associated with active socket.
-                        call write.prompt                                                        ; Send a prompt.
-                        pop  eax                                                                 ; Restore caller's eax register.
+    send.to.world.buf.sret: push  dword [text.data.index.local.data.carriage.return.message]  ; Point send function to a carriage return.
+                            call  socket.send                                                 ; Broadcast a carriage return.
 
-                        add  esi, connection.entry.size                                          ; esi - Pointer to next descriptor in table.
-                        loop send.to.world.loop                                                  ; Go broadcast to the next socket in the table.
+                            call  write.prompt                                                ; Send a prompt.
 
-                        pop  esi                                                                 ; Restore caller's esi register.
+                            add   esi, connection.entry.size                                  ; esi - Pointer to next descriptor in table.
 
-                        ret                                                                      ; Return to caller.
+                            pop   edx                                                         ; Restore return address.
+                            pop   ecx                                                         ; Restore number of sockets.
+                        
+                            loop  send.to.world.loop                                          ; Go broadcast to the next socket in the table.
+
+                            cmp   al, 1                                                       ; Buffered mode?
+                            jnz   send.to.world.c                                             ; No. Go skip restoring the stack.
+
+                            pop   ecx                                                         ; Killing the pointer to the buffer...
+                            pop   ecx                                                         ; Killing the size of the buffered data...
+
+    send.to.world.c         pop   esi                                                         ; Restore caller's esi register.
+
+                            push  ebp                                                         ; Restore return address.
+
+                            ret                                                               ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    send.to.world.buf.s     push  dword [esp+(dword.l * 4)                                    ; Tell socket.send.buf how long the data is.
+                            push  dword [esp+(dword.l * 3)                                    ; Point socket.send.buf to the data.
+                            call  socket.send.buf                                             ; Send the data.
+
+                            jmp   send.to.world.buf.sret                                      ; Resume loop.

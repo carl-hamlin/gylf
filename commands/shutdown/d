@@ -1,49 +1,29 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   ./code/commands/shutdown/data
+;   ./commands/shutdown/d
 ;
 ;   This file contains data pertinent to the shutdown command.
 ;
-
-;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
-;   Local Data
+;   Symbolic Cross-Referencing
 ;
-
-    local.data.smoked.sockets.message   db  "All sockets have been smoked.", 0Ah, 0Dh                                                                   ; Smoked sockets message.
-    local.data.smoked.sockets.message.l equ $-local.data.smoked.sockets.message                                                                         ; Length of message.
-
-    local.data.shutdown.message         db  "Server shutdown has been initiated from within the environment.", 0Ah, 0Dh                                 ; Shutdown message.
-    local.data.shutdown.message.l       equ $-local.data.shutdown.message                                                                               ; Length of message.
-
-;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;   command.shutdown    ./commands/shutdown/t
 ;
-;   Outgoing Data
+;   command.shutdown.l  ./commands/shutdown/d
+;
+;   command.shutdown.s  ./commands/shutdown/d
 ;
 
-	  socket.data.shutdown.message		    db  "G'night, Gracie...", 0Ah, 0Dh												                                                      ; Message indicating the server is about to go down.
-	  socket.data.shutdown.message.l		  equ	$-socket.data.shutdown.message												                                                      ; Length of message.
-
-;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-;
-;   Help Message
-;
-
-	  socket.data.command.shutdown.help   db  "  shutdown", 0Ah, 0Dh, 0Ah, 0Dh                                                                            ; Command shutdown help message.
-	                                      db  "  Syntax: shutdown", 0Ah, 0Dh, 0Ah, 0Dh
-	                                      db  "  The shutdown command disconnects all participants and shuts down the server. This command is", 0Ah, 0Dh
-	                                      db  "  restricted to administrator privileged participants.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
-	  socket.data.command.shutdown.help.l equ $-socket.data.command.shutdown.help                                                                         ; Length of message.
-
-;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Command Table Entry
 ;
 
-    command.shutdown.w                  db  command.shutdown.l                                                                                          ; Indicator of length of command 'shutdown'.
-    command.shutdown.s                  db  'shutdown'                                                                                                  ; Admin command string for shutting down the server.
-    command.shutdown.l                  equ $-command.shutdown.s                                                                                        ; Length of command 'shutdown'.
-    command.shutdown.p                  dd  command.shutdown                                                                                            ; Pointer to handler for command 'shutdown'.
-    command.shutdown.h                  dd  socket.data.command.shutdown.help                                                                           ; Pointer to help message for command 'look'.
-    command.shutdown.h.l                dd  socket.data.command.shutdown.help.l                                                                         ; Length of help message for command 'look'.
+    command.shutdown.w    db  command.shutdown.l                  ; Indicator of length of command 'shutdown'.
+    command.shutdown.s    db  'shutdown'                          ; Admin command string for shutting down the server.
+    command.shutdown.l    equ $-command.shutdown.s                ; Length of command 'shutdown'.
+    command.shutdown.p    dd  command.shutdown                    ; Pointer to handler for command 'shutdown'.
+    command.shutdown.h    dd  socket.data.command.shutdown.help   ; Pointer to help message for command 'look'.
+    command.shutdown.h.l  dd  socket.data.command.shutdown.help.l ; Length of help message for command 'look'.
 

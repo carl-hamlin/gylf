@@ -1,6 +1,6 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   get.ticks
+;   ./functions/get.ticks/t
 ;
 ;   This function returns the number of clock ticks since boot time.
 ;
@@ -9,6 +9,14 @@
 ;
 ;   Returns:        eax - number of clock ticks since boot time.
 ;                   [ebx] - number of clock ticks since boot time if function entered with non-null ebx.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   sys.get.ticks   ./functions/get.ticks/b
+;
+;   sys.system.call ./functions/b
 ;
 
     get.ticks: mov eax, sys.get.ticks ; eax - get number of ticks since boot time.
