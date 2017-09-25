@@ -40,8 +40,6 @@
 ;
 ;   item.filename                       ./functions/d
 ;
-;   local.data.carriage.return          ./functions/d
-;
 ;   pouch.declaration                   ./functions/d
 ;
 ;   pouch.description                   ./functions/d
@@ -62,9 +60,6 @@
 
     external.data.cursor.home             db  "./external.data/cursor.control/cursor.home", 00h
     external.data.clear.screen            db  "./external.data/cursor.control/clear.screen", 00h	
-
-    local.data.carriage.return            db  0Ah, 0Dh                                                                    ; Carriage return.
-    local.data.carriage.return.l          equ $-local.data.carriage.return                                                ; Length of message.
 
     pouch.declaration                     db  27h, 's pouch'
     pouch.declaration.l                   equ $-pouch.declaration
