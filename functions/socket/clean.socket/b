@@ -1,0 +1,8 @@
+;====================================================================================================================================================================================================
+;
+;   ./functions/socket/clean.socket/b
+;
+;   This file contains all definitions pertinent to the clean.socket function.
+;
+
+    %define sys.unlink  00Ah  ; 00Ah is the modifier for 080h that tells the kernel we want to smoke a file.

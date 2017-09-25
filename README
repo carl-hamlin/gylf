@@ -1,0 +1,387 @@
+gylf
+
+An MMO Server for linux implemented entirely in x86 assembly language, using the linux kernel services for Berkeley Sockets.
+
+Relevant data:
+
+    Where appropriate, each directory may (or may not) contain the following:
+    
+    b                         Standard definitions shared by all downstream code.
+    d                         Data declarations shared by all downstream code.
+    i                         Inclusion anchor for tying together downstream code.
+    t                         ASM code outlining the function referenced by the immediate
+                              directory name.
+
+    ==============================================================================================
+
+    ./build.gylf.sh           This is the build script. It depends on the presence of nasm and ld.
+                              Run the build script to produce an executable binary called 'gylf'
+                              from the existing codebase, which it then places in the root
+                              directory.
+
+    ==============================================================================================
+
+    ./commands                Contains code pertaining to commands available to users depending on
+                              their access level.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./commands              Contains code pertinent to the implementation of the 'ai' command; a
+        /ai                   player-level command that allows for the invoker to adjust
+                              parameters associated with their avatar's behaviour while they are
+                              signed out.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./commands              Contains code pertinent to the implementation of the 'area' command;
+        /area                 an administrator command that allows for administrators to create
+                              new areas without having to dig them out using the player interface.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./commands              Contains code pertinent to the implementation of the 'broadcast'
+        /broadcast            command; an administrator command that allows for administrators to
+                              send a message to the entire participant base all at once,
+                              regardless of their locations in the simulation.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./commands              Contains code pertinent to the implementation of the 'dig' command;
+        /dig                  a participant-level command that allows for player to, under certain
+                              circumstances, extend the environment by creating new areas.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./commands              Contains code pertinent to the implementation of the 'egg' command;
+        /egg                  an administrator command that allows for the forced implantation and
+                              fertilization of an egg in the womb of the target gylf without
+                              having to go through the normal channels of fertilization through
+                              mating.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./commands              Contains code pertinent to the implementation of the 'gylf' command;
+        /gylf                 an administrator command that allows for the creation of a complete
+                              new gylf without the intervening process of mating, fertilization,
+                              gestation, laying, and hatching.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./commands              Contains code pertinent to the implementation of the 'help' command;
+        /help                 a participant-level command whose sole purpose is to display
+                              context-sensitive help.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./commands              Contains code pertinent to the implementation of the 'logout'
+        /logout               command; a common command that removes a participant from the server
+                              and leaves their avatar under the control of an artificial
+                              intelligence.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./commands              Contains code pertinent to the implementation of the 'look' command;
+        /look                 a participant-level command that displays information about the
+                              target.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./commands              Contains code pertinent to the implementation of the 'shutdown'
+        /shutdown             command; an administrator command that shuts down the server from
+                              within the environment.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./commands              Contains code pertinent to the implementation of the 'think'
+        /think                command; a participant-level command that allows for communication
+                              between players in a local environment.
+
+    ==============================================================================================
+    
+    ./functions               Contains code pertaining to the background mechanisms that
+                              contribute to the overall functioning of the codebase. Things like
+                              writing to files, reading user input, etc... are all kept here.
+    
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that collects arguments from the participant command
+        /aggregate.arguments  line and segregates them into a predefined structure.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that suspends execution of the code, unloads from
+        /bail                 memory, and returns control to Linux.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that strips buffered data of carriage returns and line
+        /buffer.strip         feeds and replaces them with zeroes.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that checks to see if the user on the current socket
+        /check.admin          has administrative privileges.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that checks to see if a user attempting to log in is
+        /check.login          already logged in from a different location.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that remotely clears the user's screen and places
+        /clear.screen         their cursor in the upper left hand corner.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that tells linux that we're finished with a
+        /close.descriptor     descriptor, causing it to become disassociated with the dataset to
+                              which it currently points.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that builds out character data on the basis of DNA
+        /create.character     sequences left behind by either parent on the associated egg.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that builds a dataset on the drive, to which it
+        /create.file          associates a logical descriptor.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that creates a lock file for use in preventing
+        /create.lock.file     multiple instances of the same login from different locations.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code which combines the DNA left behind on an egg by both
+        /dna.lab              parents to create an entirely new gylf.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code which populates the character data in memory from file
+        /get.character.data   for the character on the current socket.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code which reads data that exists outside the codebase and
+        /get.external.data    memory.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that returns the number of clock ticks since the
+        /get.ticks            environment was booted.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions/main        Contains all pertinent first level code, definitions, and data for
+                              the main loop.
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/main      Contains code that runs through the list of potentially active
+          /active.socket.poll connections and checks each of them for activity. Upon discovering
+                              activity in a connection, the function then passes control off to
+                              the answer.active.socket function for more specialized treatment.
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/main          Contains code that polls the listening socket for new connection
+          /listening.socket.poll  attempts and sends the login message when it finds them.
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/main            Contains code that has to do with interaction between the user
+          /participant.interaction  and the infractructure of the environment. Essentially, this
+                                    code addresses all user statii and how to handle them.
+
+    ----------------------------------------------------------------------------------------------
+
+          ./functions/main            Contains code that parses commands issued by users with an
+            /participant.interaction  active status and sends them to the appropriate handler.
+              /address.active.status
+
+    ----------------------------------------------------------------------------------------------
+
+          ./functions/main            Contains code that parses commands issued by users with a
+            /participant.interaction  login status and sends them to the appropriate handler.
+              /address.login.status
+
+    ----------------------------------------------------------------------------------------------
+
+          ./functions/main                Contains code that parses commands issues by users with
+            /participant.interaction      a passphrase status and sends them to the appropriate
+              /address.passphrase.status  handler.
+
+    ----------------------------------------------------------------------------------------------
+
+          ./functions/main                    Contains code that parses commands issued by users
+            /participant.interaction          with a set passphrase status and sends them to the
+              /address.set.passphrase.status  appropriate handler.
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/main      Contains code that builds a socket, binds it to a specified hardware
+          /set.up.listener    port, and tells it to listen for incoming connections. When it's
+                              finished, it displays a message to the admin indicating that we're
+                              online and ready to go. If at any point an error occurs, the
+                              function displays an error message and passes control to the bail
+                              function so we can suspend execution and return control to linux in
+                              the hopes that the admin can figure out what's clogging up the
+                              works.
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/main      Contains code that performs checks to ensure the environment is
+          /system.check       ready to go live, prior to instantiation.
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/main      Contains code pertinent to the passage of time in the environment.
+          /world.maintenance
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that associates a logical descriptor with an existing
+        /open.descriptor      dataset on disk. If the code is unable to associate a descriptor, it
+                              instead returns an error code, which is detectable via a check on
+                              the sign of eax.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that uses a logical descriptor associated with a
+        /poll.descriptor      Berkeley Socket to ask the socket whether or not there is currently
+                              data on it that requires the attention of a handler.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that prints a socket number associated with an event
+        /print.socket.number  in the administrator console.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that pulls data from an existing dataset using a
+        /read.descriptor      logical descriptor previously associated with the dataset in
+                              question.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that sends a vt100 escape sequence to the remote
+        /set.single.attribute terminal which changes a single attribute about the printed text.
+                              Attributes can be found in external data.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions/socket      Contains code that governs the 'behind the scenes' mechanisms
+                              surrounding the operation of Berkeley Sockets under Linux in X86
+                              ASM.
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/socket    Contains code that calls the linux kernel to associate a descriptor
+          /accept.socket      with an incoming Berkeley Socket.
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/socket      Contains code that determines the status of an active socket and
+          /answer.active.socket routes the data to the appropriate handler.
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/socket    Contains code that binds a socket to a specified hardware port.
+          /bind.socket
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/socket    Contains code that removes the data associated with an active socket
+          /clean.socket       from memory, smokes the lock file, and uses the close.descriptor
+                              function to close out the socket. This function does not closeout
+                              other files associated with the socket - that responsibility is left
+                              to the caller.
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/socket    Contains code pertaining to the behind the scenes mechanisms
+          /communications     surrounding communications between users.
+
+    ----------------------------------------------------------------------------------------------
+
+          ./functions/socket  Contains code that sends a provided message to a specified area.
+            /communications   Everyone in the specified area will receive the message. This code
+              /send.to.area   is used to facilitate communication between users in a given area of
+                              the environment, as well as facilitating communications between
+                              administrators and a given area.
+
+    ----------------------------------------------------------------------------------------------
+
+          ./functions/socket  Contains code that sends a provided message to a specified player.
+            /communications   Only the specified player will received this message. This code is
+              /send.to.player used to facilitate private communication between players.
+
+    ----------------------------------------------------------------------------------------------
+
+          ./functions/socket  Contains code that sends a provided message to the entire
+            /communications   environment. This code is used to facilitate administrator
+              /send.to.world  communications that need to be addressed to everyone in the
+                              environment.
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/socket    Contains code that builds a socket for further use.
+          /create.socket
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/socket    Contains code that tells a created and bound socket to listen for
+          /listen.socket      incoming connections.
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/socket    Contains code that receives data from a connected socket and places
+          /recv.from.socket   it in a specified buffer.
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/socket    Contains code that sets up error messages to be displayed to the
+          /socket.error       admin in the event that something goes awry while building the
+                              listening socket. If any of these are ever executed, we're beyond
+                              the point of no return, so each of them passes control to the bail
+                              function after displaying their unique message.
+
+    ----------------------------------------------------------------------------------------------
+
+        ./functions/socket    Contains code that sends data out on a connected socket.
+          /socket.send
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that returns the time in seconds since the epoch.
+        /time.in.seconds.since.the.epoch
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions                 Contains code that lets the user know whan they've attempted to
+        /write.bad.command.error  send a string to the server that doesn't correspond to a
+                                  recognized command.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions                     Contains code that lets the user know when they've requested
+        /write.bad.help.command.error help for a command that does not belong to the recognized
+                                      command set.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that adds data to an existing dataset on disk using a
+        /write.descriptor     logical descriptor previously associated with the dataset.
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that displays a command prompt to the user.
+        /write.prompt
+
+    ----------------------------------------------------------------------------------------------
+
+      ./functions             Contains code that builds and displays the initial welcome screen to
+        /write.welcome        the user.
