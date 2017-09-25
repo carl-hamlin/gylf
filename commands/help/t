@@ -76,13 +76,13 @@
     command.help.found.command:       pop   ecx                                             ; Restore loop counter.
                                       pop   edi                                             ; Restore caller's edi register...
                                       
-                                      mov   ebx, esi                                        ; ebx - Pointer to help message data.
+                                      mov   ebx, esi                                        ; ebx - Pointer to command entry.
+                                      mov   ebx, dword [ebx+qword.l]                        ; ebx - pointer to index for help entry.
 
                                       pop   esi                                             ; esi - Index to socket entry.
 
-                                      push  dword [ebx+qword.l]                             ; Tell the send function how long the message is.
-                                      push  dword [ebx+dword.l]                             ; Point send function to the help message for the selected argument.
-                                      call  socket.send.buf                                 ; Send the message.
+                                      push  dword [ebx]                                     ; Point send function to help message index.
+                                      call  socket.send                                     ; Send the message.
                                       
                                       ret                                                   ; Return to caller.
 

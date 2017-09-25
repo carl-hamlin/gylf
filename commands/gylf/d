@@ -20,9 +20,8 @@
 ;   Command Table Entry
 ;
 
-    command.gylf.w    db  command.gylf.l                  ; Indicator fo length of command 'gylf'.
-    command.gylf.s    db  'gylf'                          ; Admin command string for creating new gylf.
-    command.gylf.l    equ $-command.gylf.s                ; Length of command 'gylf'.
-    command.gylf.p    dd  command.gylf                    ; Pointer to handler for command 'gylf'.
-    command.gylf.h    dd  socket.data.command.gylf.help   ; Pointer to help message for command 'gylf'.
-    command.gylf.h.l  dd  socket.data.command.gylf.help.l ; Length of help message for command 'gylf'.
+    command.gylf.w  db  command.gylf.l                                ; Indicator fo length of command 'gylf'.
+    command.gylf.s  db  'gylf'                                        ; Admin command string for creating new gylf.
+    command.gylf.l  equ $-command.gylf.s                              ; Length of command 'gylf'.
+    command.gylf.p  dd  command.gylf                                  ; Pointer to handler for command 'gylf'.
+    command.gylf.h  dd  text.data.index.socket.data.command.gylf.help ; Pointer to help message for command 'gylf'.
