@@ -1,0 +1,17 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/write.bad.command.error/e
+;
+;   This file defines the external textual data associated with the write.bad.command.error function.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Outgoing Data
+;
+
+	  socket.data.bad.command.error.l   dd  socket.data.bad.command.error.end                                     ; Length of message.
+	  socket.data.bad.command.error     db  "For a better idea of what you're doing, try 'help'.", 0Ah, 0Dh, "> " ; Message indicating that an entered command has no current analogue.
+	  socket.data.bad.command.error.end equ $-socket.data.bad.command.error												                ; Pointer to end of message.

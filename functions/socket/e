@@ -2,6 +2,5 @@
 
     section   .data
 
-    %include  "./commands/e"
-    %include  "./functions/e"
-
+    %include  "./functions/socket/answer.active.socket/e"
+    %include  "./functions/socket/socket.errors/e"
