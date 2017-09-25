@@ -3,4 +3,5 @@
     section   .data
 
     %include  "./commands/e"
+    %include  "./functions/e"
 

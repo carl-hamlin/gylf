@@ -10,3 +10,6 @@
     %include  "./commands/gylf/e"
     %include  "./commands/help/e"
     %include  "./commands/logout/e"
+    %include  "./commands/look/e"
+    %include  "./commands/shutdown/e"
+    %include  "./commands/think/e"
