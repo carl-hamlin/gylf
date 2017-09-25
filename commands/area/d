@@ -20,10 +20,8 @@
 ;   Command Table Entry
 ;
 
-    command.area.w    db  command.area.l                  ; Indicator of length of command 'area'.
-    command.area.s    db  'area'                          ; Admin command string for creating an area.
-    command.area.l    equ $-command.area.s                ; Length of command 'area'.
-    command.area.p    dd  command.area                    ; Pointer to handler for command 'area'.
-    command.area.h    dd  socket.data.command.area.help   ; Pointer to help message for command 'area'.
-    command.area.h.l  dd  socket.data.command.area.help.l ; Length of help message for command 'ai'.
-
+    command.area.w  db  command.area.l                                ; Indicator of length of command 'area'.
+    command.area.s  db  'area'                                        ; Admin command string for creating an area.
+    command.area.l  equ $-command.area.s                              ; Length of command 'area'.
+    command.area.p  dd  command.area                                  ; Pointer to handler for command 'area'.
+    command.area.h  dd  text.data.index.socket.data.command.area.help ; Pointer to help message for command 'area'.

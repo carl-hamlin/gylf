@@ -20,10 +20,8 @@
 ;   Command Table Entry
 ;
 
-    command.egg.w   db  command.egg.l                   ; Indicator of length of command 'egg'
-    command.egg.s   db  'egg'                           ; Admin command string for creating an egg and placing it.
-    command.egg.l   equ $-command.egg.s                 ; Length of command 'egg'.
-    command.egg.p   dd  command.egg                     ; Pointer to handler for command 'egg'
-    command.egg.h   dd  socket.data.command.egg.help    ; Pointer to help message for command 'egg'.
-    command.egg.h.l dd  socket.data.command.egg.help.l  ; Length of help message for command 'help'.
-
+    command.egg.w db  command.egg.l                                 ; Indicator of length of command 'egg'
+    command.egg.s db  'egg'                                         ; Admin command string for creating an egg and placing it.
+    command.egg.l equ $-command.egg.s                               ; Length of command 'egg'.
+    command.egg.p dd  command.egg                                   ; Pointer to handler for command 'egg'
+    command.egg.h dd  text.data.index.socket.data.command.egg.help  ; Pointer to help message for command 'egg'.
