@@ -60,9 +60,11 @@ Relevant data:
                                                 ./commands/look/t
                                                 ./functions/create.character/t
                                                 ./functions/d
-                                                ./functions/main/system.check/t
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/main/text.init/b
+                                                ./functions/main/text.init/t
                                                 ./functions/print.socket.number/t
 
           word.l                                ./commands/area/t
@@ -84,6 +86,11 @@ Relevant data:
                               Run the build script to produce an executable binary called 'gylf'
                               from the existing codebase, which it then places in the root
                               directory.
+
+    ./build.gylf.data.sh      This is the build script for the external textual data used in
+                              messages sent to the admin and participants. It depends on the
+                              presence of nasm. Run this script to produce the file:
+                              ../gylf.test.directory/external.data/m/d.
 
     ==============================================================================================
 
@@ -1058,6 +1065,8 @@ Relevant data:
 
 
       t   bail                                  ./commands/shutdown/t
+                                                ./functions/main/text.init/t
+                                                ./functions/main/system.check/t
                                                 ./functions/socket/socket.errors/t
 
     ----------------------------------------------------------------------------------------------
@@ -1149,6 +1158,7 @@ Relevant data:
                                                   /address.login.status/t
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
+                                                ./functions/main/text.init/t
                                                 ./functions/socket/clean.socket/t
 
     ----------------------------------------------------------------------------------------------
@@ -1695,6 +1705,80 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
+        /text.init            Contains code that initializes the ability to send messages to the
+                              admin and participants.
+
+        b   text.data.indices                   ./functions/main/text.init/b
+                                                ./functions/main/text.init/t
+
+            text.data.index.num                 ./functions/main/text.init/t
+
+            text.data.index.local.data.bad.area.id.indicator.message  No references.
+
+            text.data.index.local.data.area.bad.syntax.message  No references.
+
+            text.data.index.local.data.area.created.message No references.
+
+            text.data.index.local.data.area.out.of.areas.message  No references.
+
+            text.data.index.local.data.shutdown.message No references.
+
+            text.data.index.local.data.smoked.sockets.message No references.
+
+            text.data.index.socket.data.area.created.message  No references.
+
+            text.data.index.socket.data.bad.area.id.message No references.
+
+            text.data.index.socket.data.bad.help.command.error  No references.
+
+            text.data.index.socket.data.command.ai.help No references.
+
+            text.data.index.socket.data.command.area.help No references.
+
+            text.data.index.socket.data.command.broadcast.help  No references.
+
+            text.data.index.socket.data.command.dig.help  No references.
+
+            text.data.index.socket.data.command.egg.help  No references.
+
+            text.data.index.socket.data.command.gylf.help No references.
+
+            text.data.index.socket.data.command.help.help No references.
+
+            text.data.index.socket.data.command.logout.help No references.
+
+            text.data.index.socket.data.command.look.help No references.
+
+            text.data.index.socket.data.command.shutdown.help No references.
+
+            text.data.index.socket.data.egg.hatch.message No references.
+
+            text.data.index.socket.data.out.of.areas.message  No references.
+
+            text.data.index.socket.data.shutdown.message  No references.
+
+
+        d   local.data.populating.textual.data.indices.message  ./functions/main/text.init/d
+                                                                ./functions/main/text.init/t
+
+            local.data.populating.textual.data.indices.message.l  ./functions/main/text.init/t
+
+            local.data.text.data.failed         ./functions/main/text.init/d
+                                                ./functions/main/text.init/t
+
+            local.data.text.data.failed.l       ./functions/main/text.init/t
+
+            text.data.filename                  ./functions/main/text.init/t
+
+
+        t   text.init                           ./functions/main/t
+
+            text.init.pop.loop                  ./functions/main/text.init/t
+
+            text.init.fail                      ./functions/main/text.init/t
+
+    ----------------------------------------------------------------------------------------------
+
         /world.maintenance    Contains code pertinent to the passage of time in the environment.
 
         b   No defined symbols.
@@ -1716,7 +1800,9 @@ Relevant data:
       d   break.pointer                         ./functions/memory.switch/t
 
 
-      t   memory.switch                         ./functions/socket/send.socket/t
+      t   memory.switch                         ./functions/main/text.init/t
+                                                ./functions/socket/recv.from.socket/t
+                                                ./functions/socket/send.socket/t
 
           memory.switch.initialize              ./functions/memory.switch/t
 
@@ -1747,6 +1833,7 @@ Relevant data:
                                                 ./functions/get.external.data/t
                                                 ./functions/main/participant.interaction
                                                   /address.set.passphrase.status/t
+                                                ./functions/main/text.init/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -1797,6 +1884,7 @@ Relevant data:
                                                   /address.login.status/t
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
+                                                ./functions/main/text.init/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -2209,6 +2297,7 @@ Relevant data:
 
 
       t   write.bad.command.error               ./commands/ai/t
+                                                ./commands/area/t
                                                 ./commands/broadcast/t
                                                 ./commands/dig/t
                                                 ./commands/egg/t
