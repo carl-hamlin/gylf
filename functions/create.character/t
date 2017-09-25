@@ -81,10 +81,6 @@
 ;
 ;   egg.father.l                                        ./commands/egg/b
 ;
-;   egg.hatch.message                                   ./commands/egg/d
-;
-;   egg.hatch.message.l                                 ./commands/egg/d
-;
 ;   egg.mother                                          ./commands/egg/b
 ;
 ;   egg.mother.l                                        ./commands/egg/b
@@ -202,9 +198,8 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    build.pouch.found.open.id:          mov   eax, egg.area.id                                            ; eax - area id associated with egg.
-                                        mov   ebx, egg.hatch.message                                      ; ebx - pointer to message indicating that the egg is about to hatch.
-                                        mov   edx, egg.hatch.message.l                                    ; edx - length of message.
+    build.pouch.found.open.id:          push  dword [text.data.index.socket.data.egg.hatch.message]       ; Point send function to index for message indicating an egg is about to hatch.
+                                        push  egg.area.id                                                 ; Tell send function what area to send to.
                                         call  send.to.area                                                ; Tell the area where the egg is sitting that the egg is beginning to hatch.
                 
                                         pop   esi                                                         ; esi - Index to socket entry.
