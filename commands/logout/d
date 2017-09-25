@@ -20,10 +20,8 @@
 ;   Command Table Entry
 ;
 
-    command.logout.w	  db  command.logout.l	                ; Indicator of length of command 'logout'.
-    command.logout.s	  db  'logout'		                      ; Common command string for logging a participant out and returning control of their avatar to the artificial intelligence.
-    command.logout.l	  equ $-command.logout.s	              ; Length of command 'logout'.
-    command.logout.p	  dd  command.logout		                ; Pointer to handler for command 'logout'.
-    command.logout.h    dd  socket.data.command.logout.help   ; Pointer to help message for command 'logout'.
-    command.logout.h.l  dd  socket.data.command.logout.help.l ; Length of help message for command 'logout'.
-
+    command.logout.w  db  command.logout.l	                              ; Indicator of length of command 'logout'.
+    command.logout.s	db  'logout'		                                    ; Common command string for logging a participant out and returning control of their avatar to the artificial intelligence.
+    command.logout.l	equ $-command.logout.s	                            ; Length of command 'logout'.
+    command.logout.p	dd  command.logout		                              ; Pointer to handler for command 'logout'.
+    command.logout.h  dd  text.data.index.socket.data.command.logout.help ; Pointer to help message for command 'logout'.
