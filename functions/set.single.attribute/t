@@ -1,6 +1,6 @@
-;=================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   set.single.attribute
+;   ./functions/set.single.attribute/t
 ;
 ;   This function sends a vt100 escape sequence to the remote terminal which changes a single attribute about the
 ;   printed text. Attributes can be found in the file "attribute.control.dat".
@@ -9,6 +9,24 @@
 ;                   esi = Pointer to descriptor associated with target connection.
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   buffer.1                            ./functions/b
+;
+;   set.att.mod.1                       ./functions/set.single.attribute/d
+;
+;   set.att.mod.3                       ./functions/set.single.attribute/d
+;
+;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
+;
+;   socket.send                         ./functions/socket/socket.send/t
 ;
 
     set.single.attribute: mov   esi, set.att.mod.1                                ; esi = Pointer to first portion of the set attribute escape sequence.
