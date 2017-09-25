@@ -1,8 +1,22 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
 ;   ./functions/socket/d
 ;
 ;   This file contains all data	pertinent to downstream socket functions.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   socket.data.sockaddr.protocol.family  ./functions/socket/d
+;
+;   sys.socket.address                    ./functions/socket/b
+;
+;   sys.socket.padding                    ./functions/socket/b
+;
+;   sys.socket.port.number                ./functions/socket/b
+;
+;   sys.socket.protocol.family.inet       ./functions/socket/b
 ;
 
     socket.data.sockaddr.protocol.family  dw  sys.socket.protocol.family.inet         ; Sockaddr element for storing the protocol family.
