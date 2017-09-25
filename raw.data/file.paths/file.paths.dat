@@ -1,0 +1,20 @@
+;====================================================================================================================================================================================================
+;
+;   file.paths
+;
+;   This file contains data definitions for files used by the system.
+;
+
+    current.directory.marker   db  './'
+    current.directory.marker.l equ $-current.directory.marker
+
+    area.filename              db  './external.data/areas/00000000', 00h
+    area.filename.l            equ $-area.filename
+    item.filename              db  './external.data/items/00000000', 00h
+    item.filename.l            equ $-item.filename
+
+    lock.extension             db  '.logged'
+    lock.extension.l           equ $-lock.extension
+
+    external.data.cursor.home  db  "./external.data/cursor.control/cursor.home", 00h
+    external.data.clear.screen db  "./external.data/cursor.control/clear.screen", 00h
