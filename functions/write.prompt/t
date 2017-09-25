@@ -16,18 +16,11 @@
 ;
 ;   prompt.message.l                    ./functions/write.prompt/d
 ;
-;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
-;
 ;   socket.send                         ./functions/socket/socket.send/t
 ;
 
-    write.prompt: mov  dword [socket.data.send.socket.descriptor], eax         ; Point socket.send to target connection.
-                  mov  dword [socket.data.send.buffer.pointer], prompt.message ; Point socket.send to prompt message.
-                  mov  dword [socket.data.send.buffer.l], prompt.message.l     ; Provide length of message.
-                  call socket.send                                             ; Send the welcome message to the socket.
+    write.prompt: push  prompt.message.l  ; Tell the send function how long the message is.
+                  push  prompt.message    ; Point the send function to the prompt.
+                  call socket.send        ; Send the prompt to the socket.
 
-                  ret                                                          ; Return to caller.
+                  ret                     ; Return to caller.
