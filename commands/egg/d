@@ -1,0 +1,27 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/egg/d
+;
+;   This file contains data pertinent to the egg command.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   command.egg   ./commands/egg/t
+;
+;   command.egg.l ./commands/egg/d
+;
+;   command.egg.s ./commands/egg/d
+;
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Command Table Entry
+;
+
+    command.egg.w db  command.egg.l                                 ; Indicator of length of command 'egg'
+    command.egg.s db  'egg'                                         ; Admin command string for creating an egg and placing it.
+    command.egg.l equ $-command.egg.s                               ; Length of command 'egg'.
+    command.egg.p dd  command.egg                                   ; Pointer to handler for command 'egg'
+    command.egg.h dd  text.data.index.socket.data.command.egg.help  ; Pointer to help message for command 'egg'.

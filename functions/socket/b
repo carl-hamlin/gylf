@@ -1,0 +1,38 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/b
+;
+;   This file contains all definitions pertinent to downstream socket functions.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+    %define     sys.socket.call                     0066h  ; The little Kahuna. 0066h indicates socket functionality.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    %define     sys.socket.protocol.family.inet     0002h ; PF_INET.
+    %define     sys.socket.type.stream              0001h ; SOCK_STREAM.
+    %define     sys.socket.address                  0000h ; INADDR_ANY.
+    %define     sys.socket.port.number              280Ah ; Port number 2600.
+    %define     sys.socket.padding                  0000h ; Padding for sockaddr structure.
+
+    %define     sys.socket.queue.l                  0005h ; Number of connections to let pile up.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    socket.data.connected.socket.descriptor resd    0001h ; Data storage for the descriptor associated with the socket attempting to connect.
+    socket.data.protocol.family             resd    0001h ; Data storage for the protocol family associated with the socket attempting to connect.
+    socket.data.flags                       resd    0001h ; Data storage for communications semantics associated with the socket attempting to connect.
+    socket.data.address                     resd    0001h ; Data storage for the data address associated with the socket attempting to connect.
+    socket.data.listening.socket.descriptor resd    0001h ; Data storage for the descriptor associated with the listening socket.
+    socket.data.queue.l                     resd    0001h ; Data storage for the queue length associated with the listening socket.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    session.descriptor                      resd    0001h ; Data storage for the descriptor associated with the session file.
+    active.socket.descriptor                resd    0001h ; Data storage for the descriptor associated with the active socket.
