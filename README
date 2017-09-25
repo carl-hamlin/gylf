@@ -23,6 +23,7 @@ Relevant data:
                                                 ./commands/help/t
                                                 ./commands/look/t
                                                 ./functions/create.character/t
+                                                ./functions/create.file/t
                                                 ./functions/d
                                                 ./functions/get.external.data/t
                                                 ./functions/get.text.data/t
@@ -376,18 +377,15 @@ Relevant data:
                               command; an administrator command that shuts down the server from
                               within the environment.
 
-      b   No defined symbols.
-
-
-      d   command.shutdown.w                    ./functions/d
-
-          command.shutdown.s                    ./commands/shutdown/d
+      d   command.shutdown.h                    No references.
 
           command.shutdown.l                    ./commands/shutdown/d
 
           command.shutdown.p                    No references.
 
-          command.shutdown.h                    No references.
+          command.shutdown.s                    ./commands/shutdown/d
+
+          command.shutdown.w                    ./functions/d
 
 
       t   command.shutdown                      ./commands/shutdown/d
@@ -402,18 +400,16 @@ Relevant data:
                               command; a participant-level command that allows for communication
                               between players in a local environment.
 
-      b   No defined symbols.
-
-
-      d   command.think.w                       ./functions/d
-
-          command.think.s                       ./commands/think/d
+      d   
+          command.think.h                       No references.
 
           command.think.l                       ./commands/think/d
 
           command.think.p                       No references.
 
-          command.think.h                       No references.
+          command.think.s                       ./commands/think/d
+
+          command.think.w                       ./functions/d
 
 
       t   command.think                         ./commands/think/d
@@ -426,52 +422,13 @@ Relevant data:
                               contribute to the overall functioning of the codebase. Things like
                               writing to files, reading user input, etc... are all kept here.
 
-      b   socket.filename.entry.l               ./functions/b
-                                                ./functions/main/system.check.b
-                                                ./functions/socket/clean.socket/t
+      b   abdomen.worn.item.id                  No references.
 
-          sockets.left                          ./functions/main/active.socket.poll/t
+          admin.character                       No references.
 
-          sys.system.call                       ./functions/bail/t
-                                                ./functions/close.descriptor/t
-                                                ./functions/create.file/t
-                                                ./functions/get.ticks/t
-                                                ./functions/open.descriptor/t
-                                                ./functions/poll.descriptor/t
-                                                ./functions/read.descriptor/t
-                                                ./functions/socket/accept.socket/t
-                                                ./functions/socket/bind.socket/t
-                                                ./functions/socket/clean.socket/t
-                                                ./functions/socket/create.socket/t
-                                                ./functions/socket/listen.socket/t
-                                                ./functions/socket/recv.from.socket/t
-                                                ./functions/socket/socket.send/t
-                                                ./functions/time.in.seconds.since.the.epoch/t
-                                                ./functions/write.descriptor/t
+          administrative.byte                   ./functions/check.admin/t
 
-          sys.read.write                        ./functions/create.file/t
-                                                ./functions/open.descriptor/t
-
-          sys.lseek.call                        No references.
-
-          sys.lseek.current.position            No references.
-
-          sys.lseek.eof                         No references.
-
-          sys.no.bytes.read                     No references.
-
-          sys.write.call                        ./functions/write.console/t
-                                                ./functions/write.descriptor/t
-
-          id.size                               ./functions/create.character/t
-
-          new.char.sig.l                        ./functions/main/participant.interaction
-                                                  /address.login.status/t
-
-          buffer.1.l                            ./functions/b
-                                                ./functions/socket/recv.from.socket/t
-
-          buffer.2.l                            ./functions/b
+          back.worn.item.id                     No references.
 
           buffer.1                              ./commands/look/t
                                                 ./commands/think/t
@@ -485,6 +442,9 @@ Relevant data:
                                                 ./functions/set.single.attribute/t
                                                 ./functions/socket/recv.from.socket/t
 
+          buffer.1.l                            ./functions/b
+                                                ./functions/socket/recv.from.socket/t
+
           buffer.2                              ./functions/create.character/t
                                                 ./functions/check.login/t
                                                 ./functions/get.character.data/t
@@ -493,261 +453,298 @@ Relevant data:
                                                 ./functions/main/participant.interaction
                                                   /address.set.passphrase.status/t
 
-          id.buffer                             No references.
+          buffer.2.l                            ./functions/b
 
-          new.char.sig.buffer                   No references.
+          character.abdomen.wound.level         No references.
 
-          external.data.buffer                  ./functions/clear.screen/t
-                                                ./functions/get.external.data/t
+          character.age                         No references.
 
-          number.of.parents                     ./functions/dna.lab/t
+          character.agility                     ./functions/dna.lab/t
 
-          child.attribute.computation.factor    ./functions/dna.lab/t
+          character.back.spinal.wound.level     No references.
 
-          new.char.sig                          No references.
+          character.back.wound.level            No references.
 
-          admin.character                       No references.
+          character.base.color                  ./functions/dna.lab/t
+
+          character.base.color.number           ./functions/dna.lab/t
+
+          character.base.fur.quality            ./functions/dna.lab/t
+
+          character.base.fur.quality.number     ./functions/dna.lab/t
+
+          character.brain.wound.level           No references.
+
+          character.chin.wound.level            No references.
 
           character.data                        ./functions/b
                                                 ./functions/create.character/t
                                                 ./functions/get.character.data/t
 
-          character.base.color                  ./functions/dna.lab/t
-
-          character.secondary.color             ./functions/dna.lab/t
-
-          character.base.fur.quality            ./functions/dna.lab/t
-
-          character.secondary.fur.quality       ./functions/dna.lab/t
-
-          character.strength                    ./functions/dna.lab/t
+          character.data.l                      ./functions/get.character.data/t
 
           character.endurance                   ./functions/dna.lab/t
 
-          character.agility                     ./functions/dna.lab/t
-
-          character.mother.l                    ./functions/create.character/t
-
-          character.mother                      ./functions/create.character/t
-
-          character.father.l                    ./functions/create.character/t
-
           character.father                      ./functions/create/character/t
 
-          character.age                         No references.
+          character.father.agility              ./functions/dna.lab/t
 
-          character.pouch                       ./functions/create.character/t
+          character.father.base.color           ./functions/dna.lab/t
 
-          character.location.id                 No references.
-
-          character.right.ear.wound.level       No references.
-
-          character.left.ear.wound.level        No references.
-
-          character.right.eye.wound.level       No references.
-
-          character.left.eye.wound.level        No references.
-
-          character.scalp.wound.level           No references.
-
-          character.right.cheek.wound.level     No references.
-
-          character.left.cheek.wound.level      No references.
-
-          character.nose.wound.level            No references.
-
-          character.chin.wound.level            No references.
-
-          character.neck.wound.level            No references.
-
-          character.right.shoulder.wound.level  No references.
-
-          character.left.shoulder.wound.level   No references.
-
-          character.right.upper.arm.wound.level No references.
-
-          character.left.upper.arm.wound.level  No references.
-
-          character.right.forearm.wound.level   No references.
-
-          character.left.forearm.wound.level    No references.
-
-          character.right.wrist.wound.level     No references.
-
-          character.left.wrist.wound.level      No references.
-
-          character.right.hand.wound.level      No references,
-
-          character.left.hand.wound.level       No references.
-
-          character.right.index.finger.wound    No references.
-            .level
-
-          character.right.middle.finger.wound   No references.
-            .level
-
-          character.right.ring.finger.wound     No references.
-            .level
-
-          character.right.thumb.wound.level     No references.
-
-          character.left.index.finger.wound     No references.
-            .level
-
-          character.left.middle.finger.wound    No references.
-            .level
-
-          character.left.ring.finger.wound      No references.
-            .level
-
-          character.left.thumb.wound.level      No references.
-
-          character.right.chest.wound.level     No references.
-
-          character.left.chest.wound.level      No references.
-
-          character.back.wound.level            No references.
-
-          character.abdomen.wound.level         No references.
-
-          character.pouch.wound.level           No references.
-
-          character.right.outside.thigh.wound   No references.
-            .level
-
-          character.right.inside.thigh.wound    No references.
-            .level
-
-          character.left.outside.thigh.wound    No references.
-            .level
-
-          character.left.inside.thigh.wound     No references.
-            .level
-
-          character.right.lower.leg.wound.level No references.
-
-          character.left.lower.leg.wound.level  No references.
-
-          character.right.dew.talon.wound.level No references.
-
-          character.right.main.fore.talon.wound No references.
-            .level
-
-          character.right.middle.talon.wound    No references.
-            .level
-
-          character.right.low.talon.wound.level No references.
-
-          character.left.dew.talon.wound.level  No references.
-
-          character.left.main.fore.talon.wound  No references.
-            .level
-
-          character.left.middle.talon.wound     No references.
-            .level
-
-          character.left.low.talon.wound.level  No references.
-
-          character.brain.wound.level           No references.
-
-          character.neck.spinal.wound.level     No references.
-
-          character.back.spinal.wound.level     No references.
-
-          character.heart.wound.level           No references.
-
-          character.right.lung.wound.level      No references.
-
-          character.left.lung.wound.level       No references.
-
-          character.liver.wound.level           No references.
-
-          character.stomach.wound.level         No references.
-
-          character.large.intestine.wound.level No references.
-
-          character.small.intestine.wound.level No references.
-
-          character.ovary.wound.level           No references.
-
-          character.testicle.wound.level        No references.
-
-          character.inseminator.wound.level     No references.
-
-          head.worn.item.id                     No references.
-
-          right.ear.worn.item.id                No references.
-
-          left.ear.worn.item.id                 No references.
-
-          neck.worn.item.id                     No references.
-
-          chest.worn.item.id                    No references.
-
-          back.worn.item.id                     No references.
-
-          abdomen.worn.item.id                  No references.
-
-          right.thigh.worn.item.id              No references.
-
-          left.thigh.worn.item.id               No references.
-
-          right.hand.inventory.id               No references.
-
-          left.hand.inventory.id                No references.
-
-          administrative.byte                   ./functions/check.admin/t
-
-          character.data.l                      ./functions/get.character.data/t
+          character.father.base.fur.quality     ./functions/dna.lab/t
 
           character.father.data                 ./functions/b
                                                 ./functions/dna.lab/t
 
-          character.father.base.color           ./functions/dna.lab/t
+          character.father.dna.l                ./functions/dna.lab/t
+
+          character.father.endurance            ./functions/dna.lab/t
+
+          character.father.l                    ./functions/create.character/t
 
           character.father.secondary.color      ./functions/dna.lab/t
-
-          character.father.base.fur.quality     ./functions/dna.lab/t
 
           character.father.secondary.fur        ./functions/dna.lab/t
             .quality
 
           character.father.strength             ./functions/dna.lab/t
 
-          character.father.endurance            ./functions/dna.lab/t
+          character.heart.wound.level           No references.
 
-          character.father.agility              ./functions/dna.lab/t
+          character.inseminator.wound.level     No references.
 
-          character.father.dna.l                ./functions/dna.lab/t
+          character.large.intestine.wound.level No references.
+
+          character.left.cheek.wound.level      No references.
+
+          character.left.chest.wound.level      No references.
+
+          character.left.dew.talon.wound.level  No references.
+
+          character.left.ear.wound.level        No references.
+
+          character.left.eye.wound.level        No references.
+
+          character.left.forearm.wound.level    No references.
+
+          character.left.hand.wound.level       No references.
+
+          character.left.index.finger.wound     No references.
+            .level
+
+          character.left.inside.thigh.wound     No references.
+            .level
+
+          character.left.lower.leg.wound.level  No references.
+
+          character.left.low.talon.wound.level  No references.
+
+          character.left.lung.wound.level       No references.
+
+          character.left.main.fore.talon.wound  No references.
+            .level
+
+          character.left.middle.finger.wound    No references.
+            .level
+
+          character.left.middle.talon.wound     No references.
+            .level
+
+          character.left.outside.thigh.wound    No references.
+            .level
+
+          character.left.ring.finger.wound      No references.
+            .level
+
+          character.left.shoulder.wound.level   No references.
+
+          character.left.thumb.wound.level      No references.
+
+          character.left.upper.arm.wound.level  No references.
+
+          character.left.wrist.wound.level      No references.
+
+          character.liver.wound.level           No references.
+
+          character.location.id                 No references.
+
+          character.mother                      ./functions/create.character/t
+
+          character.mother.agility              ./functions/dna.lab/t
+
+          character.mother.base.color           ./functions/dna.lab/t
+
+          character.mother.base.fur.quality     ./functions/dna.lab/t
 
           character.mother.data                 ./functions/b
                                                 ./functions/dna.lab/t
 
-          character.mother.base.color           ./functions/dna.lab/t
+          character.mother.dna.l                ./functions/dna.lab/t
+
+          character.mother.endurance            ./functions/dna.lab/t
+
+          character.mother.l                    ./functions/create.character/t
 
           character.mother.secondary.color      ./functions/dna.lab/t
-
-          character.mother.base.fur.quality     ./functions/dna.lab/t
 
           character.mother.secondary.fur        ./functions/dna.lab/t
             .quality
 
           character.mother.strength             ./functions/dna.lab/t
 
-          character.mother.endurance            ./functions/dna.lab/t
+          character.neck.spinal.wound.level     No references.
 
-          character.mother.agility              ./functions/dna.lab/t
+          character.neck.wound.level            No references.
 
-          character.mother.dna.l                ./functions/dna.lab/t
+          character.nose.wound.level            No references.
 
-          character.base.color.number           ./functions/dna.lab/t
+          character.ovary.wound.level           No references.
+
+          character.pouch                       ./functions/create.character/t
+
+          character.pouch.wound.level           No references.
+
+          character.right.cheek.wound.level     No references.
+
+          character.right.chest.wound.level     No references.
+
+          character.right.dew.talon.wound.level No references.
+
+          character.right.ear.wound.level       No references.
+
+          character.right.eye.wound.level       No references.
+
+          character.right.forearm.wound.level   No references.
+
+          character.right.hand.wound.level      No references,
+
+          character.right.index.finger.wound    No references.
+            .level
+
+          character.right.inside.thigh.wound    No references.
+            .level
+
+          character.right.low.talon.wound.level No references.
+
+          character.right.lower.leg.wound.level No references.
+
+          character.right.lung.wound.level      No references.
+
+          character.right.main.fore.talon.wound No references.
+            .level
+
+          character.right.middle.finger.wound   No references.
+            .level
+
+          character.right.middle.talon.wound    No references.
+            .level
+
+          character.right.outside.thigh.wound   No references.
+            .level
+
+          character.right.ring.finger.wound     No references.
+            .level
+
+          character.right.shoulder.wound.level  No references.
+
+          character.right.thumb.wound.level     No references.
+
+          character.right.upper.arm.wound.level No references.
+
+          character.right.wrist.wound.level     No references.
+
+          character.scalp.wound.level           No references.
+
+          character.secondary.color             ./functions/dna.lab/t
 
           character.secondary.color.number      ./functions/dna.lab/t
 
-          character.base.fur.quality.number     ./functions/dna.lab/t
+          character.secondary.fur.quality       ./functions/dna.lab/t
 
           character.secondary.fur.quality       ./functions/dna.lab/t
             .number
+
+          character.small.intestine.wound.level No references.
+
+          character.stomach.wound.level         No references.
+
+          character.strength                    ./functions/dna.lab/t
+
+          character.testicle.wound.level        No references.
+
+          chest.worn.item.id                    No references.
+
+          child.attribute.computation.factor    ./functions/dna.lab/t
+
+          external.data.buffer                  ./functions/clear.screen/t
+                                                ./functions/get.external.data/t
+
+          head.worn.item.id                     No references.
+
+          id.buffer                             No references.
+
+          id.size                               ./functions/create.character/t
+
+          left.ear.worn.item.id                 No references.
+
+          left.hand.inventory.id                No references.
+
+          left.thigh.worn.item.id               No references.
+
+          neck.worn.item.id                     No references.
+
+          new.char.sig                          No references.
+
+          new.char.sig.buffer                   No references.
+
+          new.char.sig.l                        ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+          number.of.parents                     ./functions/dna.lab/t
+
+          right.ear.worn.item.id                No references.
+
+          right.hand.inventory.id               No references.
+
+          right.thigh.worn.item.id              No references.
+
+          socket.filename.entry.l               ./functions/main/system.check.b
+                                                ./functions/socket/clean.socket/t
+
+          sockets.left                          ./functions/main/active.socket.poll/t
+
+          sys.lseek.call                        No references.
+
+          sys.lseek.current.position            No references.
+
+          sys.lseek.eof                         No references.
+
+          sys.no.bytes.read                     No references.
+
+          sys.read.write                        ./functions/create.file/t
+                                                ./functions/open.descriptor/t
+
+          sys.system.call                       ./functions/bail/t
+                                                ./functions/close.descriptor/t
+                                                ./functions/create.file/t
+                                                ./functions/get.ticks/t
+                                                ./functions/memory.switch/t
+                                                ./functions/open.descriptor/t
+                                                ./functions/poll.descriptor/t
+                                                ./functions/read.descriptor/t
+                                                ./functions/socket/accept.socket/t
+                                                ./functions/socket/bind.socket/t
+                                                ./functions/socket/clean.socket/t
+                                                ./functions/socket/create.socket/t
+                                                ./functions/socket/listen.socket/t
+                                                ./functions/socket/recv.from.socket/t
+                                                ./functions/socket/socket.send/t
+                                                ./functions/time.in.seconds.since.the.epoch/t
+                                                ./functions/write.console/t
+                                                ./functions/write.descriptor/t
+
+          sys.write.call                        ./functions/write.console/t
+                                                ./functions/write.descriptor/t
 
 
       d   area.filename                         ./commands/area/t
@@ -783,13 +780,7 @@ Relevant data:
 
           item.filename.l                       No references.
 
-          local.data.carriage.return            ./functions/d
-                                                ./functions/socket/communications/send.to.world/t
-
-          local.data.carriage.return.l          ./functions/socket/communications/send.to.world/t
-
           number.of.commands                    ./commands/help/t
-                                                ./functions/d
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
 
@@ -808,78 +799,78 @@ Relevant data:
       /aggregate.arguments    Contains code that collects arguments from the participant command
                               line and segregates them into a predefined structure.
 
-      b   arguments.packet                      ./functions/aggregate.arguments/b
-
-          arguments.num                         ./commands/help/t
+      b   argument.01.location                  ./commands/broadcast/t
+                                                ./commands/help/t
                                                 ./functions/aggregate.arguments/t
 
           argument.01.size                      ./commands/broadcast/t
                                                 ./functions/aggregate.arguments/b
 
-          argument.01.location                  ./commands/broadcast/t
-                                                ./commands/help/t
-                                                ./functions/aggregate.arguments/t
-
-          argument.entry.size                   ./functions/aggregate.arguments/t
+          argument.02.location                  No references.
 
           argument.02.size                      No references.
 
-          argument.02.location                  No references.
+          argument.03.location                  No references.
 
           argument.03.size                      No references.
 
-          argument.03.location                  No references.
+          argument.04.location                  No references.
 
           argument.04.size                      No references.
 
-          argument.04.location                  No references.
+          argument.05.location                  No references.
 
           argument.05.size                      No references.
 
-          argument.05.location                  No references.
+          argument.06.location                  No references.
 
           argument.06.size                      No references.
 
-          argument.06.location                  No references.
+          argument.07.location                  No references.
 
           argument.07.size                      No references.
 
-          argument.07.location                  No references.
+          argument.08.location                  No references.
 
           argument.08.size                      No references.
 
-          argument.08.location                  No references.
+          argument.09.location                  No references.
 
           argument.09.size                      No references.
-
-          argument.09.location                  No references.
 
           argument.10.size                      No references.
 
           argument.10.location                  No references.
 
+          argument.entry.size                   ./functions/aggregate.arguments/t
+
+          arguments.packet                      ./functions/aggregate.arguments/b
+
           arguments.packet.l                    No references.
+
+          arguments.num                         ./commands/help/t
+                                                ./functions/aggregate.arguments/t
 
 
       t   aggregate.arguments                   ./functions/main/participant.interaction
                                                   /address.active.status/t
 
-          aggregate.arguments.strip.command     ./functions/aggregate.arguments/t
-            .loop
-
           aggregate.arguments.argument.found    ./functions/aggregate.arguments/t
+
+          aggregate.arguments.arguments         ./functions/aggregate.arguments/t
+            .aggregated
 
           aggregate.arguments.loop              ./functions/aggregate.arguments/t
 
           aggregate.arguments.prep.for.next     ./functions/aggregate.arguments/t
             .argument
 
-          aggregate.arguments.arguments         ./functions/aggregate.arguments/t
-            .aggregated
-
           aggregate.arguments.quote.mode        ./functions/aggregate.arguments/t
 
           aggregate.arguments.quote.mode.l      ./functions/aggregate.arguments/t
+
+          aggregate.arguments.strip.command     ./functions/aggregate.arguments/t
+            .loop
 
     ----------------------------------------------------------------------------------------------
 
@@ -1131,9 +1122,6 @@ Relevant data:
           sys.poll.timeout                      ./functions/poll.descriptor/t
 
 
-      d   No defined symbols.
-
-
       t   _start                                No references.
 
           main.loop                             ./functions/main/t
@@ -1312,8 +1300,7 @@ Relevant data:
                                                 ./functions/print.socket.number/t
                                                 ./functions/socket/communications/send.to.player/t
 
-            connection.status.index             
-                                                ./functions/main/active.socket.poll/t
+            connection.status.index             ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t
@@ -1340,7 +1327,7 @@ Relevant data:
             socket.numbers.l                    ./functions/main/system.check/t
 
 
-        t   system.check                        ./functions/main/system.check/t
+        t   system.check                        ./functions/main/t
 
             system.check.populate.connection    ./functions/main/system.check/t
               .numbers.0010
@@ -1577,9 +1564,6 @@ Relevant data:
                               the sign of eax.
 
       b   sys.open.call                         ./functions/open.descriptor/t
-
-          sys.read.write                        ./functions/create.file/t
-                                                ./functions/open.descriptor/t
 
 
       d   No defined symbols.

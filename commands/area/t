@@ -21,6 +21,8 @@
 ;
 ;   area.filename                                       ./functions/d
 ;
+;   area.filename.l                                     ./functions/d
+;
 ;   area.name                                           ./commands/area/b
 ;
 ;   area.name.field.l                                   ./commands/area/b

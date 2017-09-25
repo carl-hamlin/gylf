@@ -42,8 +42,6 @@
 ;
 ;   connection.area.id.index                                  ./functions/main/system.check/b
 ;
-;   connection.descriptor.index                               ./functions/main/system.check/b
-;
 ;   dword.l                                                   ./b
 ;
 ;   open.descriptor                                           ./functions/open.descriptor/t
