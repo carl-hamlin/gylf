@@ -1,0 +1,329 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/area/t
+;
+;   This function creates an area. Syntax: area <name> <quoted description>
+;
+;   Assumptions:      eax - Length of received data.
+;                     esi - Pointer to descriptor associated with target socket.
+;
+;   Returns:          None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   area.description                                    ./commands/area/b
+;
+;   area.description.field.l                            ./commands/area/b
+;
+;   area.description.l                                  ./commands/area/b
+;
+;   area.filename                                       ./functions/d
+;
+;   area.name                                           ./commands/area/b
+;
+;   area.name.field.l                                   ./commands/area/b
+;
+;   area.name.l                                         ./commands/area/b
+;
+;   area.num.contained.items                            ./commands/area/b
+;
+;   available.areas                                     ./commands/area/b
+;
+;   buffer.1                                            ./functions/b
+;
+;   check.admin                                         ./functions/main/check.admin/t
+;
+;   close.descriptor                                    ./functions/close.descriptor/t
+;
+;   command.area.admin                                  ./commands/area/t
+;
+;   command.area.bad                                    ./commands/area/t
+;
+;   command.area.description.l                          ./commands/area/t
+;
+;   command.area.filename.finder                        ./commands/area/t
+;
+;   command.area.filename.loop                          ./commands/area/t
+;
+;   command.area.filename.out.of.areas                  ./commands/area/t
+;
+;   command.area.find.first.argument                    ./commands/area/t
+;
+;   command.area.find.second.argument                   ./commands/area/t
+;
+;   command.area.l                                      ./commands/area/d
+;
+;   command.area.loop.1                                 ./commands/area/t
+;
+;   command.area.loop.2                                 ./commands/area/t
+;
+;   command.area.name.l                                 ./commands/area/t
+;
+;   command.area.next.file                              ./commands/area/t
+;
+;   command.area.prep.next                              ./commands/area/t
+;
+;   command.area.start                                  ./commands/area/t
+;
+;   create.file                                         ./functions/create.file/t
+;
+;   dword.l                                             ./b
+;
+;   open.descriptor                                     ./functions/open.descriptor/t
+;
+;   socket.send                                         ./functions/socket/socket.send/t
+;
+;   sys.standard.output                                 ./b
+;
+;   text.data.index.local.data.area.bad.syntax.message  ./functions/main/text.init/b
+;
+;   text.data.index.local.data.carriage.return.message  ./functions/main/text.init/b
+;
+;   text.data.index.local.data.area.created.message     ./functions/main/text.init/b
+;
+;   text.data.index.local.data.out.of.areas.message     ./functions/main/text.init/b
+;
+;   text.data.index.socket.data.area.created.message    ./functions/main/text.init/b
+;
+;   text.data.index.socket.data.command.area.help       ./functions/main/text.init/b
+;
+;   text.data.index.socket.data.out.of.areas.message    ./functions/main/text,init/b
+;
+;   word.l                                              ./b
+;
+;   write.console                                       ./functions/write.console/t
+;
+;   write.descriptor                                    ./functions/write.descriptor/t
+;
+;   write.bad.command.error                             ./functions/write.bad.command.error/t
+;
+
+    command.area:                       push  esi                                                                       ; Preserve index to connection entry.
+                                        push  eax                                                                       ; Preserve length of received data.
+
+                                        call  check.admin                                                               ; See if the calling socket is controlled by an admin.
+                                        jc    command.area.admin                                                        ; If so, go create the area. Otherwise...
+
+                                        pop   eax                                                                       ; Restore length of received data.
+                                        pop   esi                                                                       ; Restore index to connection entry.
+
+                                        call  write.bad.command.error                                                   ; Tell the user no.
+
+                                        ret                                                                             ; Return to caller.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.bad:                   pop  esi                                                                        ; Restore index to connection entry.
+
+                                        push  dword [text.data.index.local.data.area.bad.syntax.message]                ; Point write.console to local message indicating an admin bounced on syntax.
+                                        call write.console                                                              ; Tell the admin there's someone online with admin priviledges that needs an education.
+
+                                        push  dword [text.data.index.socket.data.command.area.help]                     ; Point send function to message indicating that the command was bad.
+                                        call socket.send                                                                ; Tell the user that the command doesn't have a current analogue.
+
+                                        ret                                                                             ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.admin:                 pop  eax                                                                        ; Restore length of received data.
+
+                                        mov  esi, buffer.1                                                              ; ecx - Pointer to received command string.
+                                        add  esi, command.area.l                                                        ; ecx - Potential pointer to argument for command.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.find.first.argument:   cmp  byte [esi], 020h                                                           ; Did the user put a space between the command and the first argument?
+                                        jnz  command.area.start                                                         ; Nope. Let's get started. Otherwise...
+
+                                        cmp  byte [esi], 00h                                                            ; Have we hit the end of the command string?
+                                        jz   command.area.bad                                                           ; Yes. Go give the user a lesson on syntax.
+
+                                        inc  esi                                                                        ; esi - Potential pointer to argument for command.
+
+                                        jmp  command.area.find.first.argument                                           ; Go see if we've hit the argument yet.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.start:                 mov  edi, area.name                                                             ; edi - Pointer to placeholder for area name.
+                                        sub  edx, edx                                                                   ; edx - Prepared to count bytes.
+                                        mov  ecx, area.name.field.l                                                     ; ecx - Size of area name field. Used as loop counter.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.loop.1:                cmp  byte [esi], "|"                                                            ; Have we hit the argument demarcator?
+                                        jz   command.area.name.l                                                        ; Yes. Go process the name and go on to the second argument.
+
+                                        cmp  byte [esi], 00h                                                            ; Have we hit the end of the command string?
+                                        jz   command.area.bad                                                           ; Yes. Go give the user a lesson on syntax.
+
+                                        movsb                                                                           ; Move a byte of the first argument over to the name field in the area header.
+                                        inc  edx                                                                        ; edx - Count of how many bytes we've moved so far.
+
+                                        loop command.area.loop.1                                                        ; Go move the rest of the first argument.
+
+                                        jmp  command.area.bad                                                           ; Looks like the argument is longer than the field to which it is to be stored. Go educate the user on the fine points of syntax.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.name.l:                mov  dword [area.name.l], edx                                                   ; Store the length of the first argument.
+                                        sub  edx, edx                                                                   ; edx - Prepared to count bytes again...
+
+                                        inc  esi                                                                        ; esi - Potential pointer to second argument.
+                                        mov  edi, area.description                                                      ; edi - Pointer to storage for area description.
+
+                                        mov  ecx, area.description.field.l                                              ; ecx - Size of description field. Used as loop counter.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.find.second.argument:  cmp  byte [esi], 020h                                                           ; Did the user put a space between the command and the first argument?
+                                        jnz  command.area.loop.2                                                        ; Nope. Let's get started. Otherwise...
+
+                                        cmp  byte [esi], 00h                                                            ; Have we hit the end of the command string?
+                                        jz   command.area.bad                                                           ; Yes. Go give the user a lesson on syntax.
+
+                                        inc  esi                                                                        ; esi - Potential pointer to argument for command.
+
+                                        jmp  command.area.find.second.argument                                          ; Go see if we've hit the argument yet.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.loop.2:                cmp  byte [esi], 00h                                                            ; Have we hit the end of the command string?
+                                        jz   command.area.description.l                                                 ; Yes. Go process the description and get started finding a filename to which to store this data.
+
+                                        movsb                                                                           ; Move a byte of the first argument over to the description field in the area header.
+                                        inc  edx                                                                        ; edx - Count of how many bytes we've moved so far.
+
+                                        loop command.area.loop.2                                                        ; Go move the rest of the second argument.
+
+                                        jmp  command.area.bad                                                           ; Looks like the argument is longer than the field to which it is to be stored. Go educate the user on the finer points of syntax.
+
+                                        ; *** Potentially unreachable code. Review when appropriate. ***
+
+                                        mov  ecx, available.areas                                                       ; ecx - Number of areas available. Used as loop counter.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.description.l:         mov  dword [area.description.l], edx                                            ; Store the length of the area description.
+
+                                        pop  esi                                                                        ; Restore index to connection entry.
+
+    command.area.filename.loop:         push area.filename                                                              ; Point open.descriptor to filename entry for area filenames.
+                                        call open.descriptor                                                            ; Try the current filename.
+
+                                        or   eax, eax                                                                   ; If eax is signed, the file doesn't exist, which means we've found a candidate.
+                                        jns  command.area.next.file                                                     ; No candidate this time. Go check the next file.
+
+                                        push  ebx                                                                       ; Point create.file to the filename to be created.
+                                        call create.file                                                                ; Create the candidate file.
+
+                                        mov  ebx, eax                                                                   ; ebx - Descriptor associated with candidate file.
+
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  area.name.l                                                               ; Pointer to area name length.
+                                        push  dword.l                                                                   ; Length of area name length.
+                                        call write.descriptor                                                           ; Store the area header in the candidate file.
+
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  area.name                                                                 ; Pointer to area name.
+                                        push  dword [area.name.l]                                                       ; Length of area name.
+                                        call write.descriptor                                                           ; Store the area name in the candidate file.
+
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  area.description.l                                                        ; Pointer to area description length.
+                                        push  dword.l                                                                   ; Length of area description length.
+                                        call write.descriptor                                                           ; Store the area description length in the candidate file.
+
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  area.description                                                          ; Pointer to area description.
+                                        push  dword [area.description.l]                                                ; Length of area description.
+                                        call write.descriptor                                                           ; Store the area description in the candidate file.
+
+                                        push eax                                                                        ; Preserve descriptor associated with the candidate file.
+                                        sub  eax, eax                                                                   ; eax - number of items in new area.
+                                        mov  dword [area.num.contained.items], eax                                      ; Set number of items in new area.
+                                        pop  eax                                                                        ; Restore descriptor associated with the candidate file.
+
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  area.num.contained.items                                                  ; Pointer to number of items contained within the new area.
+                                        push  dword.l                                                                   ; Length of number of items contained within the new area.
+                                        call write.descriptor                                                           ; Store the number of items in the candidate file.
+
+                                        call close.descriptor                                                           ; Disassociate the descriptor.
+
+                                        push  dword [text.data.index.local.data.area.created.message]                   ; Point write.console to message indicating the creation of an area.
+                                        call write.console                                                              ; Tell the admin a new area has been created.
+
+
+                                        push  sys.standard.output                                                       ; Write to console.
+                                        push  area.name                                                                 ; Pointer to stored area name.
+                                        push  dword [area.name.l]                                                       ; Length of stored area name.
+                                        call write.descriptor                                                           ; Show the area name to the admin.
+
+                                        push  dword [text.data.index.local.data.carriage.return.message]                ; Pointer to carriage return.
+                                        call write.console                                                              ; Send a carriage return to the local console.
+
+                                        push  sys.standard.output                                                       ; Write to console.
+                                        push  area.description                                                          ; Pointer to area description.
+                                        push  dword [area.description.l]                                                ; Length of area description.
+                                        call write.descriptor                                                           ; Show the area description to the admin.
+
+                                        push  dword [text.data.index.local.data.carriage.return.message]                ; Pointer to carriage return.
+                                        call write.console                                                              ; Send a carriage return to the local console.
+
+                                        push  dword [text.data.index.socket.data.area.created.message]                  ; Point socket.send to area creation success message.
+                                        call socket.send                                                                ; Send the success message to the socket.
+
+                                        call write.prompt                                                               ; Restore the user's prompt.
+
+                                        ret                                                                             ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.next.file:             mov  ebx, eax                                                                   ; ebx - Descriptor associated with an unusable area file.
+                                        call close.descriptor                                                           ; Disassociate the descriptor.
+
+                                        sub  eax, eax                                                                   ; eax - Prepared for counting places...
+                                        mov  ebx, area.filename                                                         ; ebx - Pointer to current area filename.
+                                        add  ebx, area.filename.l                                                       ; ebx - Pointer to byte immediately following area filename.
+                                        sub  ebx, word.l                                                                ; ebx - Pointer to least significant place in area filename.
+
+                                        cmp  byte [ebx], "9"                                                            ; Is the byte at [ebx] a "9"?
+                                        jz   command.area.filename.finder                                               ; Yes. Go zero it out and address the next place up.
+
+                                        jmp  command.area.prep.next                                                     ; Increment the byte at [ebx], restore ebx to the last place, and check the resulting filename.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.filename.finder:       cmp  eax, 08h                                                                   ; Have we run out of areas?
+                                        jz   command.area.filename.out.of.areas                                         ; Yes. Go take care of that.
+
+                                        mov  byte [ebx], "0"                                                            ; Zero out the byte at [ebx].
+                                        dec  ebx                                                                        ; ebx - Pointer to next place up.
+                                        inc  eax                                                                        ; eax - Count of places.
+
+                                        cmp  byte [ebx], "9"                                                            ; Is the byte at [ebx] a "9"?
+                                        jz   command.area.filename.finder                                               ; Yes. Go zero it out and address the next place up.
+
+                                        jmp  command.area.prep.next                                                     ; Increment the byte at [ebx], restore ebx to the last place, and check the resulting filename.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.filename.out.of.areas: push  dword [text.data.index.local.data.area.out.of.areas.message]              ; Pointer to message indicating we're out of area files.
+                                        call write.console                                                              ; Tell the admin we're out of area files.
+
+                                        push  dword [text.data.index.socket.data.out.of.areas.message]                  ; Point socket.send to out of areas message.
+                                        call socket.send                                                                ; Send the out of areas message to the socket.
+
+                                        call write.prompt                                                               ; Restore the user's prompt.
+
+                                        ret                                                                             ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.prep.next:             inc  byte [ebx]                                                                 ; Increment the byte at [ebx].
+                                        add  ebx, eax                                                                   ; Restore ebx to the last place in the filename.
+                                        dec  ecx                                                                        ; ecx - Number of filenames left to try.
+                                        jcxz command.area.filename.out.of.areas                                         ; Go tell the admin that we're out of area files.
+
+                                        jmp  command.area.filename.loop                                                 ; Go check the next file.
