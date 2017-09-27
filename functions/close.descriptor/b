@@ -1,0 +1,8 @@
+;====================================================================================================================================================================================================
+;
+;   ./functions/close.descriptor/b
+;
+;   This file contains all definitions pertinent to the close.descriptor function.
+;
+
+    %define sys.close.call  006h  ; 006h is the modifier for 080h that tells the kernel we're done with a descriptor and wish to dispose of it.
