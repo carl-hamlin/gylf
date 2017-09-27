@@ -1,0 +1,57 @@
+;=================================================================================================================================================================================================
+;
+;   lowercase
+;
+;   This file contains data definitions for certain elements of the IBM extended ASCII character set. Its future is uncertain.
+;
+
+char.a                              db  "a" ; Lowercase a
+char.latin.small.a.with.circumflex  db  "â" ; latin small letter a with circumflex
+char.latin.small.a.with.diaresis    db  "ä" ; latin small letter a with diaeresis
+char.latin.small.a.with.grave       db  "à" ; latin small letter a with grave
+char.latin.small.a.with.ring        db  "å" ; latin small letter a with ring above
+char.latin.small.a.with.acute       db  "á" ; latin small letter a with acute
+char.b                              db  "b" ; Lowercase b
+char.c                              db  "c" ; Lowercase c
+char.latin.small.c.with.cedilla     db  "ç" ; latin small letter c with cedilla
+char.d                              db  "d" ; Lowercase d
+char.e                              db  "e" ; Lowercase e
+char.latin.small.e.with.acute       db  "é" ; latin small letter e with acute
+char.latin.small.e.with.circumflex  db  "ê" ; latin small letter e with circumflex
+char.latin.small.e.with.diaresis    db  "ë" ; latin small letter e with diaeresis
+char.latin.small.e.with.grave       db  "è" ; latin small letter e with grave
+char.f                              db  "f" ; Lowercase f
+char.g                              db  "g" ; Lowercase g
+char.h                              db  "h" ; Lowercase h
+char.i                              db  "i" ; Lowercase i
+char.latin.small.i.with.diaresis    db  "ï" ; latin small letter i with diaeresis
+char.latin.small.i.with.circumflex  db  "î" ; latin small letter i with circumflex
+char.latin.small.i.with.grave       db  "ì" ; latin small letter i with grave
+char.latin.small.i.with.acute       db  "í" ; latin small letter i with acute
+char.j                              db  "j" ; Lowercase j
+char.k                              db  "k" ; Lowercase k
+char.l                              db  "l" ; Lowercase l
+char.m                              db  "m" ; Lowercase m
+char.n                              db  "n" ; Lowercase n
+char.latin.small.n.with.tilde       db  "ñ" ; latin small letter n with tilde
+char.o                              db  "o" ; Lowercase o
+char.latin.small.o.with.circumflex  db  "ô" ; latin small letter o with circumflex
+char.latin.small.o.with.diaresis    db  "ö" ; latin small letter o with diaeresis
+char.latin.small.o.with.grave       db  "ò" ; latin small letter o with grave
+char.latin.small.o.with.acute       db  "ó" ; latin small letter o with acute
+char.p                              db  "p" ; Lowercase p
+char.q                              db  "q" ; Lowercase q
+char.r                              db  "r" ; Lowercase r
+char.s                              db  "s" ; Lowercase s
+char.t                              db  "t" ; Lowercase t
+char.u                              db  "u" ; Lowercase u
+char.latin.small.u.with.diaresis    db  "ü" ; latin small letter u with diaeresis
+char.latin.small.u.with.circumflex  db  "û" ; latin small letter u with circumflex
+char.latin.small.u.with.grave       db  "ù" ; latin small letter u with grave
+char.latin.small.u.with.acute       db  "ú" ; latin small letter u with acute
+char.v                              db  "v" ; Lowercase v
+char.w                              db  "w" ; Lowercase w
+char.x                              db  "x" ; Lowercase x
+char.y                              db  "y" ; Lowercase y
+char.latin.small.y.with.diaresis    db  "ÿ" ; latin small letter y with diaeresis
+char.z                              db  "z" ; Lowercase z
