@@ -1,6 +1,6 @@
-;==========================================================================================================================================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   address.active.status
+;   ./functions/main/participant.interaction/address.active.status/t
 ;
 ;   This function performs further processing on data submitted by a socket with status 'active'.
 ;
@@ -8,6 +8,30 @@
 ;                   esi = Pointer to descriptor associated with target socket.
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   address.active.status.found.command       ./functions/main/participant.interaction/address.active.status/t
+;
+;   address.active.status.next.command        ./functions/main/participant.interaction/address.active.status/t
+;
+;   address.active.status.next.command.jcxnz  ./functions/main/participant.interaction/address.active.status/t
+;
+;   address.active.status.read.command.table  ./functions/main/participant.interaction/address.active.status/t
+;
+;   aggregate.arguments                       ./functions/aggregate.arguments/t
+;
+;   command.table                             ./functions/d
+;
+;   dword.l                                   ./b
+;
+;   number.of.commands                        ./functions/d
+;
+;   recv.from.socket                          ./functions/socket/recv.from.socket/t
+;
+;   write.bad.command.error                   ./functions/write.bad.command.error/t
 ;
 
     address.active.status:                    call  recv.from.socket                          ; Get the data from the socket.
@@ -31,11 +55,14 @@
                                               inc   esi                                       ; esi - Pointer to string data corresponding to command currently being referenced in the table.
 
                                               cmp   cl, al                                    ; Is the length of the received data at least the same as the command in the table?
-                                              ja    address.active.status.next.command        ; No. It's not necessary to perform any further comparison; the received data cannot possibly refer to the command currently being read from the table. Move on to the next table entry.
+                                              ja    address.active.status.next.command        ; No. It's not necessary to perform any further comparison; the received data cannot possibly refer
+                                                                                              ; to the command currently being read from the table. Move on to the next table entry.
 
-                                              repz  cmpsb                                     ; Check to see if the received data is the same as the string data corresponding to the command currently being referenced in the table.
+                                              repz  cmpsb                                     ; Check to see if the received data is the same as the string data corresponding to the command
+                                                                                              ; currently being referenced in the table.
                                               jnz   address.active.status.next.command.jcxnz  ; Otherwise, go set up for the next iteration.
-                                              jcxz  address.active.status.found.command       ; Did we get all the way through the string before cmpsb cut us loose? If so, go set up the handler and jump to it.
+                                              jcxz  address.active.status.found.command       ; Did we get all the way through the string before cmpsb cut us loose? If so, go set up the handler
+                                                                                              ; and jump to it.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
