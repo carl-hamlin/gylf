@@ -18,143 +18,142 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   area.header                                 ./commands/area/b
+;   area.header                                               ./commands/area/b
 ;
-;   area.header.l                               ./commands/area/b
+;   area.header.l                                             ./commands/area/b
 ;
-;   area.num.contained.items                    ./commands/area/b
+;   area.num.contained.items                                  ./commands/area/b
 ;
-;   buffer.1                                    ./functions/b
+;   buffer.1                                                  ./functions/b
 ;
-;   close.descriptor                            ./functions/close.descriptor/t
+;   close.descriptor                                          ./functions/close.descriptor/t
 ;
-;   command.look.bad.descriptor                 ./commands/look/t
+;   command.look.bad.descriptor                               ./commands/look/t
 ;
-;   command.look.default                        ./commands/look/t
+;   command.look.default                                      ./commands/look/t
 ;
-;   command.look.default.good.descriptor        ./commands/look/t
+;   command.look.default.good.descriptor                      ./commands/look/t
 ;
-;   command.look.l                              ./commands/look/d
+;   command.look.l                                            ./commands/look/d
 ;
-;   command.look.targetted.find.target          ./commands/look/t
+;   command.look.targetted.find.target                        ./commands/look/t
 ;
-;   command.look.targetted.good.descriptor      ./commands/look/t
+;   command.look.targetted.good.descriptor                    ./commands/look/t
 ;
-;   connection.area.id.index                    ./functions/main/system.check/b
+;   connection.area.id.index                                  ./functions/main/system.check/b
 ;
-;   connection.descriptor.index                 ./functions/main/system.check/b
+;   connection.descriptor.index                               ./functions/main/system.check/b
 ;
-;   dword.l                                     ./b
+;   dword.l                                                   ./b
 ;
-;   local.data.bad.area.id.indicator.message    ./commands/look/d
+;   open.descriptor                                           ./functions/open.descriptor/t
 ;
-;   local.data.bad.area.id.indicator.message.l  ./commands/look/d
+;   read.descriptor                                           ./functions/read.descriptor/t
 ;
-;   open.descriptor                             ./functions/open.descriptor/t
+;   socket.send                                               ./functions/socket/socket.send/t
 ;
-;   read.descriptor                             ./functions/read.descriptor/t
+;   text.data.index.local.data.bad.area.id.indicator.message  ./functions/main/text.init/b
 ;
-;   socket.data.bad.area.id.message             ./commands/area/d
+;   text.data.index.socket.data.bad.area.id.message           ./functions/main/text.init/b
 ;
-;   socket.data.bad.area.id.message.l           ./commands/area/d
+;   write.console                                             ./functions/write.console/t
 ;
-;   socket.send                                 ./functions/socket/socket.send/t
-;
-;   write.descriptor                            ./functions/write.descriptor/t
-;
-;   write.prompt                                ./functions/write.prompt/t
+;   write.prompt                                              ./functions/write.prompt/t
 ;
 
 
-    command.look:                           cmp  eax, command.look.l                              ; Has the user invoked the command with no arguments?
-                                            jz   command.look.default                             ; Yes. Go execute default behaviour.
+    command.look:                           cmp  eax, command.look.l                                                ; Has the user invoked the command with no arguments?
+                                            jz   command.look.default                                               ; Yes. Go execute default behaviour.
 
                                             ; Here's where the targetted code goes.
 
-                                            mov  ebx, esi                                         ; ebx - Pointer to descriptor associated with target socket.
-                                            add  ebx, connection.area.id.index                    ; ebx - Pointer to area id associated with active connection.
+                                            mov  ebx, esi                                                           ; ebx - Pointer to descriptor associated with target socket.
+                                            add  ebx, connection.area.id.index                                      ; ebx - Pointer to area id associated with active connection.
 
-                                            call open.descriptor                                  ; Associate a descriptor with the area id.
+                                            push  ebx                                                               ; Point open.descriptor to the area id assocaited with the active connection.
+                                            call open.descriptor                                                    ; Associate a descriptor with the area id.
 
-                                            or   eax, eax                                         ; Did the descriptor associate properly?
-                                            jz   command.look.targetted.good.descriptor           ; Yes. Go have a look at contained objects.
+                                            or   eax, eax                                                           ; Did the descriptor associate properly?
+                                            jz   command.look.targetted.good.descriptor                             ; Yes. Go have a look at contained objects.
 
-                                            jmp  command.look.bad.descriptor                      ; No. Go inform the user that the descriptor is invalid.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    command.look.targetted.good.descriptor: mov  ebx, eax                                         ; Descriptor associated with area id.
-                                            mov  ecx, area.header                                 ; ecx - Pointer to storage for area header.
-                                            mov  edx, area.header.l                               ; edx - Length of area header.
-
-                                            call read.descriptor                                  ; Read area header from descriptor associated with area id.
-
-                                            mov  ecx, dword [area.num.contained.items]            ; ecx - number of items to check targetting argument against.
+                                            jmp  command.look.bad.descriptor                                        ; No. Go inform the user that the descriptor is invalid.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.look.targetted.find.target:     push ecx                                              ; Preserve number of items.
+    command.look.targetted.good.descriptor: push  area.header.l                                                     ; Tell read.descriptor the length of the area header.
+                                            push  area.header                                                       ; Point read.descriptor to storage for area header.
+                                            push  eax                                                               ; Point read.descriptor to descriptor associated with area id.
+                                            call  read.descriptor                                                   ; Read area header from descriptor associated with area id.
 
-                                            mov  ecx, buffer.1                                    ; ecx - Pointer to buffer into which to read item id.
-                                            mov  edx, dword.l                                     ; edx - Length of item id.
-
-                                            call read.descriptor                                  ; Read an item id.
-
-                                            pop  ecx                                              ; Restore number of items.
-
-                                            loop command.look.targetted.find.target               ; Go check the next item.
-
-                                            ret                                                   ; Return to caller.
+                                            mov  ecx, dword [area.num.contained.items]                              ; ecx - number of items to check targetting argument against.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.look.default:                   mov  ebx, esi                                         ; ebx - Index to connection table entry.
-                                            add  ebx, connection.area.id.index                    ; ebx - Pointer to area id associated with active connection.
+    command.look.targetted.find.target:     push ecx                                                                ; Preserve number of items.
 
-                                            call open.descriptor                                  ; Associate a descriptor with the file containing current area info.
+                                            push  dword.l                                                           ; Tell read.descriptor the length of item id.
+                                            push  buffer.1                                                          ; Point read.descriptor to buffer into which to read item id.
+                                            push  ebx                                                               ; Point read.descriptor to descriptor associated with area id.
+                                            call  read.descriptor                                                   ; Read an item id.
 
-                                            or   eax, eax                                         ; Were we able to properly associate a descriptor?
-                                            jz   command.look.default.good.descriptor             ; Yes. Go execute default behaviour.
+                                            pop  ecx                                                                ; Restore number of items.
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                            loop command.look.targetted.find.target                                 ; Go check the next item.
 
-    command.look.bad.descriptor:            mov   ecx, local.data.bad.area.id.indicator.message   ; No. ecx - pointer to message indicating the local area id is bad.
-                                            mov   edx, local.data.bad.area.id.indicator.message.l ; edx - Length of message.
-                                            call  write.descriptor                                ; Tell the admin that the local area id got screwed up somehow.
-
-                                            push  socket.data.bad.area.id.message.l               ; Tell socket.send the length of the message.
-                                            push  socket.data.bad.area.id.message                 ; Point socket.send to the remote bad area id message.
-                                            call  socket.send                                     ; Put the message on the socket.
-
-                                            call  write.prompt                                    ; Restore the user's prompt.
-
-                                            ret                                                   ; Return to caller.
+                                            ret                                                                     ; Return to caller.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.look.default.good.descriptor:   mov   ebx, eax                                        ; ebx - Descriptor associated with area file.
-                                            mov   ecx, buffer.1                                   ; ecx - Pointer to buffer into which to read the length of the area name entry.
-                                            mov   edx, dword.l                                    ; edx - Dword length.
-                                            call  read.descriptor                                 ; Read the length of the name entry.
+    command.look.default:                   mov   ebx, esi                                                          ; ebx - Index to connection table entry.
+                                            add   ebx, connection.area.id.index                                     ; ebx - Pointer to area id associated with active connection.
 
-                                            mov   ecx, buffer.1                                   ; ecx - Pointer to buffer into which to read the name entry.
-                                            mov   edx, dword [buffer.1]                           ; edx - Length of the name entry.
-                                            call  read.descriptor                                 ; Read the name entry.
+                                            push  ebx                                                               ; Point open.descriptor to the file containing the current area info.
+                                            call  open.descriptor                                                   ; Associate a descriptor with the file containing current area info.
 
-                                            mov   ecx, buffer.1                                   ; ecx - Pointer to buffer into which to read the length of the description entry.
-                                            mov   edx, dword.l                                    ; edx - Dword length.
-                                            call  read.descriptor                                 ; Read the length of the description entry.
+                                            or    eax, eax                                                          ; Were we able to properly associate a descriptor?
+                                            jz    command.look.default.good.descriptor                              ; Yes. Go execute default behaviour.
 
-                                            mov   ecx, buffer.1                                   ; ecx - Pointer to buffer into which to read the description entry.
-                                            mov   edx, dword [buffer.1]                           ; edx - Length of the description entry.
-                                            call  read.descriptor                                 ; Read the description entry.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-                                            call  close.descriptor                                ; Disassociate the descriptor currently associated with the current area file.
+    command.look.bad.descriptor:            push  dword [text.data.index.local.data.bad.area.id.indicator.message]  ; Point write.console to message indicating the local area id is bad.
+                                            call  write.console                                                     ; Tell the admin that the local area id got screwed up somehow.
 
-                                            push  eax                                             ; Tell socket.send the length of the message.
-                                            push  buffer.1                                        ; Point socket.send to the description entry.
-                                            call  socket.send                                     ; Put the message on the socket.
+                                            push  dword [text.data.index.socket.data.bad.area.id.message]           ; Point socket.send to the remote bad area id message.
+                                            call  socket.send                                                       ; Put the message on the socket.
 
-                                            call  write.prompt                                    ; Restore the user's prompt.
+                                            call  write.prompt                                                      ; Restore the user's prompt.
 
-                                            ret                                                   ; Return to caller.
+                                            ret                                                                     ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.look.default.good.descriptor:   push  dword.l                                                           ; Tell read.descriptor the length of the message.
+                                            push  buffer.1                                                          ; Point read.descriptor to buffer into which to read the length of the area name entry.
+                                            push  eax                                                               ; Point read.descriptor to descriptor associated with area file.
+                                            call  read.descriptor                                                   ; Read the length of the name entry.
+
+                                            push  dword [buffer.1]                                                  ; Tell read.descriptor the length of the name entry.
+                                            push  buffer.1                                                          ; Point read.descriptor to buffer into which to read the name entry.
+                                            push  ebx                                                               ; Point read.descriptor to descriptor associated with the area file.
+                                            call  read.descriptor                                                   ; Read the name entry.
+
+                                            push  dword.l                                                           ; Tell read.descriptor the length of the message.
+                                            push  buffer.1                                                          ; Point read.descriptor to buffer into which to read the length of the description entry.
+                                            push  ebx                                                               ; Point read.descriptor to descriptor associated with the area file.
+                                            call  read.descriptor                                                   ; Read the length of the description entry.
+
+                                            push  dword [buffer.1]                                                  ; Tell read.descriptor the length of the description entry.
+                                            push  buffer.1                                                          ; Point read.descriptor to buffer into which to read the description entry.
+                                            push  ebx                                                               ; Point read.descriptor to descriptor associated with the area file.
+                                            call  read.descriptor                                                   ; Read the description entry.
+
+                                            call  close.descriptor                                                  ; Disassociate the descriptor currently associated with the current area
+                                                                                                                    ; file.
+
+                                            push  eax                                                               ; Tell socket.send the length of the message.
+                                            push  buffer.1                                                          ; Point socket.send to the description entry.
+                                            call  socket.send.buf                                                   ; Put the message on the socket.
+
+                                            call  write.prompt                                                      ; Restore the user's prompt.
+
+                                            ret                                                                     ; Return to caller.
