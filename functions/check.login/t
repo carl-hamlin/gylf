@@ -1,6 +1,6 @@
 ;================================================================================================================================================================================================
 ;
-;   check.login
+;   ./functions/check.login/t
 ;
 ;   This function checks to see if a participant attempting to log in is already logged in.
 ;
@@ -8,6 +8,28 @@
 ;                   ebx - Pointer to received participant data file name.
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   buffer.1                    ./functions/b
+;
+;   buffer.2                    ./functions/b
+;
+;   check.login.logged          ./functions/check.login/t
+;
+;   close.descriptor            ./functions/close.descriptor/t
+;
+;   current.directory.marker    ./functions/d
+;
+;   current.directory.marker.l  ./functions/d
+;
+;   lock.extension              ./functions/create.lock.file/d
+;
+;   lock.extension.l            ./functions/create.lock.file/d
+;
+;   open.descriptor             ./functions/open.descriptor/t
 ;
 
     check.login:        pusha                                 ; Preserve all caller registers.
@@ -38,7 +60,8 @@
                         mov   ebx, buffer.1                   ; ebx - Pointer to lock file name.
                         call  open.descriptor                 ; Attempt to associate a descriptor with the file name. If the file exists and is associable, then the participant is logged in.
 
-                        or    eax, eax                        ; Check to see if eax contains an error code. If it does, we weren't able to associate a descriptor with the lock file, indicating that the corresponding character is not logged in.
+                        or    eax, eax                        ; Check to see if eax contains an error code. If it does, we weren't able to associate a descriptor with the lock file, indicating
+                                                              ; that the corresponding character is not logged in.
                         jns   check.login.logged              ; If it doesn't, however, the lock file exists, and we need to bounce this connection.
 
                         pop   edi                             ; Restore pointer to end of received character data file name.

@@ -1,23 +1,64 @@
 ;================================================================================================================================================================================================
 ;
-;   command.look
+;   ./commands/look/t
 ;
 ;   This function displays information about the target.
 ;
 ;   Syntax:
-;   look
+;   look (target)
 ;
-;       Displays information about the current area.
-;
-;   look <target>
-;
-;       Displays information about the target.
+;       Displays information either about the general area occupied by the performing entity, or about the target entity.
 ;
 ;   Assumptions:     eax - Length of received data.
 ;                    esi - Pointer to descriptor associated with target socket.
 ;
 ;   Returns:         None.
 ;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   dword.l                                     ./b
+;
+;   area.header                                 ./commands/area/b
+;   area.header.l                               ./commands/area/b
+;   area.num.contained.items                    ./commands/area/b
+;
+;   socket.data.bad.area.id.message             ./commands/area/d
+;   socket.data.bad.area.id.message.l           ./commands/area/d
+;
+;   command.look.l                              ./commands/look/d
+;   local.data.bad.area.id.indicator.message    ./commands/look/d
+;   local.data.bad.area.id.indicator.message.l  ./commands/look/d
+;
+;   command.look.bad.descriptor                 ./commands/look/t
+;   command.look.default                        ./commands/look/t
+;   command.look.default.good.descriptor        ./commands/look/t
+;   command.look.targetted.good.descriptor      ./commands/look/t
+;   command.look.targetted.find.target          ./commands/look/t
+;
+;   buffer.1                                    ./functions/b
+;
+;   close.descriptor                            ./functions/close.descriptor/t
+;
+;   connection.area.id.index                    ./functions/main/system.check/b
+;   connection.descriptor.index                 ./functions/main/system.check/b
+;
+;   open.descriptor                             ./functions/open.descriptor/t
+;
+;   read.descriptor                             ./functions/read.descriptor/t
+;
+;   write.descriptor                            ./functions/write.descriptor/t
+;
+;   socket.data.send.buffer.l                   ./functions/socket/recv.from.socket/d
+;   socket.data.send.buffer.pointer             ./functions/socket/recv.from.socket/d
+;   socket.data.send.socket.descriptor          ./functions/socket/recv.from.socket/d
+;
+;   socket.send                                 ./functions/socket/socket.send/t
+;
+;   write.prompt                                ./functions/write.prompt/t
+;
+
 
     command.look:                           cmp  eax, command.look.l                                                      ; Has the user invoked the command with no arguments?
                                             jz   command.look.default                                                     ; Yes. Go execute default behaviour.
@@ -34,7 +75,7 @@
 
                                             jmp  command.look.bad.descriptor                                              ; No. Go inform the user that the descriptor is invalid.
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     command.look.targetted.good.descriptor: mov  ebx, eax                                                                 ; Descriptor associated with area id.
                                             mov  ecx, area.header                                                         ; ecx - Pointer to storage for area header.
@@ -44,7 +85,7 @@
 
                                             mov  ecx, dword [area.num.contained.items]                                    ; ecx - number of items to check targetting argument against.
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     command.look.targetted.find.target:     push ecx                                                                      ; Preserve number of items.
 
@@ -59,7 +100,7 @@
 
                                             ret                                                                           ; Return to caller.
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     command.look.default:                   mov  ebx, esi                                                                 ; ebx - Index to connection table entry.
                                             add  ebx, connection.area.id.index                                            ; ebx - Pointer to area id associated with active connection.
@@ -69,7 +110,7 @@
                                             or   eax, eax                                                                 ; Were we able to properly associate a descriptor?
                                             jz   command.look.default.good.descriptor                                     ; Yes. Go execute default behaviour.
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     command.look.bad.descriptor:            mov  ecx, local.data.bad.area.id.indicator.message                            ; No. ecx - pointer to message indicating the local area id is bad.
                                             mov  edx, local.data.bad.area.id.indicator.message.l                          ; edx - Length of message.
@@ -85,7 +126,7 @@
 
                                             ret                                                                           ; Return to caller.
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     command.look.default.good.descriptor:   mov  ebx, eax                                                                 ; ebx - Descriptor associated with area file.
                                             mov  ecx, buffer.1                                                            ; ecx - Pointer to buffer into which to read the length of the area name entry.
