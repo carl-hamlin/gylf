@@ -77,9 +77,6 @@ Relevant data:
 
           nibble.l                              No references.
 
-
-      d   No defined symbols.
-
     ==============================================================================================
 
     ./build.gylf.sh           This is the build script. It depends on the presence of nasm and ld.
@@ -1053,9 +1050,6 @@ Relevant data:
           arguments.packet.l                    No references.
 
 
-      d   No defined symbols.
-
-
       t   aggregate.arguments                   ./functions/main/participant.interaction
                                                   /address.active.status/t
 
@@ -1084,9 +1078,6 @@ Relevant data:
       b   sys.exit.call                         ./functions/bail/t
 
 
-      d   No defined symbols.
-
-
       t   bail                                  ./commands/shutdown/t
                                                 ./functions/main/text.init/t
                                                 ./functions/main/system.check/t
@@ -1096,12 +1087,6 @@ Relevant data:
 
       /buffer.strip           Contains code that strips buffered data of carriage returns and line
                               feeds and replaces them with zeroes.
-
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
 
       t   buffer.strip                          ./functions/socket/recv.from.socket/t
 
@@ -1116,12 +1101,6 @@ Relevant data:
       /check.admin            Contains code that checks to see if the user on the current socket
                               has administrative privileges.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   check.admin                           ./commands/area/t
                                                 ./commands/broadcast/t
                                                 ./commands/shutdown/t
@@ -1130,12 +1109,6 @@ Relevant data:
 
       /check.login            Contains code that checks to see if a user attempting to log in is
                               already logged in from a different location.
-
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
 
       t   check.login                           ./functions/main/participant.interaction
                                                   /address.login.status/t
@@ -1147,12 +1120,6 @@ Relevant data:
       /clear.screen           Contains code that remotely clears the user's screen and places
                               their cursor in the upper left hand corner.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   clear.screen                          ./functions/main/listening.socket.poll/t
                                                 ./functions/write.welcome/t
 
@@ -1163,9 +1130,6 @@ Relevant data:
                               which it currently points.
 
       b   sys.close.call                        ./functions/close.descriptor/t
-
-
-      d   No defined symbols.
 
 
       t   close.descriptor                      ./commands/area/t
@@ -1188,12 +1152,6 @@ Relevant data:
 
       /create.character       Contains code that builds out character data on the basis of DNA
                               sequences left behind by either parent on the associated egg.
-
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
 
       t   area.filename.increment.cmp           ./functions/create.character/t
 
