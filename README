@@ -1229,9 +1229,6 @@ Relevant data:
       /create.lock.file       Contains code that creates a lock file for use in preventing
                               multiple instances of the same login from different locations.
 
-      b   No defined symbols.
-
-
       d   lock.extension                        ./functions/check.login/t
                                                 ./functions/create.lock.file/t
                                                 ./functions/socket/clean.socket/t
