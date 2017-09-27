@@ -1,0 +1,9 @@
+;====================================================================================================================================================================================================
+;
+;   ./functions/socket/answer.active.socket/d
+;
+;   This file contains all data	pertinent to the answer.active.socket function.
+;
+
+    local.data.active.socket.message    db  "Activity detected on socket "      ; Answering active socket message.
+    local.data.active.socket.message.l  equ $-local.data.active.socket.message  ; Length of message.
