@@ -1,0 +1,8 @@
+;====================================================================================================================================================================================================
+;
+;   ./functions/poll.descriptor/b
+;
+;   This file contains definitions for the poll.descriptor function.
+;
+
+    %define sys.poll.call 0A8h  ; 0A8h is the call to poll active descriptors and see if they're asking for action.
