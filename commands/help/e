@@ -1,0 +1,35 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/help/e
+;
+;   This file defines the external textual data associated with the command 'help'.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Outgoing Data
+;
+
+	  socket.data.bad.help.command.error.l    dd  socket.data.bad.help.command.error.end                                                                        ; Length of message.
+	  socket.data.bad.help.command.error      db  "You've entered an argument for the help command that does not correspond to an existing command.", 0Ah, 0Dh  ; Message indicating that the user
+	                                                                                                                                                            ; has entered a bad argument for
+	                                                                                                                                                            ; the help command.
+  	                                        db  "For a listing of possible help topics, just type 'help' without arguments.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
+    socket.data.bad.help.command.error.end  equ $-socket.data.bad.help.command.error                                                                          ; Pointer to end of message.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
+
+	  socket.data.command.help.help.l         dd  socket.data.command.help.help.end                                                                             ; Length of message.
+	  socket.data.command.help.help           db  "  help", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command help help message.
+	                                          db  "  Syntax: help (command argument)", 0Ah, 0Dh, 0Ah, 0Dh
+	                                          db  "  The Help command provides detailed information on the use of specific commands available to", 0Ah, 0Dh
+	                                          db  "  participants. It takes an optional argument in the form of the command concerning which the", 0Ah, 0Dh
+	                                          db  "  performing participant needs help.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
+	  socket.data.command.help.help.end       equ $-socket.data.command.help.help                                                                               ; Pointer to end of message.
+
+
