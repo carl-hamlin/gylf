@@ -1,12 +1,26 @@
 ;================================================================================================================================================================================================
 ;
-;   create.lock.file
+;   ./functions/create.lock.file/t
 ;
 ;   This function builds a lock file to prevent multiple instances of the same login.
 ;
 ;   Assumptions:    ebp - Size of received data.
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   buffer.1          ./functions/b
+;
+;   close.descriptor  ./functions/close.descriptor/t
+;
+;   create.file       ./functions/create.file/t
+;
+;   lock.extension    ./functions/create.lock.file/d
+;
+;   lock.extension.l  ./functions/create.lock.file/d
 ;
 
     create.lock.file: pusha                       ; Preserve caller registers.
@@ -17,7 +31,7 @@
                       mov   ecx, lock.extension.l ; ecx - Length of lock extension.
                       repnz movsb                 ; Tack the extension onto the file name.
 
-                      mov   ebx, buffer.1         ; ebx - Pointer to lock file name.
+                      push  buffer.1              ; Point create.file to lock file name.
                       call  create.file           ; Create the lock file.
 
                       mov   ebx, eax              ; ebx - Descriptor associated with lock file.
