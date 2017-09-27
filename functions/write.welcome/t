@@ -1,6 +1,6 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   write.welcome
+;   ./functions/write.welcome/t
 ;
 ;   This function builds the initial welcome screen.
 ;
@@ -8,11 +8,17 @@
 ;
 ;   Returns:        None.
 ;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   clear.screen                ./functions/clear.screen/t
+;
+;   write.prompt                ./functions/write.prompt/t
+;
 
-    write.welcome: mov  eax, dword [esi+connection.descriptor.index] ; eax = Descriptor associated with target connection.
-                   call clear.screen                                 ; Clear the user's screen.
+    write.welcome: call clear.screen                                 ; Clear the user's screen.
             
-                   mov  eax, dword [esi+connection.descriptor.index] ; eax - Descriptor associated with target connection.
                    call write.prompt                                 ; Send the prompt to the user.
 
                    ret                                               ; Return to caller.
