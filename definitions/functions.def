@@ -5,7 +5,6 @@
 ;   This file contains definitions for function calls. Without these definitions, the program would run on magic numbers and be difficult to read.
 ;
 
-    %define     sys.system.call                         080h     ; The big Kahuna. 080h is the call we use to access kernel functions.
     %define     sys.socket.call                         066h     ; The little Kahuna. 066h indicates socket functionality.
     %define     sys.poll.call                           0A8h     ; 0A8h is the call to poll active descriptors and see if they're asking for action.
 
@@ -22,7 +21,6 @@
 
 ;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    %define     sys.exit.call                           001h    ; 001h is the modifier for 080h that tells the kernel we're all done here and want to return control to Linux.
     %define     sys.read.call                           003h    ; 003h is the modifier for 080h that tells the kernel we want to read data from a specified descriptor.
     %define     sys.write.call                          004h    ; 004h is the modifier for 080h that tells the kernel we want to write data to a specified descriptor.
     %define     sys.open.call                           005h    ; 005h is the modifier for 080h that tells the kernel we want to prepare a descriptor and associate it with local data or a socket.
