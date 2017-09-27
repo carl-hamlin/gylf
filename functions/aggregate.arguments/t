@@ -1,6 +1,6 @@
 ;==================================================================================================================================================================================================================
 ;
-;   aggregate.arguments.asm
+;   aggregate.arguments
 ;
 ;   This file contains code pertinent to the separation and filing of commands and arguments received from an incoming socket.
 ;
