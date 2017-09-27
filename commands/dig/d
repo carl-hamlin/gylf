@@ -8,35 +8,20 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.dig.l                   ./commands/dig/d
-;   command.dig.s                   ./commands/dig/d
-;   socket.data.command.dig.help    ./commands/dig/d
-;   socket.data.commands.dig.help.l ./commands/dig/d
+;   command.dig   ./commands/dig/t
 ;
-;   command.dig                     ./commands/dig/t
+;   command.dig.l ./commands/dig/d
 ;
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;   command.dig.s ./commands/dig/d
 ;
-;   Help Message
-;
-
-	  socket.data.command.dig.help          db  "  dig", 0Ah, 0Dh, 0Ah, 0Dh                                                                                   ; Command dig help message.
-	                                        db  "  Syntax: dig <direction, full or abbreviated to first letter>", 0Ah, 0Dh, 0Ah, 0Dh
-	                                        db  "  Sets an entity to digging a new area in the specified direction, pursuant to a series of", 0Ah, 0Dh
-	                                        db  "  environmental checks to ensure that it makes sense for the character to be able to dig",0Ah, 0Dh
-	                                        db  "  in the specified direction.", 0Ah, 0Dh, 0Ah, 0Dh, "> "	                                        
-	  socket.data.command.dig.help.l        equ $-socket.data.command.dig.help                                                                                ; Length of message.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Command Table Entry
 ;
 
-    command.dig.w                         db  command.dig.l                                                                                                 ; Indicator of length of command 'dig'.
-    command.dig.s                         db  'dig'                                                                                                         ; Common command string for creating a warren.
-    command.dig.l                         equ $-command.dig.s                                                                                               ; Length of command 'dig'.
-    command.dig.p                         dd  command.dig                                                                                                   ; Pointer to handler for command 'dig'.
-    command.dig.h                         dd  socket.data.command.dig.help                                                                                  ; Pointer to help message for command 'dig'.
-    command.dig.h.l                       dd  socket.data.command.dig.help.l                                                                                ; Length of help message for command 'dig'.
-
+    command.dig.w db  command.dig.l                                 ; Indicator of length of command 'dig'.
+    command.dig.s db  'dig'                                         ; Common command string for creating a warren.
+    command.dig.l equ $-command.dig.s                               ; Length of command 'dig'.
+    command.dig.p dd  command.dig                                   ; Pointer to handler for command 'dig'.
+    command.dig.h dd  text.data.index.socket.data.command.dig.help  ; Pointer to help message for command 'dig'.

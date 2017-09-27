@@ -31,7 +31,7 @@
                       mov   ecx, lock.extension.l ; ecx - Length of lock extension.
                       repnz movsb                 ; Tack the extension onto the file name.
 
-                      mov   ebx, buffer.1         ; ebx - Pointer to lock file name.
+                      push  buffer.1              ; Point create.file to lock file name.
                       call  create.file           ; Create the lock file.
 
                       mov   ebx, eax              ; ebx - Descriptor associated with lock file.
