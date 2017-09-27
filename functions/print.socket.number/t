@@ -1,12 +1,22 @@
-;=================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   print.socket.number
+;   ./functions/print.socket.number/t
 ;
 ;   This function prints a socket number for the admin.
 ;
 ;   Assumptions:    esi - Index to socket entry.
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   connection.number.index ./functions/main/system.check/b
+;
+;   dword.l                 ./b
+;
+;   write.descriptor        ./functions/write.descriptor/t
 ;
 
     print.socket.number: pusha                             ; Preserve caller registers.

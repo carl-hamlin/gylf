@@ -1,16 +1,17 @@
 ;================================================================================================================================================================================================
 ;
-;   buffer.strip
+;   ./functions/buffer.strip/t
 ;
 ;   This function strips the following characters from the data buffer and replaces them with zeroes:
 ;
 ;   0Ah
 ;   0Dh
 ;
-;   Assumptions: eax = Number of characters to check.
-;                ebx = Pointer to buffer to be stripped.
+;   Assumptions:  eax - Number of characters to check.
+;                 ebx - Pointer to buffer to be stripped.
 ;
-;   Returns:     eax = Revised number of characters.
+;   Returns:      eax - Revised number of characters.
+;                 ebx - Pointer to stripped buffer.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
