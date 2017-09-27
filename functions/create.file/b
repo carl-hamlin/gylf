@@ -4,3 +4,5 @@
 ;
 ;   This file contains all definitions pertinent to the create.file function.
 ;
+
+    %define sys.create.call 008h  ; 008h is the modifier for 080h that tells the kernel we want to create a new file instead of opening an existing one.
