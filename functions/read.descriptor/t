@@ -1,6 +1,6 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   read.descriptor
+;   ./functions/read.descriptor/t
 ;
 ;   This function reads data from a descriptor.
 ;
@@ -9,6 +9,15 @@
 ;                   edx = Number of bytes to be read.
 ;
 ;   Returns:        eax = Number of bytes read.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   sys.read.call   ./functions/read.descriptor/b
+;
+;   sys.system.call ./functions/b
+;
 
     read.descriptor: mov  eax, sys.read.call ; eax = Read data from a descriptor.
                      int  sys.system.call    ; Read data from a descriptor.
