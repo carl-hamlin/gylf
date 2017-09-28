@@ -4,7 +4,7 @@
 ;
 ;   This function reads data from external files.
 ;
-;   Assumptions:    ebx - Pointer to filename from which to read.
+;   Assumptions:    Stack Frame: dword - Pointer to filename from which to read.
 ;
 ;   Returns:        external.data.buffer - Read data.
 ;                   edx - Length of data read.
@@ -28,7 +28,7 @@
                         push  ebx                           ; Preserve caller's ebx register.
                         push  ecx                           ; Preserve caller's ecx register.
 
-                        push ebx                            ; Point open.descriptor to external data file.
+                        push  dword [esp+16]                ; Point to ASCIIZ filename for external data file.
                         call open.descriptor                ; Associate a descriptor with the external data file.
             
                         push  byte.l                        ; Tell read.descriptor the length of data to be read.
@@ -49,4 +49,4 @@
                         pop   ebx                           ; Restore caller's ebx register.
                         pop   eax                           ; Restore caller's eax register.
 
-                        ret                                 ; Return to caller.
+                        ret   4                             ; Return to caller.
