@@ -1,0 +1,16 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/open.descriptor/b
+;
+;   This file contains definitions for the open.descriptor function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+    %define sys.read.write  002h  ; 002h is the parameter passed to the open function when we want to be able to read from and write to the resulting descriptor.
+    %define sys.open.call   005h  ; 005h is the modifier for 080h that tells the kernel we want to prepare a descriptor and associate it with local data or a socket.
+

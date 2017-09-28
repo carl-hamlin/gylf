@@ -1,0 +1,55 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/help/d
+;
+;   This file contains data pertinent to the help command.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   command.help                        ./commands/help/t
+;
+;   command.help.l                      ./commands/help/d
+;
+;   command.help.s                      ./commands/help/d
+;
+;   socket.data.bad.help.command.error  ./commands/help/d
+;
+;   socket.data.command.help.help       ./commands/help/d
+;
+;   socket.data.command.help.help.l     ./commands/help/d
+;
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Outgoing Data
+;
+
+	  socket.data.bad.help.command.error    db  "You've entered an argument for the help command that does not correspond to an existing command.", 0Ah, 0Dh  ; Message indicating that the user has entered a bad argument for the help command.
+  	                                      db  "For a listing of possible help topics, just type 'help' without arguments.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
+    socket.data.bad.help.command.error.l  equ $-socket.data.bad.help.command.error                                                                          ; Length of message.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
+
+	  socket.data.command.help.help         db  "  help", 0Ah, 0Dh, 0Ah, 0Dh                                                                                  ; Command help help message.
+	                                        db  "  Syntax: help (command argument)", 0Ah, 0Dh, 0Ah, 0Dh
+	                                        db  "  The Help command provides detailed information on the use of specific commands available to", 0Ah, 0Dh
+	                                        db  "  participants. It takes an optional argument in the form of the command concerning which the", 0Ah, 0Dh
+	                                        db  "  performing participant needs help.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
+	  socket.data.command.help.help.l       equ $-socket.data.command.help.help                                                                               ; Length of message.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Command Table Entry
+;
+
+    command.help.w                        db  command.help.l                                                                                                ; Indicator of length of command 'help'.
+    command.help.s                        db  'help'                                                                                                        ; Common command string for displaying help information.
+    command.help.l                        equ $-command.help.s                                                                                              ; Length of command 'help'.
+    command.help.p                        dd  command.help                                                                                                  ; Pointer to handler for command 'help'.
+    command.help.h                        dd  socket.data.command.help.help                                                                                 ; Pointer to help message for command 'help'.
+    command.help.h.l                      dd  socket.data.command.help.help.l                                                                               ; Length of help message for command 'help'.
