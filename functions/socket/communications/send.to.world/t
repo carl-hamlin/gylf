@@ -56,6 +56,11 @@
                             mov   esi, connection.table                                       ; esi - Index to socket entries.
                             mov   ecx, socket.number                                          ; ecx - Number of sockets in table; we use this number as our loop counter.
 
+                            push  esi                                                         ; Preserve caller's esi register.
+
+                            mov   esi, connection.table                                       ; esi - Index to socket entries.
+                            mov   ecx, socket.number                                          ; ecx - Number of sockets in table; we use this number as our loop counter.
+
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     send.to.world.loop:     push  ecx                                                         ; Preserve number of sockets.

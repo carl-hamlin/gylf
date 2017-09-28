@@ -16,6 +16,8 @@
 ;
 ;   buffer.1        ./functions/b
 ;
+;   dword.l         ./b
+;
 ;   set.att.mod.1   ./functions/set.single.attribute/d
 ;
 ;   set.att.mod.3   ./functions/set.single.attribute/d
