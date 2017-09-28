@@ -19,8 +19,6 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   connection.descriptor.index ./functions/system.check/b
-;
 ;   dword.l                     ./b
 ;
 ;   get.text.data               ./functions/get.text.data/t
@@ -36,35 +34,35 @@
 ;   sys.system.call             ./functions/b
 ;
 
-    socket.send:            pop   ebp                                     ; Preserve return address.
-                            pop   eax                                     ; Preserve index to data to be sent.
+    socket.send:            pop   ebp                                                 ; Preserve return address.
+                            pop   eax                                                 ; Preserve index to data to be sent.
 
-                            push  ebp                                     ; Preserve return address.
+                            push  ebp                                                 ; Preserve return address.
 
-                            push  eax                                     ; Point get.text.data to data index.
-                            call  get.text.data                           ; Retrieve indexed data.
+                            push  eax                                                 ; Point get.text.data to data index.
+                            call  get.text.data                                       ; Retrieve indexed data.
 
-                            pop   ebp                                     ; Restore return address.
+                            pop   ebp                                                 ; Restore return address.
 
-    socket.send.buf.splice: push  0                                       ; Flags for send function.
-                            push  edx                                     ; Provide length of the data string to send function.
-                            push  ecx                                     ; Provide pointer to the data to be sent.
-                            push  dword [esi+connection.descriptor.index] ; Provide active descriptor.
+    socket.send.buf.splice: push  0                                                   ; Flags for send function.
+                            push  edx                                                 ; Provide length of the data string to send function.
+                            push  ecx                                                 ; Provide pointer to the data to be sent.
+                            push  dword [a.p.data + gylf.connection.descriptor.index] ; Provide active descriptor.
 
-                            mov   eax, sys.socket.call                    ; eax - Socket call indicator.
-                            mov   ebx, sys.socket.send                    ; ebx - Send data out on a socket.
-                            mov   ecx, esp                                ; ecx - Pointer to arguments package for send function.
-                            int   sys.system.call                         ; Send data out on a socket.
+                            mov   eax, sys.socket.call                                ; eax - Socket call indicator.
+                            mov   ebx, sys.socket.send                                ; ebx - Send data out on a socket.
+                            mov   ecx, esp                                            ; ecx - Pointer to arguments package for send function.
+                            int   sys.system.call                                     ; Send data out on a socket.
 
-                            push  0                                       ; Ask memory.switch to free memory.
-                            call  memory.switch                           ; Free memory.
+                            push  0                                                   ; Ask memory.switch to free memory.
+                            call  memory.switch                                       ; Free memory.
 
-                            push  ebp                                     ; Restore return address.
-                            ret   (dword.l * 4)                           ; Return to caller.
+                            push  ebp                                                 ; Restore return address.
+                            ret   (dword.l * 4)                                       ; Return to caller.
 
-    socket.send.buf:        pop   ebp                                     ; Preserve return address.
+    socket.send.buf:        pop   ebp                                                 ; Preserve return address.
 
-                            pop   ecx                                     ; ecx - Pointer to buffered data.
-                            pop   edx                                     ; edx - Length of buffered data.
+                            pop   ecx                                                 ; ecx - Pointer to buffered data.
+                            pop   edx                                                 ; edx - Length of buffered data.
 
-                            jmp   socket.send.buf.splice                  ; Splice the buffered data into the arguments package.
+                            jmp   socket.send.buf.splice                              ; Splice the buffered data into the arguments package.
