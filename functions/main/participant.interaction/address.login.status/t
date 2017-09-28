@@ -2,8 +2,8 @@
 ;
 ;   ./functions/main/participant.interaction/address.login.status/t
 ;
-;   This code performs handling for data submitted by a socket with 'login' status. Essentially, it determines whether or not the connection belongs to a new player or an old one, creates
-;   player credentials in the case of a new player, and sets the connection status to 'passphrase'.
+;   This code performs handling for data submitted by a socket with 'login' status. Essentially, it determines whether or not the connection belongs to a new participant or an old one, creates
+;   participant credentials in the case of a new participant, and sets the connection status to 'passphrase'.
 ;
 ;   Assumptions:    esi - Pointer to descriptor associated with target socket
 ;
