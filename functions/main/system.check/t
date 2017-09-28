@@ -1,0 +1,34 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/main/system.check/t
+;
+;   This code performs checks to ensure the system is ready to go live.
+;
+;   Assumptions:    None.
+;
+;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   text.data.index.local.data.populate.connection.numbers.over.message ./functions/main/system.check/d
+;
+;   text.data.index.local.data.populating.connection.table.message      ./functions/main/system.check/d
+;
+;   text.data.index.local.data.system.check.done.message                ./functions/main/system.check/d
+;
+;   text.data.index.local.data.system.check.message                     ./functions/main/system.check/d
+;
+;   write.console                                                       ./functions/write.console/t
+;
+
+    system.check:                                   push  dword [text.data.index.local.data.system.check.message]                     ; Pointer to message indicating system check underweigh
+                                                    call  write.console                                                               ; Tell the admin that a system check is underweigh
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    system.check.populate.connection.numbers.done:  push  dword [text.data.index.local.data.system.check.done.message]                ; Pointer to message indicating system check is complete.
+                                                    call  write.console                                                               ; Tell the admin that the system check is complete.
+
+                                                    ret                                                                               ; Return to caller.

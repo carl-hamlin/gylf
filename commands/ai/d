@@ -1,0 +1,29 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/ai/d
+;
+;   Data associated with the 'ai' command.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross References
+;
+;   command.ai    ./commands/ai/t
+;
+;   command.ai.l  ./commands/ai/d
+;
+;   command.ai.s  ./commands/ai/d
+;
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Command Table Entry
+;
+
+    command.ai.w  db  command.ai.l                                ; Indicator of length of command 'ai'.
+    command.ai.s  db  'ai'                                        ; Common command string for setting parameters for the offline ai.
+    command.ai.l  equ $-command.ai.s                              ; Length of command 'ai'.
+    command.ai.p  dd  command.ai                                  ; Pointer to handler for command 'ai'.
+    command.ai.h  dd  text.data.index.socket.data.command.ai.help ; Pointer to index for help message for command 'ai'.
+
+
