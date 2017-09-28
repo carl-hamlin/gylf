@@ -21,6 +21,8 @@
 ;
 ;   area.filename                                       ./functions/d
 ;
+;   area.filename.l                                     ./functions/d
+;
 ;   area.name                                           ./commands/area/b
 ;
 ;   area.name.field.l                                   ./commands/area/b
@@ -32,10 +34,6 @@
 ;   available.areas                                     ./commands/area/b
 ;
 ;   buffer.1                                            ./functions/b
-;
-;   char.0                                              ./b
-;
-;   char.9                                              ./b
 ;
 ;   check.admin                                         ./functions/main/check.admin/t
 ;
@@ -292,7 +290,7 @@
                                         add  ebx, area.filename.l                                                       ; ebx - Pointer to byte immediately following area filename.
                                         sub  ebx, word.l                                                                ; ebx - Pointer to least significant place in area filename.
 
-                                        cmp  byte [ebx], char.9                                                         ; Is the byte at [ebx] a "9"?
+                                        cmp  byte [ebx], "9"                                                            ; Is the byte at [ebx] a "9"?
                                         jz   command.area.filename.finder                                               ; Yes. Go zero it out and address the next place up.
 
                                         jmp  command.area.prep.next                                                     ; Increment the byte at [ebx], restore ebx to the last place, and check the resulting filename.
@@ -302,11 +300,11 @@
     command.area.filename.finder:       cmp  eax, 08h                                                                   ; Have we run out of areas?
                                         jz   command.area.filename.out.of.areas                                         ; Yes. Go take care of that.
 
-                                        mov  byte [ebx], char.0                                                         ; Zero out the byte at [ebx].
+                                        mov  byte [ebx], "0"                                                            ; Zero out the byte at [ebx].
                                         dec  ebx                                                                        ; ebx - Pointer to next place up.
                                         inc  eax                                                                        ; eax - Count of places.
 
-                                        cmp  byte [ebx], char.9                                                         ; Is the byte at [ebx] a "9"?
+                                        cmp  byte [ebx], "9"                                                            ; Is the byte at [ebx] a "9"?
                                         jz   command.area.filename.finder                                               ; Yes. Go zero it out and address the next place up.
 
                                         jmp  command.area.prep.next                                                     ; Increment the byte at [ebx], restore ebx to the last place, and check the resulting filename.
