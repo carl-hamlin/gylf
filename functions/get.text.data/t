@@ -13,7 +13,9 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   No external references.
+;   get.text.data.nz  ./functions/get.text.data/t
+;
+;   get.text.data.z   ./functions/get.text.data/t
 ;
 
     get.text.data:    pop   ebp                 ; Preserve return address.

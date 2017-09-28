@@ -216,6 +216,7 @@
                                         or   eax, eax                                                                   ; If eax is signed, the file doesn't exist, which means we've found a candidate.
                                         jns  command.area.next.file                                                     ; No candidate this time. Go check the next file.
 
+                                        push  ebx                                                                       ; Point create.file to the filename to be created.
                                         call create.file                                                                ; Create the candidate file.
 
                                         mov  ebx, eax                                                                   ; ebx - Descriptor associated with candidate file.
