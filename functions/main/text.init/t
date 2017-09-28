@@ -47,7 +47,7 @@
                         mov   edx, local.data.populating.textual.data.indices.message.l ; edx - Length of message.
                         call  write.descriptor                                          ; Tell the admin that we're populating the textual data indices.
 
-                        mov   ebx, text.data.filename                                   ; ebx - Pointer to filename for external text data.
+                        push  text.data.filename                                        ; Point open.descriptor to filename for external text data.
                         call  open.descriptor                                           ; Open the file for reading.
 
                         or    eax, eax                                                  ; Did we get the descriptor?
