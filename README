@@ -65,6 +65,7 @@ Relevant data:
                                                 ./functions/main/system.check/t
                                                 ./functions/main/text.init/b
                                                 ./functions/main/text.init/t
+                                                ./functions/open.descriptor/t
                                                 ./functions/print.socket.number/t
 
           word.l                                ./commands/area/t
@@ -76,9 +77,6 @@ Relevant data:
                                                   /address.passphrase.status/t
 
           nibble.l                              No references.
-
-
-      d   No defined symbols.
 
     ==============================================================================================
 
@@ -1053,9 +1051,6 @@ Relevant data:
           arguments.packet.l                    No references.
 
 
-      d   No defined symbols.
-
-
       t   aggregate.arguments                   ./functions/main/participant.interaction
                                                   /address.active.status/t
 
@@ -1084,9 +1079,6 @@ Relevant data:
       b   sys.exit.call                         ./functions/bail/t
 
 
-      d   No defined symbols.
-
-
       t   bail                                  ./commands/shutdown/t
                                                 ./functions/main/text.init/t
                                                 ./functions/main/system.check/t
@@ -1096,12 +1088,6 @@ Relevant data:
 
       /buffer.strip           Contains code that strips buffered data of carriage returns and line
                               feeds and replaces them with zeroes.
-
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
 
       t   buffer.strip                          ./functions/socket/recv.from.socket/t
 
@@ -1116,12 +1102,6 @@ Relevant data:
       /check.admin            Contains code that checks to see if the user on the current socket
                               has administrative privileges.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   check.admin                           ./commands/area/t
                                                 ./commands/broadcast/t
                                                 ./commands/shutdown/t
@@ -1130,12 +1110,6 @@ Relevant data:
 
       /check.login            Contains code that checks to see if a user attempting to log in is
                               already logged in from a different location.
-
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
 
       t   check.login                           ./functions/main/participant.interaction
                                                   /address.login.status/t
@@ -1147,12 +1121,6 @@ Relevant data:
       /clear.screen           Contains code that remotely clears the user's screen and places
                               their cursor in the upper left hand corner.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   clear.screen                          ./functions/main/listening.socket.poll/t
                                                 ./functions/write.welcome/t
 
@@ -1163,9 +1131,6 @@ Relevant data:
                               which it currently points.
 
       b   sys.close.call                        ./functions/close.descriptor/t
-
-
-      d   No defined symbols.
 
 
       t   close.descriptor                      ./commands/area/t
@@ -1189,12 +1154,6 @@ Relevant data:
       /create.character       Contains code that builds out character data on the basis of DNA
                               sequences left behind by either parent on the associated egg.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   area.filename.increment.cmp           ./functions/create.character/t
 
           area.filename.next.digit.increment    ./functions/create.character/t
@@ -1217,10 +1176,7 @@ Relevant data:
       /create.file            Contains code that builds a dataset on the drive, to which it
                               associates a logical descriptor.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
+      b   sys.create.call                       ./functions/create.file/t
 
 
       t   create.file                           ./commands/area/t
@@ -1231,9 +1187,6 @@ Relevant data:
 
       /create.lock.file       Contains code that creates a lock file for use in preventing
                               multiple instances of the same login from different locations.
-
-      b   No defined symbols.
-
 
       d   lock.extension                        ./functions/check.login/t
                                                 ./functions/create.lock.file/t
@@ -1250,12 +1203,6 @@ Relevant data:
 
       /dna.lab                Contains code which combines the DNA left behind on an egg by both
                               parents to create an entirely new gylf.
-
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
 
       t   dna.lab                               ./functions/create.character/t
 
@@ -1312,12 +1259,6 @@ Relevant data:
       /get.character.data     Contains code which populates the character data in memory from file
                               for the character on the current socket.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   get.character.data                    ./functions/check.admin/t
 
     ----------------------------------------------------------------------------------------------
@@ -1333,9 +1274,6 @@ Relevant data:
                               environment was booted.
 
       b   sys.get.ticks                         ./functions/get.ticks/t
-
-
-      d   No defined symbols.
 
 
       t   get.ticks                             ./functions/dna.lab/t
