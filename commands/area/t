@@ -224,7 +224,7 @@
 
                                         pop  esi                                                                        ; Restore index to connection entry.
 
-    command.area.filename.loop:         mov  ebx, area.filename                                                         ; ebx - Pointer to filename entry for area filenames.
+    command.area.filename.loop:         push area.filename                                                              ; Point open.descriptor to filename entry for area filenames.
                                         call open.descriptor                                                            ; Try the current filename.
 
                                         or   eax, eax                                                                   ; If eax is signed, the file doesn't exist, which means we've found a candidate.
