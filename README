@@ -53,19 +53,25 @@ Relevant data:
           
           char.F                                No references.
           
-          qword.l                               ./commands/help/t
+          qword.l                               No references.
 
           dword.l                               ./commands/area/t
                                                 ./commands/help/t
                                                 ./commands/look/t
                                                 ./functions/create.character/t
                                                 ./functions/d
+                                                ./functions/get.text.data/t
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
                                                 ./functions/main/system.check/t
                                                 ./functions/main/text.init/b
                                                 ./functions/main/text.init/t
+                                                ./functions/memory.switch/t
                                                 ./functions/print.socket.number/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/socket/socket.send/t
 
           word.l                                ./commands/area/t
                                                 ./functions/b
@@ -82,6 +88,7 @@ Relevant data:
                                                 ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/system.check/b
+                                                ./functions/main/system.check/t
                                                 ./functions/socket/communications/send.to.area/t
                                                 ./functions/socket/communications/sent.to.player/t
                                                 ./functions/socket/communications/send.to.world/t
@@ -130,8 +137,6 @@ Relevant data:
           command.ai.p                          No references.
 
           command.ai.h                          No references.
-
-          command.ai.h.l                        No references.
 
 
       t   command.ai                            ./commands/ai/d
@@ -185,8 +190,6 @@ Relevant data:
 
           command.area.h                        No references.
 
-          command.area.h.l                      No references.
-
 
       t   command.area                          ./commands/area/d
 
@@ -238,8 +241,6 @@ Relevant data:
 
           command.broadcast.h                   No references.
 
-          command.broadcast.h.l                 No references.
-
 
       t   command.broadcast                     ./commands/broadcast/d
 
@@ -263,8 +264,6 @@ Relevant data:
           command.dig.p                         No references.
 
           command.dig.h                         No references.
-
-          command.dig.h.l                       No references.
 
 
       t   command.dig                           ./commands/dig/d
@@ -299,12 +298,7 @@ Relevant data:
           egg.data.l                            No references.
 
 
-      d   egg.hatch.message                     ./commands/egg/d
-                                                ./functions/create.character/t
-
-          egg.hatch.message.l                   ./functions/create.character/t
-
-          command.egg.w                         ./functions/d
+      d   command.egg.w                         ./functions/d
 
           command.egg.s                         ./commands/egg/d
 
@@ -313,8 +307,6 @@ Relevant data:
           command.egg.p                         No references.
 
           command.egg.h                         No references.
-
-          command.egg.h.l                       No references.
 
 
       t   command.egg                           ./commands/egg/d
@@ -339,8 +331,6 @@ Relevant data:
 
           command.gylf.h                        No references.
 
-          command.gylf.h.l                      No references.
-
 
       t   command.gylf                          ./commands/gylf/d
 
@@ -362,8 +352,6 @@ Relevant data:
           command.help.p                        No references.
 
           command.help.h                        No references.
-
-          command.help.h.l                      No references.
 
 
       t   command.help                          ./commands/help/d
@@ -398,8 +386,6 @@ Relevant data:
 
           command.logout.h                      No references.
 
-          command.logout.h.l                    No references.
-
 
       t   command.logout                        ./commands/logout/d
 
@@ -421,8 +407,6 @@ Relevant data:
           command.look.p                        No references.
 
           command.look.h                        No references.
-
-          command.look.h.l                      No references.
 
 
       t   command.look                          ./commands/look/d
@@ -457,8 +441,6 @@ Relevant data:
 
           command.shutdown.h                    No references.
 
-          command.shutdown.h.l                  No references.
-
 
       t   command.shutdown                      ./commands/shutdown/d
 
@@ -484,8 +466,6 @@ Relevant data:
           command.think.p                       No references.
 
           command.think.h                       No references.
-
-          command.think.h.l                     No references.
 
 
       t   command.think                         ./commands/think/d
@@ -1607,7 +1587,7 @@ Relevant data:
               .command.error.message
 
             text.data.index.socket.data.bad     ./functions/write.bad.help.command.error/t
-              .help.command.error
+              .help.command.error.message
 
             text.data.index.socket.data.bad     ./functions/main/participant.interaction
               .login.error.message                /address.login.status/t
@@ -1615,40 +1595,41 @@ Relevant data:
             text.data.index.socket.data.bad     ./functions/main/participant.interaction
               .passphrase.message                 /address.passphrase.status/t
 
-            text.data.index.socket.data.command No references.
+            text.data.index.socket.data.command ./commands/ai/d
               .ai.help
 
-            text.data.index.socket.data.command ./commands/area/t
+            text.data.index.socket.data.command ./commands/area/d
+                                                ./commands/area/t
               .area.help
 
-            text.data.index.socket.data.command No references.
+            text.data.index.socket.data.command ./commands/broadcast/d
               .broadcast.help
 
-            text.data.index.socket.data.command No references.
+            text.data.index.socket.data.command ./commands/dig/d
               .dig.help
 
-            text.data.index.socket.data.command No references.
+            text.data.index.socket.data.command ./commands/egg/d
               .egg.help
 
-            text.data.index.socket.data.command No references.
+            text.data.index.socket.data.command ./commands/gylf/d
               .gylf.help
 
-            text.data.index.socket.data.command No references.
+            text.data.index.socket.data.command ./commands/help/d
               .help.help
 
-            text.data.index.socket.data.command No references.
+            text.data.index.socket.data.command ./commands/logout/d
               .logout.help
 
-            text.data.index.socket.data.command No references.
+            text.data.index.socket.data.command ./commands/look/d
               .look.help
 
-            text.data.index.socket.data.command No references.
+            text.data.index.socket.data.command ./commands/shutdown/d
               .shutdown.help
 
-            text.data.index.socket.data.command No references.
+            text.data.index.socket.data.command ./commands/think/d
               .think.help
 
-            text.data.index.socket.data.egg     No references.
+            text.data.index.socket.data.egg     ./functions/create.character/t
               .hatch.message
 
             text.data.index.socket.data.login   ./functions/main/listening.socket.poll/t
@@ -1725,8 +1706,11 @@ Relevant data:
       d   break.pointer                         ./functions/memory.switch/t
 
 
-      t   memory.switch                         ./functions/main/text.init/t
+      t   memory.switch                         ./functions/get.text.data/t
+                                                ./functions/main/text.init/t
                                                 ./functions/socket/recv.from.socket/t
+                                                ./functions/socket/socket.send/t
+                                                ./functions/write.console/t
 
           memory.switch.initialize              ./functions/memory.switch/t
 
@@ -2152,7 +2136,15 @@ Relevant data:
 
         /socket.send          Contains code that sends data out on a connected socket.
 
-        b   sys.socket.send                     ./functions/socket/socket.send/t
+        b   socket.send.d                       ./functions/socket/socket.send/t
+
+            socket.send.f                       ./functions/socket/socket.send/t
+
+            socket.send.l                       ./functions/socket/socket.send/t
+
+            socket.send.p                       ./functions/socket/socket.send/t
+
+            sys.socket.send                     ./functions/socket/socket.send/t
 
 
         t   socket.send                         ./commands/area/t
