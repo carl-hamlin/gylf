@@ -74,18 +74,18 @@
     get.participant.data:     mov   ebp, esp
                               add   ebp, gpd.packet_size
 
-                              cmp   dword [ebp.destination], e.data
+                              cmp   dword [ebp+gpd.packet.destination], e.data
                               jz    get.participant.data.e
 
-                              cmp   dword [ebp.destination], g.data
+                              cmp   dword [ebp+gpd.packet.destination], g.data
                               jz    get.participant.data.g
 
-                              cmp   dword [ebp.destination], d.data
+                              cmp   dword [ebp+gpd.packet.destination], d.data
                               jz    get.participant.data.d
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    get.participant.data.z:   mov   eax, FFFFFFFFh
+    get.participant.data.z:   mov   eax, 0FFFFFFFFh
                               ret                        
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -107,8 +107,8 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    get.participant.data.r:   push  dword [ebp.name.p]
-                              push  dword [ebp+name.l]
+    get.participant.data.r:   push  dword [ebp+gpd.packet.name.p]
+                              push  dword [ebp+gpd.packet.name.l]
                               call  assemble.path
 
                               push  buffer.1
@@ -117,10 +117,10 @@
                               or    eax, eax
                               js    get.participant.data.z
 
-                              cmp   dword [ebp.destination], e.data
+                              cmp   dword [ebp+gpd.packet.destination], e.data
                               jz    get.participant.data.ez
 
-                              cmp   dword [ebp.destination], g.data
+                              cmp   dword [ebp+gpd.packet.destination], g.data
                               jz    get.participant.data.gz
 
                               push  ghost_size
