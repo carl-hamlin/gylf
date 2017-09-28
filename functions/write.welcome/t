@@ -1,0 +1,24 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/write.welcome/t
+;
+;   This function builds the initial welcome screen.
+;
+;   Assumptions:    esi - Index to connection table.
+;
+;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   clear.screen                ./functions/clear.screen/t
+;
+;   write.prompt                ./functions/write.prompt/t
+;
+
+    write.welcome: call clear.screen                                 ; Clear the user's screen.
+            
+                   call write.prompt                                 ; Send the prompt to the user.
+
+                   ret                                               ; Return to caller.
