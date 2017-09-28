@@ -1,11 +1,35 @@
-;==================================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   aggregate.arguments
+;   ./functions/aggregate.arguments/t
 ;
 ;   This file contains code pertinent to the separation and filing of commands and arguments received from an incoming socket.
 ;
 ;   Assumptions: ebx - Pointer to data received from the socket.
 ;   Returns:     aggregated arguments at [argument.packet]
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   aggregate.arguments.argument.found          ./functions/aggregate.arguments/t
+;
+;   aggregate.arguments.arguments.aggregated    ./functions/aggregate.arguments/t
+;
+;   aggregate.arguments.loop                    ./functions/aggregate.arguments/t
+;
+;   aggregate.arguments.prep.for.next.argument  ./functions/aggregate.arguments/t
+;
+;   aggregate.arguments.quote.mode              ./functions/aggregate.arguments/t
+;
+;   aggregate.arguments.quode.mode.l            ./functions/aggregate.arguments/t
+;
+;   aggregate.arguments.strip.command.loop      ./functions/aggregate.arguments/t
+;
+;   argument.01.location                        ./functions/aggregate.arguments/b
+;
+;   argument.entry.size                         ./functions/aggregate.arguments/b
+;
+;   arguments.num                               ./functions/aggregate.arguments/b
 ;
 
     aggregate.arguments:                        push  eax                                         ; Preserve caller's eax register.
