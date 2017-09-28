@@ -60,6 +60,7 @@ Relevant data:
                                                 ./commands/look/t
                                                 ./functions/create.character/t
                                                 ./functions/d
+                                                ./functions/get.external.data/t
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
                                                 ./functions/main/system.check/t
@@ -1305,11 +1306,9 @@ Relevant data:
                                                 ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
 
-          sys.poll.number.of.structures         ./functions/main/active.socket.poll/t
-                                                ./functions/main/listening.socket.poll/t
+          sys.poll.number.of.structures         ./functions/poll.descriptor/t
 
-          sys.poll.timeout                      ./functions/main/active.socket.poll/t
-                                                ./functions/main/listening.socket.poll/t
+          sys.poll.timeout                      ./functions/poll.descriptor/t
 
 
       d   No defined symbols.
@@ -1918,9 +1917,6 @@ Relevant data:
       b   sys.poll.call                         ./functions/poll.descriptor/t
 
 
-      d   No defined symbols.
-
-
       t   poll.descriptor                       ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
 
@@ -1928,12 +1924,6 @@ Relevant data:
 
       /print.socket.number    Contains code that prints a socket number associated with an event
                               in the administrator console.
-
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
 
       t   print.socket.number                   ./functions/socket/answer.active.socket/t
 
