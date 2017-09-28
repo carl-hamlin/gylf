@@ -2008,9 +2008,6 @@ Relevant data:
       b   sys.read.call                         ./functions/read.descriptor/t
 
 
-      d   No defined symbols.
-
-
       t   read.descriptor                       ./commands/look/t
                                                 ./functions/create.character/t
                                                 ./functions/dna.lab/t
