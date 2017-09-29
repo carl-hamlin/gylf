@@ -1,8 +1,14 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
 ;   ./functions/write.bad.command.error/d
 ;
 ;   This file contains data for the write.bad.command.error function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   socket.data.bad.command.error ./functions/write.bad.command.error/d
 ;
 
 	  socket.data.bad.command.error   db	"For a better idea of what you're doing, try 'help'.", 0Ah, 0Dh, "> " ; Message indicating that an entered command has no current analogue.
