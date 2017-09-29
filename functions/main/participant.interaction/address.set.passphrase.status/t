@@ -39,6 +39,7 @@
 
 					                        mov	  ebx, esi						                              ; ebx - Pointer to socket entry.
 					                        add	  ebx, connection.filename.index				            ; ebx - Pointer to file path for user's credential file.
+					                        push  ebx                                               ; Point open.descriptor to credential file.
 					                        call	open.descriptor						                        ; Associate a descriptor with the file.
 
 					                        mov	  eax, dword [esi+connection.descriptor.index]      ; eax - Descriptor associated with egg file.
