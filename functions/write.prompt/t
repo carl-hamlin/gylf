@@ -12,15 +12,12 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   prompt.message                      ./functions/write.prompt/d
+;   socket.send                                 ./functions/socket/socket.send/t
 ;
-;   prompt.message.l                    ./functions/write.prompt/d
-;
-;   socket.send                         ./functions/socket/socket.send/t
+;   text.data.index.socket.data.prompt.message  ./functions/main/text.init/b
 ;
 
-    write.prompt: push  prompt.message.l  ; Tell the send function how long the message is.
-                  push  prompt.message    ; Point the send function to the prompt.
-                  call socket.send        ; Send the prompt to the socket.
+    write.prompt: push dword [text.data.index.socket.data.prompt.message] ; Point the send function to the prompt.
+                  call socket.send                                        ; Send the prompt to the socket.
 
-                  ret                     ; Return to caller.
+                  ret                                                     ; Return to caller.
