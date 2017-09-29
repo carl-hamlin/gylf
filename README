@@ -1448,10 +1448,23 @@ Relevant data:
           /address.login.status     Contains code that parses commands issued by users with a
                                     login status and sends them to the appropriate handler.
 
-          b   No defined symbols.
+          d   local.data.bad.login.error        ./functions/main/participant.interaction
+                                                  /address.login.status/d
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
 
+              local.data.bad.login.error.l      ./functions/main/participant.interaction
+                                                  /address.login.status/t
 
-          d   socket.data.bad.login.error       ./functions/main/participant.interaction
+              local.data.second.login.error     ./functions/main/participant.interaction
+                                                  /address.login.status/d
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+              local.data.second.login.error.l   ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+              socket.data.bad.login.error       ./functions/main/participant.interaction
                                                   /address.login.status/d
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t
