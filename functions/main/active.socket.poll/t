@@ -39,10 +39,6 @@
 ;
 ;   sys.poll.in                           ./functions/main/b
 ;
-;   sys.poll.number.of.structures         ./functions/main/b
-;
-;   sys.poll.timeout                      ./functions/main/b
-;
 
     active.socket.poll:           mov   esi, connection.table                                 ; esi = pointer to table of potentially active connections.
                                   mov   edi, esi                                              ; edi - Pointer to table of potentially active connections.
@@ -70,10 +66,8 @@
 
                                   mov   eax, dword [esi+connection.descriptor.index]          ; eax - descriptor for active socket.
                                   mov   dword [socket.data.active.socket.descriptor], eax     ; Store descriptor for active socket.
-                                  mov   ebx, socket.data.active.socket.descriptor             ; ebx - pointer to descriptor for active socket
-                                  mov   ecx, sys.poll.number.of.structures                    ; ecx - number of sockets to poll.
-                                  mov   edx, sys.poll.timeout                                 ; edx - length of time to wait on data from the socket.
 
+                                  push  socket.data.active.socket.descriptor                  ; ebx - pointer to descriptor for active socket
                                   call  poll.descriptor                                       ; Poll the socket for activity.
 
                                   cmp   eax, sys.poll.in                                      ; Does the socket have data on it waiting for process?
