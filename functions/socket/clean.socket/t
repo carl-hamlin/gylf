@@ -1,6 +1,6 @@
-;=================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   clean.socket
+;   ./functions/socket/clean.socket/t
 ;
 ;   This code removes the data associated with an active socket from memory, smokes the lock file, and uses the close.descriptor function to close out the socket. This function does not
 ;   closeout other files associated with the socket - that responsibility is left to the caller.
@@ -8,6 +8,32 @@
 ;   Assumptions:    esi = Index to connection tables.
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   close.descriptor            ./functions/close.descriptor/t
+;
+;   connection.descriptor.index ./functions/main/system.check/b
+;
+;   connection.filename.index   ./functions/main/system.check/b
+;
+;   connection.status.index     ./functions/main/system.check/b
+;
+;   lock.extension              ./functions/create.lock.file/d
+;
+;   lock.extension.l            ./functions/create.lock.file/d
+;
+;   socket.filename.entry.l     ./functions/b
+;
+;   sys.system.call             ./functions/b
+;
+;   sys.unlink                  ./functions/socket/clean.socket/b
+;
+;   ul.smoke                    ./functions/socket/clean.socket/t
+;
+;   ul.loop                     ./functions/socket/clean.socket/t
 ;
 
     clean.socket: push  ecx                                            ; Preserve caller's ecx register.
