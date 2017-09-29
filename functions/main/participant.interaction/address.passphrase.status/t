@@ -53,16 +53,19 @@
 
                       					mov	  ebx, esi					                                ; ebx - Pointer to connection tables.
 					                      add	  ebx, connection.filename.index                    ; ebx - Pointer to file path associated with user credentials.
+					                      push  ebx                                               ; Point open.descriptor to user credential path.
                       					call	open.descriptor									                  ; Associate a descriptor with the user's credential file.
 
-                      					mov	  ebx, eax									                        ; ebx - Descriptor associated with user credential file.
-                      					mov	  ecx, buffer.2									                    ; ecx - Pointer to buffer into which to read data from the user's credential file.
-                      					mov	  edx, byte.l									                      ; edx - Number of bytes to read.
+                      					push  byte.l									                          ; Tell read.descriptor the number of bytes to read.
+                      					push  buffer.2									                        ; Point read.descriptor to buffer into which to read data from the user's credential file.
+                      					push  eax									                              ; Point read.descriptor to descriptor associated with user credential file.
                       					call	read.descriptor									                  ; Read the number of bytes to query.
 
-                      					mov	  ecx, buffer.2									                    ; ecx - Pointer to read buffer.
-                      					sub	  edx, edx									                        ; edx - Prepared for number of bytes to read.
-                      					mov	  dl, byte [buffer.2]							                  ; edx - Number of bytes to read.
+                      					sub   edx, edx                                          ; edx - Prepped for length of passphrase
+                      					mov   dl, byte [buffer.2]                               ; edx - Length of passphrase.
+                      					push  edx                                               ; Tell read.descriptor the length of the passphrase.
+                      					push  buffer.2									                        ; Point read.descriptor to read buffer.
+                      					push  ebx                                               ; Point read.descriptor to descriptor associated with the credential file.
                       					call	read.descriptor									                  ; Read the passphrase.
 
                       					push	eax										                            ; Preserve number of bytes read.

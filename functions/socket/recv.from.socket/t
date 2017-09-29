@@ -52,7 +52,8 @@
 
                       pop   eax                                     ; Restore number of characters received.
 
-                      mov   ebx, buffer.1                           ; ebx - pointer to received data
+                      push  eax                                     ; Tell buffer.strip how many characters to check.
+                      push  buffer.1                                ; Pointer buffer.strip to buffer.1.
                       call  buffer.strip                            ; Strip carriage returns from received data.
 
                       ret                                           ; Return to caller.
