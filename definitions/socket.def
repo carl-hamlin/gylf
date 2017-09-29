@@ -1,0 +1,59 @@
+;=================================================================================================================================================================================================
+;
+;   socket
+;
+;   This file contains various definitions made use of by socket functions.
+;
+
+;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    %define     sys.socket.protocol.family.inet 0002h                           ; PF_INET.
+    %define     sys.socket.type.stream          0001h                           ; SOCK_STREAM.
+    %define     sys.socket.address              0000h                           ; INADDR_ANY.
+    %define     sys.socket.port.number          280Ah                           ; Port number 2600.
+    %define     sys.socket.padding              0000h                           ; Padding for sockaddr structure.
+
+    %define     sys.socket.queue.l              0005h                           ; Number of connections to let pile up.
+
+;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    socket.data.connected.socket.descriptor     resd    0001h                   ; Data storage for the descriptor associated with the socket attempting to connect.
+    socket.data.protocol.family                 resd    0001h                   ; Data storage for the protocol family associated with the socket attempting to connect.
+    socket.data.flags                           resd    0001h                   ; Data storage for communications semantics associated with the socket attempting to connect.
+    socket.data.address                         resd    0001h                   ; Data storage for the data address associated with the socket attempting to connect.
+    socket.data.listening.socket.descriptor     resd    0001h                   ; Data storage for the descriptor associated with the listening socket.
+    socket.data.queue.l                         resd    0001h                   ; Data storage for the queue length associated with the listening socket.
+
+;-------------------------------------------------------------------------------------------------------------------------
+
+    session.descriptor                          resd    0001h                   ; Data storage for the descriptor associated with the session file.
+    active.socket.descriptor                    resd    0001h                   ; Data storage for the descriptor associated with the active socket.
+
+;-------------------------------------------------------------------------------------------------------------------------
+
+    %define     socket.number                   0FFh                            ; Number of sockets represented in table.
+    %define     socket.filename.entry.l         040h                            ; Length of filename entry.
+
+    connection.table                            equ    $                        ; Index to connection table.
+    connection.number.index                     equ    $-connection.table       ; Index to connection number.
+                                                resd    0001h                   ; Placeholder for connection number.
+    connection.descriptor.index                 equ    $-connection.table       ; Index to connection descriptor.
+                                                resd    0001h                   ; Placeholder for connection descriptor.
+    connection.external.index                   equ    $-connection.table       ; Index to external descriptor.
+                                                resd    0001h                   ; Placeholder for external descriptor.
+    connection.area.id.index                    equ    $-connection.table       ; Index to area id.
+                                                resd    0001h                   ; Placeholder for area id.
+    connection.status.index                     equ    $-connection.table       ; Index to status.
+                                                resb    0001h                   ; Placeholder for status.
+    connection.filename.index                   equ    $-connection.table       ; Index to character data filename.
+                                                resb    socket.filename.entry.l ; Placeholder for character data filename.
+    connection.entry.size                       equ    $-connection.table       ; Size of single connection entry.
+
+    %rep                                        socket.number-1                 ; Build out the rest of the table.
+                                                resd    0001h                   ; Placeholder for connection number.
+                                                resd    0001h                   ; Placeholder for connection descriptor.
+                                                resd    0001h                   ; Placeholder for external descriptor.
+                                                resd    0001h                   ; Placeholder for area id.
+                                                resb    0001h                   ; Placeholder for status.
+                                                resb    socket.filename.entry.l ; Placeholder for character data filename.
+    %endrep                                                                     ; End preprocessor driven repetition.
