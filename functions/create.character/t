@@ -113,12 +113,12 @@
 ;
 
 
-    create.character:                   push  egg.data.l                                      ; Tell read.descriptor the length of egg data.
-                                        push  egg.data                                        ; Point read.descriptor to buffer in which to store the egg data.
-                                        push  eax                                             ; Point read.descriptor to descriptor associated with the egg file.
-                                        call  read.descriptor                                 ; Read the egg data into the buffer.
+    create.character:                   push  egg.data.l                                                  ; Tell read.descriptor the length of egg data.
+                                        push  egg.data                                                    ; Point read.descriptor to buffer in which to store the egg data.
+                                        push  eax                                                         ; Point read.descriptor to descriptor associated with the egg file.
+                                        call  read.descriptor                                             ; Read the egg data into the buffer.
 
-                                        call  close.descriptor                                ; Close the egg file.
+                                        call  close.descriptor                                            ; Close the egg file.
 
                                         push  esi                                                         ; Preserve index to socket entry.
 
@@ -205,7 +205,7 @@
                                         pop   esi                                                         ; esi - Index to socket entry.
 
                                         mov   dword [character.pouch], ebp                                ; Store area id for character pouch.
-                                        mov   ebx, area.filename                                          ; ebx - pointer to file to be created for character pouch.
+                                        push  area.filename                                               ; Point create.file to file to be created for character pouch.
                                         call  create.file                                                 ; Create the file.
 
                                         push  eax                                                         ; Store descriptor associated with new pouch.
@@ -251,7 +251,7 @@
                                         call  dna.lab                                                     ; Figure up the DNA for the new Gylf.
 
                                         mov   ebx, esi                                                    ; ebx - Index to socket table.
-                                        add   ebx, connection.filename.index                              ; ebx - pointer to filename associated with active connection.
+                                        push  connection.filename.index                                   ; Point create.file to filename associated with active connection.
                                         call  create.file                                                 ; Smoke the egg and create a new file.
 
                                         push  eax                                                         ; Preserve descriptor associated with new file.

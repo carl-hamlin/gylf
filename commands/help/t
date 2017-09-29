@@ -33,9 +33,7 @@
 ;
 ;   number.of.commands                  ./functions/d
 ;
-;   qword.l                             ./b
-;
-;   socket.send.buf                     ./functions/socket/socket.send/t
+;   socket.send                         ./functions/socket/socket.send/t
 ;
 ;   write.bad.command.error             ./functions/write.bad.command.error/t
 ;
@@ -75,9 +73,9 @@
 
     command.help.found.command:       pop   ecx                                             ; Restore loop counter.
                                       pop   edi                                             ; Restore caller's edi register...
-                                      
+
                                       mov   ebx, esi                                        ; ebx - Pointer to command entry.
-                                      mov   ebx, dword [ebx+qword.l]                        ; ebx - pointer to index for help entry.
+                                      mov   ebx, dword [ebx+dword.l]                        ; ebx - Pointer to index for help entry.
 
                                       pop   esi                                             ; esi - Index to socket entry.
 
