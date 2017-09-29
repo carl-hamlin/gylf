@@ -13,6 +13,70 @@ Relevant data:
                               directory name.
 
     ==============================================================================================
+    
+    ./                        This is the root directory for the project. the README and build
+                              script live here.
+
+    Symbolic Cross-Referencing
+    
+      b   char.0                                ./commands/area/t
+                                                ./functions/main/system.check/t
+
+          char.1                                No references.
+          
+          char.2                                No references.
+          
+          char.3                                No references.
+          
+          char.4                                No references.
+          
+          char.5                                No references.
+          
+          char.6                                No references.
+          
+          char.7                                No references.
+
+          char.8                                No references.
+          
+          char.9                                ./commands/area/t
+                                                ./functions/main/system.check/t
+          
+          char.A                                No references.
+          
+          char.B                                No references.
+          
+          char.C                                No references.
+          
+          char.D                                No references.
+          
+          char.E                                No references.
+          
+          char.F                                No references.
+          
+          qword.l                               ./commands/help/t
+
+          dword.l                               ./commands/area/t
+                                                ./commands/help/t
+                                                ./commands/look/t
+                                                ./functions/create.character/t
+                                                ./functions/d
+                                                ./functions/main/system.check/t
+                                                ./functions/main/participant.interaction/address.active.status/t
+                                                ./functions/print.socket.number/t
+
+          word.l                                ./commands/area/t
+                                                ./functions/b
+
+          byte.l                                ./functions/get.character.data/t
+                                                ./functions/get.external.data/t
+                                                ./functions/main/participant.interaction/address.passphrase.status/t
+
+          nibble.l                              No references.
+
+
+      d   No defined symbols.
+
+    ==============================================================================================
 
     ./build.gylf.sh           This is the build script. It depends on the presence of nasm and ld.
                               Run the build script to produce an executable binary called 'gylf'
@@ -26,152 +90,1224 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'ai' command; a
-        /ai                   player-level command that allows for the invoker to adjust
+      /ai                     Contains code pertinent to the implementation of the 'ai' command; a
+                              player-level command that allows for the invoker to adjust
                               parameters associated with their avatar's behaviour while they are
                               signed out.
 
+      b   No defined symbols.
+
+
+      d   socket.data.command.ai.help           ./commands/ai/d
+
+          socket.data.command.ai.help.l         ./commands/ai/d
+
+          command.ai.w                          ./commands/ai/d
+                                                ./functions/d
+
+          command.ai.s                          ./commands/ai/d
+
+          command.ai.l                          ./commands/ai/d
+
+          command.ai.p                          No references.
+
+          command.ai.h                          No references.
+
+          command.ai.h.l                        No references.
+
+
+      t   command.ai                            ./commands/ai/d
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'area' command;
-        /area                 an administrator command that allows for administrators to create
+      /area                   Contains code pertinent to the implementation of the 'area' command;
+                              an administrator command that allows for administrators to create
                               new areas without having to dig them out using the player interface.
 
+      b   available.areas                       ./commands/area/t
+
+          area.name.field.l                     ./commands/area/b
+                                                ./commands/area/t
+
+          area.description.field.l              ./commands/area/b
+                                                ./commands/area/t
+
+          area.header                           ./commands/area/b
+                                                ./commands/look/t
+                                                ./functions/create.character/t
+
+          area.name.l                           ./commands/area/t
+                                                ./functions/create.character/t
+
+          area.name                             ./commands/area/t
+                                                ./functions/create.character/t
+
+          area.description.l                    ./commands/area/t
+                                                ./functions/create.character/t
+
+          area.description                      ./commands/area/t
+                                                ./functions/create.character/t
+
+          area.num.contained.items              ./commands/area/t
+                                                ./commands/look/t
+
+          area.header.l                         ./commands/look/t
+                                                ./functions/create.character/t
+
+      d   local.data.area.bad.syntax.message    ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.area.bad.syntax.message.l  ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.area.created.message       ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.area.created.message.l     ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.out.of.areas.message       ./commands/area/d
+                                                ./commands/area/t
+
+          local.data.out.of.areas.message.l     ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.area.created.message      ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.area.created.message.l    ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.out.of.areas.message      ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.out.of.areas.message.l    ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.bad.area.id.message       ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.bad.area.id.message.l     ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.command.area.help         ./commands/area/d
+                                                ./commands/area/t
+
+	        socket.data.command.area.help.l       ./commands/area/d
+                                                ./commands/area/t
+
+          command.area.w                        ./commands/area/d
+                                                ./functions/d
+
+          command.area.s                        ./commands/area/d
+                                                ./commands/area/t
+
+          command.area.l                        ./commands/area/d
+                                                ./commands/area/t
+
+          command.area.p                        ./commands/area/t
+
+          command.area.h                        No references.
+
+          command.area.h.l                      No references.
+
+
+      t   command.area                          ./commands/area/d
+
+          command.area.bad                      ./commands/area/t
+
+          command.area.admin                    ./commands/area/t
+
+          command.area.find.first.argument      ./commands/area.t
+
+          command.area.start                    ./commands/area/t
+
+          command.area.loop.1                   ./commands/area/t
+
+          command.area.name.l                   ./commands/area/t
+
+          command.area.find.second.argument     ./commands/area/t
+
+          command.area.loop.2                   ./commands/area/t
+
+          command.area.description.l            ./commands/area/t
+
+          command.area.filename.loop            ./commands/area/t
+
+          command.area.next.file                ./commands/area/t
+
+          command.area.filename.finder          ./commands/area/t
+
+          command.area.filename.out.of.areas    ./commands/area/t
+
+          command.area.prep.next                ./commands/area/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'broadcast'
-        /broadcast            command; an administrator command that allows for administrators to
+      /broadcast              Contains code pertinent to the implementation of the 'broadcast'
+                              command; an administrator command that allows for administrators to
                               send a message to the entire participant base all at once,
                               regardless of their locations in the simulation.
 
+      b   No defined symbols.
+
+
+      d   socket.data.command.broadcast.help    ./commands/broadcast/d
+
+          socket.data.command.broadcast.help.l  ./commands/broadcast/d
+
+          command.broadcast.w                   ./functions/d
+
+          command.broadcast.s                   ./commands/broadcast/d
+
+          command.broadcast.l                   ./commands/broadcast/d
+                                                ./commands/broadcast/t
+
+          command.broadcast.p                   No references.
+
+          command.broadcast.h                   No references.
+
+          command.broadcast.h.l                 No references.
+
+
+      t   command.broadcast                     ./commands/broadcast/d
+
+          command.broadcast.admin               ./commands/broadcast/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'dig' command;
-        /dig                  a participant-level command that allows for player to, under certain
+      /dig                    Contains code pertinent to the implementation of the 'dig' command;
+                              a participant-level command that allows for player to, under certain
                               circumstances, extend the environment by creating new areas.
 
+      b   No defined symbols.
+
+
+      d   socket.data.command.dig.help          ./commands/dig/d
+
+          socket.data.command.dig.help.l        ./commands/dig/d
+
+          command.dig.w                         ./functions/d
+
+          command.dig.s                         ./commands/dig/d
+
+          command.dig.l                         ./commands/dig/d
+
+          command.dig.p                         No references.
+
+          command.dig.h                         No references.
+
+          command.dig.h.l                       No references.
+
+
+      t   command.dig                           ./commands/dig/d
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'egg' command;
-        /egg                  an administrator command that allows for the forced implantation and
+      /egg                    Contains code pertinent to the implementation of the 'egg' command;
+                              an administrator command that allows for the forced implantation and
                               fertilization of an egg in the womb of the target gylf without
                               having to go through the normal channels of fertilization through
                               mating.
 
+      b   egg.data                              ./commands/egg/b
+                                                ./functions/create.character/t
+
+          egg.signature                         No references.
+
+          egg.item.id                           No references.
+
+          egg.area.id                           ./functions/create.character/t
+
+          egg.mother.l                          ./functions/create.character/t
+
+          egg.mother                            ./functions/create.character/t
+                                                ./functions/dna.lab/t
+
+          egg.father.l                          ./functions/create.character/t
+
+          egg.father                            ./functions/create.character/t
+                                                ./functions/dna.lab/t
+
+          egg.data.l                            No references.
+
+
+      d   egg.hatch.message                     ./commands/egg/d
+                                                ./functions/create.character/t
+
+          egg.hatch.message.l                   ./functions/create.character/t
+
+          socket.data.command.egg.help          ./commands/egg/d
+
+          socket.data.command.egg.help.l        ./commands/egg/d
+
+          command.egg.w                         ./functions/d
+
+          command.egg.s                         ./commands/egg/d
+
+          command.egg.l                         ./commands/egg/d
+
+          command.egg.p                         No references.
+
+          command.egg.h                         No references.
+
+          command.egg.h.l                       No references.
+
+
+      t   command.egg                           ./commands/egg/d
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'gylf' command;
-        /gylf                 an administrator command that allows for the creation of a complete
+      /gylf                   Contains code pertinent to the implementation of the 'gylf' command;
+                              an administrator command that allows for the creation of a complete
                               new gylf without the intervening process of mating, fertilization,
                               gestation, laying, and hatching.
 
+      b   No defined symbols.
+
+
+      d   socket.data.command.gylf.help         ./commands/gylf/d
+
+          socket.data.command.gylf.help.l       ./commands/gylf/d
+
+          command.gylf.w                        ./functions/d
+
+          command.gylf.s                        ./commands/gylf/d
+
+          command.gylf.l                        ./commands/gylf/d
+
+          command.gylf.p                        No references.
+
+          command.gylf.h                        No references.
+
+          command.gylf.h.l                      No references.
+
+
+      t   command.gylf                          ./commands/gylf/d
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'help' command;
-        /help                 a participant-level command whose sole purpose is to display
+      /help                   Contains code pertinent to the implementation of the 'help' command;
+                              a participant-level command whose sole purpose is to display
                               context-sensitive help.
 
+      b   No defined symbols.
+
+
+      d   socket.data.bad.help.command.error    ./commands/help/d
+                                                ./functions/write.bad.help.command.error/t
+
+          socket.data.bad.help.command.error.l  ./functions/write.bad.help.command.error/t
+
+          socket.data.command.help.help         ./commands/help/d
+
+          socket.data.command.help.help.l       ./commands/help/d
+
+          command.help.w                        ./functions/d
+
+          command.help.s                        ./commands/help/d
+
+          command.help.l                        ./commands/help/d
+
+          command.help.p                        No references.
+
+          command.help.h                        No references.
+
+          command.help.h.l                      No references.
+
+
+      t   command.help                          ./commands/help/d
+
+          command.help.parse.arguments          ./commands/help/t
+
+          command.help.found.command            ./comamnds/help/t
+
+          command.help.next.command.jcxnz       ./commands/help/t
+
+          command.help.next.command             ./commands/help/t
+
+          command.help.no.arguments             ./commands/help/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'logout'
-        /logout               command; a common command that removes a participant from the server
+      /logout                 Contains code pertinent to the implementation of the 'logout'
+                              command; a common command that removes a participant from the server
                               and leaves their avatar under the control of an artificial
                               intelligence.
 
+      b   No defined symbols.
+
+
+      d   socket.data.command.logout.help       ./commands/logout/d
+
+          socket.data.command.logout.help.l     ./commands/logout/d
+
+          command.logout.w                      ./functions/d
+
+          command.logout.s                      ./commands/logout/d
+
+          command.logout.l                      ./commands/logout/d
+
+          command.logout.p                      No references.
+
+          command.logout.h                      No references.
+
+          command.logout.h.l                    No references.
+
+
+      t   command.logout                        ./commands/logout/d
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'look' command;
-        /look                 a participant-level command that displays information about the
+      /look                   Contains code pertinent to the implementation of the 'look' command;
+                              a participant-level command that displays information about the
                               target.
 
+      b   No defined symbols.
+
+
+      d   local.data.bad.area.id.indicator.message    ./commands/look/d
+                                                      ./commands/look/t
+
+          local.data.bad.area.id.indicator.message.l  ./commands/look/t
+
+          socket.data.command.look.help         ./commands/look/d
+
+          socket.data.command.look.help.l       ./commands/look/d
+
+          command.look.w                        ./functions/d
+
+          command.look.s                        ./commands/look/d
+
+          command.look.l                        ./commands/look/d
+
+          command.look.p                        No references.
+
+          command.look.h                        No references.
+
+          command.look.h.l                      No references.
+
+
+      t   command.look                          ./commands/look/d
+
+          command.look.targetted.good.descriptor  ./commands/look/t
+
+          command.look.targetted.find.target    ./commands/look/t
+
+          command.look.default                  ./commands/look/t
+
+          command.look.bad.descriptor           ./commands/look/t
+
+          command.look.default.good.descriptor  ./commands/look/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'shutdown'
-        /shutdown             command; an administrator command that shuts down the server from
+      /shutdown               Contains code pertinent to the implementation of the 'shutdown'
+                              command; an administrator command that shuts down the server from
                               within the environment.
 
+      b   No defined symbols.
+
+
+      d   local.data.smoked.sockets.message     ./commands/shutdown/d
+                                                ./commands/shutdown/t
+
+          local.data.smoked.sockets.message.l   ./commands/shutdown/t
+
+          local.data.shutdown.message           ./commands/shutdown/d
+                                                ./commands/shutdown/t
+
+          local.data.shutdown.message.l         ./commands/shutdown/t
+
+          socket.data.shutdown.message          ./commands/shutdown/d
+                                                ./commands/shutdown/t
+
+          socket.data.shutdown.message.l        ./commands/shutdown/t
+
+          socket.data.command.shutdown.help     ./commands/shutdown/d
+
+          socket.data.command.shutdown.help.l   ./commands/shutdown/d
+
+          command.shutdown.w                    ./functions/d
+
+          command.shutdown.s                    ./commands/shutdown/d
+
+          command.shutdown.l                    ./commands/shutdown/d
+
+          command.shutdown.p                    No references.
+
+          command.shutdown.h                    No references.
+
+          command.shutdown.h.l                  No references.
+
+
+      t   command.shutdown                      ./commands/shutdown/d
+
+          command.shutdown.admin                ./commands/shutdown/t
+
+          command.shutdown.loop                 ./commands/shutdown/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./commands              Contains code pertinent to the implementation of the 'think'
-        /think                command; a participant-level command that allows for communication
+      /think                  Contains code pertinent to the implementation of the 'think'
+                              command; a participant-level command that allows for communication
                               between players in a local environment.
+
+      b   No defined symbols.
+
+
+      d   socket.data.command.think.help        ./commands/think/d
+
+          socket.data.command.think.help.l      ./commands/think/d
+
+          command.think.w                       ./functions/d
+
+          command.think.s                       ./commands/think/d
+
+          command.think.l                       ./commands/think/d
+
+          command.think.p                       No references.
+
+          command.think.h                       No references.
+
+          command.think.h.l                     No references.
+
+
+      t   command.think                         ./commands/think/d
+
+          command.think.untargetted             ./commands/think/t
 
     ==============================================================================================
     
     ./functions               Contains code pertaining to the background mechanisms that
                               contribute to the overall functioning of the codebase. Things like
                               writing to files, reading user input, etc... are all kept here.
-    
+
+      b   socket.filename.entry.l               ./functions/b
+                                                ./functions/main/system.check.b
+                                                ./functions/socket/clean.socket/t
+
+          sockets.left                          ./functions/main/active.socket.poll/t
+
+          sys.system.call                       ./functions/bail/t
+                                                ./functions/close.descriptor/t
+                                                ./functions/create.file/t
+                                                ./functions/get.ticks/t
+                                                ./functions/open.descriptor/t
+                                                ./functions/poll.descriptor/t
+                                                ./functions/read.descriptor/t
+                                                ./functions/socket/accept.socket/t
+                                                ./functions/socket/bind.socket/t
+                                                ./functions/socket/clean.socket/t
+                                                ./functions/socket/create.socket/t
+                                                ./functions/socket/listen.socket/t
+                                                ./functions/socket/recv.from.socket/t
+                                                ./functions/socket/socket.send/t
+                                                ./functions/time.in.seconds.since.the.epoch/t
+                                                ./functions/write.descriptor/t
+
+          sys.read.write                        ./functions/create.file/t
+                                                ./functions/open.descriptor/t
+
+          sys.lseek.call                        No references.
+
+          sys.lseek.current.position            No references.
+
+          sys.lseek.eof                         No references.
+
+          sys.no.bytes.read                     No references.
+
+          id.size                               ./functions/create.character/t
+
+          new.char.sig.l                        ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+          buffer.1.l                            ./functions/b
+                                                ./functions/socket/recv.from.socket/t
+
+          buffer.2.l                            ./functions/b
+
+          buffer.1                              ./commands/broadcast/t
+                                                ./commands/look/t
+                                                ./commands/think/t
+                                                ./functions/check.login/t
+                                                ./functions/create.lock.file/t
+                                                ./functions/create.character/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/recv.from.socket/t
+
+          buffer.2                              ./functions/create.character/t
+                                                ./functions/check.login/t
+                                                ./functions/get.character.data/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+
+          id.buffer                             No references.
+
+          new.char.sig.buffer                   No references.
+
+          external.data.buffer                  ./functions/clear.screen/t
+                                                ./functions/get.external.data/t
+
+          number.of.parents                     ./functions/dna.lab/t
+
+          child.attribute.computation.factor    ./functions/dna.lab/t
+
+          new.char.sig                          No references.
+
+          admin.character                       No references.
+
+          character.data                        ./functions/b
+                                                ./functions/create.character/t
+                                                ./functions/get.character.data/t
+
+          character.base.color                  ./functions/dna.lab/t
+
+          character.secondary.color             ./functions/dna.lab/t
+
+          character.base.fur.quality            ./functions/dna.lab/t
+
+          character.secondary.fur.quality       ./functions/dna.lab/t
+
+          character.strength                    ./functions/dna.lab/t
+
+          character.endurance                   ./functions/dna.lab/t
+
+          character.agility                     ./functions/dna.lab/t
+
+          character.mother.l                    ./functions/create.character/t
+
+          character.mother                      ./functions/create.character/t
+
+          character.father.l                    ./functions/create.character/t
+
+          character.father                      ./functions/create/character/t
+
+          character.age                         No references.
+
+          character.pouch                       ./functions/create.character/t
+
+          character.location.id                 No references.
+
+          character.right.ear.wound.level       No references.
+
+          character.left.ear.wound.level        No references.
+
+          character.right.eye.wound.level       No references.
+
+          character.left.eye.wound.level        No references.
+
+          character.scalp.wound.level           No references.
+
+          character.right.cheek.wound.level     No references.
+
+          character.left.cheek.wound.level      No references.
+
+          character.nose.wound.level            No references.
+
+          character.chin.wound.level            No references.
+
+          character.neck.wound.level            No references.
+
+          character.right.shoulder.wound.level  No references.
+
+          character.left.shoulder.wound.level   No references.
+
+          character.right.upper.arm.wound.level No references.
+
+          character.left.upper.arm.wound.level  No references.
+
+          character.right.forearm.wound.level   No references.
+
+          character.left.forearm.wound.level    No references.
+
+          character.right.wrist.wound.level     No references.
+
+          character.left.wrist.wound.level      No references.
+
+          character.right.hand.wound.level      No references,
+
+          character.left.hand.wound.level       No references.
+
+          character.right.index.finger.wound.level  No references.
+
+          character.right.middle.finger.wound.level No references.
+
+          character.right.ring.finger.wound.level   No references.
+
+          character.right.thumb.wound.level     No references.
+
+          character.left.index.finger.wound.level No references.
+
+          character.left.middle.finger.wound.level  No references.
+
+          character.left.ring.finger.wound.level  No references.
+
+          character.left.thumb.wound.level      No references.
+
+          character.right.chest.wound.level     No references.
+
+          character.left.chest.wound.level      No references.
+
+          character.back.wound.level            No references.
+
+          character.abdomen.wound.level         No references.
+
+          character.pouch.wound.level           No references.
+
+          character.right.outside.thigh.wound.level No references.
+
+          character.right.inside.thigh.wound.level  No references.
+
+          character.left.outside.thigh.wound.level  No references.
+
+          character.left.inside.thigh.wound.level   No references.
+
+          character.right.lower.leg.wound.level No references.
+
+          character.left.lower.leg.wound.level  No references.
+
+          character.right.dew.talon.wound.level No references.
+
+          character.right.main.fore.talon.wound.level No references.
+
+          character.right.middle.talon.wound.level  No references.
+
+          character.right.low.talon.wound.level No references.
+
+          character.left.dew.talon.wound.level  No references.
+
+          character.left.main.fore.talon.wound.level  No references.
+
+          character.left.middle.talon.wound.level No references.
+
+          character.left.low.talon.wound.level  No references.
+
+          character.brain.wound.level           No references.
+
+          character.neck.spinal.wound.level     No references.
+
+          character.back.spinal.wound.level     No references.
+
+          character.heart.wound.level           No references.
+
+          character.right.lung.wound.level      No references.
+
+          character.left.lung.wound.level       No references.
+
+          character.liver.wound.level           No references.
+
+          character.stomach.wound.level         No references.
+
+          character.large.intestine.wound.level No references.
+
+          character.small.intestine.wound.level No references.
+
+          character.ovary.wound.level           No references.
+
+          character.testicle.wound.level        No references.
+
+          character.inseminator.wound.level     No references.
+
+          head.worn.item.id                     No references.
+
+          right.ear.worn.item.id                No references.
+
+          left.ear.worn.item.id                 No references.
+
+          neck.worn.item.id                     No references.
+
+          chest.worn.item.id                    No references.
+
+          back.worn.item.id                     No references.
+
+          abdomen.worn.item.id                  No references.
+
+          right.thigh.worn.item.id              No references.
+
+          left.thigh.worn.item.id               No references.
+
+          right.hand.inventory.id               No references.
+
+          left.hand.inventory.id                No references.
+
+          administrative.byte                   ./functions/check.admin/t
+
+          character.data.l                      ./functions/get.character.data/t
+
+          character.father.data                 ./functions/b
+                                                ./functions/dna.lab/t
+
+          character.father.base.color           ./functions/dna.lab/t
+
+          character.father.secondary.color      ./functions/dna.lab/t
+
+          character.father.base.fur.quality     ./functions/dna.lab/t
+
+          character.father.secondary.fur.quality  ./functions/dna.lab/t
+
+          character.father.strength             ./functions/dna.lab/t
+
+          character.father.endurance            ./functions/dna.lab/t
+
+          character.father.agility              ./functions/dna.lab/t
+
+          character.father.dna.l                ./functions/dna.lab/t
+
+          character.mother.data                 ./functions/b
+                                                ./functions/dna.lab/t
+
+          character.mother.base.color           ./functions/dna.lab/t
+
+          character.mother.secondary.color      ./functions/dna.lab/t
+
+          character.mother.base.fur.quality     ./functions/dna.lab/t
+
+          character.mother.secondary.fur.quality  ./functions/dna.lab/t
+
+          character.mother.strength             ./functions/dna.lab/t
+
+          character.mother.endurance            ./functions/dna.lab/t
+
+          character.mother.agility              ./functions/dna.lab/t
+
+          character.mother.dna.l                ./functions/dna.lab/t
+
+          character.base.color.table            ./functions/b
+
+          character.base.color.number           ./functions/dna.lab/t
+
+          character.secondary.color.table       ./functions/b
+
+          character.secondary.color.number      ./functions/dna.lab/t
+
+          character.base.fur.quality.table      ./functions/b
+
+          character.base.fur.quality.number     ./functions/dna.lab/t
+
+          character.secondary.fur.quality.table ./functions/b
+
+          character.secondary.fur.quality.number  ./functions/dna.lab/t
+
+
+      d   area.filename                         ./commands/area/t
+                                                ./functions/create.character/t
+                                                ./functions/d
+
+          area.filename.l                       ./commands/area/t
+
+          command.table                         ./commands/help/t
+                                                ./functions/d
+                                                ./functions/main/participant.interaction
+                                                  /address.active.status/t
+
+          current.directory.marker              ./functions/check.login/t
+
+          current.directory.marker.l            ./functions/check.login/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+          external.data.cursor.home             ./functions/clear.screen/t
+
+          external.data.clear.screen            ./functions/clear.screen/t
+
+          item.filename                         ./functions/d
+
+          item.filename.l                       No references.
+
+          local.data.carriage.return            ./commands/area/t
+                                                ./functions/d
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/communications/send.to.world/t
+
+          local.data.carriage.return.l          ./commands/area/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/communications/send.to.world/t
+
+          local.data.listening.message          ./functions/d
+                                                ./functions/main/set.up.listener/t
+
+          local.data.listening.message.l        ./functions/main/set.up.listener/t
+
+          local.data.out.of.area.ids.message    ./functions/d
+                                                ./functions/create.character/t
+
+          local.data.out.of.area.ids.message.l  ./functions/create.character/t
+
+          local.data.session.open.error         ./functions/d
+
+          local.data.session.open.error.l       No references.
+
+          number.of.commands                    ./commands/help/t
+                                                ./functions/d
+                                                ./functions/main/participant.interaction
+                                                  /address.active.status/t
+
+          pouch.declaration                     ./functions/d
+                                                ./functions/create.character/t
+
+          pouch.declaration.l                   ./functions/create.character/t
+
+          pouch.description                     ./functions/d
+                                                ./functions/create.character/t
+
+          pouch.description.l                   ./functions/create.character/t
+
+       	  socket.data.session.open.error        ./functions/d
+
+      	  socket.data.session.open.error.l      No references.
+
+      	  socket.data.out.of.area.ids.message   ./functions/d
+      	                                        ./functions/create.character/t
+
+      	  socket.data.out.of.area.ids.message.l ./functions/create.character/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that collects arguments from the participant command
-        /aggregate.arguments  line and segregates them into a predefined structure.
+      /aggregate.arguments    Contains code that collects arguments from the participant command
+                              line and segregates them into a predefined structure.
+
+      b   arguments.packet                      ./functions/aggregate.arguments/b
+
+          arguments.num                         ./commands/help/t
+                                                ./functions/aggregate.arguments/t
+
+          argument.01.size                      ./functions/aggregate.arguments/b
+
+          argument.01.location                  ./commands/help/t
+                                                ./functions/aggregate.arguments/t
+
+          argument.entry.size                   ./functions/aggregate.arguments/t
+
+          argument.02.size                      No references.
+
+          argument.02.location                  No references.
+
+          argument.03.size                      No references.
+
+          argument.03.location                  No references.
+
+          argument.04.size                      No references.
+
+          argument.04.location                  No references.
+
+          argument.05.size                      No references.
+
+          argument.05.location                  No references.
+
+          argument.06.size                      No references.
+
+          argument.06.location                  No references.
+
+          argument.07.size                      No references.
+
+          argument.07.location                  No references.
+
+          argument.08.size                      No references.
+
+          argument.08.location                  No references.
+
+          argument.09.size                      No references.
+
+          argument.09.location                  No references.
+
+          argument.10.size                      No references.
+
+          argument.10.location                  No references.
+
+          arguments.packet.l                    No references.
+
+
+      d   No defined symbols.
+
+
+      t   aggregate.arguments                   ./functions/main/participant.interaction
+                                                  /address.active.status/t
+
+          aggregate.arguments.strip.command.loop  ./functions/aggregate.arguments/t
+
+          aggregate.arguments.argument.found      ./functions/aggregate.arguments/t
+
+          aggregate.arguments.loop                ./functions/aggregate.arguments/t
+
+          aggregate.arguments.prep.for.next.argument  ./functions/aggregate.arguments/t
+
+          aggregate.arguments.arguments.aggregated  ./functions/aggregate.arguments/t
+
+          aggregate.arguments.quote.mode        ./functions/aggregate.arguments/t
+
+          aggregate.arguments.quote.mode.l      ./functions/aggregate.arguments/t
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that suspends execution of the code, unloads from
-        /bail                 memory, and returns control to Linux.
+      /bail                   Contains code that suspends execution of the code, unloads from
+                              memory, and returns control to Linux.
+
+      b   sys.exit.call                         ./functions/bail/t
+
+
+      d   No defined symbols.
+
+
+      t   bail                                  ./commands/shutdown/t
+                                                ./functions/socket/socket.errors/t
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that strips buffered data of carriage returns and line
-        /buffer.strip         feeds and replaces them with zeroes.
+      /buffer.strip           Contains code that strips buffered data of carriage returns and line
+                              feeds and replaces them with zeroes.
+
+      b   No defined symbols.
+
+
+      d   No defined symbols.
+
+
+      t   buffer.strip                          ./functions/socket/recv.from.socket/t
+
+          strip.loop                            ./functions/buffer.strip/t
+
+          strip.char                            ./functions/buffer.strip/t
+
+          strip.done                            ./functions/buffer.strip/t
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that checks to see if the user on the current socket
-        /check.admin          has administrative privileges.
+      /check.admin            Contains code that checks to see if the user on the current socket
+                              has administrative privileges.
+
+      b   No defined symbols.
+
+
+      d   No defined symbols.
+
+
+      t   check.admin                           ./commands/area/t
+                                                ./commands/broadcast/t
+                                                ./commands/shutdown/t
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that checks to see if a user attempting to log in is
-        /check.login          already logged in from a different location.
+      /check.login            Contains code that checks to see if a user attempting to log in is
+                              already logged in from a different location.
+
+      b   No defined symbols.
+
+
+      d   No defined symbols.
+
+
+      t   check.login                           ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+          check.login.logged                    ./functions/check.login/t
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that remotely clears the user's screen and places
-        /clear.screen         their cursor in the upper left hand corner.
+      /clear.screen           Contains code that remotely clears the user's screen and places
+                              their cursor in the upper left hand corner.
+
+      b   No defined symbols.
+
+
+      d   No defined symbols.
+
+
+      t   clear.screen                          ./functions/main/listening.socket.poll/t
+                                                ./functions/write.welcome/t
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that tells linux that we're finished with a
-        /close.descriptor     descriptor, causing it to become disassociated with the dataset to
+      /close.descriptor       Contains code that tells linux that we're finished with a
+                              descriptor, causing it to become disassociated with the dataset to
                               which it currently points.
 
-    ----------------------------------------------------------------------------------------------
+      b   sys.close.call                        ./functions/close.descriptor/t
 
-      ./functions             Contains code that builds out character data on the basis of DNA
-        /create.character     sequences left behind by either parent on the associated egg.
 
-    ----------------------------------------------------------------------------------------------
+      d   No defined symbols.
 
-      ./functions             Contains code that builds a dataset on the drive, to which it
-        /create.file          associates a logical descriptor.
 
-    ----------------------------------------------------------------------------------------------
-
-      ./functions             Contains code that creates a lock file for use in preventing
-        /create.lock.file     multiple instances of the same login from different locations.
-
-    ----------------------------------------------------------------------------------------------
-
-      ./functions             Contains code which combines the DNA left behind on an egg by both
-        /dna.lab              parents to create an entirely new gylf.
-
-    ----------------------------------------------------------------------------------------------
-
-      ./functions             Contains code which populates the character data in memory from file
-        /get.character.data   for the character on the current socket.
+      t   close.descriptor                      ./commands/area/t
+                                                ./commands/look/t                                                
+                                                ./functions/check.login/t
+                                                ./functions/create.character/t
+                                                ./functions/create.lock.file/t
+                                                ./functions/dna.lab/t
+                                                ./functions/get.character.data/t
+                                                ./functions/get.external.data/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/socket/clean.socket/t
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code which reads data that exists outside the codebase and
-        /get.external.data    memory.
+      /create.character       Contains code that builds out character data on the basis of DNA
+                              sequences left behind by either parent on the associated egg.
+
+      b   No defined symbols.
+
+
+      d   No defined symbols.
+
+
+      t   area.filename.increment.cmp           ./functions/create.character/t
+
+          area.filename.next.digit.increment    ./functions/create.character/t
+
+          area.filename.out.of.ids              ./functions/create.character/t
+
+          build.pouch                           ./functions/create.character/t
+
+          build.pouch.area.name                 ./functions/create.character/t
+
+          build.pouch.found.open.id             ./functions/create.character/t
+
+          build.pouch.increment.byte            ./functions/create.character/t
+
+          create.character                      ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that returns the number of clock ticks since the
-        /get.ticks            environment was booted.
+      /create.file            Contains code that builds a dataset on the drive, to which it
+                              associates a logical descriptor.
+
+      b   No defined symbols.
+
+
+      d   No defined symbols.
+
+
+      t   create.file                           ./commands/area/t
+                                                ./functions/create.lock.file/t
+                                                ./functions/create.character/t
+
+    ----------------------------------------------------------------------------------------------
+
+      /create.lock.file       Contains code that creates a lock file for use in preventing
+                              multiple instances of the same login from different locations.
+
+      b   No defined symbols.
+
+
+      d   lock.extension                        ./functions/check.login/t
+                                                ./functions/create.lock.file/t
+                                                ./functions/socket/clean.socket/t
+
+          lock.extension.l                      ./functions/check.login/t
+                                                ./functions/create.lock.file/t
+                                                ./functions/socket/clean.socket/t
+
+      t   create.lock.file                      ./functions/main/participant.interaction
+                                                  /address.login.status/t
+
+    ----------------------------------------------------------------------------------------------
+
+      /dna.lab                Contains code which combines the DNA left behind on an egg by both
+                              parents to create an entirely new gylf.
+
+      b   No defined symbols.
+
+
+      d   No defined symbols.
+
+
+      t   dna.lab                               ./functions/create.character/t
+
+          dna.lab.agility                       ./functions/dna.lab/t
+
+          dna.lab.base.color                    ./functions/dna.lab/t
+
+          dna.lab.base.fur.quality              ./functions/dna.lab/t
+
+          dna.lab.endurance                     ./functions/dna.lab/t
+
+          dna.lab.father.base.color             ./functions/dna.lab/t
+
+          dna.lab.father.base.fur.quality       ./functions/dna.lab/t
+
+          dna.lab.father.secondary.color        ./functions/dna.lab/t
+
+          dna.lab.father.secondary.fur.quality  ./functions/dna.lab/t
+
+          dna.lab.mother.base.color             ./functions/dna.lab/t
+
+          dna.lab.mother.base.fur.quality       ./functions/dna.lab/t
+
+          dna.lab.mother.secondary.color        ./functions/dna.lab/t
+
+          dna.lab.mother.secondary.fur.quality  ./functions/dna.lab/t
+
+          dna.lab.mutation.base.color           ./functions/dna.lab/t
+
+          dna.lab.mutation.base.color.fix       ./functions/dna.lab/t
+
+          dna.lab.mutation.base.fur.quality     ./functions/dna.lab/t
+
+          dna.lab.mutation.base.fur.quality.fix ./functions/dna.lab/t
+
+          dna.lab.mutation.secondary.color      ./functions/dna.lab/t
+
+          dna.lab.mutation.secondary.color.fix  ./functions/dna.lab/t
+
+          dna.lab.mutation.secondary.fur.quality  ./functions/dna.lab/t
+
+          dna.lab.mutation.secondary.fur.quality.fix  ./functions/dna.lab/t
+
+          dna.lab.secondary.color               ./functions/dna.lab/t
+
+          dna.lab.secondary.fur.quality         ./functions/dna.lab/t
+
+          dna.lab.strength                      ./functions/dna.lab/t
+
+    ----------------------------------------------------------------------------------------------
+
+      /get.character.data     Contains code which populates the character data in memory from file
+                              for the character on the current socket.
+
+      b   No defined symbols.
+
+
+      d   No defined symbols.
+
+
+      t   get.character.data                    ./functions/check.admin/t
+
+    ----------------------------------------------------------------------------------------------
+
+      /get.external.data      Contains code which reads data that exists outside the codebase and
+                              memory.
+
+      b   No defined symbols.
+
+
+      d   No defined symbols.
+
+
+      t   get.external.data                     ./functions/clear.screen/t
+
+    ----------------------------------------------------------------------------------------------
+
+      /get.ticks              Contains code that returns the number of clock ticks since the
+                              environment was booted.
+
+      b   sys.get.ticks                         ./functions/get.ticks/t
+
+
+      d   No defined symbols.
+
+
+      t   get.ticks                             ./functions/dna.lab/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -180,10 +1316,25 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/main      Contains code that runs through the list of potentially active
-          /active.socket.poll connections and checks each of them for activity. Upon discovering
+        /active.socket.poll   Contains code that runs through the list of potentially active
+                              connections and checks each of them for activity. Upon discovering
                               activity in a connection, the function then passes control off to
                               the answer.active.socket function for more specialized treatment.
+
+        b   No defines symbols.
+
+
+        d   socket.data.active.requested        No references.
+
+            socket.data.active.returned         No references.
+
+            socket.data.active.socket.descriptor  ./functions/main/active.socket.poll/t
+
+            socket.data.event.requested         No references.
+
+            socket.data.event.returned          No references.
+
+            socket.data.event.socket.descriptor ./functions/socket/bind.socket/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -243,33 +1394,140 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that associates a logical descriptor with an existing
-        /open.descriptor      dataset on disk. If the code is unable to associate a descriptor, it
+      /open.descriptor        Contains code that associates a logical descriptor with an existing
+                              dataset on disk. If the code is unable to associate a descriptor, it
                               instead returns an error code, which is detectable via a check on
                               the sign of eax.
 
+      b   sys.open.call                         ./functions/open.descriptor/t
+
+          sys.read.write                        ./functions/create.file/t
+                                                ./functions/open.descriptor/t
+
+
+      d   No defined symbols.
+
+
+      t   open.descriptor                       ./commands/area/t
+                                                ./commands/look/t
+                                                ./functions/check.login/t
+                                                ./functions/create.character/t
+                                                ./functions/dna.lab/t
+                                                ./functions/get.character.data/t
+                                                ./functions/get.external.data/t
+                                                ./functions/main/participant.interaction/address.set.passphrase.status/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that uses a logical descriptor associated with a
-        /poll.descriptor      Berkeley Socket to ask the socket whether or not there is currently
+      /poll.descriptor        Contains code that uses a logical descriptor associated with a
+                              Berkeley Socket to ask the socket whether or not there is currently
                               data on it that requires the attention of a handler.
 
+      b   sys.poll.call                         ./functions/poll.descriptor/t
+
+
+      d   No defined symbols.
+
+
+      t   poll.descriptor                       ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that prints a socket number associated with an event
-        /print.socket.number  in the administrator console.
+      /print.socket.number    Contains code that prints a socket number associated with an event
+                              in the administrator console.
+
+      b   No defined symbols.
+
+
+      d   No defined symbols.
+
+
+      t   print.socket.number                   ./functions/socket/answer.active.socket/t
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that pulls data from an existing dataset using a
-        /read.descriptor      logical descriptor previously associated with the dataset in
+      /read.descriptor        Contains code that pulls data from an existing dataset using a
+                              logical descriptor previously associated with the dataset in
                               question.
 
+      b   sys.read.call                         ./functions/read.descriptor/t
+
+
+      d   No defined symbols.
+
+
+      t   read.descriptor                       ./commands/look/t
+                                                ./functions/create.character/t
+                                                ./functions/dna.lab/t
+                                                ./functions/get.character.data/t
+                                                ./functions/get.external.data/t
+                                                ./functions/main/participant.interaction/address.login.status/t
+                                                ./functions/main/participant.interaction/address.passphrase.status/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that sends a vt100 escape sequence to the remote
-        /set.single.attribute terminal which changes a single attribute about the printed text.
+      /set.single.attribute   Contains code that sends a vt100 escape sequence to the remote
+                              terminal which changes a single attribute about the printed text.
                               Attributes can be found in external data.
+
+      b   No defined symbols.
+
+
+      d   set.att.b.blk                         No references.
+
+          set.att.b.blu                         No references.
+
+          set.att.b.cyn                         No references.
+
+          set.att.b.grn                         No references.
+
+          set.att.b.mag                         No references.
+
+          set.att.b.red                         No references.
+
+          set.att.b.yel                         No references.
+
+          set.att.b.wht                         No references.
+
+          set.att.bnk                           No references.
+
+          set.att.brt                           No references.
+
+          set.att.dim                           No references.
+
+          set.att.f.blk                         No references.
+
+          set.att.f.blu                         No references.
+
+          set.att.f.cyn                         No references.
+
+          set.att.f.grn                         No references.
+
+          set.att.f.mag                         No references.
+
+          set.att.f.red                         No references.
+
+          set.att.f.yel                         No references.
+
+          set.att.f.wht                         No references.
+
+          set.att.hdn                           No references.
+
+          set.att.mod.1                         ./functions/set.single.attribute/t
+
+          set.att.mod.2                         No references.
+
+          set.att.mod.3                         ./functions/set.single.attribute/t
+
+          set.att.rst                           No references.
+
+          set.att.rvs                           No references.
+
+          set.att.und                           No references.
+
+
+      t   set.single.attribute                  No references.
 
     ----------------------------------------------------------------------------------------------
 
@@ -356,32 +1614,113 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that returns the time in seconds since the epoch.
-        /time.in.seconds.since.the.epoch
+      /time.in.seconds.since.the.epoch  Contains code that returns the time in seconds since the
+                                        epoch.
+
+      b   sys.get.time.in.seconds.since.the.epoch ./functions/time.in.seconds.since.the.epoch/t
+
+
+      d   No defined symbols.
+
+
+      t   time.in.seconds.since.epoch           No references.
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions                 Contains code that lets the user know whan they've attempted to
-        /write.bad.command.error  send a string to the server that doesn't correspond to a
+      /write.bad.command.error    Contains code that lets the user know whan they've attempted to
+                                  send a string to the server that doesn't correspond to a
                                   recognized command.
 
+      b   No defined symbols.
+
+
+      d   socket.data.bad.command.error         ./functions/write.bad.command.error/d
+
+
+      t   write.bad.command.error               ./commands/ai/t
+                                                ./commands/dig/t
+                                                ./commands/egg/t
+                                                ./commands/gylf/t
+                                                ./commands/help/t
+                                                ./commands/logout/t
+                                                ./functions/main/participant.interaction
+                                                  /address.active.status/t
+
     ----------------------------------------------------------------------------------------------
 
-      ./functions                     Contains code that lets the user know when they've requested
-        /write.bad.help.command.error help for a command that does not belong to the recognized
-                                      command set.
+      /write.bad.help.command.error Contains code that lets the user know when they've requested
+                                    help for a command that does not belong to the recognized
+                                    command set.
+
+      b   No defined symbols.
+
+
+      d   No defined symbols.
+
+
+      t   write.bad.help.command.error          ./commands/help/t
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that adds data to an existing dataset on disk using a
-        /write.descriptor     logical descriptor previously associated with the dataset.
+      /write.descriptor       Contains code that adds data to an existing dataset on disk using a
+                              logical descriptor previously associated with the dataset.
+
+      b   sys.write.call                        ./functions/write.descriptor/t
+
+          sys.standard.output                   ./functions/write.descriptor/d
+                                                ./functions/write.descriptor/t
+
+
+      d   file.indicator                        ./commands/area/t
+                                                ./functions/write.descriptor/t
+                                                ./functions/create.character/t
+
+
+      t   write.descriptor                      ./commands/shutdown/t
+                                                ./commands/look/t
+                                                ./commands/area/t
+                                                ./functions/print.socket.number/t
+                                                ./functions/main/system.check/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/set.up.listener/t
+                                                ./functions/socket/socket.errors/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/create.character/t
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that displays a command prompt to the user.
-        /write.prompt
+      /write.prompt           Contains code that displays a command prompt to the user.
+
+      b   No defined symbols.
+
+
+      d   prompt.message                        ./functions/write.prompt/d
+                                                ./functions/write.prompt/t
+
+          prompt.message.l                      ./functions/write.prompt/t
+
+
+      t   write.prompt                          ./commands/area/t
+                                                ./commands/look/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/write.bad.help.command.error/t
+                                                
 
     ----------------------------------------------------------------------------------------------
 
-      ./functions             Contains code that builds and displays the initial welcome screen to
-        /write.welcome        the user.
+      /write.welcome          Contains code that builds and displays the initial welcome screen to
+                              the user.
+
+      b   No defined symbols.
+
+
+      d   No defined symbols.
+
+
+      t   write.welcome                         ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+
