@@ -84,10 +84,9 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.look.targetted.good.descriptor: mov   ebx, eax                                        ; Descriptor associated with area id.
-                                            mov   ecx, area.header                                ; ecx - Pointer to storage for area header.
-                                            mov   edx, area.header.l                              ; edx - Length of area header.
-
+    command.look.targetted.good.descriptor: push  area.header.l                                   ; Tell read.descriptor the length of the area header.
+                                            push  area.header                                     ; Point read.descriptor to storage for area header.
+                                            push  eax                                             ; Point read.descriptor to descriptor associated with area id.
                                             call  read.descriptor                                 ; Read area header from descriptor associated with area id.
 
                                             mov   ecx, dword [area.num.contained.items]           ; ecx - number of items to check targetting argument against.
@@ -96,9 +95,9 @@
 
     command.look.targetted.find.target:     push  ecx                                             ; Preserve number of items.
 
-                                            mov   ecx, buffer.1                                   ; ecx - Pointer to buffer into which to read item id.
-                                            mov   edx, dword.l                                    ; edx - Length of item id.
-
+                                            push  dword.l                                         ; Tell read.descriptor the length of item id.
+                                            push  buffer.1                                        ; Point read.descriptor to buffer into which to read item id.
+                                            push  ebx                                             ; Point read.descriptor to descriptor associated with area id.
                                             call  read.descriptor                                 ; Read an item id.
 
                                             pop   ecx                                             ; Restore number of items.
@@ -134,21 +133,24 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.look.default.good.descriptor:   mov   ebx, eax                                        ; ebx - Descriptor associated with area file.
-                                            mov   ecx, buffer.1                                   ; ecx - Pointer to buffer into which to read the length of the area name entry.
-                                            mov   edx, dword.l                                    ; edx - Dword length.
+    command.look.default.good.descriptor:   push  dword.l                                         ; Tell read.descriptor the length of the message.
+                                            push  buffer.1                                        ; Point read.descriptor to buffer into which to read the length of the area name entry.
+                                            push  eax                                             ; Point read.descriptor to descriptor associated with area file.
                                             call  read.descriptor                                 ; Read the length of the name entry.
 
-                                            mov   ecx, buffer.1                                   ; ecx - Pointer to buffer into which to read the name entry.
-                                            mov   edx, dword [buffer.1]                           ; edx - Length of the name entry.
+                                            push  dword [buffer.1]                                ; Tell read.descriptor the length of the name entry.
+                                            push  buffer.1                                        ; Point read.descriptor to buffer into which to read the name entry.
+                                            push  ebx                                             ; Point read.descriptor to descriptor associated with the area file.
                                             call  read.descriptor                                 ; Read the name entry.
 
-                                            mov   ecx, buffer.1                                   ; ecx - Pointer to buffer into which to read the length of the description entry.
-                                            mov   edx, dword.l                                    ; edx - Dword length.
+                                            push  dword.l                                         ; Tell read.descriptor the length of the message.
+                                            push  buffer.1                                        ; Point read.descriptor to buffer into which to read the length of the description entry.
+                                            push  ebx                                             ; Point read.descriptor to descriptor associated with the area file.
                                             call  read.descriptor                                 ; Read the length of the description entry.
 
-                                            mov   ecx, buffer.1                                   ; ecx - Pointer to buffer into which to read the description entry.
-                                            mov   edx, dword [buffer.1]                           ; edx - Length of the description entry.
+                                            push  dword [buffer.1]                                ; Tell read.descriptor the length of the description entry.
+                                            push  buffer.1                                        ; Point read.descriptor to buffer into which to read the description entry.
+                                            push  ebx                                             ; Point read.descriptor to descriptor associated with the area file.
                                             call  read.descriptor                                 ; Read the description entry.
 
                                             call  close.descriptor                                ; Disassociate the descriptor currently associated with the current area file.
