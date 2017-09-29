@@ -12,17 +12,13 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   connection.descriptor.index ./functions/main/system.check/b
-;
 ;   clear.screen                ./functions/clear.screen/t
 ;
 ;   write.prompt                ./functions/write.prompt/t
 ;
 
-    write.welcome: mov  eax, dword [esi+connection.descriptor.index] ; eax = Descriptor associated with target connection.
-                   call clear.screen                                 ; Clear the user's screen.
+    write.welcome: call clear.screen                                 ; Clear the user's screen.
             
-                   mov  eax, dword [esi+connection.descriptor.index] ; eax - Descriptor associated with target connection.
                    call write.prompt                                 ; Send the prompt to the user.
 
                    ret                                               ; Return to caller.
