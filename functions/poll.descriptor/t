@@ -15,6 +15,8 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   dword.l                       ./b
+;
 ;   sys.poll.call                 ./functions/poll.descriptor/b
 ;
 ;   sys.poll.number.of.structures ./functions/main/b
@@ -29,4 +31,4 @@
                       mov ecx, sys.poll.number.of.structures  ; ecx - Number of sockets to poll.
                       mov edx, sys.poll.timeout               ; edx - Length of time to wait on data from the socket.
                       int sys.system.call                     ; Ask a connected socket if it has data on it.
-                      ret 4                                   ; Return to caller.
+                      ret dword.l                             ; Return to caller.

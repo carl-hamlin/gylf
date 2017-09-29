@@ -21,6 +21,8 @@
 ;
 ;   area.filename                                       ./functions/d
 ;
+;   area.filename.l                                     ./functions/d
+;
 ;   area.name                                           ./commands/area/b
 ;
 ;   area.name.field.l                                   ./commands/area/b
@@ -32,10 +34,6 @@
 ;   available.areas                                     ./commands/area/b
 ;
 ;   buffer.1                                            ./functions/b
-;
-;   char.0                                              ./b
-;
-;   char.9                                              ./b
 ;
 ;   check.admin                                         ./functions/main/check.admin/t
 ;
@@ -73,19 +71,9 @@
 ;
 ;   create.file                                         ./functions/create.file/t
 ;
+;   dword.l                                             ./b
+;
 ;   open.descriptor                                     ./functions/open.descriptor/t
-;
-;   socket.data.area.created.message                    ./commands/area/d
-;
-;   socket.data.area.created.message.l                  ./commands/area/d
-;
-;   socket.data.command.area.help                       ./commands/area/d
-;
-;   socket.data.command.area.help.l                     ./commands/area/d
-;
-;   socket.data.out.of.areas.message                    ./commands/area/d
-;
-;   socket.data.out.of.areas.message.l                  ./commands/area/d
 ;
 ;   socket.send                                         ./functions/socket/socket.send/t
 ;
@@ -98,6 +86,12 @@
 ;   text.data.index.local.data.area.created.message     ./functions/main/text.init/b
 ;
 ;   text.data.index.local.data.out.of.areas.message     ./functions/main/text.init/b
+;
+;   text.data.index.socket.data.area.created.message    ./functions/main/text.init/b
+;
+;   text.data.index.socket.data.command.area.help       ./functions/main/text.init/b
+;
+;   text.data.index.socket.data.out.of.areas.message    ./functions/main/text,init/b
 ;
 ;   word.l                                              ./b
 ;
@@ -127,8 +121,7 @@
                                         push  dword [text.data.index.local.data.area.bad.syntax.message]                ; Point write.console to local message indicating an admin bounced on syntax.
                                         call write.console                                                              ; Tell the admin there's someone online with admin priviledges that needs an education.
 
-                                        push  socket.data.command.area.help.l                                           ; Store length of message for send function.
-                                        push  socket.data.command.area.help                                             ; Point send function to message indicating that the command was bad.
+                                        push  dword [text.data.index.socket.data.command.area.help]                     ; Point send function to message indicating that the command was bad.
                                         call socket.send                                                                ; Tell the user that the command doesn't have a current analogue.
 
                                         ret                                                                             ; Return to caller.
@@ -280,8 +273,7 @@
                                         push  dword [text.data.index.local.data.carriage.return.message]                ; Pointer to carriage return.
                                         call write.console                                                              ; Send a carriage return to the local console.
 
-                                        push  socket.data.area.created.message.l                                        ; Provide length of message.
-                                        push  socket.data.area.created.message                                          ; Point socket.send to area creation success message.
+                                        push  dword [text.data.index.socket.data.area.created.message]                  ; Point socket.send to area creation success message.
                                         call socket.send                                                                ; Send the success message to the socket.
 
                                         call write.prompt                                                               ; Restore the user's prompt.
@@ -298,7 +290,7 @@
                                         add  ebx, area.filename.l                                                       ; ebx - Pointer to byte immediately following area filename.
                                         sub  ebx, word.l                                                                ; ebx - Pointer to least significant place in area filename.
 
-                                        cmp  byte [ebx], char.9                                                         ; Is the byte at [ebx] a "9"?
+                                        cmp  byte [ebx], "9"                                                            ; Is the byte at [ebx] a "9"?
                                         jz   command.area.filename.finder                                               ; Yes. Go zero it out and address the next place up.
 
                                         jmp  command.area.prep.next                                                     ; Increment the byte at [ebx], restore ebx to the last place, and check the resulting filename.
@@ -308,11 +300,11 @@
     command.area.filename.finder:       cmp  eax, 08h                                                                   ; Have we run out of areas?
                                         jz   command.area.filename.out.of.areas                                         ; Yes. Go take care of that.
 
-                                        mov  byte [ebx], char.0                                                         ; Zero out the byte at [ebx].
+                                        mov  byte [ebx], "0"                                                            ; Zero out the byte at [ebx].
                                         dec  ebx                                                                        ; ebx - Pointer to next place up.
                                         inc  eax                                                                        ; eax - Count of places.
 
-                                        cmp  byte [ebx], char.9                                                         ; Is the byte at [ebx] a "9"?
+                                        cmp  byte [ebx], "9"                                                            ; Is the byte at [ebx] a "9"?
                                         jz   command.area.filename.finder                                               ; Yes. Go zero it out and address the next place up.
 
                                         jmp  command.area.prep.next                                                     ; Increment the byte at [ebx], restore ebx to the last place, and check the resulting filename.
@@ -322,8 +314,7 @@
     command.area.filename.out.of.areas: push  dword [text.data.index.local.data.area.out.of.areas.message]              ; Pointer to message indicating we're out of area files.
                                         call write.console                                                              ; Tell the admin we're out of area files.
 
-                                        push  socket.data.out.of.areas.message.l                                        ; Provide length of message.
-                                        push  socket.data.out.of.areas.message                                          ; Point socket.send to out of areas message.
+                                        push  dword [text.data.index.socket.data.out.of.areas.message]                  ; Point socket.send to out of areas message.
                                         call socket.send                                                                ; Send the out of areas message to the socket.
 
                                         call write.prompt                                                               ; Restore the user's prompt.
