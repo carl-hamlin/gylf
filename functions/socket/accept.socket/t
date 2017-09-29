@@ -4,6 +4,10 @@
 ;
 ;   This function calls the linux kernel to associate a descriptor with an incoming Berkeley Socket.
 ;
+;   Assumptions:  Populated socket.data.accept.socket.descriptor.
+;
+;   Returns:      None, although the passed socket will have been accepted and will be ready to be communicated upon.
+;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
@@ -17,14 +21,14 @@
 ;   sys.system.call                       ./functions/b
 ;
 
-    accept.socket:  mov     eax, sys.socket.call                        ; eax = linux socket call indicator.
-                    mov     ebx, sys.socket.accept                      ; ebx = linux socket call accept socket indicator.
+    accept.socket:  mov eax, sys.socket.call                      ; eax - Linux socket call indicator.
+                    mov ebx, sys.socket.accept                    ; ebx - Linux socket call accept socket indicator.
 
-                    mov     ecx, socket.data.accept.socket.descriptor   ; ecx = pointer to arguments package for linux kernel accept socket function. Package contents are as follows:
-                                                                        ;
-                                                                        ;     dword    descriptor of listening socket which detected the incoming connection.
-                                                                        ;     dword    pointer to sockaddr structure.
-                                                                        ;     dword    storage for descriptor of accepted socket.
+                    mov ecx, socket.data.accept.socket.descriptor ; ecx - Pointer to arguments package for linux kernel accept socket function. Package contents are as follows:
+                                                                  ;
+                                                                  ;     dword    descriptor of listening socket which detected the incoming connection.
+                                                                  ;     dword    pointer to sockaddr structure.
+                                                                  ;     dword    storage for descriptor of accepted socket.
 
-                    int     sys.system.call                             ; Accept the new connection.
-                    ret                                                 ; Return to caller.
+                    int sys.system.call                           ; Accept the new connection.
+                    ret                                           ; Return to caller.
