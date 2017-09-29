@@ -1,0 +1,21 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/dig/e
+;
+;   This file defines the external textual data associated with the command 'dig'.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
+
+    socket.data.command.dig.help.l    dd  socket.data.command.dig.help.end                                                                        ; Length of message.
+	  socket.data.command.dig.help      db  "  dig", 0Ah, 0Dh, 0Ah, 0Dh                                                                             ; Command dig help message.
+	                                    db  "  Syntax: dig <direction, full or abbreviated to first letter>", 0Ah, 0Dh, 0Ah, 0Dh
+	                                    db  "  Sets an entity to digging a new area in the specified direction, pursuant to a series of", 0Ah, 0Dh
+	                                    db  "  environmental checks to ensure that it makes sense for the character to be able to dig",0Ah, 0Dh
+	                                    db  "  in the specified direction.", 0Ah, 0Dh, 0Ah, 0Dh, "> "	                                        
+	  socket.data.command.dig.help.end  equ $-socket.data.command.dig.help                                                                          ; Pointer to end of message.
