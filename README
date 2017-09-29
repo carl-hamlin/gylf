@@ -120,11 +120,7 @@ Relevant data:
       b   No defined symbols.
 
 
-      d   socket.data.command.ai.help           ./commands/ai/d
-
-          socket.data.command.ai.help.l         ./commands/ai/d
-
-          command.ai.w                          ./commands/ai/d
+      d   command.ai.w                          ./commands/ai/d
                                                 ./functions/d
 
           command.ai.s                          ./commands/ai/d
@@ -176,31 +172,7 @@ Relevant data:
           area.header.l                         ./commands/look/t
                                                 ./functions/create.character/t
 
-      d   socket.data.area.created.message      ./commands/area/d
-                                                ./commands/area/t
-
-          socket.data.area.created.message.l    ./commands/area/d
-                                                ./commands/area/t
-
-          socket.data.out.of.areas.message      ./commands/area/d
-                                                ./commands/area/t
-
-          socket.data.out.of.areas.message.l    ./commands/area/d
-                                                ./commands/area/t
-
-          socket.data.bad.area.id.message       ./commands/area/d
-                                                ./commands/area/t
-
-          socket.data.bad.area.id.message.l     ./commands/area/d
-                                                ./commands/area/t
-
-          socket.data.command.area.help         ./commands/area/d
-                                                ./commands/area/t
-
-          socket.data.command.area.help.l       ./commands/area/d
-                                                ./commands/area/t
-
-          command.area.w                        ./commands/area/d
+      d   command.area.w                        ./commands/area/d
                                                 ./functions/d
 
           command.area.s                        ./commands/area/d
@@ -256,16 +228,11 @@ Relevant data:
       b   No defined symbols.
 
 
-      d   socket.data.command.broadcast.help    ./commands/broadcast/d
-
-          socket.data.command.broadcast.help.l  ./commands/broadcast/d
-
-          command.broadcast.w                   ./functions/d
+      d   command.broadcast.w                   ./functions/d
 
           command.broadcast.s                   ./commands/broadcast/d
 
           command.broadcast.l                   ./commands/broadcast/d
-                                                ./commands/broadcast/t
 
           command.broadcast.p                   No references.
 
@@ -287,11 +254,7 @@ Relevant data:
       b   No defined symbols.
 
 
-      d   socket.data.command.dig.help          ./commands/dig/d
-
-          socket.data.command.dig.help.l        ./commands/dig/d
-
-          command.dig.w                         ./functions/d
+      d   command.dig.w                         ./functions/d
 
           command.dig.s                         ./commands/dig/d
 
@@ -341,10 +304,6 @@ Relevant data:
 
           egg.hatch.message.l                   ./functions/create.character/t
 
-          socket.data.command.egg.help          ./commands/egg/d
-
-          socket.data.command.egg.help.l        ./commands/egg/d
-
           command.egg.w                         ./functions/d
 
           command.egg.s                         ./commands/egg/d
@@ -370,11 +329,7 @@ Relevant data:
       b   No defined symbols.
 
 
-      d   socket.data.command.gylf.help         ./commands/gylf/d
-
-          socket.data.command.gylf.help.l       ./commands/gylf/d
-
-          command.gylf.w                        ./functions/d
+      d   command.gylf.w                        ./functions/d
 
           command.gylf.s                        ./commands/gylf/d
 
@@ -398,16 +353,7 @@ Relevant data:
       b   No defined symbols.
 
 
-      d   socket.data.bad.help.command.error    ./commands/help/d
-                                                ./functions/write.bad.help.command.error/t
-
-          socket.data.bad.help.command.error.l  ./functions/write.bad.help.command.error/t
-
-          socket.data.command.help.help         ./commands/help/d
-
-          socket.data.command.help.help.l       ./commands/help/d
-
-          command.help.w                        ./functions/d
+      d   command.help.w                        ./functions/d
 
           command.help.s                        ./commands/help/d
 
@@ -442,11 +388,7 @@ Relevant data:
       b   No defined symbols.
 
 
-      d   socket.data.command.logout.help       ./commands/logout/d
-
-          socket.data.command.logout.help.l     ./commands/logout/d
-
-          command.logout.w                      ./functions/d
+      d   command.logout.w                      ./functions/d
 
           command.logout.s                      ./commands/logout/d
 
@@ -470,11 +412,7 @@ Relevant data:
       b   No defined symbols.
 
 
-      d   socket.data.command.look.help         ./commands/look/d
-
-          socket.data.command.look.help.l       ./commands/look/d
-
-          command.look.w                        ./functions/d
+      d   command.look.w                        ./functions/d
 
           command.look.s                        ./commands/look/d
 
@@ -509,16 +447,7 @@ Relevant data:
       b   No defined symbols.
 
 
-      d   socket.data.shutdown.message          ./commands/shutdown/d
-                                                ./commands/shutdown/t
-
-          socket.data.shutdown.message.l        ./commands/shutdown/t
-
-          socket.data.command.shutdown.help     ./commands/shutdown/d
-
-          socket.data.command.shutdown.help.l   ./commands/shutdown/d
-
-          command.shutdown.w                    ./functions/d
+      d   command.shutdown.w                    ./functions/d
 
           command.shutdown.s                    ./commands/shutdown/d
 
@@ -546,11 +475,7 @@ Relevant data:
       b   No defined symbols.
 
 
-      d   socket.data.command.think.help        ./commands/think/d
-
-          socket.data.command.think.help.l      ./commands/think/d
-
-          command.think.w                       ./functions/d
+      d   command.think.w                       ./functions/d
 
           command.think.s                       ./commands/think/d
 
@@ -620,8 +545,7 @@ Relevant data:
 
           buffer.2.l                            ./functions/b
 
-          buffer.1                              ./commands/broadcast/t
-                                                ./commands/look/t
+          buffer.1                              ./commands/look/t
                                                 ./commands/think/t
                                                 ./functions/check.login/t
                                                 ./functions/create.lock.file/t
@@ -951,15 +875,6 @@ Relevant data:
 
           pouch.description.l                   ./functions/create.character/t
 
-       	  socket.data.session.open.error        ./functions/d
-
-      	  socket.data.session.open.error.l      No references.
-
-      	  socket.data.out.of.area.ids.message   ./functions/d
-      	                                        ./functions/create.character/t
-
-      	  socket.data.out.of.area.ids.message.l ./functions/create.character/t
-
     ----------------------------------------------------------------------------------------------
 
       /aggregate.arguments    Contains code that collects arguments from the participant command
@@ -970,9 +885,11 @@ Relevant data:
           arguments.num                         ./commands/help/t
                                                 ./functions/aggregate.arguments/t
 
-          argument.01.size                      ./functions/aggregate.arguments/b
+          argument.01.size                      ./commands/broadcast/t
+                                                ./functions/aggregate.arguments/b
 
-          argument.01.location                  ./commands/help/t
+          argument.01.location                  ./commands/broadcast/t
+                                                ./commands/help/t
                                                 ./functions/aggregate.arguments/t
 
           argument.entry.size                   ./functions/aggregate.arguments/t
@@ -1392,16 +1309,6 @@ Relevant data:
         b   No defined symbols.
 
 
-        d   local.data.connection.notifier      ./functions/main/listening.socket.poll/d
-
-            local.data.connection.notifier.l    No references.
-
-            no.connection.available             ./functions/main/listening.socket.poll/d
-                                                ./functions/main/listening.socket.poll/t
-
-            no.connection.available.l           ./functions/main/listening.socket.poll/t
-
-
         t   greet                               ./functions/main/listening.socket.poll/t
 
             greet.add.socket                    ./functions/main/listening.socket.poll/t
@@ -1464,6 +1371,7 @@ Relevant data:
               local.data.second.login.error.l   ./functions/main/participant.interaction
                                                   /address.login.status/t
 
+<<<<<<< HEAD
               socket.data.bad.login.error       ./functions/main/participant.interaction
                                                   /address.login.status/d
                                                 ./functions/main/participant.interaction
@@ -1495,6 +1403,8 @@ Relevant data:
                                                   /address.login.status/t
 
 
+=======
+>>>>>>> c4a93585eb234c619c42fec484a2db6d0e6662f4
           t   address.login.status              ./functions/socket/answer.active.socket/t
 
               bad.login                         ./functions/main/participant.interaction
@@ -1516,23 +1426,6 @@ Relevant data:
                                       handler.
 
           b   No defined symbols.
-
-
-          d   socket.data.bad.passphrase        ./functions/main/participant.interaction
-                .message                          /address.passphrase.status/d
-                                                ./functions/main/participant.interaction
-                                                  /address.passphrase.status/t
-
-          	  socket.data.bad.passphrase        ./functions/main/participant.interaction
-          	    .message.l                        /address.passphrase.status/d
-
-          	  socket.data.passphrase.message    ./functions/main/participant.interaction
-          	                                      /address.passphrase.status/d
-          	                                    ./functions/main/participant.interaction
-          	                                      /address.passphrase.status/t
-
-          	  socket.data.passphrase.message.l  ./functions/main/participant.interaction
-          	                                      /address.passphrase.status/d
 
 
           t   address.passphrase.status         ./functions/socket/answer.active.socket/t
@@ -1600,6 +1493,7 @@ Relevant data:
                                                   /address.set.passphrase.status/t
                                                 ./functions/socket/clean.socket/t
                                                 ./functions/socket/recv.from.socket/t
+                                                ./functions/socket/socket.send/t
 
             connection.entry.size               ./commands/shutdown/t
                                                 ./functions/main/active.socket.poll/t
@@ -1750,28 +1644,28 @@ Relevant data:
             text.data.index.local.data.system   ./functions/system.check/t
               .check.done.message
 
-            text.data.index.socket.data.area    No references.
+            text.data.index.socket.data.area    ./commands/area/t
               .created.message
 
-            text.data.index.socket.data.bad     No references.
+            text.data.index.socket.data.bad     ./commands/look/t
               .area.id.message
 
-            text.data.index.socket.data.bad     No references.
+            text.data.index.socket.data.bad     ./functions/write.bad.command.error/t
               .command.error.message
 
-            text.data.index.socket.data.bad     No references.
+            text.data.index.socket.data.bad     ./functions/write.bad.help.command.error/t
               .help.command.error
 
-            text.data.index.socket.data.bad     No references.
-              .login.error.message
+            text.data.index.socket.data.bad     ./functions/main/participant.interaction
+              .login.error.message                /address.login.status/t
 
-            text.data.index.socket.data.bad     No references.
-              .passphrase.message
+            text.data.index.socket.data.bad     ./functions/main/participant.interaction
+              .passphrase.message                 /address.passphrase.status/t
 
             text.data.index.socket.data.command No references.
               .ai.help
 
-            text.data.index.socket.data.command No references.
+            text.data.index.socket.data.command ./commands/area/t
               .area.help
 
             text.data.index.socket.data.command No references.
@@ -1804,35 +1698,35 @@ Relevant data:
             text.data.index.socket.data.egg     No references.
               .hatch.message
 
-            text.data.index.socket.data.login   No references.
+            text.data.index.socket.data.login   ./functions/main/listening.socket.poll/t
               .message
 
-            text.data.index.socket.data.no      No references.
+            text.data.index.socket.data.no      ./functions/main/listening.socket.poll/t
               .connection.available.message
 
-            text.data.index.socket.data.out.of  No references.
+            text.data.index.socket.data.out.of  ./functions/create.character/t
               .area.ids.message
 
-            text.data.index.socket.data.out.of  No references.
+            text.data.index.socket.data.out.of  ./commands/area/t
               .areas.message
 
-            text.data.index.socket.data         No references.
-              .passphrase.message
+            text.data.index.socket.data         ./functions/main/participant.interaction
+              .passphrase.message                 /address.login.status/t
 
-            text.data.index.socket.data.prompt  No references.
+            text.data.index.socket.data.prompt  ./functions/write.prompt/t
               .message
 
-            text.data.index.socket.data.second  No references.
-              .login.message
+            text.data.index.socket.data.second  ./functions/main/participant.interaction
+              .login.message                      /address.login.status/t
 
             text.data.index.socket.data.session No references.
               .open.error.message
 
-            text.data.index.socket.data         No references.
+            text.data.index.socket.data         ./commands/shutdown/t
               .shutdown.message
 
-            text.data.index.socket.data.welcome No references.
-              .message
+            text.data.index.socket.data.welcome ./functions/main/participant.interaction
+              .message                            /address.login.status/t
 
 
         d   local.data.populating.textual.data  ./functions/main/text.init/d
@@ -1880,7 +1774,6 @@ Relevant data:
 
       t   memory.switch                         ./functions/main/text.init/t
                                                 ./functions/socket/recv.from.socket/t
-                                                ./functions/socket/send.socket/t
 
           memory.switch.initialize              ./functions/memory.switch/t
 
@@ -2228,6 +2121,14 @@ Relevant data:
           t   send.to.world                     ./commands/broadcast/t
                                                 ./commands/shutdown/t
 
+              send.to.world.c                   ./functions/socket/communications/send.to.world/t
+
+              send.to.world.buf.p               ./functions/socket/communications/send.to.world/t
+
+              send.to.world.buf.s               ./functions/socket/communications/send.to.world/t
+
+              send.to.world.buf.sret            ./functions/socket/communications/send.to.world/t
+
               send.to.world.loop                ./functions/socket/communications/send.to.world/t
 
     ----------------------------------------------------------------------------------------------
@@ -2301,26 +2202,30 @@ Relevant data:
         b   sys.socket.send                     ./functions/socket/socket.send/t
 
 
-        d   No defined symbols.
-
-
         t   socket.send                         ./commands/area/t
-                                                ./commands/help/t
                                                 ./commands/look/t
-                                                ./functions/clear.screen/t
                                                 ./functions/create.character/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
-                                                ./functions/set.single.attribute/t
                                                 ./functions/socket/communications/send.to.area/t
                                                 ./functions/socket/communications/send.to.player/t
                                                 ./functions/socket/communications/send.to.world/t
                                                 ./functions/write.bad.command.error/t
                                                 ./functions/write.bad.help.command.error/t
                                                 ./functions/write.prompt/t
+
+            socket.send.buf                     ./commands/look/t
+                                                ./commands/help/t
+                                                ./functions/clear.screen/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+
+            socket.send.buf.splice              ./functions/socket.send/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -2343,12 +2248,6 @@ Relevant data:
                                   recognized command.
 
       b   No defined symbols.
-
-
-      d   socket.data.bad.command.error         ./functions/write.bad.command.error/d
-                                                ./functions/write.bad.command.error/t
-
-          socket.data.bad.command.error.l       ./functions/write.bad.command.error/t
 
 
       t   write.bad.command.error               ./commands/ai/t
@@ -2409,12 +2308,6 @@ Relevant data:
       /write.prompt           Contains code that displays a command prompt to the user.
 
       b   No defined symbols.
-
-
-      d   prompt.message                        ./functions/write.prompt/d
-                                                ./functions/write.prompt/t
-
-          prompt.message.l                      ./functions/write.prompt/t
 
 
       t   write.prompt                          ./commands/area/t

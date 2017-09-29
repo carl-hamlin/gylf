@@ -4,22 +4,24 @@
 ;
 ;   This function sends data out on a connected socket.
 ;
-;   Assumptions:    No register assumptions, however the arguments packaged referred to herein by the ecx register must be properly packed before calling. The package is structured as follows:
+;   Assumptions:    Stack Frame:  dword - Index to data packet.
+;                   esi - Index to active socket.
 ;
-;                   dword    Descriptor associated with target socket.
-;                   dword    Pointer to data to be sent.
-;                   dword    Length of data to be sent.
-;                   dword    Communications semantics.
+;                   - OR -
 ;
-;   Returns:        None.
+;                   Stack Frame:  dword - Length of buffered data.
+;                                 dword - Pointer to buffered data
+;                   esi - Index to active socket.
+;
+;   Returns:        eax - Error indicator.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   memory.switch                       ./functions/allocate.memory/t
+;   connection.descriptor.index         ./functions/system.check/b
 ;
-;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
+;   socket.send.buf.splice              ./functions/socket.send/t
 ;
 ;   sys.socket.call                     ./functions/socket/b
 ;
@@ -28,25 +30,26 @@
 ;   sys.system.call                     ./functions/b
 ;
 
-    socket.send:  pop   edx                                     ; Preserve return address.
+    socket.send:            pop   ebp                                     ; Preserve return address.
 
-                  push  dword [esi+connection.descriptor.index] ; Indicate active descriptor for sending.
+                            call  get.text.data                           ; Retrieve indexed data.
 
-                  push  12                                      ; Tell memory.switch that we want 12 more bytes.
-                  call  memory.switch                           ; Allocate additional memory.
+    socket.send.buf.splice: push  dword [esi+connection.descriptor.index] ; Point send function to active descriptor
+                            push  ecx                                     ; Point send function to the data to be sent.
+                            push  edx                                     ; Tell send function how long the data string is.
+
+                            mov   eax, sys.socket.call                    ; eax - Socket call indicator.
+                            mov   ebx, sys.socket.send                    ; ebx - Send data out on a socket.
+                            mov   ecx, esp                                ; ecx - Prepared to be used as pointer to arguments package for send function.
+                            add   ecx, (dword.l * 3)                      ; ecx - Pointer to arguments package for send function.
+                            int   sys.system.call                         ; Send data out on a socket.
                   
-                  pop   dword [ebx]                             ; Point send function to active socket descriptor.
-                  pop   dword [ebx+4]                           ; Point send function to message to be sent.
-                  pop   dword [ebx+8]                           ; Tell send function how long the message is.
+                            push  ebp                                     ; Restore return address.
+                            ret   (dword.l * 3)                           ; Return to caller.
 
-                  mov   eax, sys.socket.call                    ; eax - Socket call indicator.
-                  mov   ecx, ebx                                ; ecx - Pointer to arguments package for send function.
-                  mov   ebx, sys.socket.send                    ; ebx - Send data out on a socket.
-                  int   sys.system.call                         ; Send data out on a socket.
+    socket.send.buf:        pop   ebp                                     ; Preserve return address.
 
-                  push  0                                       ; Tell memory.switch to free up memory.
-                  call  memory.switch                           ; Free up extra memory requested earlier.
+                            pop   edx                                     ; edx - Length of buffered data.
+                            pop   ecx                                     ; ecx - Pointer to buffered data.
 
-                  push  edx                                     ; Restore return address.
-
-                  ret                                           ; Return to caller.
+                            jmp   socket.send.buf.splice                  ; Splice the buffered data into the arguments package.

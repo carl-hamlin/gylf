@@ -30,20 +30,16 @@
 ;
 ;   send.to.world                                     ./functions/socket/communications/send.to.world/t
 ;
-;   socket.data.shutdown.message                      ./commands/shutdown/d
-;
-;   socket.data.shutdown.message.l                    ./commands/shutdown/d
-;
 ;   text.data.index.local.data.shutdown.message       ./functions/main/text.init/b
 ;
 ;   text.data.index.local.data.smoked.sockets.message ./functions/main/text.init/b
+;
+;   text.data.index.socket.data.shutdown.message      ./functions/main/text.init/b
 ;
 ;   write.bad.command.error                           ./functions/write.bad.command.error/t
 ;
 ;   write.console                                     ./functions/write.console/t
 ;
-
-
 
     command.shutdown:       call  check.admin                                               ; See if the calling socket is controlled by an admin.
                             jc    command.shutdown.admin                                    ; If so, go run the shutdown sequence. Otherwise...
@@ -54,8 +50,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.shutdown.admin: mov   ebx, socket.data.shutdown.message                         ; ebx - Pointer to socket shutdown message.
-                            mov   edx, socket.data.shutdown.message.l                       ; edx - Length of message.
+    command.shutdown.admin: push  dword [text.data.index.socket.data.shutdown.message]      ; Point send.to.world to socket shutdown message.
                             call  send.to.world                                             ; Send the shutdown message to the world.
 
                             push  dword [text.data.index.local.data.shutdown.message]       ; Point write.console to message indicating that shutdown has been initiated from within the
