@@ -1,6 +1,6 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   poll.descriptor
+;   ./functions/poll.descriptor/t
 ;
 ;   This function asks a connected socket if it has data on it that needs attention.
 ;
@@ -13,6 +13,14 @@
 ;                   edx = Length of time in milliseconds to wait for a response.
 ;
 ;    Returns:       eax = Returned event(s)
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   sys.poll.call   ./functions/poll.descriptor/b
+;
+;   sys.system.call ./functions/b
 ;
 
     poll.descriptor: mov eax, sys.poll.call ; eax = Ask a connected socket if it has data on it.
