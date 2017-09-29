@@ -1,0 +1,41 @@
+;=================================================================================================================================================================================================
+;
+;   punctuation
+;
+;   This file contains data definitions for certain elements of the IBM extended ASCII character set. Its future is uncertain.
+;
+
+char.space                  db  " "     ; Space
+char.exclamation.mark       db  "!"     ; Exclamation mark
+char.quotation.mark         db  022h    ; Quotes
+char.hash                   db  "#"     ; Hash
+char.dollar                 db  "$"     ; Dollar
+char.percent                db  "%"     ; Percent
+car.ampersand               db  "&"     ; Ampersand
+char.apostrophe             db  027h    ; Apostrophe
+char.open.bracket           db  "("     ; Open bracket
+char.close.bracket          db  ")"     ; Close bracket
+char.asterisk               db  "*"     ; Asterisk
+char.plus                   db  "+"     ; Plus
+char.comma                  db  ","     ; Comma
+char.dash                   db  "-"     ; Dash
+char.period                 db  "."     ; Full stop
+char.slash                  db  "/"     ; Slash
+char.colon                  db  ":"     ; Colon
+char.semi.colon             db  03Bh    ; Semi-colon
+char.less.than              db  "<"     ; Less than
+char.equals                 db  "="     ; Equals
+char.greater.than           db  ">"     ; Greater than
+char.question.mark          db  "?"     ; Question mark
+char.at                     db  "@"     ; At
+char.open.square.bracket    db  "["     ; Open square bracket
+char.backslash              db  "\"     ; Backslash
+char.close.square.bracket   db  "]"     ; Close square bracket
+char.caret                  db  "^"     ; Caret / hat
+char.underscore             db  "_"     ; Underscore
+char.grave.accent           db  "`"     ; Grave accent
+char.open.brace             db  "{"     ; Open brace
+char.pipe                   db  "|"     ; Pipe
+char.close.brace            db  "}"     ; Close brace
+char.tilde                  db  "~"     ; Tilde
+char.no.break.space         db  " "     ; no-break space
