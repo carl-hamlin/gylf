@@ -1,0 +1,45 @@
+;==================================================================================================================================================================================================================
+
+    section   .bss
+
+    %include  "./functions/b"
+
+;==================================================================================================================================================================================================================
+
+    section   .data
+
+    %include  "./functions/d"
+
+;==================================================================================================================================================================================================================
+
+    section   .text
+
+    %include  "./functions/main/i"
+    %include  "./functions/socket/i"
+
+    %include  "./functions/aggregate.arguments/i"
+    %include  "./functions/bail/i"
+    %include  "./functions/buffer.strip/i"
+    %include  "./functions/check.admin/i"
+    %include  "./functions/check.login/i"
+    %include  "./functions/clear.screen/i"
+    %include  "./functions/close.descriptor/i"
+    %include  "./functions/create.character/i"
+    %include  "./functions/create.file/i"
+    %include  "./functions/create.lock.file/i"
+    %include  "./functions/dna.lab/i"
+    %include  "./functions/get.character.data/i"
+    %include  "./functions/get.external.data/i"
+    %include  "./functions/get.ticks/i"
+    %include  "./functions/memory.switch/i"
+    %include  "./functions/open.descriptor/i"
+    %include  "./functions/poll.descriptor/i"
+    %include  "./functions/print.socket.number/i"
+    %include  "./functions/read.descriptor/i"
+    %include  "./functions/set.single.attribute/i"
+    %include  "./functions/time.in.seconds.since.the.epoch/i"
+    %include  "./functions/write.bad.command.error/i"
+    %include  "./functions/write.bad.help.command.error/i"
+    %include  "./functions/write.descriptor/i"
+    %include  "./functions/write.prompt/i"
+    %include  "./functions/write.welcome/i"

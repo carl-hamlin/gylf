@@ -1,0 +1,46 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/recv.from.socket/t
+;
+;   This function receives data from a connected socket and places it in a specified buffer.
+;
+;   Assumptions:    esi = Index to connection tables.
+;
+;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   buffer.1                            ./functions/b
+;
+;   buffer.1.l                          ./functions/b
+;
+;   buffer.strip                        ./functions/buffer.strip/t
+;
+;   connection.descriptor.index         ./functions/main/system.check/b
+;
+;   sys.socket.call                     ./functions/socket/b
+;
+;   sys.socket.recv                     ./functions/socket/recv.from.socket/b
+;
+;   sys.system.call                     ./functions/b
+;
+
+    recv.from.socket: pop   edx                                     ; Preserve return address.
+
+                      push  buffer.1.l                              ; Tell receive function how long the buffer is.
+                      push  buffer.1                                ; Point receive function to buffer.1.
+                      push  dword [esi+connection.descriptor.index] ; Point receive function to active socket.
+
+                      mov   eax, sys.socket.call                    ; eax = Socket call indicator.
+                      mov   ebx, sys.socket.recv                    ; ebx = Receive from socket.
+                      mov   ecx, esp                                ; ecx = Pointer to arguments package.
+                      int   sys.system.call                         ; Receive from socket.
+
+                      mov   ebx, dword [esp+dword.l]                ; ebx - pointer to received data
+                      call  buffer.strip                            ; Strip carriage returns from received data.
+
+                      push  edx                                     ; Restore return address.
+
+                      ret   12                                      ; Return to caller.

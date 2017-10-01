@@ -1,0 +1,19 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/accept.socket/d
+;
+;   This file contains all data	pertinent to the accept.socket function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   socket.data.connected.socket.descriptor ./functions/socket/b
+;
+;   socket.data.sockaddr.protocol.family    ./functions/socket/d
+;
+
+    socket.data.accept.socket.descriptor  dd  0000h                                   ; Data storage for descriptor associated with bound, active, and listening socket.
+    socket.data.accept.sockaddr.pointer   dd  socket.data.sockaddr.protocol.family    ; Storage for pointer to sockaddr structure.
+    socket.data.accept.buffer.pointer     dd  socket.data.connected.socket.descriptor ; Storage for pointer to storage for descriptor returned by accept function.
+

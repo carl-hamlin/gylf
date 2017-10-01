@@ -1,0 +1,82 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/shutdown/t
+;
+;   This function shuts down the server from within the environment.
+;
+;   Assumptions:     esi - Index to active socket entry.
+;
+;   Returns:         None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   bail                                ./functions/bail/t
+;
+;   check.admin                         ./functions/check.admin/t
+;
+;   clean.socket                        ./functions/socket/clean.socket/t
+;
+;   command.shutdown.admin              ./commands/shutdown/t
+;
+;   command.shutdown.loop               ./commands/shutdown/t
+;
+;   connection.entry.size               ./functions/main/system.check/b
+;
+;   connection.table                    ./functions/main/system.check/b
+;
+;   socket.number                       ./b
+;
+;   local.data.shutdown.message         ./commands/shutdown/d
+;
+;   local.data.shutdown.message.l       ./commands/shutdown/d
+;
+;   local.data.smoked.sockets.message   ./commands/shutdown/d
+;
+;   local.data.smoked.sockets.message.l ./commands/shutdown/d
+;
+;   send.to.world                       ./functions/socket/communications/send.to.world/t
+;
+;   socket.data.shutdown.message        ./commands/shutdown/d
+;
+;   socket.data.shutdown.message.l      ./commands/shutdown/d
+;
+;   write.bad.command.error             ./functions/write.bad.command.error/t
+;
+;   write.descriptor                    ./functions/write.descriptor/t
+;
+
+
+
+    command.shutdown:       call  check.admin                               ; See if the calling socket is controlled by an admin.
+                            jc    command.shutdown.admin                    ; If so, go run the shutdown sequence. Otherwise...
+
+                            call  write.bad.command.error                   ; Tell the non-admin user that there is no such command.
+
+                            ret                                             ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.shutdown.admin: mov   ebx, socket.data.shutdown.message         ; ebx - Pointer to socket shutdown message.
+                            mov   edx, socket.data.shutdown.message.l       ; edx - Length of message.
+                            call  send.to.world                             ; Send the shutdown message to the world.
+
+                            mov   ecx, local.data.shutdown.message          ; ecx - Pointer to message indicating that shutdown has been initiated from within the environment.
+                            mov   edx, local.data.shutdown.message.l        ; edx - Length of message.
+                            call  write.descriptor                          ; Let the admin know that shutdown has been initiated from within the environment.
+
+                            mov   esi, connection.table                     ; esi - Pointer to command table.
+                            mov   ecx, socket.number                        ; ecx - Number of sockets to smoke.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.shutdown.loop:  call  clean.socket                              ; Smoke the current socket.
+                            add   esi, connection.entry.size                ; esi - Pointer to next victim.
+                            loop  command.shutdown.loop                     ; Go smoke the rest of the sockets.
+
+                            mov   ecx, local.data.smoked.sockets.message    ; Pointer to message indicating all sockets have been smoked.
+                            mov   edx, local.data.smoked.sockets.message.l  ; Length of message.
+                            call  write.descriptor                          ; Let the admin know all sockets have been smoked.
+
+                            jmp   bail                                      ; Unload from memory and return control to Linux.

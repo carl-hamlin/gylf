@@ -1,0 +1,30 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/main/listening.socket.poll/d
+;
+;   This file contains all data	pertinent to the listening.socket.poll function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   local.data.connection.notifier  ./functions/main/listening.socket.poll/d
+;
+;   no.connection.available         ./functions/main/listening.socket.poll/d
+;
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Local Data
+;
+
+    local.data.connection.notifier    db  "Incoming connection established.", 0Ah, 0Dh  ; Connection message.
+    local.data.connection.notifier.l  equ $-local.data.connection.notifier              ; Length of message.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Outgoing Data
+;
+
+	  no.connection.available			      db  "The server is currently full.", 0Ah, 0Dh			; Storage for server currently full message.
+	  no.connection.available.l		      equ $-no.connection.available											; Length of message.

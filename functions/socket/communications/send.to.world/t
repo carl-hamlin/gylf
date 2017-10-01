@@ -1,0 +1,61 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/communications/send.to.world/t
+;
+;   This function sends a provided message out to the whole world.
+;
+;   Assumptions:    ebx - Pointer to message to be broadcast.
+;                   edx - Length of message to be broadcast.
+;
+;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   connection.entry.size               ./functions/main/system.check/b
+;
+;   connection.table                    ./functions/main/system.check/b
+;
+;   local.data.carriage.return          ./functions/d
+;
+;   local.data.carriage.return.l        ./functions/d
+;
+;   send.to.world.loop                  ./functions/socket/communications/send.to.world/t
+;
+;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
+;
+;   socket.number                       ./b
+;
+;   socket.send                         ./functions/socket/socket.send/t
+;
+;   write.prompt                        ./functions/write.prompt/t
+;
+
+    send.to.world:      push  esi                                           ; Preserve caller's esi register.
+
+                        mov   esi, connection.table                         ; esi - Index to socket entries.
+                        mov   ecx, socket.number                            ; ecx - Number of sockets in table; we use this number as our loop counter.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    send.to.world.loop: push  edx                                           ; Tell send function how long the message is.
+                        push  ebx                                           ; Point send function to the message.
+                        call  socket.send                                   ; Send the message to the socket.
+
+                        push  local.data.carriage.return.l                  ; Tell send function how long the message is.
+                        push  local.data.carriage.return                    ; Point send function to a carriage return.
+                        call  socket.send                                   ; Broadcast a carriage return.
+
+                        call  write.prompt                                  ; Send a prompt.
+
+                        add   esi, connection.entry.size                    ; esi - Pointer to next descriptor in table.
+                        loop  send.to.world.loop                            ; Go broadcast to the next socket in the table.
+
+                        pop   esi                                           ; Restore caller's esi register.
+
+                        ret                                                 ; Return to caller.
