@@ -61,7 +61,8 @@ Relevant data:
                                                 ./functions/create.character/t
                                                 ./functions/d
                                                 ./functions/main/system.check/t
-                                                ./functions/main/participant.interaction/address.active.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.active.status/t
                                                 ./functions/print.socket.number/t
 
           word.l                                ./commands/area/t
@@ -69,7 +70,8 @@ Relevant data:
 
           byte.l                                ./functions/get.character.data/t
                                                 ./functions/get.external.data/t
-                                                ./functions/main/participant.interaction/address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
 
           nibble.l                              No references.
 
@@ -172,28 +174,28 @@ Relevant data:
           local.data.out.of.areas.message.l     ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.area.created.message      ./commands/area/d
+          socket.data.area.created.message      ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.area.created.message.l    ./commands/area/d
+          socket.data.area.created.message.l    ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.out.of.areas.message      ./commands/area/d
+          socket.data.out.of.areas.message      ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.out.of.areas.message.l    ./commands/area/d
+          socket.data.out.of.areas.message.l    ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.bad.area.id.message       ./commands/area/d
+          socket.data.bad.area.id.message       ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.bad.area.id.message.l     ./commands/area/d
+          socket.data.bad.area.id.message.l     ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.command.area.help         ./commands/area/d
+          socket.data.command.area.help         ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.command.area.help.l       ./commands/area/d
+          socket.data.command.area.help.l       ./commands/area/d
                                                 ./commands/area/t
 
           command.area.w                        ./commands/area/d
@@ -1790,8 +1792,10 @@ Relevant data:
                                                 ./functions/dna.lab/t
                                                 ./functions/get.character.data/t
                                                 ./functions/get.external.data/t
-                                                ./functions/main/participant.interaction/address.login.status/t
-                                                ./functions/main/participant.interaction/address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -2089,23 +2093,156 @@ Relevant data:
 
         d   No defined symbols.
 
-    ----------------------------------------------------------------------------------------------
 
-        ./functions/socket    Contains code that receives data from a connected socket and places
-          /recv.from.socket   it in a specified buffer.
+        t   listen.socket                       ./functions/main/set.up.listener/t
 
     ----------------------------------------------------------------------------------------------
 
-        ./functions/socket    Contains code that sets up error messages to be displayed to the
-          /socket.error       admin in the event that something goes awry while building the
+        /recv.from.socket     Contains code that receives data from a connected socket and places
+                              it in a specified buffer.
+
+        b   sys.socket.recv                     ./function/socket/recv.from.socket/t
+
+
+        d   socket.data.send.buffer.l           ./commands/area/t
+                                                ./commands/broadcast/t
+                                                ./commands/help/t
+                                                ./commands/look/t
+                                                ./commands/shutdown/t
+                                                ./functions/clear.screen/t
+                                                ./functions/create.character/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/socket/recv.from.socket/t
+                                                ./functions/write.bad.command.error/t
+                                                ./functions/write.bad.help.command.error/t
+                                                ./functions/write.prompt/t
+
+            socket.data.send.buffer.pointer     ./commands/area/t
+                                                ./commands/broadcast/t
+                                                ./commands/help/t
+                                                ./commands/look/t
+                                                ./commands/shutdown/t
+                                                ./functions/clear.screen/t
+                                                ./functions/create.character/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/socket/recv.from.socket/t
+                                                ./functions/write.bad.command.error/t
+                                                ./functions/write.bad.help.command.error/t
+                                                ./functions/write.prompt/t
+
+            socket.data.send.flags              No references.
+
+            socket.data.send.socket.descriptor  ./commands/area/t
+                                                ./commands/broadcast/t
+                                                ./commands/help/t
+                                                ./commands/look/t
+                                                ./commands/shutdown/t
+                                                ./functions/clear.screen/t
+                                                ./functions/create.character/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/socket/recv.from.socket/t
+                                                ./functions/write.bad.command.error/t
+                                                ./functions/write.bad.help.command.error/t
+                                                ./functions/write.prompt/t
+
+
+        t   recv.from.socket                    ./functions/main/participant.interaction
+                                                  /address.active.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+
+    ----------------------------------------------------------------------------------------------
+
+        /socket.error         Contains code that sets up error messages to be displayed to the
+                              admin in the event that something goes awry while building the
                               listening socket. If any of these are ever executed, we're beyond
                               the point of no return, so each of them passes control to the bail
                               function after displaying their unique message.
 
+        b   No defined symbols.
+
+
+        d   local.data.accept.error.message     ./functions/socket/socket.errors/d
+                                                ./functions/socket/socket.errors/t
+
+            local.data.accept.error.message.l   ./functions/socket/socket.errors/t
+
+            local.data.bind.error.message       ./functions/socket/socket.errors/d
+                                                ./functions/socket/socket.errors/t
+
+            local.data.bind.error.message.l     ./functions/socket/socket.errors/t
+
+            local.data.create.error.message     ./functions/socket/socket.errors/d
+                                                ./functions/socket/socket.errors/t
+
+            local.data.create.error.message.l   ./functions/socket/socket.errors/t
+
+
+        t   socket.accept.error                 ./functions/main/listening.socket.poll/t
+
+            socket.bind.error                   ./functions/main/set.up.listener/t
+
+            socket.create.error                 ./functions/main/set.up.listener/t
+
+            socket.listen.error                 ./functions/main/set.up.listener/t
+
     ----------------------------------------------------------------------------------------------
 
-        ./functions/socket    Contains code that sends data out on a connected socket.
-          /socket.send
+        /socket.send          Contains code that sends data out on a connected socket.
+
+        b   sys.socket.send                     ./functions/socket/socket.send/t
+
+
+        d   No defined symbols.
+
+
+        t   socket.send                         ./commands/area/t
+                                                ./commands/broadcast/t
+                                                ./commands/help/t
+                                                ./commands/look/t
+                                                ./commands/shutdown/t
+                                                ./functions/clear.screen/t
+                                                ./functions/create.character/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/write.bad.command.error/t
+                                                ./functions/write.bad.help.command.error/t
+                                                ./functions/write.prompt/t
 
     ----------------------------------------------------------------------------------------------
 
