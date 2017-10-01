@@ -57,7 +57,7 @@
                         mov   ecx, lock.extension.l           ; ecx - Length of extension for lock files.
                         repnz movsb                           ; Tack lock extension on to the end of the file name.
 
-                        mov   ebx, buffer.1                   ; ebx - Pointer to lock file name.
+                        push  buffer.1                        ; Point open.descriptor to lock file name.
                         call  open.descriptor                 ; Attempt to associate a descriptor with the file name. If the file exists and is associable, then the participant is logged in.
 
                         or    eax, eax                        ; Check to see if eax contains an error code. If it does, we weren't able to associate a descriptor with the lock file, indicating

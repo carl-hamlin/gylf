@@ -14,11 +14,7 @@
 ;
 ;   dword.l                                 ./b
 ;
-;   socket.data.accept.socket.descriptor    ./functions/socket/accept.socket/d
-;
 ;   socket.data.event.socket.descriptor     ./functions/main/active.socket.poll/d
-;
-;   socket.data.listening.socket.descriptor ./functions/socket/b
 ;
 ;   sys.socket.bind                         ./functions/socket/bind.socket/b
 ;
@@ -27,9 +23,7 @@
 ;   sys.system.call                         ./functions/b
 ;
 
-    bind.socket:  mov   dword [socket.data.listening.socket.descriptor], eax  ; Store the listening descriptor.
-                  mov   dword [socket.data.event.socket.descriptor], eax      ; Store the event descriptor.
-                  mov   dword [socket.data.accept.socket.descriptor], eax     ; Store the accept descriptor.
+    bind.socket:  mov   dword [socket.data.event.socket.descriptor], eax      ; Store the event descriptor.
 
                   pop   ebp                                                   ; Preserve return address.
 
