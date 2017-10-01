@@ -1,6 +1,6 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   write descriptor
+;   ./functions/write.descriptor/t
 ;
 ;   This function writes data to an active descriptor.
 ;
@@ -9,6 +9,18 @@
 ;                   edx = Length of data to be written.
 ;
 ;   Returns:        eax = Error indicator.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   file.indicator      ./functions/write.descriptor/d
+;
+;   sys.standard.output ./functions/write.descriptor/b
+;
+;   sys.system.call     ./functions/b
+;
+;   sys.write.call      ./functions/write.descriptor/b
 ;
 
     write.descriptor: mov  eax, sys.write.call                         ; eax = Write data to an active descriptor.

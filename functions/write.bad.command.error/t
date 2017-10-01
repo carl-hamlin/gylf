@@ -1,12 +1,32 @@
-;==========================================================================================================================================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   write.bad.command.error
+;   ./functions/write.bad.command.error/t
 ;
 ;   This function lets the user know that they've entered a bad command and suggests that they try HELP.
 ;
 ;   Assumptions:    esi = Pointer to descriptor associated with target socket.
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   connection.descriptor.index         ./functions/main/system.check/b
+;
+;   socket.data.bad.command.error       ./functions/write.bad.command.error/d
+;
+;   socket.data.bad.command.error.l     ./functions/write.bad.command.error/d
+;
+;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
+;
+;   socket.send                         ./functions/socket/socket.send/t
+;
+;   write.prompt                        ./functions/write.prompt/t
 ;
 
     write.bad.command.error:                  mov  ebx, dword [esi+connection.descriptor.index]                           ; ebx - descriptor associated with current active socket.
