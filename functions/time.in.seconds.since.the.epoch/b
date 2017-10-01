@@ -1,0 +1,8 @@
+;====================================================================================================================================================================================================
+;
+;   ./functions/time.in.seconds.since.the.epoch/b
+;
+;   This file contains definitions for the time.in.seconds.since.the.epoch function.
+;
+
+    %define sys.get.time.in.seconds.since.the.epoch 00Dh  ; 00Dh is the modifer for 080h that tells the kernel we want the time in seconds since the epoch.
