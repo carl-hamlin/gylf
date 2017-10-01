@@ -1,6 +1,6 @@
 ;================================================================================================================================================================================================
 ;
-;   ./code/commands/ai/code
+;   ./commands/ai/t
 ;
 ;   The command.ai function sets parameters for the offline ai.
 ;
@@ -9,9 +9,11 @@
 ;
 ;   Returns:          None.
 ;
-;   Crossreferencing: Symbol Location
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
-;                     none   none
+;   Symbolic Cross-Referencing
+;
+;   write.bad.command.error ./functions/write.bad.command.error/t
 ;
 
     command.ai: call  write.bad.command.error ; Let the user know that they've entered a bad command and suggest HELP.

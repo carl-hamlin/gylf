@@ -1,4 +1,4 @@
-;=================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
 ;   answer.active.socket
 ;
@@ -7,6 +7,42 @@
 ;   Assumptions:    esi = Index to connection tables.
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   address.active.status               ./functions/main/participant.interaction/address.active.status/t
+;
+;   address.login.status                ./functions/main/participant.interaction/address.login.status/t
+;
+;   address.passphrase.status           ./functions/main/participant.interaction/address.passphrase.status/t
+;
+;   address.set.passphrase.status       ./functions/main/participant.interaction/address.set.passphrase.status/t
+;
+;   connection.status.index             ./functions/main/system.check/b
+;
+;   local.data.active.socket.message    ./functions/socket/answer.active.socket/d
+;
+;   local.data.active.socket.message.l  ./functions/socket/answer.active.socket/d
+;
+;   local.data.carriage.return          ./functions/d
+;
+;   local.data.carriage.return.l        ./functions/d
+;
+;   login.status                        ./functions/main/b
+;
+;   not.login.status                    ./functions/socket/answer.active.socket/t
+;
+;   not.passphrase.status               ./functions/socket/answer/active.socket/t
+;
+;   passphrase.status                   ./functions/main/b
+;
+;   print.socket.number                 ./functions/print.socket.number/t
+;
+;   set.passphrase.status               ./functions/main/b
+;
+;   write.descriptor                    ./functions/write.descriptor/t
 ;
 
     answer.active.socket:   mov   ecx, local.data.active.socket.message                     ; ecx - Pointer to socket activity notifier.

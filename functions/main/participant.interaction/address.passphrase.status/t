@@ -1,4 +1,4 @@
-;=================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
 ;   address.passphrase.status
 ;
@@ -9,6 +9,53 @@
 ;   Assumptions:    esi = Pointer to socket table.
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   active.status                         ./functions/main/b
+;
+;   bad.passphrase                        ./functions/main/participant.interaction/address.passphrase.status/t
+;
+;   buffer.1                              ./functions/b
+;
+;   buffer.2                              ./functions/b
+;
+;   byte.l                                ./b
+;
+;   clean.socket                          ./functions/socket/clean.socket/t
+;
+;   close.descriptor                      ./functions/close.descriptor/t
+;
+;   connection.descriptor.index           ./functions/main/system.check/b
+;
+;   connection.filename.index             ./functions/main/system.check/b
+;
+;   connection.status.index               ./functions/main/system.check/b
+;
+;   good.passphrase                       ./functions/main/participant.interaction/address.passphrase.status/t
+;
+;   open.descriptor                       ./functions/open.descriptor/t
+;
+;   read.descriptor                       ./functions/read.descriptor/t
+;
+;   recv.from.socket                      ./functions/socket/recv.from.socket/t
+;
+;   socket.data.bad.passphrase.message    ./functions/main/participant.interaction/address.passphrase.status/d
+;
+;   socket.data.bad.passphrase.message.l  ./functions/main/participant.interaction/address.passphrase.status/d
+;
+;   socket.data.send.buffer.l             ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.buffer.pointer       ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.socket.descriptor    ./functions/socket/recv.from.socket/d
+;
+;   socket.send                           ./functions/socket/socket.send/t
+;
+;   write.welcome                         ./functions/write.welcome/t
+;
 
 	  address.passphrase.status:  call  recv.from.socket                                                            ; Grab the data from the socket.
 
@@ -17,7 +64,8 @@
                       					call	open.descriptor									                                            ; Associate a descriptor with the user's credential file.
 
                       					mov	  ebx, eax									                                                  ; ebx = Descriptor associated with user credential file.
-                      					mov	  ecx, buffer.2									                                              ; ecx = Pointer to buffer into which to read data from the user's credential file.
+                      					mov	  ecx, buffer.2									                                              ; ecx = Pointer to buffer into which to read data from the user's credential
+                      					                                                                                  ; file.
                       					mov	  edx, byte.l									                                                ; edx = Number of bytes to read.
                       					call	read.descriptor									                                            ; Read the number of bytes to query.
 
@@ -40,14 +88,14 @@
                       					mov	  esi, buffer.1									                                              ; esi = Pointer to data received from socket.
                       					mov	  edi, buffer.2									                                              ; edi = Pointer to data read from file.
 
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	passphrase.cmp.loop:		      repz	cmpsb										                                                    ; See if they match.
 					                      jcxz	good.passphrase									                                            ; If ecx iz zero, we got all the way through. Go send a welcome.
 
 					                      jmp	  bad.passphrase									                                            ; Otherwise, go tell the user he's SOL and smoke his connection.
 
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	good.passphrase:		          pop	  esi										                                                      ; Restore index to connection tables.
 
@@ -56,7 +104,7 @@
 
 					                      ret											                                                          ; Return to caller.
 
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	bad.passphrase:			          pop	  esi										                                                      ; Restore index to connection tables.
 
