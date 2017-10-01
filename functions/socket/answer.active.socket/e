@@ -1,8 +1,8 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/socket.answer.active.socket/e
+;   ./functions/socket/answer.active.socket/e
 ;
-;   This file defines the external textual data associated with the system.check function.
+;   This file defines the external textual data associated with the answer.active.socket function.
 ;
 
     section   .data
