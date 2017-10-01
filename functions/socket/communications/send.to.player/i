@@ -2,23 +2,16 @@
 
     section   .bss
 
-    %include  "./functions/main/b"
+    %include  "./functions/socket/communications/send.to.player/b"
 
 ;==================================================================================================================================================================================================================
 
     section   .data
 
-    %include  "./functions/main/d"
+    %include  "./functions/socket/communications/send.to.player/d"
 
 ;==================================================================================================================================================================================================================
 
     section   .text
-
-    %include  "./functions/main/active.socket.poll/i"
-    %include  "./functions/main/participant.interaction/i"
-    %include  "./functions/main/listening.socket.poll/i"
-    %include  "./functions/main/set.up.listener/i"
-    %include  "./functions/main/system.check/i"
-    %include  "./functions/main/world.maintenance/i"
     
-    %include  "./functions/main/t"
+    %include  "./functions/socket/communications/send.to.player/t"

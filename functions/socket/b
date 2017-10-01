@@ -30,7 +30,3 @@
 
     session.descriptor                      resd    0001h ; Data storage for the descriptor associated with the session file.
     active.socket.descriptor                resd    0001h ; Data storage for the descriptor associated with the active socket.
-
-;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    sockets.left                            resd    0001h ; Storage for sockets left to poll.
