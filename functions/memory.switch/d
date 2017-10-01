@@ -1,8 +1,8 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/socket/d
+;   ./functions/memory.switch/d
 ;
-;   This file contains all data	pertinent to the listen.socket function.
+;   This file contains data for the memory.switch function.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
@@ -10,3 +10,5 @@
 ;
 ;   No external references.
 ;
+
+    break.pointer dd  00000000h ; Storage for pointer to end of OS-defined memory.
