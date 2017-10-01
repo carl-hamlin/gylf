@@ -23,7 +23,9 @@
 ;   socket.send                         ./functions/socket/socket.send/t
 ;
 
-    set.single.attribute: mov   esi, set.att.mod.1                                ; esi = Pointer to first portion of the set attribute escape sequence.
+    set.single.attribute: push  esi                                               ; Preserve pointer to descriptor associated with target connection.
+
+                          mov   esi, set.att.mod.1                                ; esi = Pointer to first portion of the set attribute escape sequence.
                           mov   edi, buffer.1                                     ; edi = Pointer to data buffer.
                           mov   ecx, 002h                                         ; ecx = Size of first portion of the set attribute escape sequence.
 
@@ -39,7 +41,6 @@
 
                           push  4                                                 ; Provide the length of the buffer.
                           push  buffer.1                                          ; Point socket.send to the data buffer.
-
                           call  socket.send                                       ; Send the string to the socket and change the attribute remotely.
 
                           ret                                                     ; Return to caller.
