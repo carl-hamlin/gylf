@@ -13,105 +13,99 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   area.description                      ./commands/area/b
+;   area.description                                    ./commands/area/b
 ;
-;   area.description.field.l              ./commands/area/b
+;   area.description.field.l                            ./commands/area/b
 ;
-;   area.description.l                    ./commands/area/b
+;   area.description.l                                  ./commands/area/b
 ;
-;   area.filename                         ./functions/d
+;   area.filename                                       ./functions/d
 ;
-;   area.name                             ./commands/area/b
+;   area.name                                           ./commands/area/b
 ;
-;   area.name.field.l                     ./commands/area/b
+;   area.name.field.l                                   ./commands/area/b
 ;
-;   area.name.l                           ./commands/area/b
+;   area.name.l                                         ./commands/area/b
 ;
-;   area.num.contained.items              ./commands/area/b
+;   area.num.contained.items                            ./commands/area/b
 ;
-;   available.areas                       ./commands/area/b
+;   available.areas                                     ./commands/area/b
 ;
-;   buffer.1                              ./functions/b
+;   buffer.1                                            ./functions/b
 ;
-;   char.0                                ./b
+;   char.0                                              ./b
 ;
-;   char.9                                ./b
+;   char.9                                              ./b
 ;
-;   check.admin                           ./functions/main/check.admin/t
+;   check.admin                                         ./functions/main/check.admin/t
 ;
-;   close.descriptor                      ./functions/close.descriptor/t
+;   close.descriptor                                    ./functions/close.descriptor/t
 ;
-;   command.area.admin                    ./commands/area/t
+;   command.area.admin                                  ./commands/area/t
 ;
-;   command.area.bad                      ./commands/area/t
+;   command.area.bad                                    ./commands/area/t
 ;
-;   command.area.description.l            ./commands/area/t
+;   command.area.description.l                          ./commands/area/t
 ;
-;   command.area.filename.finder          ./commands/area/t
+;   command.area.filename.finder                        ./commands/area/t
 ;
-;   command.area.filename.loop            ./commands/area/t
+;   command.area.filename.loop                          ./commands/area/t
 ;
-;   command.area.filename.out.of.areas    ./commands/area/t
+;   command.area.filename.out.of.areas                  ./commands/area/t
 ;
-;   command.area.find.first.argument      ./commands/area/t
+;   command.area.find.first.argument                    ./commands/area/t
 ;
-;   command.area.find.second.argument     ./commands/area/t
+;   command.area.find.second.argument                   ./commands/area/t
 ;
-;   command.area.l                        ./commands/area/d
+;   command.area.l                                      ./commands/area/d
 ;
-;   command.area.loop.1                   ./commands/area/t
+;   command.area.loop.1                                 ./commands/area/t
 ;
-;   command.area.loop.2                   ./commands/area/t
+;   command.area.loop.2                                 ./commands/area/t
 ;
-;   command.area.name.l                   ./commands/area/t
+;   command.area.name.l                                 ./commands/area/t
 ;
-;   command.area.next.file                ./commands/area/t
+;   command.area.next.file                              ./commands/area/t
 ;
-;   command.area.prep.next                ./commands/area/t
+;   command.area.prep.next                              ./commands/area/t
 ;
-;   command.area.start                    ./commands/area/t
+;   command.area.start                                  ./commands/area/t
 ;
-;   create.file                           ./functions/create.file/t
+;   create.file                                         ./functions/create.file/t
 ;
-;   file.indicator                        ./functions.write.descriptor/d
+;   open.descriptor                                     ./functions/open.descriptor/t
 ;
-;   local.data.area.bad.syntax.message    ./commands/area/d
+;   socket.data.area.created.message                    ./commands/area/d
 ;
-;   local.data.area.bad.syntax.message.l  ./commands/area/d
+;   socket.data.area.created.message.l                  ./commands/area/d
 ;
-;   local.data.area.created.message       ./commands/area/d
+;   socket.data.command.area.help                       ./commands/area/d
 ;
-;   local.data.area.created.message.l     ./commands/area/d
+;   socket.data.command.area.help.l                     ./commands/area/d
 ;
-;   local.data.carriage.return            ./functions/d
+;   socket.data.out.of.areas.message                    ./commands/area/d
 ;
-;   local.data.carriage.return.l          ./functions/d
+;   socket.data.out.of.areas.message.l                  ./commands/area/d
 ;
-;   local.data.out.of.areas.message       ./commands/area/d
+;   socket.send                                         ./functions/socket/socket.send/t
 ;
-;   local.data.out.of.areas.message.l     ./commands/area/d
+;   sys.standard.output                                 ./b
 ;
-;   open.descriptor                       ./functions/open.descriptor/t
+;   text.data.index.local.data.area.bad.syntax.message  ./functions/main/text.init/b
 ;
-;   socket.data.area.created.message      ./commands/area/d
+;   text.data.index.local.data.carriage.return.message  ./functions/main/text.init/b
 ;
-;   socket.data.area.created.message.l    ./commands/area/d
+;   text.data.index.local.data.area.created.message     ./functions/main/text.init/b
 ;
-;   socket.data.command.area.help         ./commands/area/d
+;   text.data.index.local.data.out.of.areas.message     ./functions/main/text.init/b
 ;
-;   socket.data.command.area.help.l       ./commands/area/d
+;   word.l                                              ./b
 ;
-;   socket.data.out.of.areas.message      ./commands/area/d
+;   write.console                                       ./functions/write.console/t
 ;
-;   socket.data.out.of.areas.message.l    ./commands/area/d
+;   write.descriptor                                    ./functions/write.descriptor/t
 ;
-;   socket.send                           ./functions/socket/socket.send/t
-;
-;   word.l                                ./b
-;
-;   write.descriptor                      ./functions/write.descriptor/t
-;
-;   write.bad.command.error               ./functions/write.bad.command.error/t
+;   write.bad.command.error                             ./functions/write.bad.command.error/t
 ;
 
     command.area:                       push  esi                                                                       ; Preserve index to connection entry.
@@ -130,9 +124,8 @@
 
     command.area.bad:                   pop  esi                                                                        ; Restore index to connection entry.
 
-                                        mov  ecx, local.data.area.bad.syntax.message                                    ; Pointer to local message indicating an admin bounced on syntax.
-                                        mov  edx, local.data.area.bad.syntax.message.l                                  ; Length of message.
-                                        call write.descriptor                                                           ; Tell the admin there's someone online with admin priviledges that needs an education.
+                                        push  dword [text.data.index.local.data.area.bad.syntax.message]                ; Point write.console to local message indicating an admin bounced on syntax.
+                                        call write.console                                                              ; Tell the admin there's someone online with admin priviledges that needs an education.
 
                                         push  socket.data.command.area.help.l                                           ; Store length of message for send function.
                                         push  socket.data.command.area.help                                             ; Point send function to message indicating that the command was bad.
@@ -230,28 +223,29 @@
                                         or   eax, eax                                                                   ; If eax is signed, the file doesn't exist, which means we've found a candidate.
                                         jns  command.area.next.file                                                     ; No candidate this time. Go check the next file.
 
+                                        push  ebx                                                                       ; Point create.file to the filename to be created.
                                         call create.file                                                                ; Create the candidate file.
 
                                         mov  ebx, eax                                                                   ; ebx - Descriptor associated with candidate file.
 
-                                        mov  [file.indicator], ebx                                                      ; Point write.descriptor to the candidate file.
-                                        mov  ecx, area.name.l                                                           ; ecx - Pointer to area name length.
-                                        mov  edx, dword.l                                                               ; edx - Length of area name length.
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  area.name.l                                                               ; Pointer to area name length.
+                                        push  dword.l                                                                   ; Length of area name length.
                                         call write.descriptor                                                           ; Store the area header in the candidate file.
 
-                                        mov  [file.indicator], ebx                                                      ; Point write.descriptor to the candidate file.
-                                        mov  ecx, area.name                                                             ; ecx - Pointer to area name.
-                                        mov  edx, dword [area.name.l]                                                   ; edx - Length of area name.
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  area.name                                                                 ; Pointer to area name.
+                                        push  dword [area.name.l]                                                       ; Length of area name.
                                         call write.descriptor                                                           ; Store the area name in the candidate file.
 
-                                        mov  [file.indicator], ebx                                                      ; Point write.descriptor to the candidate file.
-                                        mov  ecx, area.description.l                                                    ; ecx - Pointer to area description length.
-                                        mov  edx, dword.l                                                               ; edx - Length of area description length.
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  area.description.l                                                        ; Pointer to area description length.
+                                        push  dword.l                                                                   ; Length of area description length.
                                         call write.descriptor                                                           ; Store the area description length in the candidate file.
 
-                                        mov  [file.indicator], ebx                                                      ; Point write.descriptor to the candidate file.
-                                        mov  ecx, area.description                                                      ; ecx - Pointer to area description.
-                                        mov  edx, dword [area.description.l]                                            ; edx - Length of area description.
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  area.description                                                          ; Pointer to area description.
+                                        push  dword [area.description.l]                                                ; Length of area description.
                                         call write.descriptor                                                           ; Store the area description in the candidate file.
 
                                         push eax                                                                        ; Preserve descriptor associated with the candidate file.
@@ -259,32 +253,32 @@
                                         mov  dword [area.num.contained.items], eax                                      ; Set number of items in new area.
                                         pop  eax                                                                        ; Restore descriptor associated with the candidate file.
 
-                                        mov  [file.indicator], ebx                                                      ; Point write.descriptor to the candidate file.
-                                        mov  ecx, area.num.contained.items                                              ; ecx - Pointer to number of items contained within the new area.
-                                        mov  edx, dword.l                                                               ; edx - Length of number of items contained within the new area.
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  area.num.contained.items                                                  ; Pointer to number of items contained within the new area.
+                                        push  dword.l                                                                   ; Length of number of items contained within the new area.
                                         call write.descriptor                                                           ; Store the number of items in the candidate file.
 
                                         call close.descriptor                                                           ; Disassociate the descriptor.
 
-                                        mov  ecx, local.data.area.created.message                                       ; ecx - Pointer to message indicating the creation of an area.
-                                        mov  edx, local.data.area.created.message.l                                     ; edx - Length of message.
-                                        call write.descriptor                                                           ; Tell the admin a new area has been created.
+                                        push  dword [text.data.index.local.data.area.created.message]                   ; Point write.console to message indicating the creation of an area.
+                                        call write.console                                                              ; Tell the admin a new area has been created.
 
-                                        mov  ecx, area.name                                                             ; ecx - Pointer to stored area name.
-                                        mov  edx, dword [area.name.l]                                                   ; edx - Length of stored area name.
+
+                                        push  sys.standard.output                                                       ; Write to console.
+                                        push  area.name                                                                 ; Pointer to stored area name.
+                                        push  dword [area.name.l]                                                       ; Length of stored area name.
                                         call write.descriptor                                                           ; Show the area name to the admin.
 
-                                        mov  ecx, local.data.carriage.return                                            ; ecx - Pointer to carriage return.
-                                        mov  edx, local.data.carriage.return.l                                          ; edx - Length of carriage return.
-                                        call write.descriptor                                                           ; Send a carriage return to the local console.
+                                        push  dword [text.data.index.local.data.carriage.return.message]                ; Pointer to carriage return.
+                                        call write.console                                                              ; Send a carriage return to the local console.
 
-                                        mov  ecx, area.description                                                      ; ecx - Pointer to area description.
-                                        mov  edx, dword [area.description.l]                                            ; edx - Length of area description.
+                                        push  sys.standard.output                                                       ; Write to console.
+                                        push  area.description                                                          ; Pointer to area description.
+                                        push  dword [area.description.l]                                                ; Length of area description.
                                         call write.descriptor                                                           ; Show the area description to the admin.
 
-                                        mov  ecx, local.data.carriage.return                                            ; ecx - Pointer to carriage return.
-                                        mov  edx, local.data.carriage.return.l                                          ; edx - Length of carriage return.
-                                        call write.descriptor                                                           ; Send a carriage return to the local console.
+                                        push  dword [text.data.index.local.data.carriage.return.message]                ; Pointer to carriage return.
+                                        call write.console                                                              ; Send a carriage return to the local console.
 
                                         push  socket.data.area.created.message.l                                        ; Provide length of message.
                                         push  socket.data.area.created.message                                          ; Point socket.send to area creation success message.
@@ -325,9 +319,8 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.area.filename.out.of.areas: mov  ecx, local.data.out.of.areas.message                                       ; ecx - Pointer to message indicating we're out of area files.
-                                        mov  edx, local.data.out.of.areas.message.l                                     ; edx - Length of message.
-                                        call write.descriptor                                                           ; Tell the admin we're out of area files.
+    command.area.filename.out.of.areas: push  dword [text.data.index.local.data.area.out.of.areas.message]              ; Pointer to message indicating we're out of area files.
+                                        call write.console                                                              ; Tell the admin we're out of area files.
 
                                         push  socket.data.out.of.areas.message.l                                        ; Provide length of message.
                                         push  socket.data.out.of.areas.message                                          ; Point socket.send to out of areas message.
