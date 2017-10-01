@@ -1,705 +1,387 @@
 gylf
 
-An MMO Server for linux implemented entirely in x86 assembly language, using
-the linux kernel services for Berkeley Sockets.
+An MMO Server for linux implemented entirely in x86 assembly language, using the linux kernel services for Berkeley Sockets.
 
 Relevant data:
 
-    ========================================================================
-
-    ./build.gylf.sh
-
-    This is the build script. It depends on the presence of nasm and ld. Run
-    the build script to produce an executable binary called 'gylf' from the
-    existing codebase, which it then places in the root directory.
-
-    ========================================================================
-
-    ./code
-
-    The ./code directory acts as the root directory for the code implemented
-    in the gylf project.
-
-    ./code/gylf.asm
-
-    gylf.asm is the main program - it cycles through the main loop.
-
-    ./code/include.asm
-
-    The include.asm file contains references to all the code contained in
-    the ./code directory. This allows for selective development; we don't
-    have to write all our code to one file.
-
-    ------------------------------------------------------------------------
-
-    ./code/commands
-
-    The ./code/commands directory contains code pertaining to commands
-    available to users depending on their access level.
+    Where appropriate, each directory may (or may not) contain the following:
     
-    ./code/commands/command.ai.asm
+    b                         Standard definitions shared by all downstream code.
+    d                         Data declarations shared by all downstream code.
+    i                         Inclusion anchor for tying together downstream code.
+    t                         ASM code outlining the function referenced by the immediate
+                              directory name.
 
-    command.ai.asm contains code pertinent to the implementation of the 'ai'
-    command; a player-level command that allows for the invoker to adjust
-    parameters associated with their avatar's behaviour while they are
-    signed out.
+    ==============================================================================================
 
-    ./code/commands/command.area.asm
+    ./build.gylf.sh           This is the build script. It depends on the presence of nasm and ld.
+                              Run the build script to produce an executable binary called 'gylf'
+                              from the existing codebase, which it then places in the root
+                              directory.
 
-    command.area.asm contains code pertinent to the implementation of the
-    'area' command; an administrator command that allows for administrators
-    to create new areas without having to dig them out using the player
-    interface.
+    ==============================================================================================
 
-    ./code/commands/command.broadcast.asm
+    ./commands                Contains code pertaining to commands available to users depending on
+                              their access level.
 
-    command.broadcast.asm contains code pertinent to the implementation of
-    the 'broadcast' command; an administrator command that allows for
-    administrators to send a message to the entire participant base all at
-    once, regardless of their locations in the simulation.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/commands/command.dig.asm
+      ./commands              Contains code pertinent to the implementation of the 'ai' command; a
+        /ai                   player-level command that allows for the invoker to adjust
+                              parameters associated with their avatar's behaviour while they are
+                              signed out.
 
-    command.dig.asm contains code pertinent to the implementation of the
-   'dig' command; a player-level command that allows for player to, under
-   certain circumstances, extend the wworld by creating new areas.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/commands/command.egg.asm
+      ./commands              Contains code pertinent to the implementation of the 'area' command;
+        /area                 an administrator command that allows for administrators to create
+                              new areas without having to dig them out using the player interface.
 
-    command.egg.asm contains code pertinent to the implementation of the
-    'egg' command; an administrator command that allows for the forced
-    implantation and fertilization of an egg in the womb of the target
-    gylf without having to go through the normal channels of fertilization
-    through mating.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/commands/command.gylf.asm
+      ./commands              Contains code pertinent to the implementation of the 'broadcast'
+        /broadcast            command; an administrator command that allows for administrators to
+                              send a message to the entire participant base all at once,
+                              regardless of their locations in the simulation.
 
-    command.gylf.asm contains code pertinent to the implementation of the
-    'gylf' command; an administrator command that allows for the creation
-    of a complete new gylf without the intervening process of mating,
-    fertilization, gestation, laying, and hatching.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/commands/command.help.asm
+      ./commands              Contains code pertinent to the implementation of the 'dig' command;
+        /dig                  a participant-level command that allows for player to, under certain
+                              circumstances, extend the environment by creating new areas.
 
-    command.help.asm contains code pertinent to the implementation of the
-    'help' command; a player-level command whose sole purpose is to
-    display context-sensitive help.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/commands/command.logout.asm
+      ./commands              Contains code pertinent to the implementation of the 'egg' command;
+        /egg                  an administrator command that allows for the forced implantation and
+                              fertilization of an egg in the womb of the target gylf without
+                              having to go through the normal channels of fertilization through
+                              mating.
 
-    command.logout.asm contains code pertinent to the implementation of the
-    'logout' command; a common command that removes a participant from the
-    server and leaves their avatar under the control of an artificial
-    intelligence.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/commands/command.look.asm
+      ./commands              Contains code pertinent to the implementation of the 'gylf' command;
+        /gylf                 an administrator command that allows for the creation of a complete
+                              new gylf without the intervening process of mating, fertilization,
+                              gestation, laying, and hatching.
 
-    command.look.asm contains code pertinent to the implementation of the
-    'look' command; a player-level command that displays information about
-    the target.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/commands/command.shutdown.asm
+      ./commands              Contains code pertinent to the implementation of the 'help' command;
+        /help                 a participant-level command whose sole purpose is to display
+                              context-sensitive help.
 
-    commmand.shutdown.asm contains code pertinent to the implementation of
-    the 'shutdown' command; an administrator command that shuts down the
-    server from within the environment.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/commands/command.think.asm
+      ./commands              Contains code pertinent to the implementation of the 'logout'
+        /logout               command; a common command that removes a participant from the server
+                              and leaves their avatar under the control of an artificial
+                              intelligence.
 
-    command.think.asm contains code pertinent to the implementation of the
-    'think' command; a player-level command that allows for communication
-    between players in a local environment.
+    ----------------------------------------------------------------------------------------------
 
-    ------------------------------------------------------------------------
+      ./commands              Contains code pertinent to the implementation of the 'look' command;
+        /look                 a participant-level command that displays information about the
+                              target.
 
-    ./code/comms
+    ----------------------------------------------------------------------------------------------
 
-    The ./code/comms directory contains code pertaining to the behind the
-    scenes mechanisms surrounding communications between users.
+      ./commands              Contains code pertinent to the implementation of the 'shutdown'
+        /shutdown             command; an administrator command that shuts down the server from
+                              within the environment.
 
-    ./code/comms/send.to.area.asm
+    ----------------------------------------------------------------------------------------------
 
-    send.to.area.asm contains code that sends a provided message to a
-    specified area. Everyone in the specified area will receive the message.
-    This code is used to facilitate communication between users in a given
-    area of the environment, as well as facilitating communications between
-    administrators and a given area.
+      ./commands              Contains code pertinent to the implementation of the 'think'
+        /think                command; a participant-level command that allows for communication
+                              between players in a local environment.
 
-    ./code/comms/send.tp.player.asm
+    ==============================================================================================
+    
+    ./functions               Contains code pertaining to the background mechanisms that
+                              contribute to the overall functioning of the codebase. Things like
+                              writing to files, reading user input, etc... are all kept here.
+    
+    ----------------------------------------------------------------------------------------------
 
-    send.to.player.asm contains code that sends a provided message to a
-    specified player. Only the specified player will received this message.
-    This code is used to facilitate private communication between players.
+      ./functions             Contains code that collects arguments from the participant command
+        /aggregate.arguments  line and segregates them into a predefined structure.
 
-    ./code/comms/send.to.world.asm
+    ----------------------------------------------------------------------------------------------
 
-    send.to.world.asm contains code that sends a provided message to the
-    entire environment. This code is used to facilitate administrator
-    communications that need to be addressed to everyone in the environment.
+      ./functions             Contains code that suspends execution of the code, unloads from
+        /bail                 memory, and returns control to Linux.
 
-    ------------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions
+      ./functions             Contains code that strips buffered data of carriage returns and line
+        /buffer.strip         feeds and replaces them with zeroes.
 
-    The ./code/functions directory contains code pertaining to the
-    background mechanisms that contribute to the overall functioning of the
-    codebase. Things like writing to files, reading user input, etc... are
-    all kept here.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/bail.asm
+      ./functions             Contains code that checks to see if the user on the current socket
+        /check.admin          has administrative privileges.
 
-    bail.asm contains code that suspends execution of the code, unloads
-    from memory, and returns control to Linux.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/buffer.strip.asm
+      ./functions             Contains code that checks to see if a user attempting to log in is
+        /check.login          already logged in from a different location.
 
-    buffer.strip.asm contains code that strips buffered data of carriage
-    returns and line feeds and replaces them with zeroes.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/check.admin.asm
+      ./functions             Contains code that remotely clears the user's screen and places
+        /clear.screen         their cursor in the upper left hand corner.
 
-    check.admin.asm contains code that checks to see if the user on the
-    current socket has administrative privileges.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/check.login.asm
+      ./functions             Contains code that tells linux that we're finished with a
+        /close.descriptor     descriptor, causing it to become disassociated with the dataset to
+                              which it currently points.
 
-    check.login.asm contains code that checks to see if a user attempting to
-    log in is already logged in from a different location.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/clear.screen.asm
+      ./functions             Contains code that builds out character data on the basis of DNA
+        /create.character     sequences left behind by either parent on the associated egg.
 
-    clear.screen.asm contains code that remotely clears the user's screen
-    and places their cursor in the upper left hand corner.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/close.descriptor.asm
+      ./functions             Contains code that builds a dataset on the drive, to which it
+        /create.file          associates a logical descriptor.
 
-    close.descriptor.asm contains code that tells linux that we're finished
-    with a descriptor, causing it to become disassociated with the dataset
-    to which it currently points.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/create.character.asm
+      ./functions             Contains code that creates a lock file for use in preventing
+        /create.lock.file     multiple instances of the same login from different locations.
 
-    create.character.asm builds out character data on the basis of DNA
-    sequences left behind by either parent on the associated egg.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/create.file.asm
+      ./functions             Contains code which combines the DNA left behind on an egg by both
+        /dna.lab              parents to create an entirely new gylf.
 
-    create.file.asm contains code that builds a dataset on the drive, to
-    which it associates a logical descriptor.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/create.lock.file.asm
+      ./functions             Contains code which populates the character data in memory from file
+        /get.character.data   for the character on the current socket.
 
-    create.lock.file.asm contains code that creates a lock file for use in
-    preventing multiple instances of the same login from different locations.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/dna.lab.asm
+      ./functions             Contains code which reads data that exists outside the codebase and
+        /get.external.data    memory.
 
-    dna.lab.asm contains code which combines the DNA left behind on an egg
-    by both parents to create an entirely new gylf.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/get.character.data.asm
+      ./functions             Contains code that returns the number of clock ticks since the
+        /get.ticks            environment was booted.
 
-    get.character.data.asm contains code which populates the character data
-    in memory from file for the character on the current socket.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/get.external.data.asm
+      ./functions/main        Contains all pertinent first level code, definitions, and data for
+                              the main loop.
 
-    get.external.data.asm contains code which reads data that exists
-    outside the codebase and memory.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/get.ticks.asm
+        ./functions/main      Contains code that runs through the list of potentially active
+          /active.socket.poll connections and checks each of them for activity. Upon discovering
+                              activity in a connection, the function then passes control off to
+                              the answer.active.socket function for more specialized treatment.
 
-    get.ticks.asm contains code that returns the number of clock ticks
-    since the environment was booted.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/open.descriptor.asm
+        ./functions/main          Contains code that polls the listening socket for new connection
+          /listening.socket.poll  attempts and sends the login message when it finds them.
 
-    open.descriptor.asm contains code that associates a logical descriptor
-    with an existing dataset on disk. If the code is unable to associate a
-    descriptor, it instead returns an error code, which is detectable via
-    a check on the sign of eax.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/poll.descriptor.asm
+        ./functions/main            Contains code that has to do with interaction between the user
+          /participant.interaction  and the infractructure of the environment. Essentially, this
+                                    code addresses all user statii and how to handle them.
 
-    poll.descriptor.asm contains code that uses a logical descriptor
-    associated with a Berkely Socket to ask the socket whether or not
-    there is currently data on it that requires the attention of a
-    handler.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/print.socket.number.asm
+          ./functions/main            Contains code that parses commands issued by users with an
+            /participant.interaction  active status and sends them to the appropriate handler.
+              /address.active.status
 
-    print.socket.number.asm contains code that prints a socket number
-    associated with an event in the administrator console.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/read.descriptor.asm
+          ./functions/main            Contains code that parses commands issued by users with a
+            /participant.interaction  login status and sends them to the appropriate handler.
+              /address.login.status
 
-    read.descriptor.asm contains code that pulls data from an existing
-    dataset using a logical descriptor previously associated with the
-    dataset in question.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/set.single.attribute.asm
+          ./functions/main                Contains code that parses commands issues by users with
+            /participant.interaction      a passphrase status and sends them to the appropriate
+              /address.passphrase.status  handler.
 
-    set.single.attribute.asm contains code that sends a vt100 escape
-    sequence to the remote terminal which changes a single attribute about
-    the printed text. Attributes can be found in the file
-    "attribute.control.dat".
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/set.up.listener.asm
+          ./functions/main                    Contains code that parses commands issued by users
+            /participant.interaction          with a set passphrase status and sends them to the
+              /address.set.passphrase.status  appropriate handler.
 
-    set.up.listener.asm contains code that builds a socket, binds it to a
-    specified hardware port, and tells it to listen for incoming
-    connections. When it's finished, it displays a message to the admin
-    indicating that we're online and ready to go. If at any point an error
-    occurs, the function displays an error message and passes control to
-    the bail function so we can suspend execution and return control to
-    linux in the hopes that the admin can figure out what's clogging up
-    the works.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/system.check.asm
+        ./functions/main      Contains code that builds a socket, binds it to a specified hardware
+          /set.up.listener    port, and tells it to listen for incoming connections. When it's
+                              finished, it displays a message to the admin indicating that we're
+                              online and ready to go. If at any point an error occurs, the
+                              function displays an error message and passes control to the bail
+                              function so we can suspend execution and return control to linux in
+                              the hopes that the admin can figure out what's clogging up the
+                              works.
 
-    system.check.asm contains code that performs checks to ensure the
-    environment is ready to go live, prior to instantiation.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/time.in.seconds.since.epoch.asm
+        ./functions/main      Contains code that performs checks to ensure the environment is
+          /system.check       ready to go live, prior to instantiation.
 
-    time.in.seconds.since.epoch.asm contains code that returns the time in
-    seconds since the epoch.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/write.descriptor.asm
+        ./functions/main      Contains code pertinent to the passage of time in the environment.
+          /world.maintenance
 
-    write.descriptor.asm contains code that adds data to an existing
-    dataset on disk using a logical descriptor previously associated with
-    the dataset.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/write.prompt.asm
+      ./functions             Contains code that associates a logical descriptor with an existing
+        /open.descriptor      dataset on disk. If the code is unable to associate a descriptor, it
+                              instead returns an error code, which is detectable via a check on
+                              the sign of eax.
 
-    write.prompt.asm contains code that displays a command prompt to the
-    user.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/functions/write.welcome.asm
+      ./functions             Contains code that uses a logical descriptor associated with a
+        /poll.descriptor      Berkeley Socket to ask the socket whether or not there is currently
+                              data on it that requires the attention of a handler.
 
-    write.welcome.asm contains code that builds and displays the initial
-    welcome screen to the user.
+    ----------------------------------------------------------------------------------------------
 
-    ------------------------------------------------------------------------
+      ./functions             Contains code that prints a socket number associated with an event
+        /print.socket.number  in the administrator console.
 
-    ./code/player.interaction
+    ----------------------------------------------------------------------------------------------
 
-    The ./code/participant.interaction directory contains code that has to do
-    with interaction between the user and the infractructure of the
-    environment. Essentially, this code addresses all user statii and how to
-    handle them.
+      ./functions             Contains code that pulls data from an existing dataset using a
+        /read.descriptor      logical descriptor previously associated with the dataset in
+                              question.
 
-    ./code/participant.interaction/address.active.status.asm
+    ----------------------------------------------------------------------------------------------
 
-    address.active.status.asm parses commands issued by users with an active
-    status and sends them to the appropriate handler.
+      ./functions             Contains code that sends a vt100 escape sequence to the remote
+        /set.single.attribute terminal which changes a single attribute about the printed text.
+                              Attributes can be found in external data.
 
-    ./code/participant.interaction/address.login.status.asm
+    ----------------------------------------------------------------------------------------------
 
-    address.login.status parses commands issued by users with a login status
-    and sends them to the appropriate handler.
+      ./functions/socket      Contains code that governs the 'behind the scenes' mechanisms
+                              surrounding the operation of Berkeley Sockets under Linux in X86
+                              ASM.
 
-    ./code/participant.interaction/address.passphrase.status.asm
+    ----------------------------------------------------------------------------------------------
 
-    address.passphrase.status.asm parses commands issues by users with a
-    passphrase status and sends them to the appropriate handler.
+        ./functions/socket    Contains code that calls the linux kernel to associate a descriptor
+          /accept.socket      with an incoming Berkeley Socket.
 
-    ./code/participant.interaction/address.set.passphrase.status.asm
+    ----------------------------------------------------------------------------------------------
 
-    address.set.passphrase.status parses commands issued by users with a set
-    passphrase status and sends them to the appropriate handler.
+        ./functions/socket      Contains code that determines the status of an active socket and
+          /answer.active.socket routes the data to the appropriate handler.
 
-    ------------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------
 
-    ./code/socket
+        ./functions/socket    Contains code that binds a socket to a specified hardware port.
+          /bind.socket
 
-    The ./code/socket directory contains code that governs the 'behind the
-    scenes' mechanisms surround the operation of Berkeley Sockets under
-    Linux in X86 ASM.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/socket/accept.socket.asm
+        ./functions/socket    Contains code that removes the data associated with an active socket
+          /clean.socket       from memory, smokes the lock file, and uses the close.descriptor
+                              function to close out the socket. This function does not closeout
+                              other files associated with the socket - that responsibility is left
+                              to the caller.
 
-    accept.socket.asm contains code that calls the linux kernel to associate
-    a descriptor with an incoming Berkeley Socket.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/socket/active.socket.poll.asm
+        ./functions/socket    Contains code pertaining to the behind the scenes mechanisms
+          /communications     surrounding communications between users.
 
-    active.socket.poll.asm contains code that runs through the list of
-    potentially active connections and checks each of them for activity.
-    Upon discovering activity in a connection, the function then passes
-    control off to the answer.active.socket function for more specialized
-    treatment.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/socket/answer.active.socket.asm
+          ./functions/socket  Contains code that sends a provided message to a specified area.
+            /communications   Everyone in the specified area will receive the message. This code
+              /send.to.area   is used to facilitate communication between users in a given area of
+                              the environment, as well as facilitating communications between
+                              administrators and a given area.
 
-    answer.active.socket.asm contains code that determines the status of an
-    active socket and routes the data to the appropriate handler.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/socket/bind.socket.asm
+          ./functions/socket  Contains code that sends a provided message to a specified player.
+            /communications   Only the specified player will received this message. This code is
+              /send.to.player used to facilitate private communication between players.
 
-    bind.socket.asm contains code that binds a socket to a specified
-    hardware port.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/socket/clean.socket.asm
+          ./functions/socket  Contains code that sends a provided message to the entire
+            /communications   environment. This code is used to facilitate administrator
+              /send.to.world  communications that need to be addressed to everyone in the
+                              environment.
 
-    clean.socket.asm contains code that removes the data associated with an
-    active socket from memory, smokes the lock file, and uses the
-    close.descriptor function to close out the socket. This function does
-    not closeout other files associated with the socket - that responsibility
-    is left to the caller.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/socket/create.socket.asm
+        ./functions/socket    Contains code that builds a socket for further use.
+          /create.socket
 
-    create.socket.asm contains code that builds a socket for further use.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/socket/listen.socket.asm
+        ./functions/socket    Contains code that tells a created and bound socket to listen for
+          /listen.socket      incoming connections.
 
-    listen.socket.asm contains code that tells a created and bound socket
-    to listen for incoming connections.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/socket/listening.socket.poll.asm
+        ./functions/socket    Contains code that receives data from a connected socket and places
+          /recv.from.socket   it in a specified buffer.
 
-    listening.socket.poll.asm contains code that polls the listening socket
-    for new connection attempts and sends the login message when it finds
-    them.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/socket/recv.from.socket.asm
+        ./functions/socket    Contains code that sets up error messages to be displayed to the
+          /socket.error       admin in the event that something goes awry while building the
+                              listening socket. If any of these are ever executed, we're beyond
+                              the point of no return, so each of them passes control to the bail
+                              function after displaying their unique message.
 
-    recv.from.socket.asm contains code that receives data from a connected
-    socket and places it in a specified buffer.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/socket/socket.errors.asm
+        ./functions/socket    Contains code that sends data out on a connected socket.
+          /socket.send
 
-    socket.error.asm contains code that sets up error messages to be
-    displayed to the admin in the event that something goes awry while
-    building the listening socket. If any of these are ever executed, we're
-    beyond the point of no return, so each of them passes control to the
-    bail function after displaying their unique message.
+    ----------------------------------------------------------------------------------------------
 
-    ./code/socket/socket.send.asm
+      ./functions             Contains code that returns the time in seconds since the epoch.
+        /time.in.seconds.since.the.epoch
 
-    socket.send.asm containsn code that sends data out on a connected socket.
+    ----------------------------------------------------------------------------------------------
 
-    ------------------------------------------------------------------------
+      ./functions                 Contains code that lets the user know whan they've attempted to
+        /write.bad.command.error  send a string to the server that doesn't correspond to a
+                                  recognized command.
 
-    ./code/world.maintenance
+    ----------------------------------------------------------------------------------------------
 
-    The ./code/world.maintenance directory contains code pertinent to the
-    passage of time in the environment.
+      ./functions                     Contains code that lets the user know when they've requested
+        /write.bad.help.command.error help for a command that does not belong to the recognized
+                                      command set.
 
-    ./code/world.maintenance/maintain.asm
+    ----------------------------------------------------------------------------------------------
 
-    maintain.asm contains code that governs the passage of time in the
-    environment.
+      ./functions             Contains code that adds data to an existing dataset on disk using a
+        /write.descriptor     logical descriptor previously associated with the dataset.
 
-    ========================================================================
+    ----------------------------------------------------------------------------------------------
 
-    ./definitions
+      ./functions             Contains code that displays a command prompt to the user.
+        /write.prompt
 
-    The ./definitions directory contains defined data.
+    ----------------------------------------------------------------------------------------------
 
-	./definitions/area.def
-
-    area.def contains definitions for all aspects of area data.
-
-	./definitions/buffers.def
-
-    buffers.def contains definitions of data buffers.
-
-	./definitions/character.def
-
-    character.def contains definitions for all aspects of character data.
-
-	./definitions/egg.def
-
-    egg.def contains definitions for all aspects of egg data.
-
-	./definitions/functions.def
-
-    functions.def contains definitions for function calls. Without these
-    definitions, the program would run on magic numbers and be difficult to
-    read.
-
-	./definitions/id.def
-
-    id.def contains definitions for all aspects of id data.
-
-	./definitions/include.def
-
-    The include.def file contains references to all the code contained in the
-    ./definitions directory. This allows for selective development; we don't
-    have to write all our code to one file.
-
-	./definitions/miscellaneous.indicators.def
-
-    miscellaneous.indicators.def contains defined elements which represent
-    various indicators used in the program.
-
-	./definitions/miscellaneous.lengths.def
-
-    miscellaneous.lengths.def contains defined elements which represent
-    various sizes used in the program.
-
-	./definitions/numerals.def
-
-    numerals.def contains data definitions of numerals.
-
-	./definitions/polling.def
-
-    polling.def contains definitions made use of when polling descriptors.
-
-	./definitions/socket.def
-
-    socket.def contains various definitions made use of by socket functions.
-
-	./definitions/statii.def
-
-    statii.def contains definitions of various connection statii for use in
-    determining how to interpret data received from a connected socket.
-
-    ========================================================================
-
-    ./external.data
-
-    The ./external.data directory contains data that is read from the disk
-    at runtime, rather than being stored in memory.
-
-	./external.data/cursor.control
-
-    The ./external.data/cursor.control directory contains external cursor
-    control information made use of at runtime, but unable to be reliably
-    stored in memory.
-
-	./external.data/cursor.control/clear.screen
-
-    clear.screen contains the escape sequence pertinent to remotely clearing
-    a user's screen.
-
-	./external.data/cursor.control/cursor.home
-
-    cursor.home contains the escape sequence pertinent to remotely sending a
-    user's cursor to the upper left corner of their screen.
-
-    ========================================================================
-
-    ./raw.data
-
-    The ./raw.data directory contains data defined in binary and stored in
-    memory at runtime.
-
-	./raw.data/include.dat
-
-    The include.dat file contains references to all the code contained in
-    the ./definitions directory. This allows for selective development; we
-    don't have to write all our code to one file.
-
-    ------------------------------------------------------------------------
-
-	./raw.data/area.data
-
-    The ./raw.data/area.data directory contains data pertinent to the
-    definition and implementation of areas in the environment.
-
-	./raw.data/area.data/area.dat
-
-    area.dat contains data definitions for data pertaining to areas.
-
-    ------------------------------------------------------------------------
-
-	./raw.data/character.representation
-
-    The ./raw.data/character.representation directory contains data
-    pertinent to the definition of specific character representations via
-    remote connections. The need for this data is currently under review.
-
-	./raw.data/character.representation/block.dat
-
-    block.dat contains data definitions for blocks. Its future is
-    uncertain.
-
-	./raw.data/character.representation/box.double.dat
-
-    box.double.dat contains data definitions for box doubles. Its future
-    is uncertain.
-
-	./raw.data/character.representation/box.hybrid.dat
-
-    box.hybrid.dat contains data definitions for box hybrids. Its future
-    is uncertain.
-
-	./raw.data/character.representation/box.light.dat
-
-    box.light.dat contains data definitions for box lights. Its future is
-    uncertain.
-
-	./raw.data/character.representation/capitals.dat
-
-    capitals.dat contains data definitions for capitals. Its future is
-    uncertain.
-
-	./raw.data/character.representation/character.representation.dat
-
-    character.representation.dat contains data definitions for character
-    representation. Its future is uncertain.
-
-	./raw.data/character.representation/control.characters.dat
-
-    The character.representation.dat file contains references to all the
-    code contained in the ./raw.data/character.representation directory.
-    This allows for selective development; we don't have to write all our
-    code to one file.
-
-	./raw.data/character.representation/esoterics.dat
-
-    esoterics.dat contains data definitions for esoterics. Its future is
-    uncertain.
-
-	./raw.data/character.representation/lowercase.dat
-
-    lowercase.dat contains data definitions for lowercases. Its future is
-    uncertain.
-
-	./raw.data/character.representation/punctuation.dat
-
-    punctuation.dat contains data definitions for punctuation. Its future
-    is uncertain.
-
-	./raw.data/character.representation/stone.dat
-
-    stone.dat contains data definitions for stone. Its future is uncertain.
-
-    ------------------------------------------------------------------------
-
-	./raw.data/command.data
-
-    The ./raw.data/command.data directory contains data pertinent to the
-    implementation of commnands.
-
-	./raw.data/command.data/command.table.dat
-
-    command.table.dat associates the keywords for commands with pointers to
-    their handlers.
-
-    ------------------------------------------------------------------------
-
-	./raw.data/file.paths
-
-    The ./raw.data/file.paths directory contains data pertinent to the
-    definitions of paths to files used by the system.
-
-	./raw.data/file.paths/file.paths.dat
-
-    file.paths.dat contains data definitions for files used by the system.
-
-    ------------------------------------------------------------------------
-
-	./raw.data/function.data
-
-    The ./raw.data/function.data directory contains data pertinent to the
-    operation of certain functions.
-
-	./raw.data/function.data/file.indicator.dat
-
-    file.indicator.dat contains a definition that tells write.indicator
-    whether it's writing to a file or the screen.
-
-    ------------------------------------------------------------------------
-
-	./raw.data/item.data
-
-    The ./raw.data/item.data does not currently contain data. The intention
-    is that when items are fully implemented, it will contain data pertinent
-    to their implementation.
-
-    ------------------------------------------------------------------------
-
-	./raw.data/messages
-
-    The ./raw.data/messages directory contains data pertinent to the
-    formation and delivery of messages to the server admin and participants.
-
-	./raw.data/messages/messages.dat
-
-    The messages.dat file contains references to all the code contained in
-    the ./raw.data/messages directory. This allows for selective
-    development; we don't have to write all our code to one file.
-
-	./raw.data/messages/messages.local.dat
-
-    messages.local.dat contains data definitions for messages to be sent
-    locally to the server admin.
-
-	./raw.data/messages/messages.out.dat
-
-    messages.out.dat contains data definitions for messages to be sent on a
-    connected socket to remote users.
-
-    ------------------------------------------------------------------------
-
-	./raw.data/socket
-
-    The ./raw.data/socket directory contains data related to the
-    implementation of Berkeley Sockets.
-
-	./raw.data/socket/socket.dat
-
-    socket.dat contains data definitions pertinent to the functions
-    surrounding socket management.
-
-    ------------------------------------------------------------------------
-
-	./raw.data/vt100
-
-    The ./raw.data/vt100 directory contains data pertinent to the
-    implementation of remote terminal manipulation.
-
-	./raw.data/vt100/attribute.control.dat
-
-    attribute.control.dat contains data definitions for attribute control
-    vt100 escape sequences. Its future is uncertain.
-
-	./raw.data/vt100/cursor.control.dat
-
-    cursor.control.dat contains data definitions for vt100 escape sequences
-    pertinent to moving the cursor about on the screen, locally or remotely.
-    Its future is uncertain.
-
-	./raw.data/vt100/key.definition.control.dat
-
-    key.definition.control.dat contains data definitions for vt100 escape
-    sequences pertinent to the definition of key macros. Its future is
-    uncertain.
-
-	./raw.data/vt100/line.wrap.and.fonts.dat
-
-    line.wrap.and.fonts.dat contains data definitions for vt100 escape
-    sequences pertinent to controlling line wrap and custom fonts. Its
-    future is uncertain.
-
-	./raw.data/vt100/print.control.dat
-
-    print.control.dat contains data definitions for vt100 escape sequences
-    pertaining to print control. Its future is uncertain.
-
-	./raw.data/vt100/query.report.reset.dat
-
-    query.report.reset.dat contains data definitions of vt100 escape
-    sequences pertinent to querying terminals. Its future is uncertain.
-
-	./raw.data/vt100/screen.control.dat
-
-    screen.control.dat contains data definitions for vt100 escape
-    sequences pertinent to controlling the screen, either locally or
-    remotely. Its future is uncertain.
-
-	./raw.data/vt100/tab.control.dat
-
-    tab.control.dat contains data definitions for vt100 escape
-    sequences pertinent to tab control. Its future is uncertain.
-
-	./raw.data/vt100/vt100.dat
-
-    The vt100.dat file contains references to all the code contained
-    in the ./raw.data/vt100 directory. This allows for selective
-    development; we don't have to write all our code to one file.
+      ./functions             Contains code that builds and displays the initial welcome screen to
+        /write.welcome        the user.
