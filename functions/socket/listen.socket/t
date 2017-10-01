@@ -1,4 +1,4 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
 ;   listen.socket
 ;
@@ -7,6 +7,22 @@
 ;   Assumptions:    None.
 ;
 ;   Returns:        eax = Error indicator.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   socket.data.listening.socket.descriptor ./functions/socket/b
+;
+;   socket.data.queue.l                     ./functions/socket/b
+;
+;   sys.socket.call                         ./functions/socket/b
+;
+;   sys.socket.listen                       ./functions/socket/listen.socket/b
+;
+;   sys.socket.queue.l                      ./functions/socket/b
+;
+;   sys.system.call                         ./functions/b
 ;
 
     listen.socket: mov dword [socket.data.queue.l], sys.socket.queue.l ; Set the queue length.
