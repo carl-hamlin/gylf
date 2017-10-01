@@ -1,0 +1,43 @@
+;================================================================================================================================================================================================
+
+    section   .data
+
+    %include  "./functions/main/e"
+    %include  "./functions/socket/e"
+    %include  "./functions/write.bad.command.error/e"
+    %include  "./functions/write.prompt/e"
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Local Data
+;
+
+    local.data.carriage.return.l            dd  local.data.carriage.return.end                                                                            ; Length of message.
+    local.data.carriage.return              db  0Ah, 0Dh                                                                                                  ; Carriage return.
+    local.data.carriage.return.end          equ $-local.data.carriage.return                                                                              ; Pointer to end of message.
+
+    local.data.listening.message.l          dd  local.data.listening.message.end                                                                          ; Length of message.
+    local.data.listening.message            db  "There were no problems. the server is now listening, and can be connected on port 2600.", 0Ah, 0Dh       ; Socket listening message.
+    local.data.listening.message.end        equ $-local.data.listening.message                                                                            ; Pointer to end of message.
+
+    local.data.session.open.error.l         dd  local.data.session.open.error.end                                                                         ; Length of message.
+    local.data.session.open.error           db  "A user file could not be created.", 0Ah, 0Dh                                                             ; Session open error message.
+    local.data.session.open.error.end       equ $-local.data.session.open.error                                                                           ; Pointer to end of message.
+
+    local.data.out.of.area.ids.message.l    dd  local.data.out.of.area.ids.message.end                                                                    ; Length of message.
+    local.data.out.of.area.ids.message      db  "An attempt was made to hatch an egg, but the server was out of area ids.", 0Ah, 0Dh                      ; Out of area ids message.
+    local.data.out.of.area.ids.message.end  equ $-local.data.out.of.area.ids.message                                                                      ; Pointer to end of message.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;  Outgoing Data
+;
+
+    socket.data.session.open.error.l        dd  socket.data.session.open.error.end                                                                        ; Length of message.
+	  socket.data.session.open.error		      db	"The server was unable to open a session for you. The administrator has been notified. Please try again " ; Storage for session open error message.
+  						                              db	"later.", 0Ah, 0Dh
+	  socket.data.session.open.error.end	    equ	$-socket.data.session.open.error											                                                    ; Length of session open error message.
+
+    socket.data.out.of.area.ids.message.l   dd  socket.data.out.of.area.ids.message.end                                                                   ; Length of message.
+	  socket.data.out.of.area.ids.message	    db	"System error: Out of area IDs. Disconnecting...", 0Ah, 0Dh								                                ; Message indicating the server has run out of area ids.
+	  socket.data.out.of.area.ids.message.end equ	$-socket.data.out.of.area.ids.message											                                                ; Pointer to end of message.

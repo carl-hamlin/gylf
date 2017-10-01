@@ -8,15 +8,21 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.shutdown.l                  ./commands/shutdown/d
-;   command.shutdown.s                  ./commands/shutdown/d
-;   local.data.shutdown.message         ./commands/shutdown/d
-;   local.data.smoked.sockets.message   ./commands/shutdown/d
-;   socket.data.command.shutdown.help   ./commands/shutdown/d
-;   socket.data.command.shutdown.help.l ./commands/shutdown/d
-;   socket.data.shutdown.message        ./commands/shutdown/d
-;
 ;   command.shutdown                    ./commands/shutdown/t
+;
+;   command.shutdown.l                  ./commands/shutdown/d
+;
+;   command.shutdown.s                  ./commands/shutdown/d
+;
+;   local.data.shutdown.message         ./commands/shutdown/d
+;
+;   local.data.smoked.sockets.message   ./commands/shutdown/d
+;
+;   socket.data.command.shutdown.help   ./commands/shutdown/d
+;
+;   socket.data.command.shutdown.help.l ./commands/shutdown/d
+;
+;   socket.data.shutdown.message        ./commands/shutdown/d
 ;
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
