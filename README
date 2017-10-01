@@ -61,7 +61,8 @@ Relevant data:
                                                 ./functions/create.character/t
                                                 ./functions/d
                                                 ./functions/main/system.check/t
-                                                ./functions/main/participant.interaction/address.active.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.active.status/t
                                                 ./functions/print.socket.number/t
 
           word.l                                ./commands/area/t
@@ -69,7 +70,8 @@ Relevant data:
 
           byte.l                                ./functions/get.character.data/t
                                                 ./functions/get.external.data/t
-                                                ./functions/main/participant.interaction/address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
 
           nibble.l                              No references.
 
@@ -172,28 +174,28 @@ Relevant data:
           local.data.out.of.areas.message.l     ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.area.created.message      ./commands/area/d
+          socket.data.area.created.message      ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.area.created.message.l    ./commands/area/d
+          socket.data.area.created.message.l    ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.out.of.areas.message      ./commands/area/d
+          socket.data.out.of.areas.message      ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.out.of.areas.message.l    ./commands/area/d
+          socket.data.out.of.areas.message.l    ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.bad.area.id.message       ./commands/area/d
+          socket.data.bad.area.id.message       ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.bad.area.id.message.l     ./commands/area/d
+          socket.data.bad.area.id.message.l     ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.command.area.help         ./commands/area/d
+          socket.data.command.area.help         ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.command.area.help.l       ./commands/area/d
+          socket.data.command.area.help.l       ./commands/area/d
                                                 ./commands/area/t
 
           command.area.w                        ./commands/area/d
@@ -1790,8 +1792,10 @@ Relevant data:
                                                 ./functions/dna.lab/t
                                                 ./functions/get.character.data/t
                                                 ./functions/get.external.data/t
-                                                ./functions/main/participant.interaction/address.login.status/t
-                                                ./functions/main/participant.interaction/address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -2228,8 +2232,10 @@ Relevant data:
                                                 ./functions/clear.screen/t
                                                 ./functions/create.character/t
                                                 ./functions/main/listening.socket.poll/t
-                                                ./functions/main/participant.interaction/address.login.status/t
-                                                ./functions/main/participant.interaction/address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
                                                 ./functions/set.single.attribute/t
                                                 ./functions/socket/communications/send.to.area/t
                                                 ./functions/socket/communications/send.to.player/t
