@@ -4,27 +4,44 @@
 ;
 ;   This function calls the linux kernel to associate a descriptor with an incoming Berkeley Socket.
 ;
+;   Assumptions:  Populated socket.data.accept.socket.descriptor.
+;
+;   Returns:      eax - Descriptor associated with the nex connection.
+;                 eax - Error as a signed value.
+;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   socket.data.accept.socket.descriptor  ./functions/socket/accept.socket/d
+;   dword.l                                 ./b
 ;
-;   sys.socket.accept                     ./functions/socket/accept.socket/b
+;   socket.data.accept.socket.descriptor    ./functions/socket/accept.socket/d
 ;
-;   sys.socket.call                       ./functions/socket/b
+;   socket.data.connected.socket.descriptor ./functions/socket/b
 ;
-;   sys.system.call                       ./functions/b
+;   sys.socket.accept                       ./functions/socket/accept.socket/b
+;
+;   sys.socket.call                         ./functions/socket/b
+;
+;   sys.system.call                         ./functions/b
 ;
 
-    accept.socket:  mov     eax, sys.socket.call                        ; eax = linux socket call indicator.
-                    mov     ebx, sys.socket.accept                      ; ebx = linux socket call accept socket indicator.
+    accept.socket:  pop ebp                                             ; Preserve return address.
 
-                    mov     ecx, socket.data.accept.socket.descriptor   ; ecx = pointer to arguments package for linux kernel accept socket function. Package contents are as follows:
+                    push  socket.data.connected.socket.descriptor       ; Set connected descriptor.
+                    push  socket.data.sockaddr.protocol.family          ; Set protocol family.
+                    push  dword [socket.data.general.socket.descriptor] ; Point to listening socket.
+
+                    mov   eax, sys.socket.call                          ; eax - Linux socket call indicator.
+                    mov   ebx, sys.socket.accept                        ; ebx - Linux socket call accept socket indicator.
+
+                    mov   ecx, esp                                      ; ecx - Pointer to arguments package for linux kernel accept socket function. Package contents are as follows:
                                                                         ;
-                                                                        ;     dword    descriptor of listening socket which detected the incoming connection.
-                                                                        ;     dword    pointer to sockaddr structure.
-                                                                        ;     dword    storage for descriptor of accepted socket.
+                                                                        ;     dword    Descriptor of listening socket which detected the incoming connection.
+                                                                        ;     dword    Pointer to sockaddr structure.
+                                                                        ;     dword    Storage for descriptor of accepted socket.
 
-                    int     sys.system.call                             ; Accept the new connection.
-                    ret                                                 ; Return to caller.
+                    int   sys.system.call                               ; Accept the new connection.
+
+                    push  ebp                                           ; Restore return address.
+                    ret   (dword.l * 3)                                 ; Return to caller.
