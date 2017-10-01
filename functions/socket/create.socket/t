@@ -1,4 +1,4 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/socket/create.socket/t
 ;
@@ -37,8 +37,8 @@
                     push  sys.socket.type.stream                              ; Set flags.
                     push  sys.socket.protocol.family.inet                     ; Set protocol family.
 
-                    mov   eax, sys.socket.call                                ; eax = Socket call indicator.
-                    mov   ebx, sys.socket.create                              ; ebx = Create a socket.
+                    mov   eax, sys.socket.call                                ; eax - Socket call indicator.
+                    mov   ebx, sys.socket.create                              ; ebx - Create a socket.
                     mov   ecx, esp                                            ; ecx - Pointer to arguments package.
                     int   sys.system.call                                     ; Create a socket.
 

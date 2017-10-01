@@ -14,8 +14,6 @@
 ;
 ;   dword.l                                 ./b
 ;
-;   socket.data.accept.socket.descriptor    ./functions/socket/accept.socket/d
-;
 ;   socket.data.event.socket.descriptor     ./functions/main/active.socket.poll/d
 ;
 ;   sys.socket.bind                         ./functions/socket/bind.socket/b
@@ -26,7 +24,6 @@
 ;
 
     bind.socket:  mov   dword [socket.data.event.socket.descriptor], eax      ; Store the event descriptor.
-                  mov   dword [socket.data.accept.socket.descriptor], eax     ; Store the accept descriptor.
 
                   pop   ebp                                                   ; Preserve return address.
 
