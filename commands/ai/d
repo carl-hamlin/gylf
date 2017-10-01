@@ -1,0 +1,32 @@
+;================================================================================================================================================================================================
+;
+;   ./code/commands/ai/data
+;
+;   Data associated with the 'ai' command.
+;
+;
+
+;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
+
+	  socket.data.command.ai.help           db  "  ai", 0Ah, 0Dh, 0Ah, 0Dh                                                                                    ; Command ai help message.
+	                                        db  "  Syntax: ai <set | clear> <behaviour> <options>", 0Ah, 0Dh, 0Ah, 0Dh
+	                                        db  "  Sets the expected behaviours within a range of options for when a character's patron is not online."
+	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> "
+	  socket.data.command.ai.help.l         equ $-socket.data.command.ai.help                                                                                 ; Length of message.
+
+;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Command Table Entry
+;
+
+    command.ai.w                          db  command.ai.l                          ; Indicator of length of command 'ai'.
+    command.ai.s                          db  'ai'                                  ; Common command string for setting parameters for the offline ai.
+    command.ai.l                          equ $-command.ai.s                        ; Length of command 'ai'.
+    command.ai.p                          dd  command.ai                            ; Pointer to handler for command 'ai'.
+    command.ai.h                          dd  socket.data.command.ai.help           ; Pointer to help message for command 'ai'.
+    command.ai.h.l                        dd  socket.data.command.ai.help.l         ; Length of help message for command 'ai'.
+
+
