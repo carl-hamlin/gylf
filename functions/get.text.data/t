@@ -1,0 +1,80 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/get.text.data/t
+;
+;   This function returns the number of clock ticks since boot time.
+;
+;   Assumptions:    Stack Frame: dword - Index to data to be retrieved.
+;
+;   Returns:        ecx - Pointer to retrieved data
+;                   edx - Length of retrieved data.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+    get.text.data:  int 3
+    pop   ebp                 ; Preserve return address.
+                    pop   edi                 ; Preserve index to data.
+
+                    push  edi                 ; Tell memory.switch to reserve enough memory for the index operation.
+                    call  memory.switch       ; Reserve memory for the index operation.
+
+                    push  ebx                 ; Preserve pointer to new memory.
+
+                    push  text.data.filename  ; Point open.descriptor to the indexed data repository.
+                    call  open.descriptor     ; Associate a descriptor with the indexed data repository.
+
+                    pop   ebx                 ; Restore pointer to new memory.
+                    
+                    push  eax                 ; Preserve descriptor associated with indexed data repository.
+                    push  ebx                 ; Preserve pointer to new memory.
+
+                    push  edi                 ; Tell read.descriptor to read up to the index point.
+                    push  ebx                 ; Point read.descriptor to new memory.
+                    push  eax                 ; Point read.descriptor to the indexed data repository.
+                    call  read.descriptor     ; Read indexed data up to the index point.
+
+                    pop   ebx                 ; Restore pointer to new memory.
+                    pop   eax                 ; Restore descriptor associated with indexed data repository.
+
+                    push  eax                 ; Preserve descriptor associated with indexed data repository.
+                    push  ebx                 ; Preserve pointer to new memory.
+
+                    push  dword.l             ; Tell read.descriptor to read the dword length of the indexed data.
+                    push  ebx                 ; Point read.descriptor to new memory.
+                    push  eax                 ; Point read.descriptor to the descriptor associated with the indexed data repository.
+                    call  read.descriptor     ; Read the length of the indexed data.
+
+                    pop   ebx                 ; Restore pointer to new memory.
+                    pop   eax                 ; Restore descriptor associated with indexed data repository.
+
+                    push  ebx                 ; Preserve pointer to new memory.
+                    push  dword [ebx]         ; Preserve length of the indexed data.
+
+                    push  eax                 ; Preserve descriptor associated with indexed data repository.
+                    push  ebx                 ; Preserve pointer to new memory.
+                    push  dword [ebx]         ; Preserve length of the indexed data.
+
+                    push  dword [ebx]         ; Tell memory.switch to adjust reserved memory to the size of the indexed data.
+                    call  memory.switch       ; Adjust reserved memory to the size of the indexed data.
+
+                    pop   ecx                 ; Restore length of the indexed data.
+                    pop   ebx                 ; Restore pointer to new memory.
+                    pop   eax                 ; Restore descriptor associated with indexed data repository.
+
+                    push  ecx                 ; Tell read.descriptor to read the entire indexed string.
+                    push  ebx                 ; Point read.descriptor to new memory.
+                    push  eax                 ; Point read.descriptor to the descriptor associated with the indexed data repository.
+                    call  read.descriptor     ; Read the indexed string.
+
+                    call  close.descriptor    ; Disassociate the descriptor associated with the indexed data repository.
+
+                    pop   edx                 ; Restore length of indexed data.
+                    pop   ecx                 ; Restore pointer to indexed data.
+
+                    push  ebp                 ; Restore return address.
+                    ret                       ; Return to caller.
