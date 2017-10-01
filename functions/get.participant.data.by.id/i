@@ -2,4 +2,4 @@
 
     section   .text
 
-    %include  "./functions/get.new.area.id/t"
+    %include  "./functions/get.participant.data.by.id/t"
