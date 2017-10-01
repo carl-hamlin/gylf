@@ -2,4 +2,4 @@
 
     section   .text
 
-    %include  "./functions/print.socket.number/t"
+    %include  "./functions/get.text.data/t"

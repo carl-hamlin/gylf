@@ -17,6 +17,8 @@
 ;
 ;   close.descriptor      ./functions/close.descriptor/t
 ;
+;   dword.l               ./b
+;
 ;   external.data.buffer  ./functions/b
 ;
 ;   open.descriptor       ./functions/open.descriptor/t
@@ -33,14 +35,17 @@
             
                         mov   ebx, eax                        ; ebx - Descriptor associated with the file.
 
-                        mov   ecx, external.data.buffer       ; ecx - pointer to buffer into which to read the length of the external data.
-                        mov   edx, byte.l                     ; edx - length of data to be read.
+                        push  byte.l                          ; Tell read.descriptor the length of data to be read.
+                        push  external.data.buffer            ; Point read.descriptor to buffer into which to read the length of the external data.
+                        push  eax                             ; Point read.descriptor to descriptor associated with the file.
                         call  read.descriptor                 ; Read the length of the external data.
 
-                        mov   ecx, external.data.buffer       ; ecx - Pointer to buffer into which to read the escape sequence.
-                        sub   edx, edx                        ; edx - Prepared for length of external data.
-                        mov   dl, byte [external.data.buffer] ; edx - Length of external data.
+                        push  dword [external.data.buffer]    ; Tell read.descriptor the length of external data.
+                        push  external.data.buffer            ; Point read.descriptor to buffer into which to read the escape sequence.
+                        push  ebx                             ; Point read.descriptor to descriptor associated with the file.
                         call  read.descriptor                 ; Read the external data into the external data buffer.
+
+                        mov   edx, eax                        ; edx - Length of data read.
 
                         call  close.descriptor                ; Disassociate the descriptor.
 
@@ -48,4 +53,4 @@
                         pop   ebx                             ; Restore caller's ebx register.
                         pop   eax                             ; Restore caller's eax register.
 
-                        ret   4                               ; Return to caller.
+                        ret   dword.l                         ; Return to caller.
