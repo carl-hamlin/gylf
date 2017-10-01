@@ -4,8 +4,10 @@
 ;
 ;   This file contains code pertinent to the separation and filing of commands and arguments received from an incoming socket.
 ;
-;   Assumptions: ebx - Pointer to data received from the socket.
-;   Returns:     aggregated arguments at [argument.packet]
+;   Assumptions: [esp+4] - Pointer to data received from the socket.
+;
+;   Returns:      ebx               - Pointer to original arguments.
+;                [argument.packet]  - Aggregated arguments.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
@@ -21,7 +23,9 @@
 ;
 ;   aggregate.arguments.quote.mode              ./functions/aggregate.arguments/t
 ;
-;   aggregate.arguments.quode.mode.l            ./functions/aggregate.arguments/t
+;   aggregate.arguments.quote.mode.e            ./functions/aggregate.arguments/t
+;
+;   aggregate.arguments.quode.mode.l.bump       ./functions/aggregate.arguments/t
 ;
 ;   aggregate.arguments.strip.command.loop      ./functions/aggregate.arguments/t
 ;
@@ -31,12 +35,22 @@
 ;
 ;   arguments.num                               ./functions/aggregate.arguments/b
 ;
+;   dword.l                                     ./b
+;
 
-    aggregate.arguments:                        push  eax                                         ; Preserve caller's eax register.
-                                                push  ebx                                         ; Preserve caller's ebx register.
+    aggregate.arguments:                        pop   edx                                         ; Preserve return address.
+                                                pop   ebx                                         ; ebx - Pointer to arguments to be aggregated.
+                                                push  edx                                         ; Restore return address.
+
+                                                push  eax                                         ; Preserve caller's eax register.
+                                                push  ebx                                         ; Preserve pointer to arguments.
+                                                push  ecx                                         ; Preserve caller's ecx register.
                                                 push  esi                                         ; Preserve pointer to data received from the socket.
                                                 
-                                                sub   eax, eax                                    ; eax - Prepared to be used for counting.
+                                                sub   eax, eax                                    ; eax - Prepared to be used for counting bytes.
+                                                sub   cl, cl                                      ; cl - Prepared to be used for counting arguments.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     aggregate.arguments.strip.command.loop:     cmp   byte [ebx], 00h                             ; Are we looking at a zero terminator?
                                                 jz    aggregate.arguments.arguments.aggregated    ; Yes - this indicates that there are no arguments. Finish aggregating.
@@ -46,14 +60,18 @@
                                                 
                                                 inc   ebx                                         ; ebx - Pointer to next byte in command.
                                                 jmp   aggregate.arguments.strip.command.loop      ; Check the next byte.
-                      
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     aggregate.arguments.argument.found:         inc   ebx                                         ; ebx - Pointer to first argument.
                                                 
                                                 mov   esi, argument.01.location                   ; esi - Pointer to first location.
                                                 mov   [esi], ebx                                  ; Populate location of first argument.
 
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     aggregate.arguments.loop:                   cmp   byte [ebx], '"'                             ; Are we looking at a quotation mark?
-                                                jz    aggregate.arguments.quote.mode              ; Yes - this is a special case argument. Go treat it as such.
+                                                jz    aggregate.arguments.quote.mode.l.bump       ; Yes - this is a special case argument. Go treat it as such.
 
                                                 cmp   byte [ebx], 20h                             ; Are we looking at a space?
                                                 jz    aggregate.arguments.prep.for.next.argument  ; Yes - under normal circumstances, this indicates a new argument.
@@ -62,14 +80,16 @@
                                                 jz    aggregate.arguments.prep.for.next.argument  ; Yes - this indicates that we're finished.
 
                                                 inc   ebx                                         ; ebx - Pointer to next byte in argument.
-                                                inc   al                                          ; al - Incremented to reflect an additional byte in the size of the argument.
+                                                inc   eax                                         ; eax - Incremented to reflect an additional byte in the size of the argument.
 
                                                 jmp   aggregate.arguments.loop                    ; Go check the next byte.
 
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     aggregate.arguments.prep.for.next.argument: inc   ebx                                         ; ebx - Pointer to next argument or terminator.
-                                                inc   ah                                          ; ah - Incremented to indicate an increase in the number of arguments.
-                                                mov   [esi-1], al                                 ; Store size of argument recently examined.
-                                                sub   al, al                                      ; al - Prepared to be used for counting.
+                                                inc   cl                                          ; cl - Incremented to indicate an increase in the number of arguments.
+                                                mov   [esi-dword.l], eax                          ; Store size of argument recently examined.
+                                                sub   eax, eax                                    ; eax - Prepared to be used for counting.
 
                                                 cmp   byte [ebx], 00h                             ; Are we looking at a zero terminator?
                                                 jz    aggregate.arguments.arguments.aggregated    ; Yes - We're done here.
@@ -79,20 +99,31 @@
 
                                                 jmp   aggregate.arguments.loop                    ; Go check the next argument.
 
-    aggregate.arguments.arguments.aggregated:   mov   [arguments.num], ah                         ; Store the number of arguments.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    aggregate.arguments.arguments.aggregated:   mov   [arguments.num], cl                         ; Store the number of arguments.
 
                                                 pop   esi                                         ; Restore pointer to data received from the socket.
-                                                pop   ebx                                         ; Restore caller's ebx register.
+                                                pop   ecx                                         ; Restore caller's ecx register.
+                                                pop   ebx                                         ; Restore pointer to arguments.
                                                 pop   eax                                         ; Restore caller's eax register.
 
                                                 ret                                               ; Return to caller.
 
-    aggregate.arguments.quote.mode:             dec   al                                          ; al - Decremented to offset first loop iteration.
-    aggregate.arguments.quote.mode.l:           inc   ebx                                         ; ebx - Pointer to next byte in quoted argument.
-                                                inc   al                                          ; al - Incremented to reflect an additional byte in the size of the argument.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    aggregate.arguments.quote.mode.l.bump:      inc   dword [esi]                                 ; Increment argument location pointer to strip leading quote.
+                                                jmp   aggregate.arguments.quote.mode.e            ; Skip eax increment for this round, also to strip leading quote.
+
+    aggregate.arguments.quote.mode:             inc   eax                                         ; eax - Incremented to reflect an additional byte in the size of the argument.
+    aggregate.arguments.quote.mode.e:           inc   ebx                                         ; ebx - Pointer to next byte in quoted argument.
+                                                
+                                                cmp   byte [ebx], 00h                             ; Have we reached the end of the received data?
+                                                jmp   aggregate.arguments.prep.for.next.argument  ; Yes. The user clearly has no real idea of what their doing. Send argument and let the
+                                                                                                  ; syntax errors flow.
 
                                                 cmp   byte [ebx], '"'                             ; Have we found the terminating quotation mark?
-                                                jnz   aggregate.arguments.quote.mode.l            ; No. Go check the next byte.
+                                                jnz   aggregate.arguments.quote.mode              ; No. Go check the next byte.
 
                                                 inc   ebx                                         ; ebx - Pointer to delineator between this argument and the next, or terminator.
 
