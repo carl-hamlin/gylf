@@ -1,0 +1,19 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/notify.in.absentia/t
+;
+;   This function sends a notification to a gylf whose patron is currently absent.
+;
+;   Assumptions:  g.data - Populated with target participant data.
+;                 Stack Frame:  dword [Index to message]
+;
+;   Returns:      None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+    notify.in.absentia:  ret ; Return to caller.

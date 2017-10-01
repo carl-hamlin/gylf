@@ -1,0 +1,64 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/b
+;
+;   This file contains all definitions pertinent to downstream functions.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   buffer.1.l                            ./functions/b
+;
+;   buffer.2.l                            ./functions/b
+;
+;   word.l                                ./b
+;
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Function Data
+;
+
+    %define     sys.system.call                         080h  ; The big Kahuna. 080h is the call we use to access kernel functions.
+    %define     sys.read.write                          002h  ; 002h is the parameter passed to the open function when we want to be able to read from and write to the resulting descriptor.
+
+    %define     sys.write.call                          004h  ; 004h is the modifier for 080h that tells the kernel we want to write data to a specified descriptor.
+    %define     sys.lseek.call                          013h  ; 013h is the modifier for 080h that tells the kernel we'd like to move the file pointer.
+
+    %define     sys.lseek.current.position              001h  ; 001h indicates to the lseek function that we're seeking from the current position.
+    %define     sys.lseek.eof                           002h  ; 002h indicates to the lseek function that we're seeking to the end of the file.
+    %define     sys.no.bytes.read                       000h  ; Indicator for no bytes having been read during the read function.
+
+    %define     id.size                               word.l  ; Size of area/item ids.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Buffer Data
+;
+
+    %define     buffer.1.l                            010103h ; Length of first buffer.
+    %define     buffer.2.l                              0064h ; Length of second buffer.
+
+    buffer.1                                resb  buffer.1.l  ; Buffer for incoming and outgoing data.
+    buffer.2                                resb  buffer.2.l  ; Buffer for incoming and outgoing data.
+
+    id.buffer                               resd        0001h ; Buffer for id data.
+
+    external.data.buffer                    resb        00FFh ; Buffer for external data.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;  Participant Data
+;
+ 
+    %define     number.of.parents                       0002h ; Number of parents required to contribute to the fertilization of an egg.
+    %define     child.attribute.computation.factor      000Ah ; Arbitrary factor for the computation of certain attributes during egg conversion.
+
+    %define     admin.participant                   00000001b ; Mask for administrative byte indicating participant has admin privileges.
+    
+    %define     participant.base.color.number             35d ; Number of current participant base colors.
+    %define     participant.secondary.color.number        35d ; Number of current participant base colors.
+
+    %define     participant.base.fur.quality.number       04d ; Number of base fur qualities in table.
+    %define     participant.secondary.fur.quality.number  04d ; Number of secondary fur qualities in table.

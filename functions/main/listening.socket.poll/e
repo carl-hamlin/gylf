@@ -1,0 +1,17 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/main/listening.socket.poll/e
+;
+;   This file defines the external textual data associated with the listening.socket.poll function.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Local Data
+;
+
+    local.data.connection.notifier.l        dd  local.data.connection.notifier.end            ; Length of message.
+    local.data.connection.notifier          db  "Incoming connection established.", 0Ah, 0Dh  ; Connection message.
+    local.data.connection.notifier.end      equ $-local.data.connection.notifier              ; Pointer to end of message.

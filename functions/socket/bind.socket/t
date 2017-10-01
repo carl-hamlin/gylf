@@ -1,0 +1,40 @@
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   ./functions/socket/bind.socket/t
+;
+;   This function binds the socket to a specified hardware port.
+;
+;   Assumptions:    eax - Descriptor associated with a created socket.
+;
+;   Returns:        eax - Error indicator.
+;
+;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   dword.l                                 ./b
+;
+;   socket.data.event.socket.descriptor     ./functions/main/active.socket.poll/d
+;
+;   sys.socket.bind                         ./functions/socket/bind.socket/b
+;
+;   sys.socket.call                         ./functions/socket/b
+;
+;   sys.system.call                         ./functions/b
+;
+
+    bind.socket:  mov   dword [socket.data.event.socket.descriptor], eax      ; Store the event descriptor.
+
+                  pop   ebp                                                   ; Preserve return address.
+
+                  push  socket.data.sockaddr.l                                ; Set length.
+                  push  socket.data.sockaddr.protocol.family                  ; Set protocol family.
+                  push  dword [socket.data.general.socket.descriptor]         ; Set socket descriptor.
+
+                  mov   eax, sys.socket.call                                  ; eax - Socket call indicator.
+                  mov   ebx, sys.socket.bind                                  ; ebx - Bind the socket.
+                  mov   ecx, esp                                              ; ecx - Pointer to arguments package.
+                  int   sys.system.call                                       ; Bind the socket.
+
+                  push  ebp                                                   ; Restore return address.
+                  ret   (dword.l * 3)                                         ; Return to caller.
