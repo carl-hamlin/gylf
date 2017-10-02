@@ -1,0 +1,25 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/socket.errors/e
+;
+;   This file defines the external textual data associated with the socket.errors function.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Local Data
+;
+
+    local.data.create.error.message.l   dd  local.data.create.error.message.end                                       ; Length of message
+    local.data.create.error.message     db  "There was a problem creating the socket.", 0Ah, 0Dh                      ; Socket creation error message.
+    local.data.create.error.message.end equ $-local.data.create.error.message                                         ; Pointer to end of message.
+
+    local.data.bind.error.message.l     dd  local.data.bind.error.message.end                                         ; Length of message.
+    local.data.bind.error.message       db  "There was a problem binding the socket to the specified port.", 0Ah, 0Dh ; Binding error message.
+    local.data.bind.error.message.end   equ $-local.data.bind.error.message                                           ; Pointer to end of message.
+
+    local.data.accept.error.message.l   dd  local.data.accept.error.message.end                                       ; Length of message.
+    local.data.accept.error.message     db  "There was a problem accepting an incoming connection.", 0Ah, 0Dh         ; Accept error message.
+    local.data.accept.error.message.end equ $-local.data.accept.error.message                                         ; Pointer to end of message.

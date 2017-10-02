@@ -1,8 +1,8 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/print.socket.number/d
+;   ./functions/memory.switch/b
 ;
-;   This file contains data for the print.socket.number function.
+;   This file contains definitions for the memory.switch function.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
@@ -10,3 +10,5 @@
 ;
 ;   No external references.
 ;
+
+    %define sys.mem 45d ; Linux syscall memory management.
