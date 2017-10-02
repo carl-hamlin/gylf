@@ -2,5 +2,4 @@
 
     section   .text
 
-    %include  "./functions/socket/communications/send.to.participant/s"
-    %include  "./functions/socket/communications/send.to.participant/t"
+    %include  "./functions/convert.binary.id.to.ascii.id/t"

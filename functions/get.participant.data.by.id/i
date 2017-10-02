@@ -2,5 +2,4 @@
 
     section   .text
 
-    %include  "./functions/get.participant.data/s"
-    %include  "./functions/get.participant.data/t"
+    %include  "./functions/get.participant.data.by.id/t"

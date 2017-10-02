@@ -14,7 +14,7 @@
 
     local.data.gylf.bad.syntax.message.l    dd  local.data.gylf.bad.syntax.message.end                                                                        ; Length of message.
     local.data.gylf.bad.syntax.message      db  "An admin bounced the gylf command on bad syntax.", 0Ah, 0Dh                                                  ; Gylf bad syntax message.
-    local.data.gylf.bad.syntax.message.end  equ $-local.data.bad.syntax.message                                                                               ; Pointer to end of message.
+    local.data.gylf.bad.syntax.message.end  equ $-local.data.gylf.bad.syntax.message                                                                          ; Pointer to end of message.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
