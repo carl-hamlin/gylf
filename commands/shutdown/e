@@ -1,0 +1,45 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/shutdown/e
+;
+;   This file defines the external textual data associated with the command 'shutdown'.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Local Data
+;
+
+    local.data.smoked.sockets.message.l   dd  local.data.smoked.sockets.message.end                                                                       ; Length of message.
+    local.data.smoked.sockets.message     db  "All sockets have been smoked.", 0Ah, 0Dh                                                                   ; Smoked sockets message.
+    local.data.smoked.sockets.message.end equ $-local.data.smoked.sockets.message                                                                         ; Pointer to end of message.
+
+    local.data.shutdown.message.l         dd  local.data.shutdown.message.end                                                                             ; Length of message.
+    local.data.shutdown.message           db  "Server shutdown has been initiated from within the environment.", 0Ah, 0Dh                                 ; Shutdown message.
+    local.data.shutdown.message.end       equ $-local.data.shutdown.message                                                                               ; Pointer to end of message.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Outgoing Data
+;
+
+	  socket.data.shutdown.message.l        dd  socket.data.shutdown.message.end                                                                            ; Length of message.
+	  socket.data.shutdown.message		      db  "G'night, Gracie...", 0Ah, 0Dh												                                                      ; Message indicating the server is
+	                                                                                                                                                        ; about to go down.
+	  socket.data.shutdown.message.end		  equ	$-socket.data.shutdown.message												                                                      ; Pointer to end of message.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
+
+    socket.data.command.shutdown.help.l   dd  socket.data.command.shutdown.help.end                                                                       ; Length of message.
+	  socket.data.command.shutdown.help     db  "  shutdown", 0Ah, 0Dh, 0Ah, 0Dh                                                                            ; Command shutdown help message.
+	                                        db  "  Syntax: shutdown", 0Ah, 0Dh, 0Ah, 0Dh
+	                                        db  "  The shutdown command disconnects all participants and shuts down the server. This command is", 0Ah, 0Dh
+	                                        db  "  restricted to administrator privileged participants.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
+	  socket.data.command.shutdown.help.end equ $-socket.data.command.shutdown.help                                                                         ; Pointer to end of message.
+
+

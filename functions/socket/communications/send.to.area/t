@@ -4,9 +4,16 @@
 ;
 ;   This function sends a provided message out to a provided area.
 ;
-;   Assumptions:    Stack frame:  dword - Length of message to be broadcast.
-;                                 dword - Pointer to message to be broadcast.
+;   Assumptions:    Stack Frame:  dword - Index to message to be broadcast.
 ;                                 dword - Area id to be broadcast.
+;                   ebp - Buffered mode indicator (!1)
+;
+;                   - OR -
+;
+;                   Stack Frame:  dword - Pointer to message to be broadcast.
+;                                 dword - Length of message to be broadcast.
+;                                 dword - Area id to be broadcast.
+;                   ebp - Buffered mode indicator (1)
 ;
 ;   Returns:        None.
 ;
@@ -14,63 +21,72 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   connection.area.id.index            ./functions/main/system.check/b
+;   connection.area.id.index        ./functions/main/system.check/b
 ;
-;   connection.entry.size               ./functions/main/system.check/b
+;   connection.entry.size           ./functions/main/system.check/b
 ;
-;   connection.table                    ./functions/main/system.check/b
+;   connection.table                ./functions/main/system.check/b
 ;
-;   memory.switch                       ./functions/memory.switch/t
+;   dword.l                         ./b
 ;
-;   send.to.area.broadcast              ./functions/socket/communications/send.to.area/t
+;   send.to.area.broadcast          ./functions/socket/communications/send.to.area/t
 ;
-;   send.to.area.broadcast.done         ./functions/socket/communications/send.to.area/t
+;   send.to.area.broadcast.bret     ./functions/socket/communications/send.to.area/t
 ;
-;   send.to.area.connection.poll        ./functions/socket/communications/send.to.area/t
+;   send.to.area.broadcast.done     ./functions/socket/communications/send.to.area/t
 ;
-;   socket.number                       ./b
+;   send.to.area.broadcast.indexed  ./functions/socket/communications/send.to.area/t
 ;
-;   socket.send                         ./functions/socket/socket.send/t
+;   send.to.area.connection.poll    ./functions/socket/communications/send.to.area/t
+;
+;   socket.number                   ./b
+;
+;   socket.send                     ./functions/socket/socket.send/t
+;
+;   socket.send.buf                 ./functions/socket/socket.send/t
 ;
 
-    send.to.area:                 pop   edx                                       ; Preserve return address.
-    
-                                  push  12                                        ; Request 12 extra bytes of memory.
-                                  call  memory.switch                             ; Extend memory.
+    send.to.area:                   pop   ecx                                       ; Preserve return address.
+                                    pop   eax                                       ; eax - Area id to which to broadcast.
 
-                                  pop   dword [ebx]                               ; Point send function to area ID to be broadcast.
-                                  pop   dword [ebx+4]                             ; Point send function to the message to be broadcast.
-                                  pop   dword [ebx+8]                             ; Tell send function how long the message is.
+                                    push  ecx                                       ; Restore return address.
 
-                                  push  edx                                       ; Restore return address.
+                                    push  esi                                       ; Preserve caller's esi.
 
-                                  push  esi                                       ; Preserve caller's esi.
-
-                                  mov   esi, connection.table                     ; esi - Pointer to table of handles associated with active connections.
-                                  mov   ecx, socket.number                        ; ecx - Number of connections to poll.
+                                    mov   esi, connection.table                     ; esi - Pointer to table of handles associated with active connections.
+                                    mov   ecx, socket.number                        ; ecx - Number of connections to poll.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.area.connection.poll: mov   eax, dword [ebx]                          ; eax - Area id to be broadcast.
-                                  cmp   dword [esi+connection.area.id.index], eax ; Does the area id associated with this connection match the area id to be broadcast?
-                                  jz    send.to.area.broadcast                    ; Yes. Go broadcast to this connection.
+    send.to.area.connection.poll:   cmp   dword [esi+connection.area.id.index], eax ; Does the area id associated with this connection match the area id to be broadcast?
+                                    jz    send.to.area.broadcast                    ; Yes. Go broadcast to this connection.
+
+    send.to.area.broadcast.done:    add   esi, connection.entry.size                ; esi - Pointer to next connection handle in table.
+                                    loop  send.to.area.connection.poll              ; Go check the next connection.
+
+                                    pop   esi                                       ; Restore caller's esi.
+
+                                    cmp   ebp, 1                                    ; Buffered mode?
+                                    jz    send.to.area.broadcast.bret               ; Yes. Go return and restore the buffered stack.
+
+                                    ret   dword.l                                   ; Return to caller and restore indexed stack.
+
+    send.to.area.broadcast.bret     ret   (dword.l * 2)                             ; Return to caller and restore buffered stack.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.area.broadcast.done:  add   esi, connection.entry.size                ; esi - Pointer to next connection handle in table.
-                                  loop  send.to.area.connection.poll              ; Go check the next connection.
+    send.to.area.broadcast:         cmp   ebp, 1                                    ; Buffered mode?
+                                    jnz   send.to.area.broadcast.indexed            ; No. Go send out indexed data.
 
-                                  push  0                                         ; Tell memory.swith to free memory.
-                                  call  memory.switch                             ; Free temporary memory.
+                                    push  dword [esp + (dword.l * 2)]               ; Tell send function how long the message is.
+                                    push  dword [esp + (dword.l * 3)]               ; Point send function to the message.
+                                    call  socket.send.buf                           ; Send the message to the indicated descriptor.
 
-                                  pop   esi                                       ; Restore caller's esi.
-
-                                  ret                                             ; Return to caller.
+                                    jmp   send.to.area.broadcast.done               ; Go set up for the next connection.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.area.broadcast:       push  edx                                       ; Tell send function how long the message is.
-                                  push  ebx                                       ; Point send function to the message.
-                                  call  socket.send                               ; Send the message to the indicated descriptor.
+    send.to.area.broadcast.indexed: push  dword [esp+dword.l]                       ; Tell send function where the index to the data is.
+                                    call  socket.send                               ; Send the data.
 
-                                  jmp   send.to.area.broadcast.done               ; Go set up for the next connection.
+                                    jmp   send.to.area.broadcast.done               ; Go set up for the next connection.
