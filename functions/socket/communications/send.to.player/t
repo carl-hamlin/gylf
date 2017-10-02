@@ -1,6 +1,6 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   send.to.player
+;   ./functions/socket/communications/send.to.player/t
 ;
 ;   This function sends a provided message out to a provided area.
 ;
@@ -11,6 +11,34 @@
 ;
 ;   Returns:        eax - 0 on success
 ;                   eax - out of area indicator if target recipient is out of area
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   connection.area.id.index            ./functions/main/system.check/b
+;
+;   connection.descriptor.index         ./functions/main/system.check/b
+;
+;   connection.entry.size               ./functions/main/system.check/b
+;
+;   connection.table                    ./functions/main/system.check/b
+;
+;   send.to.player.broadcast            ./functions/socket/communications/send.to.player/t
+;
+;   send.to.player.connection.poll      ./functions/socket/communications/send.to.player/t
+;
+;   send.to.player.out.of.area.error    ./functions/socket/communications/send.to.player/t
+;
+;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
+;
+;   socket.number                       ./b
+;
+;   socket.send                         ./functions/socket/socket.send/t
 ;
 
     send.to.player:                   push esi                                             ; Preserve caller's esi.
