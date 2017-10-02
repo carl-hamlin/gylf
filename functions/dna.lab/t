@@ -124,9 +124,9 @@
 
                                                 push eax                                               ; Preserve the associated descriptor.
 
-                                                mov  ebx, eax                                          ; ebx - descriptor associated with the father's character file.
-                                                mov  ecx, character.father.data                        ; ecx - pointer to buffer into which to read the father's DNA.
-                                                mov  edx, character.father.dna.l                       ; edx - length of the father's DNA.
+                                                push  character.father.dna.l                       ; Tell read.descriptor the length of the father's DNA.
+                                                push  character.father.data                        ; Point read.descriptor to buffer into which to read the father's DNA.
+                                                push  eax                                          ; Point read.descriptor to descriptor associated with the father's character file.
                                                 call read.descriptor                                   ; Read the father's DNA into memory.
 
                                                 pop  ebx                                               ; ebx - descriptor associated with the father's character file.
@@ -137,9 +137,9 @@
 
                                                 push eax                                               ; Preserve the associated descriptor.
 
-                                                mov  ebx, eax                                          ; ebx - descriptor associated with the mother's character file.
-                                                mov  ecx, character.mother.data                        ; ecx - pointer to buffer into which to read the mother's DNA.
-                                                mov  edx, character.mother.dna.l                       ; edx - length of the mother's DNA.
+                                                push  character.mother.dna.l                       ; Tell read.descriptor the length of the mother's DNA.
+                                                push  character.mother.data                        ; Point read.descriptor to buffer into which to read the mother's DNA.
+                                                push  eax                                          ; Point read.descriptor to descriptor associated with the mother's character file.
                                                 call read.descriptor                                   ; Read the mother's DNA into memory.
 
                                                 pop  ebx                                               ; ebx - descriptor associated with the mother's character file.
