@@ -1,0 +1,27 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/help/d
+;
+;   This file contains data pertinent to the help command.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   command.help    ./commands/help/t
+;
+;   command.help.l  ./commands/help/d
+;
+;   command.help.s  ./commands/help/d
+;
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Command Table Entry
+;
+
+    command.help.w  db  command.help.l                                ; Indicator of length of command 'help'.
+    command.help.s  db  'help'                                        ; Common command string for displaying help information.
+    command.help.l  equ $-command.help.s                              ; Length of command 'help'.
+    command.help.p  dd  command.help                                  ; Pointer to handler for command 'help'.
+    command.help.h  dd  text.data.index.socket.data.command.help.help ; Pointer to help message for command 'help'.

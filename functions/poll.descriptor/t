@@ -1,0 +1,34 @@
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   ./functions/poll.descriptor/t
+;
+;   This function asks a connected socket if it has data on it that needs attention.
+;
+;   Assumptions:    [esp+dword.l] - Pointer to arguments package structured as follows:
+;                                   dword    Descriptor associated with active, bound and listening socket.
+;                                   dword    Requested event(s).
+;                                   dword    Storage for returned event(s)
+;
+;    Returns:       eax - Returned event(s)
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   dword.l                       ./b
+;
+;   sys.poll.call                 ./functions/poll.descriptor/b
+;
+;   sys.poll.number.of.structures ./functions/main/b
+;
+;   sys.poll.timeout              ./functions/main/b
+;
+;   sys.system.call               ./functions/b
+;
+
+    poll.descriptor:  mov eax, sys.poll.call                  ; eax - Ask a connected socket if it has data on it.
+                      mov ebx, dword [esp+dword.l]            ; ebx - Pointer to args packet.
+                      mov ecx, sys.poll.number.of.structures  ; ecx - Number of sockets to poll.
+                      mov edx, sys.poll.timeout               ; edx - Length of time to wait on data from the socket.
+                      int sys.system.call                     ; Ask a connected socket if it has data on it.
+                      ret dword.l                             ; Return to caller.
