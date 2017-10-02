@@ -1,12 +1,12 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/set.single.attribute/t
 ;
 ;   This function sends a vt100 escape sequence to the remote terminal which changes a single attribute about the
 ;   printed text. Attributes can be found in the file "attribute.control.dat".
 ;
-;   Assumptions:    eax = Pointer to attribute to insert.
-;                   esi = Pointer to descriptor associated with target connection.
+;   Assumptions:    eax - Pointer to attribute to insert.
+;                   esi - Pointer to descriptor associated with target connection.
 ;
 ;   Returns:        None.
 ;
@@ -14,43 +14,37 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   buffer.1                            ./functions/b
+;   buffer.1        ./functions/b
 ;
-;   set.att.mod.1                       ./functions/set.single.attribute/d
+;   dword.l         ./b
 ;
-;   set.att.mod.3                       ./functions/set.single.attribute/d
+;   set.att.mod.1   ./functions/set.single.attribute/d
 ;
-;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
+;   set.att.mod.3   ./functions/set.single.attribute/d
 ;
-;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
-;
-;   socket.send                         ./functions/socket/socket.send/t
+;   socket.send.buf ./functions/socket/socket.send/t
 ;
 
-    set.single.attribute: push  esi                                               ; Preserve pointer to descriptor associated with target connection.
+    set.single.attribute: push  esi                 ; Preserve pointer to target connection.
 
-                          mov   esi, set.att.mod.1                                ; esi = Pointer to first portion of the set attribute escape sequence.
-                          mov   edi, buffer.1                                     ; edi = Pointer to data buffer.
-                          mov   ecx, 002h                                         ; ecx = Size of first portion of the set attribute escape sequence.
+                          mov   esi, set.att.mod.1  ; esi - Pointer to first portion of the set attribute escape sequence.
+                          mov   edi, buffer.1       ; edi - Pointer to data buffer.
+                          mov   ecx, 002h           ; ecx - Size of first portion of the set attribute escape sequence.
 
-                          repnz movsb                                             ; Copy the first portion of the set attribute escape sequence to the data buffer.
+                          repnz movsb               ; Copy the first portion of the set attribute escape sequence to the data buffer.
 
-                          mov   esi, eax                                          ; esi = Pointer to attribute to be set.
+                          mov   esi, eax            ; esi - Pointer to attribute to be set.
 
-                          movsb                                                   ; Copy the attribute to be set to the data buffer.
+                          movsb                     ; Copy the attribute to be set to the data buffer.
 
-                          mov   esi, set.att.mod.3                                ; esi = Pointer to the last portion of the set attribute escape sequence.
+                          mov   esi, set.att.mod.3  ; esi - Pointer to the last portion of the set attribute escape sequence.
 
-                          movsb                                                   ; Copy the last portion of the set attribute escape sequence to the data buffer.
+                          movsb                     ; Copy the last portion of the set attribute escape sequence to the data buffer.
 
-                          pop   esi                                               ; Restore pointer to descriptor associated with target connection.
+                          pop   esi                 ; Restore pointer to target connection.
 
-                          mov   eax, dword [esi]                                  ; eax = Descriptor associated with target connected socket.
-                          mov   dword [socket.data.send.socket.descriptor], eax   ; Point socket.send to the correct socket.
-                          mov   dword [socket.data.send.buffer.pointer], buffer.1 ; Point socket.send to the data buffer.
-                          mov   dword [socket.data.send.buffer.l], 004h           ; Provide the length of the buffer.
-                          call  socket.send                                       ; Send the string to the socket and change the attribute remotely.
+                          push  dword.l             ; Provide the length of the buffer.
+                          push  buffer.1            ; Point socket.send to the data buffer.
+                          call  socket.send.buf     ; Send the string to the socket and change the attribute remotely.
 
-                          ret                                                     ; Return to caller.
+                          ret                       ; Return to caller.

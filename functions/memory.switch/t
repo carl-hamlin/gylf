@@ -1,0 +1,48 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/memory.switch/t
+;
+;   This function calls the linux kernel and causes it to allocate the specified number of bytes of memory for temporary use.
+;
+;   Assumptions:    esp+dword.l - Number of bytes to allocate.
+;
+;   Returns:        ebx - Pointer to new memory.
+;                   eax - Error indicator.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   break.pointer             ./functions/memory.switch/d
+;
+;   dword.l                   ./b
+;
+;   memory.switch.initialize  ./functions/memory.switch/t
+;
+;   memory.switch.initilized  ./functions/memory.switch/t
+;
+;   sys.mem                   ./functions/memory.switch/b
+;
+;   sys.system.call           ./functions/b
+;
+
+    memory.switch:              mov   eax, dword [break.pointer]  ; eax - Pointer to end of OS-defined program memory, or indicator that we have yet to initialize memory management.
+
+                                cmp   eax, 0                      ; Have we already initialized?
+                                jz    memory.switch.initialize    ; No. Go initialize memory management.
+
+    memory.switch.initialized:  mov   ebx, eax                    ; ebx - Pointer to end of OS-defined program memory.
+                                add   ebx, dword [esp+dword.l]    ; ebx - Pointer to where we want memory to end.
+                                mov   eax, sys.mem                ; eax - sys.mem: Linux syscall memory management.
+                                int   sys.system.call             ; Extend memory.
+
+                                sub   ebx, dword [esp+dword.l]    ; ebx - Pointer to new memory.
+
+                                ret   dword.l                     ; Return to caller.
+
+    memory.switch.initialize:   sub   ebx, ebx                    ; ebx - Indicator that we're initializing memory management.
+                                mov   eax, sys.mem                ; eax - sys.mem: Linux syscall memory management.
+                                int   sys.system.call             ; Initialize memory management.
+
+                                mov   dword [break.pointer], eax  ; Store pointer to end of OS-defined program memory.
+                                jmp   memory.switch.initialized   ; Now that memory management has been initialized, go take care of that request.
