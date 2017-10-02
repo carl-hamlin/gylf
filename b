@@ -25,3 +25,11 @@
     %define char.D        044h  ; Thirteen
     %define char.E        045h  ; Fourteen
     %define char.F        046h  ; Fifteen
+
+    %define qword.l       0008h ; Size of a qword.
+    %define dword.l       0004h ; Size of a dword.
+    %define word.l        0002h ; Size of a word.
+    %define byte.l        0001h ; Size of a byte.
+
+    %define nibble.l      0004h ; Size of a nibble.
+
