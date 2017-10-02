@@ -1,6 +1,6 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   socket.send
+;   ./functions/socket/socket.send/t
 ;
 ;   This function sends data out on a connected socket.
 ;
@@ -12,6 +12,18 @@
 ;                   dword    Communications semantics.
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
+;
+;   sys.socket.call                     ./functions/socket/b
+;
+;   sys.socket.send                     ./functions/socket/socket.send/b
+;
+;   sys.system.call                     ./functions/b
 ;
 
     socket.send: push ecx                                     ; Preserve caller's ecx register.

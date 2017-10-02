@@ -1,8 +1,16 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
 ;   ./functions/socket/bind.socket/d
 ;
 ;   This file contains all data	pertinent to the bind.socket function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   socket.data.sockaddr.l                ./functions/socket/d
+;
+;   socket.data.sockaddr.protocol.family  ./functions/socket/d
 ;
 
     socket.data.bind.socket.descriptor  dd  0000h                                 ; Data storage for the descriptor associated with the socket to be bound.
