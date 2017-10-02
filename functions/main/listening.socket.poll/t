@@ -67,9 +67,7 @@
 ;   write.console                                           ./functions/write.console/t
 ;
 
-    listening.socket.poll:      mov   ebx, socket.data.event.socket.descriptor                        ; ebx - Pointer to descriptor associated with listening socket.
-                                mov   ecx, sys.poll.number.of.structures                              ; ecx - Number of sockets to poll.
-                                mov   edx, sys.poll.timeout                                           ; edx - Number of milliseconds to wait on poll results before moving along.
+    listening.socket.poll:      push  socket.data.event.socket.descriptor                             ; Point poll.descriptor to descriptor associated with listening socket.
                                 call  poll.descriptor                                                 ; Poll the socket.
 
                                 cmp   eax, sys.poll.in                                                ; Is someone knocking?

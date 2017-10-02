@@ -213,7 +213,7 @@
                                         pop   esi                                                         ; esi - Index to socket entry.
 
                                         mov   dword [character.pouch], ebp                                ; Store area id for character pouch.
-                                        mov   ebx, area.filename                                          ; ebx - pointer to file to be created for character pouch.
+                                        push  area.filename                                               ; Point create.file to file to be created for character pouch.
                                         call  create.file                                                 ; Create the file.
 
                                         push  eax                                                         ; Store descriptor associated with new pouch.
@@ -259,7 +259,7 @@
                                         call  dna.lab                                                     ; Figure up the DNA for the new Gylf.
 
                                         mov   ebx, esi                                                    ; ebx - Index to socket table.
-                                        add   ebx, connection.filename.index                              ; ebx - pointer to filename associated with active connection.
+                                        push  connection.filename.index                                   ; Point create.file to filename associated with active connection.
                                         call  create.file                                                 ; Smoke the egg and create a new file.
 
                                         push  eax                                                         ; Preserve descriptor associated with new file.

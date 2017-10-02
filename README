@@ -60,11 +60,13 @@ Relevant data:
                                                 ./commands/look/t
                                                 ./functions/create.character/t
                                                 ./functions/d
+                                                ./functions/get.external.data/t
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
                                                 ./functions/main/system.check/t
                                                 ./functions/main/text.init/b
                                                 ./functions/main/text.init/t
+                                                ./functions/open.descriptor/t
                                                 ./functions/print.socket.number/t
 
           word.l                                ./commands/area/t
@@ -77,9 +79,9 @@ Relevant data:
 
           nibble.l                              No references.
 
-
           socket.number                         ./commands/shutdown/t
                                                 ./functions/main/active.socket.poll/t
+                                                ./functions/main/answer.active.socket/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/system.check/b
                                                 ./functions/socket/communications/send.to.area/t
@@ -90,8 +92,6 @@ Relevant data:
                                                 ./functions/main/text.init/t
                                                 ./functions/print.socket.number/t
                                                 ./functions/write.console/t
-
-      d   No defined symbols.
 
     ==============================================================================================
 
@@ -1016,9 +1016,6 @@ Relevant data:
           arguments.packet.l                    No references.
 
 
-      d   No defined symbols.
-
-
       t   aggregate.arguments                   ./functions/main/participant.interaction
                                                   /address.active.status/t
 
@@ -1047,9 +1044,6 @@ Relevant data:
       b   sys.exit.call                         ./functions/bail/t
 
 
-      d   No defined symbols.
-
-
       t   bail                                  ./commands/shutdown/t
                                                 ./functions/main/text.init/t
                                                 ./functions/main/system.check/t
@@ -1059,12 +1053,6 @@ Relevant data:
 
       /buffer.strip           Contains code that strips buffered data of carriage returns and line
                               feeds and replaces them with zeroes.
-
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
 
       t   buffer.strip                          ./functions/socket/recv.from.socket/t
 
@@ -1079,12 +1067,6 @@ Relevant data:
       /check.admin            Contains code that checks to see if the user on the current socket
                               has administrative privileges.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   check.admin                           ./commands/area/t
                                                 ./commands/broadcast/t
                                                 ./commands/shutdown/t
@@ -1093,12 +1075,6 @@ Relevant data:
 
       /check.login            Contains code that checks to see if a user attempting to log in is
                               already logged in from a different location.
-
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
 
       t   check.login                           ./functions/main/participant.interaction
                                                   /address.login.status/t
@@ -1110,12 +1086,6 @@ Relevant data:
       /clear.screen           Contains code that remotely clears the user's screen and places
                               their cursor in the upper left hand corner.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   clear.screen                          ./functions/main/listening.socket.poll/t
                                                 ./functions/write.welcome/t
 
@@ -1126,9 +1096,6 @@ Relevant data:
                               which it currently points.
 
       b   sys.close.call                        ./functions/close.descriptor/t
-
-
-      d   No defined symbols.
 
 
       t   close.descriptor                      ./commands/area/t
@@ -1152,12 +1119,6 @@ Relevant data:
       /create.character       Contains code that builds out character data on the basis of DNA
                               sequences left behind by either parent on the associated egg.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   area.filename.increment.cmp           ./functions/create.character/t
 
           area.filename.next.digit.increment    ./functions/create.character/t
@@ -1180,10 +1141,7 @@ Relevant data:
       /create.file            Contains code that builds a dataset on the drive, to which it
                               associates a logical descriptor.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
+      b   sys.create.call                       ./functions/create.file/t
 
 
       t   create.file                           ./commands/area/t
@@ -1194,9 +1152,6 @@ Relevant data:
 
       /create.lock.file       Contains code that creates a lock file for use in preventing
                               multiple instances of the same login from different locations.
-
-      b   No defined symbols.
-
 
       d   lock.extension                        ./functions/check.login/t
                                                 ./functions/create.lock.file/t
@@ -1213,12 +1168,6 @@ Relevant data:
 
       /dna.lab                Contains code which combines the DNA left behind on an egg by both
                               parents to create an entirely new gylf.
-
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
 
       t   dna.lab                               ./functions/create.character/t
 
@@ -1275,24 +1224,12 @@ Relevant data:
       /get.character.data     Contains code which populates the character data in memory from file
                               for the character on the current socket.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   get.character.data                    ./functions/check.admin/t
 
     ----------------------------------------------------------------------------------------------
 
       /get.external.data      Contains code which reads data that exists outside the codebase and
                               memory.
-
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
 
       t   get.external.data                     ./functions/clear.screen/t
 
@@ -1302,9 +1239,6 @@ Relevant data:
                               environment was booted.
 
       b   sys.get.ticks                         ./functions/get.ticks/t
-
-
-      d   No defined symbols.
 
 
       t   get.ticks                             ./functions/dna.lab/t
@@ -1336,11 +1270,9 @@ Relevant data:
                                                 ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
 
-          sys.poll.number.of.structures         ./functions/main/active.socket.poll/t
-                                                ./functions/main/listening.socket.poll/t
+          sys.poll.number.of.structures         ./functions/poll.descriptor/t
 
-          sys.poll.timeout                      ./functions/main/active.socket.poll/t
-                                                ./functions/main/listening.socket.poll/t
+          sys.poll.timeout                      ./functions/poll.descriptor/t
 
 
       d   No defined symbols.
@@ -1909,9 +1841,6 @@ Relevant data:
       b   sys.poll.call                         ./functions/poll.descriptor/t
 
 
-      d   No defined symbols.
-
-
       t   poll.descriptor                       ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
 
@@ -2312,9 +2241,6 @@ Relevant data:
             .epoch
 
 
-      d   No defined symbols.
-
-
       t   time.in.seconds.since.epoch           No references.
 
     ----------------------------------------------------------------------------------------------
@@ -2322,9 +2248,6 @@ Relevant data:
       /write.bad.command.error    Contains code that lets the user know whan they've attempted to
                                   send a string to the server that doesn't correspond to a
                                   recognized command.
-
-      b   No defined symbols.
-
 
       d   socket.data.bad.command.error         ./functions/write.bad.command.error/d
                                                 ./functions/write.bad.command.error/t
@@ -2349,12 +2272,6 @@ Relevant data:
       /write.bad.help.command.error Contains code that lets the user know when they've requested
                                     help for a command that does not belong to the recognized
                                     command set.
-
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
 
       t   write.bad.help.command.error          ./commands/help/t
 
