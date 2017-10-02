@@ -211,9 +211,9 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    build.pouch.found.open.id:          mov   eax, egg.area.id                                ; eax - area id associated with egg.
-                                        mov   ebx, egg.hatch.message                          ; ebx - pointer to message indicating that the egg is about to hatch.
-                                        mov   edx, egg.hatch.message.l                        ; edx - length of message.
+    build.pouch.found.open.id:          push  egg.hatch.message.l                             ; Store length of message.
+                                        push  egg.hatch.message                               ; Store pointer to message indicating that the egg is about to hatch.
+                                        push  egg.area.id                                     ; Store area id associated with egg.
                                         call  send.to.area                                    ; Tell the area where the egg is sitting that the egg is beginning to hatch.
                 
                                         pop   esi                                             ; esi - Index to socket entry.
