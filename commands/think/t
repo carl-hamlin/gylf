@@ -1,28 +1,41 @@
 ;================================================================================================================================================================================================
 ;
-;   command.think
+;   ./commands/think/t
 ;
 ;   This function is used by players and admins to communicate with one another.
 ;
 ;   Syntax:
-;   think
+;   think (target)
 ;
-;       Broadcasts a message to the area.
-;
-;   think <target>
-;
-;       Attempts to isolate a message to a particular recipient, with a chance for overflow.
+;       Broadcasts a message to the performing participant's local area, unless a target is specified, in which case it attempts to isolate a message to the target using a contest against
+;       Mental Projection, with failure resulting in overflow to the participant's local area.
 ;
 ;   Assumptions:     eax - Length of received data.
 ;                    esi - Pointer to descriptor associated with target socket.
 ;
 ;   Returns:         None.
 ;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   command.think.l           ./commands/think/d
+;
+;   command.think.untargetted ./commands/think/t
+;
+;   buffer.1                  ./functions/b
+;
+;   send.to.area              ./functions/socket/communications/send.to.area/t
+;
+;   send.to.player            ./functions/socket/communications/send.to.player/t
+;
 
-    command.think:             mov  ecx, buffer.1             ; ecx - Pointer to received command string.
-                               add  ecx, command.think.l      ; ecx - Pointer to first argument for command.
+    command.think:             mov  edx, eax                  ; edx - Length of command string minus terminator(s).
+                               sub  edx, command.think.l      ; edx - Length of command string minus terminator(s) and command.
 
-                               mov  ebx, ecx                  ; ebx - Pointer to first argument for command.
+                               mov  ebx, buffer.1             ; ecx - Pointer to received command string.
+                               add  ebx, command.think.l      ; ecx - Pointer to first argument for command.
+
                                inc  ebx                       ; ebx - Pointer to first byte of first argument.
                                cmp  byte [ebx], '"'           ; Is the first byte a quotation mark?
                                jz   command.think.untargetted ; Yes - send the message to the entire area.
@@ -35,8 +48,6 @@
 
                                ret                            ; Return to caller.
 
-    command.think.untargetted: mov  edx, eax                  ; edx - Length of command string minus terminator(s).
-                               sub  edx, command.think.l      ; edx - Length of command string minus terminator(s) and command.
-                               call send.to.area              ; Broadcast the message.
+    command.think.untargetted: call send.to.area              ; Broadcast the message.
 
                                ret                            ; Return to caller.
