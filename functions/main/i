@@ -6,12 +6,6 @@
 
 ;==================================================================================================================================================================================================================
 
-    section   .data
-
-    %include  "./functions/main/d"
-
-;==================================================================================================================================================================================================================
-
     section   .text
 
     %include  "./functions/main/active.socket.poll/i"
@@ -19,6 +13,7 @@
     %include  "./functions/main/listening.socket.poll/i"
     %include  "./functions/main/set.up.listener/i"
     %include  "./functions/main/system.check/i"
+    %include  "./functions/main/text.init/i"
     %include  "./functions/main/world.maintenance/i"
     
     %include  "./functions/main/t"
