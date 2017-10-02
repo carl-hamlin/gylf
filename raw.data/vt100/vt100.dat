@@ -1,8 +1,0 @@
-%include	"./raw.data/vt100/attribute.control.dat"
-%include	"./raw.data/vt100/cursor.control.dat"
-%include	"./raw.data/vt100/key.definition.control.dat"
-%include	"./raw.data/vt100/line.wrap.and.fonts.dat"
-%include	"./raw.data/vt100/print.control.dat"
-%include	"./raw.data/vt100/query.report.reset.dat"
-%include	"./raw.data/vt100/screen.control.dat"
-%include	"./raw.data/vt100/tab.control.dat"
