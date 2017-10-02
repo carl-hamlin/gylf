@@ -15,3 +15,5 @@
     section   .text
     
     %include  "./functions/socket/communications/send.to.area/i"
+    %include  "./functions/socket/communications/send.to.player/i"
+    %include  "./functions/socket/communications/send.to.world/i"
