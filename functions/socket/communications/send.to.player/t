@@ -4,10 +4,10 @@
 ;
 ;   This function sends a provided message out to a provided area.
 ;
-;   Assumptions:    eax - Connection ID to which to broadcast.
-;                   ebx - Area from which broadcast is being generated.
-;                   ecx - Pointer to message to be broadcast.
-;                   edx - Length of message to be broadcast.
+;   Assumptions:    Stack frame:  dword - Length of message to be broadcast.
+;                                 dword - Pointer to message to be broadcast.
+;                                 dword - Area from which broadcast is being generated.
+;                                 dword - Connection ID to which to broadcast.
 ;
 ;   Returns:        eax - 0 on success
 ;                   eax - out of area indicator if target recipient is out of area
@@ -18,11 +18,13 @@
 ;
 ;   connection.area.id.index            ./functions/main/system.check/b
 ;
-;   connection.descriptor.index         ./functions/main/system.check/b
-;
 ;   connection.entry.size               ./functions/main/system.check/b
 ;
 ;   connection.table                    ./functions/main/system.check/b
+;
+;   connection.number.index             ./functions/main/system.check/b
+;
+;   dword.l                             ./b
 ;
 ;   send.to.player.broadcast            ./functions/socket/communications/send.to.player/t
 ;
@@ -30,46 +32,43 @@
 ;
 ;   send.to.player.out.of.area.error    ./functions/socket/communications/send.to.player/t
 ;
-;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
-;
-;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
-;
 ;   socket.number                       ./b
 ;
-;   socket.send                         ./functions/socket/socket.send/t
+;   socket.send.buf                     ./functions/socket/socket.send/t
 ;
 
-    send.to.player:                   push esi                                             ; Preserve caller's esi.
+    send.to.player:                   pop   edx                                       ; Preserve return address.
 
-                                      mov  dword [socket.data.send.buffer.pointer], ecx    ; Point send function to provided message.
-                                      mov  dword [socket.data.send.buffer.l], edx          ; Provide length of message to send function.
+                                      push  esi                                       ; Preserve caller's esi.
 
-                                      mov  esi, connection.table                           ; esi - pointer to table of handles associated with active connections.
-                                      mov  ecx, socket.number                              ; ecx - number of connections to poll.
+                                      mov   esi, connection.table                     ; esi - Pointer to table of handles associated with active connections.
+                                      mov   ecx, socket.number                        ; ecx - Number of connections to poll.
 
-    send.to.player.connection.poll:   cmp  dword [esi+connection.area.id.index], ebx       ; Does the area id associated with this connection match the area id to be broadcast?
-                                      jnz  send.to.player.out.of.area.error                ; No - Return out of area indicator.
+    send.to.player.connection.poll:   mov   eax, dword [esp+dword.l]                  ; eax - Area id to which to be broadcast.
+                                      cmp   dword [esi+connection.area.id.index], ebx ; Does the area id associated with this connection match the area id to be broadcast?
+                                      jnz   send.to.player.out.of.area.error          ; No - Return out of area indicator.
 
-                                      cmp  dword [esi+connection.number.index], eax        ; Does this description correspond to the target recipient's ID?
-                                      jz   send.to.player.broadcast                        ; Yes - Go broadcast the message.
+                                      mov   eax, dword [esp]                          ; eax - Descriptor to which to broadcast.
+                                      cmp   dword [esi+connection.number.index], eax  ; Does this descriptor correspond to the target recipient's ID?
+                                      jz    send.to.player.broadcast                  ; Yes - Go broadcast the message.
 
-    send.to.player.broadcast.done:    add  esi, connection.entry.size                      ; esi - pointer to next connection handle in table.
-                                      loop send.to.player.connection.poll                  ; Go check the next connection.
+    send.to.player.broadcast.done:    add   esi, connection.entry.size                ; esi - Pointer to next connection handle in table.
+                                      loop  send.to.player.connection.poll            ; Go check the next connection.
 
-                                      pop  esi                                             ; Restore caller's esi.
+                                      pop   esi                                       ; Restore caller's esi.
 
-                                      ret                                                  ; Return to caller.
+                                      ret   (dword.l * 4)                             ; Return to caller.
 
-    send.to.player.broadcast:         push eax                                             ; Preserve area id to be broadcast.
-                                      mov  eax, dword [esi+connection.descriptor.index]    ; eax - descriptor to be broadcast to.
-                                      mov  dword [socket.data.send.socket.descriptor], eax ; Point send function to descriptor to which the message is to be sent.
-                                      pop  eax                                             ; Restore area id to be broadcast.
-                                      call socket.send                                     ; Send the message to the indicated descriptor.
+    send.to.player.broadcast:         push  dword [esp+(dword.l*3)]                   ; Tell the send function how long the message is.
+                                      push  dword [esp+(dword.l*2)]                   ; Point send function to the message.
+                                      call  socket.send.buf                           ; Send the message to the indicated descriptor.
 
-                                      ret                                                  ; Return to caller.
+                                      pop   esi                                       ; Restore caller's esi.
 
-    send.to.player.out.of.area.error: mov  eax, 0FFFFh                                     ; eax - Out of area indicator
+                                      ret   (dword.l * 4)                             ; Return to caller.
 
-                                      ret                                                  ; Return to caller.
+    send.to.player.out.of.area.error: mov   eax, 0FFFFh                               ; eax - Out of area indicator
+
+                                      pop   esi                                       ; Restore caller's esi.
+
+                                      ret   (dword.l * 4)                             ; Return to caller.
