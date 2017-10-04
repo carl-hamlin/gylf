@@ -7,3 +7,4 @@
     %include  "./commands/broadcast/e"
     %include  "./commands/dig/e"
     %include  "./commands/egg/e"
+    %include  "./commands/gylf/e"

@@ -1735,6 +1735,8 @@ Relevant data:
 
             text.data.index.socket.data.command.egg.help  No references.
 
+            text.data.index.socket.data.command.gylf.help No references.
+
             text.data.index.num                 ./functions/main/text.init/t
 
 
