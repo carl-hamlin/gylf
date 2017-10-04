@@ -1,6 +1,6 @@
 ;================================================================================================================================================================================================
 ;
-;   command.help.asm
+;   ./commands/help/t
 ;
 ;   This function displays context-sensitive help.
 ;
@@ -9,9 +9,36 @@
 ;
 ;   Returns:          None.
 ;
-;   Crossreferences:  Location Symbol
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
-;                     none     none
+;   Symbolic Cross-Referencing
+;
+;   dword.l                             ./b
+;   qword.l                             ./b
+;
+;   command.help.found.command          ./commands/help/t
+;   command.help.next.command           ./commands/help/t
+;   command.help.next.command.jcxnz     ./commands/help/t
+;   command.help.no.arguments           ./commands/help/t
+;   command.help.parse.arguments        ./commands/help/t
+;
+;   argument.01.locations               ./functions/aggregate.arguments/b
+;   arguments.num                       ./functions/aggregate.arguments/b
+;
+;   command.table                       ./functions/d
+;   number.of.commands                  ./functions/d
+;
+;   connection.descriptor.index         ./functions/main/system.check/b
+;
+;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
+;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
+;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
+;
+;   socket.send                         ./functions/socket/socket/send/t
+;
+;   write.bad.command.error             ./functions/write.bad.command.error/t
+;
+;   write.bad.help.command.error        ./functions/write.bad.help.command.error/t
 ;
 
     command.help:                     push  eax                                             ; Preserve length of received data.

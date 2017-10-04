@@ -4,6 +4,12 @@
 ;
 ;   This file contains shared definitions for downstream functions.
 ;
+;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Reference
+;
+;   No external references.
+;
 
     %define socket.number 0FFh  ; Number of sockets represented in table.
 

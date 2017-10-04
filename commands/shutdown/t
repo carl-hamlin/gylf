@@ -1,6 +1,6 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   command.shutdown
+;   ./commands/shutdown/t
 ;
 ;   This function shuts down the server from within the environment.
 ;
@@ -8,6 +8,47 @@
 ;
 ;   Returns:         None.
 ;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   socket.number                       ./b
+;
+;   command.shutdown.admin              ./commands/shutdown/t
+;   command.shutdown.loop               ./commands/shutdown/t
+;
+;   local.data.shutdown.message         ./commands/shutdown/d
+;   local.data.shutdown.message.l       ./commands/shutdown/d
+;   local.data.smoked.sockets.message   ./commands/shutdown/d
+;   local.data.smoked.sockets.message.l ./commands/shutdown/d
+;   socket.data.shutdown.message        ./commands/shutdown/d
+;   socket.data.shutdown.message.l      ./commands/shutdown/d
+;
+;   bail                                ./functions/bail/t
+;
+;   check.admin                         ./functions/check.admin/t
+;
+;   connection.entry.size               ./functions/main/system.check/b
+;   connection.descriptor.index         ./functions/main/system.check/b
+;   connection.table                    ./functions/main/system.check/b
+;
+;   clean.socket                        ./functions/socket/clean.socket/t
+;
+;   send.to.world                       ./functions/socket/communications/send.to.world/t
+;
+;   socket.data.send.buffer.l           ./functions/socket/recv.from.socket/d
+;   socket.data.send.buffer.pointer     ./functions/socket/recv.from.socket/d
+;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
+;
+;   socket.send                         ./functions/socket.send/t
+;
+;   socket.data.bad.command.error       ./functions/write.bad.command.error/d
+;   socket.data.bad.command.error.l     ./functions/write.bad.command.error/d
+;
+;   write.descriptor                    ./functions/write.descriptor/t
+;
+
+
 
     command.shutdown:       call check.admin                                                            ; See if the calling socket is controlled by an admin.
                             jc   command.shutdown.admin                                                 ; If so, go run the shutdown sequence. Otherwise...
@@ -20,7 +61,7 @@
 
                             ret                                                                         ; Return to caller.
 
-;-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     command.shutdown.admin: mov  ecx, socket.data.shutdown.message                                      ; ecx - Pointer to socket shutdown message.
                             mov  edx, socket.data.shutdown.message.l                                    ; edx - Length of message.
@@ -33,7 +74,7 @@
                             mov  esi, connection.table                                                  ; esi - Pointer to command table.
                             mov  ecx, socket.number                                                     ; ecx - Number of sockets to smoke.
 
-;-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     command.shutdown.loop:  call clean.socket                                                           ; Smoke the current socket.
                             add  esi, connection.entry.size                                             ; esi - Pointer to next victim.
