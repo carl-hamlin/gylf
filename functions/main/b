@@ -1,0 +1,11 @@
+;====================================================================================================================================================================================================
+;
+;   ./functions/main/b
+;
+;   This file contains all definitions pertinent to the main loop.
+;
+
+    %define login.status          0000h ; This status indicates that we're waiting on a username from this socket.
+    %define passphrase.status     0001h ; This status indicates that we're waiting for a passphrase from this socket.
+    %define active.status         0002h ; This status indicates that the socket has been through validation and is now ready to interact with the server.
+    %define set.passphrase.status 0003h ; This status indicates that the system has identified you as a new user, and is asking you to enter a passphrase with which to protect your account.

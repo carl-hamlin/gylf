@@ -1,0 +1,17 @@
+;====================================================================================================================================================================================================
+;
+;   tab.control
+;
+;   This file contains data definitions for vt100 escape sequences pertinent to tab control. Its future is uncertain.
+
+set.tab     db  01Bh, "H"   ; Set Tab         <ESC>H
+                            ; Sets a tab at the current position.
+set.tab.l   equ $-set.tab   ; Length of Set tab sequence.
+
+clr.tab     db  01Bh, "[g"  ; Clear Tab         <ESC>[g
+                            ; Clears tab at the current position.
+clr.tab.l   equ $-clr.tab   ; Length of Clear Tab sequence.
+
+clr.tab.a   db  01Bh, "[3g" ; Clear All Tabs     <ESC>[3g
+                            ; Clears all tabs.
+clr.tab.a.l equ $-clr.tab.a ; Length of Clear All Tabs sequence.
