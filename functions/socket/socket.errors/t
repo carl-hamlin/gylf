@@ -13,55 +13,43 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   bail                              ./functions/bail/t
+;   bail                                            ./functions/bail/t
 ;
-;   local.data.accept.error.message   ./functions/socket/socket.errors/d
+;   text.data.index.local.data.accept.error.message ./functions/main/text.init/b
 ;
-;   local.data.accept.error.message.l ./functions/socket/socket.errors/d
+;   text.data.index.local.data.bind.error.message   ./functions/main/text.init/b
 ;
-;   local.data.bind.error.message     ./functions/socket/socket.errors/d
+;   text.data.index.local.data.create.error.message ./functions/main/text.init/b
 ;
-;   local.data.bind.error.message.l   ./functions/socket/socket.errors/d
+;   text.data.index.local.data.listen.error.message ./functions/main/text.init/b
 ;
-;   local.data.create.error.message   ./functions/socket/socket.errors/d
-;
-;   local.data.create.error.message.l ./functions/socket/socket.errors/d
-;
-;   local.data.listen.error.message   ./functions/main/set.up.listener/d
-;
-;   local.data.listen.error.message.l ./functions/main/set.up.listener/d
-;
-;   write.descriptor                  ./functions/write.descriptor/t
+;   write.console                                   ./functions/write.console/t
 ;                     
                         
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    socket.create.error: mov  ecx, local.data.create.error.message   ; ecx = Pointer to socket creation failure error message.
-                         mov  edx, local.data.create.error.message.l ; edx = Length of message.
-                         call write.descriptor                       ; Display the message to the admin.
+    socket.create.error: push dword [text.data.index.local.data.create.error.message] ; Pointer to socket creation failure error message.
+                         call write.console                                           ; Display the message to the admin.
 
-                         jmp  bail                                   ; Return control to linux.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    socket.bind.error:   mov  ecx, local.data.bind.error.message     ; ecx = Pointer to bind failure error message.
-                         mov  edx, local.data.bind.error.message.l   ; edx = Length of message.
-                         call write.descriptor                       ; Display the message to the admin.
-
-                         jmp  bail                                   ; Return control to linux.
+                         jmp  bail                                                    ; Return control to linux.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    socket.listen.error: mov  ecx, local.data.listen.error.message   ; ecx = Pointer to listen failure error message.
-                         mov  edx, local.data.listen.error.message.l ; edx = Length of message.
-                         call write.descriptor                       ; Display the message to the admin.
+    socket.bind.error:   push dword [text.data.index.local.data.bind.error.message]   ; Pointer to bind failure error message.
+                         call write.console                                           ; Display the message to the admin.
 
-                         jmp  bail                                   ; Return control to linux.
+                         jmp  bail                                                    ; Return control to linux.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    socket.accept.error: mov  ecx, local.data.accept.error.message   ; ecx = Pointer to accept failure error message.
-                         mov  edx, local.data.accept.error.message.l ; edx = Length of message.
-                         call write.descriptor                       ; Display the message to the admin.
+    socket.listen.error: push dword [text.data.index.local.data.listen.error.message] ; Pointer to listen failure error message.
+                         call write.console                                           ; Display the message to the admin.
 
-                         jmp  bail                                   ; Return control to linux.
+                         jmp  bail                                                    ; Return control to linux.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    socket.accept.error: push dword [text.data.index.local.data.accept.error.message] ; Pointer to accept failure error message.
+                         call write.console                                           ; Display the message to the admin.
+
+                         jmp  bail                                                    ; Return control to linux.

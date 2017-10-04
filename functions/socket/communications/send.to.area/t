@@ -28,7 +28,7 @@
 ;
 ;   socket.number                       ./b
 ;
-;   socket.send                         ./functions/socket/socket.send/t
+;   socket.send.buf                     ./functions/socket/socket.send/t
 ;
 
     send.to.area:                 push  esi                                       ; Preserve caller's esi.
@@ -48,6 +48,6 @@
 
     send.to.area.broadcast:       push  edx                                       ; Tell send function how long the message is.
                                   push  ebx                                       ; Point send function to the message.
-                                  call  socket.send                               ; Send the message to the indicated descriptor.
+                                  call  socket.send.buf                           ; Send the message to the indicated descriptor.
 
                                   jmp   send.to.area.broadcast.done               ; Go set up for the next connection.
