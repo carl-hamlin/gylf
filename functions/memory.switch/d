@@ -1,21 +1,14 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/bail/t
+;   ./functions/memory.switch/d
 ;
-;   This function suspends execution and returns control back to linux.
-;
-;   Assumptions:    None.
-;
-;   Returns:        None.
+;   This file contains data for the memory.switch function.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   sys.exit.call   ./functions/bail/b
-;
-;   sys.system.call ./functions/b
+;   No external references.
 ;
 
-    bail: mov  eax, sys.exit.call ; eax = Suspend execution and return control to linux.
-          int  sys.system.call    ; Call the kernel and let it know we're done here.
+    break.pointer dd  00000000h ; Storage for pointer to end of OS-defined memory.

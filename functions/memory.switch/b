@@ -1,21 +1,14 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/bail/t
+;   ./functions/memory.switch/b
 ;
-;   This function suspends execution and returns control back to linux.
-;
-;   Assumptions:    None.
-;
-;   Returns:        None.
+;   This file contains definitions for the memory.switch function.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   sys.exit.call   ./functions/bail/b
-;
-;   sys.system.call ./functions/b
+;   No external references.
 ;
 
-    bail: mov  eax, sys.exit.call ; eax = Suspend execution and return control to linux.
-          int  sys.system.call    ; Call the kernel and let it know we're done here.
+    %define sys.mem 45d ; Linux syscall memory management.

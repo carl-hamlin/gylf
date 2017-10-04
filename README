@@ -61,7 +61,8 @@ Relevant data:
                                                 ./functions/create.character/t
                                                 ./functions/d
                                                 ./functions/main/system.check/t
-                                                ./functions/main/participant.interaction/address.active.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.active.status/t
                                                 ./functions/print.socket.number/t
 
           word.l                                ./commands/area/t
@@ -69,7 +70,8 @@ Relevant data:
 
           byte.l                                ./functions/get.character.data/t
                                                 ./functions/get.external.data/t
-                                                ./functions/main/participant.interaction/address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
 
           nibble.l                              No references.
 
@@ -172,28 +174,28 @@ Relevant data:
           local.data.out.of.areas.message.l     ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.area.created.message      ./commands/area/d
+          socket.data.area.created.message      ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.area.created.message.l    ./commands/area/d
+          socket.data.area.created.message.l    ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.out.of.areas.message      ./commands/area/d
+          socket.data.out.of.areas.message      ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.out.of.areas.message.l    ./commands/area/d
+          socket.data.out.of.areas.message.l    ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.bad.area.id.message       ./commands/area/d
+          socket.data.bad.area.id.message       ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.bad.area.id.message.l     ./commands/area/d
+          socket.data.bad.area.id.message.l     ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.command.area.help         ./commands/area/d
+          socket.data.command.area.help         ./commands/area/d
                                                 ./commands/area/t
 
-	        socket.data.command.area.help.l       ./commands/area/d
+          socket.data.command.area.help.l       ./commands/area/d
                                                 ./commands/area/t
 
           command.area.w                        ./commands/area/d
@@ -1599,27 +1601,11 @@ Relevant data:
                                                 ./functions/socket/communications/send.to.area/t
                                                 ./functions/socket/communications/send.to.player/t
 
-            connection.descriptor.index         ./commands/area/t
-                                                ./commands/broadcast/t
-                                                ./commands/look/t
-                                                ./commands/shutdown/t
-                                                ./functions/create.character/t
-                                                ./functions/main/active.socket.poll/t
-                                                ./functions/main/listening.socket.poll/t
-                                                ./functions/main/participant.interaction
-                                                  /address.login.status/t
-                                                ./functions/main/participant.interaction
-                                                  /address.passphrase.status/t
+            connection.descriptor.index         ./functions/main/active.socket.poll/t
                                                 ./functions/main/participant.interaction
                                                   /address.set.passphrase.status/t
                                                 ./functions/socket/clean.socket/t
-                                                ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
-                                                ./functions/socket/communications/send.to.world/t
                                                 ./functions/socket/recv.from.socket/t
-                                                ./functions/write.bad.command.error/t
-                                                ./functions/write.bad.help.command.error/t
-                                                ./functions/write.welcome/t
 
             connection.entry.size               ./commands/shutdown/t
                                                 ./functions/main/active.socket.poll/t
@@ -1721,6 +1707,23 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
+      /memory.switch          Contains code that allows for dynamic memory management from within
+                              the program.
+
+      b   sys.mem                               ./functions/memory.switch/t
+
+
+      d   break.pointer                         ./functions/memory.switch/t
+
+
+      t   memory.switch                         ./functions/socket/send.socket/t
+
+          memory.switch.initialize              ./functions/memory.switch/t
+
+          memory.switch.initialized             ./functions/memory.switch/t
+
+    ----------------------------------------------------------------------------------------------
+
       /open.descriptor        Contains code that associates a logical descriptor with an existing
                               dataset on disk. If the code is unable to associate a descriptor, it
                               instead returns an error code, which is detectable via a check on
@@ -1790,8 +1793,10 @@ Relevant data:
                                                 ./functions/dna.lab/t
                                                 ./functions/get.character.data/t
                                                 ./functions/get.external.data/t
-                                                ./functions/main/participant.interaction/address.login.status/t
-                                                ./functions/main/participant.interaction/address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -2100,70 +2105,7 @@ Relevant data:
         b   sys.socket.recv                     ./function/socket/recv.from.socket/t
 
 
-        d   socket.data.send.buffer.l           ./commands/area/t
-                                                ./commands/broadcast/t
-                                                ./commands/help/t
-                                                ./commands/look/t
-                                                ./commands/shutdown/t
-                                                ./functions/clear.screen/t
-                                                ./functions/create.character/t
-                                                ./functions/main/listening.socket.poll/t
-                                                ./functions/main/participant.interaction
-                                                  /address.login.status/t
-                                                ./functions/main/participant.interaction
-                                                  /address.passphrase.status/t
-                                                ./functions/set.single.attribute/t
-                                                ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
-                                                ./functions/socket/communications/send.to.world/t
-                                                ./functions/socket/recv.from.socket/t
-                                                ./functions/write.bad.command.error/t
-                                                ./functions/write.bad.help.command.error/t
-                                                ./functions/write.prompt/t
-
-            socket.data.send.buffer.pointer     ./commands/area/t
-                                                ./commands/broadcast/t
-                                                ./commands/help/t
-                                                ./commands/look/t
-                                                ./commands/shutdown/t
-                                                ./functions/clear.screen/t
-                                                ./functions/create.character/t
-                                                ./functions/main/listening.socket.poll/t
-                                                ./functions/main/participant.interaction
-                                                  /address.login.status/t
-                                                ./functions/main/participant.interaction
-                                                  /address.passphrase.status/t
-                                                ./functions/set.single.attribute/t
-                                                ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
-                                                ./functions/socket/communications/send.to.world/t
-                                                ./functions/socket/recv.from.socket/t
-                                                ./functions/write.bad.command.error/t
-                                                ./functions/write.bad.help.command.error/t
-                                                ./functions/write.prompt/t
-
-            socket.data.send.flags              No references.
-
-            socket.data.send.socket.descriptor  ./commands/area/t
-                                                ./commands/broadcast/t
-                                                ./commands/help/t
-                                                ./commands/look/t
-                                                ./commands/shutdown/t
-                                                ./functions/clear.screen/t
-                                                ./functions/create.character/t
-                                                ./functions/main/listening.socket.poll/t
-                                                ./functions/main/participant.interaction
-                                                  /address.login.status/t
-                                                ./functions/main/participant.interaction
-                                                  /address.passphrase.status/t
-                                                ./functions/set.single.attribute/t
-                                                ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
-                                                ./functions/socket/communications/send.to.world/t
-                                                ./functions/socket/recv.from.socket/t
-                                                ./functions/write.bad.command.error/t
-                                                ./functions/write.bad.help.command.error/t
-                                                ./functions/write.prompt/t
+        d   No defined symbols.
 
 
         t   recv.from.socket                    ./functions/main/participant.interaction
@@ -2219,6 +2161,25 @@ Relevant data:
 
         d   No defined symbols.
 
+
+        t   socket.send                         ./commands/area/t
+                                                ./commands/help/t
+                                                ./commands/look/t
+                                                ./functions/clear.screen/t
+                                                ./functions/create.character/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.world/t
+                                                ./functions/write.bad.command.error/t
+                                                ./functions/write.bad.help.command.error/t
+                                                ./functions/write.prompt/t
+
     ----------------------------------------------------------------------------------------------
 
       /time.in.seconds.since.the.epoch  Contains code that returns the time in seconds since the
@@ -2242,14 +2203,19 @@ Relevant data:
 
 
       d   socket.data.bad.command.error         ./functions/write.bad.command.error/d
+                                                ./functions/write.bad.command.error/t
+
+          socket.data.bad.command.error.l       ./functions/write.bad.command.error/t
 
 
       t   write.bad.command.error               ./commands/ai/t
+                                                ./commands/broadcast/t
                                                 ./commands/dig/t
                                                 ./commands/egg/t
                                                 ./commands/gylf/t
                                                 ./commands/help/t
                                                 ./commands/logout/t
+                                                ./commands/shutdown/t
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
 
