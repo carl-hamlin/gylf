@@ -1,0 +1,14 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/create.socket/b
+;
+;   This file contains all definitions pertinent to the create.socket function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+    %define sys.socket.create 001h  ; 001h is the modifier for 066h that tells the kernel we want to create a new socket. Here, we use it to build the listening socket for incoming connections.

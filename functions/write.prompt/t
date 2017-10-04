@@ -1,0 +1,26 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/write.prompt/t
+;
+;   This function prints a command prompt.
+;
+;   Assumptions:    eax - Descriptor associated with target connection.
+;
+;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   prompt.message                      ./functions/write.prompt/d
+;
+;   prompt.message.l                    ./functions/write.prompt/d
+;
+;   socket.send                         ./functions/socket/socket.send/t
+;
+
+    write.prompt: push  prompt.message.l  ; Tell the send function how long the message is.
+                  push  prompt.message    ; Point the send function to the prompt.
+                  call socket.send        ; Send the prompt to the socket.
+
+                  ret                     ; Return to caller.
