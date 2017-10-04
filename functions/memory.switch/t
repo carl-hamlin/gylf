@@ -6,7 +6,7 @@
 ;
 ;   Assumptions:    esp+4 - Number of bytes to allocate.
 ;
-;   Returns:        eax - Pointer to new memory.
+;   Returns:        ebx - Pointer to new memory.
 ;                   eax - Error indicator.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -33,6 +33,8 @@
                                 add   ebx, dword [esp+4]          ; ebx - Pointer to where we want memory to end.
                                 mov   eax, sys.mem                ; eax - sys.mem: Linux syscall memory management.
                                 int   sys.system.call             ; Extend memory.
+
+                                sub   ebx, dword [esp+4]          ; ebx - Pointer to new memory.
 
                                 ret   4                           ; Return to caller.
 

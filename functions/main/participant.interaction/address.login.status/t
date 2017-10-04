@@ -124,9 +124,9 @@
                           call  create.lock.file                                                        ; Assume the character is about to be logged and create a lock file to prevent multiple
                                                                                                         ; instances.
 
-                          mov   ebx, eax                                                                ; ebx - descriptor associated with character data.
-                          mov   ecx, new.char.sig.buffer                                                ; ecx - Pointer to buffer into which to read data.
-                          mov   edx, new.char.sig.l                                                     ; edx - Size of data to be read.
+                          push  new.char.sig.l                                                          ; Tell read.descriptor the size of data to be read.
+                          push  new.char.sig.buffer                                                     ; Point read.descriptor to buffer into which to read data.
+                          push  eax                                                                     ; Point read.descriptor to descriptor associated with character data.
                           call  read.descriptor                                                         ; Read a dword from the file.
 
                           cmp   word [new.char.sig.buffer], new.char.sig                                ; Did we read a new character signature?

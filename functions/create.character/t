@@ -121,15 +121,11 @@
 ;
 
 
-    create.character:                   push  eax                                             ; Preserve descriptor associated with the egg file.
-
-                                        mov   ebx, eax                                        ; ebx - descriptor associated with the egg file.
-                                        mov   ecx, egg.data                                   ; ecx - pointer to buffer in which to store the egg data.
-                                        mov   edx, egg.data.l                                 ; edx - length of egg data.
+    create.character:                   push  egg.data.l                                      ; Tell read.descriptor the length of egg data.
+                                        push  egg.data                                        ; Point read.descriptor to buffer in which to store the egg data.
+                                        push  eax                                             ; Point read.descriptor to descriptor associated with the egg file.
                                         call  read.descriptor                                 ; Read the egg data into the buffer.
 
-                                        pop   ebx                                             ; ebx - descriptor associated with the egg file.
-                
                                         call  close.descriptor                                ; Close the egg file.
 
                                         push  esi                                             ; Preserve index to socket entry.
