@@ -15,6 +15,8 @@
 ;
 ;   break.pointer             ./functions/memory.switch/d
 ;
+;   dword.l                   ./b
+;
 ;   memory.switch.initialize  ./functions/memory.switch/t
 ;
 ;   memory.switch.initilized  ./functions/memory.switch/t
@@ -30,11 +32,11 @@
                                 jz    memory.switch.initialize    ; No. Go initialize memory management.
 
     memory.switch.initialized:  mov   ebx, eax                    ; ebx - Pointer to end of OS-defined program memory.
-                                add   ebx, dword [esp+4]          ; ebx - Pointer to where we want memory to end.
+                                add   ebx, dword [esp+dword.l]    ; ebx - Pointer to where we want memory to end.
                                 mov   eax, sys.mem                ; eax - sys.mem: Linux syscall memory management.
                                 int   sys.system.call             ; Extend memory.
 
-                                sub   ebx, dword [esp+4]          ; ebx - Pointer to new memory.
+                                sub   ebx, dword [esp+dword.l]    ; ebx - Pointer to new memory.
 
                                 ret   4                           ; Return to caller.
 
