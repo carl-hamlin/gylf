@@ -1,0 +1,6 @@
+;================================================================================================================================================================================================
+
+    section   .data
+
+    %include  "./functions/main/participant.interaction/address.login.status/e"
+    %include  "./functions/main/participant.interaction/address.passphrase.status/e"

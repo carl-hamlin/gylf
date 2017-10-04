@@ -30,10 +30,12 @@
 ;   send.to.player            ./functions/socket/communications/send.to.player/t
 ;
 
-    command.think:             mov  ecx, buffer.1             ; ecx - Pointer to received command string.
-                               add  ecx, command.think.l      ; ecx - Pointer to first argument for command.
+    command.think:             mov  edx, eax                  ; edx - Length of command string minus terminator(s).
+                               sub  edx, command.think.l      ; edx - Length of command string minus terminator(s) and command.
 
-                               mov  ebx, ecx                  ; ebx - Pointer to first argument for command.
+                               mov  ebx, buffer.1             ; ecx - Pointer to received command string.
+                               add  ebx, command.think.l      ; ecx - Pointer to first argument for command.
+
                                inc  ebx                       ; ebx - Pointer to first byte of first argument.
                                cmp  byte [ebx], '"'           ; Is the first byte a quotation mark?
                                jz   command.think.untargetted ; Yes - send the message to the entire area.
@@ -46,8 +48,6 @@
 
                                ret                            ; Return to caller.
 
-    command.think.untargetted: mov  edx, eax                  ; edx - Length of command string minus terminator(s).
-                               sub  edx, command.think.l      ; edx - Length of command string minus terminator(s) and command.
-                               call send.to.area              ; Broadcast the message.
+    command.think.untargetted: call send.to.area              ; Broadcast the message.
 
                                ret                            ; Return to caller.
