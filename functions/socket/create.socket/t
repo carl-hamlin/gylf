@@ -1,4 +1,4 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/socket/create.socket/t
 ;
@@ -6,37 +6,44 @@
 ;
 ;   Assumptions:    None.
 ;
-;   Returns:        eax - Descriptor associated with the newly created socket.
-;                   eax - Error as a signed value.
+;   Returns:        eax                                           - Descriptor associated with the newly created socket.
+;                   dword [socket.data.general.socket.descriptor] - Descriptor associated with the newly created socket.
+;                   eax                                           - Error as a signed value.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   sys.socket.address              ./functions/socket/b
+;   dword.l                               ./b
 ;
-;   sys.socket.call                 ./functions/socket/b
+;   socket.data.general.socket.descriptor ./functions/socket/create.socket/b
 ;
-;   sys.socket.create               ./functions/socket/create.socket/b
+;   sys.socket.address                    ./functions/socket/b
 ;
-;   sys.socket.protocol.family.inet ./functions/socket/b
+;   sys.socket.call                       ./functions/socket/b
 ;
-;   sys.socket.type.stream          ./functions/socket/b
+;   sys.socket.create                     ./functions/socket/create.socket/b
 ;
-;   sys.system.call                 ./functions/b
+;   sys.socket.protocol.family.inet       ./functions/socket/b
+;
+;   sys.socket.type.stream                ./functions/socket/b
+;
+;   sys.system.call                       ./functions/b
 ;
 
-    create.socket:  pop   edx                               ; Preserve return address in edx.
+    create.socket:  pop   edx                                                 ; Preserve return address in edx.
 
-                    push  sys.socket.address                ; Set address.
-                    push  sys.socket.type.stream            ; Set flags.
-                    push  sys.socket.protocol.family.inet   ; Set protocol family.
+                    push  sys.socket.address                                  ; Set address.
+                    push  sys.socket.type.stream                              ; Set flags.
+                    push  sys.socket.protocol.family.inet                     ; Set protocol family.
 
-                    mov   eax, sys.socket.call              ; eax = Socket call indicator.
-                    mov   ebx, sys.socket.create            ; ebx = Create a socket.
-                    mov   ecx, esp                          ; ecx - pointer to arguments package.
-                    int   sys.system.call                   ; Create a socket.
+                    mov   eax, sys.socket.call                                ; eax - Socket call indicator.
+                    mov   ebx, sys.socket.create                              ; ebx - Create a socket.
+                    mov   ecx, esp                                            ; ecx - Pointer to arguments package.
+                    int   sys.system.call                                     ; Create a socket.
 
-                    push  edx                               ; Restore return address.
+                    mov   dword [socket.data.general.socket.descriptor], eax  ; Store socket descriptor.
 
-                    ret   12                                ; Return to caller.
+                    push  edx                                                 ; Restore return address.
+
+                    ret   (dword.l * 3)                                       ; Return to caller.

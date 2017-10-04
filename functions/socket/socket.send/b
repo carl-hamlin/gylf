@@ -13,4 +13,3 @@
 
     %define sys.socket.send 009h  ; 009h is the modifier for 066h that tells the kernel we're attempting to send data to an active, connected socket. We don't use this much here, preferring
                                   ; kernel function 004h to write directly to the socket descriptor.
-

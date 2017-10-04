@@ -26,10 +26,3 @@
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     socket.data.connected.socket.descriptor resd    0001h ; Data storage for the descriptor associated with the socket attempting to connect.
-    socket.data.listening.socket.descriptor resd    0001h ; Data storage for the descriptor associated with the listening socket.
-    socket.data.queue.l                     resd    0001h ; Data storage for the queue length associated with the listening socket.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    session.descriptor                      resd    0001h ; Data storage for the descriptor associated with the session file.
-    active.socket.descriptor                resd    0001h ; Data storage for the descriptor associated with the active socket.
