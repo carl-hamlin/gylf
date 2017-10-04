@@ -1,0 +1,41 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/main/text.init/b
+;
+;   This file contains all definitions pertinent to the text.init function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   dword.l           ./functions/b
+;
+;   text.data.indices ./functions/main/text.init/b
+;
+
+    text.data.indices                                         equ   $                               ; Location of text.data.index table.
+    text.data.index.socket.data.command.ai.help               resd  00000001h                       ; Index to remote help message for 'ai' command.
+    text.data.index.local.data.area.bad.syntax.message        resd  00000001h                       ; Index to local 'area' command bad syntax message.
+    text.data.index.local.data.area.created.message           resd  00000001h                       ; Index to local 'area' command success message.
+    text.data.index.local.data.area.out.of.areas.message      resd  00000001h                       ; Index to local 'area' command out of areas message.
+    text.data.index.socket.data.area.created.message          resd  00000001h                       ; Index to remote 'area' command success message.
+    text.data.index.socket.data.out.of.areas.message          resd  00000001h                       ; Index to remote 'area' command out of areas message.
+    text.data.index.socket.data.bad.area.id.message           resd  00000001h                       ; Index to remote 'area' command bad area id message.
+    text.data.index.socket.data.command.area.help             resd  00000001h                       ; Index to remote help message for 'area' command.
+    text.data.index.socket.data.command.broadcast.help        resd  00000001h                       ; Index to remote help message for 'broadcast' command.
+    text.data.index.socket.data.command.dig.help              resd  00000001h                       ; Index to remote help message for 'dig' command.
+    text.data.index.socket.data.egg.hatch.message             resd  00000001h                       ; Index to remote message indicating that an egg is hatching in the general vicinity.
+    text.data.index.socket.data.command.egg.help              resd  00000001h                       ; Index to remote help message for 'egg' command.
+    text.data.index.socket.data.command.gylf.help             resd  00000001h                       ; Index to remote help message for 'gylf' command.
+    text.data.index.socket.data.bad.help.command.error        resd  00000001h                       ; Index to remote message indicating that the user has entered a bad argument for help.
+    text.data.index.socket.data.command.help.help             resd  00000001h                       ; Index to remote help message for the 'help' command.
+    text.data.index.socket.data.command.logout.help           resd  00000001h                       ; Index to remote help message for the 'logout' command.
+    text.data.index.local.data.bad.area.id.indicator.message  resd  00000001h                       ; Index to local 'look' command bad area id message.
+    text.data.index.socket.data.command.look.help             resd  00000001h                       ; Index to remote help message for the 'look' command.
+    text.data.index.local.data.smoked.sockets.message         resd  00000001h                       ; Index to local 'shutdown' command message indicating that all sockets are disconnected.
+    text.data.index.local.data.shutdown.message               resd  00000001h                       ; Index to local 'shutdown' command message indicating that shutdown has been initiated.
+    text.data.index.socket.data.shutdown.message              resd  00000001h                       ; Index to remote 'shutdown' command message indicating that the server is shutting down.
+    text.data.index.socket.data.command.shutdown.help         resd  00000001h                       ; Index to remote help message for the 'shutdown' command.
+    text.data.index.socket.data.command.think.help            resd  00000001h                       ; Index to remote help message for the 'think' command.
+    text.data.index.socket.data.bad.command.error.message     resd  00000001h                       ; Index to remote message indicating that the participant has entered a bad command.
+    text.data.index.num                                       equ   (($-text.data.indices)/dword.l) ; Number of indices in table.
