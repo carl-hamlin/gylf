@@ -44,57 +44,68 @@
 ;   write.prompt                                        ./functions/write.prompt/t
 ;
 
-    send.to.world:          pop   ebp                                                         ; Preserve return address.
+    send.to.world:            pop   ebp                                                         ; Preserve return address.
 
-                            cmp   al, 1                                                       ; Buffered mode?
-                            jz    send.to.world.buf.p                                         ; Yes. Skip popping the index.
+                              cmp   al, 1                                                       ; Buffered mode?
+                              jz    send.to.world.loop                                          ; Yes. Skip popping the index.
 
-                            pop   edx                                                         ; edx - Index to message.
+                              pop   edx                                                         ; edx - Index to message.
 
-    send.to.world.buf.p     push  esi                                                         ; Preserve caller's esi register.
-
-                            mov   esi, connection.table                                       ; esi - Index to socket entries.
-                            mov   ecx, socket.number                                          ; ecx - Number of sockets in table; we use this number as our loop counter.
+                              sub   ecx, ecx                                                    ; ecx - First id to notify.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.world.loop:     push  ecx                                                         ; Preserve number of sockets.
-                            push  edx                                                         ; Preserve index to message.
+    send.to.world.loop:       cmp   ecx, [a.p.data + gylf.connection.external.index]            ; Does this id belong to the performer?
+                              jz    send.to.world.loop.next                                     ; Skip this id.
+    
+                              push  edx                                                         ; Preserve index to message.
 
-                            cmp   al, 1                                                       ; Buffered mode?
-                            jz    send.to.world.buf.s                                         ; Yes - go activate socket.send.buf instead.
+                              push  ecx                                                         ; Point get.participant.data.by.id to the next id in line.
+                              call  get.participant.data.by.id                                  ; Populate g.data with the participant data to which to send.
 
-                            push  edx                                                         ; Point socket.send to index.
-                            call  socket.send                                                 ; Send the message to the socket.
+                              or    eax, eax                                                    ; Are we finished?
+                              js    send.to.world.c                                             ; Yes. Go clean up and return to caller.
 
-    send.to.world.buf.sret: push  dword [text.data.index.local.data.carriage.return.message]  ; Point send function to a carriage return.
-                            call  socket.send                                                 ; Broadcast a carriage return.
+                              push  ebp                                                         ; Preserve return address.
 
-                            call  write.prompt                                                ; Send a prompt.
+                              cmp   al, 1                                                       ; Buffered mode?
+                              jz    send.to.world.buf.s                                         ; Yes - go activate socket.send.buf instead.
 
-                            add   esi, connection.entry.size                                  ; esi - Pointer to next descriptor in table.
+                              push  dword [g.data + gylf.connection.external.index]             ; Point socket.send to connection to notify.
+                              push  edx                                                         ; Point socket.send to index.
+                              call  socket.send                                                 ; Send the message to the socket.
 
-                            pop   edx                                                         ; Restore return address.
-                            pop   ecx                                                         ; Restore number of sockets.
-                        
-                            loop  send.to.world.loop                                          ; Go broadcast to the next socket in the table.
+    send.to.world.loop.next:  inc   eax                                                         ; eax - Next id to notify.
+                              jmp   send.to.world.loop                                          ; Go notify the next id.
 
-                            cmp   al, 1                                                       ; Buffered mode?
-                            jnz   send.to.world.c                                             ; No. Go skip restoring the stack.
+    send.to.world.buf.sret:   push  eax                                                         ; Preserve buffered indicator.
+    
+                              push  dword [g.data + gylf.connection.external.index]             ; Point socket.send to connection to notify.
+                              push  dword [text.data.index.local.data.carriage.return.message]  ; Point send function to a carriage return.
+                              call  socket.send                                                 ; Broadcast a carriage return.
 
-                            pop   ecx                                                         ; Killing the pointer to the buffer...
-                            pop   ecx                                                         ; Killing the size of the buffered data...
+                              call  write.prompt                                                ; Send a prompt.
 
-    send.to.world.c         pop   esi                                                         ; Restore caller's esi register.
+                              pop   eax                                                         ; Restore buffered indicator.
+                              pop   ebp                                                         ; Restore return address.
 
-                            push  ebp                                                         ; Restore return address.
+                              jmp  send.to.world.loop.next                                      ; Go broadcast to the next id.
 
-                            ret                                                               ; Return to caller.
+    send.to.world.c:          pop   esi                                                         ; Restore caller's esi register.
+
+                              push  ebp                                                         ; Restore return address.
+
+                              ret                                                               ; Return to caller.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.world.buf.s     push  dword [esp+(dword.l * 4)]                                   ; Tell socket.send.buf how long the data is.
-                            push  dword [esp+(dword.l * 3)]                                   ; Point socket.send.buf to the data.
-                            call  socket.send.buf                                             ; Send the data.
+    send.to.world.buf.s:      push  eax                                                         ; Preserve buffered indicator.
 
-                            jmp   send.to.world.buf.sret                                      ; Resume loop.
+                              push  dword [g.data + gylf.connection.external.index]             ; Point socket.send to connection to notify.
+                              push  dword [esp+(dword.l * 5)]                                   ; Tell socket.send.buf how long the data is.
+                              push  dword [esp+(dword.l * 7)]                                   ; Point socket.send.buf to the data.
+                              call  socket.send.buf                                             ; Send the data.
+
+                              pop   eax                                                         ; Restore buffered indicator.
+
+                              jmp   send.to.world.buf.sret                                      ; Resume loop.
