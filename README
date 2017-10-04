@@ -1719,6 +1719,8 @@ Relevant data:
 
             text.data.index.local.data.area.created.message No references.
 
+            text.data.index.local.data.connection.notifier.message  No references,
+
             text.data.index.local.data.area.out.of.areas.message  No references.
 
             text.data.index.local.data.shutdown.message No references.
@@ -1757,7 +1759,11 @@ Relevant data:
 
             text.data.index.socket.data.egg.hatch.message No references.
 
+            text.data.index.socket.data.no.connection.available.message No references.
+
             text.data.index.socket.data.out.of.areas.message  No references.
+
+            text.data.index.socket.data.prompt.message  No references.
 
             text.data.index.socket.data.shutdown.message  No references.
 
