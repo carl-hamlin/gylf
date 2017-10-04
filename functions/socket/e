@@ -3,3 +3,4 @@
     section   .data
 
     %include  "./functions/socket/answer.active.socket/e"
+    %include  "./functions/socket/socket.errors/e"
