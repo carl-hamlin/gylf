@@ -1,6 +1,6 @@
-;=================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   get.external.data
+;   ./functions/get.external.data/t
 ;
 ;   This function reads data from external files.
 ;
@@ -8,6 +8,20 @@
 ;
 ;   Returns:        external.data.buffer - Read data.
 ;                   edx - Length of data read.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   byte.l                ./b
+;
+;   close.descriptor      ./functions/close.descriptor/t
+;
+;   external.data.buffer  ./functions/b
+;
+;   open.descriptor       ./functions/open.descriptor/t
+;
+;   read.descriptor       ./functions/read.descriptor/t
 ;
 
     get.external.data: push eax                             ; Preserve caller's eax register.

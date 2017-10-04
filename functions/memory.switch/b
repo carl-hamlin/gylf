@@ -1,8 +1,8 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/socket/communications/b
+;   ./functions/memory.switch/b
 ;
-;   This file contains all definitions pertinent to downstream communication functions.
+;   This file contains definitions for the memory.switch function.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
@@ -10,3 +10,5 @@
 ;
 ;   No external references.
 ;
+
+    %define sys.mem 45d ; Linux syscall memory management.
