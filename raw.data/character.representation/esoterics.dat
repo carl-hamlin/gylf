@@ -1,0 +1,54 @@
+;=================================================================================================================================================================================================
+;
+;   esoterics
+;
+;   This file contains data definitions for odds and ends from the IBM ASCII character set. Its future is uncertain.
+;
+
+char.latin.small.ligature.ae            db  "æ" ; latin small ligature ae
+char.latin.capital.ligature.ae          db  "Æ" ; latin capital ligature ae
+char.cent.sign                          db  "¢" ; cent sign
+char.pound.sign                         db  "£" ; pound sign
+char.yen.sign                           db  "¥" ; yen sign
+char.peseta.sign                        db  "₧" ; peseta sign
+char.latin.small.f.with.hook            db  "ƒ" ; latin small letter f with hook
+char.feminine.ordinal.indicator         db  "ª" ; feminine ordinal indicator
+char.masculine.ordinal.indicator        db  "º" ; masculine ordinal indicator
+char.inverted.question.mark             db  "¿" ; inverted question mark
+char.reversed.not.sign                  db  "⌐" ; reversed not sign
+char.not.sign                           db  "¬" ; not sign
+char.vulgar.fraction.one.half           db  "½" ; vulgar fraction one half
+char.vulgar.fraction.one.quarter        db  "¼" ; vulgar fraction one quarter
+char.inverted.exclamation.mark          db  "¡" ; inverted exclamation mark
+char.left.double.angle.quotation.mark   db  "«" ; left-pointing double angle quotation mark
+char.right.double.angle.quotation.mark  db  "»" ; right-pointing double angle quotation mark
+char.greek.small.letter.alpha           db  "α" ; greek small letter alpha
+char.latin.small.letter.sharp.s         db  "ß" ; latin small letter sharp s
+char.greek.capital.letter.gamma         db  "Γ" ; greek capital letter gamma
+char.greek.small.letter.pi              db  "π" ; greek small letter pi
+char.greek.capital.letter.sigma         db  "Σ" ; greek capital letter sigma
+char.greek.small.letter.sigma           db  "σ" ; greek small letter sigma
+char.micro.sign                         db  "µ" ; micro sign
+char.greek.small.letter.tau             db  "τ" ; greek small letter tau
+char.greek.capital.letter.phi           db  "Φ" ; greek capital letter phi
+char.greek.capital.letter.theta         db  "Θ" ; greek capital letter theta
+char.greek.capital.letter.omega         db  "Ω" ; greek capital letter omega
+char.greek.small.letter.delta           db  "δ" ; greek small letter delta
+char.infinity                           db  "∞" ; infinity
+char.greek.small.letter.phi             db  "φ" ; greek small letter phi
+char.greek.small.letter.epsilon         db  "ε" ; greek small letter epsilon
+char.intersection                       db  "∩" ; intersection
+char.identical.to                       db  "≡" ; identical to
+char.plus.minus.sign                    db  "±" ; plus-minus sign
+char.greater.than.or.equal.to           db  "≥" ; greater-than or equal to
+char.less.than.or.equal.to              db  "≤" ; less-than or equal to
+char.top.half.integral                  db  "⌠" ; top half integral
+char.bottom.half.integral               db  "⌡" ; bottom half integral
+char.division.sign                      db  "÷" ; division sign
+char.almost.equal.to                    db  "≈" ; almost equal to
+char.degree.sign                        db  "°" ; degree sign
+char.bullet.operator                    db  "∙" ; bullet operator
+char.middle.dot                         db  "·" ; middle dot
+char.square.root                        db  "√" ; square root
+char.superscript.latin.small.letter.n   db  "ⁿ" ; superscript latin small letter n
+char.superscript.two                    db  "²" ; superscript two
