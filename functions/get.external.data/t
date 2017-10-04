@@ -28,7 +28,8 @@
                         push  ebx                           ; Preserve caller's ebx register.
                         push  ecx                           ; Preserve caller's ecx register.
 
-                        call  open.descriptor               ; Associate a descriptor with the external data file.
+                        push ebx                            ; Point open.descriptor to external data file.
+                        call open.descriptor                ; Associate a descriptor with the external data file.
             
                         push  byte.l                        ; Tell read.descriptor the length of data to be read.
                         push  external.data.buffer          ; Point read.descriptor to buffer into which to read the length of the external data.

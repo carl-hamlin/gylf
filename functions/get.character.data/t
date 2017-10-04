@@ -31,6 +31,7 @@
 
     get.character.data: mov   ebx, esi                        ; Pointer to socket table.
                         add   ebx, connection.filename.index  ; Pointer to socket filename.
+                        push  ebx                             ; Point open.descriptor to the socket filename.
                         call  open.descriptor                 ; Associate a descriptor with the filename.
 
                         push  byte.l                          ; Tell read.descriptor the size of data to be read.

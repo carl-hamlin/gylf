@@ -10,21 +10,12 @@
 ;
 ;   command.look.l                            ./commands/look/d
 ;   command.look.s                            ./commands/look/d
-;   local.data.bad.area.id.indicator.message  ./commands/look/d
 ;   socket.data.command.look.help             ./commands/look/d
 ;   socket.data.command.look.help.l           ./commands/look/d
 ;
 ;   command.look                              ./commands/look/t
 ;
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-;
-;   Local Data
-;
-
-    local.data.bad.area.id.indicator.message    db  "Bad area id error.", 0Ah, 0Dh                                                                                ; Bad area id message.
-    local.data.bad.area.id.indicator.message.l  equ $-local.data.bad.area.id.indicator.message                                                                    ; Length of message.
-    
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Help Message

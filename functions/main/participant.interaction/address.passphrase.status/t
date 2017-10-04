@@ -53,6 +53,7 @@
 
                       					mov	  ebx, esi					                                ; ebx - Pointer to connection tables.
 					                      add	  ebx, connection.filename.index                    ; ebx - Pointer to file path associated with user credentials.
+					                      push  ebx                                               ; Point open.descriptor to user credential path.
                       					call	open.descriptor									                  ; Associate a descriptor with the user's credential file.
 
                       					push  byte.l									                          ; Tell read.descriptor the number of bytes to read.
