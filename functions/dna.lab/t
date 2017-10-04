@@ -1,12 +1,122 @@
-;=================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   dna.lab
+;   ./functions/dna.lab/t
 ;
 ;   This function combines the dna of two parent gylf to create a new gylf.
 ;
 ;   Assumptions:    Populated egg.data fields.
 ;
 ;   Returns:        Populated character fields.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   character.agility                           ./functions/b
+;
+;   character.base.color                        ./functions/b
+;
+;   character.base.color.number                 ./functions/b
+;
+;   character.base.fur.quality                  ./functions/b
+;
+;   character.base.fur.quality.number           ./functions/b
+;
+;   character.endurance                         ./functions/b
+;
+;   character.father.agility                    ./functions/b
+;
+;   character.father.base.color                 ./functions/b
+;
+;   character.father.base.fur.quality           ./functions/b
+;
+;   character.father.data                       ./functions/b
+;
+;   character.father.dna.l                      ./functions/b
+;
+;   character.father.endurance                  ./functions/b
+;
+;   character.father.secondary.color            ./functions/b
+;
+;   character.father.secondary.fur.quality      ./functions/b
+;
+;   character.father.strength                   ./functions/b
+;
+;   character.mother.agility                    ./functions/b
+;
+;   character.mother.base.color                 ./functions/b
+;
+;   character.mother.base.fur.quality           ./functions/b
+;
+;   character.mother.data                       ./functions/b
+;
+;   character.mother.dna.l                      ./functions/b
+;
+;   character.mother.endurance                  ./functions/b
+;
+;   character.mother.secondary.color            ./functions/b
+;
+;   character.mother.secondary.fur.quality      ./functions/b
+;
+;   character.mother.strength                   ./functions/b
+;
+;   character.secondary.color                   ./functions/b
+;
+;   character.secondary.color.number            ./functions/b
+;
+;   character.secondary.fur.quality             ./functions/b
+;
+;   character.secondary.fur.quality.number      ./functions/b
+;
+;   character.strength                          ./functions/b
+;
+;   child.attribute.computation.factor          ./functions/b
+;
+;   close.descriptor                            ./functions/close.descriptor/t
+;
+;   dna.lab.base.fur.quality                    ./functions/dna.lab/t
+;
+;   dna.lab.mother.base.color                   ./functions/dna.lab/t
+;
+;   dna.lab.mother.base.fur.quality             ./functions/dna.lab/t
+;
+;   dna.lab.mother.secondary.color              ./functions/dna.lab/t
+;
+;   dna.lab.mother.secondary.fur.quality        ./functions/dna.lab/t
+;
+;   dna.lab.mutation.base.color                 ./functions/dna.lab/t
+;
+;   dna.lab.mutation.base.color.fix             ./functions/dna.lab/t
+;
+;   dna.lab.mutation.base.fur.quality           ./functions/dna.lab/t
+;
+;   dna.lab.mutation.base.fur.quality.fix       ./functions/dna.lab/t
+;
+;   dna.lab.mutation.secondary.color            ./functions/dna.lab/t
+;
+;   dna.lab.mutation.secondary.color.fix        ./functions/dna.lab/t
+;
+;   dna.lab.mutation.secondary.fur.quality      ./functions/dna.lab/t
+;
+;   dna.lab.mutation.secondary.fur.quality.fix  ./functions/dna.lab/t
+;
+;   dna.lab.secondary.color                     ./functions/dna.lab/t
+;
+;   dna.lab.secondary.fur.quality               ./functions/dna.lab/t
+;
+;   dna.lab.strength                            ./functions/dna.lab/t
+;
+;   egg.father                                  ./commands/egg/b
+;
+;   egg.mother                                  ./commands/egg/b
+;
+;   open.descriptor                             ./functions/open.descriptor/t
+;
+;   read.descriptor                             ./functions/read.descriptor/t
+;
+;   get.ticks                                   ./functions/get.ticks/t
+;
+;   number.of.parents                           ./functions/b
 ;
 
     dna.lab:                                    mov  ebx, egg.father                                   ; ebx - pointer to filename for father.
