@@ -1,0 +1,8 @@
+;====================================================================================================================================================================================================
+;
+;   ./functions/bail/b
+;
+;   This file contains all definitions pertinent to the bail function.
+;
+
+    %define sys.exit.call 001h  ; 001h is the modifier for 080h that tells the kernel we're all done here and want to return control to Linux.
