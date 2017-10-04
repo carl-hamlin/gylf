@@ -1661,6 +1661,32 @@ Relevant data:
                                                 ./functions/socket/communications/send.to.player/t
                                                 ./functions/socket/communications/send.to.world/t
 
+
+        d   local.data.populate.connection.numbers.over.message ./functions/main/system.check/d
+                                                                ./functions/main/system.check/t
+
+            local.data.populate.connection.numbers.over.message.l ./functions/main/system.check/t
+
+            local.data.populating.connection.table.message  ./functions/main/system.check/d
+                                                            ./functions/main/system.check/t
+
+            local.data.populating.connection.table.message.l  ./functions/main/system.check/t
+
+            local.data.system.check.done        ./functions/main/system.check/d
+                                                ./functions/main/system.check/t
+
+            local.data.system.check.done.l      ./functions/main/system.check/t
+
+            local.data.system.check.message     ./functions/main/system.check/d
+                                                ./functions/main/system.check/t
+
+            local.data.system.check.message.l   ./functions/main/system.check/t
+
+            socket.numbers                      ./functions/main/system.check/d
+                                                ./functions/main/system.check/t
+
+            socket.numbers.l                    ./functions/main/system.check/t
+
     ----------------------------------------------------------------------------------------------
 
         ./functions/main      Contains code pertinent to the passage of time in the environment.
