@@ -27,12 +27,6 @@
 ;
 ;   socket.send.buf.splice      ./functions/socket.send/t
 ;
-;   socket.send.d               ./functions/socket.send/b
-;
-;   socket.send.l               ./functions/socket.send/b
-;
-;   socket.send.p               ./functions/socket.send/b
-;
 ;   sys.socket.call             ./functions/socket/b
 ;
 ;   sys.socket.send             ./functions/socket/socket.send/b
@@ -50,26 +44,21 @@
 
                             pop   ebp                                     ; Restore return address.
 
-    socket.send.buf.splice: push  0                                       ; Preserve flags.
-                            push  edx                                     ; Preserve length of the data string.
-                            push  ecx                                     ; Preserve pointer to the data to be sent.
-                            push  dword [esi+connection.descriptor.index] ; Preserve active descriptor.
-
-                            pop   dword [socket.send.d]                   ; Point send function to active descriptor.
-                            pop   dword [socket.send.p]                   ; Point send function to the data to be sent.
-                            pop   dword [socket.send.l]                   ; Tell send function how long the data is.
-                            pop   dword [socket.send.f]                   ; Set flags for send functions.
+    socket.send.buf.splice: push  0                                       ; Flags for send function.
+                            push  edx                                     ; Provide length of the data string to send function.
+                            push  ecx                                     ; Provide pointer to the data to be sent.
+                            push  dword [esi+connection.descriptor.index] ; Provide active descriptor.
 
                             mov   eax, sys.socket.call                    ; eax - Socket call indicator.
                             mov   ebx, sys.socket.send                    ; ebx - Send data out on a socket.
-                            mov   ecx, socket.send.d                      ; ecx - Pointer to arguments package for send function.
+                            mov   ecx, esp                                ; ecx - Pointer to arguments package for send function.
                             int   sys.system.call                         ; Send data out on a socket.
 
                             push  0                                       ; Ask memory.switch to free memory.
                             call  memory.switch                           ; Free memory.
 
                             push  ebp                                     ; Restore return address.
-                            ret                                           ; Return to caller.
+                            ret   (dword.l * 4)                           ; Return to caller.
 
     socket.send.buf:        pop   ebp                                     ; Preserve return address.
 

@@ -1399,11 +1399,6 @@ Relevant data:
         b   No defined symbols.
 
 
-        d   local.data.listen.error.message     ./functions/main/set.up.listener/d
-
-            local.data.listen.error.message.l   No references.
-
-
         t   set.up.listener                     ./functions/main/t
 
             socket.bind                         ./functions/main/set.up.listener/t
@@ -1708,7 +1703,6 @@ Relevant data:
 
       t   memory.switch                         ./functions/get.text.data/t
                                                 ./functions/main/text.init/t
-                                                ./functions/socket/recv.from.socket/t
                                                 ./functions/socket/socket.send/t
                                                 ./functions/write.console/t
 
@@ -2136,15 +2130,7 @@ Relevant data:
 
         /socket.send          Contains code that sends data out on a connected socket.
 
-        b   socket.send.d                       ./functions/socket/socket.send/t
-
-            socket.send.f                       ./functions/socket/socket.send/t
-
-            socket.send.l                       ./functions/socket/socket.send/t
-
-            socket.send.p                       ./functions/socket/socket.send/t
-
-            sys.socket.send                     ./functions/socket/socket.send/t
+        b   sys.socket.send                     ./functions/socket/socket.send/t
 
 
         t   socket.send                         ./commands/area/t
