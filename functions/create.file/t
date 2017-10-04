@@ -1,6 +1,6 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   create.file
+;   ./functions/create.file/t
 ;
 ;   This function calls the kernel to build a file on disk and associate a descriptor with it.
 ;
@@ -8,6 +8,16 @@
 ;
 ;   Returns:        eax = Descriptor associated with the new file.
 ;                   eax = Error indicator.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   sys.create.call ./functions/create.file/b
+;
+;   sys.read.write  ./functions/b
+;
+;   sys.system.call ./functions/b
 ;
 
     create.file: mov  eax, sys.create.call ; eax = Build a file on disk and associate a descriptor with it.
