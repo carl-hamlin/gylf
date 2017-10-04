@@ -1,12 +1,30 @@
-;=================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   clear.screen
+;   ./functions/clear.screen/t
 ;
 ;   This function remotely clears the screen and places the cursor in the upper left hand corner.
 ;
 ;   Assumptions:    None.
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   external.data.buffer            ./functions/b
+;
+;   external.data.clear.screen      ./functions/d
+;
+;   external.data.cursor.home       ./functions/d
+;
+;   get.external.data               ./functions/get.external.data/t
+;
+;   socket.data.send.buffer.pointer ./functions/socket/recv.from.socket/d
+;
+;   socket.data.send.buffer.l       ./functions/socket/recv.from.socket/d
+;
+;   socket.send                     ./functions/socket/socket.send/t
 ;
 
     clear.screen: mov  ebx, external.data.cursor.home                                ; ebx - Pointer to filename for cursor.home external data.
