@@ -63,34 +63,135 @@
     external.data.cursor.home             db  "./external.data/cursor.control/cursor.home", 00h
     external.data.clear.screen            db  "./external.data/cursor.control/clear.screen", 00h	
 
-    local.data.carriage.return            db  0Ah, 0Dh                                                                                                  ; Carriage return.
-    local.data.carriage.return.l          equ $-local.data.carriage.return                                                                              ; Length of message.
+    local.data.carriage.return            db  0Ah, 0Dh                                                                    ; Carriage return.
+    local.data.carriage.return.l          equ $-local.data.carriage.return                                                ; Length of message.
 
     pouch.declaration                     db  27h, 's pouch'
     pouch.declaration.l                   equ $-pouch.declaration
 
-    pouch.description                     db  'This is the interior of a marsupial pouch. It is warm and dry.', 0Ah, 0Dh
-    pouch.description.l                   equ $-pouch.description
+    pouch.description                     db  'This is the interior of a marsupial pouch. It is warm and dry.', 0Ah, 0Dh  ; Descriptive text for the interior of a pouch.
+    pouch.description.l                   equ $-pouch.description                                                         ; Length of description.
 
-	  socket.data.session.open.error		    db	"The server was unable to open a session for you. The administrator has been notified. Please try again " ; Storage for session open error message.
-  						                            db	"later.", 0Ah, 0Dh
-	  socket.data.session.open.error.l	    equ	$-socket.data.session.open.error											                                                    ; Length of session open error message.
+    command.table                         equ $                                                                           ; Placeholder for beginning of command table.
 
-	  socket.data.out.of.area.ids.message	  db	"System error: Out of area IDs. Disconnecting...", 0Ah, 0Dh								                                ; Message indicating the server has run out of area ids.
-	  socket.data.out.of.area.ids.message.l	equ	$-socket.data.out.of.area.ids.message											                                                ; Length of message.
-
-    command.table                         equ $                                                                                                         ; Placeholder for beginning of command table.
-
-                                          dd  command.ai.w                                                                                              ; Pointer to table entry for command 'ai'.
-                                          dd  command.area.w                                                                                            ; Pointer to table entry for command 'area'.
-                                          dd  command.broadcast.w                                                                                       ; Pointer to table entry for command 'broadcast'.
-                                          dd  command.dig.w                                                                                             ; Pointer to table entry for command 'dig'.
-                                          dd  command.egg.w                                                                                             ; Pointer to table entry for command 'egg'.
-                                          dd  command.gylf.w                                                                                            ; Pointer to table entry for command 'gylf'.
-                                          dd  command.help.w                                                                                            ; Pointer to table entry for command 'help'.
-                                          dd  command.logout.w                                                                                          ; Pointer to table entry for command 'logout'.
-                                          dd  command.look.w                                                                                            ; Pointer to table entry for command 'look'.
-                                          dd  command.shutdown.w                                                                                        ; Pointer to table entry for command 'shutdown'.
-                                          dd  command.think.w                                                                                           ; Pointer to table entry for command 'think'.
+                                          dd  command.ai.w                                                                ; Pointer to table entry for 'ai'.
+                                          dd  command.area.w                                                              ; Pointer to table entry for 'area'.
+                                          dd  command.broadcast.w                                                         ; Pointer to table entry for 'broadcast'.
+                                          dd  command.dig.w                                                               ; Pointer to table entry for 'dig'.
+                                          dd  command.egg.w                                                               ; Pointer to table entry for 'egg'.
+                                          dd  command.gylf.w                                                              ; Pointer to table entry for 'gylf'.
+                                          dd  command.help.w                                                              ; Pointer to table entry for 'help'.
+                                          dd  command.logout.w                                                            ; Pointer to table entry for 'logout'.
+                                          dd  command.look.w                                                              ; Pointer to table entry for 'look'.
+                                          dd  command.shutdown.w                                                          ; Pointer to table entry for 'shutdown'.
+                                          dd  command.think.w                                                             ; Pointer to table entry for 'think'.
 
     number.of.commands                    equ (($ - command.table) / dword.l)
+
+;================================================================================================================================================================================================
+;
+; Base Colors
+;
+;================================================================================================================================================================================================
+
+    character.base.color.table            equ $                                                                           ; Placeholder for base color table entry point.
+                                          db  05h, 'Amber'
+                                          db  06h, 'Auburn'
+                                          db  05h, 'Beige'
+                                          db  05h, 'Black'
+                                          db  05h, 'Brass'
+                                          db  06h, 'Bronze'
+                                          db  05h, 'Brown'
+                                          db  0Ch, 'Burnt Orange'
+                                          db  0Ch, 'Burnt Sienna'
+                                          db  0Bh, 'Burnt Umber'
+                                          db  08h, 'Cardinal'
+                                          db  09h, 'Champagne'
+                                          db  08h, 'Charcoal'
+                                          db  08h, 'Chestnut'
+                                          db  09h, 'Chocolate'
+                                          db  06h, 'Copper'
+                                          db  05h, 'Cream'
+                                          db  04h, 'Grey'
+                                          db  05h, 'Ivory'
+                                          db  05h, 'Khaki'
+                                          db  07h, 'Mustard'
+                                          db  05h, 'Ochre'
+                                          db  0Bh, 'Quartz Grey'
+                                          db  09h, 'Raw Umber'
+                                          db  06h, 'Russet'
+                                          db  04h, 'Rust'
+                                          db  0Bh, 'Sandy Brown'
+                                          db  05h, 'Sepia'
+                                          db  06h, 'Silver'
+                                          db  0Ah, 'Slate Grey'
+                                          db  03h, 'Tan'
+                                          db  05h, 'Tawny'
+                                          db  05h, 'Wheat'
+                                          db  05h, 'White'
+
+;================================================================================================================================================================================================
+;
+; Secondary Colors
+;
+;================================================================================================================================================================================================
+
+    character.secondary.color.table       equ $                                                                           ; Placeholder for secondary color table entry point.
+                                          db  05h, 'Amber'
+                                          db  06h, 'Auburn'
+                                          db  05h, 'Beige'
+                                          db  05h, 'Black'
+                                          db  05h, 'Brass'
+                                          db  06h, 'Bronze'
+                                          db  05h, 'Brown'
+                                          db  0Ch, 'Burnt Orange'
+                                          db  0Ch, 'Burnt Sienna'
+                                          db  0Bh, 'Burnt Umber'
+                                          db  08h, 'Cardinal'
+                                          db  09h, 'Champagne'
+                                          db  08h, 'Charcoal'
+                                          db  08h, 'Chestnut'
+                                          db  09h, 'Chocolate'
+                                          db  06h, 'Copper'
+                                          db  05h, 'Cream'
+                                          db  04h, 'Grey'
+                                          db  05h, 'Ivory'
+                                          db  05h, 'Khaki'
+                                          db  07h, 'Mustard'
+                                          db  05h, 'Ochre'
+                                          db  0Bh, 'Quartz Grey'
+                                          db  09h, 'Raw Umber'
+                                          db  06h, 'Russet'
+                                          db  04h, 'Rust'
+                                          db  0Bh, 'Sandy Brown'
+                                          db  05h, 'Sepia'
+                                          db  06h, 'Silver'
+                                          db  0Ah, 'Slate Grey'
+                                          db  03h, 'Tan'
+                                          db  05h, 'Tawny'
+                                          db  05h, 'Wheat'
+                                          db  05h, 'White'
+
+;================================================================================================================================================================================================
+;
+; Base Fur Qualities
+;
+;================================================================================================================================================================================================
+
+    character.base.fur.quality.table      equ $                                                                           ; Placeholder for base fur quality table entry point.
+                                          db  06h, 'glossy'
+                                          db  05h, 'matte'
+                                          db  05h, 'shiny'
+                                          db  05h, 'thick'
+
+;================================================================================================================================================================================================
+;
+; Secondary Fur Qualities
+;
+;================================================================================================================================================================================================
+
+    character.secondary.fur.quality.table equ $                                                                           ; Placeholder for secondary fur quality table entry point.
+                                          db  06h, 'glossy'
+                                          db  05h, 'matte'
+                                          db  05h, 'shiny'
+                                          db  05h, 'thick'
