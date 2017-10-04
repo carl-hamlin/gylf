@@ -1,0 +1,15 @@
+;================================================================================================================================================================================================
+
+    section   .data
+
+    %include  "./commands/ai/e"
+    %include  "./commands/area/e"
+    %include  "./commands/broadcast/e"
+    %include  "./commands/dig/e"
+    %include  "./commands/egg/e"
+    %include  "./commands/gylf/e"
+    %include  "./commands/help/e"
+    %include  "./commands/logout/e"
+    %include  "./commands/look/e"
+    %include  "./commands/shutdown/e"
+    %include  "./commands/think/e"
