@@ -1,8 +1,8 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/main/world.maintenance/d
+;   ./functions/memory.switch/b
 ;
-;   This file contains all data	pertinent to the maintain function.
+;   This file contains definitions for the memory.switch function.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
@@ -10,3 +10,5 @@
 ;
 ;   No external references.
 ;
+
+    %define sys.mem 45d ; Linux syscall memory management.
