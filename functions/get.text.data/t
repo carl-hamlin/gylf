@@ -13,7 +13,21 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   No external references.
+;   close.descriptor    ./functions/close.descriptor/t
+;
+;   dword.l             ./b
+;
+;   get.text.data.nz    ./functions/get.text.data/t
+;
+;   get.text.data.z     ./functions/get.text.data/t
+;
+;   memory.switch       ./functions/memory.switch/t
+;
+;   open.descriptor     ./functions/open.descriptor/t
+;
+;   read.descriptor     ./functions/read.descriptor/t
+;
+;   text.data.filename  ./functions/main/text.init/d
 ;
 
     get.text.data:    pop   ebp                 ; Preserve return address.

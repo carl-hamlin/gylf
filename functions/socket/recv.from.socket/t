@@ -4,7 +4,7 @@
 ;
 ;   This function receives data from a connected socket and places it in a specified buffer.
 ;
-;   Assumptions:    esi = Index to connection tables.
+;   Assumptions:    esi - Index to connection tables.
 ;
 ;   Returns:        None.
 ;
@@ -12,19 +12,21 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   buffer.1                            ./functions/b
+;   buffer.1                    ./functions/b
 ;
-;   buffer.1.l                          ./functions/b
+;   buffer.1.l                  ./functions/b
 ;
-;   buffer.strip                        ./functions/buffer.strip/t
+;   buffer.strip                ./functions/buffer.strip/t
 ;
-;   connection.descriptor.index         ./functions/main/system.check/b
+;   connection.descriptor.index ./functions/main/system.check/b
 ;
-;   sys.socket.call                     ./functions/socket/b
+;   dword.l                     ./b
 ;
-;   sys.socket.recv                     ./functions/socket/recv.from.socket/b
+;   sys.socket.call             ./functions/socket/b
 ;
-;   sys.system.call                     ./functions/b
+;   sys.socket.recv             ./functions/socket/recv.from.socket/b
+;
+;   sys.system.call             ./functions/b
 ;
 
     recv.from.socket: pop   ebp                                     ; Preserve return address.
@@ -35,11 +37,12 @@
                       push  dword [esi+connection.descriptor.index] ; Point receive function to active socket.
 
                       mov   eax, sys.socket.call                    ; eax - Socket call indicator.
-                      mov   ecx, esp                                ; ecx - Pointer to arguments package.
                       mov   ebx, sys.socket.recv                    ; ebx - Receive from socket.
+                      mov   ecx, esp                                ; ecx - Pointer to arguments package.
                       int   sys.system.call                         ; Receive from socket.
 
-                      mov   ebx, buffer.1                           ; ebx - pointer to received data
+                      push  eax                                     ; Tell buffer.strip how many characters to check.
+                      push  buffer.1                                ; Pointer buffer.strip to buffer.1.
                       call  buffer.strip                            ; Strip carriage returns from received data.
 
                       push  ebp                                     ; Restore return address.

@@ -23,6 +23,8 @@
 ;
 ;   dword.l                     ./b
 ;
+;   get.text.data               ./functions/get.text.data/t
+;
 ;   memory.switch               ./functions/memory.switch/t
 ;
 ;   socket.send.buf.splice      ./functions/socket.send/t

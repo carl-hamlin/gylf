@@ -4,7 +4,7 @@
 ;
 ;   This function calls the linux kernel and causes it to allocate the specified number of bytes of memory for temporary use.
 ;
-;   Assumptions:    esp+4 - Number of bytes to allocate.
+;   Assumptions:    esp+dword.l - Number of bytes to allocate.
 ;
 ;   Returns:        ebx - Pointer to new memory.
 ;                   eax - Error indicator.
@@ -14,6 +14,8 @@
 ;   Symbolic Cross-Referencing
 ;
 ;   break.pointer             ./functions/memory.switch/d
+;
+;   dword.l                   ./b
 ;
 ;   memory.switch.initialize  ./functions/memory.switch/t
 ;
@@ -30,13 +32,13 @@
                                 jz    memory.switch.initialize    ; No. Go initialize memory management.
 
     memory.switch.initialized:  mov   ebx, eax                    ; ebx - Pointer to end of OS-defined program memory.
-                                add   ebx, dword [esp+4]          ; ebx - Pointer to where we want memory to end.
+                                add   ebx, dword [esp+dword.l]    ; ebx - Pointer to where we want memory to end.
                                 mov   eax, sys.mem                ; eax - sys.mem: Linux syscall memory management.
                                 int   sys.system.call             ; Extend memory.
 
-                                sub   ebx, dword [esp+4]          ; ebx - Pointer to new memory.
+                                sub   ebx, dword [esp+dword.l]    ; ebx - Pointer to new memory.
 
-                                ret   4                           ; Return to caller.
+                                ret   dword.l                     ; Return to caller.
 
     memory.switch.initialize:   sub   ebx, ebx                    ; ebx - Indicator that we're initializing memory management.
                                 mov   eax, sys.mem                ; eax - sys.mem: Linux syscall memory management.
