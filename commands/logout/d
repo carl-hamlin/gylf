@@ -1,0 +1,30 @@
+;====================================================================================================================================================================================================
+;
+;   ./code/commands/logout/data
+;
+;   This file contains data pertinent to the logout command.
+;
+
+;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
+
+	  socket.data.command.logout.help       db  "  logout", 0Ah, 0Dh, 0Ah, 0Dh                                                                                ; Command logout help message.
+	                                        db  "  Syntax: logout", 0Ah, 0Dh, 0Ah, 0Dh
+	                                        db  "  Returns a character to AI mode and disconnects the performing participant from the server.", 0Ah, 0Dh
+	                                        db  0Ah, 0Dh, "> "
+	  socket.data.command.logout.help.l     equ $-socket.data.command.logout.help                                                                             ; Length of message.
+
+;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Command Table Entry
+;
+
+    command.logout.w	                    db	command.logout.l	                                                                                            ; Indicator of length of command 'logout'.
+    command.logout.s	                    db	'logout'		                                                                                                  ; Common command string for logging a participant out and returning control of their avatar to the artificial intelligence.
+    command.logout.l	                    equ	$-command.logout.s	                                                                                          ; Length of command 'logout'.
+    command.logout.p	                    dd	command.logout		                                                                                            ; Pointer to handler for command 'logout'.
+    command.logout.h                      dd  socket.data.command.logout.help                                                                               ; Pointer to help message for command 'logout'.
+    command.logout.h.l                    dd  socket.data.command.logout.help.l                                                                             ; Length of help message for command 'logout'.
+
