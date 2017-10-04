@@ -1,0 +1,53 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/main/participant.interaction/address.login.status/d
+;
+;   This file contains all data	pertinent to the address.login.status function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   local.data.bad.login.error      ./functions/main/participant.interaction/address.login.status/d
+;
+;   local.data.second.login.error   ./functions/main/participant.interaction/address.login.status/d
+;
+;   socket.data.bad.login.error     ./functions/main/participant.interaction/address.login.status/d
+;
+;   socket.data.login.message       ./functions/main/participant.interaction/address.login.status/d
+;
+;   socket.data.second.login.error  ./functions/main/participant.interaction/address.login.status/d
+;
+;   socket.data.welcome.message     ./functions/main/participant.interaction/address.login.status/d
+;
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Local Data
+;
+
+    local.data.bad.login.error        db  "A login attempt failed.", 0Ah, 0Dh                                                                           ; Login failure message.
+    local.data.bad.login.error.l      equ $-local.data.bad.login.error                                                                                  ; Length of message.
+
+    local.data.second.login.error     db  "Dupe login attempt. disconnecting.", 0Ah, 0Dh                                                                ; Dupe login message.
+    local.data.second.login.error.l   equ $-local.data.second.login.error                                                                               ; Length of message.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Outgoing Data
+;
+
+	  socket.data.bad.login.error		    db  "That name corresponds neither to a current participant or an egg. Please verify your credentials and try "   ; Bad login error.
+  						                        db  "again.", 0Ah, 0Dh
+	  socket.data.bad.login.error.l		  equ $-socket.data.bad.login.error												                                                          ; Length of message.
+
+	  socket.data.login.message		      db  "Gylf v0.0001", 0Ah, 0Dh, "Please enter your username: "                                                      ; Storage for login message.
+	  socket.data.login.message.l		    equ $-socket.data.login.message												                                                            ; Length of login message.
+
+	  socket.data.second.login.error		db  "That username is currently logged in. If this is you, disconnect from your current session and try again, "  ; Message indicating duped login.
+  						                        db  "please.", 0Ah, 0Dh
+	  socket.data.second.login.error.l  equ $-socket.data.second.login.error											                                                        ; Length of message.
+
+	  socket.data.welcome.message		    db  "Ah, a new player! Welcome.", 0Ah, 0Dh, "Please enter a string of characters to use as a passphrase: "			  ; Storage for new user welcome message.
+	  socket.data.welcome.message.l		  equ $-socket.data.welcome.message												                                                          ; Length of message.
+

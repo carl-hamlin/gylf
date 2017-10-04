@@ -1,0 +1,54 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/socket.send/t
+;
+;   This function sends data out on a connected socket.
+;
+;   Assumptions:    No register assumptions, however the arguments packaged referred to herein by the ecx register must be properly packed before calling. The package is structured as follows:
+;
+;                   dword    Descriptor associated with target socket.
+;                   dword    Pointer to data to be sent.
+;                   dword    Length of data to be sent.
+;                   dword    Communications semantics.
+;
+;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   memory.switch                       ./functions/allocate.memory/t
+;
+;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
+;
+;   sys.socket.call                     ./functions/socket/b
+;
+;   sys.socket.send                     ./functions/socket/socket.send/b
+;
+;   sys.system.call                     ./functions/b
+;
+
+    socket.send:  pop   edx                                     ; Preserve return address.
+
+                  push  dword [esi+connection.descriptor.index] ; Indicate active descriptor for sending.
+
+                  push  12                                      ; Tell memory.switch that we want 12 more bytes.
+                  call  memory.switch                           ; Allocate additional memory.
+                  
+                  mov   ebx, eax                                ; ebx - Pointer to new memory.
+
+                  pop   dword [ebx]                             ; Point send function to active socket descriptor.
+                  pop   dword [ebx+4]                           ; Point send function to message to be sent.
+                  pop   dword [ebx+8]                           ; Tell send function how long the message is.
+
+                  mov   eax, sys.socket.call                    ; eax - Socket call indicator.
+                  mov   ecx, ebx                                ; ecx - Pointer to arguments package for send function.
+                  mov   ebx, sys.socket.send                    ; ebx - Send data out on a socket.
+                  int   sys.system.call                         ; Send data out on a socket.
+
+                  push  0                                       ; Tell memory.switch to free up memory.
+                  call  memory.switch                           ; Free up extra memory requested earlier.
+
+                  push  edx                                     ; Restore return address.
+
+                  ret                                           ; Return to caller.

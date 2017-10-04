@@ -1,0 +1,25 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/socket.errors/d
+;
+;   This file contains all data	pertinent to the socket.error function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   local.data.accept.error.message ./functions/socket/socket.error/d
+;
+;   local.data.bind.error.message   ./functions/socket/socket.error/d
+;
+;   local.data.create.error.message ./functions/socket/socket.error/d
+;
+
+    local.data.create.error.message   db  "There was a problem creating the socket.", 0Ah, 0Dh                      ; Socket creation error message.
+    local.data.create.error.message.l equ $-local.data.create.error.message                                         ; Length of message.
+
+    local.data.bind.error.message     db  "There was a problem binding the socket to the specified port.", 0Ah, 0Dh ; Binding error message.
+    local.data.bind.error.message.l   equ $-local.data.bind.error.message                                           ; Length of message.
+
+    local.data.accept.error.message   db  "There was a problem accepting an incoming connection.", 0Ah, 0Dh         ; Accept error message.
+    local.data.accept.error.message.l equ $-local.data.accept.error.message                                         ; Length of message.

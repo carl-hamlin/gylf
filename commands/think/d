@@ -1,0 +1,42 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/think/d
+;
+;   This file contains data pertinent to the think command.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   command.think.l                   ./commands/think/d
+;   command.think.s                   ./commands/think/d
+;   socket.data.command.think.help    ./commands/think/d
+;   socket.data.command.think.help.l  ./commands/think/d
+;
+;   command.think                     ./commands/think/t
+;
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
+
+	  socket.data.command.think.help        db  "  think", 0Ah, 0Dh, 0Ah, 0Dh                                                                                 ; Command think help message.
+	                                        db  "  Syntax: think <quoted message> (participant)", 0Ah, 0Dh, 0Ah, 0Dh
+	                                        db  "  The think command minus the participant argument sends a message to the participant's current", 0Ah, 0Dh
+	                                        db  "  area. When the participant argument is included, Mental Projection is contested to send the", 0Ah, 0Dh
+	                                        db  "  message only to the named participant. If that contest fails, then the default behaviour occurs."
+	                                        db  0Ah, 0Dh, 0Ah, 0Dh, "> " 
+	  socket.data.command.think.help.l      equ $-socket.data.command.think.help                                                                              ; Length of message.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Command Table Entry
+;
+
+    command.think.w                       db  command.think.l                                                                                               ; Indicator of length of command 'think'.
+    command.think.s                       db  'think'                                                                                                       ; Common command string for communicating with other players.
+    command.think.l                       equ $-command.think.s                                                                                             ; Length of command 'think'.
+    command.think.p                       dd  command.think                                                                                                 ; Pointer to handler for command 'think'.
+    command.think.h                       dd  socket.data.command.think.help                                                                                ; Pointer to help message for command 'think'.
+    command.think.h.l                     dd  socket.data.command.think.help.l                                                                              ; Length of help message for command 'think'.
