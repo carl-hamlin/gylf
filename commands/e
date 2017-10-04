@@ -9,3 +9,4 @@
     %include  "./commands/egg/e"
     %include  "./commands/gylf/e"
     %include  "./commands/help/e"
+    %include  "./commands/logout/e"
