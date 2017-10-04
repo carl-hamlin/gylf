@@ -1725,9 +1725,17 @@ Relevant data:
 
             text.data.index.local.data.listen.error.message No references.
 
+            text.data.index.local.data.populate.connection.numbers.over.message No references.
+
+            text.data.index.local.data.populating.connection.table.message  No references.
+
             text.data.index.local.data.shutdown.message No references.
 
             text.data.index.local.data.smoked.sockets.message No references.
+
+            text.data.index.local.data.system.check.message No references.
+
+            text.data.index.local.data.system.check.done.message  No references.
 
             text.data.index.socket.data.area.created.message  No references.
 
