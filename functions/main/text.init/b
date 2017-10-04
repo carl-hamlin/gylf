@@ -49,6 +49,7 @@
     text.data.index.local.data.populating.connection.table.message      resd  00000001h                       ; Index to local message indicating that the connection table is being populated.
     text.data.index.local.data.populate.connection.numbers.over.message resd  00000001h                       ; Index to local message indicating a bounds error.
     text.data.index.local.data.system.check.done.message                resd  00000001h                       ; Index to local message indicating that system checks are finished.
+    text.data.index.local.data.active.socket.message                    resd  00000001h                       ; Index to local message indicating activity on a connected socket.
     text.data.index.socket.data.bad.command.error.message               resd  00000001h                       ; Index to remote message indicating that the participant has entered a bad
                                                                                                               ; command.
     text.data.index.socket.data.prompt.message                          resd  00000001h                       ; Index to remote message comprising a prompt for data.
