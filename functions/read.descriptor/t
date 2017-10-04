@@ -1,15 +1,32 @@
-;====================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
-;   read.descriptor
+;   ./functions/read.descriptor/t
 ;
 ;   This function reads data from a descriptor.
 ;
-;   Assumptions:    ebx = Descriptor from which to read.
-;                   ecx = Pointer to buffer into which to read the data.
-;                   edx = Number of bytes to be read.
+;   Assumptions:    Stack Frame:  dword - Descriptor from which to read.
+;                                 dword - Pointer to buffer into which to read the data.
+;                                 dword - Number of bytes to be read.
 ;
-;   Returns:        eax = Number of bytes read.
+;   Returns:        eax - Number of bytes read.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   sys.read.call   ./functions/read.descriptor/b
+;
+;   sys.system.call ./functions/b
+;
 
-    read.descriptor: mov  eax, sys.read.call ; eax = Read data from a descriptor.
-                     int  sys.system.call    ; Read data from a descriptor.
-                     ret                     ; Return to caller.
+    read.descriptor:  pop   ebp                 ; Preserve return address.
+
+                      mov   eax, sys.read.call  ; eax - Read data from a descriptor.
+                      pop   ebx                 ; ebx - Descriptor from which to read.
+                      pop   ecx                 ; ecx - Pointer to buffer into which to read.
+                      pop   edx                 ; edx - Number of bytes to read.
+                      int   sys.system.call     ; Read data from a descriptor.
+
+                      push  ebp                 ; Restore return address.
+
+                      ret                       ; Return to caller.

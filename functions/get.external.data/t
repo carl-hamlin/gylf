@@ -1,6 +1,6 @@
-;=================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   get.external.data
+;   ./functions/get.external.data/t
 ;
 ;   This function reads data from external files.
 ;
@@ -9,28 +9,44 @@
 ;   Returns:        external.data.buffer - Read data.
 ;                   edx - Length of data read.
 ;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   byte.l                ./b
+;
+;   close.descriptor      ./functions/close.descriptor/t
+;
+;   external.data.buffer  ./functions/b
+;
+;   open.descriptor       ./functions/open.descriptor/t
+;
+;   read.descriptor       ./functions/read.descriptor/t
+;
 
-    get.external.data: push eax                             ; Preserve caller's eax register.
-                       push ebx                             ; Preserve caller's ebx register.
-                       push ecx                             ; Preserve caller's ecx register.
+    get.external.data:  push  eax                           ; Preserve caller's eax register.
+                        push  ebx                           ; Preserve caller's ebx register.
+                        push  ecx                           ; Preserve caller's ecx register.
 
-                       call open.descriptor                 ; Associate a descriptor with the external data file.
+                        push ebx                            ; Point open.descriptor to external data file.
+                        call open.descriptor                ; Associate a descriptor with the external data file.
             
-                       mov  ebx, eax                        ; ebx - Descriptor associated with the file.
+                        push  byte.l                        ; Tell read.descriptor the length of data to be read.
+                        push  external.data.buffer          ; Point read.descriptor to buffer into which to read the length of the external data.
+                        push  eax                           ; Point read.descriptor to descriptor associated with the file.
+                        call  read.descriptor               ; Read the length of the external data.
 
-                       mov  ecx, external.data.buffer       ; ecx - pointer to buffer into which to read the length of the external data.
-                       mov  edx, byte.l                     ; edx - length of data to be read.
-                       call read.descriptor                 ; Read the length of the external data.
+                        push  dword [external.data.buffer]  ; Tell read.descriptor the length of external data.
+                        push  external.data.buffer          ; Point read.descriptor to buffer into which to read the escape sequence.
+                        push  ebx                           ; Point read.descriptor to descriptor associated with the file.
+                        call  read.descriptor               ; Read the external data into the external data buffer.
 
-                       mov  ecx, external.data.buffer       ; ecx - Pointer to buffer into which to read the escape sequence.
-                       sub  edx, edx                        ; edx - Prepared for length of external data.
-                       mov  dl, byte [external.data.buffer] ; edx - Length of external data.
-                       call read.descriptor                 ; Read the external data into the external data buffer.
+                        mov   edx, eax                      ; edx - Length of data read.
 
-                       call close.descriptor                ; Disassociate the descriptor.
+                        call  close.descriptor              ; Disassociate the descriptor.
 
-                       pop  ecx                             ; Restore caller's ecx register.
-                       pop  ebx                             ; Restore caller's ebx register.
-                       pop  eax                             ; Restore caller's eax register.
+                        pop   ecx                           ; Restore caller's ecx register.
+                        pop   ebx                           ; Restore caller's ebx register.
+                        pop   eax                           ; Restore caller's eax register.
 
-                       ret                                  ; Return to caller.
+                        ret                                 ; Return to caller.
