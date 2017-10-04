@@ -1729,6 +1729,8 @@ Relevant data:
 
             text.data.index.socket.data.bad.area.id.message No references.
 
+            text.data.index.socket.data.bad.command.error.message No references.
+
             text.data.index.socket.data.bad.help.command.error  No references.
 
             text.data.index.socket.data.command.ai.help No references.

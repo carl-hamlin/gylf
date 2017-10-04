@@ -2,6 +2,5 @@
 
     section   .data
 
-    %include  "./commands/e"
-    %include  "./functions/e"
+    %include  "./functions/write.bad.command.error/e"
 
