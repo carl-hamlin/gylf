@@ -43,7 +43,9 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.world.loop: push  edx                                           ; Tell send function how long the message is.
+    send.to.world.loop: push  ecx                                           ; Preserve number of sockets.
+
+                        push  edx                                           ; Tell send function how long the message is.
                         push  ebx                                           ; Point send function to the message.
                         call  socket.send                                   ; Send the message to the socket.
 
@@ -54,6 +56,9 @@
                         call  write.prompt                                  ; Send a prompt.
 
                         add   esi, connection.entry.size                    ; esi - Pointer to next descriptor in table.
+
+                        pop   ecx                                           ; Restore number of sockets.
+                        
                         loop  send.to.world.loop                            ; Go broadcast to the next socket in the table.
 
                         pop   esi                                           ; Restore caller's esi register.
