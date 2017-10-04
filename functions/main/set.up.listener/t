@@ -1,6 +1,6 @@
-;=================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   set.up.listener
+;   ./functions/main/set.up.listener/t
 ;
 ;   This function builds a socket, binds it to a specified hardware port, and tells it to listen for incoming connections. When it's finished, it displays a message to the admin indicating
 ;   that we're online and ready to go. If at any point an error occurs, the function displays an error message and passes control to the bail function so we can suspend execution and return
@@ -9,6 +9,35 @@
 ;   Assumptions:    None.
 ;
 ;   Returns:        None, although it is assumed that if the function returns at all, a listening socket will have been established.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   bind.socket                     ./functions/socket/bind.socket/t
+;
+;   create.socket                   ./functions/socket/create.socket/t
+;
+;   listen.socket                   ./functions/socket/listen.socket/t
+;
+;   local.data.listening.message    ./functions/d
+;
+;   local.data.listening.message.l  ./functions/d
+;
+;   socket.bind                     ./functions/main/set.up.listener/t
+;
+;   socket.bind.error               ./functions/socket/socket.errors/t
+;
+;   socket.create.error             ./functions/socket/socket.errors/t
+;
+;   socket.display.success          ./functions/main/set.up.listener/t
+;
+;   socket.listen                   ./functions/main/set.up.listener/t
+;
+;   socket.listen.error             ./functions/socket/socket.errors/t
+;
+;   write.descriptor                ./functions/write.descriptor/t
+;
 
     set.up.listener:        call create.socket                       ; Create the socket we're going to be using to listen for incoming connections.
 

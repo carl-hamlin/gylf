@@ -1,8 +1,16 @@
-;====================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
 ;   ./functions/aggregate.arguments/b
 ;
-;   This file contains all definitions pertinent to the aggregate.arguments funtcion.
+;   This file contains all definitions pertinent to the aggregate.arguments function.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   argument.01.size  ./functions/aggregate.arguments/b
+;
+;   arguments.packet  ./functions/aggregate.agruments/b
 ;
 
 	  arguments.packet	    equ	  $
