@@ -62,11 +62,11 @@
     text.data.index.local.data.active.socket.message                    resd  00000001h                       ; Index to local message indicating activity on a connected socket.
     text.data.index.local.data.create.error.message                     resd  00000001h                       ; Index to local message indicating a problem creating a socket.
     text.data.index.local.data.bind.error.message                       resd  00000001h                       ; Index to local message indicating a problem binding a socket.
-    text.data.index.local.data.accept.error.message                     resd  00000001h                       : Index to local message indicating a problem accepting an incoming socket.
+    text.data.index.local.data.accept.error.message                     resd  00000001h                       ; Index to local message indicating a problem accepting an incoming socket.
     text.data.index.socket.data.bad.command.error.message               resd  00000001h                       ; Index to remote message indicating that the participant has entered a bad
                                                                                                               ; command.
     text.data.index.socket.data.prompt.message                          resd  00000001h                       ; Index to remote message comprising a prompt for data.
-    text.data.index.local.data.carriage.return.message                  resd  00000001h                       : Index to local message comprising a carriage return.
+    text.data.index.local.data.carriage.return.message                  resd  00000001h                       ; Index to local message comprising a carriage return.
     text.data.index.local.data.listening.message                        resd  00000001h                       ; Index to local message indicating that a socket is listening.
     text.data.index.local.data.session.open.error.message               resd  00000001h                       ; Index to local message indicating a session open error.
     text.data.index.local.data.out.of.area.ids.message                  resd  00000001h                       ; Index to local message indicating that we're out of area ids.
