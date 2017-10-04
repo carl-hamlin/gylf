@@ -53,7 +53,7 @@ Relevant data:
           
           char.F                                No references.
           
-          qword.l                               ./commands/help/t
+          qword.l                               No references.
 
           dword.l                               ./commands/area/t
                                                 ./commands/help/t
@@ -2136,7 +2136,15 @@ Relevant data:
 
         /socket.send          Contains code that sends data out on a connected socket.
 
-        b   sys.socket.send                     ./functions/socket/socket.send/t
+        b   socket.send.d                       ./functions/socket/socket.send/t
+
+            socket.send.f                       ./functions/socket/socket.send/t
+
+            socket.send.l                       ./functions/socket/socket.send/t
+
+            socket.send.p                       ./functions/socket/socket.send/t
+
+            sys.socket.send                     ./functions/socket/socket.send/t
 
 
         t   socket.send                         ./commands/area/t
