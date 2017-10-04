@@ -1,6 +1,6 @@
-;=================================================================================================================================================================================================
+;================================================================================================================================================================================================
 ;
-;   set.single.attribute
+;   ./functions/set.single.attribute/t
 ;
 ;   This function sends a vt100 escape sequence to the remote terminal which changes a single attribute about the
 ;   printed text. Attributes can be found in the file "attribute.control.dat".
@@ -9,6 +9,18 @@
 ;                   esi = Pointer to descriptor associated with target connection.
 ;
 ;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   buffer.1                            ./functions/b
+;
+;   set.att.mod.1                       ./functions/set.single.attribute/d
+;
+;   set.att.mod.3                       ./functions/set.single.attribute/d
+;
+;   socket.send                         ./functions/socket/socket.send/t
 ;
 
     set.single.attribute: mov   esi, set.att.mod.1                                ; esi = Pointer to first portion of the set attribute escape sequence.
@@ -25,10 +37,9 @@
 
                           movsb                                                   ; Copy the last portion of the set attribute escape sequence to the data buffer.
 
-                          mov   eax, dword [esi]                                  ; eax = Descriptor associated with target connected socket.
-                          mov   dword [socket.data.send.socket.descriptor], eax   ; Point socket.send to the correct socket.
-                          mov   dword [socket.data.send.buffer.pointer], buffer.1 ; Point socket.send to the data buffer.
-                          mov   dword [socket.data.send.buffer.l], 004h           ; Provide the length of the buffer.
+                          push  4                                                 ; Provide the length of the buffer.
+                          push  buffer.1                                          ; Point socket.send to the data buffer.
+
                           call  socket.send                                       ; Send the string to the socket and change the attribute remotely.
 
                           ret                                                     ; Return to caller.
