@@ -44,12 +44,32 @@
     text.data.index.socket.data.command.think.help                      resd  00000001h                       ; Index to remote help message for the 'think' command.
     text.data.index.local.data.connection.notifier.message              resd  00000001h                       ; Index to local message indicating that a connection is being attempted.
     text.data.index.socket.data.no.connection.available.message         resd  00000001h                       ; Index to remote message letting a participant know that no sockets are available.
+    text.data.index.local.data.bad.login.error.message                  resd  00000001h                       ; Index to local message indicating that a login attempt failed.
+    text.data.index.local.data.second.login.error.message               resd  00000001h                       ; Index to local message indicating a participant is trying to login twice
+                                                                                                              ; simultaneously.
+    text.data.index.socket.data.bad.login.error.message                 resd  00000001h                       ; Index to remote message indicating that the provided credential is invalid.
+    text.data.index.socket.data.login.message                           resd  00000001h                       ; Index to remote message comprising a prompt for login credentials.
+    text.data.index.socket.data.second.login.message                    resd  00000001h                       ; Index to remote message indicating that the user is already logged in.
+    text.data.index.socket.data.welcome.message                         resd  00000001h                       ; Index to remote message welcoming new participants.
+    text.data.index.socket.data.bad.passphrase.message                  resd  00000001h                       ; Index to remote message indicating that a bad passphrase credential has been
+                                                                                                              ; passed.
+    text.data.index.socket.data.passphrase.message                      resd  00000001h                       ; Index to remote message requesting a passphrase.
     text.data.index.local.data.listen.error.message                     resd  00000001h                       ; Index to local message indicating that there was a problem setting up a listener.
     text.data.index.local.data.system.check.message                     resd  00000001h                       ; Index to local message indicating that system checks are about to begin.
     text.data.index.local.data.populating.connection.table.message      resd  00000001h                       ; Index to local message indicating that the connection table is being populated.
     text.data.index.local.data.populate.connection.numbers.over.message resd  00000001h                       ; Index to local message indicating a bounds error.
     text.data.index.local.data.system.check.done.message                resd  00000001h                       ; Index to local message indicating that system checks are finished.
+    text.data.index.local.data.active.socket.message                    resd  00000001h                       ; Index to local message indicating activity on a connected socket.
+    text.data.index.local.data.create.error.message                     resd  00000001h                       ; Index to local message indicating a problem creating a socket.
+    text.data.index.local.data.bind.error.message                       resd  00000001h                       ; Index to local message indicating a problem binding a socket.
+    text.data.index.local.data.accept.error.message                     resd  00000001h                       ; Index to local message indicating a problem accepting an incoming socket.
     text.data.index.socket.data.bad.command.error.message               resd  00000001h                       ; Index to remote message indicating that the participant has entered a bad
                                                                                                               ; command.
     text.data.index.socket.data.prompt.message                          resd  00000001h                       ; Index to remote message comprising a prompt for data.
+    text.data.index.local.data.carriage.return.message                  resd  00000001h                       ; Index to local message comprising a carriage return.
+    text.data.index.local.data.listening.message                        resd  00000001h                       ; Index to local message indicating that a socket is listening.
+    text.data.index.local.data.session.open.error.message               resd  00000001h                       ; Index to local message indicating a session open error.
+    text.data.index.local.data.out.of.area.ids.message                  resd  00000001h                       ; Index to local message indicating that we're out of area ids.
+    text.data.index.socket.data.session.open.error.message              resd  00000001h                       ; Index to remote message indicating a session open error.
+    text.data.index.socket.data.out.of.area.ids.message                 resd  00000001h                       ; Index to remote message indicating that we're out of area ids.
     text.data.index.num                                                 equ   (($-text.data.indices)/dword.l) ; Number of indices in table.

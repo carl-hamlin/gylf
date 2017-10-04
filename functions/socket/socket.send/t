@@ -35,8 +35,6 @@
                   push  12                                      ; Tell memory.switch that we want 12 more bytes.
                   call  memory.switch                           ; Allocate additional memory.
                   
-                  mov   ebx, eax                                ; ebx - Pointer to new memory.
-
                   pop   dword [ebx]                             ; Point send function to active socket descriptor.
                   pop   dword [ebx+4]                           ; Point send function to message to be sent.
                   pop   dword [ebx+8]                           ; Tell send function how long the message is.
