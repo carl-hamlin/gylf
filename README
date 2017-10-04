@@ -1719,9 +1719,11 @@ Relevant data:
 
             text.data.index.local.data.area.created.message No references.
 
+            text.data.index.local.data.area.out.of.areas.message  No references.
+
             text.data.index.local.data.connection.notifier.message  No references,
 
-            text.data.index.local.data.area.out.of.areas.message  No references.
+            text.data.index.local.data.listen.error.message No references.
 
             text.data.index.local.data.shutdown.message No references.
 

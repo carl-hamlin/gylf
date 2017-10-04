@@ -39,6 +39,7 @@
     text.data.index.socket.data.command.think.help              resd  00000001h                       ; Index to remote help message for the 'think' command.
     text.data.index.local.data.connection.notifier.message      resd  00000001h                       ; Index to local message indicating that a connection is being attempted.
     text.data.index.socket.data.no.connection.available.message resd  00000001h                       ; Index to remote message letting a participant know that no sockets are available.
+    text.data.index.local.data.listen.error.message             resd  00000001h                       ; Index to local message indicating that there was a problem setting up a listener.
     text.data.index.socket.data.bad.command.error.message       resd  00000001h                       ; Index to remote message indicating that the participant has entered a bad command.
     text.data.index.socket.data.prompt.message                  resd  00000001h                       ; Index to remote message comprising a prompt for data.
     text.data.index.num                                         equ   (($-text.data.indices)/dword.l) ; Number of indices in table.
