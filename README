@@ -1725,6 +1725,8 @@ Relevant data:
 
             text.data.index.local.data.bad.area.id.indicator.message  No references.
 
+            text.data.index.local.data.bad.login.error.message  No references.
+
             text.data.index.local.data.bind.error.message No references.
 
             text.data.index.local.data.connection.notifier.message  No references,
@@ -1736,6 +1738,8 @@ Relevant data:
             text.data.index.local.data.populate.connection.numbers.over.message No references.
 
             text.data.index.local.data.populating.connection.table.message  No references.
+
+            text.data.index.local.data.second.login.error.message No references.
 
             text.data.index.local.data.shutdown.message No references.
 
@@ -1752,6 +1756,8 @@ Relevant data:
             text.data.index.socket.data.bad.command.error.message No references.
 
             text.data.index.socket.data.bad.help.command.error  No references.
+
+            text.data.index.socket.data.bad.login.error.message No references.
 
             text.data.index.socket.data.command.ai.help No references.
 
@@ -1777,13 +1783,19 @@ Relevant data:
 
             text.data.index.socket.data.egg.hatch.message No references.
 
+            text.data.index.socket.data.login.message No references.
+
             text.data.index.socket.data.no.connection.available.message No references.
 
             text.data.index.socket.data.out.of.areas.message  No references.
 
             text.data.index.socket.data.prompt.message  No references.
 
+            text.data.index.socket.data.second.login.message  No references.
+
             text.data.index.socket.data.shutdown.message  No references.
+
+            text.data.index.socket.data.welcome.message No references.
 
 
         d   local.data.populating.textual.data.indices.message  ./functions/main/text.init/d

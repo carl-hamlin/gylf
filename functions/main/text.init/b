@@ -44,6 +44,13 @@
     text.data.index.socket.data.command.think.help                      resd  00000001h                       ; Index to remote help message for the 'think' command.
     text.data.index.local.data.connection.notifier.message              resd  00000001h                       ; Index to local message indicating that a connection is being attempted.
     text.data.index.socket.data.no.connection.available.message         resd  00000001h                       ; Index to remote message letting a participant know that no sockets are available.
+    text.data.index.local.data.bad.login.error.message                  resd  00000001h                       ; Index to local message indicating that a login attempt failed.
+    text.data.index.local.data.second.login.error.message               resd  00000001h                       ; Index to local message indicating a participant is trying to login twice
+                                                                                                              ; simultaneously.
+    text.data.index.socket.data.bad.login.error.message                 resd  00000001h                       ; Index to remote message indicating that the provided credential is invalid.
+    text.data.index.socket.data.login.message                           resd  00000001h                       ; Index to remote message comprising a prompt for login credentials.
+    text.data.index.socket.data.second.login.message                    resd  00000001h                       ; Index to remote message indicating that the user is already logged in.
+    text.data.index.socket.data.welcome.message                         resd  00000001h                       ; Index to remote message welcoming new participants.
     text.data.index.local.data.listen.error.message                     resd  00000001h                       ; Index to local message indicating that there was a problem setting up a listener.
     text.data.index.local.data.system.check.message                     resd  00000001h                       ; Index to local message indicating that system checks are about to begin.
     text.data.index.local.data.populating.connection.table.message      resd  00000001h                       ; Index to local message indicating that the connection table is being populated.
