@@ -1,6 +1,6 @@
 ;================================================================================================================================================================================================
 ;
-;   socket.errors
+;   ./functions/socket/socket.errors/t
 ;
 ;   These code snippets setup error messages to be displayed to the admin in the event that something goes awry while building the listening socket. If any of these are ever executed, we're
 ;   beyond the point of no return, so each of them passes control to the bail function after displaying their unique message.
