@@ -1,0 +1,79 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/think/t
+;
+;   This function is used by participants and admins to communicate with one another.
+;
+;   Syntax:
+;   think (target)
+;
+;       Broadcasts a message to the performing participant's local area, unless a target is specified, in which case it attempts to isolate a message to the target using a contest against
+;       Mental Projection, with failure resulting in overflow to the participant's local area.
+;
+;   Assumptions:     eax - Length of received data.
+;                    esi - Pointer to descriptor associated with target socket.
+;
+;   Returns:         None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   argument.02.location                            ./functions/aggregate.arguments/b
+;
+;   argument.02.size                                ./functions/aggregate.arguments/b
+;
+;   arguments.num                                   ./functions/aggregate.arguments/b
+;
+;   command.think.arguments                         ./commands/think/t
+;
+;   command.think.help.msg                          ./commands/think/t
+;
+;   command.think.untargetted                       ./commands/think/t
+;
+;   connection.descriptor.index                     ./functions/main.system.check/b
+;
+;   send.to.area                                    ./functions/socket/communications/send.to.area/t
+;
+;   send.to.participant                             ./functions/socket/communications/send.to.participant/t
+;
+;   socket.send                                     ./functions/socket/socket.send/t
+;
+;   text.data.index.socket.data.command.think.help  ./functions/main/text.init/b
+;
+;   translate.name.to.socket.number                 ./functions/translate.name.to.socket.number/t
+;
+
+    command.think:              cmp   dword [arguments.num], 00000000h                                        ; Do we have arguments?
+                                jnz   command.think.arguments                                                 ; Yes. Go take care of them.
+
+    command.think.help.msg:     push  dword [text.data.index.socket.data.command.think.help]                  ; Point send function to message indicating that the command was bad.
+                                call  socket.send                                                             ; Tell the user that the command doesn't have a current analogue.
+
+                                ret                                                                           ; Return to caller.
+
+    command.think.arguments:    cmp   dword [arguments.num], 00000001h                                        ; Was there only one argument?
+                                jz    command.think.untargetted                                               ; Yes - send the message to the entire area.
+
+                                ; Skill evaluation goes here - failure shunts to command.think.untargetted.
+
+                                push  dword [argument.02.size]                                                ; Size of provided name.
+                                push  dword [argument.02.location]                                            ; Pointer to provided name.
+                                call  translate.name.to.socket.number                                         ; eax - Error, or pointer to socket associated with the given name.
+
+                                cmp   eax, 0FFFFh
+                                jz    command.think.help.msg
+
+                                ; TODO - Populate fields for send.to.participant. Still need to figure out areas.
+
+                                push  esi
+                                push  eax
+                                call  send.to.participant                                                     ; Send message to targetted participant.
+
+                                ret                                                                           ; Return to caller.
+
+    command.think.untargetted:  push  eax                                                                     ; Length of command string minus terminator(s).
+                                push  dword [argument.02.size]                                                ; Length of command string minus terminator(s) and command.
+                                call  send.to.area                                                            ; Broadcast the message.
+
+                                ret                                                                           ; Return to caller.

@@ -1,0 +1,74 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/egg/e
+;
+;   This file defines the external textual data associated with the command 'egg'.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Outgoing Data
+;
+
+    socket.data.egg.hatch.message.l               dd  socket.data.egg.hatch.message.end                                                                     ; Pointer to length of message.
+	  socket.data.egg.hatch.message			            db  "The egg is beginning to hatch!", 0Ah, 0Dh										                                        ; Message indicating an egg is
+	                                                                                                                                                          ; hatching in the local vicinity.
+	  socket.data.egg.hatch.message.end             equ $-socket.data.egg.hatch.message							                                                          ; Length of message.
+
+    socket.data.egg.item.description.l            dd  socket.data.egg.item.description.end                                                                  ; Pointer to length of message.
+    socket.data.egg.item.description              db  "This is an egg. It is warm and spotted, with a leathery shell.", 0Ah, 0Dh, 0Ah, 0Dh, "> "            ; Message which serves as a standard
+                                                                                                                                                            ; description of the exterior of an
+                                                                                                                                                            ; egg.
+    socket.data.egg.item.description.end          equ $-socket.data.egg.item.description                                                                    ; Length of message.
+
+    socket.data.egg.item.name.l                   dd  socket.data.egg.item.name.end                                                                         ; Pointer to length of message.
+    socket.data.egg.item.name                     db  "egg"                                                                                                 ; Item name for eggs.
+    socket.data.egg.item.name.end                 equ $-socket.data.egg.item.name                                                                           ; Length of message.
+    
+    socket.data.egg.area.description.l            dd  socket.data.egg.area.description.end                                                                  ; Pointer to length of message.
+    socket.data.egg.area.description              db  "This is the interior of your egg. No light penetrates here, and you lack knowledge of the", 0Ah, 0Dh ; Message which serves as a standard
+                                                  db  "concept of sight. The fluid in which you currently rest is warm, and pulsates mildy.", 0Ah, 0Dh      ; description of the interior of an
+                                                  db  0Ah, 0Dh, "> "                                                                                        ; egg.
+
+    socket.data.egg.area.description.end          equ $-socket.data.egg.area.description                                                                    ; Length of message.
+
+    socket.data.egg.area.name.l                   dd  socket.data.egg.area.name.end                                                                         ; Pointer to length of message.
+    socket.data.egg.area.name                     db  "Inside Your Egg"                                                                                     ; Area name for eggs.
+    socket.data.egg.area.name.end                 equ $-socket.data.egg.area.name                                                                           ; Length of message.
+
+    socket.data.command.egg.bad.name.message.l    dd  socket.data.command.egg.bad.name.message.end                                                          ; Pointer to length of message.
+    socket.data.command.egg.bad.name.message      db  "Oop. Looks like there isn't a gylf alive at the moment with that name.", 0Ah, 0Dh, 0Ah, 0Dh, "> "    ; Message indicating that the
+                                                                                                                                                            ; performer has asked to fertilize a
+                                                                                                                                                            ; gylf who does not yet exist.
+    socket.data.command.egg.bad.name.message.end  equ $-socket.data.command.egg.bad.name.message                                                            ; Length of message.
+
+    socket.data.command.egg.f.notif.message.l     dd  socket.data.command.egg.f.notif.message.end                                                           ; Pointer to length of message.
+    socket.data.command.egg.f.notif.message       db  "Congratulations! Your egg has been fertilized by divine intervention!", 0Ah, 0Dh, 0Ah, 0Dh, "> "     ; Message indicating that the target
+                                                                                                                                                            ; gylf's egg has been fertilized by
+                                                                                                                                                            ; divine intervention.
+    socket.data.command.egg.f.notif.message.end   equ $-socket.data.command.egg.f.notif.message                                                             ; Length of message.
+
+    socket.data.command.egg.a.f.message.l         dd  socket.data.command.egg.a.f.message.end                                                               ; Pointer to length of message.
+    socket.data.command.egg.a.f.message           db  "Oop. Looks like someone got there before you - that egg has already been fertilized."                ; Message indicating that the egg
+                                                  db  0Ah, 0Dh, 0Ah, 0Dh, "> "                                                                              ; the performer is attempting to
+                                                                                                                                                            ; fertilize has already been
+                                                                                                                                                            ; fertilized.
+    socket.data.command.egg.a.f.message.end       equ $-socket.data.command.egg.a.f.message                                                                 ; Length of message.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Help Message
+;
+
+	  socket.data.command.egg.help.l                dd  socket.data.command.egg.help.end                                                                      ; Pointer to length of message.
+	  socket.data.command.egg.help                  db  "  egg", 0Ah, 0Dh, 0Ah, 0Dh                                                                           ; Command egg help message.
+	                                                db  "  Syntax: egg <name of known participant>", 0Ah, 0Dh, 0Ah, 0Dh
+	                                                db  "  The egg command takes as an argument the name of a known participant, then uses the DNA Lab to", 0Ah, 0Dh
+	                                                db  "  implant that participant with an egg using the performing participant as the secondary parent", 0Ah, 0Dh
+	                                                db  "  and the implantee as the primary parent.", 0Ah, 0Dh, 0Ah, 0Dh
+	                                                db  "  The implantee is informed of it's new expecting status, and is also given the name of the", 0Ah, 0Dh
+	                                                db  "  implanter. This command is, of course, restricted to administrator privileged participants."
+	                                                db  0Ah, 0Dh, 0Ah, 0Dh, "> "
+	  socket.data.command.egg.help.end              equ $-socket.data.command.egg.help                                                                        ; Length of message.
