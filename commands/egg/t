@@ -87,18 +87,16 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.egg.admin:              push  g.data                                                                      ; Tell get.participant.data to get gylf data.
-                                    push  dword [argument.01.location]                                                ; Point get.participant.data to the name of the target for fertilization.
-                                    push  dword [argument.01.size]                                                    ; Tell get.participant.data how long the name is.
-                                    call  get.participant.data                                                        ; Store gylf data at g.data.
+    command.egg.admin:              push  dword [argument.01.location]                                                ; Point get.participant.data.by.name to the name of the target for 
+                                                                                                                      ; fertilization.
+                                    call  get.participant.data.by.name                                                ; Store gylf data at g.data.
 
                                     or    eax, eax                                                                    ; Did we successfully open the target participant data file?
                                     jns   command.egg.bad.name                                                        ; No. Go tell the performing user that the target name is bad.
 
-                                    push  e.data                                                                      ; Tell get.participant.data to get egg data.
-                                    push  dword [argument.01.location]                                                ; Point get.egg.data to the name of the target for fertilization.
-                                    push  dword [argument.01.size]                                                    ; Tell get.egg.data how long the name is.
-                                    call  get.participant.data                                                        ; Store egg data at e.data.
+                                    push  dword [argument.01.location]                                                ; Point get.participant.data.by.name to the name of the target for
+                                                                                                                      ; fertilization.
+                                    call  get.participant.data.by.name                                                ; Store egg data at e.data.
 
                                     or    eax, eax                                                                    ; Did we successfully open the egg data file?
                                     js    command.egg.already.fertilized                                              ; Yes. Looks like the target participant is already carrying a fertilized
