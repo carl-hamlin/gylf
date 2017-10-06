@@ -102,15 +102,15 @@
                                     js    command.egg.already.fertilized                                              ; Yes. Looks like the target participant is already carrying a fertilized
                                                                                                                       ; egg, but hasn't named it yet. Abort.
 
-                                    push  dword [text.data.index.socket.data.egg.item.description]                    ; Point get.new.item.id to the standard egg item description.
-                                    push  dword [text.data.index.socket.data.egg.item.name]                           ; Point get.new.item.id to the standard egg item name.
-                                    push  e.data + egg.item.id                                                        ; Point get.new.item.id to the new egg item id.
-                                    call  get.new.item.id                                                             ; Populate the new egg's item id.
+                                    push  item.filename                                                               ; Point get.new.id to items.
+                                    call  get.new.id                                                                  ; eax - New item id.
 
-                                    push  dword [text.data.index.socket.data.egg.area.description]                    ; Point get.new.area.id to the standard egg area description.
-                                    push  dword [text.data.index.socket.data.egg.area.name]                           ; Point get.new.area.id to the standard egg area name.
-                                    push  e.data + egg.area.id                                                        ; Point get.new.area.id to the new egg area id.
-                                    call  get.new.area.id                                                             ; Populate the new egg's area id.
+                                    mov   [e.data + egg.item.id], eax                                                 ; Populate egg with new item id.
+
+                                    push  area.filename                                                               ; Point get.new.id to areas.
+                                    call  get.new.id                                                                  ; eax - New area id.
+
+                                    mov   [e.data + egg.area.id], eax                                                 ; Populate egg with new area id.
 
                                     mov   ecx, dword [argument.01.size]                                               ; ecx - Length of target participant's name.
                                     mov   byte [e.data + egg.e.parent.name.l], cl                                     ; Populate new egg's egg parent name length field.
