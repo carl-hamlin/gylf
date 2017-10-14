@@ -129,12 +129,9 @@
                                     repnz movsb                                                                       ; Populate the new egg's fertilizing parent field.
 
                                     push  egg.filename                                                                ; Point assemble.path to the egg directory.
-                                    push  egg.filename.l                                                              ; Tell assemble.path how long the egg directory string is.
-                                    push  dword [argument.01.location]                                                ; Point assemble.path to the name of the target for fertilization.
-                                    push  dword [argument.01.size]                                                    ; Tell assemble.path how long the name is.
-                                    call  assemble.path                                                               ; Assemble the path to the egg data file at buffer.1.
+                                    call  get.new.id                                                                  ; Assemble the path to the egg data file at buffer.1.
 
-                                    push  buffer.1                                                                    ; Point create.file to assembled path to egg data file.
+                                    push  egg.filename                                                                ; Point create.file to assembled path to egg data file.
                                     call  create.file                                                                 ; Create the new egg data file.
 
                                     push  eax                                                                         ; Preserve descriptor associated with new egg data file.
