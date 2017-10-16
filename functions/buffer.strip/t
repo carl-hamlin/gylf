@@ -1,4 +1,4 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/buffer.strip/t
 ;
@@ -40,7 +40,7 @@
                   cmp   byte [ebx], 0Dh ; Is the current character 0Dh?
                   jz    strip.char      ; Yes. Go strip it.
 
-                  inc   ebx             ; esi = Pointer to the next element in the data buffer.
+                  inc   ebx             ; esi - Pointer to the next element in the data buffer.
                   loop  strip.loop      ; Go check the next element.
 
                   jmp   strip.done      ; All finished here. Go return to caller.
@@ -48,8 +48,8 @@
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     strip.char:   mov   byte [ebx], 00h ; Strip the current character.
-                  inc   ebx             ; esi = Pointer to the next element in the data buffer.
-                  dec   eax             ; eax = Revised number of characters.
+                  inc   ebx             ; esi - Pointer to the next element in the data buffer.
+                  dec   eax             ; eax - Revised number of characters.
                   loop  strip.loop      ; Go check the next element.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -12,3 +12,4 @@
 ;
 
     %define sys.create.call 008h  ; 008h is the modifier for 080h that tells the kernel we want to create a new file instead of opening an existing one.
+    %define sys.rw.r.r      666o  ; 666o creates files that the owner can read and write, and everyone else can read.

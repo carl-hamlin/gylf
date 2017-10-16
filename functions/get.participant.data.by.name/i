@@ -1,5 +1,6 @@
 ;==================================================================================================================================================================================================================
 
     section   .text
-    
-    %include  "./functions/socket/communications/send.to.player/t"
+
+    %include  "./functions/get.participant.data.by.name/s"
+    %include  "./functions/get.participant.data.by.name/t"

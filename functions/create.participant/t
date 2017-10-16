@@ -1,8 +1,8 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/create.character/t
+;   ./functions/create.participant/t
 ;
-;   This function builds out character data on the basis of the DNA sequences provided by the parents of the egg.
+;   This function builds out participant data on the basis of the DNA sequences provided by the parents of the egg.
 ;
 ;   Assumptions:    eax - Descriptor associated with an egg file.
 ;                   esi - Index to socket entry.
@@ -45,45 +45,19 @@
 ;
 ;   build.pouch.increment.byte                          ./functions/create.character/t
 ;
-;   character.data                                      ./functions/b
-;
-;   character.data.l                                    ./functions/b
-;
-;   character.father                                    ./functions/b
-;
-;   character.father.l                                  ./functions/b
-;
-;   character.mother                                    ./functions/b
-;
-;   character.mother.l                                  ./functions/b
-;
-;   character.pouch                                     ./functions/b
-;
 ;   clean.socket                                        ./functions/clean.socket/t
 ;
 ;   close.descriptor                                    ./functions/close.descriptor/t
 ;
 ;   connection.filename.index                           ./functions/main/system.check/b
 ;
+;   create.character.gylf.command                       No references.
+;
 ;   create.file                                         ./functions/create.file/t
 ;
 ;   dna.lab                                             ./functions/dna.lab/t
 ;
 ;   dword.l                                             ./b
-;
-;   egg.area.id                                         ./commands/egg/d
-;
-;   egg.data                                            ./commands/egg/b
-;
-;   egg.data.l                                          ./commands/egg/b
-;
-;   egg.father                                          ./commands/egg/b
-;
-;   egg.father.l                                        ./commands/egg/b
-;
-;   egg.mother                                          ./commands/egg/b
-;
-;   egg.mother.l                                        ./commands/egg/b
 ;
 ;   id.size                                             ./functions/b
 ;
@@ -113,30 +87,30 @@
 ;
 
 
-    create.character:                   push  egg.data.l                                      ; Tell read.descriptor the length of egg data.
-                                        push  egg.data                                        ; Point read.descriptor to buffer in which to store the egg data.
-                                        push  eax                                             ; Point read.descriptor to descriptor associated with the egg file.
-                                        call  read.descriptor                                 ; Read the egg data into the buffer.
+    create.character:                   push  egg_size                                                    ; Tell read.descriptor the length of egg data.
+                                        push  e.data                                                      ; Point read.descriptor to buffer in which to store the egg data.
+                                        push  eax                                                         ; Point read.descriptor to descriptor associated with the egg file.
+                                        call  read.descriptor                                             ; Read the egg data into the buffer.
 
-                                        call  close.descriptor                                ; Close the egg file.
+                                        call  close.descriptor                                            ; Close the egg file.
 
-                                        push  esi                                                         ; Preserve index to socket entry.
+    create.character.gylf.command:      push  esi                                                         ; Preserve index to socket entry.
 
                                         sub   ecx, ecx                                                    ; ecx - Prepared for loading.
-                                        mov   cl, byte [egg.mother.l]                                     ; ecx - length of mother's name.
-                                        mov   esi, egg.mother                                             ; esi - pointer to mother's name.
-                                        mov   edi, character.mother                                       ; edi - pointer to entry for mother's name on character template.
+                                        mov   cl, byte [e.data+egg.e.parent.name.l]                       ; ecx - length of laying parent's name.
+                                        mov   esi, e.data+egg.e.parent.name                               ; esi - pointer to laying parent's name.
+                                        mov   edi, g.data+gylf.e.parent.name                              ; edi - pointer to entry for laying parent's name on character template.
 
-                                        mov   byte [character.mother.l], cl                               ; Store length of mother's name in character template.
-                                        repnz movsb                                                       ; Store mother's name in character template.
+                                        mov   byte [g.data+gylf.e.parent.name.l], cl                      ; Store length of laying parent's name in character template.
+                                        repnz movsb                                                       ; Store laying parent's name in character template.
                 
                                         sub   ecx, ecx                                                    ; ecx - Prepared for loading.
-                                        mov   cl, byte [egg.father.l]                                     ; ecx - length of father's name.
-                                        mov   esi, egg.father                                             ; esi - pointer to father's name.
-                                        mov   edi, character.father                                       ; edi - pointer to entry for father's name on character template.
+                                        mov   cl, byte [e.data+egg.i.parent.name.l]                       ; ecx - length of inseminating parent's name.
+                                        mov   esi, e.data+egg.i.parent.name                               ; esi - pointer to inseminating parent's name.
+                                        mov   edi, g.data+gylf.i.parent.name                              ; edi - pointer to entry for inseminating parent's name on character template.
 
-                                        mov   byte [character.father.l], cl                               ; Store length of father's name in character template.
-                                        repnz movsb                                                       ; Store father's name in character template.
+                                        mov   byte [g.data+gylf.i.parent.name.l], cl                      ; Store length of inseminating parent's name in character template.
+                                        repnz movsb                                                       ; Store inseminating parent's name in character template.
 
                                         pop   esi                                                         ; Restore index to socket entry.
 
@@ -204,7 +178,7 @@
                 
                                         pop   esi                                                         ; esi - Index to socket entry.
 
-                                        mov   dword [character.pouch], ebp                                ; Store area id for character pouch.
+                                        mov   dword [g.data+gylf.pouch], ebp                              ; Store area id for character pouch.
                                         push  area.filename                                               ; Point create.file to file to be created for character pouch.
                                         call  create.file                                                 ; Create the file.
 
@@ -214,7 +188,7 @@
 
                                         push  esi                                                         ; Preserve index to socket entry.
 
-                                        add   esi, connection.filename.index                              ; esi - pointer to socket filename.
+                                        mov   esi, a.p.data + gylf.name                                   ; esi - pointer to socket filename.
                                         mov   edi, area.name                                              ; edi - pointer to buffer for area name.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -251,7 +225,7 @@
                                         call  dna.lab                                                     ; Figure up the DNA for the new Gylf.
 
                                         mov   ebx, esi                                                    ; ebx - Index to socket table.
-                                        push  connection.filename.index                                   ; Point create.file to filename associated with active connection.
+                                        push  a.p.data + gylf.name                                        ; Point create.file to filename associated with active connection.
                                         call  create.file                                                 ; Smoke the egg and create a new file.
 
                                         push  eax                                                         ; Preserve descriptor associated with new file.
@@ -273,8 +247,8 @@
                                         push  eax                                                         ; Preserve descriptor associated with new file.
 
                                         push  eax                                                         ; Point write function to new file.
-                                        push  character.data                                              ; Pointer to generated character data.
-                                        push  character.data.l                                            ; Length of character data.
+                                        push  g.data                                                      ; Pointer to generated character data.
+                                        push  gylf_size                                                   ; Length of character data.
                                         call  write.descriptor                                            ; Write character data to new file.
 
                                         pop   eax                                                         ; Restore descriptor associated with new file.

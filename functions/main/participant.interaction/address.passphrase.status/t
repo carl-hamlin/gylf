@@ -1,4 +1,4 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/main/participant.interaction/address.passphrase.status/t
 ;
@@ -6,7 +6,7 @@
 ;   compares the data to the stored passphrase for the user. If they match, then the user's status is set to 'active' and control is passed back to the caller. If they do not match, then the
 ;   user is informed of the situation and disconnected.
 ;
-;   Assumptions:    esi = Pointer to socket table.
+;   Assumptions:    esi - Pointer to socket table.
 ;
 ;   Returns:        None.
 ;
