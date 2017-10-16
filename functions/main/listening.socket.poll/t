@@ -18,16 +18,6 @@
 ;
 ;   close.descriptor                                            ./functions/close.descriptor/t
 ;
-;   connection.descriptor.index                                 ./functions/main/system.check/b
-;
-;   connection.entry.size                                       ./functions/main/system.check/b
-;
-;   connection.status.index                                     ./functions/main/system.check/b
-;
-;   connection.table                                            ./functions/main/system.check/b
-;
-;   dead.socket                                                 ./functions/main/b
-;
 ;   greet                                                       ./functions/main/listening.socket.poll/t
 ;
 ;   greet.add.socket                                            ./functions/main/listening.socket.poll/t
@@ -56,10 +46,6 @@
 ;
 ;   sys.poll.timeout                                            ./functions/main/b
 ;
-;   text.data.index.local.data.connection.notifier.message      ./functions/main/text.init/b
-;
-;   text.data.index.socket.data.no.connection.available.message ./functions/main/text.init/b
-;
 ;   text.data.index.local.data.accept.error.message             ./functions/main/text.init/b
 ;
 ;   text.data.index.local.data.connection.notifier.message      ./functions/main/text.init/b
@@ -87,32 +73,24 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    greet:                      mov   esi, connection.table                                               ; esi - Index to connection tables.
-                                mov   ecx, socket.number                                                  ; ecx - Number of entries.
+    greet:                      mov   dword [a.p.data + gylf.connection.descriptor.index], eax            ; Position login connection descriptor for greeting.
+    
+                                mov   dword [login.handle], eax                                           ; Store login connection.
+                                mov   byte [login.status], login.status                                   ; Indicate that the connection is in login status.
 
-    greet.loop                  cmp   dword [esi+connection.descriptor.index], dead.socket                ; Is the current entry occupied?
-                                jz    greet.add.socket                                                    ; No! Let's occupy it!
+                                push  login.filename                                                      ; Point open.descriptor to login storage.
+                                call  open.descriptor                                                     ; Prepare login storage to receive a new entry.
 
-                                add   esi, connection.entry.size                                          ; Yes. esi - pointer to the next entry.
+                                push  eax                                                                 ; Login storage descriptor stored for closing.
 
-                                loop  greet.loop                                                          ; Go check the next entry.
+                                push  eax                                                                 ; Point write.descriptor to login storage.
+                                push  03h                                                                 ; Tell write.descriptor that we'll be writing 3 bytes.
+                                push  login.handle                                                        ; Point write.descriptor to the login data.
+                                call  write.descriptor                                                    ; Write the login data to login storage.
 
-                                push  eax                                                                 ; Preserve descriptor associated with new connection. If we're here, the table is full
-                                                                                                          ; up and there's no room for a new person. Bad news, bud.
+                                call  close.descriptor                                                    ; Put login storage away for now.
 
-                                push  dword [text.data.index.socket.data.no.connection.available.message] ; Point send function to message indicating that no connection is available.
-                                call  socket.send                                                         ; Tell the poor bastard we're all full up.
-
-                                pop   ebx                                                                 ; ebx - Descriptor associated with new connection.
-
-                                call  close.descriptor                                                    ; Drop the new connection.
-
-                                ret                                                                       ; Return to caller.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    greet.add.socket:           mov   dword [esi+connection.descriptor.index], eax                        ; Store descriptor as a new entry.
-                                mov   byte [esi+connection.status.index], login.status                    ; Store status as a new entry.
+                                mov   eax, dword [login.handle]                                           ; eax - Descriptor correcponding to current connection.
 
                                 call  clear.screen                                                        ; Clear that fellow's screen.
 
