@@ -34,6 +34,7 @@
     %include  "./functions/get.ticks/i"
     %include  "./functions/get.text.data/i"
     %include  "./functions/memory.switch/i"
+    %include  "./functions/notify.in.absentia/i"
     %include  "./functions/open.descriptor/i"
     %include  "./functions/poll.descriptor/i"
     %include  "./functions/read.descriptor/i"
