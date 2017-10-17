@@ -1,11 +1,11 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/main/participant.interaction/address.active.status/t
 ;
 ;   This function performs further processing on data submitted by a socket with status 'active'.
 ;
-;   Assumptions:    eax = Length of received data.
-;                   esi = Pointer to descriptor associated with target socket.
+;   Assumptions:    eax - Length of received data.
+;                   esi - Pointer to descriptor associated with target socket.
 ;
 ;   Returns:        None.
 ;

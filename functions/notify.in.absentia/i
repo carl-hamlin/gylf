@@ -2,4 +2,5 @@
 
     section   .text
 
-    %include  "./functions/get.character.data/t"
+    %include  "./functions/notify.in.absentia/s"
+    %include  "./functions/notify.in.absentia/t"
