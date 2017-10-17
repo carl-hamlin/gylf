@@ -1,10 +1,10 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/main/participant.interaction/address.set.passphrase.status/t
 ;
 ;   This function handles data received from a socket in 'setting passphrase' status.
 ;
-;   Assumptions:    esi = Pointer to descriptor associated with target socket
+;   Assumptions:    esi - Pointer to descriptor associated with target socket
 ;
 ;   Returns:        None.
 ;
@@ -39,6 +39,7 @@
 
 					                        mov	  ebx, esi						                              ; ebx - Pointer to socket entry.
 					                        add	  ebx, connection.filename.index				            ; ebx - Pointer to file path for user's credential file.
+					                        push  ebx                                               ; Point open.descriptor to credential file.
 					                        call	open.descriptor						                        ; Associate a descriptor with the file.
 
 					                        mov	  eax, dword [esi+connection.descriptor.index]      ; eax - Descriptor associated with egg file.
