@@ -1,7 +1,6 @@
 ;==================================================================================================================================================================================================================
 
     section   .text
-    
-    %include  "./functions/socket/communications/send.to.area/i"
-    %include  "./functions/socket/communications/send.to.participant/i"
-    %include  "./functions/socket/communications/send.to.world/i"
+
+    %include  "./functions/socket/communications/send.to.participant/s"
+    %include  "./functions/socket/communications/send.to.participant/t"

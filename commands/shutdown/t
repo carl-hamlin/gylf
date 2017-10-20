@@ -41,32 +41,52 @@
 ;   write.console                                     ./functions/write.console/t
 ;
 
-    command.shutdown:       call  check.admin                                               ; See if the calling socket is controlled by an admin.
-                            jc    command.shutdown.admin                                    ; If so, go run the shutdown sequence. Otherwise...
+    command.shutdown:         call  check.admin                                               ; See if the calling socket is controlled by an admin.
+                              jc    command.shutdown.admin                                    ; If so, go run the shutdown sequence. Otherwise...
 
-                            call  write.bad.command.error                                   ; Tell the non-admin user that there is no such command.
+                              call  write.bad.command.error                                   ; Tell the non-admin user that there is no such command.
 
-                            ret                                                             ; Return to caller.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    command.shutdown.admin: push  dword [text.data.index.socket.data.shutdown.message]      ; Point send.to.world to socket shutdown message.
-                            call  send.to.world                                             ; Send the shutdown message to the world.
-
-                            push  dword [text.data.index.local.data.shutdown.message]       ; Point write.console to message indicating that shutdown has been initiated from within the
-                                                                                            ; environment.
-                            call  write.console                                             ; Let the admin know that shutdown has been initiated from within the environment.
-
-                            mov   esi, connection.table                                     ; esi - Pointer to command table.
-                            mov   ecx, socket.number                                        ; ecx - Number of sockets to smoke.
+                              ret                                                             ; Return to caller.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.shutdown.loop:  call  clean.socket                                              ; Smoke the current socket.
-                            add   esi, connection.entry.size                                ; esi - Pointer to next victim.
-                            loop  command.shutdown.loop                                     ; Go smoke the rest of the sockets.
+    command.shutdown.admin:   push  dword [text.data.index.socket.data.shutdown.message]      ; Point send.to.world to socket shutdown message.
+                              call  send.to.world                                             ; Send the shutdown message to the world.
 
-                            push  dword [text.data.index.local.data.smoked.sockets.message] ; Point write.console to message indicating all sockets have been smoked.
-                            call  write.console                                             ; Let the admin know all sockets have been smoked.
+                              push  dword [text.data.index.local.data.shutdown.message]       ; Point write.console to message indicating that shutdown has been initiated from within the
+                                                                                              ; environment.
+                              call  write.console                                             ; Let the admin know that shutdown has been initiated from within the environment.
 
-                            jmp   bail                                                      ; Unload from memory and return control to Linux.
+                              mov   ebp, esp                                                  ; Prepare to store a shutdown packet. We're never coming back from this, so we can afford to screw
+                                                                                              ; up the stack.
+                              add   ebp, shutdown.packet                                      ; ebp - Pointer to shutdown packet.
+
+                              mov   esi, ebp                                                  ; esi - Almost prepared to be used as a pointer.
+                              sub   esi, dword.l                                              ; esi - Prepared to be used as a pointer.
+
+                              mov   dword [ebp + shutdown.packet.egg], egg.filename           ; Store egg.filename in the shutdown packet.
+                              mov   dword [ebp + shutdown.packet.gylf], gylf.filename         ; Store gylf.filename in the shutdown packet.
+                              mov   dword [ebp + shutdown.packet.ghost], ghost.filename       ; Store ghost filename in the shutdown packet.
+
+    command.shutdown.id.prep: mov   dword [ebp + shutdown.packet.id], 00000000h               ; Set the first id to be cleaned.
+                              add   esi, dword.l                                              ; esi - Pointer to next set of sockets to be cleaned.
+
+                              cmp   dword [esi], 00000000h                                    ; Does esi point to a filename pointer?
+                              jz    command.shutdown.bail                                     ; No. We're done here. Go bail out.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.shutdown.loop:    push  dword [esi]                                               ; Point clean.socket to the correct collection of sockets.
+                              push  dword [ebp + shutdown.packet.id]                          ; Point clean.socket to the socket in need of cleaning.
+                              call  clean.socket                                              ; Smoke the current socket.
+
+                              or    eax, eax                                                  ; Did we run out of sockets in this collection?
+                              js    command.shutdown.id.prep                                  ; Yes. Go perpare the next collection.
+
+                              inc   dword [ebp + shutdown.packet.id]                          ; Point to next socket to be cleaned.
+                              jmp   command.shutdown.loop                                     ; Go clean the next socket.
+                                
+    command.shutdown.bail:    push  dword [text.data.index.local.data.smoked.sockets.message] ; Point write.console to message indicating all sockets have been smoked.
+                              call  write.console                                             ; Let the admin know all sockets have been smoked.
+
+                              jmp   bail                                                      ; Unload from memory and return control to Linux.
