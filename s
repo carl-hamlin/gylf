@@ -52,6 +52,7 @@
       .e.parent.endurance                 resb        01h ; Byte indicator for participant endurance.
       .e.parent.agility                   resb        01h ; Byte indicator for participant agility.
 
+      .connection.area.id.index           resd  00000001h ; Placeholder for connection area id.
       .connection.descriptor.index        resd  00000001h ; Placeholder for connection descriptor.
       .connection.external.index          resd  00000001h ; Placeholder for external descriptor.
       .connection.status.index            resb        01h ; Placeholder for status.
