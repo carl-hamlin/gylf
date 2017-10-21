@@ -93,7 +93,8 @@
                                         cmp   eax, sys.poll.in                                        ; Does the socket have incoming data?
                                         jnz   active.socket.poll.eggs.inactive                        ; No. Don't do anything more with it.
 
-                                        call  answer.active.socket                                    ; Yes. Let's go process it.
+                                        push  socket.data.active.socket.descriptor                    ; Yes. Point answer.active.socket to the active socket.
+                                        call  answer.active.socket                                    ; Go process the data on the socket.
 
     active.socket.poll.eggs.inactive:   inc   edx                                                     ; edx - Next socket to poll.
                                         jmp   active.socket.poll.eggs                                 ; Go poll the next socket.
@@ -131,7 +132,8 @@
                                         cmp   eax, sys.poll.in                                        ; Does the socket have incoming data?
                                         jnz   active.socket.poll.gylf.inactive                        ; No. Don't do anything more with it.
 
-                                        call  answer.active.socket                                    ; Yes. Let's go process it.
+                                        push  socket.data.active.socket.descriptor                    ; Yes. Point answer.active.socket to the active socket.
+                                        call  answer.active.socket                                    ; Go process the data on the socket.
 
     active.socket.poll.gylf.inactive:   inc   edx                                                     ; edx - Next socket to poll.
                                         jmp   active.socket.poll.gylf                                 ; Go poll the next socket.
@@ -168,7 +170,8 @@
                                         cmp   eax, sys.poll.in                                        ; Does the socket have incoming data?
                                         jnz   active.socket.poll.ghosts.inactive                      ; No. Don't do anything more with it.
 
-                                        call  answer.active.socket                                    ; Yes. Let's go process it.
+                                        push  socket.data.active.socket.descriptor                    ; Yes. Point answer.active.socket to the active socket.
+                                        call  answer.active.socket                                    ; Go process the data on the socket.
 
     active.socket.poll.ghosts.inactive: inc   edx                                                     ; edx - Next socket to poll.
                                         jmp   active.socket.poll.gylf                                 ; Go poll the next socket.
