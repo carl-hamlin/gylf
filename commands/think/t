@@ -2,7 +2,7 @@
 ;
 ;   ./commands/think/t
 ;
-;   This function is used by players and admins to communicate with one another.
+;   This function is used by participants and admins to communicate with one another.
 ;
 ;   Syntax:
 ;   think (target)
@@ -19,35 +19,60 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.think.l           ./commands/think/d
+;   argument.02.location                            ./functions/aggregate.arguments/b
 ;
-;   command.think.untargetted ./commands/think/t
+;   argument.02.size                                ./functions/aggregate.arguments/b
 ;
-;   buffer.1                  ./functions/b
+;   arguments.num                                   ./functions/aggregate.arguments/b
 ;
-;   send.to.area              ./functions/socket/communications/send.to.area/t
+;   command.think.arguments                         ./commands/think/t
 ;
-;   send.to.player            ./functions/socket/communications/send.to.player/t
+;   command.think.help.msg                          ./commands/think/t
+;
+;   command.think.untargetted                       ./commands/think/t
+;
+;   connection.descriptor.index                     ./functions/main.system.check/b
+;
+;   send.to.area                                    ./functions/socket/communications/send.to.area/t
+;
+;   send.to.participant                             ./functions/socket/communications/send.to.participant/t
+;
+;   socket.send                                     ./functions/socket/socket.send/t
+;
+;   text.data.index.socket.data.command.think.help  ./functions/main/text.init/b
 ;
 
-    command.think:             mov  edx, eax                  ; edx - Length of command string minus terminator(s).
-                               sub  edx, command.think.l      ; edx - Length of command string minus terminator(s) and command.
+    command.think:              cmp   dword [arguments.num], 00000000h                                        ; Do we have arguments?
+                                jnz   command.think.arguments                                                 ; Yes. Go take care of them.
 
-                               mov  ebx, buffer.1             ; ecx - Pointer to received command string.
-                               add  ebx, command.think.l      ; ecx - Pointer to first argument for command.
+    command.think.help.msg:     push  dword [text.data.index.socket.data.command.think.help]                  ; Point send function to message indicating that the command was bad.
+                                call  socket.send                                                             ; Tell the user that the command doesn't have a current analogue.
 
-                               inc  ebx                       ; ebx - Pointer to first byte of first argument.
-                               cmp  byte [ebx], '"'           ; Is the first byte a quotation mark?
-                               jz   command.think.untargetted ; Yes - send the message to the entire area.
+                                ret                                                                           ; Return to caller.
 
-                               ; Skill evaluation goes here - failure shunts to command.think.untargetted.
-                                
-                               ; TODO - Figure out how to get a valid connection ID from user input to send in eax.
+    command.think.arguments:    cmp   dword [arguments.num], 00000001h                                        ; Was there only one argument?
+                                jz    command.think.untargetted                                               ; Yes - send the message to the entire area.
 
-                               call send.to.player            ; Send message to targetted player.
+                                ; Skill evaluation goes here - failure shunts to command.think.untargetted.
 
-                               ret                            ; Return to caller.
+                                push  dword [argument.02.location]                                            ; Pointer to provided name.
+                                call  get.participant.data.by.name                                            ; g.data - Participant data corresponding to the provided name.
 
-    command.think.untargetted: call send.to.area              ; Broadcast the message.
+                                cmp   eax, 0FFFFFFFFh                                                         ; Did we get a participant?
+                                jz    command.think.help.msg                                                  ; No. Go broadcast an error to the performer.
 
-                               ret                            ; Return to caller.
+                                ; TODO - Populate fields for send.to.participant. Still need to figure out areas.
+
+                                push  dword [g.data + gylf.connection.descriptor.index]                       ; Point send.to.participant to the target connection.
+                                push  dword [a.p.data + gylf.connection.area.id.index]                        ; Point send.to.participant.to the performer's area.
+                                push  dword [argument.03.location]                                            ; Point send.to.participant to the message to be broadcast.
+                                push  dword [argument.03.size]                                                ; Tell send.to.participant how long the message is.
+                                call  send.to.participant                                                     ; Send message to targetted participant.
+
+                                ret                                                                           ; Return to caller.
+
+    command.think.untargetted:  push  eax                                                                     ; Length of command string minus terminator(s).
+                                push  dword [argument.02.size]                                                ; Length of command string minus terminator(s) and command.
+                                call  send.to.area                                                            ; Broadcast the message.
+
+                                ret                                                                           ; Return to caller.
