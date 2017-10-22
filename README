@@ -65,6 +65,7 @@ Relevant data:
                                                 ./functions/main/system.check/t
                                                 ./functions/main/text.init/b
                                                 ./functions/main/text.init/t
+                                                ./functions/open.descriptor/t
                                                 ./functions/print.socket.number/t
 
           word.l                                ./commands/area/t
@@ -1203,12 +1204,6 @@ Relevant data:
       /dna.lab                Contains code which combines the DNA left behind on an egg by both
                               parents to create an entirely new gylf.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   dna.lab                               ./functions/create.character/t
 
           dna.lab.agility                       ./functions/dna.lab/t
@@ -1264,24 +1259,12 @@ Relevant data:
       /get.character.data     Contains code which populates the character data in memory from file
                               for the character on the current socket.
 
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
-
       t   get.character.data                    ./functions/check.admin/t
 
     ----------------------------------------------------------------------------------------------
 
       /get.external.data      Contains code which reads data that exists outside the codebase and
                               memory.
-
-      b   No defined symbols.
-
-
-      d   No defined symbols.
-
 
       t   get.external.data                     ./functions/clear.screen/t
 
@@ -1291,9 +1274,6 @@ Relevant data:
                               environment was booted.
 
       b   sys.get.ticks                         ./functions/get.ticks/t
-
-
-      d   No defined symbols.
 
 
       t   get.ticks                             ./functions/dna.lab/t

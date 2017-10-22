@@ -158,7 +158,7 @@
 
     build.pouch:                        push  esi                                             ; Preserve index to socket entry.
 
-                                        mov   ebx, area.filename                              ; ebx - Pointer to filename for area to be created.
+                                        push  area.filename                                   ; Point open.descriptor to filename for area to be created.
                                         call  open.descriptor                                 ; Attempt to associate a descriptor with the file.
 
                                         or    eax, eax                                        ; Were we able to associate a descriptor with the filename?

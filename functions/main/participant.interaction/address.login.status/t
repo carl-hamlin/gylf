@@ -80,8 +80,7 @@
 
     address.login.status: call  recv.from.socket                                                        ; Get the data from the socket.
 
-                          call  check.login                                                             ; Make sure this character isn't already logged in.
-                          jnc   not.logged.in                                                           ; If the character isn't already logged in, proceed to the login code.
+                          ; * Replace check.login *
 
                           push  socket.data.second.login.error.l                                        ; Store length of message for send function.
                           push  socket.data.second.login.error                                          ; Point send function to message indicating that the login was bad.
@@ -112,6 +111,7 @@
                           pop   esi                                                                     ; Restore index to connection table.
 
                           mov   ebp, eax                                                                ; ebp - Size of received data.
+                          push  ebx                                                                     ; Point open.descriptor to socket filename.
                           call  open.descriptor                                                         ; See if there's already a user credentials file named after the data received. If so,
                                                                                                         ; associate a descriptor with it.
 
