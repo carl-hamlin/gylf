@@ -72,8 +72,7 @@
 
     address.login.status: call  recv.from.socket                                                        ; Get the data from the socket.
 
-                          call  check.login                                                             ; Make sure this character isn't already logged in.
-                          jnc   not.logged.in                                                           ; If the character isn't already logged in, proceed to the login code.
+                          ; * Replace check.login *
 
                           push  dword [text.data.index.socket.data.second.login.message]                ; Point send function to message indicating that the login was bad.
                           call  socket.send                                                             ; Tell the petitioner that they're trying to log in a second time.
@@ -111,9 +110,6 @@
                                                                                                         ; sign. We can use the sign to determine which. If eax is signed, we'll treat this like a
                                                                                                         ; bad login. If it isn't, then we'll treat it as an good one.
                           js    bad.login                                                               ; Couldn't generate a descriptor for the file. Bad login.
-
-                          call  create.lock.file                                                        ; Assume the character is about to be logged and create a lock file to prevent multiple
-                                                                                                        ; instances.
 
                           push  new.char.sig.l                                                          ; Tell read.descriptor the size of data to be read.
                           push  new.char.sig.buffer                                                     ; Point read.descriptor to buffer into which to read data.
