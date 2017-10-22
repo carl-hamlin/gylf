@@ -25,7 +25,6 @@
     %include  "./functions/close.descriptor/i"
     %include  "./functions/create.character/i"
     %include  "./functions/create.file/i"
-    %include  "./functions/create.lock.file/i"
     %include  "./functions/dna.lab/i"
     %include  "./functions/get.character.data/i"
     %include  "./functions/get.external.data/i"

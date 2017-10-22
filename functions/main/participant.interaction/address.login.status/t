@@ -121,9 +121,6 @@
                                                                                                         ; bad login. If it isn't, then we'll treat it as an good one.
                           js    bad.login                                                               ; Couldn't generate a descriptor for the file. Bad login.
 
-                          call  create.lock.file                                                        ; Assume the character is about to be logged and create a lock file to prevent multiple
-                                                                                                        ; instances.
-
                           mov   ebx, eax                                                                ; ebx - descriptor associated with character data.
                           mov   ecx, new.char.sig.buffer                                                ; ecx - Pointer to buffer into which to read data.
                           mov   edx, new.char.sig.l                                                     ; edx - Size of data to be read.
