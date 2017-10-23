@@ -56,11 +56,9 @@
     egg.filename                          db  './e/00000000', 00h                                                         ; Egg filename storage.
     gylf.filename                         db  './p/00000000', 00h                                                         ; Gylf filename storage.
     ghost.filename                        db  './g/00000000', 00h                                                         ; Ghost filename storage.
+    login.filename                        db  './l/00000000', 00h                                                         ; Login filename storage.
 
-    login.filename                        db  './d/l/t', 00h                                                              ; Login filename storage.
-
-    login.handle                          dw  0000h                                                                       ; Login descriptor storage.
-    login.status                          db  00h                                                                         ; Login status storage.
+    login.handle                          dw  0000h                                                                       ; Storage for login handle.
 
     pouch.declaration                     db  27h, 's pouch'                                                              ; Pouch declaration storage.
     pouch.declaration.l                   equ $-pouch.declaration                                                         ; Pouch declaration length.

@@ -5,7 +5,7 @@
 ;   This code performs handling for data submitted by a socket with 'login' status. Essentially, it determines whether or not the connection belongs to a new participant or an old one, creates
 ;   participant credentials in the case of a new participant, and sets the connection status to 'passphrase'.
 ;
-;   Assumptions:    esi - Pointer to descriptor associated with target socket
+;   Assumptions:    Stack Frame:  dword [Socket to be addressed]
 ;
 ;   Returns:        None.
 ;
@@ -13,49 +13,51 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   bad.login                                               ./functions/main/participant.interaction/address.login.status/t
+;   address.login.status.clean.waiting.list                 ./functions/main/participant.interaction/address.login.status/t
+;
+;   address.login.status.eggs                               ./functions/main/participant.interaction/address.login.status/t
+;
+;   address.login.status.eggs.new.login.done                ./functions/main/participant.interaction/address.login.status/t
+;
+;   address.login.status.eggs.returning.login               ./functions/main/participant.interaction/address.login.status/t
+;
+;   address.login.status.done                               ./functions/main/participant.interaction/address.login.status/t
+;
+;   address.login.status.ghosts                             ./functions/main/participant.interaction/address.login.status/t
+;
+;   address.login.status.gylf                               ./functions/main/participant.interaction/address.login.status/t
+;
+;   address.login.status.old.login                          ./functions/main/participant.interaction/address.login.status/t
 ;
 ;   buffer.1                                                ./functions/b
 ;
-;   check.login                                             ./functions/check.login/t
-;
-;   clean.socket                                            ./functions/socket/clean.socket/t
-;
 ;   close.descriptor                                        ./functions/close.descriptor/t
 ;
-;   connection.filename.index                               ./functions/main/system.check/b
+;   convert.binary.id.to.ascii.id                           ./functions/convert.binary.id.to.ascii.id/t
 ;
-;   connection.status.index                                 ./functions/main/system.check/b
+;   d.data                                                  ./functions/b
 ;
-;   create.lock.file                                        ./functions/create.lock.file/t
+;   e.data                                                  ./functions/b
 ;
-;   current.directory.marker.l                              ./functions/d
+;   g.data                                                  ./functions/b
 ;
-;   new.char.sig                                            ./functions/b
+;   get.participant.by.name                                 ./functions/get.participant.by.name/t
 ;
-;   new.char.sig.buffer                                     ./functions/b
-;
-;   new.char.sig.l                                          ./functions/b
-;
-;   new.login                                               ./functions/main/participant.interaction/address.login.status/t
-;
-;   not.logged.in                                           ./functions/main/participant.interaction/address.login.status/t
+;   login.filename                                          ./functions/d
 ;
 ;   open.descriptor                                         ./functions/open.descriptor/t
 ;
 ;   passphrase.status                                       ./functions/main/b
 ;
-;   read.descriptor                                         ./functions/read.descriptor/t
-;
 ;   recv.from.socket                                        ./functions/socket/recv.from.socket/t
-;
-;   returning.login                                         ./functions/main/participant.interaction/address.login.status/t
 ;
 ;   set.passphrase.status                                   ./functions/main/b
 ;
 ;   socket.send                                             ./functions/socket/socket.send/t
 ;
-;   text.data.index.local.data.second.login.error.message   ./functions/main/text.init/b
+;   sys.unlink                                              ./functions/b
+;
+;   sys.system.call                                         ./functions/b                                         
 ;
 ;   text.data.index.local.data.bad.login.error.message      ./functions/main/text.init/b
 ;
@@ -63,96 +65,165 @@
 ;
 ;   text.data.index.socket.data.passphrase.message          ./functions/main/text.init/b
 ;
+;   text.data.index.socket.data.second.login.error.message  ./functions/main/text.init/b
+;
 ;   text.data.index.socket.data.second.login.message        ./functions/main/text.init/b
 ;
 ;   text.data.index.socket.data.welcome.message             ./functions/main/text.init/b
 ;
 ;   write.console                                           ./functions/write.console/t
 ;
+;   write.descriptor                                        ./functions/write.descriptor/t
+;
 
-    address.login.status: call  recv.from.socket                                                        ; Get the data from the socket.
+    address.login.status:                       mov   ebp, esp                                                            ; ebp - Prepared to be used as a data pointer.
+                                                add   ebp, als.packet                                                     ; ebp - Data pointer.
 
-                          ; * Replace check.login *
+                                                call  recv.from.socket                                                    ; buffer.1 - Username received from the socket.
 
-                          push  dword [text.data.index.socket.data.second.login.message]                ; Point send function to message indicating that the login was bad.
-                          call  socket.send                                                             ; Tell the petitioner that they're trying to log in a second time.
+                                                push  buffer.1                                                            ; Point get.participant.data.by.name to received username.
+                                                push  e.data                                                              ; Point get.participant.data.by.name to e.data.
+                                                call  get.participant.data.by.name                                        ; Attempt to populate e.data with the data associated with the target
+                                                                                                                          ; egg.
 
-                          call  clean.socket                                                            ; Clean up the socket data and get it ready for a new connection.
+                                                or    eax, eax                                                            ; Were we able to associate data with the provided credential?
+                                                jns   address.login.status.eggs                                           ; Yes. Go attach the socket number to the associated egg credential.
 
-                          push  dword [text.data.index.local.data.second.login.error.message]           ; Pointer to error message indicating a connection failed on credentials.
-                          call  write.console                                                           ; Tell the admin that somebody bounced.
+                                                push  buffer.1                                                            ; Point get.participant.data.by.name to received username.
+                                                push  g.data                                                              ; Point get.participant.data.by.name to g.data.
+                                                call  get.participant.data.by.name                                        ; Attempt to populate g.data with the data associated with the target
+                                                                                                                          ; gylf.
 
-                          ret                                                                           ; Return to caller.
+                                                or    eax, eax                                                            ; Were we able to associate data with the provided credential?
+                                                jns   address.login.status.gylf                                           ; Yes. Go attach the socket number to the associated gylf credential.
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                push  buffer.1                                                            ; Point get.participant.data.by.name to reveice username.
+                                                push  d.data                                                              ; Point get.participant.data.by.name to d.data.
+                                                call  get.participant.data.by.name                                        ; Attempt to populate d.data with the data associated with the target
+                                                                                                                          ; gylf.
 
-    not.logged.in:        mov   edi, esi                                                                ; edi - Pointer to connection table.
-                          add   edi, connection.filename.index                                          ; edi - Pointer to empty socket filename entry.
-
-                          push  esi                                                                     ; Preserve index to connection table.
-
-                          add   eax, current.directory.marker.l                                         ; eax - Size of complete participant data filename.
-                          mov   ecx, eax                                                                ; ecx - Number of bytes received from socket.
-                          mov   esi, buffer.1                                                           ; esi - Pointer to received data.
-                          mov   ebx, edi                                                                ; ebx - Pointer to socket filename entry for later use with the open.descriptor function.
-
-                          repnz movsb                                                                   ; Store the filename.
-
-                          pop   esi                                                                     ; Restore index to connection table.
-
-                          mov   ebp, eax                                                                ; ebp - Size of received data.
-                          push  ebx                                                                     ; Point open.descriptor to socket filename.
-                          call  open.descriptor                                                         ; See if there's already a user credentials file named after the data received. If so,
-                                                                                                        ; associate a descriptor with it.
-
-                          or    eax, eax                                                                ; If such a file exists, then we'll have succeeded in associating a descriptor with it,
-                                                                                                        ; and the descriptor will be in eax. If not, then eax will be negative, and contain a
-                                                                                                        ; sign. We can use the sign to determine which. If eax is signed, we'll treat this like a
-                                                                                                        ; bad login. If it isn't, then we'll treat it as an good one.
-                          js    bad.login                                                               ; Couldn't generate a descriptor for the file. Bad login.
-
-                          push  new.char.sig.l                                                          ; Tell read.descriptor the size of data to be read.
-                          push  new.char.sig.buffer                                                     ; Point read.descriptor to buffer into which to read data.
-                          push  eax                                                                     ; Point read.descriptor to descriptor associated with character data.
-                          call  read.descriptor                                                         ; Read a dword from the file.
-
-                          cmp   word [new.char.sig.buffer], new.char.sig                                ; Did we read a new character signature?
-                          jz    new.login                                                               ; If the received data matches the new character data prototype, go populate the
-                                                                                                        ; character file.
-
-                          jmp   returning.login                                                         ; Otherwise, treat this like a returning login.
+                                                or    eax, eax                                                            ; Were we able to associate data with the provided credential?
+                                                jns   address.login.status.ghosts                                         ; Yes. Go attach the socket number ot the associated ghost credential.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    bad.login:            push  dword [text.data.index.socket.data.bad.login.error.message]             ; Point send function to message indicating that the login was bad.
-                          call  socket.send                                                             ; Tell the petitioner that their credentials aren't good here.
+    address.login.status.bad.login:             push  dword [text.data.index.socket.data.bad.login.error.message]         ; Point send function to message indicating that the login was bad.
+                                                call  socket.send                                                         ; Tell the petitioner that their credentials aren't good here.
 
-                          call  clean.socket                                                            ; Clean up the socket data and get it ready for a new connection.
+                                                push  dword [text.data.index.local.data.bad.login.error.message]          ; Pointer to error message indicating a connection failed on
+                                                                                                                          ; credentials.
+                                                call  write.console                                                       ; Tell the admin that somebody bounced.
 
-                          push  dword [text.data.index.local.data.bad.login.error.message]              ; Pointer to error message indicating a connection failed on credentials.
-                          call  write.console                                                           ; Tell the admin that somebody bounced.
-
-                          ret                                                                           ; Return to caller.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    new.login:            mov   ebx, eax                                                                ; ebx - Descriptor associated with user's credential file.
-                          call  close.descriptor                                                        ; Disassociate the descriptor.
-
-                          push  dword [text.data.index.socket.data.welcome.message]                     ; Point send function to welcome message.
-                          call  socket.send                                                             ; Send the welcome message on the socket.
-
-                          mov   dword [esi+connection.status.index], set.passphrase.status              ; Set status of target socket to 'setting passphrase'.
-
-                          ret                                                                           ; Return to caller.
+                                                jmp   address.login.status.done                                           ; Go return to caller.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    returning.login:      call  close.descriptor                                                        ; Disassociate the descriptor.
+    address.login.status.old.login:             push  dword [text.data.index.socket.data.second.login.message]            ; Point send function to message indicating that the login was bad.
+                                                call  socket.send                                                         ; Tell the petitioner that they're trying to log in a second time.
 
-                          push  dword [text.data.index.socket.data.passphrase.message]                  ; Point send function to message indicating a request for a passphrase.
-                          call  socket.send                                                             ; Send the passphrase request on the socket.
+                                                push  dword [text.data.index.local.data.second.login.error.message]       ; Pointer to error message indicating a connection failed on
+                                                                                                                          ; credentials.
+                                                call  write.console                                                       ; Tell the admin that somebody bounced.
 
-                          mov   byte [esi+connection.status.index], passphrase.status                   ; Set status of target socket to 'passphrase'.
+                                                jmp   address.login.status.done                                           ; Go return to caller.
 
-                          ret                                                                           ; Return to caller.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    address.login.status.eggs:                  cmp   dword [e.data + egg.connection.descriptor.index], 0                 ; Is this credential already active?
+                                                jz    address.login.status.old.login                                      ; Yes. Go tell the user and the admin both that the provided credential
+                                                                                                                          ; is active.
+
+                                                mov   eax, dword [ebp + als.packet.socket]                                ; eax - Socket being addressed.
+                                                mov   dword [e.data + egg.connection.descriptor.index], eax               ; Populate the egg data with the associated active socket.
+
+                                                cmp   byte [e.data + egg.passphrase], 0                                   ; Has the credential ever been used before?
+                                                jnz   address.login.status.eggs.returning.login                           ; Yes. Go process a returning login for the egg.
+
+    address.login.status.eggs.new.login:        push  dword [text.data.index.socket.data.welcome.message]                 ; Point send function to welcome message.
+                                                call  socket.send                                                         ; Send the welcome message on the socket.
+
+                                                mov   dword [e.data + egg.connection.status.index], set.passphrase.status ; Set status of target socket to 'setting passphrase'.
+
+                                                jmp   address.login.status.eggs.new.login.done                            ; Go write the updated credential.
+
+    address.login.status.eggs.returning.login:  push  dword [text.data.index.socket.data.passphrase.message]              ; Point send function to message indicating a request for a passphrase.
+                                                call  socket.send                                                         ; Send the passphrase request on the socket.
+
+                                                mov   byte [e.data + egg.connection.status.index], passphrase.status      ; Set status of target socket to 'passphrase'.
+
+    address.login.status.eggs.new.login.done:   push  dword [e.data + egg.connection.external.index]                      ; Point open.descriptor to external credential.
+                                                call  open.descriptor                                                     ; Associate a descriptor with the external credential.
+
+                                                push  eax                                                                 ; Preserve descriptor for close.descriptor.
+
+                                                push  eax                                                                 ; Point write.descriptor to the descriptor associated with the external
+                                                                                                                          ; credential.
+                                                push  e.data                                                              ; Point write.descriptor to the credential data stored at e.data.
+                                                push  egg_size                                                            ; Tell write.descriptor to write an entire egg.credential.
+                                                call  write.descriptor                                                    ; Write the updated egg credential.
+
+                                                call  close.descriptor                                                    ; Disassociate the descriptor from the egg credential.
+
+                                                jmp   address.login.status.clean.waiting.list                             ; Go remove the temporary socket descriptor from the waiting list.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    address.login.status.gylf:                  cmp   dword [g.data + gylf.connection.descriptor.index], 0                ; Is this credential already active?
+                                                jz    address.login.status.old.login                                      ; Yes. Go tell the user and the admin both that the provided credential
+                                                                                                                          ;  is active.
+
+                                                mov   eax, dword [ebp + als.packet.socket]                                ; eax - Socket being addressed.
+                                                mov   dword [g.data + gylf.connection.descriptor.index], eax              ; Populate the gylf data with the associated active socket.
+                                                mov   dword [g.data + gylf.connection.status.index], passphrase.status    ; Populate the gylf data with the updated connection status.
+
+                                                push  dword [g.data + gylf.connection.external.index]                     ; Point open.descriptor to external credential.
+                                                call  open.descriptor                                                     ; Associated a descriptor with the external credential.
+
+                                                push  eax                                                                 ; Preserve descriptor for close.descriptor.
+
+                                                push  eax                                                                 ; Point write.descriptor to the descriptor associated with the external
+                                                                                                                          ; credential.
+                                                push  g.data                                                              ; Point write.descriptor to the credential stored at g.data.
+                                                push  gylf_size                                                           ; Tell write.descriptor to write an entire gylf credential.
+                                                call  write.descriptor                                                    ; Write the updated gylf credential.
+
+                                                call  close.descriptor                                                    ; Disassociate the descriptor from the gylf credential.
+
+                                                jmp   address.login.status.clean.waiting.list
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    address.login.status.ghosts:                cmp   dword [d.data + ghost.connection.descriptor.index], 0               ; Is this credential already active?
+                                                jz    address.login.status.old.login                                      ; Yes. Go tell the user and the admin both that the provided credential
+                                                                                                                          ; is active.
+
+                                                mov   eax, dword [ebp + als.packet.socket]                                ; eax - Socket being addressed.
+                                                mov   dword [d.data + ghost.connection.descriptor.index], eax             ; Populate the ghost data with the associated active socket.
+                                                mov   dword [d.data + ghost.connection.status.index], passphrase.status   ; Populate the ghost data with the updated connection status.
+
+                                                push  dword [d.data + ghost.connection.external.index]                    ; Point open.descriptor to external credential.
+                                                call  open.descriptor                                                     ; Associate a descriptor with the external credential.
+
+                                                push  eax                                                                 ; Preserve descriptor for close.descriptor.
+
+                                                push  eax                                                                 ; Point write.descriptor to the descriptor associated with the external
+                                                                                                                          ; credential.
+                                                push  d.data                                                              ; Point write.descriptor to the credential data stored at d.data.
+                                                push  ghost_size                                                          ; Tell write.descriptor to write an entire ghost credential.
+                                                call  write.descriptor                                                    ; Write the updated ghost credential.
+
+                                                call  close.descriptor                                                    ; Disassociate the descriptor from the ghost credential.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    address.login.status.clean.waiting.list:    push  dword [ebp + als.packet.socket]                                     ; Point convert.binary.id.to.ascii.id to current socket.
+                                                push  login.filename                                                      ; Point convert.binary.id.to.ascii.id to login filename.
+                                                call  convert.binary.id.to.ascii.id                                       ; Prepare the filename for removal.
+
+                                                mov   eax, sys.unlink                                                     ; eax - Smoke the file.
+                                                mov   ebx, login.filename                                                 ; ebx - Smoke the login file.
+                                                int   sys.system.call                                                     ; SMOKE THAT MOTHERFUCKER!
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    address.login.status.done:                  ret   als.packet                                                          ; Return to caller.
