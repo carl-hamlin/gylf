@@ -15,12 +15,3 @@
     local.data.connection.notifier.l        dd  local.data.connection.notifier.end            ; Length of message.
     local.data.connection.notifier          db  "Incoming connection established.", 0Ah, 0Dh  ; Connection message.
     local.data.connection.notifier.end      equ $-local.data.connection.notifier              ; Pointer to end of message.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-;
-;   Outgoing Data
-;
-
-    socket.data.no.connection.available.l   dd  socket.data.no.connection.available.end       ; Length of message.
-	  socket.data.no.connection.available     db  "The server is currently full.", 0Ah, 0Dh     ; Storage for server currently full message.
-	  socket.data.no.connection.available.end equ $-socket.data.no.connection.available         ; Pointer to end of message.
