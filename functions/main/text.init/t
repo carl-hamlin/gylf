@@ -131,9 +131,9 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    text.init.fail:     push  sys.standard.output                                   ; Write to console.
+    text.init.fail:     push  local.data.text.data.failed.l                         ; Length of message.
                         push  local.data.text.data.failed                           ; Message indicating that we've failed to initialize messaging and need to shut down.
-                        push  local.data.text.data.failed.l                         ; Length of message.
+                        push  sys.standard.output                                   ; Write to console.
                         call  write.descriptor                                      ; Let the admin know that we've failed to initialize messaging and need to shut down.
 
                         jmp   bail                                                  ; Go shut the server down.
