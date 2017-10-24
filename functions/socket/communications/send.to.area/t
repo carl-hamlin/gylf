@@ -4,16 +4,10 @@
 ;
 ;   This function sends a provided message out to a provided area.
 ;
-;   Assumptions:    Stack Frame:  dword - Index to message to be broadcast.
-;                                 dword - Area id to be broadcast.
-;                   ebp - Buffered mode indicator (!1)
-;
-;                   - OR -
-;
-;                   Stack Frame:  dword - Pointer to message to be broadcast.
+;   Assumptions:    Stack Frame:  dword - Area id to be broadcast.
+;                                 byte  - Buffered mode indicator (0-1)
+;                                 dword - Pointer to message to be broadcast.
 ;                                 dword - Length of message to be broadcast.
-;                                 dword - Area id to be broadcast.
-;                   ebp - Buffered mode indicator (1)
 ;
 ;   Returns:        None.
 ;
@@ -21,70 +15,136 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   connection.area.id.index        ./functions/main/system.check/b
-;
-;   connection.entry.size           ./functions/main/system.check/b
-;
-;   connection.table                ./functions/main/system.check/b
-;
-;   dword.l                         ./b
-;
-;   send.to.area.broadcast          ./functions/socket/communications/send.to.area/t
-;
-;   send.to.area.broadcast.bret     ./functions/socket/communications/send.to.area/t
-;
-;   send.to.area.broadcast.done     ./functions/socket/communications/send.to.area/t
-;
-;   send.to.area.broadcast.indexed  ./functions/socket/communications/send.to.area/t
-;
-;   send.to.area.connection.poll    ./functions/socket/communications/send.to.area/t
-;
-;   socket.number                   ./b
-;
-;   socket.send.buf                 ./functions/socket/socket.send/t
+;   No external references.
 ;
 
-    send.to.area:                   pop   ecx                                       ; Preserve return address.
-                                    pop   eax                                       ; eax - Area id to which to broadcast.
+    send.to.area:                   mov   ebp, esp                                              ; ebp - Prepared to be used as a data pointer.
+                                    add   ebp, sta.packet                                       ; ebp - Data pointer.
 
-                                    push  ecx                                       ; Restore return address.
+                                    sub   edx, edx                                              ; edx - First egg id to check.
+                        
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                        
+    send.to.area.eggs:              push  edx                                                   ; Preserve first id.
 
-                                    push  esi                                       ; Preserve caller's esi.
+                                    push  egg.filename                                          ; Point convert.binary.id.to.ascii.id to egg filename.
+                                    push  edx                                                   ; Point convert.binary.id.to.ascii.id to id to check.
+                                    call  convert.binary.id.to.ascii.id                         ; Set up filename for egg to check.
 
-                                    mov   esi, connection.table                     ; esi - Pointer to table of handles associated with active connections.
-                                    mov   ecx, socket.number                        ; ecx - Number of connections to poll.
+                                    push  egg.filename                                          ; Point open.descriptor to egg to check.
+                                    call  open.descriptor                                       ; Attempt to associate a descriptor with the egg file.
 
+                                    or    eax, eax                                              ; Were we able to associate a descriptor?
+                                    js    send.to.area.eggs.done                                ; No. We're done here. Move on to gylf now.
+
+                                    push  eax                                                   ; Preserve descriptor for closing egg file.
+
+                                    push  egg_size                                              ; Tell read.descriptor to read an entire egg.
+                                    push  e.data                                                ; Tell read.descriptor to read the egg into e.data.
+                                    push  eax                                                   ; Point read.descriptor to the descriptor associated with the egg file.
+                                    call  read.descriptor                                       ; Read the egg into memory at e.data.
+
+                                    call  close.descriptor                                      ; Close the egg file.
+
+                                    mov   eax, dword [e.data + egg.connection.area.id.index]    ; eax - Area id corresponding to the area in which the egg resides.
+
+                                    cmp   eax, dword [ebp + sta.packet.area]                    ; Does this connection currently reside in the area to which we are attempting to broadcast?
+                                    jz    send.to.area.eggs.broadcast                           ; Yes! Go broadcast to this socket.
+
+                                    pop   edx                                                   ; Restore id.
+                                    inc   edx                                                   ; edx - Pointer to next id.
+
+                                    jmp   send.to.area.eggs                                     ; Go check the next id.
+
+    send.to.area.eggs.broadcast:    push  dword [e.data + egg.connection.external.index]        ; Point send.to.participant to the id that we just checked.
+                                    push  dword [ebp + sta.packet.area]                         ; Tell send.to.participant which area we're broadcasting in.
+                                    push  dword [ebp + sta.packet.message]                      ; Point send.to.participant to the message to be broadcast.
+                                    push  dword [ebp + sta.packet.length]                       ; Tell send.to.participant how long the message is.
+                                    call  send.to.participant                                   ; Broadcast the message to the participant.
+
+    send.to.area.eggs.done:         pop   edx                                                   ; Restore id.
+                                    sub   edx, edx                                              ; edx - First gylf id to check.
+                        
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.area.connection.poll:   cmp   dword [esi+connection.area.id.index], eax ; Does the area id associated with this connection match the area id to be broadcast?
-                                    jz    send.to.area.broadcast                    ; Yes. Go broadcast to this connection.
+    send.to.area.gylf:              push  edx                                                   ; Preserve first id.
 
-    send.to.area.broadcast.done:    add   esi, connection.entry.size                ; esi - Pointer to next connection handle in table.
-                                    loop  send.to.area.connection.poll              ; Go check the next connection.
+                                    push  gylf.filename                                         ; Point convert.binary.id.to.ascii.id to gylf filename.
+                                    push  edx                                                   ; Point convert.binary.id.to.ascii.id to id to check.
+                                    call  convert.binary.id.to.ascii.id                         ; Set up filename for gylf to check.
 
-                                    pop   esi                                       ; Restore caller's esi.
+                                    push  egg.filename                                          ; Point open.descriptor to gylf to check.
+                                    call  open.descriptor                                       ; Attempt to associate a descriptor with the gylf file.
 
-                                    cmp   ebp, 1                                    ; Buffered mode?
-                                    jz    send.to.area.broadcast.bret               ; Yes. Go return and restore the buffered stack.
+                                    or    eax, eax                                              ; Were we able to associate a descriptor?
+                                    js    send.to.area.gylf.done                                ; No. We're done here. Move on to ghosts now.
 
-                                    ret   dword.l                                   ; Return to caller and restore indexed stack.
+                                    push  eax                                                   ; Preserve descriptor for closing gylf file.
 
-    send.to.area.broadcast.bret     ret   (dword.l * 2)                             ; Return to caller and restore buffered stack.
+                                    push  gylf_size                                             ; Tell read.descriptor to read an entire gylf.
+                                    push  g.data                                                ; Tell read.descriptor to read the gylf into g.data.
+                                    push  eax                                                   ; Point read.descriptor to the descriptor associated with the gylf file.
+                                    call  read.descriptor                                       ; Read the gylf into memory at g.data.
 
+                                    call  close.descriptor                                      ; Close the gylf file.
+
+                                    mov   eax, dword [g.data + gylf.connection.area.id.index]   ; eax - Area id corresponding to the area in which the gylf currently resides.
+
+                                    cmp   eax, dword [ebp + sta.packet.area]                    ; Does this connection currently reside in the area to which we are attempting to broadcast?
+                                    jz    send.to.area.gylf.broadcast                           ; Yes! Go broadcast to this socket.
+
+                                    pop   edx                                                   ; Restore id.
+                                    inc   edx                                                   ; edx - Pointer to next id.
+
+                                    jmp   send.to.area.gylf                                     ; Go check the next id.
+
+    send.to.area.gylf.broadcast:    push  dword [g.data + gylf.connection.external.index]       ; Point send.to.participant to the id that we just checked.
+                                    push  dword [ebp + sta.packet.area]                         ; Tell send.to.participant which area we're broadcasting in.
+                                    push  dword [ebp + sta.packet.message]                      ; Point send.to.participant to the message to be broadcast.
+                                    push  dword [ebp + sta.packet.length]                       ; Tell send.to.participant how long the message is.
+                                    call  send.to.participant                                   ; Broadcast the message to the participant.
+
+    send.to.area.gylf.done:         pop   edx                                                   ; Restore id.
+                                    sub   edx, edx                                              ; edx - First ghost id to check.
+                        
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.area.broadcast:         cmp   ebp, 1                                    ; Buffered mode?
-                                    jnz   send.to.area.broadcast.indexed            ; No. Go send out indexed data.
+    send.to.area.ghosts:            push  edx                                                   ; Preserve first id.
 
-                                    push  dword [esp + (dword.l * 2)]               ; Tell send function how long the message is.
-                                    push  dword [esp + (dword.l * 3)]               ; Point send function to the message.
-                                    call  socket.send.buf                           ; Send the message to the indicated descriptor.
+                                    push  ghost.filename                                        ; Point convert.binary.id.to.ascii.id to ghost filename.
+                                    push  edx                                                   ; Point convert.binary.id.to.ascii.id to id to check.
+                                    call  convert.binary.id.to.ascii.id                         ; Set up filename for ghost to check.
 
-                                    jmp   send.to.area.broadcast.done               ; Go set up for the next connection.
+                                    push  egg.filename                                          ; Point open.descriptor to ghost to check.
+                                    call  open.descriptor                                       ; Attempt to associate a descriptor with the ghost file.
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                    or    eax, eax                                              ; Were we able to associate a descriptor?
+                                    js    send.to.area.ghosts.done                              ; No. We're done here. Clean up and return to caller.
 
-    send.to.area.broadcast.indexed: push  dword [esp+dword.l]                       ; Tell send function where the index to the data is.
-                                    call  socket.send                               ; Send the data.
+                                    push  eax                                                   ; Preserve descriptor for closing ghost file.
 
-                                    jmp   send.to.area.broadcast.done               ; Go set up for the next connection.
+                                    push  ghost_size                                            ; Tell read.descriptor to read an entire ghost.
+                                    push  d.data                                                ; Tell read.descriptor to read the ghost into d.data.
+                                    push  eax                                                   ; Point read.descriptor to the descriptor associated with the ghost file.
+                                    call  read.descriptor                                       ; Read the gylf into memory at d.data.
+
+                                    call  close.descriptor                                      ; Close the ghost file.
+
+                                    mov   eax, dword [d.data + ghost.connection.area.id.index]  ; eax - Area id corresponding to the area in which the ghost currently resides.
+
+                                    cmp   eax, dword [ebp + sta.packet.area]                    ; Does this connection currently reside in the area to which we are attempting to broadcast?
+                                    jz    send.to.area.ghosts.broadcast                         ; Yes! Go broadcast to this socket.
+
+                                    pop   edx                                                   ; Restore id.
+                                    inc   edx                                                   ; edx - Pointer to next id.
+
+                                    jmp   send.to.area.ghosts                                   ; Go check the next id.
+
+    send.to.area.ghosts.broadcast:  push  dword [g.data + ghost.connection.external.index]      ; Point send.to.participant to the id that we just checked.
+                                    push  dword [ebp + sta.packet.area]                         ; Tell send.to.participant which area we're broadcasting in.
+                                    push  dword [ebp + sta.packet.message]                      ; Point send.to.participant to the message to be broadcast.
+                                    push  dword [ebp + sta.packet.length]                       ; Tell send.to.participant how long the message is.
+                                    call  send.to.participant                                   ; Broadcast the message to the participant.
+
+    send.to.area.ghosts.done:       pop   edx                                                   ; Restore id.
+                                    ret   sta.packet                                            ; Return to caller.

@@ -2,4 +2,5 @@
 
     section   .text
 
+    %include  "./functions/main/participant.interaction/address.login.status/s"
     %include  "./functions/main/participant.interaction/address.login.status/t"
