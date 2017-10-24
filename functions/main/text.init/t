@@ -44,6 +44,8 @@
 ;
 ;   text.init.pop.loop                                    ./functions/main/text.init/t
 ;
+;   word.l                                                ./b
+;
 ;   write.descriptor                                      ./functions/write.descriptor/t
 ;
 
@@ -81,7 +83,7 @@
                         pop   eax                                                   ; Restore descriptor associated with external data file.
                         push  eax                                                   ; Preserve descriptor associated with external data file.
 
-                        push  4                                                     ; Tell read.descriptor to read four bytes.
+                        push  word.l                                                ; Tell read.descriptor to read four bytes.
                         push  ebx                                                   ; Point read.descriptor to extended memory buffer.
                         push  eax                                                   ; Point read.descriptor to descriptor associated with external data file.
                         call  read.descriptor                                       ; Read the length of the message at this index.
@@ -92,7 +94,7 @@
 
                         pop   edx                                                   ; Restore index counter.
                         add   edx, dword [ebx]                                      ; Add new bytes to last index.
-                        add   edx, 4                                                ; Account for size storage in repository.
+                        add   edx, word.l                                           ; Account for size storage in repository.
                         mov   dword [esi], edx                                      ; Store new index.
                         push  edx                                                   ; Preserve index counter.
 

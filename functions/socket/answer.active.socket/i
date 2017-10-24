@@ -2,4 +2,5 @@
 
     section   .text
 
+    %include  "./functions/socket/answer.active.socket/s"
     %include  "./functions/socket/answer.active.socket/t"
