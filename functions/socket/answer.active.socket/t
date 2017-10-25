@@ -4,7 +4,9 @@
 ;
 ;   This code determines the status of an active socket and routes the data to the appropriate handler.
 ;
-;   Assumptions:    esi = Index to connection tables.
+;   Assumptions:    Stack Frame:  dword [Pointer to active socket structure]
+;                                 dword [Pointer to socket filename]
+;                                 byte  [Connection status index]
 ;
 ;   Returns:        None.
 ;
@@ -12,60 +14,42 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   address.active.status                               ./functions/main/participant.interaction/address.active.status/t
-;
-;   address.login.status                                ./functions/main/participant.interaction/address.login.status/t
-;
-;   address.passphrase.status                           ./functions/main/participant.interaction/address.passphrase.status/t
-;
-;   address.set.passphrase.status                       ./functions/main/participant.interaction/address.set.passphrase.status/t
-;
-;   connection.status.index                             ./functions/main/system.check/b
-;
-;   login.status                                        ./functions/main/b
-;
-;   not.login.status                                    ./functions/socket/answer.active.socket/t
-;
-;   not.passphrase.status                               ./functions/socket/answer/active.socket/t
-;
-;   passphrase.status                                   ./functions/main/b
-;
-;   print.socket.number                                 ./functions/print.socket.number/t
-;
-;   set.passphrase.status                               ./functions/main/b
-;
-;   text.data.index.local.data.active.socket.message    ./functions/main/text.init/b
-;
-;   text.data.index.local.data.carriage.return.message  ./functions/main/text.init/b
-;
-;   write.console                                       ./functions/write.console/t
+;   No external references.
 ;
 
-    answer.active.socket:   push  dword [text.data.index.local.data.active.socket.message]    ; Pointer to socket activity notifier.
-                            call  write.console                                               ; Let the admin know we're working with an active socket.
+    answer.active.socket:           pop   edx                                                         ; edx - Return address.
 
-                            call  print.socket.number                                         ; Let the admin know what socket is active.
+                                    push  address.login.status                                        ; Set up pointer to address.login.status
+                                    push  address.passphrase.status                                   ; Set up pointer to address.passphrase.status
+                                    push  address.set.passphrase.status                               ; Set up pointer to address.set.passphrase.status
+                                    push  address.active.status                                       ; Set up pointer to address.active.status
 
-                            push  dword [text.data.index.local.data.carriage.return.message]  ; Pointer to carriage return.
-                            call  write.console                                               ; Print the carriage return.
+                                    push  edx                                                         ; Restore return address.
 
-                            cmp  byte [esi+connection.status.index], login.status             ; Is the connection in 'login' status?
-                            jnz  not.login.status                                             ; No. Go check for 'passphrase' status.
+                                    mov   ebp, esp                                                    ; ebp - Prepared to be used as a data pointer.
+                                    add   ebp, aas.packet                                             ; ebp - Data pointer.
 
-                            jmp  address.login.status                                         ; Yes. Pass control to address.login.status.
+                                    push  dword [text.data.index.local.data.active.socket.message]    ; Pointer to socket activity notifier.
+                                    call  write.console                                               ; Let the admin know we're working with an active socket.
 
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                    push  sys.standard.output                                         ; Point write.descriptor to standard output.
+                                    push  dword [ebp + aas.packet.type + word.l]                      ; Point write descriptor to the socket type.
+                                    push  1                                                           ; Tell write descriptor to write one byte.
+                                    call  write.descriptor                                            ; Tell the admin what type of socket we're working with.
 
-    not.login.status:       cmp  byte [esi+connection.status.index], passphrase.status        ; Is the connection in 'passphrase' status?
+                                    push  sys.standard.output                                         ; Point write.descriptor to standard output.
+                                    push  dword [ebp + aas.packet.type + word.l]                      ; Point write.descriptor to the socket id.
+                                    push  dword.l                                                     ; Tell write.descriptor to write one dword.
+                                    call  write.descriptor                                            ; Tell the admin which socket we're working with.
 
-                            jnz  not.passphrase.status                                        ; No. Go check for 'setting passphrase' status.
+                                    push  dword [text.data.index.local.data.carriage.return.message]  ; Point write.console to the carriage return.
+                                    call  write.console                                               ; Write a carriage return to the console.
 
-                            jmp  address.passphrase.status                                    ; Yes. Pass control to address.passphrase.status.
+                                    mov   ebx, aas.packet.statii                                      ; ebx - Pointer to potential handler.
+                                    mov   ecx, aas.packet.status                                      ; ecx - Socket status.
 
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                    repnz add ebx, dword.l                                            ; ebx - Pointer to correct handler for socket status.
 
-    not.passphrase.status:  cmp  byte [esi+connection.status.index], set.passphrase.status    ; Is the connection in 'setting passphrase' status?
+                                    call  ebx                                                         ; Go handle the data.
 
-                            jnz  address.active.status                                        ; No. Pass control to address.active.status.
-
-                            jmp  address.set.passphrase.status                                ; Yes. Pass control to address.set.passphrase.status.
+                                    ret   aas.packet                                                  ; Return to caller.

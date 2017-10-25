@@ -2,4 +2,4 @@
 
     section   .text
 
-    %include  "./functions/create.character/t"
+    %include  "./functions/get.participant.data.by.id/t"

@@ -1,8 +1,8 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/socket/clean.socket/b
+;   ./functions/get.new.id/s
 ;
-;   This file contains all definitions pertinent to the clean.socket function.
+;   This file contains structures pertinent to the get.new.id utiliity.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
@@ -11,4 +11,11 @@
 ;   No external references.
 ;
 
-    %define sys.unlink  00Ah  ; 00Ah is the modifier for 080h that tells the kernel we want to smoke a file.
+;================================================================================================================================================================================================
+;
+;   get.new.id Data Structure
+;
+
+    struc gni.packet
+      .id resd  00000001h ; Storage for pointer to directory to be looked up.
+    endstruc
