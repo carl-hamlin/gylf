@@ -14,6 +14,8 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   dword.l         ./b
+;
 ;   sys.read.call   ./functions/read.descriptor/b
 ;
 ;   sys.system.call ./functions/b
@@ -40,4 +42,4 @@
 
                       pop   ebp                                                   ; Restore caller's ebp.
 
-                      ret   read.descriptor.packet                                ; Return to caller.
+                      ret   read.descriptor.packet_size                           ; Return to caller.
