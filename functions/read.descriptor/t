@@ -24,16 +24,16 @@
     read.descriptor:  push  ebp                                                   ; Preserve caller's ebp.
 
                       mov   ebp, esp                                              ; ebp - prepared to be used as data pointer.
-                      add   ebp, (dword.l + dword.l + read.descriptor.packet)     ; ebp - Data pointer.
+                      add   ebp, (dword.l + read.descriptor.packet_size)          ; ebp - Data pointer.
 
                       push  ebx                                                   ; Preserve caller's ebx.
                       push  ecx                                                   ; Preserve caller's ecx.
                       push  edx                                                   ; Preserve caller's edx.
 
                       mov   eax, sys.read.call                                    ; eax - Read data from a descriptor.
-                      mov   ebx, dword [ebp + read.descriptor.packet.descriptor]  ; ebx - Descriptor from which to read.
-                      mov   ecx, dword [ebp + read.descriptor.packet.buffer]      ; ecx - Pointer to buffer into which to read.
-                      mov   edx, dword [ebp + read.descriptor.packet.bytes]       ; edx - Number of bytes to read.
+                      mov   ebx, dword [ebp - read.descriptor.packet.descriptor]  ; ebx - Descriptor from which to read.
+                      mov   ecx, dword [ebp - read.descriptor.packet.buffer]      ; ecx - Pointer to buffer into which to read.
+                      mov   edx, dword [ebp - read.descriptor.packet.bytes]       ; edx - Number of bytes to read.
                       int   sys.system.call                                       ; Read data from a descriptor.
 
                       pop   edx                                                   ; Restore caller's edx.

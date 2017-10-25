@@ -22,17 +22,17 @@
 ;   sys.system.call ./functions/b
 ;
 
-    open.descriptor:  push  ebp                                               ; Preserve caller's ebp.
+    open.descriptor:  push  ebp                                                     ; Preserve caller's ebp.
 
-                      mov   ebp, esp                                          ; Prepared to be used as  data pointer.
-                      add   ebp, (dword.l + dword.l + open.descriptor.packet) ; ebp - Data pointer.
+                      mov   ebp, esp                                                ; Prepared to be used as  data pointer.
+                      add   ebp, (open.descriptor.packet_size + dword.l)            ; ebp - Data pointer.
 
-                      mov   eax, sys.open.call                                ; eax - Associate a descriptor with a file on disk.
-                      mov   ebx, [ebp + open.descriptor.packet.filename]      ; ebx - Pointer to ASCIIZ file path.
-                      mov   ecx, sys.read.write                               ; ecx - Apply read/write permissions to the descriptor.
-                      sub   edx, edx                                          ; edx - No special modes.
-                      int   sys.system.call                                   ; Associate a descriptor with a file on disk.
+                      mov   eax, sys.open.call                                      ; eax - Associate a descriptor with a file on disk.
+                      mov   ebx, [ebp - open.descriptor.packet.filename]            ; ebx - Pointer to ASCIIZ file path.
+                      mov   ecx, sys.read.write                                     ; ecx - Apply read/write permissions to the descriptor.
+                      sub   edx, edx                                                ; edx - No special modes.
+                      int   sys.system.call                                         ; Associate a descriptor with a file on disk.
 
-                      pop   ebp                                               ; Restore caller's ebp.
+                      pop   ebp                                                     ; Restore caller's ebp.
 
-                      ret   open.descriptor.packet                            ; Return to caller.
+                      ret   open.descriptor.packet_size                             ; Return to caller.
