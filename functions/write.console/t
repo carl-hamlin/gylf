@@ -1,4 +1,4 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/write.console/t
 ;
@@ -6,11 +6,13 @@
 ;
 ;   Assumptions:    Stack Frame:  dword - Index to data packet.
 ;
-;   Returns:        eax = Error indicator.
+;   Returns:        eax - Error indicator.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
+;
+;   dword.l             ./b
 ;
 ;   get.text.data       ./functions/get.text.data/t
 ;
@@ -23,7 +25,7 @@
 ;   sys.write.call      ./functions/b
 ;
 
-    write.console:  push  dword [esp+4]             ; Preserve descriptor to be written.
+    write.console:  push  dword [esp+dword.l]       ; Preserve descriptor to be written.
 
                     call  get.text.data             ; Get indexed data.
 
@@ -34,4 +36,4 @@
                     push  0                         ; Tell memory.check to free memory.
                     call  memory.switch             ; Free memory.
 
-                    ret                             ; Return to caller.
+                    ret   dword.l                   ; Return to caller.

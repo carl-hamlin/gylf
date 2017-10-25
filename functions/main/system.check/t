@@ -12,38 +12,6 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   bail                                                                ./functions/bail/t
-;
-;   char.0                                                              ./b
-;
-;   char.9                                                              ./b
-;
-;   connection.entry.size                                               ./functions/main/system.check/b
-;
-;   connection.number.index                                             ./functions/main/system.check/b
-;
-;   connection.table                                                    ./functions/main/system.check/b
-;
-;   dword.l                                                             ./b
-;
-;   socket.number                                                       ./b
-;
-;   socket.numbers                                                      ./functions/main/system.check/d
-;
-;   socket.numbers.l                                                    ./functions/main/system.check/d
-;
-;   system.check.populate.connection.numbers.0010                       ./functions/main/system.check/t
-;
-;   system.check.populate.connection.numbers.0100                       ./functions/main/system.check/t
-;
-;   system.check.populate.connection.numbers.1000                       ./functions/main/system.check/t
-;
-;   system.check.populate.connection.numbers.done                       ./functions/main/system.check/t
-;
-;   system.check.populate.connection.numbers.loop                       ./functions/main/system.check/t
-;
-;   system.check.populate.connection.numbers.over                       ./functions/main/system.check/t
-;
 ;   text.data.index.local.data.populate.connection.numbers.over.message ./functions/main/system.check/d
 ;
 ;   text.data.index.local.data.populating.connection.table.message      ./functions/main/system.check/d
@@ -55,94 +23,12 @@
 ;   write.console                                                       ./functions/write.console/t
 ;
 
-    system.check:                                  push dword [text.data.index.local.data.system.check.message]                     ; Pointer to message indicating system check underweigh
-                                                   call write.console                                                               ; Tell the admin that a system check is underweigh
-
-                                                   push dword [text.data.index.local.data.populating.connection.table.message]      ; ecx - Pointer to message indicating that system check is
-                                                                                                                                    ; populating the connection numbers table.
-                                                   call write.console                                                               ; Let the admin know that system.check is populating the
-                                                                                                                                    ; connection numbers table.
-
-                                                   mov  esi, socket.numbers                                                         ; esi - Pointer to placeholder for socket numbers.
-                                                   mov  edi, connection.table                                                       ; edi - Index into connection table.
-                                                   add  edi, connection.number.index                                                ; edi - Pointer to first connection number to be populated.
-                                                   mov  ecx, socket.number                                                          ; ecx - Number of sockets to number. Used as loop counter.
+    system.check:                                   push  dword [text.data.index.local.data.system.check.message]                     ; Pointer to message indicating system check underweigh
+                                                    call  write.console                                                               ; Tell the admin that a system check is underweigh
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    system.check.populate.connection.numbers.loop: movsd                                                                            ; Copy the current socket number to the current socket number
-                                                                                                                                    ; table entry.
+    system.check.populate.connection.numbers.done:  push  dword [text.data.index.local.data.system.check.done.message]                ; Pointer to message indicating system check is complete.
+                                                    call  write.console                                                               ; Tell the admin that the system check is complete.
 
-                                                   sub  esi, dword.l                                                                ; Restore esi to its pre-movsd value.
-                                                   sub  edi, dword.l                                                                ; Restore edi to its pre-movsd value.
-
-                                                   add  edi, connection.entry.size                                                  ; edi - Pointer to next socket number table entry.
-                                                   mov  ebx, esi                                                                    ; ebx - Pointer to placeholder for socket numbers.
-                                                   add  ebx, socket.numbers.l                                                       ; ebx - Pointer to byte immediately following placeholder for
-                                                                                                                                    ; socket numbers.
-                                                   dec  ebx                                                                         ; ebx - Pointer to last byte of placeholder for socket
-                                                                                                                                    ; numbers.
-
-                                                   cmp  byte [ebx], char.9                                                          ; Is the byte at [ebx] "9"?
-                                                   jz   system.check.populate.connection.numbers.0010                               ; Yes. Go zero it out and address the next place up.
-
-                                                   inc  byte [ebx]                                                                  ; No. Increment the byte.
-                                                   loop system.check.populate.connection.numbers.loop                               ; Go store this entry.
-
-                                                   jmp  system.check.populate.connection.numbers.done                               ; We're done here, so go finish up with system.check.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    system.check.populate.connection.numbers.0010: mov  byte [ebx], char.0                                                          ; Zero the byte at [ebx].
-                                                   dec  ebx                                                                         ; ebx - Pointer to byte representing the next place up.
-
-                                                   cmp  byte [ebx], char.9                                                          ; Is the byte at [ebx] a "9"?
-                                                   jz   system.check.populate.connection.numbers.0100                               ; Yes. Go zero it out and address the next place up.
-
-                                                   inc  byte [ebx]                                                                  ; No. Increment the byte.
-                                                   loop system.check.populate.connection.numbers.loop                               ; Go store this entry.
-
-                                                   jmp  system.check.populate.connection.numbers.done                               ; We're done here, so go finish up with system.check.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    system.check.populate.connection.numbers.0100: mov  byte [ebx], char.0                                                          ; Zero the byte at [ebx].
-                                                   dec  ebx                                                                         ; ebx - Pointer to byte representing the next place up.
-
-                                                   cmp  byte [ebx], char.9                                                          ; Is the byte ate [ebx] a "9"?
-                                                   jz   system.check.populate.connection.numbers.1000                               ; Yes. Go zero it out and address the next place up.
-
-                                                   inc  byte [ebx]                                                                  ; No. Increment the byte.
-                                                   loop system.check.populate.connection.numbers.loop                               ; Go store this entry.
-
-                                                   jmp  system.check.populate.connection.numbers.done                               ; We're done here, so go finish up with system.check.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    system.check.populate.connection.numbers.1000: mov  byte [ebx], char.0                                                          ; Zero the byte at [ebx].
-                                                   dec  ebx                                                                         ; ebx - Pointer to byte representing the next place up.
-
-                                                   cmp  byte [ebx], char.9                                                          ; Is the byte at [ebx] a "9"?
-                                                   jz   system.check.populate.connection.numbers.over                               ; Yes. At this point, we're experiencing a bounds error, so
-                                                                                                                                    ; go tell the admin we're fucked and shut down the server.
-
-                                                   inc  byte [ebx]                                                                  ; No. Increment the byte.
-                                                   loop system.check.populate.connection.numbers.loop                               ; Go store this entry.
-
-                                                   jmp  system.check.populate.connection.numbers.done                               ; We're done here, so go finish up with system.check.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    system.check.populate.connection.numbers.over: push dword [text.data.index.local.data.populate.connection.numbers.over.message] ; Pointer to message indicating we experienced a bounds error
-                                                                                                                                    ; and need to shut down the server.
-                                                   call write.console                                                               ; Tell the admin we experienced a bounds error and need to
-                                                                                                                                    ; shut down the server.
-
-                                                   jmp  bail                                                                        ; Go shut down the server.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    system.check.populate.connection.numbers.done: push dword [text.data.index.local.data.system.check.done.message]                ; Pointer to message indicating system check is complete.
-                                                   call write.console                                                               ; Tell the admin that the system check is complete.
-
-                                                   ret                                                                              ; Return to caller.
+                                                    ret                                                                               ; Return to caller.
