@@ -111,6 +111,7 @@
                         
                         loop  text.init.pop.loop                                    ; Populate the remainder of the indices.
 
+                        push  eax                                                   ; Tell close.descriptor which descriptor to disassociate.
                         call  close.descriptor                                      ; Close the external data file.
 
                         push  0                                                     ; Tell memory.switch to free up memory.
