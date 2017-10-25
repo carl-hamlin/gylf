@@ -85,8 +85,6 @@
                         push  eax                                                   ; Point read.descriptor to descriptor associated with external data file.
                         call  read.descriptor                                       ; Read the length of the message at this index.
 
-                        mov   ebx, ecx                                              ; ebx - Pointer to read data.
-
                         pop   eax                                                   ; Restore descriptor associated with external data file.
 
                         pop   edx                                                   ; Restore index counter.
