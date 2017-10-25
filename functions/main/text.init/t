@@ -49,9 +49,9 @@
 ;   write.descriptor                                      ./functions/write.descriptor/t
 ;
 
-    text.init:          push  local.data.populating.textual.data.indices.message.l  ; Length of message.
+    text.init:          push  sys.standard.output                                   ; Write to console.
                         push  local.data.populating.textual.data.indices.message    ; Pointer to message indicating that we're about to populate the textual data indices.
-                        push  sys.standard.output                                   ; Write to console.
+                        push  local.data.populating.textual.data.indices.message.l  ; Length of message.
                         call  write.descriptor                                      ; Tell the admin that we're populating the textual data indices.
 
                         push  text.data.filename                                    ; Point open.descriptor to filename for external text data.
