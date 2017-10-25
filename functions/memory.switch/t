@@ -28,7 +28,7 @@
     memory.switch:              push  ebp                                           ; Preserve caller's ebp.
 
                                 mov   ebp, esp                                      ; ebp - Pointer to stack.
-                                add   ebp, (dword.l + memory.switch.packet)         ; ebp - Pointer to number of bytes to allocate.
+                                add   ebp, (dword.l + memory.switch.packet_size)    ; ebp - Pointer to number of bytes to allocate.
 
                                 push  eax                                           ; Preserve caller's eax register.
                                 push  ecx                                           ; Preserve caller's ecx register.
@@ -40,7 +40,7 @@
                                 jz    memory.switch.initialize                      ; No. Go initialize memory management.
 
     memory.switch.initialized:  mov   ebx, eax                                      ; ebx - Pointer to end of OS-defined program memory.
-                                add   ebx, dword [ebp + memory.switch.packet.bytes] ; ebx - Pointer to where we want memory to end.
+                                add   ebx, dword [ebp - memory.switch.packet.bytes] ; ebx - Pointer to where we want memory to end.
                                 mov   eax, sys.mem                                  ; eax - sys.mem: Linux syscall memory management.
                                 int   sys.system.call                               ; Extend memory.
 
@@ -58,7 +58,7 @@
 
                                 pop   ebp                                           ; Restore caller's ebp.
 
-                                ret   (dword.l + memory.switch.packet)              ; Return to caller.
+                                ret   (memory.switch.packet_size)                   ; Return to caller.
 
     memory.switch.initialize:   sub   ebx, ebx                                      ; ebx - Indicator that we're initializing memory management.
                                 mov   eax, sys.mem                                  ; eax - sys.mem: Linux syscall memory management.
