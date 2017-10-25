@@ -58,7 +58,7 @@
 
                                 pop   ebp                                           ; Restore caller's ebp.
 
-                                ret   memory.switch.packet                          ; Return to caller.
+                                ret   (dword.l + memory.switch.packet)              ; Return to caller.
 
     memory.switch.initialize:   sub   ebx, ebx                                      ; ebx - Indicator that we're initializing memory management.
                                 mov   eax, sys.mem                                  ; eax - sys.mem: Linux syscall memory management.
