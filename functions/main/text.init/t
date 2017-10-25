@@ -80,9 +80,6 @@
                         push  dword.l                                               ; Request 4 bytes of extra memory.
                         call  memory.switch                                         ; Extend memory.
 
-                        pop   eax                                                   ; Restore descriptor associated with external data file.
-                        push  eax                                                   ; Preserve descriptor associated with external data file.
-
                         push  word.l                                                ; Tell read.descriptor to read four bytes.
                         push  ebx                                                   ; Point read.descriptor to extended memory buffer.
                         push  eax                                                   ; Point read.descriptor to descriptor associated with external data file.
