@@ -79,9 +79,9 @@
 
                         push  eax                                                   ; Preserve descriptor associated with external data file.
 
-                        push  word.l                                                ; Tell read.descriptor to read four bytes.
-                        push  ebx                                                   ; Point read.descriptor to extended memory buffer.
                         push  eax                                                   ; Point read.descriptor to descriptor associated with external data file.
+                        push  ebx                                                   ; Point read.descriptor to extended memory buffer.
+                        push  word.l                                                ; Tell read.descriptor to read four bytes.
                         call  read.descriptor                                       ; Read the length of the message at this index.
 
                         pop   eax                                                   ; Restore descriptor associated with external data file.
@@ -97,9 +97,9 @@
 
                         push  eax                                                   ; Preserve descriptor associated with external data file.
 
-                        push  edx                                                   ; Tell read.descriptor the number of bytes to be read till next index.
-                        push  ebx                                                   ; Point read.descriptor to extended memory buffer.
                         push  eax                                                   ; Point read.descriptor to descriptor associated with external data file.
+                        push  ebx                                                   ; Point read.descriptor to extended memory buffer.
+                        push  edx                                                   ; Tell read.descriptor the number of bytes to be read till next index.
                         call  read.descriptor                                       ; Read those bytes.
 
                         pop   eax                                                   ; Restore descriptor associated with external data file.
