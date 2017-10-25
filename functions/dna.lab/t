@@ -4,85 +4,25 @@
 ;
 ;   This function combines the dna of two parent gylf to create a new gylf.
 ;
-;   Assumptions:    Populated egg.data fields.
+;   Assumptions:    Populated e.data fields.
 ;
-;   Returns:        Populated character fields.
+;   Returns:        Populated g.data fields.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   character.agility                           ./functions/b
-;
-;   character.base.color                        ./functions/b
-;
-;   character.base.color.number                 ./functions/b
-;
-;   character.base.fur.quality                  ./functions/b
-;
-;   character.base.fur.quality.number           ./functions/b
-;
-;   character.endurance                         ./functions/b
-;
-;   character.father.agility                    ./functions/b
-;
-;   character.father.base.color                 ./functions/b
-;
-;   character.father.base.fur.quality           ./functions/b
-;
-;   character.father.data                       ./functions/b
-;
-;   character.father.dna.l                      ./functions/b
-;
-;   character.father.endurance                  ./functions/b
-;
-;   character.father.secondary.color            ./functions/b
-;
-;   character.father.secondary.fur.quality      ./functions/b
-;
-;   character.father.strength                   ./functions/b
-;
-;   character.mother.agility                    ./functions/b
-;
-;   character.mother.base.color                 ./functions/b
-;
-;   character.mother.base.fur.quality           ./functions/b
-;
-;   character.mother.data                       ./functions/b
-;
-;   character.mother.dna.l                      ./functions/b
-;
-;   character.mother.endurance                  ./functions/b
-;
-;   character.mother.secondary.color            ./functions/b
-;
-;   character.mother.secondary.fur.quality      ./functions/b
-;
-;   character.mother.strength                   ./functions/b
-;
-;   character.secondary.color                   ./functions/b
-;
-;   character.secondary.color.number            ./functions/b
-;
-;   character.secondary.fur.quality             ./functions/b
-;
-;   character.secondary.fur.quality.number      ./functions/b
-;
-;   character.strength                          ./functions/b
-;
-;   child.attribute.computation.factor          ./functions/b
-;
 ;   close.descriptor                            ./functions/close.descriptor/t
 ;
 ;   dna.lab.base.fur.quality                    ./functions/dna.lab/t
 ;
-;   dna.lab.mother.base.color                   ./functions/dna.lab/t
+;   dna.lab.e.parent.base.color                 ./functions/dna.lab/t
 ;
-;   dna.lab.mother.base.fur.quality             ./functions/dna.lab/t
+;   dna.lab.e.parent.base.fur.quality           ./functions/dna.lab/t
 ;
-;   dna.lab.mother.secondary.color              ./functions/dna.lab/t
+;   dna.lab.e.parent.secondary.color            ./functions/dna.lab/t
 ;
-;   dna.lab.mother.secondary.fur.quality        ./functions/dna.lab/t
+;   dna.lab.e.parent.secondary.fur.quality      ./functions/dna.lab/t
 ;
 ;   dna.lab.mutation.base.color                 ./functions/dna.lab/t
 ;
@@ -106,9 +46,9 @@
 ;
 ;   dna.lab.strength                            ./functions/dna.lab/t
 ;
-;   egg.father                                  ./commands/egg/b
+;   e.data                                      ./functions/b
 ;
-;   egg.mother                                  ./commands/egg/b
+;   g.data                                      ./functions/b
 ;
 ;   open.descriptor                             ./functions/open.descriptor/t
 ;
@@ -116,249 +56,219 @@
 ;
 ;   get.ticks                                   ./functions/get.ticks/t
 ;
-;   number.of.parents                           ./functions/b
-;
 
-    dna.lab:                                    mov  ebx, egg.father                                   ; ebx - pointer to filename for father.
-                                                call open.descriptor                                   ; Associate a descriptor with the file for the father.
+    dna.lab:                                    sub   ebx, ebx                                              ; ebx - return ticks in eax.
+                                                call  get.ticks                                             ; eax - ticks.
 
-                                                push eax                                               ; Preserve the associated descriptor.
+                                                cmp   al, 00h                                               ; Did we happen upon a zero lsb?
+                                                jz    dna.lab.mutation.base.color                           ; YES! Go mutate the embryo!
 
-                                                push  character.father.dna.l                       ; Tell read.descriptor the length of the father's DNA.
-                                                push  character.father.data                        ; Point read.descriptor to buffer into which to read the father's DNA.
-                                                push  eax                                          ; Point read.descriptor to descriptor associated with the father's character file.
-                                                call read.descriptor                                   ; Read the father's DNA into memory.
-
-                                                pop  ebx                                               ; ebx - descriptor associated with the father's character file.
-                                                call close.descriptor                                  ; Disassociate the descriptor.
-
-                                                mov  ebx, egg.mother                                   ; ebx - pointer to filename for mother.
-                                                call open.descriptor                                   ; Associate a descriptor with the file for the mother.
-
-                                                push eax                                               ; Preserve the associated descriptor.
-
-                                                push  character.mother.dna.l                       ; Tell read.descriptor the length of the mother's DNA.
-                                                push  character.mother.data                        ; Point read.descriptor to buffer into which to read the mother's DNA.
-                                                push  eax                                          ; Point read.descriptor to descriptor associated with the mother's character file.
-                                                call read.descriptor                                   ; Read the mother's DNA into memory.
-
-                                                pop  ebx                                               ; ebx - descriptor associated with the mother's character file.
-                                                call close.descriptor                                  ; Disassociate the descriptor.
+                                                shr   al, 01h                                               ; Is the least significant bit high?
+                                                jc    dna.lab.e.parent.base.color                           ; Yes. The embryo inherits its laying parent's base color.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.base.color:                         sub  ebx, ebx                                          ; ebx - return ticks in eax.
-                                                call get.ticks                                         ; eax - ticks.
+    dna.lab.i.parent.base.color:                mov   al, byte [e.data+egg.i.parent.base.color]             ; al - inseminating parent's base color.
+                                                mov   byte [g.data+gylf.base.color], al                     ; Give the embryo its inseminating parent's base color.
 
-                                                cmp  al, 00h                                           ; Did we happen upon a zero lsb?
-                                                jz   dna.lab.mutation.base.color                       ; YES! Go mutate the embryo!
-
-                                                shr  al, 01h                                           ; Is the least significant bit high?
-                                                jc   dna.lab.mother.base.color                         ; Yes. The embryo inherits its mother's base color.
+                                                jmp   dna.lab.secondary.color                               ; Go see which parent the embryo will take afer in secondary coloring.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.father.base.color:                  mov  al, byte [character.father.base.color]            ; al - father's base color.
-                                                mov  byte [character.base.color], al                   ; Give the embryo its father's base color.
+    dna.lab.e.parent.base.color:                mov   al, byte [e.data+egg.e.parent.base.color]             ; al - laying parent's base color.
+                                                mov   byte [g.data+gylf.base.color], al                     ; Give the embryo its laying parent's base color.
 
-                                                jmp  dna.lab.secondary.color                           ; Go see which parent the embryo will take afer in secondary coloring.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    dna.lab.mother.base.color:                  mov  al, byte [character.mother.base.color]            ; al - mother's base color.
-                                                mov  byte [character.base.color], al                   ; Give the embryo its mother's base color.
-
-                                                jmp  dna.lab.secondary.color                           ; Go see which parent the embryo will take after in secondary coloring.
+                                                jmp   dna.lab.secondary.color                               ; Go see which parent the embryo will take after in secondary coloring.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.mutation.base.color:                cmp  ah, character.base.color.number                   ; Is ah higher than the total number of base colorings?
-                                                ja   dna.lab.mutation.base.color.fix                   ; Yes. Go fix that.
+    dna.lab.mutation.base.color:                cmp   ah, participant.base.color.number                     ; Is ah higher than the total number of base colorings?
+                                                ja    dna.lab.mutation.base.color.fix                       ; Yes. Go fix that.
 
-                                                mov  byte [character.base.color], ah                   ; Use ah as the mutation factor for the embryo's base coloring.
+                                                mov   byte [g.data+gylf.base.color], ah                     ; Use ah as the mutation factor for the embryo's base coloring.
 
-                                                jmp  dna.lab.secondary.color                           ; Go see which parent the embryo will take after in secondary coloring.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    dna.lab.mutation.base.color.fix:            sub  ebx, ebx                                          ; ebx - return ticks in eax.
-                                                call get.ticks                                         ; eax - ticks.
-
-                                                sub  ah, al                                            ; ah - potential mutation factore for the embryo's base coloring.
-                                                jmp  dna.lab.mutation.base.color                       ; Go see if we can safely mutate the embryo yet.
+                                                jmp   dna.lab.secondary.color                               ; Go see which parent the embryo will take after in secondary coloring.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.secondary.color:                    sub  ebx, ebx                                          ; ebx - return ticks in eax.
-                                                call get.ticks                                         ; eax - ticks.
+    dna.lab.mutation.base.color.fix:            sub   ebx, ebx                                              ; ebx - return ticks in eax.
+                                                call  get.ticks                                             ; eax - ticks.
 
-                                                cmp  al, 00h                                           ; Did we happen upon a zero lsb?
-                                                jz   dna.lab.mutation.secondary.color                  ; YES! Go mutate the embryo!
-
-                                                shr  al, 01h                                           ; Is the least significant bit high?
-                                                jc   dna.lab.mother.secondary.color                    ; Yes. The embryo inherits its mother's secondary coloring.
+                                                sub   ah, al                                                ; ah - potential mutation factore for the embryo's base coloring.
+                                                jmp   dna.lab.mutation.base.color                           ; Go see if we can safely mutate the embryo yet.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.father.secondary.color:             mov  al, byte [character.father.secondary.color]       ; al - father's secondary coloring.
-                                                mov  byte [character.secondary.color], al              ; Give the embryo its father's secondary coloring.
+    dna.lab.secondary.color:                    sub   ebx, ebx                                              ; ebx - return ticks in eax.
+                                                call  get.ticks                                             ; eax - ticks.
 
-                                                jmp  dna.lab.base.fur.quality                          ; Go see which parent the embryo will take after in fur quality.
+                                                cmp   al, 00h                                               ; Did we happen upon a zero lsb?
+                                                jz    dna.lab.mutation.secondary.color                      ; YES! Go mutate the embryo!
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    dna.lab.mother.secondary.color:             mov  al, byte [character.mother.secondary.color]       ; al - mother's secondary coloring.
-                                                mov  byte [character.secondary.color], al              ; Give the embryo its mother's secondary coloring.
-
-                                                jmp  dna.lab.base.fur.quality                          ; Go see which parent the embryo will take after in fur quality.
+                                                shr   al, 01h                                               ; Is the least significant bit high?
+                                                jc    dna.lab.e.parent.secondary.color                      ; Yes. The embryo inherits its laying parent's secondary coloring.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.mutation.secondary.color:           cmp  ah, character.secondary.color.number              ; Is ah higher than the total number of secondary colorings?
-                                                ja   dna.lab.mutation.secondary.color.fix              ; Yes. Go fix that.
+    dna.lab.i.parent.secondary.color:           mov   al, byte [e.data+egg.i.parent.secondary.color]        ; al - inseminating parent's secondary coloring.
+                                                mov   byte [g.data+gylf.secondary.color], al                ; Give the embryo its inseminating parent's secondary coloring.
 
-                                                mov  byte [character.secondary.color], ah              ; Use ah as the mutation factor for the embryo's secondary coloring.
-
-                                                jmp  dna.lab.base.fur.quality                          ; Go see which parent the embryo will take after in fur quality.
+                                                jmp   dna.lab.base.fur.quality                              ; Go see which parent the embryo will take after in fur quality.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.mutation.secondary.color.fix:       sub  ebx, ebx                                          ; ebx - return ticks in eax.
-                                                call get.ticks                                         ; eax - ticks.
+    dna.lab.e.parent.secondary.color:           mov   al, byte [e.data+egg.e.parent.secondary.color]        ; al - laying parent's secondary coloring.
+                                                mov   byte [g.data+gylf.secondary.color], al                ; Give the embryo its laying parent's secondary coloring.
 
-                                                sub  ah, al                                            ; ah - potential mutation factor for embryo's secondary coloring.
-                                                jmp  dna.lab.mutation.secondary.color                  ; Go see if we can safely mutate the embryo yet.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    dna.lab.base.fur.quality:                   sub  ebx, ebx                                          ; ebx - return ticks in eax.
-                                                call get.ticks                                         ; eax - ticks.
-
-                                                cmp  al, 00h                                           ; Did we happen upon a zero lsb?
-                                                jz   dna.lab.mutation.base.fur.quality                 ; YES! Go mutate the embryo!
-
-                                                shr  al, 01h                                           ; Is the least significant bit high?
-                                                jc   dna.lab.mother.base.fur.quality                   ; Yes. The embryo inherits its mother's base fur quality.
+                                                jmp   dna.lab.base.fur.quality                              ; Go see which parent the embryo will take after in fur quality.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.father.base.fur.quality:            mov  al, byte [character.father.base.fur.quality]      ; al - father's base fur quality.
-                                                mov  byte [character.base.fur.quality], al             ; Give the embryo its father's base fur quality.
+    dna.lab.mutation.secondary.color:           cmp   ah, participant.secondary.color.number                ; Is ah higher than the total number of secondary colorings?
+                                                ja    dna.lab.mutation.secondary.color.fix                  ; Yes. Go fix that.
 
-                                                jmp  dna.lab.secondary.fur.quality                     ; Go see which parent the embryo will take after in secondary fur quality.
+                                                mov   byte [g.data+gylf.secondary.color], ah                ; Use ah as the mutation factor for the embryo's secondary coloring.
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    dna.lab.mother.base.fur.quality:            mov  al, byte [character.mother.base.fur.quality]      ; al - mother's base fur quality.
-                                                mov  byte [character.base.fur.quality], al             ; Give the embryo its mother's base fur quality.
-
-                                                jmp  dna.lab.secondary.fur.quality                     ; Go see which parent the embryo will take after in secondary fur quality.
+                                                jmp   dna.lab.base.fur.quality                              ; Go see which parent the embryo will take after in fur quality.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.mutation.base.fur.quality:          cmp  ah, character.base.fur.quality.number             ; Is ah higher than the total number of base fur qualities?
-                                                ja   dna.lab.mutation.base.fur.quality.fix             ; Yes. Go fix that.
+    dna.lab.mutation.secondary.color.fix:       sub   ebx, ebx                                              ; ebx - return ticks in eax.
+                                                call  get.ticks                                             ; eax - ticks.
 
-                                                mov  byte [character.base.fur.quality], ah             ; Use ah as the mutation factor for the embryo's base fur quality.
-
-                                                jmp  dna.lab.secondary.fur.quality                     ; Go see which parent the embryo will take after in secondary fur quality.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    dna.lab.mutation.base.fur.quality.fix:      sub  ebx, ebx                                          ; ebx - return ticks in eax.
-                                                call get.ticks                                         ; eax - ticks.
-
-                                                sub  ah, al                                            ; ah - potential mutation factor for embryo's base fur quality.
-                                                jmp  dna.lab.mutation.base.fur.quality                 ; Go see if we can safely mutate the embryo yet.
+                                                sub   ah, al                                                ; ah - potential mutation factor for embryo's secondary coloring.
+                                                jmp   dna.lab.mutation.secondary.color                      ; Go see if we can safely mutate the embryo yet.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.secondary.fur.quality:              sub  ebx, ebx                                          ; ebx - return ticks in eax.
-                                                call get.ticks                                         ; eax - ticks.
+    dna.lab.base.fur.quality:                   sub   ebx, ebx                                              ; ebx - return ticks in eax.
+                                                call  get.ticks                                             ; eax - ticks.
 
-                                                cmp  al, 00h                                           ; Did we happen upon a zero lsb?
-                                                jz   dna.lab.mutation.secondary.fur.quality            ; YES! Go mutate the embryo!
+                                                cmp   al, 00h                                               ; Did we happen upon a zero lsb?
+                                                jz    dna.lab.mutation.base.fur.quality                     ; YES! Go mutate the embryo!
 
-                                                shr  al, 01h                                           ; Is the least significant bit high?
-                                                jc   dna.lab.mother.secondary.fur.quality              ; Yes. The embryo inherits its mother's secondary fur quality.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    dna.lab.father.secondary.fur.quality:       mov  al, byte [character.father.secondary.fur.quality] ; al - father's secondary fur quality.
-                                                mov  byte [character.secondary.fur.quality], al        ; Give the embryo its father's secondary fur quality.
-
-                                                jmp  dna.lab.strength                                  ; Go compute the embryo's base strength.
+                                                shr   al, 01h                                               ; Is the least significant bit high?
+                                                jc    dna.lab.e.parent.base.fur.quality                     ; Yes. The embryo inherits its laying parent's base fur quality.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.mother.secondary.fur.quality:       mov  al, byte [character.mother.secondary.fur.quality] ; al - mother's secondary fur quality.
-                                                mov  byte [character.secondary.fur.quality], al        ; Give the embryo its mother's secondary fur quality.
+    dna.lab.i.parent.base.fur.quality:          mov   al, byte [e.data+egg.i.parent.base.fur.quality]       ; al - inseminating parent's base fur quality.
+                                                mov   byte [g.data+gylf.base.fur.quality], al               ; Give the embryo its inseminating parent's base fur quality.
 
-                                                jmp  dna.lab.strength                                  ; Go compute the embryo's base strength.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    dna.lab.mutation.secondary.fur.quality:     cmp  ah, character.secondary.fur.quality.number        ; Is ah higher than the total number of secondary fur qualities?
-                                                ja   dna.lab.mutation.secondary.fur.quality.fix        ; Yes. Go fix that.
-
-                                                mov  [character.secondary.fur.quality], ah             ; Use ah as the mutation factor for the embryo's secondary fur quality.
-
-                                                jmp  dna.lab.strength                                  ; Go compute the embryo's base strength.
+                                                jmp   dna.lab.secondary.fur.quality                         ; Go see which parent the embryo will take after in secondary fur quality.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.mutation.secondary.fur.quality.fix: sub  ebx, ebx                                          ; ebx - return ticks in eax.
-                                                call get.ticks                                         ; eax - ticks.
+    dna.lab.e.parent.base.fur.quality:          mov   al, byte [e.data+egg.e.parent.base.fur.quality]       ; al - laying parent's base fur quality.
+                                                mov   byte [g.data+gylf.base.fur.quality], al               ; Give the embryo its laying parent's base fur quality.
 
-                                                sub  ah, al                                            ; ah - potential mutation factor for embryo's secondary fur quality.
-                                                jmp  dna.lab.mutation.secondary.fur.quality            ; Go see if we can safely mutate the embryo yet.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    dna.lab.strength:                           mov  al, byte [character.father.strength]              ; al - father's strength.
-                                                mov  ah, byte [character.mother.strength]              ; ah - mother's strength.
-
-                                                add  al, ah                                            ; al - the sum of both strengths.
-                                                sub  ah, ah                                            ; ah - prepared for averaging.
-                                                mov  dl, number.of.parents                             ; dl - number of contributing parents.
-                                                div  dl                                                ; al - average of parental strengths.
-
-                                                sub  ah, ah                                            ; ah - prepared for conversion to embryonic strength.
-                                                mov  dl, child.attribute.computation.factor            ; dl - arbitrary factor for attribute conversion.
-                                                div  dl                                                ; al - embryonic strength.
-
-                                                mov  byte [character.strength], al                     ; Assign embryonic strength value to embryo.
+                                                jmp   dna.lab.secondary.fur.quality                         ; Go see which parent the embryo will take after in secondary fur quality.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.endurance:                          mov  al, byte [character.father.endurance]             ; al - father's endurance.
-                                                mov  ah, byte [character.mother.endurance]             ; ah - mother's endurance.
+    dna.lab.mutation.base.fur.quality:          cmp   ah, participant.base.fur.quality.number               ; Is ah higher than the total number of base fur qualities?
+                                                ja    dna.lab.mutation.base.fur.quality.fix                 ; Yes. Go fix that.
 
-                                                add  al, ah                                            ; al - the sum of both endurancii.
-                                                sub  ah, ah                                            ; ah - prepared for averaging.
-                                                mov  dl, number.of.parents                             ; dl - number of contributing parents.
-                                                div  dl                                                ; al - average of parental endurancii.
+                                                mov   byte [g.data+gylf.base.fur.quality], ah               ; Use ah as the mutation factor for the embryo's base fur quality.
 
-                                                sub  ah, ah                                            ; ah - prepared for conversion to embryonic endurance.
-                                                mov  dl, child.attribute.computation.factor            ; dl - arbitrary factor for attribute conversion.
-                                                div  dl                                                ; al - embryonic endurance.
-
-                                                mov  byte [character.endurance], al                    ; Assign embryonic endurance value to embryo.
+                                                jmp   dna.lab.secondary.fur.quality                         ; Go see which parent the embryo will take after in secondary fur quality.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.agility:                            mov  al, byte [character.father.agility]               ; al - father's agility.
-                                                mov  ah, byte [character.mother.agility]               ; ah - mother's agility.
+    dna.lab.mutation.base.fur.quality.fix:      sub   ebx, ebx                                              ; ebx - return ticks in eax.
+                                                call  get.ticks                                             ; eax - ticks.
 
-                                                add  al, ah                                            ; al - the sum of both agilities.
-                                                sub  ah, ah                                            ; ah - prepared for averaging.
-                                                mov  dl, number.of.parents                             ; dl - number of contributing parents.
-                                                div  dl                                                ; al - average of parental agilities.
+                                                sub   ah, al                                                ; ah - potential mutation factor for embryo's base fur quality.
+                                                jmp   dna.lab.mutation.base.fur.quality                     ; Go see if we can safely mutate the embryo yet.
 
-                                                sub  ah, ah                                            ; ah - prepared for conversion to embryonic agility.
-                                                mov  dl, child.attribute.computation.factor            ; dl - arbitrary factor for attribute conversion.
-                                                div  dl                                                ; al - embryonic agility.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-                                                mov  byte [character.agility], al                      ; Assign embryonic agility to embryo.
+    dna.lab.secondary.fur.quality:              sub   ebx, ebx                                              ; ebx - return ticks in eax.
+                                                call  get.ticks                                             ; eax - ticks.
 
-                                                ret                                                    ; Return to caller.
+                                                cmp   al, 00h                                               ; Did we happen upon a zero lsb?
+                                                jz    dna.lab.mutation.secondary.fur.quality                ; YES! Go mutate the embryo!
+
+                                                shr   al, 01h                                               ; Is the least significant bit high?
+                                                jc    dna.lab.e.parent.secondary.fur.quality                ; Yes. The embryo inherits its laying parent's secondary fur quality.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    dna.lab.i.parent.secondary.fur.quality:     mov   al, byte [e.data+egg.i.parent.secondary.fur.quality]  ; al - inseminating parent's secondary fur quality.
+                                                mov   byte [g.data+gylf.secondary.fur.quality], al          ; Give the embryo its inseminating parent's secondary fur quality.
+
+                                                jmp   dna.lab.strength                                      ; Go compute the embryo's base strength.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    dna.lab.e.parent.secondary.fur.quality:     mov   al, byte [e.data+egg.e.parent.secondary.fur.quality]  ; al - laying parent's secondary fur quality.
+                                                mov   byte [g.data+gylf.secondary.fur.quality], al          ; Give the embryo its laying parent's secondary fur quality.
+
+                                                jmp   dna.lab.strength                                      ; Go compute the embryo's base strength.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    dna.lab.mutation.secondary.fur.quality:     cmp   ah, participant.secondary.fur.quality.number          ; Is ah higher than the total number of secondary fur qualities?
+                                                ja    dna.lab.mutation.secondary.fur.quality.fix            ; Yes. Go fix that.
+
+                                                mov   [g.data+gylf.secondary.fur.quality], ah               ; Use ah as the mutation factor for the embryo's secondary fur quality.
+
+                                                jmp   dna.lab.strength                                      ; Go compute the embryo's base strength.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    dna.lab.mutation.secondary.fur.quality.fix: sub   ebx, ebx                                              ; ebx - return ticks in eax.
+                                                call  get.ticks                                             ; eax - ticks.
+
+                                                sub   ah, al                                                ; ah - potential mutation factor for embryo's secondary fur quality.
+                                                jmp   dna.lab.mutation.secondary.fur.quality                ; Go see if we can safely mutate the embryo yet.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    dna.lab.strength:                           mov   al, byte [e.data+egg.i.parent.strength]               ; al - inseminating parent's strength.
+                                                mov   ah, byte [e.data+egg.e.parent.strength]               ; ah - laying parent's strength.
+
+                                                add   al, ah                                                ; al - the sum of both strengths.
+                                                sub   ah, ah                                                ; ah - prepared for averaging.
+                                                mov   dl, number.of.parents                                 ; dl - number of contributing parents.
+                                                div   dl                                                    ; al - average of parental strengths.
+
+                                                sub   ah, ah                                                ; ah - prepared for conversion to embryonic strength.
+                                                mov   dl, child.attribute.computation.factor                ; dl - arbitrary factor for attribute conversion.
+                                                div   dl                                                    ; al - embryonic strength.
+
+                                                mov   byte [g.data+gylf.strength], al                       ; Assign embryonic strength value to embryo.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    dna.lab.endurance:                          mov   al, byte [e.data+egg.i.parent.endurance]              ; al - inseminating parent's endurance.
+                                                mov   ah, byte [e.data+egg.e.parent.endurance]              ; ah - laying parent's endurance.
+
+                                                add   al, ah                                                ; al - the sum of both endurancii.
+                                                sub   ah, ah                                                ; ah - prepared for averaging.
+                                                mov   dl, number.of.parents                                 ; dl - number of contributing parents.
+                                                div   dl                                                    ; al - average of parental endurancii.
+
+                                                sub   ah, ah                                                ; ah - prepared for conversion to embryonic endurance.
+                                                mov   dl, child.attribute.computation.factor                ; dl - arbitrary factor for attribute conversion.
+                                                div   dl                                                    ; al - embryonic endurance.
+
+                                                mov   byte [g.data+gylf.endurance], al                      ; Assign embryonic endurance value to embryo.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    dna.lab.agility:                            mov   al, byte [e.data+egg.i.parent.agility]                ; al - inseminating parent's agility.
+                                                mov   ah, byte [e.data+egg.e.parent.agility]                ; ah - laying parent's agility.
+
+                                                add   al, ah                                                ; al - the sum of both agilities.
+                                                sub   ah, ah                                                ; ah - prepared for averaging.
+                                                mov   dl, number.of.parents                                 ; dl - number of contributing parents.
+                                                div   dl                                                    ; al - average of parental agilities.
+
+                                                sub   ah, ah                                                ; ah - prepared for conversion to embryonic agility.
+                                                mov   dl, child.attribute.computation.factor                ; dl - arbitrary factor for attribute conversion.
+                                                div   dl                                                    ; al - embryonic agility.
+
+                                                mov   byte [g.data+gylf.agility], al                        ; Assign embryonic agility to embryo.
+
+                                                ret                                                         ; Return to caller.

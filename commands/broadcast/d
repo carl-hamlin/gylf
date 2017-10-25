@@ -8,34 +8,20 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.broadcast.l                   ./commands/broadcast/d
-;   command.broadcast.s                   ./commands/broadcast/d
-;   socket.data.command.broadcast.help    ./commands/broadcast/d
-;   socket.data.command.broadcast.help.l  ./commands/broadcast/d
+;   command.broadcast   ./commands/broadcast/t
 ;
-;   command.broadcast                     ./commands/broadcast/t
+;   command.broadcast.l ./commands/broadcast/d
 ;
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;   command.broadcast.s ./commands/broadcast/d
 ;
-;   Help Message
-;
-
-	  socket.data.command.broadcast.help    db  "  broadcast", 0Ah, 0Dh, 0Ah, 0Dh                                                                             ; Command broadcast help message.
-	                                        db  "  Syntax: broadcast <quoted message>", 0Ah, 0Dh, 0Ah, 0Dh
-	                                        db  "  Broadcasts a message to the entire world. This command is restricted to administrator privileged", 0Ah, 0Dh
-	                                        db  "  participants.", 0Ah, 0Dh, 0Ah, 0Dh, "> "
-	  socket.data.command.broadcast.help.l  equ $-socket.data.command.broadcast.help                                                                          ; Length of message.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Command Table Entry
 ;
 
-    command.broadcast.w                   db  command.broadcast.l                                                                                           ; Indicator of length of command 'broadcast'.
-    command.broadcast.s                   db  'broadcast'                                                                                                   ; Admin command string for broadcasting a message to the entire world.
-    command.broadcast.l                   equ $-command.broadcast.s                                                                                         ; Length of command 'broadcast'.
-    command.broadcast.p                   dd  command.broadcast                                                                                             ; Pointer to handler for command 'broadcast'.
-    command.broadcast.h                   dd  socket.data.command.broadcast.help                                                                            ; Pointer to help message for command 'broadcast'.
-    command.broadcast.h.l                 dd  socket.data.command.broadcast.help.l                                                                          ; Length of help message for command 'broadcast'.
-
+    command.broadcast.w db  command.broadcast.l                                 ; Indicator of length of command 'broadcast'.
+    command.broadcast.s db  'broadcast'                                         ; Admin command string for broadcasting a message to the entire world.
+    command.broadcast.l equ $-command.broadcast.s                               ; Length of command 'broadcast'.
+    command.broadcast.p dd  command.broadcast                                   ; Pointer to handler for command 'broadcast'.
+    command.broadcast.h dd  text.data.index.socket.data.command.broadcast.help  ; Pointer to help message for command 'broadcast'.
