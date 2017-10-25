@@ -80,9 +80,9 @@
                         push  dword.l                                               ; Request 4 bytes of extra memory.
                         call  memory.switch                                         ; Extend memory.
 
-                        push  word.l                                                ; Tell read.descriptor to read four bytes.
-                        push  ebx                                                   ; Point read.descriptor to extended memory buffer.
                         push  eax                                                   ; Point read.descriptor to descriptor associated with external data file.
+                        push  ebx                                                   ; Point read.descriptor to extended memory buffer.
+                        push  word.l                                                ; Tell read.descriptor to read four bytes.
                         call  read.descriptor                                       ; Read the length of the message at this index.
 
                         mov   ebx, ecx                                              ; ebx - Pointer to read data.
@@ -106,9 +106,9 @@
 
                         pop   edx                                                   ; Restore index counter.
 
-                        push  edx                                                   ; Tell read.descriptor the number of bytes to be read till next index.
-                        push  ebx                                                   ; Point read.descriptor to extended memory buffer.
                         push  eax                                                   ; Point read.descriptor to descriptor associated with external data file.
+                        push  ebx                                                   ; Point read.descriptor to extended memory buffer.
+                        push  edx                                                   ; Tell read.descriptor the number of bytes to be read till next index.
                         call  read.descriptor                                       ; Read those bytes.
 
                         add   esi, dword.l                                          ; esi - Pointer to storage for next index.
