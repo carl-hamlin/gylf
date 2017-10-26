@@ -30,77 +30,60 @@
 ;   text.data.filename  ./functions/main/text.init/d
 ;
 
-    get.text.data:    pop   ebp                 ; Preserve return address.
-                      pop   edi                 ; Preserve index to requested data.
+    get.text.data:    push  ebp                                                 ; Preserve caller's ebp.
+                      push  dword 00000000h                                     ; Setup get.text.data.packet.descriptor.
+                      push  dword 00000000h                                     ; Setup get.text.data.packet.length.
 
-                      cmp   edi, 0              ; Are we at the zero index?
-                      jnz   get.text.data.nz    ; No - proceed uninterrupted.
+                      mov   ebp, esp                                            ; ebp - Prepared to be used as a data pointer.
+                      add   ebp, (dword.l + get.text.data.packet_size)          ; ebp - Data pointer.
 
-                      push  dword.l             ; Yes - ask for at least a dword of memory, or we're going to run into problems later.
-                      jmp   get.text.data.z     ; Proceed.
+                      push  eax                                                 ; Preserve caller's eax.
+                      push  ebx                                                 ; Preserve caller's ebx.
 
-    get.text.data.nz: push  edi                 ; Ask for enough memory for the entire index.
+                      cmp   dword [ebp - get.text.data.packet.message], 0       ; Are we at the zero index?
+                      jnz   get.text.data.nz                                    ; No - proceed uninterrupted.
 
-    get.text.data.z:  call  memory.switch       ; Reserve memory for the index operation.
+                      push  dword.l                                             ; Yes - ask for at least a dword of memory, or we're going to run into problems later.
+                      jmp   get.text.data.z                                     ; Proceed.
 
-                      push  ebx                 ; Preserve pointer to new memory.
+    get.text.data.nz: push  dword [ebp - get.text.data.packet.message]          ; Ask for enough memory for the entire index.
 
-                      push  text.data.filename  ; Point open.descriptor to the indexed data repository.
-                      call  open.descriptor     ; Associate a descriptor with the indexed data repository.
+    get.text.data.z:  call  memory.switch                                       ; Reserve memory for the index operation.
 
-                      pop   ebx                 ; Restore pointer to new memory.
+                      push  text.data.filename                                  ; Point open.descriptor to the indexed data repository.
+                      call  open.descriptor                                     ; Associate a descriptor with the indexed data repository.
                     
-                      push  eax                 ; Preserve descriptor associated with indexed data repository.
-                      push  ebx                 ; Preserve pointer to new memory.
-                      push  ebp                 ; Preserve return address.
+                      mov   dword [ebp - get.text.data.packet.descriptor], eax  ; Store descriptor for external text data.
 
-                      push  edi                 ; Tell read.descriptor to read up to the index point.
-                      push  ebx                 ; Point read.descriptor to new memory.
-                      push  eax                 ; Point read.descriptor to the indexed data repository.
-                      call  read.descriptor     ; Read indexed data up to the index point.
+                      push  dword [ebp - get.text.data.packet.message]          ; Tell read.descriptor to read up to the index point.
+                      push  ebx                                                 ; Point read.descriptor to new memory.
+                      push  dword [ebp - get.text.data.packet.descriptor]       ; Point read.descriptor to the indexed data repository.
+                      call  read.descriptor                                     ; Read indexed data up to the index point.
 
-                      pop   ebp                 ; Restore return address.
-                      pop   ebx                 ; Restore pointer to new memory.
-                      pop   eax                 ; Restore descriptor associated with indexed data repository.
+                      push  dword.l                                             ; Tell read.descriptor to read the dword length of the indexed data.
+                      push  ebx                                                 ; Point read.descriptor to new memory.
+                      push  dword [ebp - get.text.data.packet.descriptor]       ; Point read.descriptor to the descriptor associated with the indexed data repository.
+                      call  read.descriptor                                     ; Read the length of the indexed data.
 
-                      push  eax                 ; Preserve descriptor associated with indexed data repository.
-                      push  ebx                 ; Preserve pointer to new memory.
-                      push  ebp                 ; Preserve return address.
+                      mov   eax, dword [ebx]                                    ; eax - Length of indexed data.
+                      mov   dword [ebp - get.text.data.packet.length], eax      ; Store length of indexed data.
 
-                      push  dword.l             ; Tell read.descriptor to read the dword length of the indexed data.
-                      push  ebx                 ; Point read.descriptor to new memory.
-                      push  eax                 ; Point read.descriptor to the descriptor associated with the indexed data repository.
-                      call  read.descriptor     ; Read the length of the indexed data.
+                      push  dword [ebp - get.text.data.packet.length]           ; Tell memory.switch to adjust reserved memory to the size of the indexed data.
+                      call  memory.switch                                       ; Adjust reserved memory to the size of the indexed data.
 
-                      pop   ebp                 ; Restore return address.
-                      pop   ebx                 ; Restore pointer to new memory.
-                      pop   eax                 ; Restore descriptor associated with indexed data repository.
+                      push  dword [ebp - get.text.data.packet.length]           ; Tell read.descriptor to read the entire indexed string.
+                      push  ebx                                                 ; Point read.descriptor to new memory.
+                      push  dword [ebp - get.text.data.packet.descriptor]       ; Point read.descriptor to the descriptor associated with the indexed data repository.
+                      call  read.descriptor                                     ; Read the indexed string.
 
-                      push  ebx                 ; Preserve pointer to new memory.
-                      push  dword [ebx]         ; Preserve length of the indexed data.
+                      push  dword [ebp - get.text.data.packet.descriptor]       ; Point close.descriptor to the descriptor associated with the indexed data repository.
+                      call  close.descriptor                                    ; Disassociate the descriptor associated with the indexed data repository.
 
-                      push  eax                 ; Preserve descriptor associated with indexed data repository.
-                      push  dword [ebx]         ; Preserve length of the indexed data.
+                      mov   ecx, ebx                                            ; ecx - Pointer to retrieved message.
+                      mov   edx, [ebp - get.text.data.packet.length]            ; edx - Length of retrieved message.
 
-                      push  dword [ebx]         ; Tell memory.switch to adjust reserved memory to the size of the indexed data.
-                      call  memory.switch       ; Adjust reserved memory to the size of the indexed data.
+                      pop   ebx                                                 ; Restore caller's ebx.
+                      pop   eax                                                 ; Restore caller's eax.
 
-                      pop   ecx                 ; Restore length of the indexed data.
-                      pop   eax                 ; Restore descriptor associated with indexed data repository.
-
-                      push  ebp                 ; Preserve return address.
-
-                      push  ecx                 ; Tell read.descriptor to read the entire indexed string.
-                      push  ebx                 ; Point read.descriptor to new memory.
-                      push  eax                 ; Point read.descriptor to the descriptor associated with the indexed data repository.
-                      call  read.descriptor     ; Read the indexed string.
-
-                      pop   ebp                 ; Restore return address.
-
-                      call  close.descriptor    ; Disassociate the descriptor associated with the indexed data repository.
-
-                      pop   edx                 ; Restore length of indexed data.
-                      pop   ecx                 ; Restore pointer to indexed data.
-
-                      push  ebp                 ; Restore return address.
-                      ret                       ; Return to caller.
+                      pop   ebp                                                 ; Restore return address.
+                      ret   get.text.data.packet_size                           ; Return to caller.
