@@ -1,0 +1,24 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/read.descriptor/s
+;
+;   This file contains structures pertinent to the read.descriptor utility.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+;================================================================================================================================================================================================
+;
+;   read.descriptor Data Structure
+;
+
+    struc read.descriptor.packet
+      .descriptor resd  00000001h ; Storage for descriptor from which to read.
+      .buffer     resd  00000001h ; Storage for pointer to buffer into which to read data.
+      .bytes      resd  00000001h ; Storage for number of bytes to read.
+    endstruc
+
