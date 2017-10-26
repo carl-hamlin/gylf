@@ -28,7 +28,7 @@
     write.console:  push  ebp                                         ; Preserve caller's ebp.
 
                     mov   ebp, esp                                    ; ebp - Prepared to be used as data pointer.
-                    add   ebp (dword.l + write.console.packet_size)   ; ebp - Data pointer.
+                    add   ebp, (dword.l + write.console.packet_size)  ; ebp - Data pointer.
 
                     push  dword [ebp - write.console.packet.message]  ; Point get.text.data to message to be retrieved.
                     call  get.text.data                               ; Get indexed data.
