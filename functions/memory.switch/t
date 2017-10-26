@@ -4,10 +4,9 @@
 ;
 ;   This function calls the linux kernel and causes it to allocate the specified number of bytes of memory for temporary use.
 ;
-;   Assumptions:    esp+4 - Number of bytes to allocate.
+;   Assumptions:    Stack Frame: dword [Number of bytes to allocate]
 ;
 ;   Returns:        ebx - Pointer to new memory.
-;                   eax - Error indicator.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
@@ -26,23 +25,44 @@
 ;   sys.system.call           ./functions/b
 ;
 
-    memory.switch:              mov   eax, dword [break.pointer]  ; eax - Pointer to end of OS-defined program memory, or indicator that we have yet to initialize memory management.
+    memory.switch:              push  ebp                                           ; Preserve caller's ebp.
 
-                                cmp   eax, 0                      ; Have we already initialized?
-                                jz    memory.switch.initialize    ; No. Go initialize memory management.
+                                mov   ebp, esp                                      ; ebp - Pointer to stack.
+                                add   ebp, (dword.l + memory.switch.packet_size)    ; ebp - Pointer to number of bytes to allocate.
 
-    memory.switch.initialized:  mov   ebx, eax                    ; ebx - Pointer to end of OS-defined program memory.
-                                add   ebx, dword [esp+dword.l]    ; ebx - Pointer to where we want memory to end.
-                                mov   eax, sys.mem                ; eax - sys.mem: Linux syscall memory management.
-                                int   sys.system.call             ; Extend memory.
+                                push  eax                                           ; Preserve caller's eax register.
+                                push  ecx                                           ; Preserve caller's ecx register.
+                                push  edi                                           ; Preserve caller's edi register.
 
-                                sub   ebx, dword [esp+dword.l]    ; ebx - Pointer to new memory.
+                                mov   eax, dword [break.pointer]                    ; eax - Pointer to end of OS-defined program memory, or indicator that we have yet to initialize memory management.
 
-                                ret   4                           ; Return to caller.
+                                cmp   eax, 0                                        ; Have we already initialized?
+                                jz    memory.switch.initialize                      ; No. Go initialize memory management.
 
-    memory.switch.initialize:   sub   ebx, ebx                    ; ebx - Indicator that we're initializing memory management.
-                                mov   eax, sys.mem                ; eax - sys.mem: Linux syscall memory management.
-                                int   sys.system.call             ; Initialize memory management.
+    memory.switch.initialized:  mov   ebx, eax                                      ; ebx - Pointer to end of OS-defined program memory.
+                                add   ebx, dword [ebp - memory.switch.packet.bytes] ; ebx - Pointer to where we want memory to end.
+                                mov   eax, sys.mem                                  ; eax - sys.mem: Linux syscall memory management.
+                                int   sys.system.call                               ; Extend memory.
 
-                                mov   dword [break.pointer], eax  ; Store pointer to end of OS-defined program memory.
-                                jmp   memory.switch.initialized   ; Now that memory management has been initialized, go take care of that request.
+                                sub   ebx, dword [ebp]                              ; ebx - Pointer to new memory.
+
+                                mov   edi, ebx                                      ; edi - Pointer to new memory.
+                                mov   ecx, dword [ebp]                              ; ecx - Number of bytes to sterilize.
+                                sub   al, al                                        ; al - Zero for memory sterilization.
+
+                                repnz stosb                                         ; Sterilize new memory.
+
+                                pop   edi                                           ; Restore caller's edi register.
+                                pop   ecx                                           ; Restore caller's ecx register.
+                                pop   eax                                           ; Restore caller's eax register.
+
+                                pop   ebp                                           ; Restore caller's ebp.
+
+                                ret   (memory.switch.packet_size)                   ; Return to caller.
+
+    memory.switch.initialize:   sub   ebx, ebx                                      ; ebx - Indicator that we're initializing memory management.
+                                mov   eax, sys.mem                                  ; eax - sys.mem: Linux syscall memory management.
+                                int   sys.system.call                               ; Initialize memory management.
+
+                                mov   dword [break.pointer], eax                    ; Store pointer to end of OS-defined program memory.
+                                jmp   memory.switch.initialized                     ; Now that memory management has been initialized, go take care of that request.
