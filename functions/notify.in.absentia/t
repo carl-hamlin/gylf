@@ -1,0 +1,63 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/notify.in.absentia/t
+;
+;   This function stores a message to be recalled to a participant upon their next login.
+;
+;   Assumptions:    Stack Frame:  dword [pointer to filename to notify]
+;                                 dword [pointer to notification]
+;                                 dword [length of notification]
+;
+;   Returns:        eax - Error.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   buffer.1                    ./functions/b
+;
+;   close.descriptor            ./functions/close.descriptor/t
+;
+;   create.file                 ./functions/create.file/t
+;
+;   dword.l                     ./b
+;
+;   message.marker              ./functions/d
+;
+;   notify.in.absentia.old.file ./functions/notify.in.absentia/t
+;
+;   open.descriptor             ./functions/open.descriptor/t
+;
+;   write.descriptor            ./functions/write.descriptor/t
+;
+
+    notify.in.absentia:           mov   ebp, esp
+                                  add   ebp, (dword.l + nia.packet)
+
+                                  mov   esi, dword [ebp + nia.packet.id]
+                                  mov   edi, buffer.1
+
+                                  repnz movsb
+
+                                  mov   esi, message.marker
+                                  repnz movsb
+
+                                  push  buffer.1
+                                  call  open.descriptor
+                        
+                                  or    eax, eax
+                                  js    notify.in.absentia.old.file
+
+                                  push  buffer.1
+                                  call  create.file                        
+
+    notify.in.absentia.old.file:  push  eax
+
+                                  push  eax
+                                  push  dword [ebp + nia.packet.notification]
+                                  push  dword [ebp + nia.packet.length]
+                                  call  write.descriptor
+
+                                  call  close.descriptor
+
+                                  ret   nia.packet
