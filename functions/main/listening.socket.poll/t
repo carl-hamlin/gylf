@@ -73,7 +73,8 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    listening.socket.poll.greet:  mov   dword [a.p.data + gylf.connection.descriptor.index], eax            ; Position login connection descriptor for greeting.
+    listening.socket.poll.greet:  int 3
+    mov   dword [a.p.data + gylf.connection.descriptor.index], eax            ; Position login connection descriptor for greeting.
     
                                   mov   dword [login.handle], eax                                           ; Store login connection.
                                   mov   byte [login.status], login.status                                   ; Indicate that the connection is in login status.
