@@ -70,7 +70,7 @@
 
                                         cmp   edx, eax                                                ; Have we reached the last login in our list?
                                         jz    active.socket.poll.logins.done                          ; Yes. Go set up for eggs.
-int 3
+
                                         push  login.filename + dword.l                                ; Point convert.binary.id.to.ascii.id to the login filename.
                                         push  edx                                                     ; Point convert.binary.id.to.ascii.id to the first id in the list.
                                         call  convert.binary.id.to.ascii.id                           ; Set up the id for reading.
