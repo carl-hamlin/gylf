@@ -2,4 +2,5 @@
 
     section   .text
 
+    %include  "./functions/convert.binary.id.to.ascii.id/s"
     %include  "./functions/convert.binary.id.to.ascii.id/t"

@@ -70,8 +70,8 @@
 
                                         cmp   edx, eax                                                ; Have we reached the last login in our list?
                                         jz    active.socket.poll.logins.done                          ; Yes. Go set up for eggs.
-
-                                        push  login.filename                                          ; Point convert.binary.id.to.ascii.id to the login filename.
+int 3
+                                        push  login.filename + dword.l                                ; Point convert.binary.id.to.ascii.id to the login filename.
                                         push  edx                                                     ; Point convert.binary.id.to.ascii.id to the first id in the list.
                                         call  convert.binary.id.to.ascii.id                           ; Set up the id for reading.
 
@@ -110,7 +110,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    active.socket.poll.eggs:            push  egg.filename                                            ; Point convert.binary.id.to.ascii.id to the egg filename.
+    active.socket.poll.eggs:            push  egg.filename + dword.l                                  ; Point convert.binary.id.to.ascii.id to the egg filename.
                                         push  edx                                                     ; Point convert.binary.id.to.ascii.id to the first id in the list.
                                         call  convert.binary.id.to.ascii.id                           ; Set up the id for reading.
 
@@ -149,7 +149,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    active.socket.poll.gylf:            push  gylf.filename                                           ; Point convert.binary.id.to.ascii.id to the gylf filename.
+    active.socket.poll.gylf:            push  gylf.filename + dword.l                                 ; Point convert.binary.id.to.ascii.id to the gylf filename.
                                         push  edx                                                     ; Point convert.binary.id.to.ascii.id to the first id in the list.
                                         call  convert.binary.id.to.ascii.id                           ; Set up the id for reading.
 
@@ -187,7 +187,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    active.socket.poll.ghosts:          push  ghost.filename                                          ; Point convert.binary.id.to.ascii.id to the ghost filename.
+    active.socket.poll.ghosts:          push  ghost.filename + dword.l                                ; Point convert.binary.id.to.ascii.id to the ghost filename.
                                         push  edx                                                     ; Point convert.binary.id.to.ascii.id to the first id in the list.
                                         call  convert.binary.id.to.ascii.id                           ; Set up the id for reading.
 
