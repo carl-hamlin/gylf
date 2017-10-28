@@ -15,7 +15,7 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   a.p.data                                                ./b
+;   a.p.data.gylf                                           ./b
 ;
 ;   argument.01.location                                    ./functions/aggregate.arguments/b
 ;
@@ -120,10 +120,10 @@
 
                                     repnz movsb                                                                       ; Populate the new egg's egg parent field.
 
-                                    mov   cl, byte [a.p.data + gylf.name.l]                                           ; ecx - Length of performing participant's name.
+                                    mov   cl, byte [a.p.data.gylf + gylf.name.l]                                      ; ecx - Length of performing participant's name.
                                     mov   byte [e.data + egg.i.parent.name.l], cl                                     ; Populate new egg's fertilizing parent name length field.
 
-                                    mov   esi, a.p.data + gylf.name                                                   ; esi - Pointer to the name of the new egg's fertilizing parent.
+                                    mov   esi, a.p.data.gylf + gylf.name                                              ; esi - Pointer to the name of the new egg's fertilizing parent.
                                     mov   edi, e.data + egg.i.parent.name                                             ; edi - Pointer to the new egg's fertilizing parent field.
 
                                     repnz movsb                                                                       ; Populate the new egg's fertilizing parent field.
@@ -154,7 +154,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.egg.bad.name:           push  dword [a.p.data + gylf.connection.descriptor.index]                         ; Point send.socket to the socket descriptor associated with the performing
+    command.egg.bad.name:           push  dword [a.p.data.gylf + gylf.connection.descriptor.index]                    ; Point send.socket to the socket descriptor associated with the performing
                                                                                                                       ; user.
                                     push  dword [text.data.index.socket.data.command.egg.bad.name.message]            ; Point send.socket to the bad name message.
                                     call  socket.send                                                                 ; Tell the performing user that the indicated target is bad.

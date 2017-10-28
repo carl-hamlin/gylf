@@ -18,6 +18,8 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   a.p.data.gylf                                             ./b
+;
 ;   area.header                                               ./commands/area/b
 ;
 ;   area.header.l                                             ./commands/area/b
@@ -67,7 +69,7 @@
 
                                             ; Here's where the targetted code goes.
 
-                                            push  a.p.data + gylf.connection.area.id.index                          ; Point open.descriptor to area id associated with active connection.
+                                            push  a.p.data.gylf + gylf.connection.area.id.index                     ; Point open.descriptor to area id associated with active connection.
                                             call  open.descriptor                                                   ; Associate a descriptor with the area id.
 
                                             or    eax, eax                                                          ; Did the descriptor associate properly?
@@ -101,7 +103,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.look.default:                   push  a.p.data + gylf.connection.area.id.index                          ; Point open.descriptor to the file containing the current area info.
+    command.look.default:                   push  a.p.data.gylf + gylf.connection.area.id.index                     ; Point open.descriptor to the file containing the current area info.
                                             call  open.descriptor                                                   ; Associate a descriptor with the file containing current area info.
 
                                             or    eax, eax                                                          ; Were we able to properly associate a descriptor?

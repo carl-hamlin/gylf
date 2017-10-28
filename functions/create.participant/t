@@ -13,6 +13,8 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   a.p.data.gylf                                       ./b
+;
 ;   area.description                                    ./commands/area/b
 ;
 ;   area.description.l                                  ./commands/area/b
@@ -188,7 +190,7 @@
 
                                         push  esi                                                         ; Preserve index to socket entry.
 
-                                        mov   esi, a.p.data + gylf.name                                   ; esi - pointer to socket filename.
+                                        mov   esi, a.p.data.gylf + gylf.name                              ; esi - pointer to socket filename.
                                         mov   edi, area.name                                              ; edi - pointer to buffer for area name.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -225,7 +227,7 @@
                                         call  dna.lab                                                     ; Figure up the DNA for the new Gylf.
 
                                         mov   ebx, esi                                                    ; ebx - Index to socket table.
-                                        push  a.p.data + gylf.name                                        ; Point create.file to filename associated with active connection.
+                                        push  a.p.data.gylf + gylf.name                                   ; Point create.file to filename associated with active connection.
                                         call  create.file                                                 ; Smoke the egg and create a new file.
 
                                         push  eax                                                         ; Preserve descriptor associated with new file.

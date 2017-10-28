@@ -19,6 +19,8 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   a.p.data.gylf                                       ./b
+;
 ;   connection.entry.size                               ./functions/main/system.check/b
 ;
 ;   connection.table                                    ./functions/main/system.check/b
@@ -55,7 +57,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.world.loop:       cmp   ecx, [a.p.data + gylf.connection.external.index]            ; Does this id belong to the performer?
+    send.to.world.loop:       cmp   ecx, [a.p.data.gylf + gylf.connection.external.index]       ; Does this id belong to the performer?
                               jz    send.to.world.loop.next                                     ; Skip this id.
     
                               push  edx                                                         ; Preserve index to message.

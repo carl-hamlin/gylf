@@ -65,6 +65,51 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    active.socket.poll.logins:          mov   eax, dword [top.login]                                  ; eax - Highest current login id.
+                                        inc   eax                                                     ; eax - Target indicator for discontinuation of login polling.
+
+                                        cmp   edx, eax                                                ; Have we reached the last login in our list?
+                                        jz    active.socket.poll.logins.done                          ; Yes. Go set up for eggs.
+
+                                        push  login.filename                                          ; Point convert.binary.id.to.ascii.id to the login filename.
+                                        push  edx                                                     ; Point convert.binary.id.to.ascii.id to the first id in the list.
+                                        call  convert.binary.id.to.ascii.id                           ; Set up the id for reading.
+
+                                        push  login.filename                                          ; Point open.descriptor to the login filename.
+                                        call  open.descriptor                                         ; Associate a descriptor with the socket.
+
+                                        or    eax, eax                                                ; Were we able to associate a descriptor?
+                                        js    active.socket.poll.logins.inactive                      ; Nope. Empty login. Move on to the next.
+
+                                        push  eax                                                     ; Preserve descriptor for close.descriptor.
+
+                                        push  login_size                                              ; Tell read.descriptor to read an entire login.
+                                        push  l.data                                                  ; Tell read.descriptor to read the login into l.data.
+                                        push  eax                                                     ; Point read.descriptor to the descriptor we associated with the socket.
+                                        call  read.descriptor                                         ; Read the login.
+
+                                        call  close.descriptor                                        ; Close the login file.
+
+                                        mov   eax, dword [l.data + login.connection.descriptor.index] ; eax - Descriptor associated with poll target.
+                                        mov   dword [socket.data.active.socket.descriptor], eax       ; Plug the descriptor into our polling packet.
+
+                                        push  socket.data.active.socket.descriptor                    ; Point poll.descriptor to the poll target.
+                                        call  poll.descriptor                                         ; Ask the socket whether or not it has incoming data for us to process.
+
+                                        cmp   eax, sys.poll.in                                        ; Does the socket have incoming data?
+                                        jnz   active.socket.poll.logins.inactive                      ; No. Don't do anything more with it.
+
+                                        push  socket.data.active.socket.descriptor                    ; Yes. Point answer.active.socket to the active socket.
+                                        call  answer.active.socket                                    ; Go process the data on the socket.
+
+    active.socket.poll.logins.inactive: inc   edx                                                     ; edx - Next socket to poll.
+                                        jmp   active.socket.poll.logins                               ; Go poll the next socket.
+
+    active.socket.poll.logins.done      pop   edx                                                     ; edx - First socket id.
+                                        push  edx                                                     ; Preserve first socket id.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     active.socket.poll.eggs:            push  egg.filename                                            ; Point convert.binary.id.to.ascii.id to the egg filename.
                                         push  edx                                                     ; Point convert.binary.id.to.ascii.id to the first id in the list.
                                         call  convert.binary.id.to.ascii.id                           ; Set up the id for reading.

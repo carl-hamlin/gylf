@@ -14,6 +14,8 @@
 ;
 ;   accept.socket                                               ./functions/socket/accept.socket/t
 ;
+;   a.p.data.gylf                                               ./b
+;
 ;   clear.screen                                                ./functions/clear.screen/t
 ;
 ;   close.descriptor                                            ./functions/close.descriptor/t
@@ -73,7 +75,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    listening.socket.poll.greet:  mov   dword [l.data + login.descriptor], eax                              ; Store login connection.
+    listening.socket.poll.greet:  mov   dword [l.data + login.connection.descriptor.index], eax             ; Store login connection.
 
                                   push  login.filename                                                      ; Point get.new.id to logins.
                                   call  get.new.id                                                          ; Get new login id.
@@ -90,10 +92,10 @@
 
                                   call  close.descriptor                                                    ; Put login storage away for now.
 
-                                  push  dword [l.data + login.descriptor]                                   ; Point clear.screen to the active socket.
+                                  push  dword [l.data + login.connection.descriptor.index]                  ; Point clear.screen to the active socket.
                                   call  clear.screen                                                        ; Clear that fellow's screen.
 
-                                  push  dword [l.data + login.descriptor]                                   ; Point socket.send to the active socket.
+                                  push  dword [l.data + login.connection.descriptor.index]                  ; Point socket.send to the active socket.
                                   push  dword [text.data.index.socket.data.login.message]                   ; Point send function to message indicating a need for login credentials.
                                   call  socket.send                                                         ; Tell the new guy that we'll need some login credentials.
 
