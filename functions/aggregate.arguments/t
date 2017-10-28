@@ -66,7 +66,7 @@
     aggregate.arguments.argument.found:         inc   ebx                                         ; ebx - Pointer to first argument.
                                                 
                                                 mov   esi, argument.01.location                   ; esi - Pointer to first location.
-                                                mov   [esi], ebx                                  ; Populate location of first argument.
+                                                mov   dword [esi], ebx                            ; Populate location of first argument.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -95,13 +95,13 @@
                                                 jz    aggregate.arguments.arguments.aggregated    ; Yes - We're done here.
 
                                                 add   esi, argument.entry.size                    ; esi - Pointer to next argument entry.
-                                                mov   [esi], ebx                                  ; Store location of next argument.
+                                                mov   dword [esi], ebx                            ; Store location of next argument.
 
                                                 jmp   aggregate.arguments.loop                    ; Go check the next argument.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    aggregate.arguments.arguments.aggregated:   mov   [arguments.num], cl                         ; Store the number of arguments.
+    aggregate.arguments.arguments.aggregated:   mov   byte [arguments.num], cl                    ; Store the number of arguments.
 
                                                 pop   esi                                         ; Restore pointer to data received from the socket.
                                                 pop   ecx                                         ; Restore caller's ecx register.
@@ -121,7 +121,6 @@
                                                 cmp   byte [ebx], 00h                             ; Have we reached the end of the received data?
                                                 jmp   aggregate.arguments.prep.for.next.argument  ; Yes. The user clearly has no real idea of what their doing. Send argument and let the
                                                                                                   ; syntax errors flow.
-
                                                 cmp   byte [ebx], '"'                             ; Have we found the terminating quotation mark?
                                                 jnz   aggregate.arguments.quote.mode              ; No. Go check the next byte.
 

@@ -13,71 +13,214 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   active.socket.poll.done               ./functions/main/active.socket.poll/t
+;
+;   active.socket.poll.eggs               ./functions/main/active.socket.poll/t
+;
+;   active.socket.poll.eggs.done          ./functions/main/active.socket.poll/t
+;
+;   active.socket.poll.eggs.inactive      ./functions/main/active.socket.poll/t
+;
+;   active.socket.poll.gylf               ./functions/main/active.socket.poll/t
+;
+;   active.socket.poll.gylf.done          ./functions/main/active.socket.poll/t
+;
+;   active.socket.poll.gylf.inactive      ./functions/main/active.socket.poll/t
+;
+;   active.socket.poll.ghosts             ./functions/main/active.socket.poll/t
+;
+;   active.socket.poll.ghosts.inactive    ./functions/main/active.socket.poll/t
+;
 ;   answer.active.socket                  ./functions/socket/answer.active.socket/t
 ;
-;   active.socket.poll.loop               ./functions/main/ active.socket.poll/t
+;   close.descriptor                      ./functions/close.descriptor/t
 ;
-;   connection.entry.size                 ./functions/main/system.check/b
+;   convert.binary.id.to.ascii.id         ./functions/convert.binary.id.to.ascii.id/t
 ;
-;   connection.status.index               ./functions/main/system.check/b
+;   d.data                                ./b
 ;
-;   connection.table                      ./functions/main/system.check/b
+;   e.data                                ./b
 ;
-;   dead.socket                           ./functions/main/b
+;   g.data                                ./b
 ;
-;   poll.active.socket                    ./functions/main/active.socket.poll/t
+;   egg.filename                          ./functions/d
 ;
-;   poll.active.socket.done               ./functions/main/active.socket.poll/t
+;   ghost.filename                        ./functions/d
+;
+;   gylf.filename                         ./functions/d
+;
+;   open.descriptor                       ./functions/open.descriptor/t
 ;
 ;   poll.descriptor                       ./functions/poll.descriptor/t
 ;
-;   socket.data.active.socket.descriptor  ./functions/main/active.socket.poll/d
+;   read.descriptor                       ./functions/read.descriptor/t
 ;
-;   socket.number                         ./b
-;
-;   sockets.left                          ./functions/b
+;   socket.data.active.socket.descriptor  ./functions/main/active.socket.descriptor/d
 ;
 ;   sys.poll.in                           ./functions/main/b
 ;
 
-    active.socket.poll:           mov   esi, connection.table                                 ; esi = pointer to table of potentially active connections.
-                                  mov   edi, esi                                              ; edi - Pointer to table of potentially active connections.
-                                  add   edi, connection.status.index                          ; edi = pointer to table of statii for active connections.
-                                  mov   ecx, socket.number                                    ; ecx = number of connections to check for activity.
-                                  mov   dword [sockets.left], ecx                             ; Store number of connections to check for activity in memory so we aren't constrained in our use
-                                                                                              ; of the ecx register later on.
+    active.socket.poll:                 sub   edx, edx                                                ; edx - First id in the list.
+                                        push  edx                                                     ; Preserve first id.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    active.socket.poll.loop:      cmp   dword [esi+connection.descriptor.index], dead.socket  ; Are we looking at a dead socket?
-                                  jnz   poll.active.socket                                    ; If not, go see if the socket is active.
+    active.socket.poll.logins:          mov   eax, dword [top.login]                                  ; eax - Highest current login id.
+                                        inc   eax                                                     ; eax - Target indicator for discontinuation of login polling.
 
-    poll.active.socket.done:      add   esi, connection.entry.size                            ; esi = pointer to next socket to check.
-                                  add   edi, connection.entry.size                            ; edi = pointer to status of next socket.
+                                        cmp   edx, eax                                                ; Have we reached the last login in our list?
+                                        jz    active.socket.poll.logins.done                          ; Yes. Go set up for eggs.
 
-                                  loop  active.socket.poll.loop                               ; Go check the next socket.
+                                        push  login.filename                                          ; Point convert.binary.id.to.ascii.id to the login filename.
+                                        push  edx                                                     ; Point convert.binary.id.to.ascii.id to the first id in the list.
+                                        call  convert.binary.id.to.ascii.id                           ; Set up the id for reading.
 
-                                  ret                                                         ; All sockets checked. Return to caller.
+                                        push  login.filename                                          ; Point open.descriptor to the login filename.
+                                        call  open.descriptor                                         ; Associate a descriptor with the socket.
+
+                                        or    eax, eax                                                ; Were we able to associate a descriptor?
+                                        js    active.socket.poll.logins.inactive                      ; Nope. Empty login. Move on to the next.
+
+                                        push  eax                                                     ; Preserve descriptor for close.descriptor.
+
+                                        push  login_size                                              ; Tell read.descriptor to read an entire login.
+                                        push  l.data                                                  ; Tell read.descriptor to read the login into l.data.
+                                        push  eax                                                     ; Point read.descriptor to the descriptor we associated with the socket.
+                                        call  read.descriptor                                         ; Read the login.
+
+                                        call  close.descriptor                                        ; Close the login file.
+
+                                        mov   eax, dword [l.data + login.connection.descriptor.index] ; eax - Descriptor associated with poll target.
+                                        mov   dword [socket.data.active.socket.descriptor], eax       ; Plug the descriptor into our polling packet.
+
+                                        push  socket.data.active.socket.descriptor                    ; Point poll.descriptor to the poll target.
+                                        call  poll.descriptor                                         ; Ask the socket whether or not it has incoming data for us to process.
+
+                                        cmp   eax, sys.poll.in                                        ; Does the socket have incoming data?
+                                        jnz   active.socket.poll.logins.inactive                      ; No. Don't do anything more with it.
+
+                                        push  socket.data.active.socket.descriptor                    ; Yes. Point answer.active.socket to the active socket.
+                                        call  answer.active.socket                                    ; Go process the data on the socket.
+
+    active.socket.poll.logins.inactive: inc   edx                                                     ; edx - Next socket to poll.
+                                        jmp   active.socket.poll.logins                               ; Go poll the next socket.
+
+    active.socket.poll.logins.done      pop   edx                                                     ; edx - First socket id.
+                                        push  edx                                                     ; Preserve first socket id.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    poll.active.socket            mov   dword [sockets.left], ecx                             ; Store number of sockets left to check in memory - we're going to need the ecx register for
-                                                                                              ; something else momentarily.
+    active.socket.poll.eggs:            push  egg.filename                                            ; Point convert.binary.id.to.ascii.id to the egg filename.
+                                        push  edx                                                     ; Point convert.binary.id.to.ascii.id to the first id in the list.
+                                        call  convert.binary.id.to.ascii.id                           ; Set up the id for reading.
 
-                                  mov   eax, dword [esi+connection.descriptor.index]          ; eax - descriptor for active socket.
-                                  mov   dword [socket.data.active.socket.descriptor], eax     ; Store descriptor for active socket.
+                                        push  egg.filename                                            ; Point open.descriptor to the egg filename.
+                                        call  open.descriptor                                         ; Associate a descriptor with the socket.
 
-                                  push  socket.data.active.socket.descriptor                  ; ebx - pointer to descriptor for active socket
-                                  call  poll.descriptor                                       ; Poll the socket for activity.
+                                        or    eax, eax                                                ; Were we able to associate the descriptor?
+                                        js    active.socket.poll.eggs.done                            ; No. Looks like we're done with eggs.
 
-                                  cmp   eax, sys.poll.in                                      ; Does the socket have data on it waiting for process?
-                                  jz    answer.active.socket                                  ; Yes. Pass control to answer.active.socket for further processing of the discovered data.
+                                        push  eax                                                     ; Preserve descriptor for close.descriptor.
 
-                                  mov   ecx, dword [sockets.left]                             ; No. Let's get the number of sockets left back into the ecx register so the loop will iterate
-                                                                                              ; properly.
+                                        push  egg_size                                                ; Tell read.descriptor to read an entire egg.
+                                        push  e.data                                                  ; Tell read.descriptor to read the egg into e.data.
+                                        push  eax                                                     ; Point read.descriptor to the descriptor we associated with the socket.
+                                        call  read.descriptor                                         ; Read the egg.
 
-                                  jmp   poll.active.socket.done                               ; Go check the next socket.
+                                        call  close.descriptor                                        ; Close the socket file.
+
+                                        mov   eax, dword [e.data + egg.connection.descriptor.index]   ; eax - Descriptor associated with poll target.
+                                        mov   dword [socket.data.active.socket.descriptor], eax       ; Plug the descriptor into our polling packet.
+
+                                        push  socket.data.active.socket.descriptor                    ; Point poll.descriptor to the poll target.
+                                        call  poll.descriptor                                         ; Ask the socket whether or not it has incoming data for us to process.
+
+                                        cmp   eax, sys.poll.in                                        ; Does the socket have incoming data?
+                                        jnz   active.socket.poll.eggs.inactive                        ; No. Don't do anything more with it.
+
+                                        push  socket.data.active.socket.descriptor                    ; Yes. Point answer.active.socket to the active socket.
+                                        call  answer.active.socket                                    ; Go process the data on the socket.
+
+    active.socket.poll.eggs.inactive:   inc   edx                                                     ; edx - Next socket to poll.
+                                        jmp   active.socket.poll.eggs                                 ; Go poll the next socket.
+
+    active.socket.poll.eggs.done:       pop   edx                                                     ; edx - First socket id.
+                                        push  edx                                                     ; Preserve first socket id.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    active.socket.poll.loop.done: ret                                                         ; All done checking sockets. Pass control back to the caller.
+    active.socket.poll.gylf:            push  gylf.filename                                           ; Point convert.binary.id.to.ascii.id to the gylf filename.
+                                        push  edx                                                     ; Point convert.binary.id.to.ascii.id to the first id in the list.
+                                        call  convert.binary.id.to.ascii.id                           ; Set up the id for reading.
+
+                                        push  gylf.filename                                           ; Point open.descriptor to the gylf filename.
+                                        call  open.descriptor                                         ; Associate a descriptor with the socket.
+
+                                        or    eax, eax                                                ; Were we able to associate the descriptor?
+                                        js    active.socket.poll.gylf.done                            ; No. Looks like we're done with gylf.
+
+                                        push  eax                                                     ; Preserve descriptor for close.descriptor.
+
+                                        push  gylf_size                                               ; Tell read.descriptor to read an entire gylf.
+                                        push  g.data                                                  ; Tell read.descriptor to read the gylf into g.data.
+                                        push  eax                                                     ; Point read.descriptor to the descriptor we associated with the socket.
+                                        call  read.descriptor                                         ; Read the gylf.
+
+                                        call  close.descriptor                                        ; Close the socket file.
+
+                                        mov   eax, dword [g.data + gylf.connection.descriptor.index]  ; eax - Descriptor associated with the poll target.
+                                        mov   dword [socket.data.active.socket.descriptor], eax       ; Plug the descriptor into our polling packet.
+
+                                        push  socket.data.active.socket.descriptor                    ; Point poll.descriptor to the poll target.
+                                        call  poll.descriptor                                         ; Ask the socket whether or not it has incoming data for us to process.
+
+                                        cmp   eax, sys.poll.in                                        ; Does the socket have incoming data?
+                                        jnz   active.socket.poll.gylf.inactive                        ; No. Don't do anything more with it.
+
+                                        push  socket.data.active.socket.descriptor                    ; Yes. Point answer.active.socket to the active socket.
+                                        call  answer.active.socket                                    ; Go process the data on the socket.
+
+    active.socket.poll.gylf.inactive:   inc   edx                                                     ; edx - Next socket to poll.
+                                        jmp   active.socket.poll.gylf                                 ; Go poll the next socket.
+
+    active.socket.poll.gylf.done:       pop   edx                                                     ; edx - First socket id.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    active.socket.poll.ghosts:          push  ghost.filename                                          ; Point convert.binary.id.to.ascii.id to the ghost filename.
+                                        push  edx                                                     ; Point convert.binary.id.to.ascii.id to the first id in the list.
+                                        call  convert.binary.id.to.ascii.id                           ; Set up the id for reading.
+
+                                        push  ghost.filename                                          ; Point open.descriptor to the ghost filename.
+                                        call  open.descriptor                                         ; Associate a descriptor with the socket.
+
+                                        or    eax, eax                                                ; Were we able to associate the descriptor?
+                                        js    active.socket.poll.done                                 ; No. Looks like we're done with ghosts.
+
+                                        push  eax                                                     ; Preserve descriptor for close.descriptor.
+
+                                        push  ghost_size                                              ; Tell read.descriptor to read an entire ghost.
+                                        push  d.data                                                  ; Tell read.descriptor to read the ghost into d.data.
+                                        push  eax                                                     ; Point read.descriptor to the descriptor we associated with the socket.
+                                        call  read.descriptor                                         ; Read the ghost.
+
+                                        call  close.descriptor                                        ; Close the socket file.
+
+                                        mov   eax, dword [d.data + ghost.connection.descriptor.index] ; eax - Descriptor associated with the poll target.
+                                        mov   dword [socket.data.active.socket.descriptor], eax       ; Plug the descriptor into our polling packet.
+
+                                        push  socket.data.active.socket.descriptor                    ; Point poll.descriptor to the poll target.
+                                        call  poll.descriptor                                         ; Ask the socket whether or not it has incoming data for us to process.
+
+                                        cmp   eax, sys.poll.in                                        ; Does the socket have incoming data?
+                                        jnz   active.socket.poll.ghosts.inactive                      ; No. Don't do anything more with it.
+
+                                        push  socket.data.active.socket.descriptor                    ; Yes. Point answer.active.socket to the active socket.
+                                        call  answer.active.socket                                    ; Go process the data on the socket.
+
+    active.socket.poll.ghosts.inactive: inc   edx                                                     ; edx - Next socket to poll.
+                                        jmp   active.socket.poll.gylf                                 ; Go poll the next socket.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    active.socket.poll.done:            ret                                                           ; Return to caller.

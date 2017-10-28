@@ -8,4 +8,5 @@
 
     section   .text
 
+    %include  "./commands/shutdown/s"
     %include  "./commands/shutdown/t"
