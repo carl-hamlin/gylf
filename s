@@ -225,5 +225,4 @@
 
     struc login
       .connection.descriptor.index        resd  00000001h ; Placeholder for connection descriptor.
-      .connection.status.index            resb        01h ; Placeholder for status.
     endstruc

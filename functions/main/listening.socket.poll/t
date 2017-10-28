@@ -73,28 +73,27 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    listening.socket.poll.greet:  int 3
-    mov   dword [a.p.data + gylf.connection.descriptor.index], eax            ; Position login connection descriptor for greeting.
-    
-                                  mov   dword [login.handle], eax                                           ; Store login connection.
-                                  mov   byte [login.status], login.status                                   ; Indicate that the connection is in login status.
+    listening.socket.poll.greet:  mov   dword [l.data + login.descriptor], eax                              ; Store login connection.
+
+                                  push  login.filename                                                      ; Point get.new.id to logins.
+                                  call  get.new.id                                                          ; Get new login id.
 
                                   push  login.filename                                                      ; Point open.descriptor to login storage.
-                                  call  open.descriptor                                                     ; Prepare login storage to receive a new entry.
+                                  call  create.file                                                         ; Build a file to store the login connection.
 
                                   push  eax                                                                 ; Login storage descriptor stored for closing.
 
                                   push  eax                                                                 ; Point write.descriptor to login storage.
-                                  push  03h                                                                 ; Tell write.descriptor that we'll be writing 3 bytes.
-                                  push  login.handle                                                        ; Point write.descriptor to the login data.
+                                  push  login_size                                                          ; Tell write.descriptor that we'll be writing an entire login entry.
+                                  push  l.data                                                              ; Point write.descriptor to the login data.
                                   call  write.descriptor                                                    ; Write the login data to login storage.
 
                                   call  close.descriptor                                                    ; Put login storage away for now.
 
-                                  mov   eax, dword [login.handle]                                           ; eax - Descriptor correcponding to current connection.
-
+                                  push  dword [l.data + login.descriptor]                                   ; Point clear.screen to the active socket.
                                   call  clear.screen                                                        ; Clear that fellow's screen.
 
+                                  push  dword [l.data + login.descriptor]                                   ; Point socket.send to the active socket.
                                   push  dword [text.data.index.socket.data.login.message]                   ; Point send function to message indicating a need for login credentials.
                                   call  socket.send                                                         ; Tell the new guy that we'll need some login credentials.
 

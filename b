@@ -21,5 +21,6 @@
     e.data            resb  egg_size    ; Storage for egg data.
     d.data            resb  ghost_size  ; Storage for ghost data.
     g.data            resb  gylf_size   ; Storage for participant data.
+    l.data            resb  login_size  ; Storage for login data.
 
     a.p.data          resb  gylf_size   ; Storage for active participant data.
