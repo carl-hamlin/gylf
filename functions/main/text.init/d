@@ -20,4 +20,4 @@
     local.data.text.data.failed                           db  "A problem occurred while reading external data. Exiting...", 0Ah, 0Dh  ; Message indicating failure to load data.
     local.data.text.data.failed.l                         equ $-local.data.text.data.failed                                           ; Length of message.
 
-    text.data.filename                                    db  "./external.data/m/d", 00h                                              ; ASCIIZ terminated filename for textual data.
+    text.data.filename                                    db  "./d/m/d", 00h                                                          ; ASCIIZ terminated filename for textual data.

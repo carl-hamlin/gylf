@@ -1,0 +1,6 @@
+;==================================================================================================================================================================================================================
+
+    section   .text
+
+    %include  "./functions/socket/communications/send.to.participant/s"
+    %include  "./functions/socket/communications/send.to.participant/t"
