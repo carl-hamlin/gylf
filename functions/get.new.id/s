@@ -16,6 +16,6 @@
 ;   get.new.id Data Structure
 ;
 
-    struc gni.packet
+    struc get.new.id.packet
       .id resd  00000001h ; Storage for pointer to directory to be looked up.
     endstruc
