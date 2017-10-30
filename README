@@ -19,9 +19,15 @@ Relevant data:
 
     Symbolic Cross-Referencing
     
-      b   dword.l                               ./commands/area/t
+      b   byte.l                                ./functions/get.character.data/t
+                                                ./functions/get.external.data/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+
+          dword.l                               ./commands/area/t
                                                 ./commands/help/t
                                                 ./commands/look/t
+                                                ./functions/aggregate.arguments/t
                                                 ./functions/create.character/t
                                                 ./functions/create.file/t
                                                 ./functions/d
@@ -40,20 +46,18 @@ Relevant data:
                                                 ./functions/socket/accept.socket/t
                                                 ./functions/socket/bind.socket/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.participant/t
                                                 ./functions/socket/communications/send.to.world/t
                                                 ./functions/socket/create.socket/t
                                                 ./functions/socket/listen.socket/t
                                                 ./functions/socket/recv.from.socket/t
                                                 ./functions/socket/socket.send/t
+                                                ./functions/write.console/t
+
+          qword.l                               ./commands/help/t
 
           word.l                                ./commands/area/t
                                                 ./functions/b
-
-          byte.l                                ./functions/get.character.data/t
-                                                ./functions/get.external.data/t
-                                                ./functions/main/participant.interaction
-                                                  /address.passphrase.status/t
 
           socket.number                         ./commands/shutdown/t
                                                 ./functions/main/active.socket.poll/t
@@ -61,13 +65,22 @@ Relevant data:
                                                 ./functions/main/system.check/b
                                                 ./functions/main/system.check/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/sent.to.player/t
+                                                ./functions/socket/communications/sent.to.participant/t
                                                 ./functions/socket/communications/send.to.world/t
 
           sys.standard.output                   ./commands/area/t
                                                 ./functions/main/text.init/t
                                                 ./functions/print.socket.number/t
                                                 ./functions/write.console/t
+
+
+      s   egg
+
+          participant
+
+          ghost
+
+          connection          
 
     ==============================================================================================
 
@@ -89,7 +102,7 @@ Relevant data:
     ----------------------------------------------------------------------------------------------
 
       /ai                     Contains code pertinent to the implementation of the 'ai' command; a
-                              player-level command that allows for the invoker to adjust
+                              participant-level command that allows for the invoker to adjust
                               parameters associated with their avatar's behaviour while they are
                               signed out.
 
@@ -111,16 +124,15 @@ Relevant data:
 
       /area                   Contains code pertinent to the implementation of the 'area' command;
                               an administrator command that allows for administrators to create
-                              new areas without having to dig them out using the player interface.
+                              new areas without having to dig them out using the participant interface.
 
-      b   area.description.field.l              ./commands/area/b
+      b   area.description                      ./commands/area/t
+                                                ./functions/create.character/t
+
+          area.description.l                    ./functions/create.character/t
+
+          area.description.field.l              ./commands/area/b
                                                 ./commands/area/t
-
-          area.description                      ./commands/area/t
-                                                ./functions/create.character/t
-
-          area.description.l                    ./commands/area/t
-                                                ./functions/create.character/t
 
           area.header                           ./commands/area/b
                                                 ./commands/look/t
@@ -129,14 +141,11 @@ Relevant data:
           area.header.l                         ./commands/look/t
                                                 ./functions/create.character/t
 
+          area.name                             ./functions/create.character/t
+
           area.name.field.l                     ./commands/area/b
-                                                ./commands/area/t
 
-          area.name                             ./commands/area/t
-                                                ./functions/create.character/t
-
-          area.name.l                           ./commands/area/t
-                                                ./functions/create.character/t
+          area.name.l                           ./functions/create.character/t
 
           area.num.contained.items              ./commands/area/t
                                                 ./commands/look/t
@@ -147,7 +156,6 @@ Relevant data:
       d   command.area.h                        No references.
 
           command.area.l                        ./commands/area/d
-                                                ./commands/area/t
 
           command.area.p                        ./commands/area/t
 
@@ -160,31 +168,15 @@ Relevant data:
 
       t   command.area                          ./commands/area/d
 
-          command.area.bad                      ./commands/area/t
-
           command.area.admin                    ./commands/area/t
 
-          command.area.find.first.argument      ./commands/area.t
-
-          command.area.start                    ./commands/area/t
-
-          command.area.loop.1                   ./commands/area/t
-
-          command.area.name.l                   ./commands/area/t
-
-          command.area.find.second.argument     ./commands/area/t
-
-          command.area.loop.2                   ./commands/area/t
-
-          command.area.description.l            ./commands/area/t
-
-          command.area.filename.loop            ./commands/area/t
-
-          command.area.next.file                ./commands/area/t
+          command.area.bad                      ./commands/area/t
 
           command.area.filename.finder          ./commands/area/t
 
           command.area.filename.out.of.areas    ./commands/area/t
+
+          command.area.next.file                ./commands/area/t
 
           command.area.prep.next                ./commands/area/t
 
@@ -205,6 +197,10 @@ Relevant data:
 
           command.broadcast.w                   ./functions/d
 
+          socket.data.command.broadcast.help    ./commands/broadcast/d
+
+          socket.data.command.broadcast.help.l  ./commands/broadcast/d
+
 
       t   command.broadcast                     ./commands/broadcast/d
 
@@ -213,7 +209,7 @@ Relevant data:
     ----------------------------------------------------------------------------------------------
 
       /dig                    Contains code pertinent to the implementation of the 'dig' command;
-                              a participant-level command that allows for player to, under certain
+                              a participant-level command that allows for participant to, under certain
                               circumstances, extend the environment by creating new areas.
 
       d   command.dig.h                         No references.
@@ -236,28 +232,6 @@ Relevant data:
                               fertilization of an egg in the womb of the target gylf without
                               having to go through the normal channels of fertilization through
                               mating.
-
-      b   egg.area.id                           ./functions/create.character/t
-
-          egg.data                              ./commands/egg/b
-                                                ./functions/create.character/t
-
-          egg.data.l                            ./functions/create.character/t
-
-          egg.father                            ./functions/create.character/t
-                                                ./functions/dna.lab/t
-
-          egg.father.l                          ./functions/create.character/t
-
-          egg.item.id                           No references.
-
-          egg.mother                            ./functions/create.character/t
-                                                ./functions/dna.lab/t
-
-          egg.mother.l                          ./functions/create.character/t
-
-          egg.signature                         No references.
-
 
       d   command.egg.h                         No references.
 
@@ -292,6 +266,12 @@ Relevant data:
 
       t   command.gylf                          ./commands/gylf/d
 
+          command.gylf.admin                    ./commands/gylf/t
+
+          command.gylf.dna.mode                 ./commands/gylf/t
+
+          command.gylf.nsp.mode                 ./commands/gylf/t
+
     ----------------------------------------------------------------------------------------------
 
       /help                   Contains code pertinent to the implementation of the 'help' command;
@@ -311,15 +291,15 @@ Relevant data:
 
       t   command.help                          ./commands/help/d
 
-          command.help.parse.arguments          ./commands/help/t
-
-          command.help.found.command            ./comamnds/help/t
-
-          command.help.next.command.jcxnz       ./commands/help/t
+          command.help.found.command            ./commands/help/t
 
           command.help.next.command             ./commands/help/t
 
+          command.help.next.command.jcxnz       ./commands/help/t
+
           command.help.no.arguments             ./commands/help/t
+
+          command.help.parse.arguments          ./commands/help/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -398,10 +378,9 @@ Relevant data:
 
       /think                  Contains code pertinent to the implementation of the 'think'
                               command; a participant-level command that allows for communication
-                              between players in a local environment.
+                              between participants in a local environment.
 
-      d   
-          command.think.h                       No references.
+      d   command.think.h                       No references.
 
           command.think.l                       ./commands/think/d
 
@@ -413,6 +392,10 @@ Relevant data:
 
 
       t   command.think                         ./commands/think/d
+
+          command.think.arguments               ./commands/think/t
+
+          command.think.help.msg                ./commands/think/t
 
           command.think.untargetted             ./commands/think/t
 
@@ -455,260 +438,12 @@ Relevant data:
 
           buffer.2.l                            ./functions/b
 
-          character.abdomen.wound.level         No references.
+          e.data                                ./functions/dna.lab/t
 
-          character.age                         No references.
+          g.data                                ./functions/dna.lab/t
 
-          character.agility                     ./functions/dna.lab/t
-
-          character.back.spinal.wound.level     No references.
-
-          character.back.wound.level            No references.
-
-          character.base.color                  ./functions/dna.lab/t
-
-          character.base.color.number           ./functions/dna.lab/t
-
-          character.base.fur.quality            ./functions/dna.lab/t
-
-          character.base.fur.quality.number     ./functions/dna.lab/t
-
-          character.brain.wound.level           No references.
-
-          character.chin.wound.level            No references.
-
-          character.data                        ./functions/b
-                                                ./functions/create.character/t
-                                                ./functions/get.character.data/t
-
-          character.data.l                      ./functions/get.character.data/t
-
-          character.endurance                   ./functions/dna.lab/t
-
-          character.father                      ./functions/create/character/t
-
-          character.father.agility              ./functions/dna.lab/t
-
-          character.father.base.color           ./functions/dna.lab/t
-
-          character.father.base.fur.quality     ./functions/dna.lab/t
-
-          character.father.data                 ./functions/b
-                                                ./functions/dna.lab/t
-
-          character.father.dna.l                ./functions/dna.lab/t
-
-          character.father.endurance            ./functions/dna.lab/t
-
-          character.father.l                    ./functions/create.character/t
-
-          character.father.secondary.color      ./functions/dna.lab/t
-
-          character.father.secondary.fur        ./functions/dna.lab/t
-            .quality
-
-          character.father.strength             ./functions/dna.lab/t
-
-          character.heart.wound.level           No references.
-
-          character.inseminator.wound.level     No references.
-
-          character.large.intestine.wound.level No references.
-
-          character.left.cheek.wound.level      No references.
-
-          character.left.chest.wound.level      No references.
-
-          character.left.dew.talon.wound.level  No references.
-
-          character.left.ear.wound.level        No references.
-
-          character.left.eye.wound.level        No references.
-
-          character.left.forearm.wound.level    No references.
-
-          character.left.hand.wound.level       No references.
-
-          character.left.index.finger.wound     No references.
-            .level
-
-          character.left.inside.thigh.wound     No references.
-            .level
-
-          character.left.lower.leg.wound.level  No references.
-
-          character.left.low.talon.wound.level  No references.
-
-          character.left.lung.wound.level       No references.
-
-          character.left.main.fore.talon.wound  No references.
-            .level
-
-          character.left.middle.finger.wound    No references.
-            .level
-
-          character.left.middle.talon.wound     No references.
-            .level
-
-          character.left.outside.thigh.wound    No references.
-            .level
-
-          character.left.ring.finger.wound      No references.
-            .level
-
-          character.left.shoulder.wound.level   No references.
-
-          character.left.thumb.wound.level      No references.
-
-          character.left.upper.arm.wound.level  No references.
-
-          character.left.wrist.wound.level      No references.
-
-          character.liver.wound.level           No references.
-
-          character.location.id                 No references.
-
-          character.mother                      ./functions/create.character/t
-
-          character.mother.agility              ./functions/dna.lab/t
-
-          character.mother.base.color           ./functions/dna.lab/t
-
-          character.mother.base.fur.quality     ./functions/dna.lab/t
-
-          character.mother.data                 ./functions/b
-                                                ./functions/dna.lab/t
-
-          character.mother.dna.l                ./functions/dna.lab/t
-
-          character.mother.endurance            ./functions/dna.lab/t
-
-          character.mother.l                    ./functions/create.character/t
-
-          character.mother.secondary.color      ./functions/dna.lab/t
-
-          character.mother.secondary.fur        ./functions/dna.lab/t
-            .quality
-
-          character.mother.strength             ./functions/dna.lab/t
-
-          character.neck.spinal.wound.level     No references.
-
-          character.neck.wound.level            No references.
-
-          character.nose.wound.level            No references.
-
-          character.ovary.wound.level           No references.
-
-          character.pouch                       ./functions/create.character/t
-
-          character.pouch.wound.level           No references.
-
-          character.right.cheek.wound.level     No references.
-
-          character.right.chest.wound.level     No references.
-
-          character.right.dew.talon.wound.level No references.
-
-          character.right.ear.wound.level       No references.
-
-          character.right.eye.wound.level       No references.
-
-          character.right.forearm.wound.level   No references.
-
-          character.right.hand.wound.level      No references,
-
-          character.right.index.finger.wound    No references.
-            .level
-
-          character.right.inside.thigh.wound    No references.
-            .level
-
-          character.right.low.talon.wound.level No references.
-
-          character.right.lower.leg.wound.level No references.
-
-          character.right.lung.wound.level      No references.
-
-          character.right.main.fore.talon.wound No references.
-            .level
-
-          character.right.middle.finger.wound   No references.
-            .level
-
-          character.right.middle.talon.wound    No references.
-            .level
-
-          character.right.outside.thigh.wound   No references.
-            .level
-
-          character.right.ring.finger.wound     No references.
-            .level
-
-          character.right.shoulder.wound.level  No references.
-
-          character.right.thumb.wound.level     No references.
-
-          character.right.upper.arm.wound.level No references.
-
-          character.right.wrist.wound.level     No references.
-
-          character.scalp.wound.level           No references.
-
-          character.secondary.color             ./functions/dna.lab/t
-
-          character.secondary.color.number      ./functions/dna.lab/t
-
-          character.secondary.fur.quality       ./functions/dna.lab/t
-
-          character.secondary.fur.quality       ./functions/dna.lab/t
-            .number
-
-          character.small.intestine.wound.level No references.
-
-          character.stomach.wound.level         No references.
-
-          character.strength                    ./functions/dna.lab/t
-
-          character.testicle.wound.level        No references.
-
-          chest.worn.item.id                    No references.
-
-          child.attribute.computation.factor    ./functions/dna.lab/t
-
-          external.data.buffer                  ./functions/clear.screen/t
-                                                ./functions/get.external.data/t
-
-          head.worn.item.id                     No references.
-
-          id.buffer                             No references.
-
-          id.size                               ./functions/create.character/t
-
-          left.ear.worn.item.id                 No references.
-
-          left.hand.inventory.id                No references.
-
-          left.thigh.worn.item.id               No references.
-
-          neck.worn.item.id                     No references.
-
-          new.char.sig                          No references.
-
-          new.char.sig.buffer                   No references.
-
-          new.char.sig.l                        ./functions/main/participant.interaction
-                                                  /address.login.status/t
-
-          number.of.parents                     ./functions/dna.lab/t
-
-          right.ear.worn.item.id                No references.
-
-          right.hand.inventory.id               No references.
-
-          right.thigh.worn.item.id              No references.
-
-          socket.filename.entry.l               ./functions/main/system.check.b
+          socket.filename.entry.l               ./functions/b
+                                                ./functions/main/system.check.b
                                                 ./functions/socket/clean.socket/t
 
           sockets.left                          ./functions/main/active.socket.poll/t
@@ -721,8 +456,7 @@ Relevant data:
 
           sys.no.bytes.read                     No references.
 
-          sys.read.write                        ./functions/create.file/t
-                                                ./functions/open.descriptor/t
+          sys.read.write                        ./functions/open.descriptor/t
 
           sys.system.call                       ./functions/bail/t
                                                 ./functions/close.descriptor/t
@@ -772,9 +506,17 @@ Relevant data:
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t
 
+          egg.directory                         ./functions/d
+
+          egg.directory.l                       No references.
+
           external.data.cursor.home             ./functions/clear.screen/t
 
           external.data.clear.screen            ./functions/clear.screen/t
+
+          ghost.directory                       ./functions/d
+
+          ghost.directory.l                     No references.
 
           item.filename                         ./functions/d
 
@@ -783,6 +525,10 @@ Relevant data:
           number.of.commands                    ./commands/help/t
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
+
+          participant.directory                 ./functions/d
+
+          participant.directory.l               No references.
 
           pouch.declaration                     ./functions/d
                                                 ./functions/create.character/t
@@ -799,16 +545,19 @@ Relevant data:
       /aggregate.arguments    Contains code that collects arguments from the participant command
                               line and segregates them into a predefined structure.
 
-      b   argument.01.location                  ./commands/broadcast/t
+      b   argument.01.location                  ./commands/area/t
+                                                ./commands/broadcast/t
                                                 ./commands/help/t
                                                 ./functions/aggregate.arguments/t
 
-          argument.01.size                      ./commands/broadcast/t
+          argument.01.size                      ./commands/area/t
+                                                ./commands/broadcast/t
                                                 ./functions/aggregate.arguments/b
 
           argument.02.location                  No references.
 
-          argument.02.size                      No references.
+          argument.02.size                      ./commands/area/t
+                                                ./commands/think/t
 
           argument.03.location                  No references.
 
@@ -838,9 +587,17 @@ Relevant data:
 
           argument.09.size                      No references.
 
+          argument.10.location                  No references.
+
           argument.10.size                      No references.
 
-          argument.10.location                  No references.
+          argument.entry.size                   ./functions/aggregate.arguments/t
+
+          arguments.num                         ./commands/gylf/t
+                                                ./commands/help/t
+                                                ./functions/aggregate.arguments/t
+
+          arguments.packet                      ./functions/aggregate.arguments/b
 
           argument.entry.size                   ./functions/aggregate.arguments/t
 
@@ -867,10 +624,20 @@ Relevant data:
 
           aggregate.arguments.quote.mode        ./functions/aggregate.arguments/t
 
-          aggregate.arguments.quote.mode.l      ./functions/aggregate.arguments/t
+          aggregate.arguments.quote.mode.e      ./functions/aggregate.arguments/t
+
+          aggregate.arguments.guote.mode.l.bump ./functions/aggregate.arguments/t
 
           aggregate.arguments.strip.command     ./functions/aggregate.arguments/t
             .loop
+
+          aggregate.arguments.strip.command.loop  ./functions/aggregate.arguments/t
+
+    ----------------------------------------------------------------------------------------------
+
+      /assemble.path          Contains code to assemble a path to a given file.
+
+      t   assemble.path                         ./functions/get.participant.data/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -892,11 +659,11 @@ Relevant data:
 
       t   buffer.strip                          ./functions/socket/recv.from.socket/t
 
-          strip.loop                            ./functions/buffer.strip/t
-
           strip.char                            ./functions/buffer.strip/t
 
           strip.done                            ./functions/buffer.strip/t
+
+          strip.loop                            ./functions/buffer.strip/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -905,6 +672,7 @@ Relevant data:
 
       t   check.admin                           ./commands/area/t
                                                 ./commands/broadcast/t
+                                                ./commands/gylf/t
                                                 ./commands/shutdown/t
 
     ----------------------------------------------------------------------------------------------
@@ -972,12 +740,16 @@ Relevant data:
           create.character                      ./functions/main/participant.interaction
                                                   /address.set.passphrase.status/t
 
+          create.character.gylf.command         No references.
+
     ----------------------------------------------------------------------------------------------
 
       /create.file            Contains code that builds a dataset on the drive, to which it
                               associates a logical descriptor.
 
       b   sys.create.call                       ./functions/create.file/t
+
+          sys.rw.r.r                            ./functions/create.file/t
 
 
       t   create.file                           ./commands/area/t
@@ -1005,7 +777,7 @@ Relevant data:
       /dna.lab                Contains code which combines the DNA left behind on an egg by both
                               parents to create an entirely new gylf.
 
-      t   dna.lab                               ./functions/create.character/t
+      t   dna.lab                               ./functions/create.participant/t
 
           dna.lab.agility                       ./functions/dna.lab/t
 
@@ -1073,12 +845,12 @@ Relevant data:
 
       /get.text.data          Contains code that pulls string data from an external repository.
 
-      t   get.text.data       ./functions/socket/socket.send/t
-                              ./functions/write.console/t
+      t   get.text.data                         ./functions/socket/socket.send/t
+                                                ./functions/write.console/t
 
-          get.text.data.nz    ./functions/get.text.data/t
+          get.text.data.nz                      ./functions/get.text.data/t
 
-          get.text.data.z     ./functions/get.text.data/t
+          get.text.data.z                       ./functions/get.text.data/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -1104,9 +876,6 @@ Relevant data:
           login.status                          ./functions/main/listening.socket.poll/t
                                                 ./functions/socket/active.socket.poll/t
 
-          new.char.sig                          ./functions/main/participant.interaction
-                                                  /address.login.status/t
-
           passphrase.status                     ./functions/main/participant.interaction
                                                   /address.login.status/t
 
@@ -1120,9 +889,6 @@ Relevant data:
           sys.poll.number.of.structures         ./functions/poll.descriptor/t
 
           sys.poll.timeout                      ./functions/poll.descriptor/t
-
-
-      d   No defined symbols.
 
 
       t   _start                                No references.
@@ -1268,11 +1034,25 @@ Relevant data:
         /system.check   Contains code that performs checks to ensure the environment is ready to
                         go live, prior to instantiation.
 
-        b   connection.area.id.index            ./commands/look/t
+        b   connection.area.id.index            ./commands/gylf/t
+                                                ./commands/look/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications
+                                                  /send.to.participant/t
 
-            connection.descriptor.index         ./functions/main/active.socket.poll/t
+            connection.descriptor.index         ./commands/area/t
+                                                ./commands/broadcast/t
+                                                ./commands/gylf/t
+                                                ./commands/look/t
+                                                ./commands/shutdown/t
+                                                ./commands/think/t
+                                                ./functions/create.character/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
                                                 ./functions/main/participant.interaction
                                                   /address.set.passphrase.status/t
                                                 ./functions/socket/clean.socket/t
@@ -1284,7 +1064,8 @@ Relevant data:
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/system.check/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications
+                                                  /send.to.participant/t
                                                 ./functions/socket/communications/send.to.world/t
 
             connection.external.index           No references.
@@ -1301,10 +1082,14 @@ Relevant data:
 
             connection.number.index             ./functions/main/system.check/t
                                                 ./functions/print.socket.number/t
-                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications
+                                                  /send.to.participant/t
 
-            connection.status.index             
-                                                ./functions/main/active.socket.poll/t
+            connection.pname.index              ./functions/translate.name.to.socket.number/t
+
+            connection.pname.index.l            No references.
+
+            connection.status.index             ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t
@@ -1321,7 +1106,8 @@ Relevant data:
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/active.socket.poll/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications
+                                                  /send.to.participant/t
                                                 ./functions/socket/communications/send.to.world/t
 
 
@@ -1331,7 +1117,7 @@ Relevant data:
             socket.numbers.l                    ./functions/main/system.check/t
 
 
-        t   system.check                        ./functions/main/system.check/t
+        t   system.check                        ./functions/main/t
 
             system.check.populate.connection    ./functions/main/system.check/t
               .numbers.0010
@@ -1570,9 +1356,6 @@ Relevant data:
       b   sys.open.call                         ./functions/open.descriptor/t
 
 
-      d   No defined symbols.
-
-
       t   open.descriptor                       ./commands/area/t
                                                 ./commands/look/t
                                                 ./functions/check.login/t
@@ -1580,6 +1363,11 @@ Relevant data:
                                                 ./functions/dna.lab/t
                                                 ./functions/get.character.data/t
                                                 ./functions/get.external.data/t
+                                                ./functions/get.text.data/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
                                                 ./functions/main/participant.interaction
                                                   /address.set.passphrase.status/t
                                                 ./functions/main/text.init/t
@@ -1628,9 +1416,6 @@ Relevant data:
       /set.single.attribute   Contains code that sends a vt100 escape sequence to the remote
                               terminal which changes a single attribute about the printed text.
                               Attributes can be found in external data.
-
-      b   No defined symbols.
-
 
       d   set.att.b.blk                         No references.
 
@@ -1693,11 +1478,7 @@ Relevant data:
                               surrounding the operation of Berkeley Sockets under Linux in X86
                               ASM.
 
-      b   active.socket.descriptor              No references.
-
-          session.descriptor                    No references.
-
-          socket.data.connected.socket          ./functions/socket/accept.socket/t
+      b   socket.data.connected.socket          ./functions/socket/accept.socket/t
             .descriptor
 
           socket.data.queue.l                   ./functions/socket/listen.socket/t
@@ -1800,11 +1581,6 @@ Relevant data:
         ./functions/socket    Contains code pertaining to the behind the scenes mechanisms
           /communications     surrounding communications between users.
 
-        b   No defined symbols.
-
-
-        d   No defined symbols.
-
     ----------------------------------------------------------------------------------------------
 
           /send.to.area       Contains code that sends a provided message to a specified area.
@@ -1812,12 +1588,6 @@ Relevant data:
                               is used to facilitate communication between users in a given area of
                               the environment, as well as facilitating communications between
                               administrators and a given area.
-
-          b   No defined symbols.
-
-
-          d   No defined symbols.
-
 
           t   send.to.area                      ./commands/think/t
                                                 ./functions/create.character/t
@@ -1830,25 +1600,23 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-          /send.to.player     Contains code that sends a provided message to a specified player.
-                              Only the specified player will received this message. This code is
-                              used to facilitate private communication between players.
+          /send.to.participant     Contains code that sends a provided message to a specified participant.
+                              Only the specified participant will received this message. This code is
+                              used to facilitate private communication between participants.
 
-          b   No defined symbols.
+          t   send.to.participant               ./commands/think/t
 
+              send.to.participant.broadcast     ./functions/socket/communications
+                                                  /send.to.participant/t
 
-          d   No defined symbols.
+              send.to.participant.broadcast     ./functions/socket/communications
+                .done                             /send.to.participant/t
 
+              send.to.participant.connection    ./functions/socket/communications
+                .poll                             /send.to.participant/t
 
-          t   send.to.player                    ./commands/think/t
-
-              send.to.player.broadcast          ./functions/socket/communications/send.to.player/t
-
-              send.to.player.broadcast.done     ./functions/socket/communications/send.to.player/t
-
-              send.to.player.connection.poll    ./functions/socket/communications/send.to.player/t
-
-              send.to.player.out.of.area.error  ./functions/socket/communications/send.to.player/t
+              send.to.participant.out.of.area   ./functions/socket/communications
+                .error                            /send.to.participant/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -1856,12 +1624,6 @@ Relevant data:
                               environment. This code is used to facilitate administrator
                               communications that need to be addressed to everyone in the
                               environment.
-
-          b   No defined symbols.
-
-
-          d   No defined symbols.
-
 
           t   send.to.world                     ./commands/broadcast/t
                                                 ./commands/shutdown/t
@@ -1937,6 +1699,7 @@ Relevant data:
 
         t   socket.send                         ./commands/area/t
                                                 ./commands/look/t
+                                                ./commands/help/t
                                                 ./functions/create.character/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/participant.interaction
@@ -1944,18 +1707,16 @@ Relevant data:
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
                                                 ./functions/socket/communications/send.to.world/t
                                                 ./functions/write.bad.command.error/t
                                                 ./functions/write.bad.help.command.error/t
                                                 ./functions/write.prompt/t
 
             socket.send.buf                     ./commands/look/t
-                                                ./commands/help/t
                                                 ./functions/clear.screen/t
                                                 ./functions/set.single.attribute/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.player/t
+                                                ./functions/socket/communications/send.to.participant/t
                                                 ./functions/socket/communications/send.to.world/t
 
             socket.send.buf.splice              ./functions/socket.send/t
@@ -1970,6 +1731,28 @@ Relevant data:
 
 
       t   time.in.seconds.since.epoch           No references.
+
+    ----------------------------------------------------------------------------------------------
+
+      /translate.name.to.socket.number  Contains code which allows for a given participant name
+                                        to be translated to a socket ID for use internally.
+
+      b   No defined symbols.
+
+
+      d   No defined symbols.
+
+
+      t   translate.name.to.socket.number       No references.
+
+          translate.name.to.socket.number       ./functions/translate.name.to.socket.number/t
+            .search.loop
+
+          translate.name.to.socket.number       ./functions/translate.name.to.socket.number/t
+            .cleanup
+
+          translate.name.to.socket.number.found ./functions/translate.name.to.socket.number/t
+            .socket
 
     ----------------------------------------------------------------------------------------------
 

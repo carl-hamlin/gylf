@@ -2,4 +2,5 @@
 
     section   .text
 
+    %include  "./functions/main/participant.interaction/address.passphrase.status/s"
     %include  "./functions/main/participant.interaction/address.passphrase.status/t"
