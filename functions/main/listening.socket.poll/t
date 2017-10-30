@@ -86,8 +86,8 @@
                                   push  eax                                                                 ; Login storage descriptor stored for closing.
 
                                   push  eax                                                                 ; Point write.descriptor to login storage.
-                                  push  login_size                                                          ; Tell write.descriptor that we'll be writing an entire login entry.
                                   push  l.data                                                              ; Point write.descriptor to the login data.
+                                  push  login_size                                                          ; Tell write.descriptor that we'll be writing an entire login entry.
                                   call  write.descriptor                                                    ; Write the login data to login storage.
 
                                   call  close.descriptor                                                    ; Put login storage away for now.
