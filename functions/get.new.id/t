@@ -19,30 +19,38 @@
 ;   No external references.
 ;
 
-    get.new.id:       mov   ebp, esp                          ; ebp - Pointer to stack.
-                      add   ebp, (dword.l + gni.packet_size)  ; ebp - Pointer to data packet.
+    get.new.id:       push  ebp                                         ; Preserve caller's ebp.
 
-                      sub   eax, eax                          ; eax - First id to lookup.
+                      mov   ebp, esp                                    ; ebp - Pointer to stack.
+                      add   ebp, (dword.l + get.new.id.packet_size)     ; ebp - Pointer to data packet.
 
-    get.new.id.loop:  push  eax                               ; Tell convert.binary.id.to.ascii.id what id to convert.
-                      push  dword [ebp + gni.packet.id]       ; Point convert.binary.id.to.ascii.id to destination buffer. *CHECK FUNCTION IN PRACTICE*
-                      call  convert.binary.id.to.ascii.id     ; Convert the id and load the directory indicator.
+                      sub   eax, eax                                    ; eax - First id to lookup.
 
-                      push  dword [ebp + gni.packet.id]       ; Point open.descriptor to the directory against which to lookup a new id.
-                      call  open.descriptor                   ; Attempt to associate a descriptor with the file.
+    get.new.id.loop:  push  eax                                         ; Preserve id.
 
-                      push  eax                               ; Preserve result of open.descriptor.
+                      add   dword [ebp - get.new.id.packet.id], dword.l ; Adjust id to point to the buffer.
 
-                      call  close.descriptor                  ; Attempt to close an open descriptor.
+                      push  dword [ebp - get.new.id.packet.id]          ; Point convert.binary.id.to.ascii.id to destination buffer.
+                      push  eax                                         ; Tell convert.binary.id.to.ascii.id what id to convert.
+                      call  convert.binary.id.to.ascii.id               ; Convert the id and load the directory indicator.
 
-                      pop   eax                               ; Restore result of open.descriptor.
+                      sub   dword [ebp - get.new.id.packet.id], dword.l ; Adjust id to point back to the filename.
 
-                      or    eax, eax                          ; Did we associate a descriptor?
-                      js    get.new.id.done                   ; No! We have our new id!
+                      push  dword [ebp - get.new.id.packet.id]          ; Point open.descriptor to the directory against which to lookup a new id.
+                      call  open.descriptor                             ; Attempt to associate a descriptor with the file.
 
-                      pop   eax                               ; Restore id counter.
-                      inc   eax                               ; Increment id counter.
-                      jmp   get.new.id.loop                   ; Go check the next id.
+                      or    eax, eax                                    ; Did we associate a descriptor?
+                      js    get.new.id.done                             ; No! We have our new id!
 
-    get.new.id.done:  pop   eax                               ; eax - New id.
-                      ret   gni.packet_size                   ; Return to caller.
+                      push  eax                                         ; Preserve result of open.descriptor.
+                      call  close.descriptor                            ; Attempt to close an open descriptor.
+
+                      pop   eax                                         ; Restore id counter.
+                      inc   eax                                         ; Increment id counter.
+                      jmp   get.new.id.loop                             ; Go check the next id.
+
+    get.new.id.done:  pop   eax                                         ; eax - New id.
+
+                      pop   ebp                                         ; Restore caller's ebp.
+
+                      ret   get.new.id.packet_size                      ; Return to caller.
