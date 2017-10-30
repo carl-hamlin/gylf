@@ -8,6 +8,8 @@
 ;                                 dword [Pointer to socket filename]
 ;                                 byte  [Connection status index]
 ;
+;   Clobbers:       eax.
+;
 ;   Returns:        None.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -17,39 +19,75 @@
 ;   No external references.
 ;
 
-    answer.active.socket:           pop   edx                                                         ; edx - Return address.
+    answer.active.socket:                         pop   eax                                                             ; eax - Return address.
 
-                                    push  address.login.status                                        ; Set up pointer to address.login.status
-                                    push  address.passphrase.status                                   ; Set up pointer to address.passphrase.status
-                                    push  address.set.passphrase.status                               ; Set up pointer to address.set.passphrase.status
-                                    push  address.active.status                                       ; Set up pointer to address.active.status
+                                                  push  address.login.status                                            ; Set up pointer to address.login.status
+                                                  push  address.passphrase.status                                       ; Set up pointer to address.passphrase.status
+                                                  push  address.set.passphrase.status                                   ; Set up pointer to address.set.passphrase.status
+                                                  push  address.active.status                                           ; Set up pointer to address.active.status
 
-                                    push  edx                                                         ; Restore return address.
+                                                  push  eax                                                             ; Restore return address.
 
-                                    mov   ebp, esp                                                    ; ebp - Prepared to be used as a data pointer.
-                                    add   ebp, aas.packet                                             ; ebp - Data pointer.
+                                                  push  ebp                                                             ; Preserve caller's ebp.
 
-                                    push  dword [text.data.index.local.data.active.socket.message]    ; Pointer to socket activity notifier.
-                                    call  write.console                                               ; Let the admin know we're working with an active socket.
+                                                  mov   ebp, esp                                                        ; ebp - Prepared to be used as a data pointer.
+                                                  add   ebp, (dword.l + answer.active.socket.packet_size)               ; ebp - Data pointer.
 
-                                    push  sys.standard.output                                         ; Point write.descriptor to standard output.
-                                    push  dword [ebp + aas.packet.type + word.l]                      ; Point write descriptor to the socket type.
-                                    push  1                                                           ; Tell write descriptor to write one byte.
-                                    call  write.descriptor                                            ; Tell the admin what type of socket we're working with.
+                                                  push  ebx                                                             ; Preserve caller's ebx.
+                                                  push  ecx                                                             ; Preserve caller's ecx.
 
-                                    push  sys.standard.output                                         ; Point write.descriptor to standard output.
-                                    push  dword [ebp + aas.packet.type + word.l]                      ; Point write.descriptor to the socket id.
-                                    push  dword.l                                                     ; Tell write.descriptor to write one dword.
-                                    call  write.descriptor                                            ; Tell the admin which socket we're working with.
+                                                  cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.egg    ; Are we dealing with an egg?
+                                                  jz    answer.active.socket.egg.type                                   ; Go set the admin display type to egg.
 
-                                    push  dword [text.data.index.local.data.carriage.return.message]  ; Point write.console to the carriage return.
-                                    call  write.console                                               ; Write a carriage return to the console.
+                                                  cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.ghost  ; Are we dealing with a ghost?
+                                                  jz    answer.active.socket.ghost.type                                 ; Go set the admin display type to ghost.
 
-                                    mov   ebx, aas.packet.statii                                      ; ebx - Pointer to potential handler.
-                                    mov   ecx, aas.packet.status                                      ; ecx - Socket status.
+                                                  cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.gylf   ; Are we dealing with a gylf?
+                                                  jz    answer.active.socket.gylf.type                                  ; Go set the admin display type to gylf.
 
-                                    repnz add ebx, dword.l                                            ; ebx - Pointer to correct handler for socket status.
+                                                  mov   eax, (login.filename)                                           ; By process of elimination, we're dealing with a login. Set the admin
+                                                                                                                        ; display type to login.
+    answer.active.socket.admin.display.type.set:  push  dword [text.data.index.local.data.active.socket.message]        ; Pointer to socket activity notifier.
+                                                  call  write.console                                                   ; Let the admin know we're working with an active socket.
 
-                                    call  ebx                                                         ; Go handle the data.
+                                                  push  sys.standard.output                                             ; Point write.descriptor to standard output.
+                                                  push  (eax + word.l)                                                  ; Point write descriptor to the socket type.
+                                                  push  1                                                               ; Tell write descriptor to write one byte.
+                                                  call  write.descriptor                                                ; Tell the admin what type of socket we're working with.
 
-                                    ret   aas.packet                                                  ; Return to caller.
+                                                  push  sys.standard.output                                             ; Point write.descriptor to standard output.
+                                                  push  eax + dword.l                                                   ; Point write.descriptor to the socket id.
+                                                  push  dword.l                                                         ; Tell write.descriptor to write one dword.
+                                                  call  write.descriptor                                                ; Tell the admin which socket we're working with.
+
+                                                  push  dword [text.data.index.local.data.carriage.return.message]      ; Point write.console to the carriage return.
+                                                  call  write.console                                                   ; Write a carriage return to the console.
+
+                                                  mov   ebx, (ebp - answer.active.socket.packet.statii)                 ; ebx - Pointer to potential handler.
+                                                  mov   ecx, (ebp - answer.active.socket.packet.status)                 ; ecx - Socket status.
+
+                                                  repnz add ebx, dword.l                                                ; ebx - Pointer to correct handler for socket status.
+
+                                                  call  ebx                                                             ; Go handle the data.
+
+                                                  pop   ecx                                                             ; Restore caller's ecx.
+                                                  pop   ebx                                                             ; Restore caller's ebx.
+
+                                                  pop   ebp                                                             ; Restore caller's ebp.
+
+                                                  ret   answer.active.socket.packet_size                                ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+    answer.active.socket.egg.type:                mov   eax, (egg.filename)                                             ; Set the admin display type to egg.
+                                                  jmp   answer.active.socket.admin.display.type.set                     ; Go tell the admin we have activity on a socket.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+    answer.active.socket.ghost.type:              mov   eax, (ghost.filename)                                           ; Set the admin display type to ghost.
+                                                  jmp   answer.active.socket.admin.display.type.set                     ; Go tell the admin we have activity on a socket.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+    answer.active.socket.gylf.type:               mov   eax, (gylf.filename)                                            ; Set the admin display type to gylf.
+                                                  jmp   answer.active.socket.admin.display.type.set                     ; Go tell the admin we have activity on a socket.

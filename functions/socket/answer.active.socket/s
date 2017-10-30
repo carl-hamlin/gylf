@@ -16,7 +16,7 @@
 ;   answer.active.socket Data Structure
 ;
 
-    struc aas.packet
+    struc answer.active.socket.packet
       .active resd  00000001h ; Storage for pointer to active socket structure.
       .type   resd  00000001h ; Storage for socket type.
       .status resb        01h ; Storage for socket status.
