@@ -129,6 +129,9 @@
 
                                         call  close.descriptor                                        ; Close the socket file.
 
+                                        cmp   dword [e.data + egg.connection.descriptor.index], 0     ; Is there an active connection associated with this credential?
+                                        jz    active.socket.poll.eggs.inactive                        ; No. Don't do anything further with it.
+
                                         mov   eax, dword [e.data + egg.connection.descriptor.index]   ; eax - Descriptor associated with poll target.
                                         mov   dword [socket.data.active.socket.descriptor], eax       ; Plug the descriptor into our polling packet.
 
@@ -168,6 +171,9 @@
 
                                         call  close.descriptor                                        ; Close the socket file.
 
+                                        cmp   dword [g.data + gylf.connection.descriptor.index], 0    ; Is there an active connection associated with this credential?
+                                        jz    active.socket.poll.gylf.inactive                        ; No. Don't do anything further with it.
+
                                         mov   eax, dword [g.data + gylf.connection.descriptor.index]  ; eax - Descriptor associated with the poll target.
                                         mov   dword [socket.data.active.socket.descriptor], eax       ; Plug the descriptor into our polling packet.
 
@@ -206,6 +212,9 @@
 
                                         call  close.descriptor                                        ; Close the socket file.
 
+                                        cmp   dword [d.data + ghost.connection.descriptor.index], 0   ; Is there an active connection associated with this credential?
+                                        jz    active.socket.poll.ghosts.inactive                      ; No. Don't do anything further with it.
+
                                         mov   eax, dword [d.data + ghost.connection.descriptor.index] ; eax - Descriptor associated with the poll target.
                                         mov   dword [socket.data.active.socket.descriptor], eax       ; Plug the descriptor into our polling packet.
 
@@ -219,7 +228,7 @@
                                         call  answer.active.socket                                    ; Go process the data on the socket.
 
     active.socket.poll.ghosts.inactive: inc   edx                                                     ; edx - Next socket to poll.
-                                        jmp   active.socket.poll.gylf                                 ; Go poll the next socket.
+                                        jmp   active.socket.poll.ghosts                               ; Go poll the next socket.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
