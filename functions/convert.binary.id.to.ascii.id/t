@@ -30,6 +30,7 @@
                                                     mov   edx, dword [ebp - convert.binary.id.to.ascii.id.packet.id]      ; edx - Id to convert.
 
                                                     mov   ecx, 4                                                          ; ecx - Counter for conversion loop.
+                                                    sub   eax, eax                                                        ; eax - Sanitized for computational use.
 
     convert.binary.id.to.ascii.id.conversion.loop:  rol   edx, 8                                                          ; Move first to digits to be converted into position.
 
