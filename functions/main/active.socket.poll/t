@@ -83,9 +83,9 @@
 
                                         push  eax                                                     ; Preserve descriptor for close.descriptor.
 
-                                        push  login_size                                              ; Tell read.descriptor to read an entire login.
-                                        push  l.data                                                  ; Tell read.descriptor to read the login into l.data.
                                         push  eax                                                     ; Point read.descriptor to the descriptor we associated with the socket.
+                                        push  l.data                                                  ; Tell read.descriptor to read the login into l.data.
+                                        push  login_size                                              ; Tell read.descriptor to read an entire login.
                                         call  read.descriptor                                         ; Read the login.
 
                                         call  close.descriptor                                        ; Close the login file.
@@ -122,9 +122,9 @@
 
                                         push  eax                                                     ; Preserve descriptor for close.descriptor.
 
-                                        push  egg_size                                                ; Tell read.descriptor to read an entire egg.
-                                        push  e.data                                                  ; Tell read.descriptor to read the egg into e.data.
                                         push  eax                                                     ; Point read.descriptor to the descriptor we associated with the socket.
+                                        push  e.data                                                  ; Tell read.descriptor to read the egg into e.data.
+                                        push  egg_size                                                ; Tell read.descriptor to read an entire egg.
                                         call  read.descriptor                                         ; Read the egg.
 
                                         call  close.descriptor                                        ; Close the socket file.
@@ -161,9 +161,9 @@
 
                                         push  eax                                                     ; Preserve descriptor for close.descriptor.
 
-                                        push  gylf_size                                               ; Tell read.descriptor to read an entire gylf.
-                                        push  g.data                                                  ; Tell read.descriptor to read the gylf into g.data.
                                         push  eax                                                     ; Point read.descriptor to the descriptor we associated with the socket.
+                                        push  g.data                                                  ; Tell read.descriptor to read the gylf into g.data.
+                                        push  gylf_size                                               ; Tell read.descriptor to read an entire gylf.
                                         call  read.descriptor                                         ; Read the gylf.
 
                                         call  close.descriptor                                        ; Close the socket file.
@@ -199,9 +199,9 @@
 
                                         push  eax                                                     ; Preserve descriptor for close.descriptor.
 
-                                        push  ghost_size                                              ; Tell read.descriptor to read an entire ghost.
-                                        push  d.data                                                  ; Tell read.descriptor to read the ghost into d.data.
                                         push  eax                                                     ; Point read.descriptor to the descriptor we associated with the socket.
+                                        push  d.data                                                  ; Tell read.descriptor to read the ghost into d.data.
+                                        push  ghost_size                                              ; Tell read.descriptor to read an entire ghost.
                                         call  read.descriptor                                         ; Read the ghost.
 
                                         call  close.descriptor                                        ; Close the socket file.
