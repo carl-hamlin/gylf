@@ -1,0 +1,62 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/convert.binary.id.to.ascii.id/t
+;
+;   This function takes a passed binary id and a buffer, and returns the ASCII converted id at the passed buffer.
+;
+;   Assumptions:    Stack Frame:  dword [ID to be converted]
+;                                 dword [Pointer to buffer]
+;
+;   Returns:        [buffer] - Converted id.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   convert.binary.id.to.ascii.id.conversion.loop ./functions/convert.binary.id.to.ascii.id/t
+;
+
+    convert.binary.id.to.ascii.id:                  push  ebp                                                             ; Preserve caller's ebp.
+
+                                                    mov   ebp, esp                                                        ; ebp - Prepared to be used as data pointer.
+                                                    add   ebp, (dword.l + convert.binary.id.to.ascii.id.packet_size)      ; ebp - Data pointer.
+
+                                                    push  eax                                                             ; Preserve caller's eax.
+                                                    push  ecx                                                             ; Preserve caller's ecx.
+                                                    push  edx                                                             ; Preserve caller's edx.
+                                                    push  edi                                                             ; Preserve caller's edi.
+
+                                                    mov   edi, dword [ebp - convert.binary.id.to.ascii.id.packet.buffer]  ; edi - Pointer to buffer against which to convert.
+                                                    mov   edx, dword [ebp - convert.binary.id.to.ascii.id.packet.id]      ; edx - Id to convert.
+
+                                                    mov   ecx, 4                                                          ; ecx - Counter for conversion loop.
+                                                    sub   eax, eax                                                        ; eax - Sanitized for computational use.
+
+    convert.binary.id.to.ascii.id.conversion.loop:  rol   edx, 8                                                          ; Move first to digits to be converted into position.
+
+                                                    mov   al, dl                                                          ; al - First two digits to be converted.
+
+                                                    shl   ax, 4                                                           ; ah - First digit to convert.
+                                                    shr   al, 4                                                           ; al - Second digit to convert.
+
+                                                    add   ah, 30h                                                         ; ah - First converted digit.
+                                                    add   al, 30h                                                         ; al - Second converted digit.
+
+                                                    ror   ax, 8                                                           ; Swap digit positions.
+
+                                                    stosb                                                                 ; Store first digit.
+
+                                                    ror   ax, 8                                                           ; Swap digit positions.
+
+                                                    stosb                                                                 ; Store second digit.
+
+                                                    loop  convert.binary.id.to.ascii.id.conversion.loop                   ; Go convert the rest of the digits.
+
+                                                    pop   edi                                                             ; Restore caller's edi.
+                                                    pop   edx                                                             ; Restore caller's edx.
+                                                    pop   ecx                                                             ; Restore caller's ecx.
+                                                    pop   eax                                                             ; Restore caller's eax.
+
+                                                    pop   ebp                                                             ; Restore return address.
+
+                                                    ret   convert.binary.id.to.ascii.id.packet_size                       ; Return to caller.

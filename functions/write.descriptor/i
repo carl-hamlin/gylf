@@ -2,4 +2,5 @@
 
     section   .text
 
+    %include  "./functions/write.descriptor/s"
     %include  "./functions/write.descriptor/t"
