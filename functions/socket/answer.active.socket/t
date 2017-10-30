@@ -5,7 +5,7 @@
 ;   This code determines the status of an active socket and routes the data to the appropriate handler.
 ;
 ;   Assumptions:    Stack Frame:  dword [Pointer to active socket structure]
-;                                 dword [Pointer to socket filename]
+;                                 dword [Pointer to socket type]
 ;                                 byte  [Connection status index]
 ;
 ;   Clobbers:       eax.
