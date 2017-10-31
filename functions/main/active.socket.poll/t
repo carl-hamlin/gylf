@@ -101,6 +101,7 @@
 
                                         push  socket.data.active.socket.descriptor                    ; Yes. Point answer.active.socket to the active socket.
                                         push  a.p.type.login                                          ; Tell answer.active.socket that we're dealing with a login.
+                                        push  login.status                                            ; Tell answer.active.socket to deal with login status.
                                         call  answer.active.socket                                    ; Go process the data on the socket.
 
     active.socket.poll.logins.inactive: inc   edx                                                     ; edx - Next socket to poll.
