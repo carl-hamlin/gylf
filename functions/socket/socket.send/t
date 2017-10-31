@@ -45,10 +45,10 @@
                           mov   dword [ebp - socket.send.packet.blength], edx ; Store length of retrieved data.
                           mov   dword [ebp - socket.send.packet.edata], 0     ; Smoke index to external data.
 
-    socket.send.buffered: push  dword [ebp - socket.send.packet.descriptor]
-                          push  dword [ebp - socket.send.packet.bdata]
-                          push  dword [ebp - socket.send.packet.blength]
-                          call  write.descriptor
+    socket.send.buffered: push  dword [ebp - socket.send.packet.descriptor]   ; Point write.descriptor to target connection.
+                          push  dword [ebp - socket.send.packet.bdata]        ; Point write.descriptor to data to be written.
+                          push  dword [ebp - socket.send.packet.blength]      ; Tell write.descriptor how long the data is.
+                          call  write.descriptor                              ; Put the data out on the socket.
 
     socket.send.done:     pop   edx                                           ; Restore caller's edx.
                           pop   ecx                                           ; Restore caller's ecx.
