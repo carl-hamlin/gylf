@@ -5,7 +5,7 @@
 ;   This code performs handling for data submitted by a socket with 'login' status. Essentially, it determines whether or not the connection belongs to a new participant or an old one, creates
 ;   participant credentials in the case of a new participant, and sets the connection status to 'passphrase'.
 ;
-;   Assumptions:    Stack Frame:  dword [Socket to be addressed]
+;   Assumptions:    ebp - Pointer to answer.active.socket.packet.
 ;
 ;   Returns:        None.
 ;
@@ -76,10 +76,7 @@
 ;   write.descriptor                                        ./functions/write.descriptor/t
 ;
 
-    address.login.status:                       mov   ebp, esp                                                            ; ebp - Prepared to be used as a data pointer.
-                                                add   ebp, als.packet                                                     ; ebp - Data pointer.
-
-                                                call  recv.from.socket                                                    ; buffer.1 - Username received from the socket.
+    address.login.status:                       call  recv.from.socket                                                    ; buffer.1 - Username received from the socket.
 
                                                 push  buffer.1                                                            ; Point get.participant.data.by.name to received username.
                                                 push  e.data                                                              ; Point get.participant.data.by.name to e.data.
@@ -133,7 +130,8 @@
                                                 jz    address.login.status.old.login                                      ; Yes. Go tell the user and the admin both that the provided credential
                                                                                                                           ; is active.
 
-                                                mov   eax, dword [ebp + als.packet.socket]                                ; eax - Socket being addressed.
+                                                mov   ebx, dword [ebp - answer.active.socket.packet.active]               ; ebx - Pointer to active socket.
+                                                mov   eax, dword [ebx]                                                    ; eax - Socket being addressed.
                                                 mov   dword [e.data + egg.connection.descriptor.index], eax               ; Populate the egg data with the associated active socket.
 
                                                 cmp   byte [e.data + egg.passphrase], 0                                   ; Has the credential ever been used before?
@@ -172,7 +170,8 @@
                                                 jz    address.login.status.old.login                                      ; Yes. Go tell the user and the admin both that the provided credential
                                                                                                                           ;  is active.
 
-                                                mov   eax, dword [ebp + als.packet.socket]                                ; eax - Socket being addressed.
+                                                mov   ebx, dword [ebp - answer.active.socket.packet.active]               ; ebx - Pointer to active socket.
+                                                mov   eax, dword [ebx]                                                    ; eax - Socket being addressed.
                                                 mov   dword [g.data + gylf.connection.descriptor.index], eax              ; Populate the gylf data with the associated active socket.
                                                 mov   dword [g.data + gylf.connection.status.index], passphrase.status    ; Populate the gylf data with the updated connection status.
 
@@ -197,7 +196,8 @@
                                                 jz    address.login.status.old.login                                      ; Yes. Go tell the user and the admin both that the provided credential
                                                                                                                           ; is active.
 
-                                                mov   eax, dword [ebp + als.packet.socket]                                ; eax - Socket being addressed.
+                                                mov   ebx, dword [ebp - answer.active.socket.packet.active]               ; ebx - Pointer to active socket.
+                                                mov   eax, dword [ebx]                                                    ; eax - Socket being addressed.
                                                 mov   dword [d.data + ghost.connection.descriptor.index], eax             ; Populate the ghost data with the associated active socket.
                                                 mov   dword [d.data + ghost.connection.status.index], passphrase.status   ; Populate the ghost data with the updated connection status.
 
@@ -216,14 +216,10 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    address.login.status.clean.waiting.list:    push  dword [ebp + als.packet.socket]                                     ; Point convert.binary.id.to.ascii.id to current socket.
-                                                push  login.filename                                                      ; Point convert.binary.id.to.ascii.id to login filename.
-                                                call  convert.binary.id.to.ascii.id                                       ; Prepare the filename for removal.
-
-                                                mov   eax, sys.unlink                                                     ; eax - Smoke the file.
+    address.login.status.clean.waiting.list:    mov   eax, sys.unlink                                                     ; eax - Smoke the file.
                                                 mov   ebx, login.filename                                                 ; ebx - Smoke the login file.
                                                 int   sys.system.call                                                     ; SMOKE THAT MOTHERFUCKER!
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    address.login.status.done:                  ret   als.packet                                                          ; Return to caller.
+    address.login.status.done:                  ret                                                                       ; Return to caller.
