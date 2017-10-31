@@ -1,32 +1,37 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/write.descriptor/t
 ;
 ;   This function writes data to an active descriptor.
 ;
-;   Assumptions:    [file.indicator] = indicator of whether or not a file is associated with the descriptor
-;                   ecx = Pointer to data to be written.
-;                   edx = Length of data to be written.
+;   Assumptions:    Stack Frame:  dword - Length of data to be written.
+;                                 dword - Pointer to data to be written.
+;                                 dword - Descriptor to which to write.
 ;
-;   Returns:        eax = Error indicator.
+;   Returns:        eax - Error indicator.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   file.indicator      ./functions/write.descriptor/d
-;
-;   sys.standard.output ./functions/write.descriptor/b
-;
 ;   sys.system.call     ./functions/b
 ;
-;   sys.write.call      ./functions/write.descriptor/b
+;   sys.write.call      ./functions/b
 ;
 
-    write.descriptor: mov  eax, sys.write.call                         ; eax = Write data to an active descriptor.
-                      mov  ebx, dword [file.indicator]                 ; ebx = Write to descriptor specified.
-                      int  sys.system.call                             ; Write data to an active descriptor.
+; ffd9c09c
 
-                      mov  dword [file.indicator], sys.standard.output ; Reset the file indicator to default.
+    write.descriptor: push  ebp                                                   ; Preserve caller's ebp.
 
-                      ret                                              ; Return to caller.
+                      mov   ebp, esp                                              ; ebp - Prepared to be used as a data pointer.
+                      add   ebp, (write.descriptor.packet_size + dword.l)         ; ebp - Data pointer.
+
+                      mov   eax, sys.write.call                                   ; eax - Write data to an active descriptor.
+                      mov   ebx, dword [ebp - write.descriptor.packet.descriptor] ; ebx - Write to descriptor specified.
+                      mov   ecx, dword [ebp - write.descriptor.packet.buffer]     ; ecx - Pointer to data to be written.
+                      mov   edx, dword [ebp - write.descriptor.packet.bytes]      ; edx - Length of data to be written.
+                      int   sys.system.call                                       ; Write data to an active descriptor.
+
+                      pop  ebp                                                    ; Restore caller's ebp.
+
+                      ret  write.descriptor.packet_size                           ; Return to caller.
