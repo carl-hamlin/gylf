@@ -36,7 +36,8 @@
                   push  dword [ebp - clear.screen.packet.descriptor]  ; Point socket.send to the active socket.
                   push  external.data.buffer                          ; Point socket.send to the future location of the cursor.home escape sequence.
                   push  edx                                           ; Provide the length of the sequence.
-                  call  socket.send.buf                               ; Send the string to the connected socket, modifying the cursor position remotely.
+                  push  00000000h                                     ; Flags for send function.
+                  call  socket.send                                   ; Send the string to the connected socket, modifying the cursor position remotely.
 
                   push  external.data.clear.screen                    ; Point get.external.data to filename for clear.screen external data.
                   call  get.external.data                             ; Grab the clear.screen escape sequence.
@@ -44,7 +45,8 @@
                   push  dword [ebp - clear.screen.packet.descriptor]  ; Point socket.send to the active socket.
                   push  external.data.buffer                          ; Point socket.send to the future location of the cursor.home escape sequence.
                   push  edx                                           ; Provide the length of the sequence.
-                  call  socket.send.buf                               ; Send the string to the connected socket, clearing the screen remotely.
+                  push  00000000h                                     ; Flags for send function.
+                  call  socket.send                                   ; Send the string to the connected socket, clearing the screen remotely.
 
                   pop   edx                                           ; Restore caller's edx.
 

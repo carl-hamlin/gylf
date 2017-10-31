@@ -146,9 +146,11 @@
                                             call  close.descriptor                                                  ; Disassociate the descriptor currently associated with the current area
                                                                                                                     ; file.
 
+                                            push  dword [a.p.data.gylf + gylf.connection.descriptor.index]          ; Point socket.send to the active descriptor.
                                             push  eax                                                               ; Tell socket.send the length of the message.
                                             push  buffer.1                                                          ; Point socket.send to the description entry.
-                                            call  socket.send.buf                                                   ; Put the message on the socket.
+                                            push  dword 00000000h                                                   ; Flags for send function.
+                                            call  socket.send                                                       ; Put the message on the socket.
 
                                             call  write.prompt                                                      ; Restore the user's prompt.
 

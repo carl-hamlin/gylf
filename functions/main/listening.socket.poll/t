@@ -96,6 +96,8 @@
                                   call  clear.screen                                                        ; Clear that fellow's screen.
 
                                   push  dword [l.data + login.connection.descriptor.index]                  ; Point socket.send to the active socket.
+                                  push  dword 00000000h                                                     ; No buffered data.
+                                  push  dword 00000000h                                                     ; No buffered length.
                                   push  dword [text.data.index.socket.data.login.message]                   ; Point send function to message indicating a need for login credentials.
                                   call  socket.send                                                         ; Tell the new guy that we'll need some login credentials.
 
