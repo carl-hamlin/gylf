@@ -1,0 +1,24 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/write.descriptor/s
+;
+;   This file contains structures pertinent to the write.descriptor utility.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+;================================================================================================================================================================================================
+;
+;   write.descriptor Data Structure
+;
+
+    struc write.descriptor.packet
+      .descriptor resd  00000001h ; Storage for descriptor to which to write.
+      .buffer     resd  00000001h ; Storage for pointer to buffer from which to write data.
+      .bytes      resd  00000001h ; Storage for number of bytes to write.
+    endstruc
+

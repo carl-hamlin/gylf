@@ -1,0 +1,30 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/answer.active.socket/s
+;
+;   This file contains structures pertinent to the answer.active.socket utility.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+;================================================================================================================================================================================================
+;
+;   answer.active.socket Data Structure
+;
+
+    struc answer.active.socket.packet
+      .active   resd  00000001h ; Storage for pointer to active socket structure.
+      .type     resd  00000001h ; Storage for socket type.
+      .status   resd  00000001h ; Storage for socket status.
+      .statii   resd  00000001h ; Storage for pointer to address.login.status.
+                resd  00000001h ; Storage for pointer to address.passphrase.status.
+                resd  00000001h ; Storage for pointer to address.set.passphrase.status.
+                resd  00000001h ; Storage for pointer to address.active.status.
+      .tpointer resd  00000001h ; Storage for pointer to type indicator.
+      .ipointer resd  00000001h ; Storage for pointer to id.
+    endstruc
+
