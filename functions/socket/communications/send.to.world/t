@@ -91,7 +91,7 @@
                               pop   eax                                                         ; Restore buffered indicator.
                               pop   ebp                                                         ; Restore return address.
 
-                              jmp  send.to.world.loop.next                                      ; Go broadcast to the next id.
+                              jmp   send.to.world.loop.next                                     ; Go broadcast to the next id.
 
     send.to.world.c:          pop   esi                                                         ; Restore caller's esi register.
 
@@ -104,9 +104,10 @@
     send.to.world.buf.s:      push  eax                                                         ; Preserve buffered indicator.
 
                               push  dword [g.data + gylf.connection.external.index]             ; Point socket.send to connection to notify.
-                              push  dword [esp+(dword.l * 5)]                                   ; Tell socket.send.buf how long the data is.
                               push  dword [esp+(dword.l * 7)]                                   ; Point socket.send.buf to the data.
-                              call  socket.send.buf                                             ; Send the data.
+                              push  dword [esp+(dword.l * 5)]                                   ; Tell socket.send.buf how long the data is.
+                              push  dword 00000000h                                             ; Flags for send function.
+                              call  socket.send                                                 ; Send the data.
 
                               pop   eax                                                         ; Restore buffered indicator.
 

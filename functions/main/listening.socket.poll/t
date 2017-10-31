@@ -86,8 +86,8 @@
                                   push  eax                                                                 ; Login storage descriptor stored for closing.
 
                                   push  eax                                                                 ; Point write.descriptor to login storage.
-                                  push  login_size                                                          ; Tell write.descriptor that we'll be writing an entire login entry.
                                   push  l.data                                                              ; Point write.descriptor to the login data.
+                                  push  login_size                                                          ; Tell write.descriptor that we'll be writing an entire login entry.
                                   call  write.descriptor                                                    ; Write the login data to login storage.
 
                                   call  close.descriptor                                                    ; Put login storage away for now.
@@ -96,6 +96,8 @@
                                   call  clear.screen                                                        ; Clear that fellow's screen.
 
                                   push  dword [l.data + login.connection.descriptor.index]                  ; Point socket.send to the active socket.
+                                  push  dword 00000000h                                                     ; No buffered data.
+                                  push  dword 00000000h                                                     ; No buffered length.
                                   push  dword [text.data.index.socket.data.login.message]                   ; Point send function to message indicating a need for login credentials.
                                   call  socket.send                                                         ; Tell the new guy that we'll need some login credentials.
 

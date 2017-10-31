@@ -1,8 +1,8 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/get.new.id/s
+;   ./functions/get.external.data/s
 ;
-;   This file contains structures pertinent to the get.new.id utiliity.
+;   This file contains structures pertinent to the get.external.data utiliity.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
@@ -13,9 +13,10 @@
 
 ;================================================================================================================================================================================================
 ;
-;   get.new.id Data Structure
+;   get.external.data Data Structure
 ;
 
-    struc get.new.id.packet
-      .id resd  00000001h ; Storage for pointer to directory to be looked up.
+    struc get.external.data.packet
+      .filename   resd  00000001h ; Storage for pointer to ASCIIZ filename for external data file.
+      .descriptor resd  00000001h ; Storage for descriptor associated with external data file.
     endstruc

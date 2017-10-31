@@ -1,8 +1,8 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/get.new.id/s
+;   ./functions/socket/socket.send/s
 ;
-;   This file contains structures pertinent to the get.new.id utiliity.
+;   This file contains structures pertinent to the socket.send utiliity.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
@@ -13,9 +13,12 @@
 
 ;================================================================================================================================================================================================
 ;
-;   get.new.id Data Structure
+;   socket.send Data Structure
 ;
 
-    struc get.new.id.packet
-      .id resd  00000001h ; Storage for pointer to directory to be looked up.
+    struc socket.send.packet
+      .descriptor resd  00000001h ; Storage for descriptor associated with active socket.
+      .bdata      resd  00000001h ; Storage for pointer to buffered data.
+      .blength    resd  00000001h ; Storage for length of buffered data.
+      .edata      resd  00000001h ; Storage for index to external data.
     endstruc

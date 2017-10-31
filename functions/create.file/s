@@ -1,8 +1,8 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/socket/socket.send/b
+;   ./functions/create.file/s
 ;
-;   This file contains all definitions pertinent to the socket.send function.
+;   This file contains structures pertinent to the create.file utiliity.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
@@ -11,5 +11,11 @@
 ;   No external references.
 ;
 
-    %define sys.socket.send 009h  ; 009h is the modifier for 066h that tells the kernel we're attempting to send data to an active, connected socket. We don't use this much here, preferring
-                                  ; kernel function 004h to write directly to the socket descriptor.
+;================================================================================================================================================================================================
+;
+;   create.file Data Structure
+;
+
+    struc create.file.packet
+      .filename resd  00000001h ; Storage for pointer to filename to be created.
+    endstruc
