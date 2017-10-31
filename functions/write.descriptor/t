@@ -19,13 +19,19 @@
 ;   sys.write.call      ./functions/b
 ;
 
-    write.descriptor: pop   ebp                 ; Preserve return address
+; ffd9c09c
 
-                      mov   eax, sys.write.call ; eax - Write data to an active descriptor.
-                      pop   ebx                 ; ebx - Write to descriptor specified.
-                      pop   ecx                 ; ecx - Pointer to data to be written.
-                      pop   edx                 ; edx - Length of data to be written.
-                      int   sys.system.call     ; Write data to an active descriptor.
+    write.descriptor: push  ebp                                                   ; Preserve caller's ebp.
 
-                      push  ebp                 ; Restore return address.
-                      ret                       ; Return to caller.
+                      mov   ebp, esp                                              ; ebp - Prepared to be used as a data pointer.
+                      add   ebp, (write.descriptor.packet_size + dword.l)         ; ebp - Data pointer.
+
+                      mov   eax, sys.write.call                                   ; eax - Write data to an active descriptor.
+                      mov   ebx, dword [ebp - write.descriptor.packet.descriptor] ; ebx - Write to descriptor specified.
+                      mov   ecx, dword [ebp - write.descriptor.packet.buffer]     ; ecx - Pointer to data to be written.
+                      mov   edx, dword [ebp - write.descriptor.packet.bytes]      ; edx - Length of data to be written.
+                      int   sys.system.call                                       ; Write data to an active descriptor.
+
+                      pop  ebp                                                    ; Restore caller's ebp.
+
+                      ret  write.descriptor.packet_size                           ; Return to caller.

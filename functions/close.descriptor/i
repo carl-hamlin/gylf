@@ -8,4 +8,5 @@
 
     section   .text
 
+    %include  "./functions/close.descriptor/s"
     %include  "./functions/close.descriptor/t"

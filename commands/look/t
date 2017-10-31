@@ -18,6 +18,8 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   a.p.data.gylf                                             ./b
+;
 ;   area.header                                               ./commands/area/b
 ;
 ;   area.header.l                                             ./commands/area/b
@@ -62,21 +64,18 @@
 ;
 
 
-    command.look:                           cmp  eax, command.look.l                                                ; Has the user invoked the command with no arguments?
-                                            jz   command.look.default                                               ; Yes. Go execute default behaviour.
+    command.look:                           cmp   eax, command.look.l                                               ; Has the user invoked the command with no arguments?
+                                            jz    command.look.default                                              ; Yes. Go execute default behaviour.
 
                                             ; Here's where the targetted code goes.
 
-                                            mov  ebx, esi                                                           ; ebx - Pointer to descriptor associated with target socket.
-                                            add  ebx, connection.area.id.index                                      ; ebx - Pointer to area id associated with active connection.
+                                            push  a.p.data.gylf + gylf.connection.area.id.index                     ; Point open.descriptor to area id associated with active connection.
+                                            call  open.descriptor                                                   ; Associate a descriptor with the area id.
 
-                                            push  ebx                                                               ; Point open.descriptor to the area id assocaited with the active connection.
-                                            call open.descriptor                                                    ; Associate a descriptor with the area id.
+                                            or    eax, eax                                                          ; Did the descriptor associate properly?
+                                            jz    command.look.targetted.good.descriptor                            ; Yes. Go have a look at contained objects.
 
-                                            or   eax, eax                                                           ; Did the descriptor associate properly?
-                                            jz   command.look.targetted.good.descriptor                             ; Yes. Go have a look at contained objects.
-
-                                            jmp  command.look.bad.descriptor                                        ; No. Go inform the user that the descriptor is invalid.
+                                            jmp   command.look.bad.descriptor                                       ; No. Go inform the user that the descriptor is invalid.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -85,29 +84,26 @@
                                             push  eax                                                               ; Point read.descriptor to descriptor associated with area id.
                                             call  read.descriptor                                                   ; Read area header from descriptor associated with area id.
 
-                                            mov  ecx, dword [area.num.contained.items]                              ; ecx - number of items to check targetting argument against.
+                                            mov   ecx, dword [area.num.contained.items]                             ; ecx - number of items to check targetting argument against.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.look.targetted.find.target:     push ecx                                                                ; Preserve number of items.
+    command.look.targetted.find.target:     push  ecx                                                               ; Preserve number of items.
 
                                             push  dword.l                                                           ; Tell read.descriptor the length of item id.
                                             push  buffer.1                                                          ; Point read.descriptor to buffer into which to read item id.
                                             push  ebx                                                               ; Point read.descriptor to descriptor associated with area id.
                                             call  read.descriptor                                                   ; Read an item id.
 
-                                            pop  ecx                                                                ; Restore number of items.
+                                            pop   ecx                                                               ; Restore number of items.
 
-                                            loop command.look.targetted.find.target                                 ; Go check the next item.
+                                            loop  command.look.targetted.find.target                                ; Go check the next item.
 
                                             ret                                                                     ; Return to caller.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.look.default:                   mov   ebx, esi                                                          ; ebx - Index to connection table entry.
-                                            add   ebx, connection.area.id.index                                     ; ebx - Pointer to area id associated with active connection.
-
-                                            push  ebx                                                               ; Point open.descriptor to the file containing the current area info.
+    command.look.default:                   push  a.p.data.gylf + gylf.connection.area.id.index                     ; Point open.descriptor to the file containing the current area info.
                                             call  open.descriptor                                                   ; Associate a descriptor with the file containing current area info.
 
                                             or    eax, eax                                                          ; Were we able to properly associate a descriptor?
