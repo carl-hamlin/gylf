@@ -78,8 +78,8 @@
 
     address.login.status:                       call  recv.from.socket                                                    ; buffer.1 - Username received from the socket.
 
-                                                push  buffer.1                                                            ; Point get.participant.data.by.name to received username.
-                                                push  e.data                                                              ; Point get.participant.data.by.name to e.data.
+                                                mov   dword [ebp - answer.active.socket.packet.bpointer], e.data          ; Point get.participant.data.by.name to e.data.
+                                                mov   dword [ebp - answer.active.socket.packet.fpointer], egg.filename    ; Point get.participant.data.by.name to egg filename.
                                                 call  get.participant.data.by.name                                        ; Attempt to populate e.data with the data associated with the target
                                                                                                                           ; egg.
 

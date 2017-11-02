@@ -6,7 +6,9 @@
 ;
 ;   Assumptions:    Stack Frame:  dword [pointer to name to be looked up]
 ;
-;   Returns:        [g.data] - Data for the requested participant.
+;   Returns:        [d.data] - Data for the requested ghost.
+;                   [e.data] - Data for the requested egg.
+;                   [g.data] - Data for the requested gylf.
 ;
 ;                   - OR -
 ;
@@ -35,43 +37,61 @@
 ;   read.descriptor                           ./functions/read.descriptor/t
 ;
 
-    get.participant.data.by.name:             push  eax                                       ; Preserve caller's eax register.
+    get.participant.data.by.name:             push  eax                                                         ; Preserve caller's eax.
+                                              push  esi                                                         ; Preserve caller's esi.
+                                              push  edi                                                         ; Preserve caller's edi.
 
-                                              mov   ebp, esp                                  ; ebp - Pointer to stack.
-                                              add   ebp, (dword.l + gpdbn.packet_size)        ; ebp - Pointer to stack frame.
+                                              sub   eax, eax                                                    ; eax - Prepared to represent IDs against which to look up.
 
-                                              sub   eax, eax                                  ; eax - Prepared to represent IDs against which to look up.
-
-    get.participant.data.by.name.lookup.loop: push  eax                                       ; Store id against which to lookup.
+    get.participant.data.by.name.lookup.loop: push  eax                                                         ; Store id against which to lookup.
     
-                                              push  eax                                       ; Point convert.binary.id.to.ascii.id to the next id to be looked up.
-                                              push  gylf.filename + dword.l                   ; Point convert.binary.id.to.ascii.id to buffer.1.
-                                              call  convert.binary.id.to.ascii.id             ; Convert the id to ASCII.
+                                              push  eax                                                         ; Point convert.binary.id.to.ascii.id to the next id to be looked up.
 
-                                              push  gylf.filename                             ; Point open.descriptor to the newly created filename containing the converted id.
-                                              call  open.descriptor                           ; Attempt to open the file for reading.
+                                              mov   eax, dword [ebp - answer.active.socket.packet.fpointer]     ; eax - Pointer to specified filename.
+                                              add   eax, dword.l                                                ; eax - Pointer to buffer into which to write the converted id.
 
-                                              or    eax, eax                                  ; Did we successfully open the file for reading?
-                                              js    get.participant.data.by.name.error        ; NO! We're done here; restore the return address and return to sender with the error code in eax.
+                                              push  eax                                                         ; Point convert.binary.id.to.ascii.id to the specified buffer.
+                                              call  convert.binary.id.to.ascii.id                               ; Convert the id to ASCII.
 
-                                              push  eax                                       ; Store file descriptor for closing after read.
+                                              push  dword [ebp - answer.active.socket.packet.fpointer]          ; Point open.descriptor to the newly created filename containing the converted id.
+                                              call  open.descriptor                                             ; Attempt to open the file for reading.
 
-                                              push  gylf_size                                 ; Tell read.descriptor to read the whole file.
-                                              push  g.data                                    ; Point read.descriptor to g.data.
-                                              push  eax                                       ; Point read.descriptor to the target data file.
-                                              call  read.descriptor                           ; Read that data into g.data.
+                                              or    eax, eax                                                    ; Did we successfully open the file for reading?
+                                              js    get.participant.data.by.name.error                          ; NO! We're done here; restore the return address and return to sender with the error code in eax.
 
-                                              call  close.descriptor                          ; Close the file.
+                                              push  eax                                                         ; Store file descriptor for closing after read.
 
-                                              pop   eax                                       ; Restore id against which to lookup.
-                                              inc   eax                                       ; eax - Next id.
+                                              push  dword [ebp - answer.active.socket.packet.bsize]             ; Tell read.descriptor to read the whole file.
+                                              push  dword [ebp - answer.active.socket.packet.bpointer]          ; Point read.descriptor to specified buffer.
+                                              push  eax                                                         ; Point read.descriptor to the target data file.
+                                              call  read.descriptor                                             ; Read that data into the specified buffer.
 
-                                              mov   esi, dword [ebp + gpdbn.packet.id]        ; esi - Pointer to name agianst which to lookup.
-                                              mov   edi, g.data + gylf.name                   ; edi - Pointer to name stored in most recent id read.
+                                              call  close.descriptor                                            ; Close the file.
 
-                                              repnz cmpsb                                     ; Are they the same names?
+                                              pop   eax                                                         ; Restore id against which to lookup.
+                                              inc   eax                                                         ; eax - Next id.
 
-                                              jnz   get.participant.data.by.name.lookup.loop  ; NO! Go gheck the next id.
+                                              mov   esi, buffer.1                                               ; esi - Pointer to name against which to lookup.
+
+                                              cmp   dword [ebp - answer.active.socket.packet.bpointer], e.data  ; Are we looking at an egg?
+                                              jnz   get.participant.data.no.egg.name                            ; No. Go see if we're looking at a gylf.
+
+                                              mov   edi, e.data + egg.name                                      ; Yes. Set up the buffer.
+
+    get.participant.data.no.egg.name:         cmp   dword [ebp - answer.active.socket.packet.bpointer], g.data  ; Are we looking at a gylf?
+                                              jnz   get.participant.data.no.gylf.name                           ; No. Go see if we're looking at a ghost.
+
+                                              mov   edi, g.data + gylf.name                                     ; Yes. Set up the buffer.
+
+    get.participant.data.no.gylf.name:        cmp   dword [ebp - answer.active.socket.packet.bpointer], d.data  ; Are we looking at a ghost?
+                                              jnz   get.participant.data.no.ghost.name                          ; No. At this point, we've got the buffer set up, or something *horrible* has happened. Move on.
+
+                                              mov   edi, d.data + ghost.name                                    ; Yes. Set up the buffer.
+
+    get.participant.data.no.ghost.name:       repnz cmpsb                                                       ; Are they the same names?
+
+                                              jnz   get.participant.data.by.name.lookup.loop                    ; NO! Go check the next id.
                                               
-    get.participant.data.by.name.error:       pop   eax                                       ; YES! Restore eax to the correct id
-                                              ret   gpdbn.packet_size                         ; Return to caller.
+    get.participant.data.by.name.error:       pop   eax                                                         ; Restore eax to the correct id
+
+                                              ret                                                               ; Return to caller.
