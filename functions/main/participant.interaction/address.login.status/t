@@ -122,12 +122,12 @@
                                                                                                                           ; credentials.
                                                 call  write.console                                                       ; Tell the admin that somebody bounced.
 
-                                                jmp   address.login.status.done                                           ; Go return to caller.
+                                                jmp   address.login.status.clean.waiting.list                             ; Go return to caller.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     address.login.status.eggs:                  cmp   dword [e.data + egg.connection.descriptor.index], 0                 ; Is this credential already active?
-                                                jz    address.login.status.old.login                                      ; Yes. Go tell the user and the admin both that the provided credential
+                                                jnz   address.login.status.old.login                                      ; Yes. Go tell the user and the admin both that the provided credential
                                                                                                                           ; is active.
 
                                                 mov   ebx, dword [ebp - answer.active.socket.packet.active]               ; ebx - Pointer to active socket.
@@ -144,12 +144,15 @@
 
                                                 jmp   address.login.status.eggs.new.login.done                            ; Go write the updated credential.
 
-    address.login.status.eggs.returning.login:  push  dword [text.data.index.socket.data.passphrase.message]              ; Point send function to message indicating a request for a passphrase.
+    address.login.status.eggs.returning.login:  push  eax                                                                 ; Point send function to active socket.
+                                                push  dword 00000000h                                                     ; No buffered data.
+                                                push  dword 00000000h                                                     ; No buffered length.
+                                                push  dword [text.data.index.socket.data.passphrase.message]              ; Point send function to message indicating a request for a passphrase.
                                                 call  socket.send                                                         ; Send the passphrase request on the socket.
 
                                                 mov   byte [e.data + egg.connection.status.index], passphrase.status      ; Set status of target socket to 'passphrase'.
 
-    address.login.status.eggs.new.login.done:   push  dword [e.data + egg.connection.external.index]                      ; Point open.descriptor to external credential.
+    address.login.status.eggs.new.login.done:   push  dword [ebp - answer.active.socket.packet.fpointer]                  ; Point open.descriptor to external credential.
                                                 call  open.descriptor                                                     ; Associate a descriptor with the external credential.
 
                                                 push  eax                                                                 ; Preserve descriptor for close.descriptor.
@@ -167,8 +170,8 @@
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     address.login.status.gylf:                  cmp   dword [g.data + gylf.connection.descriptor.index], 0                ; Is this credential already active?
-                                                jz    address.login.status.old.login                                      ; Yes. Go tell the user and the admin both that the provided credential
-                                                                                                                          ;  is active.
+                                                jnz   address.login.status.old.login                                      ; Yes. Go tell the user and the admin both that the provided credential
+                                                                                                                          ; is active.
 
                                                 mov   ebx, dword [ebp - answer.active.socket.packet.active]               ; ebx - Pointer to active socket.
                                                 mov   eax, dword [ebx]                                                    ; eax - Socket being addressed.
@@ -188,12 +191,12 @@
 
                                                 call  close.descriptor                                                    ; Disassociate the descriptor from the gylf credential.
 
-                                                jmp   address.login.status.clean.waiting.list
+                                                jmp   address.login.status.clean.waiting.list                             ; Go remove the temporary socket descriptor from the waiting list.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     address.login.status.ghosts:                cmp   dword [d.data + ghost.connection.descriptor.index], 0               ; Is this credential already active?
-                                                jz    address.login.status.old.login                                      ; Yes. Go tell the user and the admin both that the provided credential
+                                                jnz   address.login.status.old.login                                      ; Yes. Go tell the user and the admin both that the provided credential
                                                                                                                           ; is active.
 
                                                 mov   ebx, dword [ebp - answer.active.socket.packet.active]               ; ebx - Pointer to active socket.
