@@ -110,14 +110,19 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    address.login.status.bad.login:             push  dword [text.data.index.socket.data.bad.login.error.message]         ; Point send function to message indicating that the login was bad.
+    address.login.status.bad.login:             mov   ebx, dword [ebp - answer.active.socket.packet.active]               ; ebx - Pointer to active socket.
+
+                                                push  dword [ebx]                                                         ; Point send function to active socket.
+                                                push  dword 00000000h                                                     ; No buffered data.
+                                                push  dword 00000000h                                                     ; No buffered length.
+                                                push  dword [text.data.index.socket.data.bad.login.error.message]         ; Point send function to message indicating that the login was bad.
                                                 call  socket.send                                                         ; Tell the petitioner that their credentials aren't good here.
 
                                                 push  dword [text.data.index.local.data.bad.login.error.message]          ; Pointer to error message indicating a connection failed on
                                                                                                                           ; credentials.
                                                 call  write.console                                                       ; Tell the admin that somebody bounced.
 
-                                                jmp   address.login.status.done                                           ; Go return to caller.
+                                                jmp   address.login.status.clean.waiting.list                             ; Go smoke the login and return to caller.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
