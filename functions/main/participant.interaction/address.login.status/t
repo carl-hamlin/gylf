@@ -39,9 +39,15 @@
 ;
 ;   e.data                                                  ./functions/b
 ;
+;   egg.filename                                            ./functions/d
+;
 ;   g.data                                                  ./functions/b
 ;
-;   get.participant.by.name                                 ./functions/get.participant.by.name/t
+;   get.participant.data.by.name                            ./functions/get.participant.data.by.name/t
+;
+;   ghost.filename                                          ./functions/d
+;
+;   gylf.filename                                           ./functions/d
 ;
 ;   login.filename                                          ./functions/d
 ;
@@ -178,7 +184,13 @@
                                                 mov   dword [g.data + gylf.connection.descriptor.index], eax              ; Populate the gylf data with the associated active socket.
                                                 mov   dword [g.data + gylf.connection.status.index], passphrase.status    ; Populate the gylf data with the updated connection status.
 
-                                                push  dword [g.data + gylf.connection.external.index]                     ; Point open.descriptor to external credential.
+                                                push  eax                                                                 ; Point send function to active socket.
+                                                push  dword 00000000h                                                     ; No buffered data.
+                                                push  dword 00000000h                                                     ; No buffered length.
+                                                push  dword [text.data.index.socket.data.passphrase.message]              ; Point send function to message indicating a request for a passphrase.
+                                                call  socket.send                                                         ; Send the passphrase request on the socket.
+
+                                                push  dword [ebp - answer.active.socket.packet.fpointer]                  ; Point open.descriptor to external credential.
                                                 call  open.descriptor                                                     ; Associated a descriptor with the external credential.
 
                                                 push  eax                                                                 ; Preserve descriptor for close.descriptor.
@@ -204,7 +216,13 @@
                                                 mov   dword [d.data + ghost.connection.descriptor.index], eax             ; Populate the ghost data with the associated active socket.
                                                 mov   dword [d.data + ghost.connection.status.index], passphrase.status   ; Populate the ghost data with the updated connection status.
 
-                                                push  dword [d.data + ghost.connection.external.index]                    ; Point open.descriptor to external credential.
+                                                push  eax                                                                 ; Point send function to active socket.
+                                                push  dword 00000000h                                                     ; No buffered data.
+                                                push  dword 00000000h                                                     ; No buffered length.
+                                                push  dword [text.data.index.socket.data.passphrase.message]              ; Point send function to message indicating a request for a passphrase.
+                                                call  socket.send                                                         ; Send the passphrase request on the socket.
+
+                                                push  dword [ebp - answer.active.socket.packet.fpointer]                  ; Point open.descriptor to external credential.
                                                 call  open.descriptor                                                     ; Associate a descriptor with the external credential.
 
                                                 push  eax                                                                 ; Preserve descriptor for close.descriptor.
