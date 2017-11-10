@@ -4,7 +4,8 @@
 ;
 ;   This function returns participant data in g.data corresponding to a provided name, or an error in the case of an id that does not exist.
 ;
-;   Assumptions:    Stack Frame:  dword [pointer to name to be looked up]
+;   Assumptions:    Stack Frame:  dword [Pointer to populated answer.active.socket.packet.bpointer]
+;                                 dword [Pointer to populated answer.active.socket.packet.fpointer]
 ;
 ;   Returns:        [d.data] - Data for the requested ghost.
 ;                   [e.data] - Data for the requested egg.
@@ -18,17 +19,31 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   buffer.1                                  ./functions/b
+;
 ;   close.descriptor                          ./functions/close.descriptor/t
 ;
 ;   convert.binary.id.to.ascii.id             ./functions/convert.binary.id.to.ascii.id/t
 ;
 ;   dword.l                                   ./b
 ;
+;   d.data                                    ./functions/d
+;
+;   e.data                                    ./functions/d
+;
 ;   g.data                                    ./functions/d
+;
+;   get.participant.data.by.name.done         ./functions/get.participant.data.by.name/t
 ;
 ;   get.participant.data.by.name.error        ./functions/get.participant.data.by.name/t
 ;
 ;   get.participant.data.by.name.lookup.loop  ./functions/get.participant.data.by.name/t
+;
+;   get.participant.data.no.egg.name          ./functions/get.participant.data.by.name/t
+;
+;   get.participant.data.no.ghost.name        ./functions/get.participant.data.by.name/t
+;
+;   get.participant.data.no.gylf.name         ./functions/get.participant.data.by.name/t
 ;
 ;   gylf.filename                             ./functions/d  
 ;
@@ -93,10 +108,12 @@
                                               repz  cmpsb                                                       ; Are they the same names?
 
                                               jnz   get.participant.data.by.name.lookup.loop                    ; NO! Go check the next id.
+
+                                              jmp   get.participant.data.by.name.done                           ; Go restore the caller's registers and return to caller.
                                               
     get.participant.data.by.name.error:       pop   ebx                                                         ; Restore eax to the correct id
 
-                                              pop   edi                                                         ; Restore caller's edi.
+    get.participant.data.by.name.done:        pop   edi                                                         ; Restore caller's edi.
                                               pop   esi                                                         ; Restore caller's esi.
                                               pop   ebx                                                         ; Restore caller's ebx.
 
