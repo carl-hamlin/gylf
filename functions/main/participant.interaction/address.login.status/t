@@ -86,16 +86,16 @@
                                                 or    eax, eax                                                            ; Were we able to associate data with the provided credential?
                                                 jns   address.login.status.eggs                                           ; Yes. Go attach the socket number to the associated egg credential.
 
-                                                push  buffer.1                                                            ; Point get.participant.data.by.name to received username.
-                                                push  g.data                                                              ; Point get.participant.data.by.name to g.data.
+                                                mov   dword [ebp - answer.active.socket.packet.bpointer], g.data          ; Point get.participant.data.by.name to g.data.
+                                                mov   dword [ebp - answer.active.socket.packet.fpointer], gylf.filename   ; Point get.participant.data.by.name to gylf filename.
                                                 call  get.participant.data.by.name                                        ; Attempt to populate g.data with the data associated with the target
                                                                                                                           ; gylf.
 
                                                 or    eax, eax                                                            ; Were we able to associate data with the provided credential?
                                                 jns   address.login.status.gylf                                           ; Yes. Go attach the socket number to the associated gylf credential.
 
-                                                push  buffer.1                                                            ; Point get.participant.data.by.name to reveice username.
-                                                push  d.data                                                              ; Point get.participant.data.by.name to d.data.
+                                                mov   dword [ebp - answer.active.socket.packet.bpointer], d.data          ; Point get.participant.data.by.name to d.data.
+                                                mov   dword [ebp - answer.active.socket.packet.fpointer], ghost.filename  ; Point get.participant.data.by.name to ghost filename.
                                                 call  get.participant.data.by.name                                        ; Attempt to populate d.data with the data associated with the target
                                                                                                                           ; gylf.
 
