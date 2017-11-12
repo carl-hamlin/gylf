@@ -1,0 +1,3 @@
+Issue #378: assemble.path Function
+
+The assemble.path function takes provided data and assembles a path to a file.
