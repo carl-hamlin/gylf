@@ -41,6 +41,7 @@
 
                                                   push  ebx                                                                             ; Preserve caller's ebx.
                                                   push  ecx                                                                             ; Preserve caller's ecx.
+                                                  push  edx                                                                             ; Preserve caller's edx.
 
                                                   cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.egg                    ; Are we dealing with an egg?
                                                   jz    answer.active.socket.egg.type                                                   ; Go set the admin display type to egg.
@@ -82,6 +83,7 @@
 
                                                   call  ebx                                                                             ; Go handle the data.
 
+                                                  pop   edx                                                                             ; Restore caller's edx.
                                                   pop   ecx                                                                             ; Restore caller's ecx.
                                                   pop   ebx                                                                             ; Restore caller's ebx.
 
