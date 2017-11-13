@@ -30,6 +30,7 @@
                                                   push  00000000h                                                                       ; Reserve storage for id pointer.
                                                   push  00000000h                                                                       ; Reserve storage for buffer pointer.
                                                   push  00000000h                                                                       ; Reserve storage for size of buffer.
+                                                  push  00000000h                                                                       ; Reserve storage for size of retrieved data.
                                                   push  00000000h                                                                       ; Reserve storage for filename pointer.
 
                                                   push  eax                                                                             ; Restore return address.
