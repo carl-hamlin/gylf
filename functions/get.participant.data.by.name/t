@@ -104,7 +104,7 @@
 
                                               mov   edi, d.data + ghost.name                                    ; Yes. Set up the buffer.
 
-    get.participant.data.no.ghost.name:       mov   ecx, dword [ebp - answer.active.socket.packet.bsize]        ; ecx - Length of retrieved name.
+    get.participant.data.no.ghost.name:       mov   ecx, dword [ebp - answer.active.socket.packet.rsize]        ; ecx - Length of retrieved name.
                                               repz  cmpsb                                                       ; Are they the same names?
 
                                               jnz   get.participant.data.by.name.lookup.loop                    ; NO! Go check the next id.
