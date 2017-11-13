@@ -2,5 +2,4 @@
 
     section   .text
     
-    %include  "./functions/socket/clean.socket/s"
     %include  "./functions/socket/clean.socket/t"
