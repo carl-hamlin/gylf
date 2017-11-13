@@ -1,0 +1,120 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/get.participant.data.by.name/t
+;
+;   This function returns participant data in g.data corresponding to a provided name, or an error in the case of an id that does not exist.
+;
+;   Assumptions:    Stack Frame:  dword [Pointer to populated answer.active.socket.packet.bpointer]
+;                                 dword [Pointer to populated answer.active.socket.packet.fpointer]
+;
+;   Returns:        [d.data] - Data for the requested ghost.
+;                   [e.data] - Data for the requested egg.
+;                   [g.data] - Data for the requested gylf.
+;
+;                   - OR -
+;
+;                   eax - Error.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   buffer.1                                  ./functions/b
+;
+;   close.descriptor                          ./functions/close.descriptor/t
+;
+;   convert.binary.id.to.ascii.id             ./functions/convert.binary.id.to.ascii.id/t
+;
+;   dword.l                                   ./b
+;
+;   d.data                                    ./functions/d
+;
+;   e.data                                    ./functions/d
+;
+;   g.data                                    ./functions/d
+;
+;   get.participant.data.by.name.done         ./functions/get.participant.data.by.name/t
+;
+;   get.participant.data.by.name.error        ./functions/get.participant.data.by.name/t
+;
+;   get.participant.data.by.name.lookup.loop  ./functions/get.participant.data.by.name/t
+;
+;   get.participant.data.no.egg.name          ./functions/get.participant.data.by.name/t
+;
+;   get.participant.data.no.ghost.name        ./functions/get.participant.data.by.name/t
+;
+;   get.participant.data.no.gylf.name         ./functions/get.participant.data.by.name/t
+;
+;   gylf.filename                             ./functions/d  
+;
+;   open.descriptor                           ./functions/open.descriptor/t
+;
+;   read.descriptor                           ./functions/read.descriptor/t
+;
+
+    get.participant.data.by.name:             push  ebx                                                         ; Preserve caller's ebx.
+                                              push  esi                                                         ; Preserve caller's esi.
+                                              push  edi                                                         ; Preserve caller's edi.
+
+                                              sub   ebx, ebx                                                    ; ebx - Prepared to represent IDs against which to look up.
+
+    get.participant.data.by.name.lookup.loop: push  ebx                                                         ; Store id against which to lookup.
+    
+                                              mov   eax, dword [ebp - answer.active.socket.packet.fpointer]     ; eax - Pointer to specified filename.
+                                              add   eax, dword.l                                                ; eax - Pointer to buffer into which to write the converted id.
+
+                                              push  eax                                                         ; Point convert.binary.id.to.ascii.id to the specified buffer.
+                                              push  ebx                                                         ; Point convert.binary.id.to.ascii.id to the id to lookup.
+                                              call  convert.binary.id.to.ascii.id                               ; Convert the id to ASCII.
+
+                                              push  dword [ebp - answer.active.socket.packet.fpointer]          ; Point open.descriptor to the newly created filename containing the converted id.
+                                              call  open.descriptor                                             ; Attempt to open the file for reading.
+
+                                              or    eax, eax                                                    ; Did we successfully open the file for reading?
+                                              js    get.participant.data.by.name.error                          ; NO! We're done here; restore the return address and return to sender with the
+                                                                                                                ; error code in eax.
+
+                                              push  eax                                                         ; Store file descriptor for closing after read.
+
+                                              push  eax                                                         ; Point read.descriptor to the target data file.
+                                              push  dword [ebp - answer.active.socket.packet.bpointer]          ; Point read.descriptor to specified buffer.
+                                              push  dword [ebp - answer.active.socket.packet.bsize]             ; Tell read.descriptor to read the whole file.
+                                              call  read.descriptor                                             ; Read that data into the specified buffer.
+
+                                              call  close.descriptor                                            ; Close the file.
+
+                                              pop   ebx                                                         ; Restore id against which to lookup.
+                                              inc   ebx                                                         ; ebx - Next id.
+
+                                              mov   esi, buffer.1                                               ; esi - Pointer to name against which to lookup.
+
+                                              cmp   dword [ebp - answer.active.socket.packet.bpointer], e.data  ; Are we looking at an egg?
+                                              jnz   get.participant.data.no.egg.name                            ; No. Go see if we're looking at a gylf.
+
+                                              mov   edi, e.data + egg.name                                      ; Yes. Set up the buffer.
+
+    get.participant.data.no.egg.name:         cmp   dword [ebp - answer.active.socket.packet.bpointer], g.data  ; Are we looking at a gylf?
+                                              jnz   get.participant.data.no.gylf.name                           ; No. Go see if we're looking at a ghost.
+
+                                              mov   edi, g.data + gylf.name                                     ; Yes. Set up the buffer.
+
+    get.participant.data.no.gylf.name:        cmp   dword [ebp - answer.active.socket.packet.bpointer], d.data  ; Are we looking at a ghost?
+                                              jnz   get.participant.data.no.ghost.name                          ; No. At this point, we've got the buffer set up, or something *horrible* has
+                                                                                                                ; happened. Move on.
+
+                                              mov   edi, d.data + ghost.name                                    ; Yes. Set up the buffer.
+
+    get.participant.data.no.ghost.name:       mov   ecx, dword [ebp - answer.active.socket.packet.bsize]        ; ecx - Length of retrieved name.
+                                              repz  cmpsb                                                       ; Are they the same names?
+
+                                              jnz   get.participant.data.by.name.lookup.loop                    ; NO! Go check the next id.
+
+                                              jmp   get.participant.data.by.name.done                           ; Go restore the caller's registers and return to caller.
+                                              
+    get.participant.data.by.name.error:       pop   ebx                                                         ; Restore eax to the correct id
+
+    get.participant.data.by.name.done:        pop   edi                                                         ; Restore caller's edi.
+                                              pop   esi                                                         ; Restore caller's esi.
+                                              pop   ebx                                                         ; Restore caller's ebx.
+
+                                              ret                                                               ; Return to caller.
