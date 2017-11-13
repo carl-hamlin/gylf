@@ -6,7 +6,7 @@
 ;
 ;   Assumptions:  ebp - Pointer to answer.active.socket.packet.
 ;
-;   Returns:      answer.active.socket.packet.bsize - Size of retrieved data.
+;   Returns:      answer.active.socket.packet.rsize - Size of retrieved data.
 ;                 buffer.1                          - Retrieved data.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@
                       push  buffer.1                                              ; Pointer buffer.strip to buffer.1.
                       call  buffer.strip                                          ; Strip carriage returns from received data.
 
-                      mov   dword [ebp - answer.active.socket.packet.bsize], eax  ; Record size of retrieved data.
+                      mov   dword [ebp - answer.active.socket.packet.rsize], eax  ; Record size of retrieved data.
 
                       pop   edx                                                   ; Restore caller's edx (1/5).
                       pop   edx                                                   ; Restore caller's edx (2/5).
