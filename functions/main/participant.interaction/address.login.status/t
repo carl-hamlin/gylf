@@ -159,7 +159,10 @@
                                                 cmp   byte [e.data + egg.passphrase], 0                                   ; Has the credential ever been used before?
                                                 jnz   address.login.status.eggs.returning.login                           ; Yes. Go process a returning login for the egg.
 
-    address.login.status.eggs.new.login:        push  dword [text.data.index.socket.data.welcome.message]                 ; Point send function to welcome message.
+    address.login.status.eggs.new.login:        push  dword [ebx]                                                         ; Point send function to active socket.
+                                                push  00000000h                                                           ; No buffered data.
+                                                push  00000000h                                                           ; No buffered length.
+                                                push  dword [text.data.index.socket.data.welcome.message]                 ; Point send function to welcome message.
                                                 call  socket.send                                                         ; Send the welcome message on the socket.
 
                                                 mov   dword [e.data + egg.connection.status.index], set.passphrase.status ; Set status of target socket to 'setting passphrase'.
