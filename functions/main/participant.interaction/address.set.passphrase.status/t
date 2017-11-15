@@ -12,6 +12,8 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   active.status     ./functions/main/b
+;
 ;   buffer.1          ./functions/b
 ;
 ;   close.descriptor  ./functions/close.descriptor/t
@@ -33,24 +35,15 @@
 
   section .text
 
-	address.set.passphrase.status:	call	recv.from.socket					                                  ; Receive data from the active socket.
+	address.set.passphrase.status:	int   3
+	                                pusha                                                             ; Preserve caller's registers.
+
+	                                call	recv.from.socket					                                  ; Receive data from the active socket.
 
 					                        push  eax                                                         ; Preserve number of bytes received.
 
-                                  push  egg.filename                                                ; Point open.descriptor to the connection filename.
-					                        call	open.descriptor						                                  ; Associate a descriptor with the file.
-
-                                  push  eax                                                         ; Preserve descriptor for close.descriptor.
-
-                                  push  egg_size                                                    ; Tell read.descriptor to read an entire egg.
-                                  push  e.data                                                      ; Tell read.descriptor to read the egg into e.data.
-                                  push  eax                                                         ; Point read.descriptor to the descriptor we associated with the socket.
-                                  call  read.descriptor                                             ; Read the egg.
-
-                                  call  close.descriptor                                            ; Disassociate the descriptor for the egg file.
-
                                   mov   esi, buffer.1                                               ; esi - Pointer to entered passphrase to set.
-                                  mov   edi, [e.data + egg.passphrase]                              ; edi - Pointer to passphrase receptacle in egg data.
+                                  mov   edi, e.data + egg.passphrase                                ; edi - Pointer to passphrase receptacle in egg data.
 
                                   pop   ecx                                                         ; ecx - Number of bytes received.
 
@@ -73,5 +66,7 @@
 	                                ; *** Here's where particpants begin to integrate. ***
 
 					                        call	write.welcome						                                    ; Set up the user screen.
+
+                                  popa                                                              ; Restore caller's registers.
 
 					                        ret								                                                ; Return to caller.
