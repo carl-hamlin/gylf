@@ -99,9 +99,16 @@
                                         cmp   eax, sys.poll.in                                        ; Does the socket have incoming data?
                                         jnz   active.socket.poll.logins.inactive                      ; No. Don't do anything more with it.
 
-                                        push  socket.data.active.socket.descriptor                    ; Yes. Point answer.active.socket to the active socket.
-                                        push  a.p.type.login                                          ; Tell answer.active.socket that we're dealing with a login.
-                                        push  login.status                                            ; Tell answer.active.socket to deal with login status.
+                                        push  dword socket.data.active.socket.descriptor              ; Yes. Point answer.active.socket to the active socket.
+                                        push  dword a.p.type.login                                    ; Tell answer.active.socket that we're dealing with a login.
+                                        push  dword login.status                                      ; Tell answer.active.socket to deal with login status.
+                                        push  dword 00000000h                                         ; Reserve storage for type pointer.
+                                        push  dword 00000000h                                         ; Reserve storage for id pointer.
+                                        push  dword 00000000h                                         ; Reserve storage for buffer pointer.
+                                        push  dword 00000000h                                         ; Reserve storage for size of buffer.
+                                        push  dword 00000000h                                         ; Reserve storage for size of retrieved data.
+                                        push  dword 00000000h                                         ; Reserve storage for filename pointer.
+
                                         call  answer.active.socket                                    ; Go process the data on the socket.
 
     active.socket.poll.logins.inactive: inc   edx                                                     ; edx - Next socket to poll.
@@ -112,7 +119,13 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    active.socket.poll.eggs:            push  egg.filename + dword.l                                  ; Point convert.binary.id.to.ascii.id to the egg filename.
+    active.socket.poll.eggs:            mov   eax, dword [top.egg]                                    ; eax - Highest current egg id.
+                                        inc   eax                                                     ; eax - Target indicator for discontinuation of login polling.
+
+                                        cmp   edx, eax                                                ; Have we reached the last egg in our list?
+                                        jz    active.socket.poll.eggs.done                            ; Yes. Go set up for gylf.    
+
+                                        push  egg.filename + dword.l                                  ; Point convert.binary.id.to.ascii.id to the egg filename.
                                         push  edx                                                     ; Point convert.binary.id.to.ascii.id to the first id in the list.
                                         call  convert.binary.id.to.ascii.id                           ; Set up the id for reading.
 
@@ -120,7 +133,7 @@
                                         call  open.descriptor                                         ; Associate a descriptor with the socket.
 
                                         or    eax, eax                                                ; Were we able to associate the descriptor?
-                                        js    active.socket.poll.eggs.done                            ; No. Looks like we're done with eggs.
+                                        js    active.socket.poll.eggs.inactive                        ; No. Empty egg. Move on to the next.
 
                                         push  eax                                                     ; Preserve descriptor for close.descriptor.
 
@@ -144,6 +157,19 @@
                                         jnz   active.socket.poll.eggs.inactive                        ; No. Don't do anything more with it.
 
                                         push  socket.data.active.socket.descriptor                    ; Yes. Point answer.active.socket to the active socket.
+                                        push  a.p.type.egg                                            ; Tell answer.active.socket that we're dealing with an egg.
+
+                                        sub   eax, eax                                                ; eax - Prepared to be used for connection status.
+                                        mov   al, byte [e.data + egg.connection.status.index]         ; eax - Connection status.
+                                        push  eax                                                     ; Tell answer active socket what the connection status is.
+
+                                        push  dword 00000000h                                         ; Reserve storage for type pointer.
+                                        push  dword 00000000h                                         ; Reserve storage for id pointer.
+                                        push  dword 00000000h                                         ; Reserve storage for buffer pointer.
+                                        push  dword 00000000h                                         ; Reserve storage for size of buffer.
+                                        push  dword 00000000h                                         ; Reserve storage for size of retrieved data.
+                                        push  dword 00000000h                                         ; Reserve storage for filename pointer.
+
                                         call  answer.active.socket                                    ; Go process the data on the socket.
 
     active.socket.poll.eggs.inactive:   inc   edx                                                     ; edx - Next socket to poll.
