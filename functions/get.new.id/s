@@ -1,8 +1,8 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/socket/socket.send/b
+;   ./functions/get.new.id/s
 ;
-;   This file contains all definitions pertinent to the socket.send function.
+;   This file contains structures pertinent to the get.new.id utiliity.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
@@ -11,5 +11,11 @@
 ;   No external references.
 ;
 
-    %define sys.socket.send 009h  ; 009h is the modifier for 066h that tells the kernel we're attempting to send data to an active, connected socket. We don't use this much here, preferring
-                                  ; kernel function 004h to write directly to the socket descriptor.
+;================================================================================================================================================================================================
+;
+;   get.new.id Data Structure
+;
+
+    struc get.new.id.packet
+      .id resd  00000001h ; Storage for pointer to directory to be looked up.
+    endstruc

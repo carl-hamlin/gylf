@@ -6,6 +6,8 @@
 ;
 ;   Assumptions:  Populated socket.data.accept.socket.descriptor.
 ;
+;   Clobbers:     ebx, ecx.
+;
 ;   Returns:      eax - Descriptor associated with the nex connection.
 ;                 eax - Error as a signed value.
 ;
@@ -26,16 +28,19 @@
 ;   sys.system.call                         ./functions/b
 ;
 
-    accept.socket:  pop ebp                                             ; Preserve return address.
+    accept.socket:  pop eax                                             ; Preserve return address.
 
                     push  socket.data.connected.socket.descriptor       ; Set connected descriptor.
                     push  socket.data.sockaddr.protocol.family          ; Set protocol family.
                     push  dword [socket.data.general.socket.descriptor] ; Point to listening socket.
 
+                    push  eax                                           ; Restore return address.
+
                     mov   eax, sys.socket.call                          ; eax - Linux socket call indicator.
                     mov   ebx, sys.socket.accept                        ; ebx - Linux socket call accept socket indicator.
 
-                    mov   ecx, esp                                      ; ecx - Pointer to arguments package for linux kernel accept socket function. Package contents are as follows:
+                    mov   ecx, esp                                      ; ecx - Prepared to be used as data pointer.
+                    add   ecx, dword.l                                  ; ecx - Pointer to arguments package for linux kernel accept socket function. Package contents are as follows:
                                                                         ;
                                                                         ;     dword    Descriptor of listening socket which detected the incoming connection.
                                                                         ;     dword    Pointer to sockaddr structure.
@@ -43,5 +48,4 @@
 
                     int   sys.system.call                               ; Accept the new connection.
 
-                    push  ebp                                           ; Restore return address.
                     ret   (dword.l * 3)                                 ; Return to caller.
