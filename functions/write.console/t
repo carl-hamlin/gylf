@@ -30,6 +30,9 @@
                     mov   ebp, esp                                    ; ebp - Prepared to be used as data pointer.
                     add   ebp, (dword.l + write.console.packet_size)  ; ebp - Data pointer.
 
+                    push  eax                                         ; Preserve caller's eax.
+                    push  ebx                                         ; Preserve caller's ebx.
+
                     push  dword [ebp - write.console.packet.message]  ; Point get.text.data to message to be retrieved.
                     call  get.text.data                               ; Get indexed data.
 
@@ -39,6 +42,9 @@
 
                     push  0                                           ; Tell memory.check to free memory.
                     call  memory.switch                               ; Free memory.
+
+                    pop   ebx                                         ; Restore caller's ebx.
+                    pop   eax                                         ; restore caller's eax.
 
                     pop   ebp                                         ; Restore caller's ebp.
 
