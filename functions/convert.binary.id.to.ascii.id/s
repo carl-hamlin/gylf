@@ -1,0 +1,23 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/convert.binary.id.to.ascii.id/s
+;
+;   This file contains structures pertinent to the convert.binary.id.to.ascii.id utility.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+;================================================================================================================================================================================================
+;
+;   convert.binary.id.to.ascii.id Data Structure
+;
+
+    struc convert.binary.id.to.ascii.id.packet
+      .buffer     resd  00000001h ; Storage for pointer to buffer into which to store the converted id.
+      .id         resd  00000001h ; Storage for id to be converted.
+    endstruc
+

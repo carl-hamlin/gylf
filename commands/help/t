@@ -33,9 +33,7 @@
 ;
 ;   number.of.commands                  ./functions/d
 ;
-;   qword.l                             ./b
-;
-;   socket.send                         ./functions/socket/socket/send/t
+;   socket.send                         ./functions/socket/socket.send/t
 ;
 ;   write.bad.command.error             ./functions/write.bad.command.error/t
 ;
@@ -44,8 +42,7 @@
 
     command.help:                     push  eax                                             ; Preserve length of received data.
                   
-                                      sub   al, al                                          ; al - Zero arguments comparator.
-                                      cmp   [arguments.num], al                             ; Do we have arguments?
+                                      cmp   byte [arguments.num], 00h                       ; Do we have arguments?
                                       jz    command.help.no.arguments                       ; No. Run without the argument parser.
                   
                                       pop   eax                                             ; Restore length of received data.
@@ -75,13 +72,13 @@
 
     command.help.found.command:       pop   ecx                                             ; Restore loop counter.
                                       pop   edi                                             ; Restore caller's edi register...
-                                      
-                                      mov   ebx, esi                                        ; ebx - Pointer to help message data.
+
+                                      mov   ebx, esi                                        ; ebx - Pointer to command entry.
+                                      mov   ebx, dword [ebx+dword.l]                        ; ebx - Pointer to index for help entry.
 
                                       pop   esi                                             ; esi - Index to socket entry.
 
-                                      push  dword [ebx+qword.l]                             ; Tell the send function how long the message is.
-                                      push  dword [ebx+dword.l]                             ; Point send function to the help message for the selected argument.
+                                      push  dword [ebx]                                     ; Point send function to help message index.
                                       call  socket.send                                     ; Send the message.
                                       
                                       ret                                                   ; Return to caller.

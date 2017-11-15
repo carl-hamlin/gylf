@@ -1,53 +1,77 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/main/participant.interaction/address.set.passphrase.status/t
 ;
 ;   This function handles data received from a socket in 'setting passphrase' status.
 ;
-;   Assumptions:    esi = Pointer to descriptor associated with target socket
+;   Assumptions:  Stack Frame:  dword [Connection id to be addressed]
 ;
-;   Returns:        None.
+;   Returns:      None.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   active.status                 ./functions/main/b
+;   buffer.1          ./functions/b
 ;
-;   buffer.2                      ./functions/b
+;   close.descriptor  ./functions/close.descriptor/t
 ;
-;   connection.descriptor.index   ./functions/main/system.check/b
+;   e.data            ./b
 ;
-;   connection.filename.index     ./functions/main/system.check/b
+;   egg.filename      ./functions/d
 ;
-;   connection.status.index       ./functions/main/system.check/b
+;   open.descriptor   ./functions/open.descriptor/t
 ;
-;   create.character              ./functions/create.character/t
+;   read.descriptor   ./functions/read.descriptor/t
 ;
-;   open.descriptor               ./functions/open.descriptor/t
+;   recv.from.socket  ./functions/socket/recv.from.socket/t
 ;
-;   recv.from.socket              ./functions/recv.from.socket/t
+;   write.descriptor  ./functions/write.descriptor/t
 ;
-;   write.welcome                 ./functions/write.welcome/t
+;   write.welcome     ./functions/write.welcome/t
 ;
 
   section .text
 
-	address.set.passphrase.status:	call	recv.from.socket					                        ; Receive data from the active socket.
+	address.set.passphrase.status:	call	recv.from.socket					                                  ; Receive data from the active socket.
 
-					                        mov	  dword [buffer.2], eax					                    ; Store number of bytes received for later use.
+					                        push  eax                                                         ; Preserve number of bytes received.
 
-					                        mov	  ebx, esi						                              ; ebx - Pointer to socket entry.
-					                        add	  ebx, connection.filename.index				            ; ebx - Pointer to file path for user's credential file.
-					                        call	open.descriptor						                        ; Associate a descriptor with the file.
+                                  push  egg.filename                                                ; Point open.descriptor to the connection filename.
+					                        call	open.descriptor						                                  ; Associate a descriptor with the file.
 
-					                        mov	  eax, dword [esi+connection.descriptor.index]      ; eax - Descriptor associated with egg file.
-					                        call	create.character					                        ; Build out the character.
+                                  push  eax                                                         ; Preserve descriptor for close.descriptor.
 
-					                        mov	  byte [esi+connection.status.index], active.status ; Set socket status to 'active'.
+                                  push  egg_size                                                    ; Tell read.descriptor to read an entire egg.
+                                  push  e.data                                                      ; Tell read.descriptor to read the egg into e.data.
+                                  push  eax                                                         ; Point read.descriptor to the descriptor we associated with the socket.
+                                  call  read.descriptor                                             ; Read the egg.
+
+                                  call  close.descriptor                                            ; Disassociate the descriptor for the egg file.
+
+                                  mov   esi, buffer.1                                               ; esi - Pointer to entered passphrase to set.
+                                  mov   edi, [e.data + egg.passphrase]                              ; edi - Pointer to passphrase receptacle in egg data.
+
+                                  pop   ecx                                                         ; ecx - Number of bytes received.
+
+                                  repnz movsb                                                       ; Store passphrase.
+
+					                        mov	  byte [e.data + egg.connection.status.index], active.status  ; Set socket status to 'active'.
+
+                                  push  egg.filename                                                ; Point open.descriptor to connection filename.
+                                  call  open.descriptor                                             ; Associate a descriptor with the file.
+
+                                  push  eax                                                         ; Preserve descriptor for close.descriptor.
+
+                                  push  eax                                                         ; Point write.descriptor to the egg file.
+                                  push  e.data                                                      ; Point write.descriptor to the data at e.data.
+                                  push  egg_size                                                    ; Tell write.descriptor to write an entire egg.
+                                  call  write.descriptor                                            ; Write back the updated egg.
+
+                                  call  close.descriptor                                            ; Disassociate the descriptor from the egg file.
 
 	                                ; *** Here's where particpants begin to integrate. ***
 
-					                        call	write.welcome						                          ; Set up the user screen.
+					                        call	write.welcome						                                    ; Set up the user screen.
 
-					                        ret								                                      ; Return to caller.
+					                        ret								                                                ; Return to caller.
