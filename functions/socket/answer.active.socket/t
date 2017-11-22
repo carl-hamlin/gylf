@@ -57,6 +57,7 @@
 
                                                       mov   dword [ebp - answer.active.socket.packet.tpointer], (egg.filename + word.l)     ; Set the admin display type to egg.
                                                       mov   dword [ebp - answer.active.socket.packet.ipointer], (egg.filename + dword.l)    ; Store pointer to id.
+                                                      mov   dword [ebp - answer.active.socket.packet.fpointer], egg.filename                ; Store pointer to egg filename.
                                                       jmp   answer.active.socket.admin.display.type.set                                     ; Go notify the admin of socket activity.
                                                   
     answer.active.socket.ghost.check:                 cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.ghost                  ; Are we dealing with a ghost?
@@ -64,6 +65,7 @@
 
                                                       mov   dword [ebp - answer.active.socket.packet.tpointer], (ghost.filename + word.l)   ; Set the admin display type to ghost.
                                                       mov   dword [ebp - answer.active.socket.packet.ipointer], (ghost.filename + dword.l)  ; Store pointer to id.
+                                                      mov   dword [ebp - answer.active.socket.packet.fpointer], ghost.filename              ; Store pointer to ghost filename.
                                                       jmp   answer.active.socket.admin.display.type.set                                     ; Go notify the admin of socket activity.
 
     answer.active.socket.gylf.check:                  cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.gylf                   ; Are we dealing with a gylf?
@@ -71,11 +73,13 @@
 
                                                       mov   dword [ebp - answer.active.socket.packet.tpointer], (gylf.filename + word.l)    ; Set the admin display type to gylf.
                                                       mov   dword [ebp - answer.active.socket.packet.ipointer], (gylf.filename + dword.l)   ; Store pointer to id.
+                                                      mov   dword [ebp - answer.active.socket.packet.fpointer], gylf.filename               ; Store pointer to gylf filename.
                                                       jmp   answer.active.socket.admin.display.type.set                                     ; Go notify the admin of socket activity.
 
     answer.active.socket.login.check:                 mov   dword [ebp - answer.active.socket.packet.tpointer], (login.filename + word.l)   ; By process of elimination, we're dealing with a
                                                                                                                                             ; login. Set the admin display type to login.
                                                       mov   dword [ebp - answer.active.socket.packet.ipointer], (login.filename + dword.l)  ; Store pointer to id.
+                                                      mov   dword [ebp - answer.active.socket.packet.fpointer], login.filename              ; Store pointer to login filename.
 
     answer.active.socket.admin.display.type.set:      push  dword [text.data.index.local.data.active.socket.message]                        ; Pointer to socket activity notifier.
                                                       call  write.console                                                                   ; Let the admin know we're working with an active
