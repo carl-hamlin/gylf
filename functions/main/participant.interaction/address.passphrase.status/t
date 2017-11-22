@@ -17,8 +17,7 @@
 ;   No external references.
 ;
 
-    address.passphrase.status:                        int 3
-    push  eax                                                           ; Preserve caller's eax.
+    address.passphrase.status:                        push  eax                                                           ; Preserve caller's eax.
                                                       push  ebx                                                           ; Preserve caller's ebx.
                                                       push  ecx                                                           ; Preserve caller's ecx.
 
