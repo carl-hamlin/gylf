@@ -6,8 +6,7 @@
 ;   compares the data to the stored passphrase for the user. If they match, then the user's status is set to 'active' and control is passed back to the caller. If they do not match, then the
 ;   user is informed of the situation and disconnected.
 ;
-;   Assumptions:    Stack Frame:  dword [Connection ID to be addressed]
-;                                 dword [Pointer to connection filename]
+;   Assumptions:    ebp - Pointer to populated answer.active.socket.packet.
 ;
 ;   Returns:        None.
 ;
@@ -18,19 +17,23 @@
 ;   No external references.
 ;
 
-    address.passphrase.status:                        mov   ebp, esp                                                      ; ebp - Prepared to be used as a data pointer.
-                                                      add   ebp, aps.packet                                               ; ebp - Data pointer.
+    address.passphrase.status:                        int 3
+    push  eax                                                           ; Preserve caller's eax.
+                                                      push  ebx                                                           ; Preserve caller's ebx.
+                                                      push  ecx                                                           ; Preserve caller's ecx.
 
                                                       call  recv.from.socket                                              ; Grab the data from the socket.
 
                                                       mov   ecx, eax                                                      ; ecx - Number of bytes read.
 
+                                                      mov   ebx, dword [ebp - answer.active.socket.packet.active]         ; ebx - Pointer to pointer to active socket descriptor.
+
                                                       mov   esi, buffer.1                                                 ; Pointer to received data.
 
-                                                      cmp   dword [ebp + aps.packet.filename], egg.filename               ; Are we dealing with an egg?
+                                                      cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.egg  ; Are we dealing with an egg?
                                                       jz    address.passphrase.status.eggs                                ; Yes. Go deal with eggs.
 
-                                                      cmp   dword [ebp + aps.packet.filename], gylf.filename              ; Are we dealing with a gylf?
+                                                      cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.gylf ; Are we dealing with a gylf?
                                                       jz    address.passphrase.status.gylf                                ; Yes. Go deal with gylf.
                               
     address.passphrase.status.ghosts:                 mov   edi, (d.data + ghost.passphrase)                              ; edi - Pointer to ghost passphrase.
@@ -44,23 +47,30 @@
     address.passphrase.status.edi.positioned:         repz  cmpsb                                                         ; Is the passphrase good?
                                                       jcxz  address.passphrase.status.good.passphrase                     ; Yes. Go set the connection status and let the user in.
 
+                                                      push  dword [ebx]                                                   ; Point socket.send to active descriptor.
+                                                      push  00000000h                                                     ; No buffered data.
+                                                      push  00000000h                                                     ; No buffered length.
                                                       push  dword [text.data.index.socket.data.bad.passphrase.message]    ; Point send function to message indicating that the passphrase was bad.
 					                                            call	socket.send									                                  ; Tell the user that he's SOL.
 
               					                              call	clean.socket									                                ; Smoke that connection!
 
-    address.passphrase.status.done:                   ret   aps.packet                                                    ; Return to caller.
+    address.passphrase.status.done:                   pop   ecx                                                           ; Restore caller's ecx.
+                                                      pop   ebx                                                           ; Restore caller's ebx.
+                                                      pop   eax                                                           ; Restore caller's eax.
 
-    address.passphrase.status.good.passphrase:        push  dword [ebp + aps.packet.filename]                             ; Point open.descriptor to socket credential filename.
+                                                      ret                                                                 ; Return to caller.
+
+    address.passphrase.status.good.passphrase:        push  dword [ebp - answer.active.socket.packet.fpointer]            ; Point open.descriptor to socket credential filename.
                                                       call  open.descriptor                                               ; Associate a descriptor with the credential.
 
                                                       push  eax                                                           ; Preserve descriptor for close.descriptor.
                                                       push  eax                                                           ; Preserve descriptor for conditional credential update.
 
-                                                      cmp   dword [ebp + aps.packet.filename], egg.filename               ; Are we dealing with an egg?
+                                                      cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.egg  ; Are we dealing with an egg?
                                                       jz    address.passphrase.status.good.passphrase.eggs                ; Yes. Go deal with eggs.
 
-                                                      cmp   dword [ebp + aps.packet.filename], gylf.filename              ; Are we dealing with a gylf?
+                                                      cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.gylf ; Are we dealing with a gylf?
                                                       jz    address.passphrase.status.good.passphrase.gylf                ; Yes. Go deal with gylf.
                               
     address.passphrase.status.good.passphrase.ghosts: mov   byte [d.data + ghost.connection.status.index], active.status  ; Set the status of the connection to 'active'.
