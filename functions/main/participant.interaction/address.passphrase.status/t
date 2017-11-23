@@ -17,9 +17,7 @@
 ;   No external references.
 ;
 
-    address.passphrase.status:                        push  eax                                                           ; Preserve caller's eax.
-                                                      push  ebx                                                           ; Preserve caller's ebx.
-                                                      push  ecx                                                           ; Preserve caller's ecx.
+    address.passphrase.status:                        pusha                                                               ; Preserve caller's registers.
 
                                                       call  recv.from.socket                                              ; Grab the data from the socket.
 
@@ -54,10 +52,7 @@
 
               					                              call	clean.socket									                                ; Smoke that connection!
 
-    address.passphrase.status.done:                   pop   ecx                                                           ; Restore caller's ecx.
-                                                      pop   ebx                                                           ; Restore caller's ebx.
-                                                      pop   eax                                                           ; Restore caller's eax.
-
+    address.passphrase.status.done:                   popa                                                                ; Restore caller's registers.
                                                       ret                                                                 ; Return to caller.
 
     address.passphrase.status.good.passphrase:        push  dword [ebp - answer.active.socket.packet.fpointer]            ; Point open.descriptor to socket credential filename.
