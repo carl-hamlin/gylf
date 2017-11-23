@@ -60,7 +60,9 @@
 ;   sys.poll.in                           ./functions/main/b
 ;
 
-    active.socket.poll:                 sub   edx, edx                                                ; edx - First id in the list.
+    active.socket.poll:                 pusha                                                         ; Preserve caller's registers.
+
+                                        sub   edx, edx                                                ; edx - First id in the list.
                                         push  edx                                                     ; Preserve first id.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -272,6 +274,19 @@
                                         jnz   active.socket.poll.ghosts.inactive                      ; No. Don't do anything more with it.
 
                                         push  socket.data.active.socket.descriptor                    ; Yes. Point answer.active.socket to the active socket.
+                                        push  a.p.type.ghost                                          ; Tell answer.active.socket that we're dealing with a ghost.
+
+                                        sub   eax, eax                                                ; eax - Prepared to be used for connection status.
+                                        mov   al, byte [d.data + ghost.connection.status.index]       ; eax - Connection status.
+                                        push  eax                                                     ; Tell answer active socket what the connection status is.
+
+                                        push  dword 00000000h                                         ; Reserve storage for type pointer.
+                                        push  dword 00000000h                                         ; Reserve storage for id pointer.
+                                        push  dword 00000000h                                         ; Reserve storage for buffer pointer.
+                                        push  dword 00000000h                                         ; Reserve storage for size of buffer.
+                                        push  dword 00000000h                                         ; Reserve storage for size of retrieved data.
+                                        push  dword 00000000h                                         ; Reserve storage for filename pointer.
+
                                         call  answer.active.socket                                    ; Go process the data on the socket.
 
     active.socket.poll.ghosts.inactive: inc   edx                                                     ; edx - Next socket to poll.
@@ -279,4 +294,5 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    active.socket.poll.done:            ret                                                           ; Return to caller.
+    active.socket.poll.done:            popa                                                          ; Restore caller's registers.
+                                        ret                                                           ; Return to caller.
