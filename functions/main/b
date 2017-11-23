@@ -26,3 +26,4 @@
 
     top.login                  resd   00000001h ; Storage for id of top login file.
     top.egg                    resd   00000001h ; Storage for id of top egg file.
+    top.gylf                   resd   00000001h ; Storage for id of top gylf file.
