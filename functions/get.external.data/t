@@ -1,0 +1,66 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/get.external.data/t
+;
+;   This function reads data from external files.
+;
+;   Assumptions:    Stack Frame: dword - Pointer to filename from which to read.
+;
+;   Returns:        external.data.buffer - Read data.
+;                   edx - Length of data read.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   byte.l                ./b
+;
+;   close.descriptor      ./functions/close.descriptor/t
+;
+;   dword.l               ./b
+;
+;   external.data.buffer  ./functions/b
+;
+;   open.descriptor       ./functions/open.descriptor/t
+;
+;   read.descriptor       ./functions/read.descriptor/t
+;
+
+    get.external.data:  pop   edx                                                     ; Preserve return address.
+
+                        push  dword 00000000h                                         ; Setup storage for descriptor.
+
+                        push  edx                                                     ; Restore return address.
+
+                        push  ebp                                                     ; Preserve caller's ebp.
+
+                        mov   ebp, esp                                                ; ebp - Prepared to be used as data pointer.
+                        add   ebp, (dword.l + get.external.data.packet_size)          ; ebp - Data pointer.
+
+                        push  eax                                                     ; Preserve caller's eax register.
+
+                        push  dword [ebp - get.external.data.packet.filename]         ; Point to ASCIIZ filename for external data file.
+                        call  open.descriptor                                         ; Associate a descriptor with the external data file.
+
+                        mov   dword [ebp - get.external.data.packet.descriptor], eax  ; Store descriptor associated with external data file.
+            
+                        push  dword [ebp - get.external.data.packet.descriptor]       ; Point read.descriptor to descriptor associated with the file.
+                        push  external.data.buffer                                    ; Point read.descriptor to buffer into which to read the length of the external data.
+                        push  byte.l                                                  ; Tell read.descriptor the length of data to be read.
+                        call  read.descriptor                                         ; Read the length of the external data.
+
+                        push  dword [ebp - get.external.data.packet.descriptor]       ; Point read.descriptor to descriptor associated with the file.
+                        push  external.data.buffer                                    ; Point read.descriptor to buffer into which to read the escape sequence.
+                        push  dword [external.data.buffer]                            ; Tell read.descriptor the length of external data.
+                        call  read.descriptor                                         ; Read the external data into the external data buffer.
+
+                        mov   edx, eax                                                ; edx - Length of data read.
+
+                        push  dword [ebp - get.external.data.packet.descriptor]       ; Point close.descriptor to descriptor associated with the external data file.
+                        call  close.descriptor                                        ; Disassociate the descriptor.
+
+                        pop   eax                                                     ; Restore caller's eax register.
+
+                        pop   ebp                                                     ; Restore caller's ebp.
+
+                        ret   get.external.data.packet_size                           ; Return to caller.

@@ -1,0 +1,110 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/clean.socket/t
+;
+;   This code removes the data associated with an active socket from memory, smokes the lock file, and uses the close.descriptor function to close out the socket. This function does not
+;   closeout other files associated with the socket - that responsibility is left to the caller.
+;
+;   Assumptions:    Stack Frame:  ebp - Populated answer.active.socket.packet
+;
+;   Returns:        eax - Error status.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+    clean.socket:       cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.egg    ; Are we cleaning egg sockets?
+                        jz    clean.socket.egg                                                ; Yes. Go clean the socket.
+
+                        cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.ghost  ; Are we cleaning ghost sockets?
+                        jz    clean.socket.ghost                                              ; Yes. Go clean the socket.
+
+                        cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.gylf   ; Are we cleaning gylf sockets?
+                        jz    clean.socket.gylf                                               ; Yes. Go clean the socket.
+
+                        cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.login  ; Are we cleaning login sockets?
+                        jz    clean.socket.login                                              ; Yes. Go clean the socket.
+
+                        mov   eax, 0FFFFFFFFh                                                 ; If we're here, we got a bad collection. Set eax to error status.
+
+    clean.socket.done:  ret                                                                   ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    clean.socket.egg:   push  dword [e.data + egg.connection.descriptor.index]                ; Point close.descriptor to the socket associated with the connection to be cleaned.
+                        call  close.descriptor                                                ; Disassociate that descriptor.
+
+                        mov   dword [e.data + egg.connection.descriptor.index], 00000000h     ; Scrub evidence of the previous connection.
+                        mov   byte [e.data + egg.connection.status.index], 00h                ; Reset socket status.
+
+                        push  dword [ebp - answer.active.socket.packet.fpointer]              ; Point open.descriptor to the socket to be cleaned.
+                        call  open.descriptor                                                 ; Reassociate a descriptor with the socket file.
+
+                        push  eax                                                             ; Preserve descriptor for socket file for close.descriptor.
+
+                        push  eax                                                             ; Point write.descriptor to the socket to be cleaned.
+                        push  e.data                                                          ; Point write descriptor to the new socket data.
+                        push  egg_size                                                        ; Tell write descriptor to write the entire egg.
+                        call  write.descriptor                                                ; Write the new data to file.
+
+                        call  close.descriptor                                                ; Disassociate the descriptor from the socket file.
+
+                        sub   eax, eax                                                        ; Set eax to no error status.
+                        jmp   clean.socket.done                                               ; Go return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    clean.socket.ghost: push  dword [d.data + ghost.connection.descriptor.index]              ; Point close.descriptor to the socket associated with the connection to be cleaned.
+                        call  close.descriptor                                                ; Disassociate that descriptor.
+
+                        mov   dword [d.data + ghost.connection.descriptor.index], 00000000h   ; Scrub evidence of the previous connection.
+                        mov   byte [d.data + ghost.connection.status.index], 00h              ; Reset socket status.
+
+                        push  dword [ebp - answer.active.socket.packet.fpointer]              ; Point open.descriptor to the socket to be cleaned.
+                        call  open.descriptor                                                 ; Reassociate a descriptor with the socket file.
+
+                        push  eax                                                             ; Preserve descriptor for socket file for close.descriptor.
+
+                        push  eax                                                             ; Point write.descriptor to the socket to be cleaned.
+                        push  d.data                                                          ; Point write descriptor to the new socket data.
+                        push  ghost_size                                                      ; Tell write descriptor to write the entire ghost.
+                        call  write.descriptor                                                ; Write the new data to file.
+
+                        call  close.descriptor                                                ; Disassociate the descriptor from the socket file.
+
+                        sub   eax, eax                                                        ; Set eax to no error status.
+                        jmp   clean.socket.done                                               ; Go return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    clean.socket.gylf:  push  dword [g.data + gylf.connection.descriptor.index]               ; Point close.descriptor to the socket associated with the connection to be cleaned.
+                        call  close.descriptor                                                ; Disassociate that descriptor.
+
+                        mov   dword [g.data + gylf.connection.descriptor.index], 00000000h    ; Scrub evidence of the previous connection.
+                        mov   byte [g.data + gylf.connection.status.index], 00h               ; Reset socket status.
+
+                        push  dword [ebp - answer.active.socket.packet.fpointer]              ; Point open.descriptor to the socket to be cleaned.
+                        call  open.descriptor                                                 ; Reassociate a descriptor with the socket file.
+
+                        push  eax                                                             ; Preserve descriptor for socket file for close.descriptor.
+
+                        push  eax                                                             ; Point write.descriptor to the socket to be cleaned.
+                        push  g.data                                                          ; Point write descriptor to the new socket data.
+                        push  gylf_size                                                       ; Tell write descriptor to write the entire gylf.
+                        call  write.descriptor                                                ; Write the new data to file.
+
+                        call  close.descriptor                                                ; Disassociate the descriptor from the socket file.
+
+                        sub   eax, eax                                                        ; Set eax to no error status.
+                        jmp   clean.socket.done                                               ; Go return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    clean.socket.login: push  dword [l.data + login.connection.descriptor.index]              ; Point close.descriptor to the socket associated with the connection to be closed.
+                        call  close.descriptor                                                ; Disassociate that descriptor.
+
+                        sub   eax, eax                                                        ; Set eax to no error status.
+                        jmp   clean.socket.done                                               ; Go return to caller.

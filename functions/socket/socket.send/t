@@ -1,0 +1,59 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/socket.send/t
+;
+;   This function sends data out on a connected socket.
+;
+;   Assumptions:    Stack Frame:  dword - Descriptor corresponding to target connection.
+;                                 dword - Index to external data.
+;                                 dword - Pointer to buffered data.
+;                                 dword - Length of buffered data.
+;
+;   Returns:        eax - Error indicator.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   dword.l                     ./b
+;
+;   get.text.data               ./functions/get.text.data/t
+;
+;   sys.socket.call             ./functions/socket/b
+;
+;   sys.socket.send             ./functions/socket/socket.send/b
+;
+;   sys.system.call             ./functions/b
+;
+
+    socket.send:          push  ebp                                           ; Preserve caller's ebp.
+
+                          mov   ebp, esp                                      ; ebp - Prepared to be used as data pointer.
+                          add   ebp, (dword.l + socket.send.packet_size)      ; ebp - Data pointer.
+
+                          push  ebx                                           ; Preserve caller's ebx.
+                          push  ecx                                           ; Preserve caller's ecx.
+                          push  edx                                           ; Preserve caller's edx.
+
+                          cmp   dword [ebp - socket.send.packet.blength], 0   ; Are we dealing with buffered data?
+                          jnz   socket.send.buffered                          ; Yes. Go take care of the buffered data.
+
+                          push  dword [ebp - socket.send.packet.edata]        ; Point get.text.data to external data.
+                          call  get.text.data                                 ; Get external text data.
+
+                          mov   dword [ebp - socket.send.packet.bdata], ecx   ; Store pointer to retrieved data.
+                          mov   dword [ebp - socket.send.packet.blength], edx ; Store length of retrieved data.
+                          mov   dword [ebp - socket.send.packet.edata], 0     ; Smoke index to external data.
+
+    socket.send.buffered: push  dword [ebp - socket.send.packet.descriptor]   ; Point write.descriptor to target connection.
+                          push  dword [ebp - socket.send.packet.bdata]        ; Point write.descriptor to data to be written.
+                          push  dword [ebp - socket.send.packet.blength]      ; Tell write.descriptor how long the data is.
+                          call  write.descriptor                              ; Put the data out on the socket.
+
+    socket.send.done:     pop   edx                                           ; Restore caller's edx.
+                          pop   ecx                                           ; Restore caller's ecx.
+                          pop   ebx                                           ; Restore caller's ebx.
+
+                          pop   ebp                                           ; Restore caller's ebp.
+
+                          ret   socket.send.packet_size                       ; Return to caller.

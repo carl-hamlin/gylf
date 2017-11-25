@@ -1,0 +1,186 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/area/t
+;
+;   This function creates an area. Syntax: area <name> <quoted description>
+;
+;   Assumptions:      eax - Length of received data.
+;                     esi - Pointer to descriptor associated with target socket.
+;
+;   Returns:          None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   area.filename                                       ./functions/d
+;
+;   area.num.contained.items                            ./commands/area/b
+;
+;   argument.01.location                                ./functions/aggregate.arguments/b
+;
+;   argument.01.size                                    ./functions/aggregate.arguments/b
+;
+;   area.filename.l                                     ./functions/d
+;
+;   area.name                                           ./commands/area/b
+;
+;   argument.02.location                                ./functions/aggregate.arguments/b
+;
+;   argument.02.size                                    ./functions/aggregate.arguments/b
+;
+;   arguments.num                                       ./functions/aggregate.arguments/b
+;
+;   available.areas                                     ./commands/area/b
+;
+;   check.admin                                         ./functions/main/check.admin/t
+;
+;   close.descriptor                                    ./functions/close.descriptor/t
+;
+;   command.area.admin                                  ./commands/area/t
+;
+;   command.area.bad                                    ./commands/area/t
+;
+;   command.area.filename.finder                        ./commands/area/t
+;
+;   command.area.filename.loop                          ./commands/area/t
+;
+;   command.area.filename.out.of.areas                  ./commands/area/t
+;
+;   command.area.next.file                              ./commands/area/t
+;
+;   command.area.prep.next                              ./commands/area/t
+;
+;   create.file                                         ./functions/create.file/t
+;
+;   dword.l                                             ./b
+;
+;   open.descriptor                                     ./functions/open.descriptor/t
+;
+;   socket.send                                         ./functions/socket/socket.send/t
+;
+;   sys.standard.output                                 ./b
+;
+;   text.data.index.local.data.area.bad.syntax.message  ./functions/main/text.init/b
+;
+;   text.data.index.local.data.area.created.message     ./functions/main/text.init/b
+;
+;   text.data.index.local.data.carriage.return.message  ./functions/main/text.init/b
+;
+;   text.data.index.local.data.out.of.areas.message     ./functions/main/text.init/b
+;
+;   text.data.index.socket.data.area.created.message    ./functions/main/text.init/b
+;
+;   text.data.index.socket.data.command.area.help       ./functions/main/text.init/b
+;
+;   text.data.index.socket.data.out.of.areas.message    ./functions/main/text,init/b
+;
+;   word.l                                              ./b
+;
+;   write.bad.command.error                             ./functions/write.bad.command.error/t
+;
+;   write.console                                       ./functions/write.console/t
+;
+;   write.descriptor                                    ./functions/write.descriptor/t
+;
+
+    command.area:                       push  esi                                                                       ; Preserve index to connection entry.
+                                        push  eax                                                                       ; Preserve length of received data.
+
+                                        call  check.admin                                                               ; See if the calling socket is controlled by an admin.
+                                        jc    command.area.admin                                                        ; If so, go create the area. Otherwise...
+
+                                        pop   eax                                                                       ; Restore length of received data.
+                                        pop   esi                                                                       ; Restore index to connection entry.
+
+                                        call  write.bad.command.error                                                   ; Tell the user no.
+
+                                        ret                                                                             ; Return to caller.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.bad:                   pop   esi                                                                       ; Restore index to connection entry.
+
+                                        push  dword [text.data.index.local.data.area.bad.syntax.message]                ; Point write.console to local message indicating an admin bounced on syntax.
+                                        call  write.console                                                             ; Tell the admin there's someone online with admin priviledges that needs an education.
+
+                                        push  dword [text.data.index.socket.data.command.area.help]                     ; Point send function to message indicating that the command was bad.
+                                        call  socket.send                                                               ; Tell the user that the command doesn't have a current analogue.
+
+                                        ret                                                                             ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.area.admin:                 pop   eax                                                                       ; Restore length of received data.
+
+                                        mov   al, 02h                                                                   ; al - indicator for two arguments.
+                                        cmp   al, byte [arguments.num]                                                  ; Are there two arguments?
+                                        jnz   command.area.bad                                                          ; Nope. Let's go inform the user that they're being bounced on syntax.
+
+                                        push  area.filename                                                             ; Tell get.new.id that we need a new area id.
+                                        call  get.new.id                                                                ; Get a new area id.
+
+    command.area.filename.loop:         push  area.filename                                                             ; Point open.descriptor to filename entry for area filenames.
+                                        call  open.descriptor                                                           ; Try the current filename.
+
+                                        push  eax                                                                       ; Point create.file to the filename to be created.
+                                        call  create.file                                                               ; Create the candidate file.
+
+                                        mov   ebx, eax                                                                  ; ebx - Descriptor associated with candidate file.
+
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  argument.01.size                                                          ; Pointer to area name length.
+                                        push  dword.l                                                                   ; Length of area name length.
+                                        call  write.descriptor                                                          ; Store the area header in the candidate file.
+
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  dword [argument.01.location]                                              ; Pointer to area name.
+                                        push  dword [argument.01.size]                                                  ; Length of area name.
+                                        call  write.descriptor                                                          ; Store the area name in the candidate file.
+
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  argument.02.size                                                          ; Pointer to area description length.
+                                        push  dword.l                                                                   ; Length of area description length.
+                                        call  write.descriptor                                                          ; Store the area description length in the candidate file.
+
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  dword [argument.02.location]                                              ; Pointer to area description.
+                                        push  dword [argument.02.size]                                                  ; Length of area description.
+                                        call  write.descriptor                                                          ; Store the area description in the candidate file.
+
+                                        push  eax                                                                       ; Preserve descriptor associated with the candidate file.
+                                        sub   eax, eax                                                                  ; eax - number of items in new area.
+                                        mov   dword [area.num.contained.items], eax                                     ; Set number of items in new area.
+                                        pop   eax                                                                       ; Restore descriptor associated with the candidate file.
+
+                                        push  ebx                                                                       ; Point write.descriptor to the candidate file.
+                                        push  area.num.contained.items                                                  ; Pointer to number of items contained within the new area.
+                                        push  dword.l                                                                   ; Length of number of items contained within the new area.
+                                        call  write.descriptor                                                          ; Store the number of items in the candidate file.
+
+                                        call  close.descriptor                                                          ; Disassociate the descriptor.
+
+                                        push  dword [text.data.index.local.data.area.created.message]                   ; Point write.console to message indicating the creation of an area.
+                                        call  write.console                                                             ; Tell the admin a new area has been created.
+
+                                        push  sys.standard.output                                                       ; Write to console.
+                                        push  dword [argument.01.location]                                              ; Pointer to stored area name.
+                                        push  dword [argument.01.size]                                                  ; Length of stored area name.
+                                        call  write.descriptor                                                          ; Show the area name to the admin.
+
+                                        push  dword [text.data.index.local.data.carriage.return.message]                ; Pointer to carriage return.
+                                        call  write.console                                                             ; Send a carriage return to the local console.
+
+                                        push  sys.standard.output                                                       ; Write to console.
+                                        push  dword [argument.02.location]                                              ; Pointer to area description.
+                                        push  dword [argument.02.size]                                                  ; Length of area description.
+                                        call  write.descriptor                                                          ; Show the area description to the admin.
+
+                                        push  dword [text.data.index.local.data.carriage.return.message]                ; Pointer to carriage return.
+                                        call  write.console                                                             ; Send a carriage return to the local console.
+
+                                        push  dword [text.data.index.socket.data.area.created.message]                  ; Point socket.send to area creation success message.
+                                        call  socket.send                                                               ; Send the success message to the socket.
+
+                                        call  write.prompt                                                              ; Restore the user's prompt.
+
+                                        ret                                                                             ; Return to caller.

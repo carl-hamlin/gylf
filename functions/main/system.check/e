@@ -1,0 +1,21 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/main/system.check/e
+;
+;   This file defines the external textual data associated with the system.check function.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Local Data
+;
+
+    local.data.system.check.message.l                       dd  local.data.system.check.message.end                                 ; length of message.
+    local.data.system.check.message                         db  "Performing system check...", 0Ah, 0Dh                              ; System check message.
+    local.data.system.check.message.end                     equ $-local.data.system.check.message                                   ; Pointer to end of message.
+
+    local.data.system.check.done.l                          dd  local.data.system.check.done.end                                    ; Length of message.
+    local.data.system.check.done                            db  "System checks completed.", 0Ah, 0Dh                                ; System check completed message.
+    local.data.system.check.done.end                        equ $-local.data.system.check.done                                      ; Pointer to end of message.

@@ -1,0 +1,83 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/gylf/t
+;
+;   This function creates a complete user profile without the intervening process of eggdom.
+;
+;   Assumptions:     eax - Length of received data.
+;                    esi - Pointer to descriptor associated with target socket.
+;
+;   Returns:         None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   a.p.data.gylf               ./b
+;
+;   arguments.num               ./functions/aggregate.arguments/b
+;
+;   check.admin                 ./functions/check.admin/t
+;
+;   command.gylf.admin          ./functions/gylf/t
+;
+;   command.gylf.dna.mode       ./functions/gylf/t
+;
+;   command.gylf.nsp.mode       ./functions/gylf/t
+;
+;   connection.area.id.index    ./functions/main/system/check/b
+;
+;   connection.descriptor.index ./functions/main/system.check/b
+;
+;   egg.area.id                 ./commands/egg/b
+;
+;   egg.data                    ./commands/egg/b
+;
+;   write.bad.command.error     ./functions/write.bad.command.error/t
+;
+;   write.descriptor            ./functions/write.descriptor/t
+;
+
+    command.gylf:           push  esi                                                         ; Preserve index to connection entry.
+
+                            call  check.admin                                                 ; Is the user an admin?
+                            jc    command.gylf.admin                                          ; Yes. Go check their syntax.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.gylf.bad:       pop   esi                                                         ; Restore index to connection entry.
+
+                            call  write.bad.command.error                                     ; Give non-admin users a generic bad command message.
+                            ret                                                               ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.gylf.admin:     cmp   byte [arguments.num], 03h                                   ; Are we operating in DNA mode?
+                            jz    command.gylf.dna.mode                                       ; Yes. Go take care of that.
+
+                            cmp   byte [arguments.num], 02h                                   ; Are we operating in named secondary parent mode?
+                            jz    command.gylf.nsp.mode                                       ; Yes. Go take care of that.
+
+                            pop   esi                                                         ; Restore index to connection entry.
+
+                            push  dword [text.data.index.local.data.gylf.bad.syntax.message]  ; Pointer to local message indicating that an admin bounced on syntax.
+                            call  write.descriptor                                            ; Let the server admin know there's someone trying to use the gylf command that doesn't know how.
+
+                            push  dword [text.data.index.socket.data.command.gylf.help]       ; Point send function to help message for command.
+                            call  socket.send                                                 ; Let the user know that they need to brush up on syntax.
+
+                            ret                                                               ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.gylf.dna.mode:  mov   ebx, e.data                                                 ; ebx - Index into egg data.
+                            mov   eax, dword [a.p.data.gylf + gylf.connection.area.id.index]  ; eax - Pointer to area in which the command is being performed.
+                            mov   dword [ebx+egg.area.id], eax                                ; Store area id in egg data.
+                            
+                            ; FIX FUCKING CONNECTION DATA - WE NEED A LENGTH FOR FILENAMES
+
+                            ret                                                               ; Return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    command.gylf.nsp.mode:  ret                                                               ; Return to caller.
