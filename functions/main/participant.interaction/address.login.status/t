@@ -262,6 +262,38 @@
                                                 mov   ebx, login.filename                                                 ; ebx - Smoke the login file.
                                                 int   sys.system.call                                                     ; SMOKE THAT MOTHERFUCKER!
 
+    address.login.status.clean.waiting.list.l:  cmp   dword [top.login], 0                                                ; Do we need to address top login?
+                                                jz    address.login.status.done                                           ; No. Go return to caller.
+
+                                                push  login.filename + dword.l                                            ; Point convert.binary.id.to.ascii.id to login filename.
+                                                push  dword [top.login]                                                   ; Point convert.binary.id.to.ascii.id to top login id.
+                                                call  convert.binary.id.to.ascii.id                                       ; Convert the id.
+
+                                                push  login.filename                                                      ; Point open.descriptor to the login data.
+                                                call  open.descriptor                                                     ; Associate a descriptor with the login data.
+
+                                                or    eax, eax                                                            ; Were we able to associate the descriptor?
+                                                jns   address.login.status.clean.waiting.list.d                           ; Yes. We've reached the new top login. Go do the update.
+
+                                                dec   dword [top.login]                                                   ; Decrement top.login.
+
+                                                jmp   address.login.status.clean.waiting.list.l                           ; Go check the new top login.
+
+    address.login.status.clean.waiting.list.d:  push  eax                                                                 ; Point close.descriptor to the descriptor we associated with the login data.
+                                                call  close.descriptor                                                    ; Disassociate the descriptor.
+
+                                                push  tops.filename                                                       ; Point open.descriptor to the tops data.
+                                                call  open.descriptor                                                     ; Associate a descriptor with the tops data.
+
+                                                push  eax                                                                 ; Preserve descriptor for closing.
+
+                                                push  eax                                                                 ; Point write.descriptor to the descriptor associated with the tops data.
+                                                push  top.egg                                                             ; Tell write.descriptor to write starting at top.egg.
+                                                push  (dword.l + dword.l + dword.l + dword.l)                             ; Tell write.descriptor to write all four tops.
+                                                call  write.descriptor                                                    ; Write the new tops data.
+
+                                                call  close.descriptor                                                    ; Disassociate the descriptor.
+
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     address.login.status.done:                  ret                                                                       ; Return to caller.
