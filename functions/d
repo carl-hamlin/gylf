@@ -47,6 +47,8 @@
     message.marker                        db  '.m'                                                                        ; Message indicator.
     message.marker.l                      equ $-message.marker                                                            ; Length of message indicator.
 
+    tops.filename                         db  './d/t', 00h                                                                ; Top file storage.
+
     area.filename                         db  './d/a/00000000', 00h                                                       ; Area filename storage.
     item.filename                         db  './d/i/00000000', 00h                                                       ; Item filename storage.
 
