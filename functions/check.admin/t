@@ -1,0 +1,22 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/check.admin/t
+;
+;   This function checks to see if the current character is an admin.
+;
+;   Assumptions:    esi - Index to connection table.
+;
+;   Returns:        Carry - Admin
+;                   No Carry - Not Admin
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   a.p.data.gylf ./b
+;
+
+    check.admin:  mov   al, byte [a.p.data.gylf + gylf.administrative.byte] ; al - Administrative byte.
+                  shr   al, 01h                                             ; Set carry if the least significant bit is high.
+
+                  ret                                                       ; Return to caller.

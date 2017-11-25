@@ -1,0 +1,46 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/open.descriptor/t
+;
+;   This function calls the linux kernel and causes it to associate a descriptor with an existing file on disk.
+;
+;   Assumptions:    Stack Frame: dword - Pointer to ASCIIZ formatted file path.
+;
+;   Returns:        eax - Descriptor associated with file on disk.
+;                   eax - Error indicator.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   dword.l         ./b
+;
+;   sys.open.call   ./functions/open.descriptor/b
+;
+;   sys.read.write  ./functions/open.descriptor/b
+;
+;   sys.system.call ./functions/b
+;
+
+    open.descriptor:  push  ebp                                                     ; Preserve caller's ebp.
+
+                      mov   ebp, esp                                                ; Prepared to be used as  data pointer.
+                      add   ebp, (open.descriptor.packet_size + dword.l)            ; ebp - Data pointer.
+
+                      push  ebx                                                     ; Preserve caller's ebx.
+                      push  ecx                                                     ; Preserve caller's ecx.
+                      push  edx                                                     ; Preserve caller's edx. 
+ 
+                      mov   eax, sys.open.call                                      ; eax - Associate a descriptor with a file on disk.
+                      mov   ebx, [ebp - open.descriptor.packet.filename]            ; ebx - Pointer to ASCIIZ file path.
+                      mov   ecx, sys.read.write                                     ; ecx - Apply read/write permissions to the descriptor.
+                      sub   edx, edx                                                ; edx - No special modes.
+                      int   sys.system.call                                         ; Associate a descriptor with a file on disk.
+
+                      pop   edx                                                     ; Restore caller's edx.
+                      pop   ecx                                                     ; Restore caller's ecx.
+                      pop   ebx                                                     ; Restore caller's ebx.
+
+                      pop   ebp                                                     ; Restore caller's ebp.
+
+                      ret   open.descriptor.packet_size                             ; Return to caller.

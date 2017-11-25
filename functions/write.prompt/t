@@ -1,0 +1,32 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/write.prompt/t
+;
+;   This function prints a command prompt.
+;
+;   Assumptions:    ebp - Pointer to populated answer.active.socket.packet.
+;
+;   Returns:        None.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   socket.send                                 ./functions/socket/socket.send/t
+;
+;   text.data.index.socket.data.prompt.message  ./functions/main/text.init/b
+;
+
+    write.prompt: push  ebx                                                   ; Preserve caller's ebx.
+
+                  mov   ebx, dword [ebp - answer.active.socket.packet.active] ; ebx - Pointer to descriptor associated with active socket.
+
+                  push  dword [ebx]                                           ; Point socket.send to active socket.
+                  push  00000000h                                             ; No buffered data.
+                  push  00000000h                                             ; No buffered length.
+                  push  dword [text.data.index.socket.data.prompt.message]    ; Point the send function to the prompt.
+                  call  socket.send                                           ; Send the prompt to the socket.
+
+                  pop   ebx                                                   ; Restore caller's ebx.
+
+                  ret                                                         ; Return to caller.

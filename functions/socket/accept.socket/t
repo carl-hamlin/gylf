@@ -1,0 +1,51 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/accept.socket/t
+;
+;   This function calls the linux kernel to associate a descriptor with an incoming Berkeley Socket.
+;
+;   Assumptions:  Populated socket.data.accept.socket.descriptor.
+;
+;   Clobbers:     ebx, ecx.
+;
+;   Returns:      eax - Descriptor associated with the nex connection.
+;                 eax - Error as a signed value.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   dword.l                                 ./b
+;
+;   socket.data.accept.socket.descriptor    ./functions/socket/accept.socket/d
+;
+;   socket.data.connected.socket.descriptor ./functions/socket/b
+;
+;   sys.socket.accept                       ./functions/socket/accept.socket/b
+;
+;   sys.socket.call                         ./functions/socket/b
+;
+;   sys.system.call                         ./functions/b
+;
+
+    accept.socket:  pop eax                                             ; Preserve return address.
+
+                    push  socket.data.connected.socket.descriptor       ; Set connected descriptor.
+                    push  socket.data.sockaddr.protocol.family          ; Set protocol family.
+                    push  dword [socket.data.general.socket.descriptor] ; Point to listening socket.
+
+                    push  eax                                           ; Restore return address.
+
+                    mov   eax, sys.socket.call                          ; eax - Linux socket call indicator.
+                    mov   ebx, sys.socket.accept                        ; ebx - Linux socket call accept socket indicator.
+
+                    mov   ecx, esp                                      ; ecx - Prepared to be used as data pointer.
+                    add   ecx, dword.l                                  ; ecx - Pointer to arguments package for linux kernel accept socket function. Package contents are as follows:
+                                                                        ;
+                                                                        ;     dword    Descriptor of listening socket which detected the incoming connection.
+                                                                        ;     dword    Pointer to sockaddr structure.
+                                                                        ;     dword    Storage for descriptor of accepted socket.
+
+                    int   sys.system.call                               ; Accept the new connection.
+
+                    ret   (dword.l * 3)                                 ; Return to caller.

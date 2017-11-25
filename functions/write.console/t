@@ -1,0 +1,51 @@
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   ./functions/write.console/t
+;
+;   This function writes data to an active descriptor.
+;
+;   Assumptions:    Stack Frame:  dword - [Pointer to message to be written]
+;
+;   Returns:        eax - Error indicator.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   dword.l             ./b
+;
+;   get.text.data       ./functions/get.text.data/t
+;
+;   memory.switch       ./functions/memory.switch/t
+;
+;   sys.standard.output ./functions/write.descriptor/b
+;
+;   sys.system.call     ./functions/b
+;
+;   sys.write.call      ./functions/b
+;
+
+    write.console:  push  ebp                                         ; Preserve caller's ebp.
+
+                    mov   ebp, esp                                    ; ebp - Prepared to be used as data pointer.
+                    add   ebp, (dword.l + write.console.packet_size)  ; ebp - Data pointer.
+
+                    push  eax                                         ; Preserve caller's eax.
+                    push  ebx                                         ; Preserve caller's ebx.
+
+                    push  dword [ebp - write.console.packet.message]  ; Point get.text.data to message to be retrieved.
+                    call  get.text.data                               ; Get indexed data.
+
+                    mov   eax, sys.write.call                         ; eax - Write data to an active descriptor.
+                    mov   ebx, sys.standard.output                    ; ebx - Write to console.
+                    int   sys.system.call                             ; Write data to an active descriptor.
+
+                    push  0                                           ; Tell memory.check to free memory.
+                    call  memory.switch                               ; Free memory.
+
+                    pop   ebx                                         ; Restore caller's ebx.
+                    pop   eax                                         ; restore caller's eax.
+
+                    pop   ebp                                         ; Restore caller's ebp.
+
+                    ret   write.console.packet_size                   ; Return to caller.

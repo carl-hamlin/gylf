@@ -1,0 +1,43 @@
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   ./functions/write.descriptor/t
+;
+;   This function writes data to an active descriptor.
+;
+;   Assumptions:    Stack Frame:  dword - Length of data to be written.
+;                                 dword - Pointer to data to be written.
+;                                 dword - Descriptor to which to write.
+;
+;   Returns:        eax - Error indicator.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   sys.system.call     ./functions/b
+;
+;   sys.write.call      ./functions/b
+;
+
+    write.descriptor: push  ebp                                                   ; Preserve caller's ebp.
+
+                      mov   ebp, esp                                              ; ebp - Prepared to be used as a data pointer.
+                      add   ebp, (write.descriptor.packet_size + dword.l)         ; ebp - Data pointer.
+
+                      push  ebx                                                   ; Preserve caller's ebx.
+                      push  ecx                                                   ; Preserve caller's ecx.
+                      push  edx                                                   ; Preserve caller's edx.
+
+                      mov   eax, sys.write.call                                   ; eax - Write data to an active descriptor.
+                      mov   ebx, dword [ebp - write.descriptor.packet.descriptor] ; ebx - Write to descriptor specified.
+                      mov   ecx, dword [ebp - write.descriptor.packet.buffer]     ; ecx - Pointer to data to be written.
+                      mov   edx, dword [ebp - write.descriptor.packet.bytes]      ; edx - Length of data to be written.
+                      int   sys.system.call                                       ; Write data to an active descriptor.
+
+                      pop   edx                                                   ; Restore caller's edx.
+                      pop   ecx                                                   ; Restore caller's ecx.
+                      pop   ebx                                                   ; Restore caller's ebx.
+
+                      pop   ebp                                                   ; Restore caller's ebp.
+
+                      ret   write.descriptor.packet_size                          ; Return to caller.

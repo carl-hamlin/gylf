@@ -1,0 +1,44 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/main/participant.interaction/address.login.status/e
+;
+;   This file defines the external textual data associated with the address.login.status function.
+;
+
+    section   .data
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Local Data
+;
+
+    local.data.bad.login.error.l        dd  local.data.bad.login.error.end                                                                                ; Length of message.
+    local.data.bad.login.error          db  "A login attempt failed.", 0Ah, 0Dh                                                                           ; Login failure message.
+    local.data.bad.login.error.end      equ $-local.data.bad.login.error                                                                                  ; Pointer to end of message.
+
+    local.data.second.login.error.l     dd  local.data.second.login.error.end                                                                             ; Length of message.
+    local.data.second.login.error       db  "Dupe login attempt. disconnecting.", 0Ah, 0Dh                                                                ; Dupe login message.
+    local.data.second.login.error.end   equ $-local.data.second.login.error                                                                               ; Pointer to end of message.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Outgoing Data
+;
+
+    socket.data.bad.login.error.l       dd  socket.data.bad.login.error.end                                                                               ; Length of message.
+	  socket.data.bad.login.error		      db  "That name corresponds neither to a current participant or an egg. Please verify your credentials and try "   ; Bad login error.
+  						                          db  "again.", 0Ah, 0Dh
+	  socket.data.bad.login.error.end		  equ $-socket.data.bad.login.error												                                                          ; Pointer to end of message.
+
+    socket.data.login.message.l         dd  socket.data.login.message.end                                                                                 ; Length of message.
+	  socket.data.login.message		        db  "Gylf v0.0001", 0Ah, 0Dh, "Please enter your username: "                                                      ; Storage for login message.
+	  socket.data.login.message.end		    equ $-socket.data.login.message												                                                            ; Length of login message.
+
+    socket.data.second.login.error.l    dd  socket.data.second.login.error.end                                                                            ; Length of message.
+	  socket.data.second.login.error		  db  "That username is currently logged in. If this is you, disconnect from your current session and try again, "  ; Message indicating duped login.
+  						                          db  "please.", 0Ah, 0Dh
+	  socket.data.second.login.error.end  equ $-socket.data.second.login.error											                                                        ; Pointer to end of message.
+
+    socket.data.welcome.message.l       dd  socket.data.welcome.message.end                                                                               ; Length of message.
+	  socket.data.welcome.message		      db  "Ah, a new participant! Welcome.", 0Ah, 0Dh, "Please enter a string of characters to use as a passphrase: "		; Storage for new user welcome message.
+	  socket.data.welcome.message.end		  equ $-socket.data.welcome.message												                                                          ; Pointer to end of message.
