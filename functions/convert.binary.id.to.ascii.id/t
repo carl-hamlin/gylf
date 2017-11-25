@@ -32,17 +32,84 @@
                                                     mov   ecx, 4                                                          ; ecx - Counter for conversion loop.
                                                     sub   eax, eax                                                        ; eax - Sanitized for computational use.
 
-    convert.binary.id.to.ascii.id.conversion.loop:  rol   edx, 8                                                          ; Move first to digits to be converted into position.
+    convert.binary.id.to.ascii.id.conversion.loop:  rol   edx, 8                                                          ; Move first two digits to be converted into position.
 
                                                     mov   al, dl                                                          ; al - First two digits to be converted.
 
                                                     shl   ax, 4                                                           ; ah - First digit to convert.
                                                     shr   al, 4                                                           ; al - Second digit to convert.
 
+    convert.binary.id.to.ascii.id.cmp.ah.a:         cmp   ah, 0Ah                                                         ; Are we dealing with 'A' in ah?
+                                                    jnz   convert.binary.id.to.ascii.id.cmp.al.a                          ; No. Go make the next check.
+
+                                                    mov   ah, 'A'                                                         ; Convert digit in ah.
+
+    convert.binary.id.to.ascii.id.cmp.al.a:         cmp   al, 0Ah                                                         ; Are we dealing with 'A' in al?
+                                                    jnz   convert.binary.id.to.ascii.id.cmp.ah.b                          ; No. Go make the next check.
+
+                                                    mov   al, 'A'                                                         ; Convert digit in al.
+
+    convert.binary.id.to.ascii.id.cmp.ah.b:         cmp   ah, 0Bh                                                         ; Are we dealing with 'B' in ah?
+                                                    jnz   convert.binary.id.to.ascii.id.cmp.al.b                          ; No. Go make the next check.
+
+                                                    mov   ah, 'B'                                                         ; Convert digit in ah.
+
+    convert.binary.id.to.ascii.id.cmp.al.b:         cmp   al, 0Bh                                                         ; Are we dealing with 'B' in al?
+                                                    jnz   convert.binary.id.to.ascii.id.cmp.ah.c                          ; No. Go make the next check.
+
+                                                    mov   al, 'B'                                                         ; Convert digit in al.
+
+    convert.binary.id.to.ascii.id.cmp.ah.c:         cmp   ah, 0Ch                                                         ; Are we dealing with 'C' in ah?
+                                                    jnz   convert.binary.id.to.ascii.id.cmp.al.c                          ; No. Go make the next check.
+
+                                                    mov   ah, 'C'                                                         ; Convert digit in ah.
+
+    convert.binary.id.to.ascii.id.cmp.al.c:         cmp   al, 0Ch                                                         ; Are we dealing with 'C' in al?
+                                                    jnz   convert.binary.id.to.ascii.id.cmp.ah.d                          ; No. Go make the next check.
+
+                                                    mov   al, 'C'                                                         ; Convert digit in al.
+
+    convert.binary.id.to.ascii.id.cmp.ah.d:         cmp   ah, 0Dh                                                         ; Are we dealing with 'D' in ah?
+                                                    jnz   convert.binary.id.to.ascii.id.cmp.al.d                          ; No. Go make the next check.
+
+                                                    mov   ah, 'D'                                                         ; Convert digit in ah.
+
+    convert.binary.id.to.ascii.id.cmp.al.d:         cmp   al, 0Dh                                                         ; Are we dealing with 'D' in al?
+                                                    jnz   convert.binary.id.to.ascii.id.cmp.ah.e                          ; No. Go make the next check.
+
+                                                    mov   al, 'D'                                                         ; Convert digit in al.
+
+    convert.binary.id.to.ascii.id.cmp.ah.e:         cmp   ah, 0Eh                                                         ; Are we dealing with 'E' in ah?
+                                                    jnz   convert.binary.id.to.ascii.id.cmp.al.e                          ; No. Go make the next check.
+
+                                                    mov   ah, 'E'                                                         ; Convert digit in ah.
+
+    convert.binary.id.to.ascii.id.cmp.al.e:         cmp   al, 0Eh                                                         ; Are we dealing with 'E' in al?
+                                                    jnz   convert.binary.id.to.ascii.id.cmp.ah.f                          ; No. Go make the next check.
+
+                                                    mov   al, 'E'                                                         ; Convert digit in al.
+
+    convert.binary.id.to.ascii.id.cmp.ah.f:         cmp   ah, 0Fh                                                         ; Are we dealing with 'F' in ah?
+                                                    jnz   convert.binary.id.to.ascii.id.cmp.al.f                          ; No. Go make the next check.
+
+                                                    mov   ah, 'F'                                                         ; Convert digit in ah.
+
+    convert.binary.id.to.ascii.id.cmp.al.f:         cmp   al, 0Fh                                                         ; Are we dealing with 'F' in al?
+                                                    jnz   convert.binary.id.to.ascii.id.cmp.ah.convert                    ; No. Go make the next check.
+
+                                                    mov   al, 'F'                                                         ; Convert digit in al.
+
+    convert.binary.id.to.ascii.id.cmp.ah.convert:   cmp   ah, 09h                                                         ; Have we converted this digit already?
+                                                    ja    convert.binary.id.to.ascii.id.cmp.al.convert                    ; Yes. Go check al.
+
                                                     add   ah, 30h                                                         ; ah - First converted digit.
+
+    convert.binary.id.to.ascii.id.cmp.al.convert:   cmp   al, 09h                                                         ; Have we converted this digit already?
+                                                    ja    convert.binary.id.to.ascii.id.store                             ; Yes. Go store the digits.
+
                                                     add   al, 30h                                                         ; al - Second converted digit.
 
-                                                    ror   ax, 8                                                           ; Swap digit positions.
+    convert.binary.id.to.ascii.id.store:            ror   ax, 8                                                           ; Swap digit positions.
 
                                                     stosb                                                                 ; Store first digit.
 
