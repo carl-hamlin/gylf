@@ -85,6 +85,18 @@
 
                                           mov   dword [top.login], eax                                              ; Yes. Update top.login.
 
+                                          push  tops.filename                                                       ; Point open.descriptor to tops filename.
+                                          call  open.descriptor                                                     ; Associate a descriptor with the tops data.
+
+                                          push  eax                                                                 ; Preserve descriptor for closing.
+
+                                          push  eax                                                                 ; Point write.descriptor to tops data.
+                                          push  top.egg                                                             ; Tell write.descriptor to write the data at top.egg.
+                                          push  (dword.l + dword.l + dword.l + dword.l)                             ; Tell write.descriptor to write all four tops.
+                                          call  write.descriptor                                                    ; Write the tops.
+
+                                          call  close.descriptor                                                    ; Disassociate the descriptor from the tops data.
+
     listening.socket.poll.greet.r.login:  push  login.filename                                                      ; Point open.descriptor to login storage.
                                           call  create.file                                                         ; Build a file to store the login connection.
 
