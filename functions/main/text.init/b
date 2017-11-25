@@ -57,6 +57,10 @@
     text.data.index.socket.data.passphrase.message              resd  00000001h ; Index to remote message requesting a passphrase.
     text.data.index.local.data.listen.error.message             resd  00000001h ; Index to local message indicating that there was a problem setting up a listener.
     text.data.index.local.data.system.check.message             resd  00000001h ; Index to local message indicating that system checks are about to begin.
+    text.data.index.local.data.system.check.eggs.message        resd  00000001h ; Index to local message indicating that the pre-check and maintenance for eggs is underweigh.
+    text.data.index.local.data.system.check.ghosts.message      resd  00000001h ; Index to local message indicating that the pre-check and maintenance for ghosts in underweigh.
+    text.data.index.local.data.system.check.gylf.message        resd  00000001h ; Index to local message indicating that the pre-check and maintenance for gylf is underweigh.
+    text.data.index.local.data.system.check.logins.message      resd  00000001h ; Index to local message indicating that superfluous and leftover logins are being smoked.
     text.data.index.local.data.system.check.done.message        resd  00000001h ; Index to local message indicating that system checks are finished.
     text.data.index.local.data.active.socket.message            resd  00000001h ; Index to local message indicating activity on a connected socket.
     text.data.index.local.data.create.error.message             resd  00000001h ; Index to local message indicating a problem creating a socket.
