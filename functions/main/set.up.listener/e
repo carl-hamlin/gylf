@@ -12,6 +12,10 @@
 ;   Local Data
 ;
 
-    local.data.listen.error.message.l   dd  local.data.listen.error.message.end                                                 ; Length of message.
-    local.data.listen.error.message     db  "There was a problem getting the socket to listen on the specified port.", 0Ah, 0Dh ; Listen error message.
-    local.data.listen.error.message.end equ $-local.data.listen.error.message                                                   ; Pointer to end of message.
+    local.data.listen.error.message.l   dd  local.data.listen.error.message.end                                                                 ; Length of message.
+    local.data.listen.error.message     db  "There was a problem getting the socket to listen on the specified port.", 0Ah, 0Dh                 ; Listen error message.
+    local.data.listen.error.message.end equ $-local.data.listen.error.message                                                                   ; Pointer to end of message.
+
+    local.data.listening.message.l      dd  local.data.listening.message.end                                                                    ; Length of message.
+    local.data.listening.message        db  "There were no problems. The server is now listening, and can be connected on port 2600.", 0Ah, 0Dh ; Socket listening message.
+    local.data.listening.message.end    equ $-local.data.listening.message                                                                      ; Pointer to end of message.

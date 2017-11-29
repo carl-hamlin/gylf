@@ -1,0 +1,23 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/communications/send.to.area/s
+;
+;   This file contains structures pertinent to the send.to.area utility.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+;================================================================================================================================================================================================
+;
+;   send.to.area Data Structure
+;
+
+    struc sta.packet
+      .area     resd  00000001h ; Storage for area from which to broadcast.
+      .message  resd  00000001h ; Storage for pointer to message to be broadcast.
+      .length   resd  00000001h ; Optional storage for length of message.
+    endstruc
