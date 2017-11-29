@@ -14,7 +14,27 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   No external references.
+;   a.p.type.egg                  ./b
+;
+;   a.p.type.gylf                 ./b
+;
+;   e.data                        ./b
+;
+;   egg.connection.status.index   ./s
+;
+;   egg.passphrase                ./s
+;
+;   d.data                        ./b
+;
+;   g.data                        ./b
+;
+;   ghost.connection.status.index ./s
+;
+;   ghost.passphrase              ./s
+;
+;   gylf.connection.status.index  ./s
+;
+;   gylf.passphrase               ./s
 ;
 
     address.passphrase.status:                        pusha                                                               ; Preserve caller's registers.
@@ -36,7 +56,7 @@
     address.passphrase.status.ghosts:                 mov   edi, (d.data + ghost.passphrase)                              ; edi - Pointer to ghost passphrase.
                                                       jmp   address.passphrase.status.edi.positioned                      ; Continue with the comparison.
 
-    address.passphrase.status.eggs:                   mov   edi, (e.data + ghost.passphrase)                              ; edi - Pointer to egg passphrase.
+    address.passphrase.status.eggs:                   mov   edi, (e.data + egg.passphrase)                                ; edi - Pointer to egg passphrase.
                                                       jmp   address.passphrase.status.edi.positioned                      ; Continue with the comparison.
 
     address.passphrase.status.gylf:                   mov   edi, (g.data + gylf.passphrase)                               ; edi - Pointer to gylf passphrase.
