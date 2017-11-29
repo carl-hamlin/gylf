@@ -13,7 +13,9 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   a.p.data.gylf ./b
+;   a.p.data.gylf             ./b
+;
+;   gylf.administrative.byte  ./s
 ;
 
     check.admin:  mov   al, byte [a.p.data.gylf + gylf.administrative.byte] ; al - Administrative byte.
