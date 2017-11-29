@@ -27,11 +27,17 @@
 ;
 ;   dword.l                                   ./b
 ;
-;   d.data                                    ./functions/d
+;   d.data                                    ./b
 ;
-;   e.data                                    ./functions/d
+;   e.data                                    ./b
 ;
-;   g.data                                    ./functions/d
+;   egg.name                                  ./s
+;
+;   g.data                                    ./b
+;
+;   ghost.name                                ./s
+;
+;   gylf.name                                 ./s
 ;
 ;   get.participant.data.by.name.done         ./functions/get.participant.data.by.name/t
 ;
