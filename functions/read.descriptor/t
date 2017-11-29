@@ -1,24 +1,45 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/read.descriptor/t
 ;
 ;   This function reads data from a descriptor.
 ;
-;   Assumptions:    ebx = Descriptor from which to read.
-;                   ecx = Pointer to buffer into which to read the data.
-;                   edx = Number of bytes to be read.
+;   Assumptions:    Stack Frame:  dword - Descriptor from which to read.
+;                                 dword - Pointer to buffer into which to read the data.
+;                                 dword - Number of bytes to be read.
 ;
-;   Returns:        eax = Number of bytes read.
+;   Returns:        eax - Number of bytes read.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
+;
+;   dword.l         ./b
 ;
 ;   sys.read.call   ./functions/read.descriptor/b
 ;
 ;   sys.system.call ./functions/b
 ;
 
-    read.descriptor: mov  eax, sys.read.call ; eax = Read data from a descriptor.
-                     int  sys.system.call    ; Read data from a descriptor.
-                     ret                     ; Return to caller.
+    read.descriptor:  push  ebp                                                   ; Preserve caller's ebp.
+
+                      mov   ebp, esp                                              ; ebp - prepared to be used as data pointer.
+                      add   ebp, (dword.l + read.descriptor.packet_size)          ; ebp - Data pointer.
+
+                      push  ebx                                                   ; Preserve caller's ebx.
+                      push  ecx                                                   ; Preserve caller's ecx.
+                      push  edx                                                   ; Preserve caller's edx.
+
+                      mov   eax, sys.read.call                                    ; eax - Read data from a descriptor.
+                      mov   ebx, dword [ebp - read.descriptor.packet.descriptor]  ; ebx - Descriptor from which to read.
+                      mov   ecx, dword [ebp - read.descriptor.packet.buffer]      ; ecx - Pointer to buffer into which to read.
+                      mov   edx, dword [ebp - read.descriptor.packet.bytes]       ; edx - Number of bytes to read.
+                      int   sys.system.call                                       ; Read data from a descriptor.
+
+                      pop   edx                                                   ; Restore caller's edx.
+                      pop   ecx                                                   ; Restore caller's ecx.
+                      pop   ebx                                                   ; Restore caller's ebx.
+
+                      pop   ebp                                                   ; Restore caller's ebp.
+
+                      ret   read.descriptor.packet_size                           ; Return to caller.

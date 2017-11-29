@@ -1,4 +1,4 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/buffer.strip/t
 ;
@@ -7,8 +7,8 @@
 ;   0Ah
 ;   0Dh
 ;
-;   Assumptions:  eax - Number of characters to check.
-;                 ebx - Pointer to buffer to be stripped.
+;   Assumptions:  Stack Frame:  dword - Number of characters to check.
+;                               dword - Pointer to buffer to be stripped.
 ;
 ;   Returns:      eax - Revised number of characters.
 ;                 ebx - Pointer to stripped buffer.
@@ -24,30 +24,35 @@
 ;   strip.done  ./functions/buffer.strip/t
 ;
 
-    buffer.strip: push ebx             ; Save pointer to buffer.
-                  mov  ecx, eax        ; ecx = Number of characters to check.
+    buffer.strip: pop   edx             ; Preserve return address.
+                  pop   ebx             ; ebx - Pointer to buffer to be stripped.
+                  pop   ecx             ; ecx - Number of characters to check.
+
+                  push  edx             ; Restore return address.
+
+                  push  ebx             ; Save pointer to buffer.
+                  mov   eax, ecx        ; eax - Running counter of valid characters.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    strip.loop:   cmp   byte [ebx], 0Ah ; Is the current character 0Ah?
+                  jz    strip.char      ; Yes. Go strip it.
+
+                  cmp   byte [ebx], 0Dh ; Is the current character 0Dh?
+                  jz    strip.char      ; Yes. Go strip it.
+
+                  inc   ebx             ; esi - Pointer to the next element in the data buffer.
+                  loop  strip.loop      ; Go check the next element.
+
+                  jmp   strip.done      ; All finished here. Go return to caller.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    strip.loop:   cmp  byte [ebx], 0Ah ; Is the current character 0Ah?
-                  jz   strip.char      ; Yes. Go strip it.
-
-                  cmp  byte [ebx], 0Dh ; Is the current character 0Dh?
-                  jz   strip.char      ; Yes. Go strip it.
-
-                  inc  ebx             ; esi = Pointer to the next element in the data buffer.
-                  loop strip.loop      ; Go check the next element.
-
-                  jmp  strip.done      ; All finished here. Go return to caller.
+    strip.char:   mov   byte [ebx], 00h ; Strip the current character.
+                  inc   ebx             ; esi - Pointer to the next element in the data buffer.
+                  dec   eax             ; eax - Revised number of characters.
+                  loop  strip.loop      ; Go check the next element.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    strip.char:   mov  byte [ebx], 00h ; Strip the current character.
-                  inc  ebx             ; esi = Pointer to the next element in the data buffer.
-                  dec  eax             ; eax = Revised number of characters.
-                  loop strip.loop      ; Go check the next element.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    strip.done:   pop  ebx             ; Restore pointer to buffer.
-                  ret                  ; Return to caller.
+    strip.done:   pop   ebx             ; Restore pointer to buffer.
+                  ret                   ; Return to caller.
