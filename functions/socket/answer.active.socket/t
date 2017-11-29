@@ -20,7 +20,17 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   No external references.
+;   a.p.type.egg        ./b
+;
+;   a.p.type.ghost      ./b
+;
+;   a.p.type.gylf       ./b
+;
+;   dword.l             ./b
+;
+;   sys.standard.output ./b
+;
+;   word.l              ./b
 ;
 
     answer.active.socket:                             push  ebp                                                                             ; Preserve caller's ebp.
