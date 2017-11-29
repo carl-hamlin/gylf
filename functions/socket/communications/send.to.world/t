@@ -27,6 +27,10 @@
 ;
 ;   dword.l                                             ./b
 ;
+;   g.data                                              ./b
+;
+;   gylf.connection.external.index                      ./s
+;
 ;   send.to.world.buf.p                                 ./functions/socket/communications/send.to.world/t
 ;
 ;   send.to.world.buf.s                                 ./functions/socket/communications/send.to.world/t
