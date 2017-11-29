@@ -14,15 +14,19 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   buffer.1        ./functions/b
+;   a.p.data.gylf                     ./b
 ;
-;   dword.l         ./b
+;   buffer.1                          ./functions/b
 ;
-;   set.att.mod.1   ./functions/set.single.attribute/d
+;   dword.l                           ./b
 ;
-;   set.att.mod.3   ./functions/set.single.attribute/d
+;   gylf.connection.descriptor.index  ./s
 ;
-;   socket.send.buf ./functions/socket/socket.send/t
+;   set.att.mod.1                     ./functions/set.single.attribute/d
+;
+;   set.att.mod.3                     ./functions/set.single.attribute/d
+;
+;   socket.send.buf                   ./functions/socket/socket.send/t
 ;
 
     set.single.attribute: push  esi                                                       ; Preserve pointer to target connection.
