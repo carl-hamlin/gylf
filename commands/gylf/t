@@ -13,29 +13,33 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   a.p.data.gylf               ./b
+;   a.p.data.gylf                 ./b
 ;
-;   arguments.num               ./functions/aggregate.arguments/b
+;   arguments.num                 ./functions/aggregate.arguments/b
 ;
-;   check.admin                 ./functions/check.admin/t
+;   check.admin                   ./functions/check.admin/t
 ;
-;   command.gylf.admin          ./functions/gylf/t
+;   command.gylf.admin            ./functions/gylf/t
 ;
-;   command.gylf.dna.mode       ./functions/gylf/t
+;   command.gylf.dna.mode         ./functions/gylf/t
 ;
-;   command.gylf.nsp.mode       ./functions/gylf/t
+;   command.gylf.nsp.mode         ./functions/gylf/t
 ;
-;   connection.area.id.index    ./functions/main/system/check/b
+;   connection.area.id.index      ./functions/main/system/check/b
 ;
-;   connection.descriptor.index ./functions/main/system.check/b
+;   connection.descriptor.index   ./functions/main/system.check/b
 ;
-;   egg.area.id                 ./commands/egg/b
+;   e.data                        ./commands/gylf/t
 ;
-;   egg.data                    ./commands/egg/b
+;   egg.area.id                   ./s
 ;
-;   write.bad.command.error     ./functions/write.bad.command.error/t
+;   egg.data                      ./commands/egg/b
 ;
-;   write.descriptor            ./functions/write.descriptor/t
+;   gylf.connection.area.id.index ./s
+;
+;   write.bad.command.error       ./functions/write.bad.command.error/t
+;
+;   write.descriptor              ./functions/write.descriptor/t
 ;
 
     command.gylf:           push  esi                                                         ; Preserve index to connection entry.
