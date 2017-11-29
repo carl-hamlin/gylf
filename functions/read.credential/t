@@ -15,7 +15,7 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   No external references.
+;   dword.l ./b
 ;
 
     read.credential:      push  ebp                                                 ; Preserve caller's ebp.
