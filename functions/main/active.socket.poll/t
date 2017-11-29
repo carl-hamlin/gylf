@@ -13,6 +13,14 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   a.p.type.egg                          ./b
+;
+;   a.p.type.ghost                        ./b
+;
+;   a.p.type.gylf                         ./b
+;
+;   a.p.type.login                        ./b
+;
 ;   active.socket.poll.done               ./functions/main/active.socket.poll/t
 ;
 ;   active.socket.poll.eggs               ./functions/main/active.socket.poll/t
@@ -39,15 +47,33 @@
 ;
 ;   d.data                                ./b
 ;
+;   dword.l                               ./b
+;
 ;   e.data                                ./b
 ;
-;   g.data                                ./b
+;   egg.connection.descriptor.index       ./s
+;
+;   egg.connection.status.index           ./s
 ;
 ;   egg.filename                          ./functions/d
 ;
+;   g.data                                ./b
+;
 ;   ghost.filename                        ./functions/d
 ;
+;   ghost.connection.descriptor.index     ./s
+;
+;   ghost.connection.status.index         ./s
+;
+;   gylf.connection.descriptor.index      ./s
+;
+;   gylf.connection.status.index          ./s
+;
 ;   gylf.filename                         ./functions/d
+;
+;   l.data                                ./b
+;
+;   login.connection.descriptor.index     ./s
 ;
 ;   open.descriptor                       ./functions/open.descriptor/t
 ;
