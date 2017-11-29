@@ -8,4 +8,5 @@
 
     section   .text
 
+    %include  "./functions/poll.descriptor/s"
     %include  "./functions/poll.descriptor/t"

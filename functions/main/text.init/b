@@ -56,7 +56,12 @@
     text.data.index.socket.data.bad.passphrase.message          resd  00000001h ; Index to remote message indicating that a bad passphrase credential has been passed.
     text.data.index.socket.data.passphrase.message              resd  00000001h ; Index to remote message requesting a passphrase.
     text.data.index.local.data.listen.error.message             resd  00000001h ; Index to local message indicating that there was a problem setting up a listener.
+    text.data.index.local.data.listening.message                resd  00000001h ; Index to local message indicating that a socket is listening.
     text.data.index.local.data.system.check.message             resd  00000001h ; Index to local message indicating that system checks are about to begin.
+    text.data.index.local.data.system.check.eggs.message        resd  00000001h ; Index to local message indicating that the pre-check and maintenance for eggs is underweigh.
+    text.data.index.local.data.system.check.ghosts.message      resd  00000001h ; Index to local message indicating that the pre-check and maintenance for ghosts in underweigh.
+    text.data.index.local.data.system.check.gylf.message        resd  00000001h ; Index to local message indicating that the pre-check and maintenance for gylf is underweigh.
+    text.data.index.local.data.system.check.logins.message      resd  00000001h ; Index to local message indicating that superfluous and leftover logins are being smoked.
     text.data.index.local.data.system.check.done.message        resd  00000001h ; Index to local message indicating that system checks are finished.
     text.data.index.local.data.active.socket.message            resd  00000001h ; Index to local message indicating activity on a connected socket.
     text.data.index.local.data.create.error.message             resd  00000001h ; Index to local message indicating a problem creating a socket.
@@ -65,7 +70,6 @@
     text.data.index.socket.data.bad.command.error.message       resd  00000001h ; Index to remote message indicating that the participant has entered a bad command.
     text.data.index.socket.data.prompt.message                  resd  00000001h ; Index to remote message comprising a prompt for data.
     text.data.index.local.data.carriage.return.message          resd  00000001h ; Index to local message comprising a carriage return.
-    text.data.index.local.data.listening.message                resd  00000001h ; Index to local message indicating that a socket is listening.
     text.data.index.local.data.session.open.error.message       resd  00000001h ; Index to local message indicating a session open error.
     text.data.index.local.data.out.of.area.ids.message          resd  00000001h ; Index to local message indicating that we're out of area ids.
     text.data.index.socket.data.session.open.error.message      resd  00000001h ; Index to remote message indicating a session open error.

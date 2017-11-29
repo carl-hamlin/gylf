@@ -52,8 +52,9 @@
       .e.parent.endurance                 resb        01h ; Byte indicator for participant endurance.
       .e.parent.agility                   resb        01h ; Byte indicator for participant agility.
 
+      .connection.area.id.index           resd  00000001h ; Placeholder for connection area id.
       .connection.descriptor.index        resd  00000001h ; Placeholder for connection descriptor.
-      .connection.external.index          resd  00000001h ; Placeholder for external descriptor.
+      .connection.external.index          resd  00000001h ; Placeholder for external id.
       .connection.status.index            resb        01h ; Placeholder for status.
     endstruc
 
@@ -180,4 +181,48 @@
 ;
 
     struc ghost
+      .passphrase                         resb        28h ; Buffer for passphrase associated with this gylf.
+
+      .base.color                         resb        01h ; Byte indicator for base color.
+      .secondary.color                    resb        01h ; Byte indicator for secondary color.
+
+      .base.fur.quality                   resb        01h ; Byte indicator for base fur quality.
+      .secondary.fur.quality              resb        01h ; Byte indicator for secondary fur quality.
+
+      .strength                           resb        01h ; Byte indicator for participant strength.
+      .endurance                          resb        01h ; Byte indicator for participant endurance.
+      .agility                            resb        01h ; Byte indicator for participant agility.
+
+      .name.l                             resb        01h ; Byte indicator for length of gylf's name.
+      .name                               resb        28h ; Buffer for the name of this gylf.
+
+      .e.parent.name.l                    resb        01h ; Byte indicator for length of laying parent's name.
+      .e.parent.name                      resb        28h ; Buffer for the name of the participant's laying parent.
+
+      .i.parent.name.l                    resb        01h ; Byte indicator for length of inseminating parent's name.
+      .i.parent.name                      resb        28h ; Buffer for the name of the participant's inseminating parent.
+
+      .age                                resd  00000001h ; Dword indicator for participant age.
+
+      .pouch                              resd  00000001h ; Dword placeholder for area id correspondent to participant's pouch.
+      .location.id                        resd  00000001h ; Dword indicator for area id.
+
+      .right.hand.inventory.id            resd  00000001h ; Item id for item held in right hand.
+      .left.hand.inventory.id             resd  00000001h ; Item id for item held in left hand.
+
+      .administrative.byte                resb        01h ; Reserved for administrative data
+
+      .connection.area.id.index           resd  00000001h ; Placeholder for connection area id.
+      .connection.descriptor.index        resd  00000001h ; Placeholder for connection descriptor.
+      .connection.external.index          resd  00000001h ; Placeholder for external descriptor.
+      .connection.status.index            resb        01h ; Placeholder for status.
+    endstruc
+
+;================================================================================================================================================================================================
+;
+;   Login Data Structure
+;
+
+    struc login
+      .connection.descriptor.index        resd  00000001h ; Placeholder for connection descriptor.
     endstruc
