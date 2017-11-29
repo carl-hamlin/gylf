@@ -12,7 +12,7 @@
 ;
 ;   buffer.2.l                            ./functions/b
 ;
-;   word.l                                ./b
+;   dword.l                               ./b
 ;
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@
 
     %define     sys.unlink                              00Ah  ; 00Ah is the modifier for 080h that tells the kernel we want to smoke a file.
     
-    %define     id.size                               word.l  ; Size of area/item ids.
+    %define     id.size                              dword.l  ; Size of area/item ids.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
@@ -44,8 +44,6 @@
 
     buffer.1                                resb  buffer.1.l  ; Buffer for incoming and outgoing data.
     buffer.2                                resb  buffer.2.l  ; Buffer for incoming and outgoing data.
-
-    id.buffer                               resd        0001h ; Buffer for id data.
 
     external.data.buffer                    resb        00FFh ; Buffer for external data.
 
