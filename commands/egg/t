@@ -41,15 +41,29 @@
 ;
 ;   create.file                                             ./functions/create.file/t
 ;
-;   dead.socket                                             ./functions/main/b
+;   dead.socket                                             ./b
 ;
 ;   e.data                                                  ./b
+;
+;   egg.area.id                                             ./s
+;
+;   egg.e.parent.name                                       ./s
+;
+;   egg.e.parent.name.l                                     ./s
+;
+;   egg.i.parent.name                                       ./s
+;
+;   egg.i.parent.name.l                                     ./s
+;
+;   egg.item.id                                             ./s
 ;
 ;   get.new.area.id                                         ./functions/get.new.area.id/t
 ;
 ;   get.new.item.id                                         ./functions/get.new.item.id/t
 ;
 ;   get.participant.data                                    ./functions/get.participant.data/t
+;
+;   gylf.connection.descriptor.index                        ./s
 ;
 ;   notify.in.absentia                                      ./functions/notify.in.absentia/t
 ;
