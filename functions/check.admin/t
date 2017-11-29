@@ -13,10 +13,10 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   No external references.
+;   a.p.data.gylf ./b
 ;
 
-    check.admin:  mov   al, byte [a.p.data+gylf.administrative.byte]  ; al - Administrative byte.
-                  shr   al, 01h                                       ; Set carry if the least significant bit is high.
+    check.admin:  mov   al, byte [a.p.data.gylf + gylf.administrative.byte] ; al - Administrative byte.
+                  shr   al, 01h                                             ; Set carry if the least significant bit is high.
 
-                  ret                                                 ; Return to caller.
+                  ret                                                       ; Return to caller.

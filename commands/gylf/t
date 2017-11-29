@@ -13,27 +13,29 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   arguments.num                         ./functions/aggregate.arguments/b
+;   a.p.data.gylf               ./b
 ;
-;   check.admin                           ./functions/check.admin/t
+;   arguments.num               ./functions/aggregate.arguments/b
 ;
-;   command.gylf.admin                    ./functions/gylf/t
+;   check.admin                 ./functions/check.admin/t
 ;
-;   command.gylf.dna.mode                 ./functions/gylf/t
+;   command.gylf.admin          ./functions/gylf/t
 ;
-;   command.gylf.nsp.mode                 ./functions/gylf/t
+;   command.gylf.dna.mode       ./functions/gylf/t
 ;
-;   connection.area.id.index              ./functions/main/system/check/b
+;   command.gylf.nsp.mode       ./functions/gylf/t
 ;
-;   connection.descriptor.index           ./functions/main/system.check/b
+;   connection.area.id.index    ./functions/main/system/check/b
 ;
-;   egg.area.id                           ./commands/egg/b
+;   connection.descriptor.index ./functions/main/system.check/b
 ;
-;   egg.data                              ./commands/egg/b
+;   egg.area.id                 ./commands/egg/b
 ;
-;   write.bad.command.error               ./functions/write.bad.command.error/t
+;   egg.data                    ./commands/egg/b
 ;
-;   write.descriptor                      ./functions/write.descriptor/t
+;   write.bad.command.error     ./functions/write.bad.command.error/t
+;
+;   write.descriptor            ./functions/write.descriptor/t
 ;
 
     command.gylf:           push  esi                                                         ; Preserve index to connection entry.
@@ -69,7 +71,7 @@
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     command.gylf.dna.mode:  mov   ebx, e.data                                                 ; ebx - Index into egg data.
-                            mov   eax, dword [a.p.data + gylf.connection.area.id.index]       ; eax - Pointer to area in which the command is being performed.
+                            mov   eax, dword [a.p.data.gylf + gylf.connection.area.id.index]  ; eax - Pointer to area in which the command is being performed.
                             mov   dword [ebx+egg.area.id], eax                                ; Store area id in egg data.
                             
                             ; FIX FUCKING CONNECTION DATA - WE NEED A LENGTH FOR FILENAMES

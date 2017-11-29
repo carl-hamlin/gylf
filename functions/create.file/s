@@ -1,8 +1,8 @@
 ;================================================================================================================================================================================================
 ;
-;   ./s
+;   ./functions/create.file/s
 ;
-;   This file contains structures pertinent to the get.participant.data function.
+;   This file contains structures pertinent to the create.file utiliity.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
@@ -11,8 +11,11 @@
 ;   No external references.
 ;
 
-  struc gpd.packet
-    .name.l       resd  00000001h ; Length of the name of the target.
-    .name.p       resd  00000001h ; Pointer to the name of the target.
-    .destination  resd  00000001h ; Destination for data and indicator of type.
-  endstruc
+;================================================================================================================================================================================================
+;
+;   create.file Data Structure
+;
+
+    struc create.file.packet
+      .filename resd  00000001h ; Storage for pointer to filename to be created.
+    endstruc

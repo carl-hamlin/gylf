@@ -4,7 +4,15 @@
 ;
 ;   This code determines the status of an active socket and routes the data to the appropriate handler.
 ;
-;   Assumptions:    esi = Index to connection tables.
+;   Assumptions:    Stack Frame:  dword [Pointer to active socket structure]
+;                                 dword [Pointer to socket type]
+;                                 dword [Connection status index]
+;                                 dword [Empty storage for pointer to type indicator]
+;                                 dword [Empty storage for pointer to id]
+;                                 dword [Empty storage for pointer to generic buffer]
+;                                 dword [Empty storage for size of generic buffer]
+;                                 dword [Empty storage for size of retrieved data]
+;                                 dword [Empty storage for pointer to generic filename]
 ;
 ;   Returns:        None.
 ;
@@ -12,60 +20,90 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   address.active.status                               ./functions/main/participant.interaction/address.active.status/t
-;
-;   address.login.status                                ./functions/main/participant.interaction/address.login.status/t
-;
-;   address.passphrase.status                           ./functions/main/participant.interaction/address.passphrase.status/t
-;
-;   address.set.passphrase.status                       ./functions/main/participant.interaction/address.set.passphrase.status/t
-;
-;   connection.status.index                             ./functions/main/system.check/b
-;
-;   login.status                                        ./functions/main/b
-;
-;   not.login.status                                    ./functions/socket/answer.active.socket/t
-;
-;   not.passphrase.status                               ./functions/socket/answer/active.socket/t
-;
-;   passphrase.status                                   ./functions/main/b
-;
-;   print.socket.number                                 ./functions/print.socket.number/t
-;
-;   set.passphrase.status                               ./functions/main/b
-;
-;   text.data.index.local.data.active.socket.message    ./functions/main/text.init/b
-;
-;   text.data.index.local.data.carriage.return.message  ./functions/main/text.init/b
-;
-;   write.console                                       ./functions/write.console/t
+;   No external references.
 ;
 
-    answer.active.socket:   push  dword [text.data.index.local.data.active.socket.message]    ; Pointer to socket activity notifier.
-                            call  write.console                                               ; Let the admin know we're working with an active socket.
+    answer.active.socket:                             push  ebp                                                                             ; Preserve caller's ebp.
 
-                            call  print.socket.number                                         ; Let the admin know what socket is active.
+                                                      mov   ebp, esp                                                                        ; ebp - Prepared to be used as a data pointer.
+                                                      add   ebp, (dword.l + answer.active.socket.packet_size)                               ; ebp - Data pointer.
 
-                            push  dword [text.data.index.local.data.carriage.return.message]  ; Pointer to carriage return.
-                            call  write.console                                               ; Print the carriage return.
+                                                      push  ebx                                                                             ; Preserve caller's ebx.
 
-                            cmp  byte [esi+connection.status.index], login.status             ; Is the connection in 'login' status?
-                            jnz  not.login.status                                             ; No. Go check for 'passphrase' status.
+    answer.active.socket.login.status.check:          cmp   dword [ebp - answer.active.socket.packet.status], login.status                  ; Is the connection in login status?
+                                                      jnz   answer.active.socket.passphrase.status.check                                    ; No. Go check for passphrase status.
 
-                            jmp  address.login.status                                         ; Yes. Pass control to address.login.status.
+                                                      mov   ebx, address.login.status                                                       ; ebx - Pointer to handler for login status.
+                                                      jmp   answer.active.socket.egg.check                                                  ; Go check the connection type.
 
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    answer.active.socket.passphrase.status.check:     cmp   dword [ebp - answer.active.socket.packet.status], passphrase.status             ; Is the connection in passphrase status?
+                                                      jnz   answer.active.socket.set.passphrase.status.check                                ; No go check for set passphrase status.
 
-    not.login.status:       cmp  byte [esi+connection.status.index], passphrase.status        ; Is the connection in 'passphrase' status?
+                                                      mov   ebx, address.passphrase.status                                                  ; ebx - Pointer to handler for passphrase status.
+                                                      jmp   answer.active.socket.egg.check                                                  ; Go check the connection type.
 
-                            jnz  not.passphrase.status                                        ; No. Go check for 'setting passphrase' status.
+    answer.active.socket.set.passphrase.status.check: cmp   dword [ebp - answer.active.socket.packet.status], set.passphrase.status         ; Is the connection in set passphrase status?
+                                                      jnz   answer.active.socket.active.status                                              ; No. By default, it's in active status.
 
-                            jmp  address.passphrase.status                                    ; Yes. Pass control to address.passphrase.status.
+                                                      mov   ebx, address.set.passphrase.status                                              ; ebx - Pointer to handler for set passphrase status.
+                                                      jmp   answer.active.socket.egg.check                                                  ; Go check the connection type.
 
-;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    answer.active.socket.active.status:               mov   ebx, address.active.status                                                      ; ebx - Pointer to handler for active status.
 
-    not.passphrase.status:  cmp  byte [esi+connection.status.index], set.passphrase.status    ; Is the connection in 'setting passphrase' status?
+    answer.active.socket.egg.check:                   push  edx                                                                             ; Preserve caller's edx.
 
-                            jnz  address.active.status                                        ; No. Pass control to address.active.status.
+                                                      cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.egg                    ; Are we dealing with an egg?
+                                                      jnz   answer.active.socket.ghost.check                                                ; No. Go check to see if we're dealing with a ghost.
 
-                            jmp  address.set.passphrase.status                                ; Yes. Pass control to address.set.passphrase.status.
+                                                      mov   dword [ebp - answer.active.socket.packet.tpointer], (egg.filename + word.l)     ; Set the admin display type to egg.
+                                                      mov   dword [ebp - answer.active.socket.packet.ipointer], (egg.filename + dword.l)    ; Store pointer to id.
+                                                      mov   dword [ebp - answer.active.socket.packet.fpointer], egg.filename                ; Store pointer to egg filename.
+                                                      jmp   answer.active.socket.admin.display.type.set                                     ; Go notify the admin of socket activity.
+                                                  
+    answer.active.socket.ghost.check:                 cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.ghost                  ; Are we dealing with a ghost?
+                                                      jnz   answer.active.socket.gylf.check                                                 ; No. Go check to see if we're dealing with a gylf.
+
+                                                      mov   dword [ebp - answer.active.socket.packet.tpointer], (ghost.filename + word.l)   ; Set the admin display type to ghost.
+                                                      mov   dword [ebp - answer.active.socket.packet.ipointer], (ghost.filename + dword.l)  ; Store pointer to id.
+                                                      mov   dword [ebp - answer.active.socket.packet.fpointer], ghost.filename              ; Store pointer to ghost filename.
+                                                      jmp   answer.active.socket.admin.display.type.set                                     ; Go notify the admin of socket activity.
+
+    answer.active.socket.gylf.check:                  cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.gylf                   ; Are we dealing with a gylf?
+                                                      jnz   answer.active.socket.login.check                                                ; No. Go check to see if we're dealing with a login.
+
+                                                      mov   dword [ebp - answer.active.socket.packet.tpointer], (gylf.filename + word.l)    ; Set the admin display type to gylf.
+                                                      mov   dword [ebp - answer.active.socket.packet.ipointer], (gylf.filename + dword.l)   ; Store pointer to id.
+                                                      mov   dword [ebp - answer.active.socket.packet.fpointer], gylf.filename               ; Store pointer to gylf filename.
+                                                      jmp   answer.active.socket.admin.display.type.set                                     ; Go notify the admin of socket activity.
+
+    answer.active.socket.login.check:                 mov   dword [ebp - answer.active.socket.packet.tpointer], (login.filename + word.l)   ; By process of elimination, we're dealing with a
+                                                                                                                                            ; login. Set the admin display type to login.
+                                                      mov   dword [ebp - answer.active.socket.packet.ipointer], (login.filename + dword.l)  ; Store pointer to id.
+                                                      mov   dword [ebp - answer.active.socket.packet.fpointer], login.filename              ; Store pointer to login filename.
+
+    answer.active.socket.admin.display.type.set:      push  dword [text.data.index.local.data.active.socket.message]                        ; Pointer to socket activity notifier.
+                                                      call  write.console                                                                   ; Let the admin know we're working with an active
+                                                                                                                                            ; socket.
+
+                                                      push  sys.standard.output                                                             ; Point write.descriptor to standard output.
+                                                      push  dword [ebp - answer.active.socket.packet.tpointer]                              ; Point write descriptor to the socket type.
+                                                      push  01h                                                                             ; Tell write descriptor to write one byte.
+                                                      call  write.descriptor                                                                ; Tell the admin what type of socket we're working
+                                                                                                                                            ; with.
+
+                                                      push  sys.standard.output                                                             ; Point write.descriptor to standard output.
+                                                      push  dword [ebp - answer.active.socket.packet.ipointer]                              ; Point write.descriptor to the socket id.
+                                                      push  (dword.l * 2)                                                                   ; Tell write.descriptor to write one dword.
+                                                      call  write.descriptor                                                                ; Tell the admin which socket we're working with.
+
+                                                      push  dword [text.data.index.local.data.carriage.return.message]                      ; Point write.console to the carriage return.
+                                                      call  write.console                                                                   ; Write a carriage return to the console.
+
+                                                      call  ebx                                                                             ; Go handle the data.
+
+                                                      pop   edx                                                                             ; Restore caller's edx.
+                                                      pop   ebx                                                                             ; Restore caller's ebx.
+
+                                                      pop   ebp                                                                             ; Restore caller's ebp.
+
+                                                      ret   answer.active.socket.packet_size                                                ; Return to caller.

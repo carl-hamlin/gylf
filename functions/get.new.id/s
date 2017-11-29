@@ -1,20 +1,21 @@
 ;================================================================================================================================================================================================
 ;
-;   ./functions/assemble.path/t
+;   ./functions/get.new.id/s
 ;
-;   This function populates the participant data for the target participant.
-;
-;   Assumptions:  Stack Frame:  dword - Length of name of target participant.
-;                               dword - Pointer to name of target participant.
-;                               dword - Pointer to destination, and indicator of type.
-;
-;   Returns:      Pointer to ASCIIZ path to target participant.
+;   This file contains structures pertinent to the get.new.id utiliity.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
 ;   No external references.
+;
 
-    assemble.path:     ret
+;================================================================================================================================================================================================
+;
+;   get.new.id Data Structure
+;
 
+    struc get.new.id.packet
+      .id resd  00000001h ; Storage for pointer to directory to be looked up.
+    endstruc

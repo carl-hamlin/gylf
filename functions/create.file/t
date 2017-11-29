@@ -4,7 +4,7 @@
 ;
 ;   This function calls the kernel to build a file on disk and associate a descriptor with it.
 ;
-;   Assumptions:    Stack Frame:  dword (ebx) - Pointer to ASCIIZ formatted file path.
+;   Assumptions:    Stack Frame:  dword - Pointer to ASCIIZ formatted file path.
 ;
 ;   Returns:        eax - Descriptor associated with the new file.
 ;                   eax - Error indicator.
@@ -22,9 +22,25 @@
 ;   sys.system.call ./functions/b
 ;
 
-    create.file:  mov eax, sys.create.call  ; eax - Build a file on disk and associate a descriptor with it.
-                  mov ebx, [esp+dword.l]    ; ebx - Pointer to filename to create.
-                  mov ecx, sys.rw.r.r       ; ecx - Apply read/write access permissions to the built file.
-                  sub edx, edx              ; edx - No special modes.
-                  int sys.system.call       ; Build a file on disk and associate a descriptor with it.
-                  ret dword.l               ; Return to caller.
+    create.file:  push  ebp                                             ; Preserve caller's ebp.
+
+                  mov   ebp, esp                                        ; ebp - Prepared to be used as data pointer.
+                  add   ebp, (dword.l + create.file.packet_size)        ; ebp - Data pointer.
+
+                  push  ebx                                             ; Preserve caller's ebx.
+                  push  ecx                                             ; Preserve caller's ecx.
+                  push  edx                                             ; Preserve caller's edx.
+
+                  mov   eax, sys.create.call                            ; eax - Build a file on disk and associate a descriptor with it.
+                  mov   ebx, dword [ebp - create.file.packet.filename]  ; ebx - Pointer to filename to create.
+                  mov   ecx, sys.rw.r.r                                 ; ecx - Apply read/write access permissions to the built file.
+                  sub   edx, edx                                        ; edx - No special modes.
+                  int   sys.system.call                                 ; Build a file on disk and associate a descriptor with it.
+
+                  pop   edx                                             ; Restore caller's edx.
+                  pop   ecx                                             ; Restore caller's ecx.
+                  pop   ebx                                             ; Restore caller's ebx.
+
+                  pop   ebp                                             ; Restore caller's ebp.
+
+                  ret   create.file.packet_size                         ; Return to caller.

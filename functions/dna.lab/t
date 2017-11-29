@@ -6,7 +6,7 @@
 ;
 ;   Assumptions:    Populated e.data fields.
 ;
-;   Returns:        Populated character fields.
+;   Returns:        Populated g.data fields.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
@@ -82,7 +82,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.mutation.base.color:                cmp   ah, character.base.color.number                       ; Is ah higher than the total number of base colorings?
+    dna.lab.mutation.base.color:                cmp   ah, participant.base.color.number                     ; Is ah higher than the total number of base colorings?
                                                 ja    dna.lab.mutation.base.color.fix                       ; Yes. Go fix that.
 
                                                 mov   byte [g.data+gylf.base.color], ah                     ; Use ah as the mutation factor for the embryo's base coloring.
@@ -124,7 +124,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.mutation.secondary.color:           cmp   ah, character.secondary.color.number                  ; Is ah higher than the total number of secondary colorings?
+    dna.lab.mutation.secondary.color:           cmp   ah, participant.secondary.color.number                ; Is ah higher than the total number of secondary colorings?
                                                 ja    dna.lab.mutation.secondary.color.fix                  ; Yes. Go fix that.
 
                                                 mov   byte [g.data+gylf.secondary.color], ah                ; Use ah as the mutation factor for the embryo's secondary coloring.
@@ -166,7 +166,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.mutation.base.fur.quality:          cmp   ah, character.base.fur.quality.number                 ; Is ah higher than the total number of base fur qualities?
+    dna.lab.mutation.base.fur.quality:          cmp   ah, participant.base.fur.quality.number               ; Is ah higher than the total number of base fur qualities?
                                                 ja    dna.lab.mutation.base.fur.quality.fix                 ; Yes. Go fix that.
 
                                                 mov   byte [g.data+gylf.base.fur.quality], ah               ; Use ah as the mutation factor for the embryo's base fur quality.
@@ -208,7 +208,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    dna.lab.mutation.secondary.fur.quality:     cmp   ah, character.secondary.fur.quality.number            ; Is ah higher than the total number of secondary fur qualities?
+    dna.lab.mutation.secondary.fur.quality:     cmp   ah, participant.secondary.fur.quality.number          ; Is ah higher than the total number of secondary fur qualities?
                                                 ja    dna.lab.mutation.secondary.fur.quality.fix            ; Yes. Go fix that.
 
                                                 mov   [g.data+gylf.secondary.fur.quality], ah               ; Use ah as the mutation factor for the embryo's secondary fur quality.
