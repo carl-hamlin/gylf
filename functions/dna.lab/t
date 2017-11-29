@@ -46,9 +46,43 @@
 ;
 ;   dna.lab.strength                            ./functions/dna.lab/t
 ;
-;   e.data                                      ./functions/b
+;   e.data                                      ./b
 ;
-;   g.data                                      ./functions/b
+;   egg.e.parent.agility                        ./s
+;
+;   egg.e.parent.base.color                     ./s
+;
+;   egg.e.parent.endurance                      ./s
+;
+;   egg.e.parent.secondary.color                ./s
+;
+;   egg.e.parent.strength                       ./s
+;
+;   egg.i.parent.agility                        ./s
+;
+;   egg.i.parent.base.color                     ./s
+;
+;   egg.i.parent.endurance                      ./s
+;
+;   egg.i.parent.secondary.color                ./s
+;
+;   egg.i.parent.strength                       ./s
+;
+;   g.data                                      ./b
+;
+;   gylf.agility                                ./s
+;
+;   gylf.base.color                             ./s
+;
+;   gylf.base.fur.quality                       ./s
+;
+;   gylf.endurance                              ./s
+;
+;   gylf.secondary.color                        ./s
+;
+;   gylf.secondary.fur.quality                  ./s
+;
+;   gylf.strength                               ./s
 ;
 ;   open.descriptor                             ./functions/open.descriptor/t
 ;
