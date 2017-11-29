@@ -15,7 +15,23 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   No external references.
+;   d.data                          ./b
+;
+;   e.data                          ./b
+;
+;   egg.connection.area.id.index    ./s
+;
+;   egg.connection.external.index   ./s
+;
+;   g.data                          ./b
+;
+;   ghost.connection.area.id.index  ./s
+;
+;   ghost.connection.external.index ./s
+;
+;   gylf.connection.area.id.index   ./s
+;
+;   gylf.connection.external.index  ./s
 ;
 
     send.to.area:                   mov   ebp, esp                                              ; ebp - Prepared to be used as a data pointer.
