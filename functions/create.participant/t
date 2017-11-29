@@ -61,6 +61,32 @@
 ;
 ;   dword.l                                             ./b
 ;
+;   e.data                                              ./b
+;
+;   egg.area.id                                         ./s
+;
+;   egg.e.parent.name                                   ./s
+;
+;   egg.e.parent.name.l                                 ./s
+;
+;   egg.i.parent.name                                   ./s
+;
+;   egg.i.parent.name.l                                 ./s
+;
+;   g.data                                              ./b
+;
+;   gylf.e.parent.name                                  ./s
+;
+;   gylf.e.parent.name.l                                ./s
+;
+;   gylf.i.parent.name                                  ./s
+;
+;   gylf.i.parent.name.l                                ./s
+;
+;   gylf.name                                           ./s
+;
+;   gylf.pouch                                          ./s
+;
 ;   id.size                                             ./functions/b
 ;
 ;   open.descriptor                                     ./functions/open.descriptor/t
