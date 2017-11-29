@@ -1,0 +1,24 @@
+;================================================================================================================================================================================================
+;
+;   ./commands/shutdown/s
+;
+;   This file contains structures pertinent to the shutdown command.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+;================================================================================================================================================================================================
+;
+;   shutdown Data Structure
+;
+
+    struc shutdown.packet
+      .egg    resd  00000001h ; Storage for pointer to egg filename.
+      .gylf   resd  00000001h ; Storage for pointer to gylf filename.
+      .ghost  resd  00000001h ; Storage for pointer to ghost filename.
+      .id     resd  00000001h ; Storage for pointer to directory to be looked up.
+    endstruc
