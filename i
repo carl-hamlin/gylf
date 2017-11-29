@@ -8,5 +8,6 @@
 
     section   .text
 
+    %include  "./s"
     %include  "./commands/i"
     %include  "./functions/i"

@@ -1,0 +1,23 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/notify.in.absentia/s
+;
+;   This file contains structures pertinent to the notify.in.absentia utiliity.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+;================================================================================================================================================================================================
+;
+;   notify.in.absentia Data Structure
+;
+
+    struc nia.packet
+      .id           resd  00000001h ; Storage for pointer to id to be notified.
+      .notification resd  00000001h ; Storage for pointer to notification.
+      .length       resd  00000001h ; Storage for length of notification.
+    endstruc

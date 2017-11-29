@@ -1,4 +1,4 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/socket/create.socket/t
 ;
@@ -6,38 +6,44 @@
 ;
 ;   Assumptions:    None.
 ;
-;   Returns:        eax = Error indicator.
+;   Returns:        eax                                           - Descriptor associated with the newly created socket.
+;                   dword [socket.data.general.socket.descriptor] - Descriptor associated with the newly created socket.
+;                   eax                                           - Error as a signed value.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   socket.data.address             ./functions/socket/b
+;   dword.l                               ./b
 ;
-;   socket.data.flags               ./functions/socket/b
+;   socket.data.general.socket.descriptor ./functions/socket/create.socket/b
 ;
-;   socket.data.protocol.family     ./functions/socket/b
+;   sys.socket.address                    ./functions/socket/b
 ;
-;   sys.socket.address              ./functions/socket/b
+;   sys.socket.call                       ./functions/socket/b
 ;
-;   sys.socket.call                 ./functions/socket/b
+;   sys.socket.create                     ./functions/socket/create.socket/b
 ;
-;   sys.socket.create               ./functions/socket/create.socket/b
+;   sys.socket.protocol.family.inet       ./functions/socket/b
 ;
-;   sys.socket.protocol.family.inet ./functions/socket/b
+;   sys.socket.type.stream                ./functions/socket/b
 ;
-;   sys.socket.type.stream          ./functions/socket/b
+;   sys.system.call                       ./functions/b
 ;
-;   sys.system.call                 ./functions/b
-;               
 
-    create.socket: mov dword [socket.data.protocol.family], sys.socket.protocol.family.inet ; Set protocol family.
-                   mov dword [socket.data.flags], sys.socket.type.stream                    ; Set flags.
-                   mov dword [socket.data.address], sys.socket.address                      ; Set address.
+    create.socket:  pop   edx                                                 ; Preserve return address in edx.
 
-                   mov eax, sys.socket.call                                                 ; eax = Socket call indicator.
-                   mov ebx, sys.socket.create                                               ; ebx = Create a socket.
-                   mov ecx, socket.data.protocol.family                                     ; ecx = Pointer to arguments package.
-                   int sys.system.call                                                      ; Create a socket.
+                    push  sys.socket.address                                  ; Set address.
+                    push  sys.socket.type.stream                              ; Set flags.
+                    push  sys.socket.protocol.family.inet                     ; Set protocol family.
 
-                   ret                                                                      ; Return to caller.
+                    mov   eax, sys.socket.call                                ; eax - Socket call indicator.
+                    mov   ebx, sys.socket.create                              ; ebx - Create a socket.
+                    mov   ecx, esp                                            ; ecx - Pointer to arguments package.
+                    int   sys.system.call                                     ; Create a socket.
+
+                    mov   dword [socket.data.general.socket.descriptor], eax  ; Store socket descriptor.
+
+                    push  edx                                                 ; Restore return address.
+
+                    ret   (dword.l * 3)                                       ; Return to caller.

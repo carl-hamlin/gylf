@@ -2,4 +2,5 @@
 
     section   .text
 
+    %include  "./functions/clear.screen/s"
     %include  "./functions/clear.screen/t"

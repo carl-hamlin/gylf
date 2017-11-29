@@ -4,49 +4,56 @@
 ;
 ;   This function sends data out on a connected socket.
 ;
-;   Assumptions:    No register assumptions, however the arguments packaged referred to herein by the ecx register must be properly packed before calling. The package is structured as follows:
+;   Assumptions:    Stack Frame:  dword - Descriptor corresponding to target connection.
+;                                 dword - Index to external data.
+;                                 dword - Pointer to buffered data.
+;                                 dword - Length of buffered data.
 ;
-;                   dword    Descriptor associated with target socket.
-;                   dword    Pointer to data to be sent.
-;                   dword    Length of data to be sent.
-;                   dword    Communications semantics.
-;
-;   Returns:        None.
+;   Returns:        eax - Error indicator.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   memory.switch                       ./functions/allocate.memory/t
+;   dword.l                     ./b
 ;
-;   socket.data.send.socket.descriptor  ./functions/socket/recv.from.socket/d
+;   get.text.data               ./functions/get.text.data/t
 ;
-;   sys.socket.call                     ./functions/socket/b
+;   sys.socket.call             ./functions/socket/b
 ;
-;   sys.socket.send                     ./functions/socket/socket.send/b
+;   sys.socket.send             ./functions/socket/socket.send/b
 ;
-;   sys.system.call                     ./functions/b
+;   sys.system.call             ./functions/b
 ;
 
-    socket.send:  pop   edx                                     ; Preserve return address.
+    socket.send:          push  ebp                                           ; Preserve caller's ebp.
 
-                  push  dword [esi+connection.descriptor.index] ; Indicate active descriptor for sending.
+                          mov   ebp, esp                                      ; ebp - Prepared to be used as data pointer.
+                          add   ebp, (dword.l + socket.send.packet_size)      ; ebp - Data pointer.
 
-                  push  12                                      ; Tell memory.switch that we want 12 more bytes.
-                  call  memory.switch                           ; Allocate additional memory.
-                  
-                  pop   dword [ebx]                             ; Point send function to active socket descriptor.
-                  pop   dword [ebx+4]                           ; Point send function to message to be sent.
-                  pop   dword [ebx+8]                           ; Tell send function how long the message is.
+                          push  ebx                                           ; Preserve caller's ebx.
+                          push  ecx                                           ; Preserve caller's ecx.
+                          push  edx                                           ; Preserve caller's edx.
 
-                  mov   eax, sys.socket.call                    ; eax - Socket call indicator.
-                  mov   ecx, ebx                                ; ecx - Pointer to arguments package for send function.
-                  mov   ebx, sys.socket.send                    ; ebx - Send data out on a socket.
-                  int   sys.system.call                         ; Send data out on a socket.
+                          cmp   dword [ebp - socket.send.packet.blength], 0   ; Are we dealing with buffered data?
+                          jnz   socket.send.buffered                          ; Yes. Go take care of the buffered data.
 
-                  push  0                                       ; Tell memory.switch to free up memory.
-                  call  memory.switch                           ; Free up extra memory requested earlier.
+                          push  dword [ebp - socket.send.packet.edata]        ; Point get.text.data to external data.
+                          call  get.text.data                                 ; Get external text data.
 
-                  push  edx                                     ; Restore return address.
+                          mov   dword [ebp - socket.send.packet.bdata], ecx   ; Store pointer to retrieved data.
+                          mov   dword [ebp - socket.send.packet.blength], edx ; Store length of retrieved data.
+                          mov   dword [ebp - socket.send.packet.edata], 0     ; Smoke index to external data.
 
-                  ret                                           ; Return to caller.
+    socket.send.buffered: push  dword [ebp - socket.send.packet.descriptor]   ; Point write.descriptor to target connection.
+                          push  dword [ebp - socket.send.packet.bdata]        ; Point write.descriptor to data to be written.
+                          push  dword [ebp - socket.send.packet.blength]      ; Tell write.descriptor how long the data is.
+                          call  write.descriptor                              ; Put the data out on the socket.
+
+    socket.send.done:     pop   edx                                           ; Restore caller's edx.
+                          pop   ecx                                           ; Restore caller's ecx.
+                          pop   ebx                                           ; Restore caller's ebx.
+
+                          pop   ebp                                           ; Restore caller's ebp.
+
+                          ret   socket.send.packet_size                       ; Return to caller.
