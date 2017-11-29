@@ -46,6 +46,10 @@
 ;
 ;   dword.l                                                   ./b
 ;
+;   gylf.connection.area.id.index                             ./s
+;
+;   gylf.connection.descriptor.index                          ./s
+;
 ;   open.descriptor                                           ./functions/open.descriptor/t
 ;
 ;   read.descriptor                                           ./functions/read.descriptor/t
