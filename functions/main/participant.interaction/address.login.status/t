@@ -35,17 +35,33 @@
 ;
 ;   convert.binary.id.to.ascii.id                           ./functions/convert.binary.id.to.ascii.id/t
 ;
-;   d.data                                                  ./functions/b
+;   d.data                                                  ./b
 ;
-;   e.data                                                  ./functions/b
+;   dword.l                                                 ./b
+;
+;   e.data                                                  ./b
+;
+;   egg.connection.descriptor.index                         ./s
+;
+;   egg.connection.status.index                             ./s
+;
+;   egg.passphrase                                          ./s
 ;
 ;   egg.filename                                            ./functions/d
 ;
-;   g.data                                                  ./functions/b
+;   g.data                                                  ./b
 ;
 ;   get.participant.data.by.name                            ./functions/get.participant.data.by.name/t
 ;
 ;   ghost.filename                                          ./functions/d
+;
+;   ghost.connection.descriptor.index                       ./s
+;
+;   ghost.connection.status.index                           ./s
+;
+;   gylf.connection.descriptor.index                        ./s
+;
+;   gylf.connection.status.index                            ./s
 ;
 ;   gylf.filename                                           ./functions/d
 ;
