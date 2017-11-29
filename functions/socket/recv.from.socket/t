@@ -19,8 +19,6 @@
 ;
 ;   buffer.strip                ./functions/buffer.strip/t
 ;
-;   dword.l                     ./b
-;
 ;   sys.socket.call             ./functions/socket/b
 ;
 ;   sys.socket.recv             ./functions/socket/recv.from.socket/b
