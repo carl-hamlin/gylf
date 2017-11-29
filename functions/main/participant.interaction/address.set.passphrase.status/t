@@ -12,25 +12,29 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   active.status     ./functions/main/b
+;   active.status               ./functions/main/b
 ;
-;   buffer.1          ./functions/b
+;   buffer.1                    ./functions/b
 ;
-;   close.descriptor  ./functions/close.descriptor/t
+;   close.descriptor            ./functions/close.descriptor/t
 ;
-;   e.data            ./b
+;   e.data                      ./b
 ;
-;   egg.filename      ./functions/d
+;   egg.connection.status.index ./s
 ;
-;   open.descriptor   ./functions/open.descriptor/t
+;   egg.filename                ./functions/d
 ;
-;   read.descriptor   ./functions/read.descriptor/t
+;   egg.passphrase              ./s
 ;
-;   recv.from.socket  ./functions/socket/recv.from.socket/t
+;   open.descriptor             ./functions/open.descriptor/t
 ;
-;   write.descriptor  ./functions/write.descriptor/t
+;   read.descriptor             ./functions/read.descriptor/t
 ;
-;   write.welcome     ./functions/write.welcome/t
+;   recv.from.socket            ./functions/socket/recv.from.socket/t
+;
+;   write.descriptor            ./functions/write.descriptor/t
+;
+;   write.welcome               ./functions/write.welcome/t
 ;
 
   section .text
