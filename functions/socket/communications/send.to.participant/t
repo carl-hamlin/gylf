@@ -42,9 +42,11 @@
                                             cmp   dword [g.data + gylf.connection.area.id.index], eax ; Does the area id associated with this connection match the area id to be broadcast?
                                             jnz   send.to.participant.out.of.area.error               ; No - Return out of area indicator.
 
-                                            push  dword [ebp + stp.packet.length]                     ; Tell the send function how long the message is.
+                                            push  dword [ebp - stp.packet.connection]                 ; Point send function to specified connection.
                                             push  dword [ebp + stp.packet.message]                    ; Point send function to the message.
-                                            call  socket.send.buf                                     ; Send the message to the indicated descriptor.
+                                            push  dword [ebp + stp.packet.length]                     ; Tell the send function how long the message is.
+                                            push  dword 00000000h                                     ; Flags for send function.
+                                            call  socket.send                                         ; Send the message to the indicated descriptor.
 
                                             jmp   send.to.participant.done                            ; Return to caller.
 

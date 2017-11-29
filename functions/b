@@ -30,6 +30,8 @@
     %define     sys.lseek.eof                           002h  ; 002h indicates to the lseek function that we're seeking to the end of the file.
     %define     sys.no.bytes.read                       000h  ; Indicator for no bytes having been read during the read function.
 
+    %define     sys.unlink                              00Ah  ; 00Ah is the modifier for 080h that tells the kernel we want to smoke a file.
+    
     %define     id.size                               word.l  ; Size of area/item ids.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

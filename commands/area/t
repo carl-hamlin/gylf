@@ -116,18 +116,13 @@
                                         cmp   al, byte [arguments.num]                                                  ; Are there two arguments?
                                         jnz   command.area.bad                                                          ; Nope. Let's go inform the user that they're being bounced on syntax.
 
-                                        mov   ecx, available.areas                                                      ; ecx - Number of areas available. Used as loop counter.
-
-                                        pop   esi                                                                       ; Restore index to connection entry.
+                                        push  area.filename                                                             ; Tell get.new.id that we need a new area id.
+                                        call  get.new.id                                                                ; Get a new area id.
 
     command.area.filename.loop:         push  area.filename                                                             ; Point open.descriptor to filename entry for area filenames.
                                         call  open.descriptor                                                           ; Try the current filename.
 
-                                        or    eax, eax                                                                  ; If eax is signed, the file doesn't exist, which means we've found a
-                                                                                                                        ; candidate.
-                                        jns   command.area.next.file                                                    ; No candidate this time. Go check the next file.
-
-                                        push  ebx                                                                       ; Point create.file to the filename to be created.
+                                        push  eax                                                                       ; Point create.file to the filename to be created.
                                         call  create.file                                                               ; Create the candidate file.
 
                                         mov   ebx, eax                                                                  ; ebx - Descriptor associated with candidate file.
@@ -189,55 +184,3 @@
                                         call  write.prompt                                                              ; Restore the user's prompt.
 
                                         ret                                                                             ; Return to caller.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    command.area.next.file:             mov   ebx, eax                                                                  ; ebx - Descriptor associated with an unusable area file.
-                                        call  close.descriptor                                                          ; Disassociate the descriptor.
-
-                                        sub   eax, eax                                                                  ; eax - Prepared for counting places...
-                                        mov   ebx, area.filename                                                        ; ebx - Pointer to current area filename.
-                                        add   ebx, area.filename.l                                                      ; ebx - Pointer to byte immediately following area filename.
-                                        sub   ebx, word.l                                                               ; ebx - Pointer to least significant place in area filename.
-
-                                        cmp   byte [ebx], "9"                                                           ; Is the byte at [ebx] a "9"?
-                                        jz    command.area.filename.finder                                              ; Yes. Go zero it out and address the next place up.
-
-                                        jmp   command.area.prep.next                                                    ; Increment the byte at [ebx], restore ebx to the last place, and check
-                                                                                                                        ; the resulting filename.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    command.area.filename.finder:       cmp   eax, 08h                                                                  ; Have we run out of areas?
-                                        jz    command.area.filename.out.of.areas                                        ; Yes. Go take care of that.
-
-                                        mov   byte [ebx], "0"                                                           ; Zero out the byte at [ebx].
-                                        dec   ebx                                                                       ; ebx - Pointer to next place up.
-                                        inc   eax                                                                       ; eax - Count of places.
-
-                                        cmp   byte [ebx], "9"                                                           ; Is the byte at [ebx] a "9"?
-                                        jz    command.area.filename.finder                                              ; Yes. Go zero it out and address the next place up.
-
-                                        jmp   command.area.prep.next                                                    ; Increment the byte at [ebx], restore ebx to the last place, and check
-                                                                                                                        ; the resulting filename.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    command.area.filename.out.of.areas: push  dword [text.data.index.local.data.area.out.of.areas.message]              ; Pointer to message indicating we're out of area files.
-                                        call  write.console                                                             ; Tell the admin we're out of area files.
-
-                                        push  dword [text.data.index.socket.data.out.of.areas.message]                  ; Point socket.send to out of areas message.
-                                        call  socket.send                                                               ; Send the out of areas message to the socket.
-
-                                        call  write.prompt                                                              ; Restore the user's prompt.
-
-                                        ret                                                                             ; Return to caller.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    command.area.prep.next:             inc   byte [ebx]                                                                ; Increment the byte at [ebx].
-                                        add   ebx, eax                                                                  ; Restore ebx to the last place in the filename.
-                                        dec   ecx                                                                       ; ecx - Number of filenames left to try.
-                                        jcxz  command.area.filename.out.of.areas                                        ; Go tell the admin that we're out of area files.
-
-                                        jmp   command.area.filename.loop                                                ; Go check the next file.

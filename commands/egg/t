@@ -15,7 +15,7 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   a.p.data                                                ./b
+;   a.p.data.gylf                                           ./b
 ;
 ;   argument.01.location                                    ./functions/aggregate.arguments/b
 ;
@@ -87,32 +87,30 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.egg.admin:              push  g.data                                                                      ; Tell get.participant.data to get gylf data.
-                                    push  dword [argument.01.location]                                                ; Point get.participant.data to the name of the target for fertilization.
-                                    push  dword [argument.01.size]                                                    ; Tell get.participant.data how long the name is.
-                                    call  get.participant.data                                                        ; Store gylf data at g.data.
+    command.egg.admin:              push  dword [argument.01.location]                                                ; Point get.participant.data.by.name to the name of the target for 
+                                                                                                                      ; fertilization.
+                                    call  get.participant.data.by.name                                                ; Store gylf data at g.data.
 
                                     or    eax, eax                                                                    ; Did we successfully open the target participant data file?
                                     jns   command.egg.bad.name                                                        ; No. Go tell the performing user that the target name is bad.
 
-                                    push  e.data                                                                      ; Tell get.participant.data to get egg data.
-                                    push  dword [argument.01.location]                                                ; Point get.egg.data to the name of the target for fertilization.
-                                    push  dword [argument.01.size]                                                    ; Tell get.egg.data how long the name is.
-                                    call  get.participant.data                                                        ; Store egg data at e.data.
+                                    push  dword [argument.01.location]                                                ; Point get.participant.data.by.name to the name of the target for
+                                                                                                                      ; fertilization.
+                                    call  get.participant.data.by.name                                                ; Store egg data at e.data.
 
                                     or    eax, eax                                                                    ; Did we successfully open the egg data file?
                                     js    command.egg.already.fertilized                                              ; Yes. Looks like the target participant is already carrying a fertilized
                                                                                                                       ; egg, but hasn't named it yet. Abort.
 
-                                    push  dword [text.data.index.socket.data.egg.item.description]                    ; Point get.new.item.id to the standard egg item description.
-                                    push  dword [text.data.index.socket.data.egg.item.name]                           ; Point get.new.item.id to the standard egg item name.
-                                    push  e.data + egg.item.id                                                        ; Point get.new.item.id to the new egg item id.
-                                    call  get.new.item.id                                                             ; Populate the new egg's item id.
+                                    push  item.filename                                                               ; Point get.new.id to items.
+                                    call  get.new.id                                                                  ; eax - New item id.
 
-                                    push  dword [text.data.index.socket.data.egg.area.description]                    ; Point get.new.area.id to the standard egg area description.
-                                    push  dword [text.data.index.socket.data.egg.area.name]                           ; Point get.new.area.id to the standard egg area name.
-                                    push  e.data + egg.area.id                                                        ; Point get.new.area.id to the new egg area id.
-                                    call  get.new.area.id                                                             ; Populate the new egg's area id.
+                                    mov   [e.data + egg.item.id], eax                                                 ; Populate egg with new item id.
+
+                                    push  area.filename                                                               ; Point get.new.id to areas.
+                                    call  get.new.id                                                                  ; eax - New area id.
+
+                                    mov   [e.data + egg.area.id], eax                                                 ; Populate egg with new area id.
 
                                     mov   ecx, dword [argument.01.size]                                               ; ecx - Length of target participant's name.
                                     mov   byte [e.data + egg.e.parent.name.l], cl                                     ; Populate new egg's egg parent name length field.
@@ -122,21 +120,18 @@
 
                                     repnz movsb                                                                       ; Populate the new egg's egg parent field.
 
-                                    mov   cl, byte [a.p.data + gylf.name.l]                                           ; ecx - Length of performing participant's name.
+                                    mov   cl, byte [a.p.data.gylf + gylf.name.l]                                      ; ecx - Length of performing participant's name.
                                     mov   byte [e.data + egg.i.parent.name.l], cl                                     ; Populate new egg's fertilizing parent name length field.
 
-                                    mov   esi, a.p.data + gylf.name                                                   ; esi - Pointer to the name of the new egg's fertilizing parent.
+                                    mov   esi, a.p.data.gylf + gylf.name                                              ; esi - Pointer to the name of the new egg's fertilizing parent.
                                     mov   edi, e.data + egg.i.parent.name                                             ; edi - Pointer to the new egg's fertilizing parent field.
 
                                     repnz movsb                                                                       ; Populate the new egg's fertilizing parent field.
 
                                     push  egg.filename                                                                ; Point assemble.path to the egg directory.
-                                    push  egg.filename.l                                                              ; Tell assemble.path how long the egg directory string is.
-                                    push  dword [argument.01.location]                                                ; Point assemble.path to the name of the target for fertilization.
-                                    push  dword [argument.01.size]                                                    ; Tell assemble.path how long the name is.
-                                    call  assemble.path                                                               ; Assemble the path to the egg data file at buffer.1.
+                                    call  get.new.id                                                                  ; Assemble the path to the egg data file at buffer.1.
 
-                                    push  buffer.1                                                                    ; Point create.file to assembled path to egg data file.
+                                    push  egg.filename                                                                ; Point create.file to assembled path to egg data file.
                                     call  create.file                                                                 ; Create the new egg data file.
 
                                     push  eax                                                                         ; Preserve descriptor associated with new egg data file.
@@ -159,7 +154,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.egg.bad.name:           push  dword [a.p.data + gylf.connection.descriptor.index]                         ; Point send.socket to the socket descriptor associated with the performing
+    command.egg.bad.name:           push  dword [a.p.data.gylf + gylf.connection.descriptor.index]                    ; Point send.socket to the socket descriptor associated with the performing
                                                                                                                       ; user.
                                     push  dword [text.data.index.socket.data.command.egg.bad.name.message]            ; Point send.socket to the bad name message.
                                     call  socket.send                                                                 ; Tell the performing user that the indicated target is bad.

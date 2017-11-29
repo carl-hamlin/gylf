@@ -12,10 +12,26 @@
 ;   Local Data
 ;
 
-    local.data.system.check.message.l                       dd  local.data.system.check.message.end                                 ; length of message.
-    local.data.system.check.message                         db  "Performing system check...", 0Ah, 0Dh                              ; System check message.
-    local.data.system.check.message.end                     equ $-local.data.system.check.message                                   ; Pointer to end of message.
+    local.data.system.check.message.l           dd  local.data.system.check.message.end                                 ; Length of message.
+    local.data.system.check.message             db  "Performing system check...", 0Ah, 0Dh                              ; System check message.
+    local.data.system.check.message.end         equ $-local.data.system.check.message                                   ; Pointer to end of message.
 
-    local.data.system.check.done.l                          dd  local.data.system.check.done.end                                    ; Length of message.
-    local.data.system.check.done                            db  "System checks completed.", 0Ah, 0Dh                                ; System check completed message.
-    local.data.system.check.done.end                        equ $-local.data.system.check.done                                      ; Pointer to end of message.
+    local.data.system.check.eggs.message.l      dd  local.data.system.check.eggs.message.end                            ; Length of message.
+    local.data.system.check.eggs.message        db  "Performing pre-check and maintenance on eggs...", 0Ah, 0Dh         ; Egg maintenance message.
+    local.data.system.check.eggs.message.end    equ $-local.data.system.check.eggs.message                              ; Pointer to end of message.
+
+    local.data.system.check.ghosts.message.l    dd  local.data.system.check.ghosts.message.end                          ; Length of message.
+    local.data.system.check.ghosts.message      db  "Performing pre-check and maintenance on ghosts...", 0Ah, 0Dh       ; Ghost maintenance message.
+    local.data.system.check.ghosts.message.end  equ $-local.data.system.check.ghosts.message                            ; Pointer to end of message.
+
+    local.data.system.check.gylf.message.l      dd  local.data.system.check.gylf.message.end                            ; Length of message.
+    local.data.system.check.gylf.message        db  "Performing pre-check and maintenance on gylf...", 0Ah, 0Dh         ; Gylf maintenance message.
+    local.data.system.check.gylf.message.end    equ $-local.data.system.check.gylf.message                              ; Pointer to end of message.
+
+    local.data.system.check.logins.message.l    dd  local.data.system.check.logins.message.end                          ; Length of message.
+    local.data.system.check.logins.message      db  "Smoking superfluous and leftlover login credentials...", 0Ah, 0Dh  ; Login maintenance message.
+    local.data.system.check.logins.message.end  equ $-local.data.system.check.logins.message                            ; Pointer to end of message.
+
+    local.data.system.check.done.l              dd  local.data.system.check.done.end                                    ; Length of message.
+    local.data.system.check.done                db  "System checks completed.", 0Ah, 0Dh                                ; System check completed message.
+    local.data.system.check.done.end            equ $-local.data.system.check.done                                      ; Pointer to end of message.

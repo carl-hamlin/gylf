@@ -18,6 +18,8 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   a.p.data.gylf                                             ./b
+;
 ;   area.header                                               ./commands/area/b
 ;
 ;   area.header.l                                             ./commands/area/b
@@ -67,7 +69,7 @@
 
                                             ; Here's where the targetted code goes.
 
-                                            push  a.p.data + gylf.connection.area.id.index                          ; Point open.descriptor to area id associated with active connection.
+                                            push  a.p.data.gylf + gylf.connection.area.id.index                     ; Point open.descriptor to area id associated with active connection.
                                             call  open.descriptor                                                   ; Associate a descriptor with the area id.
 
                                             or    eax, eax                                                          ; Did the descriptor associate properly?
@@ -101,7 +103,7 @@
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    command.look.default:                   push  a.p.data + gylf.connection.area.id.index                          ; Point open.descriptor to the file containing the current area info.
+    command.look.default:                   push  a.p.data.gylf + gylf.connection.area.id.index                     ; Point open.descriptor to the file containing the current area info.
                                             call  open.descriptor                                                   ; Associate a descriptor with the file containing current area info.
 
                                             or    eax, eax                                                          ; Were we able to properly associate a descriptor?
@@ -144,9 +146,11 @@
                                             call  close.descriptor                                                  ; Disassociate the descriptor currently associated with the current area
                                                                                                                     ; file.
 
+                                            push  dword [a.p.data.gylf + gylf.connection.descriptor.index]          ; Point socket.send to the active descriptor.
                                             push  eax                                                               ; Tell socket.send the length of the message.
                                             push  buffer.1                                                          ; Point socket.send to the description entry.
-                                            call  socket.send.buf                                                   ; Put the message on the socket.
+                                            push  dword 00000000h                                                   ; Flags for send function.
+                                            call  socket.send                                                       ; Put the message on the socket.
 
                                             call  write.prompt                                                      ; Restore the user's prompt.
 

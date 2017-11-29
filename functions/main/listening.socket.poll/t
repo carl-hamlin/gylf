@@ -14,6 +14,8 @@
 ;
 ;   accept.socket                                               ./functions/socket/accept.socket/t
 ;
+;   a.p.data.gylf                                               ./b
+;
 ;   clear.screen                                                ./functions/clear.screen/t
 ;
 ;   close.descriptor                                            ./functions/close.descriptor/t
@@ -53,51 +55,70 @@
 ;   write.console                                               ./functions/write.console/t
 ;
 
-    listening.socket.poll:      push  socket.data.event.socket.descriptor                                 ; Point poll.descriptor to descriptor associated with listening socket.
-                                call  poll.descriptor                                                     ; Poll the socket.
+    listening.socket.poll:                push  socket.data.event.socket.descriptor                                 ; Point poll.descriptor to descriptor associated with listening socket.
+                                          call  poll.descriptor                                                     ; Poll the socket.
 
-                                cmp   eax, sys.poll.in                                                    ; Is someone knocking?
-                                jnz   listening.socket.poll.done                                          ; Nope. Go return to caller.
+                                          cmp   eax, sys.poll.in                                                    ; Is someone knocking?
+                                          jnz   listening.socket.poll.done                                          ; Nope. Go return to caller.
 
-                                call  accept.socket                                                       ; Yes. Let's let them in!
+                                          call  accept.socket                                                       ; Yes. Let's let them in!
 
-                                or    eax, eax                                                            ; Did a descriptor successfully manage to become associated with the new socket?
-                                jns   greet                                                               ; Yes! Go tell the new guy it's time to log in!
+                                          or    eax, eax                                                            ; Did a descriptor successfully manage to become associated with the new socket?
+                                          jns   listening.socket.poll.greet                                         ; Yes! Go tell the new guy it's time to log in!
 
-                                push  dword [text.data.index.local.data.accept.error.message]             ; Pointer to accept failure error message.
-                                jmp   socket.error                                                        ; Nope. Something is seriously wrong here. Go tell the admin we're screwed and bail out.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    listening.socket.poll.done: ret                                                                       ; Return to caller.
+                                          push  dword [text.data.index.local.data.accept.error.message]             ; Pointer to accept failure error message.
+                                          jmp   socket.error                                                        ; Nope. Something is seriously wrong here. Go tell the admin we're screwed and bail out.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    greet:                      mov   dword [a.p.data + gylf.connection.descriptor.index], eax            ; Position login connection descriptor for greeting.
-    
-                                mov   dword [login.handle], eax                                           ; Store login connection.
-                                mov   byte [login.status], login.status                                   ; Indicate that the connection is in login status.
+    listening.socket.poll.done:           ret                                                                       ; Return to caller.
 
-                                push  login.filename                                                      ; Point open.descriptor to login storage.
-                                call  open.descriptor                                                     ; Prepare login storage to receive a new entry.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-                                push  eax                                                                 ; Login storage descriptor stored for closing.
+    listening.socket.poll.greet:          mov   dword [l.data + login.connection.descriptor.index], eax             ; Store login connection.
 
-                                push  eax                                                                 ; Point write.descriptor to login storage.
-                                push  03h                                                                 ; Tell write.descriptor that we'll be writing 3 bytes.
-                                push  login.handle                                                        ; Point write.descriptor to the login data.
-                                call  write.descriptor                                                    ; Write the login data to login storage.
+                                          push  login.filename                                                      ; Point get.new.id to logins.
+                                          call  get.new.id                                                          ; Get new login id.
 
-                                call  close.descriptor                                                    ; Put login storage away for now.
+                                          cmp   eax, dword [top.login]                                              ; Is this the new top login?
+                                          jbe   listening.socket.poll.greet.r.login                                 ; No - we don't have to update top.login.
 
-                                mov   eax, dword [login.handle]                                           ; eax - Descriptor correcponding to current connection.
+                                          mov   dword [top.login], eax                                              ; Yes. Update top.login.
 
-                                call  clear.screen                                                        ; Clear that fellow's screen.
+                                          push  tops.filename                                                       ; Point open.descriptor to tops filename.
+                                          call  open.descriptor                                                     ; Associate a descriptor with the tops data.
 
-                                push  dword [text.data.index.socket.data.login.message]                   ; Point send function to message indicating a need for login credentials.
-                                call  socket.send                                                         ; Tell the new guy that we'll need some login credentials.
+                                          push  eax                                                                 ; Preserve descriptor for closing.
 
-                                push  dword [text.data.index.local.data.connection.notifier.message]      ; Pointer to connection notification message.
-                                call  write.console                                                       ; Tell the admin there's a new connection.
+                                          push  eax                                                                 ; Point write.descriptor to tops data.
+                                          push  top.egg                                                             ; Tell write.descriptor to write the data at top.egg.
+                                          push  (dword.l + dword.l + dword.l + dword.l)                             ; Tell write.descriptor to write all four tops.
+                                          call  write.descriptor                                                    ; Write the tops.
 
-                                ret                                                                       ; Return to caller.
+                                          call  close.descriptor                                                    ; Disassociate the descriptor from the tops data.
+
+    listening.socket.poll.greet.r.login:  push  login.filename                                                      ; Point open.descriptor to login storage.
+                                          call  create.file                                                         ; Build a file to store the login connection.
+
+                                          push  eax                                                                 ; Login storage descriptor stored for closing.
+
+                                          push  eax                                                                 ; Point write.descriptor to login storage.
+                                          push  l.data                                                              ; Point write.descriptor to the login data.
+                                          push  login_size                                                          ; Tell write.descriptor that we'll be writing an entire login entry.
+                                          call  write.descriptor                                                    ; Write the login data to login storage.
+
+                                          call  close.descriptor                                                    ; Put login storage away for now.
+
+                                          push  dword [l.data + login.connection.descriptor.index]                  ; Point clear.screen to the active socket.
+                                          call  clear.screen                                                        ; Clear that fellow's screen.
+
+                                          push  dword [l.data + login.connection.descriptor.index]                  ; Point socket.send to the active socket.
+                                          push  dword 00000000h                                                     ; No buffered data.
+                                          push  dword 00000000h                                                     ; No buffered length.
+                                          push  dword [text.data.index.socket.data.login.message]                   ; Point send function to message indicating a need for login credentials.
+                                          call  socket.send                                                         ; Tell the new guy that we'll need some login credentials.
+
+                                          push  dword [text.data.index.local.data.connection.notifier.message]      ; Pointer to connection notification message.
+                                          call  write.console                                                       ; Tell the admin there's a new connection.
+
+                                          ret                                                                       ; Return to caller.

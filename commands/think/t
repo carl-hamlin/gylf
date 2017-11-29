@@ -19,6 +19,8 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   a.p.data.gylf                                   ./b
+;
 ;   argument.02.location                            ./functions/aggregate.arguments/b
 ;
 ;   argument.02.size                                ./functions/aggregate.arguments/b
@@ -41,8 +43,6 @@
 ;
 ;   text.data.index.socket.data.command.think.help  ./functions/main/text.init/b
 ;
-;   translate.name.to.socket.number                 ./functions/translate.name.to.socket.number/t
-;
 
     command.think:              cmp   dword [arguments.num], 00000000h                                        ; Do we have arguments?
                                 jnz   command.think.arguments                                                 ; Yes. Go take care of them.
@@ -57,17 +57,18 @@
 
                                 ; Skill evaluation goes here - failure shunts to command.think.untargetted.
 
-                                push  dword [argument.02.size]                                                ; Size of provided name.
                                 push  dword [argument.02.location]                                            ; Pointer to provided name.
-                                call  translate.name.to.socket.number                                         ; eax - Error, or pointer to socket associated with the given name.
+                                call  get.participant.data.by.name                                            ; g.data - Participant data corresponding to the provided name.
 
-                                cmp   eax, 0FFFFh
-                                jz    command.think.help.msg
+                                cmp   eax, 0FFFFFFFFh                                                         ; Did we get a participant?
+                                jz    command.think.help.msg                                                  ; No. Go broadcast an error to the performer.
 
                                 ; TODO - Populate fields for send.to.participant. Still need to figure out areas.
 
-                                push  esi
-                                push  eax
+                                push  dword [g.data + gylf.connection.descriptor.index]                       ; Point send.to.participant to the target connection.
+                                push  dword [a.p.data.gylf + gylf.connection.area.id.index]                   ; Point send.to.participant.to the performer's area.
+                                push  dword [argument.03.location]                                            ; Point send.to.participant to the message to be broadcast.
+                                push  dword [argument.03.size]                                                ; Tell send.to.participant how long the message is.
                                 call  send.to.participant                                                     ; Send message to targetted participant.
 
                                 ret                                                                           ; Return to caller.
