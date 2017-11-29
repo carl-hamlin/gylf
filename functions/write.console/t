@@ -1,16 +1,18 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/write.console/t
 ;
 ;   This function writes data to an active descriptor.
 ;
-;   Assumptions:    Stack Frame:  dword - Index to data packet.
+;   Assumptions:    Stack Frame:  dword - [Pointer to message to be written]
 ;
-;   Returns:        eax = Error indicator.
+;   Returns:        eax - Error indicator.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
+;
+;   dword.l             ./b
 ;
 ;   get.text.data       ./functions/get.text.data/t
 ;
@@ -23,15 +25,27 @@
 ;   sys.write.call      ./functions/b
 ;
 
-    write.console:  push  dword [esp+4]             ; Preserve descriptor to be written.
+    write.console:  push  ebp                                         ; Preserve caller's ebp.
 
-                    call  get.text.data             ; Get indexed data.
+                    mov   ebp, esp                                    ; ebp - Prepared to be used as data pointer.
+                    add   ebp, (dword.l + write.console.packet_size)  ; ebp - Data pointer.
 
-                    mov   eax, sys.write.call       ; eax - Write data to an active descriptor.
-                    mov   ebx, sys.standard.output  ; ebx - Write to console.
-                    int   sys.system.call           ; Write data to an active descriptor.
+                    push  eax                                         ; Preserve caller's eax.
+                    push  ebx                                         ; Preserve caller's ebx.
 
-                    push  0                         ; Tell memory.check to free memory.
-                    call  memory.switch             ; Free memory.
+                    push  dword [ebp - write.console.packet.message]  ; Point get.text.data to message to be retrieved.
+                    call  get.text.data                               ; Get indexed data.
 
-                    ret   4                         ; Return to caller.
+                    mov   eax, sys.write.call                         ; eax - Write data to an active descriptor.
+                    mov   ebx, sys.standard.output                    ; ebx - Write to console.
+                    int   sys.system.call                             ; Write data to an active descriptor.
+
+                    push  0                                           ; Tell memory.check to free memory.
+                    call  memory.switch                               ; Free memory.
+
+                    pop   ebx                                         ; Restore caller's ebx.
+                    pop   eax                                         ; restore caller's eax.
+
+                    pop   ebp                                         ; Restore caller's ebp.
+
+                    ret   write.console.packet_size                   ; Return to caller.
