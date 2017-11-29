@@ -22,7 +22,7 @@
 ;
 ;   dword.l                       ./b
 ;
-;   g.data                        ./functions/d
+;   g.data                        ./b
 ;
 ;   gylf.filename                 ./functions/d  
 ;
