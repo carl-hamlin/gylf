@@ -75,8 +75,6 @@
 ;
 ;   text.data.index.socket.data.out.of.areas.message    ./functions/main/text,init/b
 ;
-;   word.l                                              ./b
-;
 ;   write.bad.command.error                             ./functions/write.bad.command.error/t
 ;
 ;   write.console                                       ./functions/write.console/t
