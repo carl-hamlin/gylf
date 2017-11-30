@@ -8,8 +8,6 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   area.filename                       ./functions/d
-;
 ;   command.ai.w                        ./commands/ai/d
 ;
 ;   command.area.w                      ./commands/area/d
@@ -38,36 +36,32 @@
 ;
 ;   dword.l                             ./b
 ;
-;   item.filename                       ./functions/d
-;
-;   local.data.carriage.return          ./functions/d
-;
 ;   pouch.declaration                   ./functions/d
 ;
 ;   pouch.description                   ./functions/d
 ;
-;   socket.data.session.open.error      ./functions/d
-;
-;   socket.data.out.of.area.ids.message ./functions/d
-;
 
-    current.directory.marker              db  './'
-    current.directory.marker.l            equ $-current.directory.marker
+    current.directory.marker              db  './'                                                                        ; Current directory indicator.
+    current.directory.marker.l            equ $-current.directory.marker                                                  ; Length of current directory indicator.
 
-    area.filename                         db  './external.data/areas/00000000', 00h
-    area.filename.l                       equ $-area.filename
+    message.marker                        db  '.m'                                                                        ; Message indicator.
+    message.marker.l                      equ $-message.marker                                                            ; Length of message indicator.
 
-    item.filename                         db  './external.data/items/00000000', 00h
-    item.filename.l                       equ $-item.filename
+    tops.filename                         db  './d/t', 00h                                                                ; Top file storage.
 
-    external.data.cursor.home             db  "./external.data/cursor.control/cursor.home", 00h
-    external.data.clear.screen            db  "./external.data/cursor.control/clear.screen", 00h	
+    area.filename                         db  './d/a/00000000', 00h                                                       ; Area filename storage.
+    item.filename                         db  './d/i/00000000', 00h                                                       ; Item filename storage.
 
-    local.data.carriage.return            db  0Ah, 0Dh                                                                    ; Carriage return.
-    local.data.carriage.return.l          equ $-local.data.carriage.return                                                ; Length of message.
+    external.data.cursor.home             db  "./d/c/h", 00h                                                              ; External data cursor home filename storage.
+    external.data.clear.screen            db  "./d/c/s", 00h	                                                            ; External data clear screen filename storage.
 
-    pouch.declaration                     db  27h, 's pouch'
-    pouch.declaration.l                   equ $-pouch.declaration
+    egg.filename                          db  './e/00000000', 00h                                                         ; Egg filename storage.
+    gylf.filename                         db  './p/00000000', 00h                                                         ; Gylf filename storage.
+    ghost.filename                        db  './g/00000000', 00h                                                         ; Ghost filename storage.
+    login.filename                        db  './l/00000000', 00h                                                         ; Login filename storage.
+
+    pouch.declaration                     db  27h, 's pouch'                                                              ; Pouch declaration storage.
+    pouch.declaration.l                   equ $-pouch.declaration                                                         ; Pouch declaration length.
 
     pouch.description                     db  'This is the interior of a marsupial pouch. It is warm and dry.', 0Ah, 0Dh  ; Descriptive text for the interior of a pouch.
     pouch.description.l                   equ $-pouch.description                                                         ; Length of description.
@@ -86,7 +80,7 @@
                                           dd  command.shutdown.w                                                          ; Pointer to table entry for 'shutdown'.
                                           dd  command.think.w                                                             ; Pointer to table entry for 'think'.
 
-    number.of.commands                    equ (($ - command.table) / dword.l)
+    number.of.commands                    equ (($ - command.table) / dword.l)                                             ; Number of commands.
 
 ;================================================================================================================================================================================================
 ;

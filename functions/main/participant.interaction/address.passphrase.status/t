@@ -1,4 +1,4 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/main/participant.interaction/address.passphrase.status/t
 ;
@@ -6,7 +6,7 @@
 ;   compares the data to the stored passphrase for the user. If they match, then the user's status is set to 'active' and control is passed back to the caller. If they do not match, then the
 ;   user is informed of the situation and disconnected.
 ;
-;   Assumptions:    esi = Pointer to socket table.
+;   Assumptions:    ebp - Pointer to populated answer.active.socket.packet.
 ;
 ;   Returns:        None.
 ;
@@ -14,95 +14,101 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   active.status                                       ./functions/main/b
+;   a.p.type.egg                  ./b
 ;
-;   bad.passphrase                                      ./functions/main/participant.interaction/address.passphrase.status/t
+;   a.p.type.gylf                 ./b
 ;
-;   buffer.1                                            ./functions/b
+;   e.data                        ./b
 ;
-;   buffer.2                                            ./functions/b
+;   egg.connection.status.index   ./s
 ;
-;   byte.l                                              ./b
+;   egg.passphrase                ./s
 ;
-;   clean.socket                                        ./functions/socket/clean.socket/t
+;   d.data                        ./b
 ;
-;   close.descriptor                                    ./functions/close.descriptor/t
+;   g.data                        ./b
 ;
-;   connection.filename.index                           ./functions/main/system.check/b
+;   ghost.connection.status.index ./s
 ;
-;   connection.status.index                             ./functions/main/system.check/b
+;   ghost.passphrase              ./s
 ;
-;   good.passphrase                                     ./functions/main/participant.interaction/address.passphrase.status/t
+;   gylf.connection.status.index  ./s
 ;
-;   open.descriptor                                     ./functions/open.descriptor/t
-;
-;   read.descriptor                                     ./functions/read.descriptor/t
-;
-;   recv.from.socket                                    ./functions/socket/recv.from.socket/t
-;
-;   socket.send                                         ./functions/socket/socket.send/t
-;
-;   text.data.index.socket.data.bad.passphrase.message  ./functions/main/text.init/b
-;
-;   write.welcome                                       ./functions/write.welcome/t
+;   gylf.passphrase               ./s
 ;
 
-	  address.passphrase.status:  call  recv.from.socket                                            ; Grab the data from the socket.
+    address.passphrase.status:                        pusha                                                               ; Preserve caller's registers.
 
-                      					mov	  ebx, esi					                                          ; ebx - Pointer to connection tables.
-					                      add	  ebx, connection.filename.index                              ; ebx - Pointer to file path associated with user credentials.
-					                      push  ebx                                                         ; Point open.descriptor to user credential path.
-                      					call	open.descriptor									                            ; Associate a descriptor with the user's credential file.
+                                                      call  recv.from.socket                                              ; Grab the data from the socket.
 
-                      					push  byte.l									                                    ; Tell read.descriptor the number of bytes to read.
-                      					push  buffer.2									                                  ; Point read.descriptor to buffer into which to read data from the user's credential file.
-                      					push  eax									                                        ; Point read.descriptor to descriptor associated with user credential file.
-                      					call	read.descriptor									                            ; Read the number of bytes to query.
+                                                      mov   ecx, eax                                                      ; ecx - Number of bytes read.
 
-                      					sub   edx, edx                                                    ; edx - Prepped for length of passphrase
-                      					mov   dl, byte [buffer.2]                                         ; edx - Length of passphrase.
-                      					push  edx                                                         ; Tell read.descriptor the length of the passphrase.
-                      					push  buffer.2									                                  ; Point read.descriptor to read buffer.
-                      					push  ebx                                                         ; Point read.descriptor to descriptor associated with the credential file.
-                      					call	read.descriptor									                            ; Read the passphrase.
+                                                      mov   ebx, dword [ebp - answer.active.socket.packet.active]         ; ebx - Pointer to pointer to active socket descriptor.
 
-                      					push	eax										                                      ; Preserve number of bytes read.
+                                                      mov   esi, buffer.1                                                 ; Pointer to received data.
 
-                      					call	close.descriptor								                            ; Disassociate the descriptor.
+                                                      cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.egg  ; Are we dealing with an egg?
+                                                      jz    address.passphrase.status.eggs                                ; Yes. Go deal with eggs.
 
-                      					pop	  eax										                                      ; Restore number of bytes read.
+                                                      cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.gylf ; Are we dealing with a gylf?
+                                                      jz    address.passphrase.status.gylf                                ; Yes. Go deal with gylf.
+                              
+    address.passphrase.status.ghosts:                 mov   edi, (d.data + ghost.passphrase)                              ; edi - Pointer to ghost passphrase.
+                                                      jmp   address.passphrase.status.edi.positioned                      ; Continue with the comparison.
 
-                      					mov	  ebx, buffer.2									                              ; Pointer to read data.
+    address.passphrase.status.eggs:                   mov   edi, (e.data + egg.passphrase)                                ; edi - Pointer to egg passphrase.
+                                                      jmp   address.passphrase.status.edi.positioned                      ; Continue with the comparison.
 
-                      					push	esi										                                      ; Preserve index to connection tables.
+    address.passphrase.status.gylf:                   mov   edi, (g.data + gylf.passphrase)                               ; edi - Pointer to gylf passphrase.
 
-                      					mov	  ecx, eax									                                  ; ecx - Number of bytes read.
-                      					mov	  esi, buffer.1									                              ; esi - Pointer to data received from socket.
-                      					mov	  edi, buffer.2									                              ; edi - Pointer to data read from file.
+    address.passphrase.status.edi.positioned:         repz  cmpsb                                                         ; Is the passphrase good?
+                                                      jcxz  address.passphrase.status.good.passphrase                     ; Yes. Go set the connection status and let the user in.
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                      push  dword [ebx]                                                   ; Point socket.send to active descriptor.
+                                                      push  00000000h                                                     ; No buffered data.
+                                                      push  00000000h                                                     ; No buffered length.
+                                                      push  dword [text.data.index.socket.data.bad.passphrase.message]    ; Point send function to message indicating that the passphrase was bad.
+					                                            call	socket.send									                                  ; Tell the user that he's SOL.
 
-	passphrase.cmp.loop:		      repz	cmpsb										                                    ; See if they match.
-					                      jcxz	good.passphrase									                            ; If ecx iz zero, we got all the way through. Go send a welcome.
+              					                              call	clean.socket									                                ; Smoke that connection!
 
-					                      jmp	  bad.passphrase									                            ; Otherwise, go tell the user he's SOL and smoke his connection.
+    address.passphrase.status.done:                   popa                                                                ; Restore caller's registers.
+                                                      ret                                                                 ; Return to caller.
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    address.passphrase.status.good.passphrase:        push  dword [ebp - answer.active.socket.packet.fpointer]            ; Point open.descriptor to socket credential filename.
+                                                      call  open.descriptor                                               ; Associate a descriptor with the credential.
 
-	good.passphrase:		          pop	  esi										                                      ; Restore index to connection tables.
+                                                      push  eax                                                           ; Preserve descriptor for close.descriptor.
+                                                      push  eax                                                           ; Preserve descriptor for conditional credential update.
 
-					                      mov	  byte [esi+connection.status.index], active.status           ; Set connection status to 'active'.
-                      					call	write.welcome									                              ; Print the welcome screen.
+                                                      cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.egg  ; Are we dealing with an egg?
+                                                      jz    address.passphrase.status.good.passphrase.eggs                ; Yes. Go deal with eggs.
 
-					                      ret											                                          ; Return to caller.
+                                                      cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.gylf ; Are we dealing with a gylf?
+                                                      jz    address.passphrase.status.good.passphrase.gylf                ; Yes. Go deal with gylf.
+                              
+    address.passphrase.status.good.passphrase.ghosts: mov   byte [d.data + ghost.connection.status.index], active.status  ; Set the status of the connection to 'active'.
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                      push  d.data                                                        ; Point write.descriptor to d.data.
+                                                      push  ghost_size                                                    ; Tell write.descriptor to write an entire ghost credential.
 
-	bad.passphrase:			          pop	  esi										                                      ; Restore index to connection tables.
+                                                      jmp   address.passphrase.status.update.credential                   ; Go update the credential.
 
-                                push  dword [text.data.index.socket.data.bad.passphrase.message]  ; Point send function to message indicating that the passphrase was bad.
-					                      call	socket.send									                                ; Tell the user that he's SOL.
+    address.passphrase.status.good.passphrase.eggs:   mov   byte [e.data + egg.connection.status.index], active.status    ; Set the status of the connection to 'active'.
 
-					                      call	clean.socket									                              ; Smoke that connection!
+                                                      push  e.data                                                        ; Point write.descriptor to e.data.
+                                                      push  egg_size                                                      ; Tell write.descriptor to write an entire egg credential.
 
-					                      ret											                                          ; Return to caller.
+                                                      jmp   address.passphrase.status.update.credential                   ; Go update the credential.
+
+    address.passphrase.status.good.passphrase.gylf:   mov   byte [g.data + gylf.connection.status.index], active.status   ; Set the status of the connection to 'active'.
+
+                                                      push  g.data                                                        ; Point write.descriptor to g.data.
+                                                      push  gylf_size                                                     ; Tell write.descriptor to write an entire gylf credential.
+
+    address.passphrase.status.update.credential:      call  write.descriptor                                              ; Update the credential.
+                                                      call  close.descriptor                                              ; Disassociate the descriptor.
+
+                                            					call	write.welcome									                                ; Print the welcome screen.
+
+                                                      jmp   address.passphrase.status.done                                ; Go return to caller.

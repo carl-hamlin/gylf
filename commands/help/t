@@ -33,7 +33,7 @@
 ;
 ;   number.of.commands                  ./functions/d
 ;
-;   socket.send.buf                     ./functions/socket/socket.send/t
+;   socket.send                         ./functions/socket/socket.send/t
 ;
 ;   write.bad.command.error             ./functions/write.bad.command.error/t
 ;
@@ -42,8 +42,7 @@
 
     command.help:                     push  eax                                             ; Preserve length of received data.
                   
-                                      sub   al, al                                          ; al - Zero arguments comparator.
-                                      cmp   [arguments.num], al                             ; Do we have arguments?
+                                      cmp   byte [arguments.num], 00h                       ; Do we have arguments?
                                       jz    command.help.no.arguments                       ; No. Run without the argument parser.
                   
                                       pop   eax                                             ; Restore length of received data.

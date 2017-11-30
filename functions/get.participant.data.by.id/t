@@ -1,0 +1,55 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/get.participant.data.by.id/t
+;
+;   This function returns participant data in g.data corresponding to a provided id, or an error in the case of an id that does not exist.
+;
+;   Assumptions:    Stack Frame:  dword [id to lookup]
+;
+;   Returns:        [g.data] - Data for the requested participant.
+;
+;                   - OR -
+;
+;                   eax - Error.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   close.descriptor              ./functions/close.descriptor/t
+;
+;   convert.binary.id.to.ascii.id ./functions/convert.binary.id.to.ascii.id/t
+;
+;   dword.l                       ./b
+;
+;   g.data                        ./b
+;
+;   gylf.filename                 ./functions/d  
+;
+;   open.descriptor               ./functions/open.descriptor/t
+;
+;   read.descriptor               ./functions/read.descriptor/t
+;
+
+    get.participant.data.by.id:       pop   ebp                               ; ebp - Return address.
+
+                                      push  gylf.filename + dword.l           ; Point convert.binary.id.to.ascii.id to buffer.1.
+                                      call  convert.binary.id.to.ascii.id     ; Convert the id to ASCII.
+
+                                      push  gylf.filename                     ; Point open.descriptor to the newly created filename containing the converted id.
+                                      call  open.descriptor                   ; Attempt to open the file for reading.
+
+                                      or    eax, eax                          ; Did we successfully open the file for reading?
+                                      js    get.participant.data.by.id.error  ; NO! Go restore the return address and return to sender with the error code in eax.
+
+                                      push  eax                               ; Store file descriptor for closing after read.
+
+                                      push  gylf_size                         ; Tell read.descriptor to read the whole file.
+                                      push  g.data                            ; Point read.descriptor to g.data.
+                                      push  eax                               ; Point read.descriptor to the target data file.
+                                      call  read.descriptor                   ; Read that data into g.data.
+
+                                      call  close.descriptor                  ; Close the file.
+
+    get.participant.data.by.id.error: push  ebp                               ; Restore the return address.
+                                      ret                                     ; Return to caller.

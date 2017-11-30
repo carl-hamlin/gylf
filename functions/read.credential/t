@@ -1,0 +1,49 @@
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   ./functions/read.credential/t
+;
+;   This function reads data from a credential into the provided buffer.
+;
+;   Assumptions:    Stack Frame:  dword - ID to be read.
+;                                 dword - Pointer to credential filename to be read.
+;                                 dword - Pointer to buffer into which to read the data.
+;                                 dword - Number of bytes to be read.
+;
+;   Returns:        eax - Error.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   dword.l ./b
+;
+
+    read.credential:      push  ebp                                                 ; Preserve caller's ebp.
+
+                          mov   ebp, esp                                            ; ebp - Prepared to be used as data pointer.
+                          add   ebp, (dword.l + read.credential.packet_size)        ; ebp - Data pointer.
+
+                          mov   eax, dword [ebp - read.credential.packet.fpointer]  ; eax - Pointer to credential filename.
+                          add   eax, dword.l                                        ; eax - Pointer to ASCII ID to be converted.
+
+                          push  eax                                                 ; Point convert.binary.id.to.ascii.id to the provided filename.
+                          push  dword [ebp - read.credential.packet.id]             ; Point convert.binary.id.to.ascii.id to id to be converted.
+                          call  convert.binary.id.to.ascii.id                       ; Convert the id.
+
+                          push  dword [ebp - read.credential.packet.fpointer]       ; Point open.descriptor to the provided credential.
+                          call  open.descriptor                                     ; Attempt to associate a descriptor with the provided credential.
+
+                          or    eax, eax                                            ; Were we able to associate the descriptor?
+                          js    read.credential.done                                ; No. Return with error.
+
+                          push  eax                                                 ; Preserve descriptor for close.descriptor.
+
+                          push  eax                                                 ; Point read.descriptor to the descriptor we associated with the credential.
+                          push  dword [ebp - read.credential.packet.bpointer]       ; Tell read.descriptor to read the credential into the provided buffer.
+                          push  dword [ebp - read.credential.packet.size]           ; Tell read.descriptor to read the specified number of bytes.
+                          call  read.descriptor                                     ; Read the credential.
+
+                          call  close.descriptor                                    ; Close the credential file.
+
+    read.credential.done: pop   ebp                                                 ; Restore caller's ebp.
+                          ret   read.credential.packet_size                         ; Return to caller.
