@@ -4,8 +4,8 @@
 ;
 ;   This function broadcasts a message to the entire world.
 ;
-;   Assumptions:      eax - Length of received data.
-;                     esi - Pointer to descriptor associated with target socket.
+;   Assumptions:      ebp - Populated answer.active.socket.packet
+;                     Aggregated arguments.
 ;
 ;   Returns:          None.
 ;
@@ -13,17 +13,16 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   argument.01.location    ./functions/aggregate.arguments/b
+;   ./commands/broadcast/t                            command.broadcast.admin
 ;
-;   argument.01.size        ./functions/aggregate.arguments/b
+;   ./functions/aggregate.arguments/b                 argument.01.location
+;                                                     argument.01.size
 ;
-;   check.admin             ./functions/check.admin/t
+;   ./functions/check.admin/t                         check.admin
 ;
-;   command.broadcast.admin ./commands/broadcast/t
+;   ./functions/socket/communications/send.to.world/t send.to.world
 ;
-;   send.to.world           ./functions/socket/communications/send.to.world/t
-;
-;   write.bad.command.error ./functions/write.bad.command.error/t
+;   ./functions/write.bad.command.error/t             write.bad.command.error
 ;
 
     command.broadcast:        call  check.admin                   ; See if the calling socket is controlled by an admin.
