@@ -597,12 +597,8 @@ Relevant data:
 
           command.broadcast.w                   ./functions/d
 
-          socket.data.command.broadcast.help    ./commands/broadcast/d
 
-          socket.data.command.broadcast.help.l  ./commands/broadcast/d
-
-
-      t   command.broadcast                     ./commands/broadcast/d
+      t   command.broadcast                     ./functions/d
 
           command.broadcast.admin               ./commands/broadcast/t
 
