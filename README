@@ -528,8 +528,7 @@ Relevant data:
 
           command.ai.s                          ./commands/ai/d
 
-          command.ai.w                          ./commands/ai/d
-                                                ./functions/d
+          command.ai.w                          ./functions/d
 
 
       t   command.ai                            ./commands/ai/d
