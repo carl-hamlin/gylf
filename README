@@ -537,46 +537,41 @@ Relevant data:
 
       /area                   Contains code pertinent to the implementation of the 'area' command;
                               an administrator command that allows for administrators to create
-                              new areas without having to dig them out using the participant interface.
+                              new areas without having to dig them out using the participant
+                              interface.
 
-      b   area.description                      ./commands/area/t
-                                                ./functions/create.character/t
+      b   area.description                      ./functions/create.participant/t
 
-          area.description.l                    ./functions/create.character/t
+          area.description.l                    ./functions/create.participant/t
 
           area.description.field.l              ./commands/area/b
-                                                ./commands/area/t
 
           area.header                           ./commands/area/b
                                                 ./commands/look/t
-                                                ./functions/create.character/t
+                                                ./functions/create.participant/t
 
           area.header.l                         ./commands/look/t
-                                                ./functions/create.character/t
+                                                ./functions/create.participant/t
 
-          area.name                             ./functions/create.character/t
+          area.name                             ./functions/create.participant/t
 
           area.name.field.l                     ./commands/area/b
 
-          area.name.l                           ./functions/create.character/t
+          area.name.l                           ./functions/create.participant/t
 
           area.num.contained.items              ./commands/area/t
                                                 ./commands/look/t
-
-          available.areas                       ./commands/area/t
 
 
       d   command.area.h                        No references.
 
           command.area.l                        ./commands/area/d
 
-          command.area.p                        ./commands/area/t
+          command.area.p                        No references.
 
           command.area.s                        ./commands/area/d
-                                                ./commands/area/t
 
-          command.area.w                        ./commands/area/d
-                                                ./functions/d
+          command.area.w                        ./functions/d
 
 
       t   command.area                          ./commands/area/d
@@ -584,14 +579,6 @@ Relevant data:
           command.area.admin                    ./commands/area/t
 
           command.area.bad                      ./commands/area/t
-
-          command.area.filename.finder          ./commands/area/t
-
-          command.area.filename.out.of.areas    ./commands/area/t
-
-          command.area.next.file                ./commands/area/t
-
-          command.area.prep.next                ./commands/area/t
 
     ----------------------------------------------------------------------------------------------
 
