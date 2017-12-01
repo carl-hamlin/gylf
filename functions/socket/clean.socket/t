@@ -5,69 +5,134 @@
 ;   This code removes the data associated with an active socket from memory, smokes the lock file, and uses the close.descriptor function to close out the socket. This function does not
 ;   closeout other files associated with the socket - that responsibility is left to the caller.
 ;
-;   Assumptions:    esi = Index to connection tables.
+;   Assumptions:    Stack Frame:  ebp - Populated answer.active.socket.packet
 ;
-;   Returns:        None.
+;   Returns:        eax - Error status.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   close.descriptor            ./functions/close.descriptor/t
+;   a.p.type.egg                      ./b
 ;
-;   connection.descriptor.index ./functions/main/system.check/b
+;   a.p.type.ghost                    ./b
 ;
-;   connection.filename.index   ./functions/main/system.check/b
+;   a.p.type.gylf                     ./b
 ;
-;   connection.status.index     ./functions/main/system.check/b
+;   a.p.type.login                    ./b
 ;
-;   lock.extension              ./functions/create.lock.file/d
+;   d.data                            ./b
 ;
-;   lock.extension.l            ./functions/create.lock.file/d
+;   e.data                            ./b
 ;
-;   socket.filename.entry.l     ./functions/b
+;   egg.connection.descriptor.index   ./s
 ;
-;   sys.system.call             ./functions/b
+;   egg.connection.status.index       ./s
 ;
-;   sys.unlink                  ./functions/socket/clean.socket/b
+;   g.data                            ./b
 ;
-;   ul.smoke                    ./functions/socket/clean.socket/t
+;   ghost.connection.descriptor.index ./s
 ;
-;   ul.loop                     ./functions/socket/clean.socket/t
+;   ghost.connection.status.index     ./s
+;
+;   gylf.connection.descriptor.index  ./s
+;
+;   gylf.connection.status.index      ./s
+;
+;   l.data                            ./b
+;
+;   login.connection.descriptor.index ./s
 ;
 
-    clean.socket: push  ecx                                            ; Preserve caller's ecx register.
-                  mov   ebx, dword [esi+connection.descriptor.index]   ; ebx = Descriptor associated with target socket.
-                  call  close.descriptor                               ; Disassociate the descriptor and shut down the socket.
-            
-                  push  esi                                            ; Preserve index to socket table.
-                  mov   edi, esi                                       ; edi - Index to socket table.
-                  add   edi, connection.filename.index                 ; edi - Pointer to character data file name.
-                  mov   ebx, edi                                       ; ebx - Pointer to character data file name.
-                  mov   ecx, lock.extension.l                          ; ecx - Length of lock extension.
+    clean.socket:       cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.egg    ; Are we cleaning egg sockets?
+                        jz    clean.socket.egg                                                ; Yes. Go clean the socket.
 
-    ul.loop:      cmp   byte [edi], 00h                                ; Have we struck a zero?
-                  jz    ul.smoke                                       ; Yes. Go tack on the lock extension.
+                        cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.ghost  ; Are we cleaning ghost sockets?
+                        jz    clean.socket.ghost                                              ; Yes. Go clean the socket.
 
-                  inc   edi                                            ; edi - Pointer to next byte of character data file name.
-                  jmp   ul.loop                                        ; Go check the next byte.
+                        cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.gylf   ; Are we cleaning gylf sockets?
+                        jz    clean.socket.gylf                                               ; Yes. Go clean the socket.
 
-    ul.smoke:     mov   esi, lock.extension                            ; esi - Pointer to lock extension.
-                  repnz movsb                                          ; Tack on the lock extension.
+                        cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.login  ; Are we cleaning login sockets?
+                        jz    clean.socket.login                                              ; Yes. Go clean the socket.
 
-                  pop   esi                                            ; Restore index to connection table.
+                        mov   eax, 0FFFFFFFFh                                                 ; If we're here, we got a bad collection. Set eax to error status.
 
-                  mov   eax, sys.unlink                                ; eax - Smoke a file.
-                  int   sys.system.call                                ; Smoke the lock file.
+    clean.socket.done:  ret                                                                   ; Return to caller.
 
-                  mov   dword [esi+connection.descriptor.index], 0000h ; Smoke the stored descriptor for the defunct socket.
-                  mov   byte [esi+connection.status.index], 00h        ; Smoke the stored status for the defunct socket.
-                  sub   eax, eax                                       ; eax = Zeroes for smoking the stored filename for the defunct socket's user credentials.
-                  mov   ecx, socket.filename.entry.l                   ; ecx = Number of times to write the zeroes to fill the entire filename entry.
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-                  mov   edi, esi                                       ; edi - Index to socket entry.
-                  add   edi, connection.filename.index                 ; edi - Pointer to socket filename entry.
-                  repnz stosb                                          ; Smoke the stored filename for the defunct socket.
-                  pop   ecx                                            ; Restore caller's ecx register.
+    clean.socket.egg:   push  dword [e.data + egg.connection.descriptor.index]                ; Point close.descriptor to the socket associated with the connection to be cleaned.
+                        call  close.descriptor                                                ; Disassociate that descriptor.
 
-                  ret                                                  ; Return to caller.
+                        mov   dword [e.data + egg.connection.descriptor.index], 00000000h     ; Scrub evidence of the previous connection.
+                        mov   byte [e.data + egg.connection.status.index], 00h                ; Reset socket status.
+
+                        push  dword [ebp - answer.active.socket.packet.fpointer]              ; Point open.descriptor to the socket to be cleaned.
+                        call  open.descriptor                                                 ; Reassociate a descriptor with the socket file.
+
+                        push  eax                                                             ; Preserve descriptor for socket file for close.descriptor.
+
+                        push  eax                                                             ; Point write.descriptor to the socket to be cleaned.
+                        push  e.data                                                          ; Point write descriptor to the new socket data.
+                        push  egg_size                                                        ; Tell write descriptor to write the entire egg.
+                        call  write.descriptor                                                ; Write the new data to file.
+
+                        call  close.descriptor                                                ; Disassociate the descriptor from the socket file.
+
+                        sub   eax, eax                                                        ; Set eax to no error status.
+                        jmp   clean.socket.done                                               ; Go return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    clean.socket.ghost: push  dword [d.data + ghost.connection.descriptor.index]              ; Point close.descriptor to the socket associated with the connection to be cleaned.
+                        call  close.descriptor                                                ; Disassociate that descriptor.
+
+                        mov   dword [d.data + ghost.connection.descriptor.index], 00000000h   ; Scrub evidence of the previous connection.
+                        mov   byte [d.data + ghost.connection.status.index], 00h              ; Reset socket status.
+
+                        push  dword [ebp - answer.active.socket.packet.fpointer]              ; Point open.descriptor to the socket to be cleaned.
+                        call  open.descriptor                                                 ; Reassociate a descriptor with the socket file.
+
+                        push  eax                                                             ; Preserve descriptor for socket file for close.descriptor.
+
+                        push  eax                                                             ; Point write.descriptor to the socket to be cleaned.
+                        push  d.data                                                          ; Point write descriptor to the new socket data.
+                        push  ghost_size                                                      ; Tell write descriptor to write the entire ghost.
+                        call  write.descriptor                                                ; Write the new data to file.
+
+                        call  close.descriptor                                                ; Disassociate the descriptor from the socket file.
+
+                        sub   eax, eax                                                        ; Set eax to no error status.
+                        jmp   clean.socket.done                                               ; Go return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    clean.socket.gylf:  push  dword [g.data + gylf.connection.descriptor.index]               ; Point close.descriptor to the socket associated with the connection to be cleaned.
+                        call  close.descriptor                                                ; Disassociate that descriptor.
+
+                        mov   dword [g.data + gylf.connection.descriptor.index], 00000000h    ; Scrub evidence of the previous connection.
+                        mov   byte [g.data + gylf.connection.status.index], 00h               ; Reset socket status.
+
+                        push  dword [ebp - answer.active.socket.packet.fpointer]              ; Point open.descriptor to the socket to be cleaned.
+                        call  open.descriptor                                                 ; Reassociate a descriptor with the socket file.
+
+                        push  eax                                                             ; Preserve descriptor for socket file for close.descriptor.
+
+                        push  eax                                                             ; Point write.descriptor to the socket to be cleaned.
+                        push  g.data                                                          ; Point write descriptor to the new socket data.
+                        push  gylf_size                                                       ; Tell write descriptor to write the entire gylf.
+                        call  write.descriptor                                                ; Write the new data to file.
+
+                        call  close.descriptor                                                ; Disassociate the descriptor from the socket file.
+
+                        sub   eax, eax                                                        ; Set eax to no error status.
+                        jmp   clean.socket.done                                               ; Go return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    clean.socket.login: push  dword [l.data + login.connection.descriptor.index]              ; Point close.descriptor to the socket associated with the connection to be closed.
+                        call  close.descriptor                                                ; Disassociate that descriptor.
+
+                        sub   eax, eax                                                        ; Set eax to no error status.
+                        jmp   clean.socket.done                                               ; Go return to caller.

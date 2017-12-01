@@ -12,33 +12,46 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   external.data.buffer            ./functions/b
+;   dword.l                     ./b
 ;
-;   external.data.clear.screen      ./functions/d
+;   external.data.buffer        ./functions/b
 ;
-;   external.data.cursor.home       ./functions/d
+;   external.data.clear.screen  ./functions/d
 ;
-;   get.external.data               ./functions/get.external.data/t
+;   external.data.cursor.home   ./functions/d
 ;
-;   socket.data.send.buffer.pointer ./functions/socket/recv.from.socket/d
+;   get.external.data           ./functions/get.external.data/t
 ;
-;   socket.data.send.buffer.l       ./functions/socket/recv.from.socket/d
-;
-;   socket.send.buf                 ./functions/socket/socket.send/t
+;   socket.send.buf             ./functions/socket/socket.send/t
 ;
 
-    clear.screen: mov   ebx, external.data.cursor.home          ; ebx - Pointer to filename for cursor.home external data.
-                  call  get.external.data                       ; Grab the cursor.home escape sequence.
+    clear.screen: push  ebp                                           ; Preserve caller's ebp.
 
-                  push  edx                                     ; Provide the length of the sequence.
-                  push  external.data.buffer                    ; Point socket.send to the future location of the cursor.home escape sequence.
-                  call  socket.send.buf                         ; Send the string to the connected socket, modifying the cursor position remotely.
+                  mov   ebp, esp                                      ; ebp - Prepared to be used as data pointer.
+                  add   ebp, (dword.l + clear.screen.packet_size)     ; ebp - Data pointer.
 
-                  mov   ebx, external.data.clear.screen         ; ebx - Pointer to filename for clear.screen external data.
-                  call  get.external.data                       ; Grab the clear.screen escape sequence.
+                  push  edx                                           ; Preserve caller's edx.
 
-                  push  edx                                     ; Provide the length of the sequence.
-                  push  external.data.buffer                    ; Point socket.send to the future location of the cursor.home escape sequence.
-                  call  socket.send.buf                         ; Send the string to the connected socket, clearing the screen remotely.
+                  push  external.data.cursor.home                     ; Point get.external.data to filename for cursor.home external data.
+                  call  get.external.data                             ; Grab the cursor.home escape sequence.
 
-                  ret                                           ; Return to caller.
+                  push  dword [ebp - clear.screen.packet.descriptor]  ; Point socket.send to the active socket.
+                  push  external.data.buffer                          ; Point socket.send to the future location of the cursor.home escape sequence.
+                  push  edx                                           ; Provide the length of the sequence.
+                  push  00000000h                                     ; Flags for send function.
+                  call  socket.send                                   ; Send the string to the connected socket, modifying the cursor position remotely.
+
+                  push  external.data.clear.screen                    ; Point get.external.data to filename for clear.screen external data.
+                  call  get.external.data                             ; Grab the clear.screen escape sequence.
+
+                  push  dword [ebp - clear.screen.packet.descriptor]  ; Point socket.send to the active socket.
+                  push  external.data.buffer                          ; Point socket.send to the future location of the cursor.home escape sequence.
+                  push  edx                                           ; Provide the length of the sequence.
+                  push  00000000h                                     ; Flags for send function.
+                  call  socket.send                                   ; Send the string to the connected socket, clearing the screen remotely.
+
+                  pop   edx                                           ; Restore caller's edx.
+
+                  pop   ebp                                           ; Restore caller's ebp.
+
+                  ret   clear.screen.packet_size                      ; Return to caller.
