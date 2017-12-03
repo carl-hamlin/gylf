@@ -12,42 +12,6 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   bail                                                                ./functions/bail/t
-;
-;   char.0                                                              ./b
-;
-;   char.9                                                              ./b
-;
-;   connection.entry.size                                               ./functions/main/system.check/b
-;
-;   connection.number.index                                             ./functions/main/system.check/b
-;
-;   connection.table                                                    ./functions/main/system.check/b
-;
-;   dword.l                                                             ./b
-;
-;   socket.number                                                       ./b
-;
-;   socket.numbers                                                      ./functions/main/system.check/d
-;
-;   socket.numbers.l                                                    ./functions/main/system.check/d
-;
-;   system.check.populate.connection.numbers.0010                       ./functions/main/system.check/t
-;
-;   system.check.populate.connection.numbers.0100                       ./functions/main/system.check/t
-;
-;   system.check.populate.connection.numbers.1000                       ./functions/main/system.check/t
-;
-;   system.check.populate.connection.numbers.done                       ./functions/main/system.check/t
-;
-;   system.check.populate.connection.numbers.loop                       ./functions/main/system.check/t
-;
-;   system.check.populate.connection.numbers.over                       ./functions/main/system.check/t
-;
-;   text.data.index.local.data.populate.connection.numbers.over.message ./functions/main/system.check/d
-;
-;   text.data.index.local.data.populating.connection.table.message      ./functions/main/system.check/d
-;
 ;   text.data.index.local.data.system.check.done.message                ./functions/main/system.check/d
 ;
 ;   text.data.index.local.data.system.check.message                     ./functions/main/system.check/d
@@ -55,94 +19,175 @@
 ;   write.console                                                       ./functions/write.console/t
 ;
 
-    system.check:                                   push  dword [text.data.index.local.data.system.check.message]                     ; Pointer to message indicating system check underweigh
-                                                    call  write.console                                                               ; Tell the admin that a system check is underweigh
+    system.check:                   pusha                                                                 ; Preserve caller's registers.
 
-                                                    push  dword [text.data.index.local.data.populating.connection.table.message]      ; Point write.console to message indicating that system
-                                                                                                                                      ; check is populating the connection numbers table.
-                                                    call  write.console                                                               ; Let the admin know that system.check is populating the
-                                                                                                                                      ; connection numbers table.
+                                    push  dword [text.data.index.local.data.system.check.message]         ; Pointer to message indicating system check underweigh.
+                                    call  write.console                                                   ; Tell the admin that a system check is underweigh.
 
-                                                    mov   esi, socket.numbers                                                         ; esi - Pointer to placeholder for socket numbers.
-                                                    mov   edi, connection.table                                                       ; edi - Index into connection table.
-                                                    add   edi, connection.number.index                                                ; edi - Pointer to first connection number to be populated.
-                                                    mov   ecx, socket.number                                                          ; ecx - Number of sockets to number. Used as loop counter.
+                                    push  tops.filename                                                   ; Point open.descriptor to the tops file.
+                                    call  open.descriptor                                                 ; Associate a descriptor with the tops file.
+
+                                    push  eax                                                             ; Preserve descriptor for closing.
+
+                                    push  eax                                                             ; Point read.descriptor to descriptor associated with tops file.
+                                    push  top.egg                                                         ; Tell read descriptor to put the data at top.egg.
+                                    push  (dword.l + dword.l + dword.l + dword.l)                         ; Tell read.descriptor to read all four tops.
+                                    call  read.descriptor                                                 ; Populate the tops.
+
+                                    call  close.descriptor                                                ; Disassociate the descriptor from the tops file.
+
+                                    push  dword [text.data.index.local.data.system.check.eggs.message]    ; Pointer to message indicating that pre-check and maintenance of eggs is underweigh.
+                                    call  write.console                                                   ; Tell the admin that we're performing pre-check and maintenance on eggs.
+
+                                    sub   edx, edx                                                        ; edx - Minimum id.
+                                    push  edx                                                             ; Preserve id.
+
+                                    mov   ecx, dword [top.egg]                                            ; ecx - Top egg.
+                                    inc   ecx                                                             ; ecx - Stop indicator for eggs.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+    system.check.eggs:              cmp   edx, ecx                                                        ; Have we reached the last egg?
+                                    jnz   system.check.eggs.next.check                                    ; No. Go check the next egg.
+
+                                    push  dword [text.data.index.local.data.system.check.ghosts.message]  ; Pointer to message indicating that pre-check and maintenance of ghosts is underweigh.
+                                    call  write.console                                                   ; Tell the admin that we're performing pre-check and maintenance on ghosts.
+
+                                    pop   edx                                                             ; edx - Minimum id.
+                                    push  edx                                                             ; Preserve id.
+
+                                    mov   ecx, dword [top.ghost]                                          ; ecx - Top ghost.
+                                    inc   ecx                                                             ; ecx - Stop indicator for ghosts.
+                                    jmp   system.check.ghosts                                             ; Go check ghosts.
+
+    system.check.eggs.next.check:   push  edx                                                             ; Point read.credential to the current id.
+                                    push  egg.filename                                                    ; Point read.credential to the egg filename.
+                                    push  e.data                                                          ; Point read.credential to e.data.
+                                    push  egg_size                                                        ; Tell read.credential to read an entire egg.
+                                    call  read.credential                                                 ; Read the egg credential to e.data.
+
+                                    or    eax, eax                                                        ; Were we able to read the credential?
+                                    js    system.check.eggs.next                                          ; No. Go set up for the next one.
+
+                                    mov   dword [e.data + egg.connection.descriptor.index], 00000000h     ; Zero the connection descriptor for this credential.
+                                    mov   byte  [e.data + egg.connection.status.index],           00h     ; Zero the connection status for this credential.
+
+                                    push  edx                                                             ; Point write.credential to the current id.
+                                    push  egg.filename                                                    ; Point write.credential to the egg filename.
+                                    push  e.data                                                          ; Point write.credential to e.data.
+                                    push  egg_size                                                        ; Tell write.credential to write an entire egg.
+                                    call  write.credential                                                ; Write the egg credential at e.data.
+
+    system.check.eggs.next:         inc   edx                                                             ; edx - Next id to check.
+                                    jmp   system.check.eggs                                               ; Go check the next id.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    system.check.populate.connection.numbers.loop:  movsd                                                                             ; Copy the current socket number to the current socket
-                                                                                                                                      ; number table entry.
+    system.check.ghosts:            cmp   edx, ecx                                                        ; Have we reached the last ghost?
+                                    jnz   system.check.ghosts.next.check                                  ; No. Go check the next ghost.
 
-                                                    sub   esi, dword.l                                                                ; Restore esi to its pre-movsd value.
-                                                    sub   edi, dword.l                                                                ; Restore edi to its pre-movsd value.
+                                    push  dword [text.data.index.local.data.system.check.gylf.message]    ; Pointer to message indicating that pre-check and maintenance of gylf is underweigh.
+                                    call  write.console                                                   ; Tell the admin that we're performing pre-check and maintenance on gylf.
 
-                                                    add   edi, connection.entry.size                                                  ; edi - Pointer to next socket number table entry.
-                                                    mov   ebx, esi                                                                    ; ebx - Pointer to placeholder for socket numbers.
-                                                    add   ebx, socket.numbers.l                                                       ; ebx - Pointer to byte immediately following placeholder
-                                                                                                                                      ; for socket numbers.
-                                                    dec   ebx                                                                         ; ebx - Pointer to last byte of placeholder for socket
-                                                                                                                                      ; numbers.
+                                    pop   edx                                                             ; edx - Minimum id.
+                                    push  edx                                                             ; Preserve id.
 
-                                                    cmp   byte [ebx], char.9                                                          ; Is the byte at [ebx] "9"?
-                                                    jz    system.check.populate.connection.numbers.0010                               ; Yes. Go zero it out and address the next place up.
+                                    mov   ecx, dword [top.gylf]                                           ; ecx - Top gylf.
+                                    inc   ecx                                                             ; ecx - Stop indicator for gylf.
+                                    jmp   system.check.gylf                                               ; Go check gylf.
 
-                                                    inc   byte [ebx]                                                                  ; No. Increment the byte.
-                                                    loop  system.check.populate.connection.numbers.loop                               ; Go store this entry.
+    system.check.ghosts.next.check: push  edx                                                             ; Point read.credential to the current id.
+                                    push  ghost.filename                                                  ; Point read.credential to the ghost filename.
+                                    push  d.data                                                          ; Point read.credential to d.data.
+                                    push  ghost_size                                                      ; Tell read.credential to read an entire ghost.
+                                    call  read.credential                                                 ; Read the ghost credential to d.data.
 
-                                                    jmp   system.check.populate.connection.numbers.done                               ; We're done here, so go finish up with system.check.
+                                    or    eax, eax                                                        ; Were we able to read the credential?
+                                    js    system.check.ghosts.next                                        ; No. Go set up for the next one.
 
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                    mov   dword [d.data + ghost.connection.descriptor.index], 00000000h   ; Zero the connection descriptor for this credential.
+                                    mov   byte  [d.data + ghost.connection.status.index],           00h   ; Zero the connection status for this credential.
 
-    system.check.populate.connection.numbers.0010:  mov   byte [ebx], char.0                                                          ; Zero the byte at [ebx].
-                                                    dec   ebx                                                                         ; ebx - Pointer to byte representing the next place up.
+                                    push  edx                                                             ; Point write.credential to the current id.
+                                    push  ghost.filename                                                  ; Point write.credential to the ghost filename.
+                                    push  d.data                                                          ; Point write.credential to d.data.
+                                    push  ghost_size                                                      ; Tell write.credential to write an entire ghost.
+                                    call  write.credential                                                ; Write the gylf credential at d.data.
 
-                                                    cmp   byte [ebx], char.9                                                          ; Is the byte at [ebx] a "9"?
-                                                    jz    system.check.populate.connection.numbers.0100                               ; Yes. Go zero it out and address the next place up.
-
-                                                    inc   byte [ebx]                                                                  ; No. Increment the byte.
-                                                    loop  system.check.populate.connection.numbers.loop                               ; Go store this entry.
-
-                                                    jmp   system.check.populate.connection.numbers.done                               ; We're done here, so go finish up with system.check.
-
-;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    system.check.populate.connection.numbers.0100:  mov   byte [ebx], char.0                                                          ; Zero the byte at [ebx].
-                                                    dec   ebx                                                                         ; ebx - Pointer to byte representing the next place up.
-
-                                                    cmp   byte [ebx], char.9                                                          ; Is the byte ate [ebx] a "9"?
-                                                    jz    system.check.populate.connection.numbers.1000                               ; Yes. Go zero it out and address the next place up.
-
-                                                    inc   byte [ebx]                                                                  ; No. Increment the byte.
-                                                    loop  system.check.populate.connection.numbers.loop                               ; Go store this entry.
-
-                                                    jmp   system.check.populate.connection.numbers.done                               ; We're done here, so go finish up with system.check.
+    system.check.ghosts.next:       inc   edx                                                             ; edx - Next id to check.
+                                    jmp   system.check.ghosts                                             ; Go check the next id.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+    system.check.gylf:              cmp   edx, ecx                                                        ; Have we reached the last gylf?
+                                    jnz   system.check.gylf.next.check                                    ; No. Go check the next gylf.
 
-    system.check.populate.connection.numbers.1000:  mov   byte [ebx], char.0                                                          ; Zero the byte at [ebx].
-                                                    dec   ebx                                                                         ; ebx - Pointer to byte representing the next place up.
+                                    push  dword [text.data.index.local.data.system.check.logins.message]  ; Pointer to message indicating that pre-check and maintenance of logins is underweigh.
+                                    call  write.console                                                   ; Tell the admin that we're performing pre-check and maintenance on logins.
 
-                                                    cmp   byte [ebx], char.9                                                          ; Is the byte at [ebx] a "9"?
-                                                    jz    system.check.populate.connection.numbers.over                               ; Yes. At this point, we're experiencing a bounds error, so
-                                                                                                                                      ; go tell the admin we're fucked and shut down the server.
+                                    pop   edx                                                             ; edx - Minimum id.
 
-                                                    inc   byte [ebx]                                                                  ; No. Increment the byte.
-                                                    loop  system.check.populate.connection.numbers.loop                               ; Go store this entry.
+                                    mov   ecx, dword [top.login]                                          ; ecx - Top login.
+                                    inc   ecx                                                             ; ecx - Stop indicator for logins.
+                                    jmp   system.check.logins                                             ; Go check logins.
 
-                                                    jmp   system.check.populate.connection.numbers.done                               ; We're done here, so go finish up with system.check.
+    system.check.gylf.next.check:   push  edx                                                             ; Point read.credential to the current id.
+                                    push  gylf.filename                                                   ; Point read.credential to the gylf filename.
+                                    push  g.data                                                          ; Point read.credential to g.data.
+                                    push  gylf_size                                                       ; Tell read.credential to read an entire gylf.
+                                    call  read.credential                                                 ; Read the gylf credential to g.data.
+
+                                    or    eax, eax                                                        ; Were we able to read the credential?
+                                    js    system.check.gylf.next                                          ; No. Go set up for the next one.
+
+                                    mov   dword [g.data + gylf.connection.descriptor.index], 00000000h    ; Zero the connection descriptor for this credential.
+                                    mov   byte  [g.data + gylf.connection.status.index],           00h    ; Zero the connection status for this credential.
+
+                                    mov   dword [top.gylf], edx                                           ; Update top.gylf.
+
+                                    push  edx                                                             ; Point write.credential to the current id.
+                                    push  gylf.filename                                                   ; Point write.credential to the gylf filename.
+                                    push  g.data                                                          ; Point write.credential to g.data.
+                                    push  gylf_size                                                       ; Tell write.credential to write an entire gylf.
+                                    call  write.credential                                                ; Write the gylf credential at g.data.
+
+    system.check.gylf.next:         inc   edx                                                             ; edx - Next id to check.
+                                    jmp   system.check.gylf                                               ; Go check the next id.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+    system.check.logins:            cmp   edx, ecx                                                        ; Have we reached the last login?
+                                    jz    system.check.complete                                           ; Yes. Go let the admin know.
 
-    system.check.populate.connection.numbers.over:  push  dword [text.data.index.local.data.populate.connection.numbers.over.message] ; Pointer to message indicating we experienced a bounds
-                                                                                                                                      ; error and need to shut down the server.
-                                                    call  write.console                                                               ; Tell the admin we experienced a bounds error and need to
-                                                                                                                                      ; shut down the server.
+                                    push  (login.filename + dword.l)                                      ; Point convert.binary.id.to.ascii.id to login filename.
+                                    push  edx                                                             ; Point convert.binary.id.to.ascii.id to the current id.
+                                    call  convert.binary.id.to.ascii.id                                   ; Convert the id.
 
-                                                    jmp   bail                                                                        ; Go shut down the server.
+                                    mov   eax, sys.unlink                                                 ; eax - Smoke the file.
+                                    mov   ebx, login.filename                                             ; ebx - Smoke the login file.
+                                    int   sys.system.call                                                 ; SMOKE THAT MOTHERFUCKER!
+
+                                    inc   edx                                                             ; edx - Next login id.
+                                    jmp   system.check.logins                                             ; Go smoke the next login.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+    system.check.complete:          mov   dword [top.login], 0                                            ; Zero top login.
 
-    system.check.populate.connection.numbers.done:  push  dword [text.data.index.local.data.system.check.done.message]                ; Pointer to message indicating system check is complete.
-                                                    call  write.console                                                               ; Tell the admin that the system check is complete.
+                                    push  tops.filename                                                   ; Point open.descriptor to tops data.
+                                    call  open.descriptor                                                 ; Associate a descriptor with the tops data.
 
-                                                    ret                                                                               ; Return to caller.
+                                    push  eax                                                             ; Preserve descriptor for closing.
+
+                                    push  eax                                                             ; Point write.descriptor to descriptor associated with tops data.
+                                    push  top.egg                                                         ; Tell write.descriptor to write the data starting at top.egg.
+                                    push  (dword.l + dword.l + dword.l + dword.l)                         ; Tell write.descriptor to write all four tops.
+                                    call  write.descriptor                                                ; Write the data.
+
+                                    call  close.descriptor                                                ; Disassociate the descriptor.
+
+                                    push  dword [text.data.index.local.data.system.check.done.message]    ; Pointer to message indicating system check is complete.
+                                    call  write.console                                                   ; Tell the admin that the system check is complete.
+
+                                    popa                                                                  ; Restore caller's registers.
+                                    ret                                                                   ; Return to caller.
