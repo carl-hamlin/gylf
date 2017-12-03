@@ -1,0 +1,24 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/communications/send.to.participant/s
+;
+;   This file contains structures pertinent to the send.to.participant utility.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+;================================================================================================================================================================================================
+;
+;   STP Packet Data Structure
+;
+
+    struc stp.packet
+      .length     resd  00000001h ; Length of message to be broadcast.
+      .message    resd  00000001h ; Pointer to message to be broadcast.
+      .area       resd  00000001h ; ID of area from which the message is being broadcast.
+      .connection resd  00000001h ; Connection ID to which to broadcast.
+    endstruc
