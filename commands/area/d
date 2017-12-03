@@ -8,12 +8,13 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.area    ./commands/area/t
+;   ./commands/area/d             command.area.l
+;                                 command.area.s
 ;
-;   command.area.l  ./commands/area/d
+;   ./commands/area/t             command.area
 ;
-;   command.area.s  ./commands/area/d
 ;
+;   ./functions/main/text.init/b  text.data.index.socket.data.command.area.help
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;

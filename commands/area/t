@@ -4,8 +4,8 @@
 ;
 ;   This function creates an area. Syntax: area <name> <quoted description>
 ;
-;   Assumptions:      eax - Length of received data.
-;                     esi - Pointer to descriptor associated with target socket.
+;   Assumptions:      ebp - Pointer to populated answer.active.socket.packet
+;                     Aggregated arguments.
 ;
 ;   Returns:          None.
 ;
@@ -13,75 +13,47 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   area.filename                                       ./functions/d
+;   ./b                                   dword.l
+;                                         sys.standard.output
 ;
-;   area.num.contained.items                            ./commands/area/b
+;   ./commands/area/b                     area.num.contained.items
 ;
-;   argument.01.location                                ./functions/aggregate.arguments/b
+;   ./commands/area/t                     command.area.admin
+;                                         command.area.bad
 ;
-;   argument.01.size                                    ./functions/aggregate.arguments/b
+;   ./functions/aggregate.arguments/b     argument.01.location
+;                                         argument.01.size
+;                                         argument.02.location
+;                                         argument.02.size
+;                                         arguments.num
 ;
-;   area.filename.l                                     ./functions/d
+;   ./functions/close.descriptor/t        close.descriptor
 ;
-;   area.name                                           ./commands/area/b
+;   ./functions/create.file/t             create.file
 ;
-;   argument.02.location                                ./functions/aggregate.arguments/b
+;   ./functions/d                         area.filename
 ;
-;   argument.02.size                                    ./functions/aggregate.arguments/b
+;   ./functions/get.new.id/t              get.new.id
 ;
-;   arguments.num                                       ./functions/aggregate.arguments/b
+;   ./functions/main/check.admin/t        check.admin
 ;
-;   available.areas                                     ./commands/area/b
+;   ./functions/main/text.init/b          text.data.index.local.data.area.bad.syntax.message
+;                                         text.data.index.local.data.area.created.message
+;                                         text.data.index.local.data.carriage.return.message
+;                                         text.data.index.socket.data.area.created.message
+;                                         text.data.index.socket.data.command.area.help
 ;
-;   check.admin                                         ./functions/main/check.admin/t
+;   ./functions/open.descriptor/t         open.descriptor
 ;
-;   close.descriptor                                    ./functions/close.descriptor/t
+;   ./functions/socket/socket.send/t      socket.send
 ;
-;   command.area.admin                                  ./commands/area/t
+;   ./functions/write.bad.command.error/t write.bad.command.error
 ;
-;   command.area.bad                                    ./commands/area/t
+;   ./functions/write.console/t           write.console
 ;
-;   command.area.filename.finder                        ./commands/area/t
+;   ./functions/write.descriptor/t        write.descriptor
 ;
-;   command.area.filename.loop                          ./commands/area/t
-;
-;   command.area.filename.out.of.areas                  ./commands/area/t
-;
-;   command.area.next.file                              ./commands/area/t
-;
-;   command.area.prep.next                              ./commands/area/t
-;
-;   create.file                                         ./functions/create.file/t
-;
-;   dword.l                                             ./b
-;
-;   open.descriptor                                     ./functions/open.descriptor/t
-;
-;   socket.send                                         ./functions/socket/socket.send/t
-;
-;   sys.standard.output                                 ./b
-;
-;   text.data.index.local.data.area.bad.syntax.message  ./functions/main/text.init/b
-;
-;   text.data.index.local.data.area.created.message     ./functions/main/text.init/b
-;
-;   text.data.index.local.data.carriage.return.message  ./functions/main/text.init/b
-;
-;   text.data.index.local.data.out.of.areas.message     ./functions/main/text.init/b
-;
-;   text.data.index.socket.data.area.created.message    ./functions/main/text.init/b
-;
-;   text.data.index.socket.data.command.area.help       ./functions/main/text.init/b
-;
-;   text.data.index.socket.data.out.of.areas.message    ./functions/main/text,init/b
-;
-;   word.l                                              ./b
-;
-;   write.bad.command.error                             ./functions/write.bad.command.error/t
-;
-;   write.console                                       ./functions/write.console/t
-;
-;   write.descriptor                                    ./functions/write.descriptor/t
+;   ./functions/write.prompt/t            write.prompt
 ;
 
     command.area:                       push  esi                                                                       ; Preserve index to connection entry.
@@ -119,7 +91,7 @@
                                         push  area.filename                                                             ; Tell get.new.id that we need a new area id.
                                         call  get.new.id                                                                ; Get a new area id.
 
-    command.area.filename.loop:         push  area.filename                                                             ; Point open.descriptor to filename entry for area filenames.
+                                        push  area.filename                                                             ; Point open.descriptor to filename entry for area filenames.
                                         call  open.descriptor                                                           ; Try the current filename.
 
                                         push  eax                                                                       ; Point create.file to the filename to be created.

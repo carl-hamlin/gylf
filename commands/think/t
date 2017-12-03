@@ -35,6 +35,12 @@
 ;
 ;   connection.descriptor.index                     ./functions/main.system.check/b
 ;
+;   g.data                                          ./b
+;
+;   gylf.connection.area.id.index                   ./s
+;
+;   gylf.connection.descriptor.index                ./s
+;
 ;   send.to.area                                    ./functions/socket/communications/send.to.area/t
 ;
 ;   send.to.participant                             ./functions/socket/communications/send.to.participant/t

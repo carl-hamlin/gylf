@@ -12,11 +12,31 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   text.data.index.local.data.system.check.done.message                ./functions/main/system.check/d
+;   dword.l                                               ./b
 ;
-;   text.data.index.local.data.system.check.message                     ./functions/main/system.check/d
+;   d.data                                                ./b
 ;
-;   write.console                                                       ./functions/write.console/t
+;   e.data                                                ./b
+;
+;   egg.connection.descriptor.index                       ./s
+;
+;   egg.connection.status.index                           ./s
+;
+;   g.data                                                ./b
+;
+;   ghost.connection.descriptor.index                     ./s
+;
+;   ghost.connection.status.index                         ./s
+;
+;   gylf.connection.descriptor.index                      ./s
+;
+;   gylf.connection.status.index                          ./s
+;
+;   text.data.index.local.data.system.check.done.message  ./functions/main/system.check/d
+;
+;   text.data.index.local.data.system.check.message       ./functions/main/system.check/d
+;
+;   write.console                                         ./functions/write.console/t
 ;
 
     system.check:                   pusha                                                                 ; Preserve caller's registers.

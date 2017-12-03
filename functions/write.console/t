@@ -18,7 +18,7 @@
 ;
 ;   memory.switch       ./functions/memory.switch/t
 ;
-;   sys.standard.output ./functions/write.descriptor/b
+;   sys.standard.output ./b
 ;
 ;   sys.system.call     ./functions/b
 ;

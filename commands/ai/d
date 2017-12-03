@@ -8,12 +8,13 @@
 ;
 ;   Symbolic Cross References
 ;
-;   command.ai    ./commands/ai/t
+;   ./commands/ai/d               command.ai.l
+;                                 command.ai.s
 ;
-;   command.ai.l  ./commands/ai/d
+;   ./commands/ai/t               command.ai
 ;
-;   command.ai.s  ./commands/ai/d
 ;
+;   ./functions/main/text.init/b  text.data.index.socket.data.command.ai.help
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;

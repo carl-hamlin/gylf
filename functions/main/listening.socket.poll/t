@@ -14,11 +14,11 @@
 ;
 ;   accept.socket                                               ./functions/socket/accept.socket/t
 ;
-;   a.p.data.gylf                                               ./b
-;
 ;   clear.screen                                                ./functions/clear.screen/t
 ;
 ;   close.descriptor                                            ./functions/close.descriptor/t
+;
+;   dword.l                                                     ./b
 ;
 ;   greet                                                       ./functions/main/listening.socket.poll/t
 ;
@@ -26,7 +26,11 @@
 ;
 ;   greet.loop                                                  ./functions/main/listening.socket.poll/t
 ;
+;   l.data                                                      ./b
+;
 ;   listening.socket.poll.done                                  ./functions/main/listening.socket.poll/t
+;
+;   login.connection.descriptor.index                           ./s
 ;
 ;   login.status                                                ./functions/main/b
 ;
@@ -37,8 +41,6 @@
 ;   socket.data.event.socket.descriptor                         ./functions/main/active.socket.poll/d
 ;
 ;   socket.error                                                ./functions/socket/socket.errors/t
-;
-;   socket.number                                               ./b
 ;
 ;   socket.send                                                 ./functions/socket/socket.send/t
 ;

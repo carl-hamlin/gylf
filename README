@@ -11,6 +11,8 @@ Relevant data:
     i                         Inclusion anchor for tying together downstream code.
     t                         ASM code outlining the function referenced by the immediate
                               directory name.
+    s                         Structural data pertinent to the function name under which
+                              it occurs.
 
     ==============================================================================================
     
@@ -19,68 +21,480 @@ Relevant data:
 
     Symbolic Cross-Referencing
     
-      b   byte.l                                ./functions/get.character.data/t
-                                                ./functions/get.external.data/t
+      b   a.p.type.egg                          ./functions/main/active.socket.poll/t
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/clean.socket/t
+
+          a.p.type.ghost                        ./functions/main/active.socket.poll/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/clean.socket/t
+
+          a.p.type.gylf                         ./functions/main/active.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/clean.socket/t
+
+          a.p.type.login                        ./functions/main/active.socket.poll/t
+                                                ./functions/socket/clean.socket/t
+
+          a.p.data.egg                          No references.
+
+          a.p.data.ghost                        No references.
+
+          a.p.data.gylf                         ./commands/look/t
+                                                ./commands/egg/t
+                                                ./commands/think/t
+                                                ./commands/gylf/t
+                                                ./functions/check.admin/t
+                                                ./functions/create.participant/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/communications/send.to.world/t
+
+          byte.l                                ./functions/get.external.data/t
 
           dword.l                               ./commands/area/t
                                                 ./commands/help/t
                                                 ./commands/look/t
+                                                ./commands/shutdown/t
                                                 ./functions/aggregate.arguments/t
-                                                ./functions/create.character/t
+                                                ./functions/close.descriptor/t
+                                                ./functions/convert.binary.id.to.ascii.id/t
                                                 ./functions/create.file/t
+                                                ./functions/create.participant/t
+                                                ./functions/b
                                                 ./functions/d
                                                 ./functions/get.external.data/t
+                                                ./functions/get.new.id/t
+                                                ./functions/get.participant.data.by.id/t
+                                                ./functions/get.participant.data.by.name/t
                                                 ./functions/get.text.data/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
                                                 ./functions/main/system.check/t
                                                 ./functions/main/text.init/b
                                                 ./functions/main/text.init/t
                                                 ./functions/memory.switch/t
+                                                ./functions/notify.in.absentia/t
                                                 ./functions/open.descriptor/t
                                                 ./functions/poll.descriptor/t
-                                                ./functions/print.socket.number/t
+                                                ./functions/read.credential/t
+                                                ./functions/read.descriptor/t
                                                 ./functions/set.single.attribute/t
                                                 ./functions/socket/accept.socket/t
+                                                ./functions/socket/answer.active.socket/t
                                                 ./functions/socket/bind.socket/t
-                                                ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/send.to.participant/t
+                                                ./functions/socket/communications
+                                                  /send.to.participant/t
                                                 ./functions/socket/communications/send.to.world/t
                                                 ./functions/socket/create.socket/t
                                                 ./functions/socket/listen.socket/t
                                                 ./functions/socket/recv.from.socket/t
                                                 ./functions/socket/socket.send/t
                                                 ./functions/write.console/t
+                                                ./functions/write.credential/t
 
-          qword.l                               ./commands/help/t
+          dead.socket                           ./commands/egg/t
 
-          word.l                                ./commands/area/t
-                                                ./functions/b
-
-          socket.number                         ./commands/shutdown/t
+          e.data                                ./commands/egg/t
+                                                ./commands/gylf/t
+                                                ./functions/create.participant/t
                                                 ./functions/main/active.socket.poll/t
-                                                ./functions/main/listening.socket.poll/t
-                                                ./functions/main/system.check/b
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
                                                 ./functions/main/system.check/t
+                                                ./functions/socket/clean.socket/t
                                                 ./functions/socket/communications/send.to.area/t
-                                                ./functions/socket/communications/sent.to.participant/t
+
+          d.data                                ./functions/get.participant.data.by.name/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/clean.socket/t
+                                                ./functions/socket/communications/send.to.area/t
+
+          g.data                                ./commands/egg/t
+                                                ./commands/think/t
+                                                ./functions/create.participant/t
+                                                ./functions/dna.lab/t
+                                                ./functions/get.participant.data.by.id/t
+                                                ./functions/get.participant.data.by.name/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/clean.socket/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications
+                                                  /send.to.participant/t
                                                 ./functions/socket/communications/send.to.world/t
+
+          l.data                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/socket/clean.socket/t
 
           sys.standard.output                   ./commands/area/t
                                                 ./functions/main/text.init/t
-                                                ./functions/print.socket.number/t
+                                                ./functions/socket/answer.active.socket/t
                                                 ./functions/write.console/t
 
+          word.l                                ./functions/socket/answer.active.socket/t
 
-      s   egg
+      s   egg.area.id                           ./commands/egg/t
+                                                ./commands/gylf/t
+                                                ./functions/create.participant/t
 
-          participant
+          egg.connection.area.id.index          ./functions/socket/communications/send.to.area/t
 
-          ghost
+          egg.connection.descriptor.index       ./functions/main/active.socket.poll/t
+                                                ./functions/main/participant.interactions
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/clean.socket/t
 
-          connection          
+          egg.connection.external.index         ./functions/socket/communications/send.to.area/t
+
+          egg.connection.status.index           ./functions/main/active.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/clean.socket/t
+
+          egg.e.parent.agility                  ./functions/dna.lab/t
+
+          egg.e.parent.base.color               ./functions/dna.lab/t
+
+          egg.e.parent.endurance                ./functions/dna.lab/t
+
+          egg.e.parent.name                     ./commands/egg/t
+                                                ./functions/create.participant/t
+
+          egg.e.parent.name.l                   ./commands/egg/t
+                                                ./functions/create.participant/t
+
+          egg.e.parent.secondary.color          ./functions/dna.lab/t
+
+          egg.e.parent.strength                 ./functions/dna.lab/t
+
+          egg.i.parent.agility                  ./functions/dna.lab/t
+
+          egg.i.parent.base.color               ./functions/dna.lab/t
+
+          egg.i.parent.endurance                ./functions/dna.lab/t
+
+          egg.i.parent.name                     ./commands/egg/t
+                                                ./functions/create.participant/t
+
+          egg.i.parent.name.l                   ./commands/egg/t
+                                                ./functions/create.participant/t
+
+          egg.i.parent.secondary.color          ./functions/dna.lab/t
+
+          egg.i.parent.strength                 ./functions/dna.lab/t
+
+          egg.item.id                           ./commands/egg/t
+
+          egg.name                              ./functions/get.participant.data.by.name/t
+
+          egg.name.l                            No references.
+
+          egg.passphrase                        ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+
+          ghost.administrative.byte             No references.
+
+          ghost.age                             No references.
+
+          ghost.agility                         No references.
+
+          ghost.base.color                      No references.
+
+          ghost.base.fur.quality                No references.
+
+          ghost.connection.area.id.index        ./functions/socket/communications/send.to.area/t
+
+          ghost.connection.descriptor.index     ./functions/main/active.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/clean.socket/t
+
+          ghost.connection.external.index       ./functions/socket/communications/send.to.area/t
+
+          ghost.connection.status.index         ./functions/main/active.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/clean.socket/t
+
+          ghost.e.parent.name                   No references.
+
+          ghost.e.parent.name.l                 No references.
+
+          ghost.endurance                       No references.
+
+          ghost.i.parent.name                   No references.
+
+          ghost.i.parent.name.l                 No references.
+
+          ghost.left.hand.inventory.id          No references.
+
+          ghost.location.id                     No references.
+
+          ghost.name                            ./functions/get.participant.data.by.name/t
+
+          ghost.name.l                          No references.
+
+          ghost.passphrase                      ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+
+          ghost.pouch                           No references.
+
+          ghost.right.hand.inventory.id         No references.
+
+          ghost.secondary.color                 No references.
+
+          ghost.secondary.fur.quality           No references.
+
+          ghost.strength                        No references.
+
+          gylf.abdomen.worn.item.id             No references.
+
+          gylf.abdomen.wound.level              No references.
+
+          gylf.administrative.byte              ./functions/check.admin/t
+
+          gylf.age                              No references.
+
+          gylf.agility                          ./functions/dna.lab/t
+
+          gylf.back.spinal.wound.level          No references.
+
+          gylf.back.worn.item.id                No references.
+
+          gylf.back.wound.level                 No references.
+
+          gylf.base.color                       ./functions/dna.lab/t
+
+          gylf.base.fur.quality                 ./functions/dna.lab/t
+
+          gylf.brain.wound.level                No references.
+
+          gylf.chest.worn.item.id               No references.
+
+          gylf.chin.wound.level                 No references.
+
+          gylf.connection.area.id.index         ./commands/gylf/t
+                                                ./commands/look/t
+                                                ./commands/think/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications
+                                                  /send.to.participant/t
+
+          gylf.connection.descriptor.index      ./commands/egg/t
+                                                ./commands/look/t
+                                                ./commands/think/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/set.single.attribute/t
+                                                ./functions/socket/clean.socket/t
+
+          gylf.connection.external.index        ./functions/socket/communications/send.to.area/t
+                                                ./functions.socket/communications/send.to.world/t
+
+          gylf.connection.status.index          ./functions/main/active.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/clean.socket/t
+
+          gylf.e.parent.name                    ./functions/create.participant/t
+
+          gylf.e.parent.name.l                  ./functions/create.participant/t
+
+          gylf.egg.readiness                    No references.
+
+          gylf.endurance                        ./functions/dna.lab/t
+
+          gylf.head.worn.item.id                No references.
+
+          gylf.heart.wound.level                No references.
+
+          gylf.i.parent.name                    ./functions/create.participant/t
+
+          gylf.i.parent.name.l                  ./functions/create.participant/t
+
+          gylf.inseminator.wound.level          No references.
+
+          gylf.large.intestine.wound.level      No references.
+
+          gylf.left.cheek.wound.level           No references.
+
+          gylf.left.chest.wound.level           No references.
+
+          gylf.left.dew.talon.wound.level       No references.
+
+          gylf.left.ear.worn.item.id            No references.
+
+          gylf.left.ear.wound.level             No references.
+
+          gylf.left.eye.wound.level             No references.
+
+          gylf.left.forearm.wound.level         No references.
+
+          gylf.left.hand.inventory.id           No references.
+
+          gylf.left.hand.wound.level            No references.
+
+          gylf.left.index.finger.wound.level    No references.
+
+          gylf.left.inside.thigh.wound.level    No references.
+
+          gylf.left.low.talon.wound.level       No references.
+
+          gylf.left.lower.leg.wound.level       No references.
+
+          gylf.left.lung.wound.level            No references.
+
+          gylf.left.main.fore.talon.wound.level No references.
+
+          gylf.left.middle.finger.wound.level   No references.
+
+          gylf.left.middle.talon.wound.level    No references.
+
+          gylf.left.outside.thigh.wound.level   No references.
+
+          gylf.left.ring.finger.wound.level     No references.
+
+          gylf.left.shoulder.wound.level        No references.
+
+          gylf.left.thigh.worn.item.id          No references.
+
+          gylf.left.thumb.wound.level           No references.
+
+          gylf.left.upper.arm.wound.level       No references.
+
+          gylf.left.wrist.wound.level           No references.
+
+          gylf.liver.wound.level                No references.
+
+          gylf.location.id                      No references.
+
+          gylf.name                             ./functions/create.participant/t
+                                                ./functions/get.participant.data.by.name/t
+
+          gylf.name.l                           No references.
+
+          gylf.neck.spinal.wound.level          No references.
+
+          gylf.neck.worn.item.id                No references.
+
+          gylf.neck.wound.level                 No references.
+
+          gylf.nose.wound.level                 No references.
+
+          gylf.ovary.wound.level                No references.
+
+          gylf.passphrase                       ./functions/main/participant.interaction
+                                                  /address.passphrase.status/t
+
+          gylf.pouch                            ./functions/create.participant/t
+
+          gylf.pouch.wound.level                No references.
+
+          gylf.right.cheek.wound.level          No references.
+
+          gylf.right.chest.wound.level          No references.
+
+          gylf.right.dew.talon.wound.level      No references.
+
+          gylf.right.ear.worn.item.id           No references.
+
+          gylf.right.ear.wound.level            No references.
+
+          gylf.right.eye.wound.level            No references.
+
+          gylf.right.forearm.wound.level        No references.
+
+          gylf.right.hand.inventory.id          No references.
+
+          gylf.right.hand.wound.level           No references.
+
+          gylf.right.index.finger.wound.level   No references.
+
+          gylf.right.inside.thigh.wound.level   No references.
+
+          gylf.right.low.talon.wound.level      No references.
+
+          gylf.right.lower.leg.wound.level      No references.
+
+          gylf.right.lung.wound.level           No references.
+
+          gylf.right.main.fore.talon.wound      No references.
+            .level
+
+          gylf.right.middle.finger.wound.level  No references.
+
+          gylf.right.middle.talon.wound.level   No references.
+
+          gylf.right.outside.thigh.wound.level  No references.
+
+          gylf.right.ring.finger.wound.level    No references.
+
+          gylf.right.shoulder.wound.level       No references.
+
+          gylf.right.thigh.worn.item.id         No references.
+
+          gylf.right.thumb.wound.level          No references.
+
+          gylf.right.upper.arm.wound.level      No references.
+
+          gylf.right.wrist.wound.level          No references.
+
+          gylf.scalp.wound.level                No references.
+
+          gylf.secondary.color                  ./functions/dna.lab/t
+
+          gylf.secondary.fur.quality            ./functions/dna.lab/t
+
+          gylf.small.intestine.wound.level      No references.
+
+          gylf.stomach.wound.level              No references.
+
+          gylf.strength                         ./functions/dna.lab/t
+
+          gylf.testicle.wound.level             No references.
+
+          login.connection.descriptor.index     ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/socket/clean.socket/t
 
     ==============================================================================================
 
@@ -114,8 +528,7 @@ Relevant data:
 
           command.ai.s                          ./commands/ai/d
 
-          command.ai.w                          ./commands/ai/d
-                                                ./functions/d
+          command.ai.w                          ./functions/d
 
 
       t   command.ai                            ./commands/ai/d
@@ -124,46 +537,41 @@ Relevant data:
 
       /area                   Contains code pertinent to the implementation of the 'area' command;
                               an administrator command that allows for administrators to create
-                              new areas without having to dig them out using the participant interface.
+                              new areas without having to dig them out using the participant
+                              interface.
 
-      b   area.description                      ./commands/area/t
-                                                ./functions/create.character/t
+      b   area.description                      ./functions/create.participant/t
 
-          area.description.l                    ./functions/create.character/t
+          area.description.l                    ./functions/create.participant/t
 
           area.description.field.l              ./commands/area/b
-                                                ./commands/area/t
 
           area.header                           ./commands/area/b
                                                 ./commands/look/t
-                                                ./functions/create.character/t
+                                                ./functions/create.participant/t
 
           area.header.l                         ./commands/look/t
-                                                ./functions/create.character/t
+                                                ./functions/create.participant/t
 
-          area.name                             ./functions/create.character/t
+          area.name                             ./functions/create.participant/t
 
           area.name.field.l                     ./commands/area/b
 
-          area.name.l                           ./functions/create.character/t
+          area.name.l                           ./functions/create.participant/t
 
           area.num.contained.items              ./commands/area/t
                                                 ./commands/look/t
-
-          available.areas                       ./commands/area/t
 
 
       d   command.area.h                        No references.
 
           command.area.l                        ./commands/area/d
 
-          command.area.p                        ./commands/area/t
+          command.area.p                        No references.
 
           command.area.s                        ./commands/area/d
-                                                ./commands/area/t
 
-          command.area.w                        ./commands/area/d
-                                                ./functions/d
+          command.area.w                        ./functions/d
 
 
       t   command.area                          ./commands/area/d
@@ -171,14 +579,6 @@ Relevant data:
           command.area.admin                    ./commands/area/t
 
           command.area.bad                      ./commands/area/t
-
-          command.area.filename.finder          ./commands/area/t
-
-          command.area.filename.out.of.areas    ./commands/area/t
-
-          command.area.next.file                ./commands/area/t
-
-          command.area.prep.next                ./commands/area/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -197,12 +597,8 @@ Relevant data:
 
           command.broadcast.w                   ./functions/d
 
-          socket.data.command.broadcast.help    ./commands/broadcast/d
 
-          socket.data.command.broadcast.help.l  ./commands/broadcast/d
-
-
-      t   command.broadcast                     ./commands/broadcast/d
+      t   command.broadcast                     ./functions/d
 
           command.broadcast.admin               ./commands/broadcast/t
 
@@ -869,9 +1265,6 @@ Relevant data:
 
       b   active.status                         ./functions/main/participant.interaction
                                                   /address.set.passphrase.status/t
-
-          dead.socket                           ./functions/main/listening.socket.poll/t
-                                                ./functions/socket/active.socket.poll/t
 
           login.status                          ./functions/main/listening.socket.poll/t
                                                 ./functions/socket/active.socket.poll/t
