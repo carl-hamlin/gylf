@@ -8,4 +8,5 @@
 
     section   .text
 
+    %include  "./functions/create.file/s"
     %include  "./functions/create.file/t"
