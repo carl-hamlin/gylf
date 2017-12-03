@@ -12,64 +12,62 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   active.status               ./functions/main/b
+;   ./b                                   a.p.data.egg
 ;
-;   buffer.1                    ./functions/b
+;   ./functions/b                         buffer.1
 ;
-;   close.descriptor            ./functions/close.descriptor/t
+;   ./functions/close.descriptor/t        close.descriptor
 ;
-;   e.data                      ./b
+;   ./functions/d                         egg.filename
 ;
-;   egg.connection.status.index ./s
+;   ./functions/main/b                    active.status
 ;
-;   egg.filename                ./functions/d
+;   ./functions/open.descriptor/t         open.descriptor
 ;
-;   egg.passphrase              ./s
+;   ./functions/socket/recv.from.socket/t recv.from.socket
 ;
-;   open.descriptor             ./functions/open.descriptor/t
+;   ./functions/write.descriptor/t        write.descriptor
 ;
-;   read.descriptor             ./functions/read.descriptor/t
+;   ./functions/write.welcome/t           write.welcome
 ;
-;   recv.from.socket            ./functions/socket/recv.from.socket/t
-;
-;   write.descriptor            ./functions/write.descriptor/t
-;
-;   write.welcome               ./functions/write.welcome/t
+;   ./s                                   egg.connection.status.index
+;                                         egg.passphrase
+;                                         egg_size
 ;
 
   section .text
 
-	address.set.passphrase.status:	pusha                                                             ; Preserve caller's registers.
+	address.set.passphrase.status:	pusha                                                                   ; Preserve caller's registers.
 
-	                                call	recv.from.socket					                                  ; Receive data from the active socket.
+	                                call	recv.from.socket					                                        ; Receive data from the active socket.
 
-					                        push  eax                                                         ; Preserve number of bytes received.
+					                        push  eax                                                               ; Preserve number of bytes received.
 
-                                  mov   esi, buffer.1                                               ; esi - Pointer to entered passphrase to set.
-                                  mov   edi, e.data + egg.passphrase                                ; edi - Pointer to passphrase receptacle in egg data.
+                                  mov   esi, buffer.1                                                     ; esi - Pointer to entered passphrase to set.
+                                  mov   edi, a.p.data.egg + egg.passphrase                                ; edi - Pointer to passphrase receptacle in egg data.
 
-                                  pop   ecx                                                         ; ecx - Number of bytes received.
+                                  pop   ecx                                                               ; ecx - Number of bytes received.
 
-                                  repnz movsb                                                       ; Store passphrase.
+                                  repnz movsb                                                             ; Store passphrase.
 
-					                        mov	  byte [e.data + egg.connection.status.index], active.status  ; Set socket status to 'active'.
+					                        mov	  byte [a.p.data.egg + egg.connection.status.index], active.status  ; Set socket status to 'active'.
 
-                                  push  egg.filename                                                ; Point open.descriptor to connection filename.
-                                  call  open.descriptor                                             ; Associate a descriptor with the file.
+                                  push  egg.filename                                                      ; Point open.descriptor to connection filename.
+                                  call  open.descriptor                                                   ; Associate a descriptor with the file.
 
-                                  push  eax                                                         ; Preserve descriptor for close.descriptor.
+                                  push  eax                                                               ; Preserve descriptor for close.descriptor.
 
-                                  push  eax                                                         ; Point write.descriptor to the egg file.
-                                  push  e.data                                                      ; Point write.descriptor to the data at e.data.
-                                  push  egg_size                                                    ; Tell write.descriptor to write an entire egg.
-                                  call  write.descriptor                                            ; Write back the updated egg.
+                                  push  eax                                                               ; Point write.descriptor to the egg file.
+                                  push  a.p.data.egg                                                      ; Point write.descriptor to the data at a.p.data.egg.
+                                  push  egg_size                                                          ; Tell write.descriptor to write an entire egg.
+                                  call  write.descriptor                                                  ; Write back the updated egg.
 
-                                  call  close.descriptor                                            ; Disassociate the descriptor from the egg file.
+                                  call  close.descriptor                                                  ; Disassociate the descriptor from the egg file.
 
 	                                ; *** Here's where particpants begin to integrate. ***
 
-					                        call	write.welcome						                                    ; Set up the user screen.
+					                        call	write.welcome						                                          ; Set up the user screen.
 
-                                  popa                                                              ; Restore caller's registers.
+                                  popa                                                                    ; Restore caller's registers.
 
-					                        ret								                                                ; Return to caller.
+					                        ret								                                                      ; Return to caller.
