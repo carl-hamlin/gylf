@@ -1,0 +1,56 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/get.new.id/t
+;
+;   This function returns a new id corresponding to the directory passed to it.
+;
+;   Assumptions:    Stack Frame:  dword [Pointer to id directory]
+;
+;   Returns:        eax - New id for the provided directory.
+;
+;                   - OR -
+;
+;                   eax - Error.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+    get.new.id:       push  ebp                                         ; Preserve caller's ebp.
+
+                      mov   ebp, esp                                    ; ebp - Pointer to stack.
+                      add   ebp, (dword.l + get.new.id.packet_size)     ; ebp - Pointer to data packet.
+
+                      sub   eax, eax                                    ; eax - First id to lookup.
+
+    get.new.id.loop:  push  eax                                         ; Preserve id.
+
+                      add   dword [ebp - get.new.id.packet.id], dword.l ; Adjust id to point to the buffer.
+
+                      push  dword [ebp - get.new.id.packet.id]          ; Point convert.binary.id.to.ascii.id to destination buffer.
+                      push  eax                                         ; Tell convert.binary.id.to.ascii.id what id to convert.
+                      call  convert.binary.id.to.ascii.id               ; Convert the id and load the directory indicator.
+
+                      sub   dword [ebp - get.new.id.packet.id], dword.l ; Adjust id to point back to the filename.
+
+                      push  dword [ebp - get.new.id.packet.id]          ; Point open.descriptor to the directory against which to lookup a new id.
+                      call  open.descriptor                             ; Attempt to associate a descriptor with the file.
+
+                      or    eax, eax                                    ; Did we associate a descriptor?
+                      js    get.new.id.done                             ; No! We have our new id!
+
+                      push  eax                                         ; Preserve result of open.descriptor.
+                      call  close.descriptor                            ; Attempt to close an open descriptor.
+
+                      pop   eax                                         ; Restore id counter.
+                      inc   eax                                         ; Increment id counter.
+                      jmp   get.new.id.loop                             ; Go check the next id.
+
+    get.new.id.done:  pop   eax                                         ; eax - New id.
+
+                      pop   ebp                                         ; Restore caller's ebp.
+
+                      ret   get.new.id.packet_size                      ; Return to caller.

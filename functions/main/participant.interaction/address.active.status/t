@@ -1,11 +1,11 @@
-;================================================================================================================================================================================================
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   ./functions/main/participant.interaction/address.active.status/t
 ;
 ;   This function performs further processing on data submitted by a socket with status 'active'.
 ;
-;   Assumptions:    eax = Length of received data.
-;                   esi = Pointer to descriptor associated with target socket.
+;   Assumptions:    eax - Length of received data.
+;                   esi - Pointer to descriptor associated with target socket.
 ;
 ;   Returns:        None.
 ;
@@ -35,6 +35,8 @@
 ;
 
     address.active.status:                    call  recv.from.socket                          ; Get the data from the socket.
+
+                                              push  ebx                                       ; Store pointer to received arguments.
                                               call  aggregate.arguments                       ; Aggregate arguments received.
 
                                               mov   ecx, number.of.commands                   ; ecx - Number of commands in command table. This number acts as our loop counter.

@@ -40,5 +40,5 @@
 	  socket.data.second.login.error.end  equ $-socket.data.second.login.error											                                                        ; Pointer to end of message.
 
     socket.data.welcome.message.l       dd  socket.data.welcome.message.end                                                                               ; Length of message.
-	  socket.data.welcome.message		      db  "Ah, a new player! Welcome.", 0Ah, 0Dh, "Please enter a string of characters to use as a passphrase: "			  ; Storage for new user welcome message.
+	  socket.data.welcome.message		      db  "Ah, a new participant! Welcome.", 0Ah, 0Dh, "Please enter a string of characters to use as a passphrase: "		; Storage for new user welcome message.
 	  socket.data.welcome.message.end		  equ $-socket.data.welcome.message												                                                          ; Pointer to end of message.
