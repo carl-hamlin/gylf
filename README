@@ -736,6 +736,7 @@ Relevant data:
       d   command.look.h                        No references.
 
           command.look.l                        ./commands/look/d
+                                                ./commands/look/t
 
           command.look.p                        No references.
 
