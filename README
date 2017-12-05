@@ -642,6 +642,14 @@ Relevant data:
 
       t   command.egg                           ./commands/egg/d
 
+          command.egg.admin                     ./commands/egg/t
+
+          command.egg.already.fertilized        ./commands/egg/t
+
+          command.egg.bad.name                  ./commands/egg/t
+
+          command.egg.nat                       ./commands/egg/t
+
     ----------------------------------------------------------------------------------------------
 
       /gylf                   Contains code pertinent to the implementation of the 'gylf' command;
