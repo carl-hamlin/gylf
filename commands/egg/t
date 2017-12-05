@@ -15,81 +15,56 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   a.p.data.gylf                                           ./b
+;   ./b                                         a.p.data.gylf
+;                                               dead.socket
+;                                               e.data
+;                                               g.data
 ;
-;   argument.01.location                                    ./functions/aggregate.arguments/b
+;   ./commands/egg/t                            command.egg.admin
+;                                               command.egg.already.fertilized
+;                                               command.egg.bad.name
+;                                               command.egg.nat
 ;
-;   argument.01.size                                        ./functions/aggregate.arguments/b
+;   ./functions/aggregate.arguments/d           argument.01.location
 ;
-;   assemble.path                                           ./functions/assemble.path/t
+;   ./functions/b                               buffer.1
 ;
-;   buffer.1                                                ./functions/b
+;   ./functions/check.admin/t                   check.admin
 ;
-;   check.admin                                             ./functions/check.admin/t
+;   ./functions/close.descriptor/t              close.descriptor
 ;
-;   close.descriptor                                        ./functions/close.descriptor/t
+;   ./functions/create.file/t                   create.file
 ;
-;   command.egg.admin                                       ./commands/egg/t
+;   ./functions/d                               area.filename
+;                                               egg.filename
+;                                               item.filename
 ;
-;   command.egg.already.fertilized                          ./commands/egg/t
+;   ./functions/get.new.id/t                    get.new.id
 ;
-;   command.egg.bad.name                                    ./commands/egg/t
+;   ./functions/get.participant.data.by.name/t  get.participant.data.by.name
 ;
-;   command.egg.nat.ret                                     ./commands/egg/t
+;   ./functions/main/text.init/b                text.data.index.socket.data.command.egg.a.f.message
+;                                               text.data.index.socket.data.command.egg.bad.name.message
+;                                               text.data.index.socket.data.command.egg.f.notif.message
 ;
-;   command.egg.notify.absent.target                        ./commands/egg/t
+;   ./functions/notification.in.absentia/t      notify.in.absentia
 ;
-;   create.file                                             ./functions/create.file/t
+;   ./functions/socket.send/t                   socket.send
 ;
-;   dead.socket                                             ./b
+;   ./functions/write.bad.command.error/t       write.bad.command.error
 ;
-;   e.data                                                  ./b
+;   ./functions/write.descriptor/t              write.descriptor
 ;
-;   egg.area.id                                             ./s
-;
-;   egg.e.parent.name                                       ./s
-;
-;   egg.e.parent.name.l                                     ./s
-;
-;   egg.i.parent.name                                       ./s
-;
-;   egg.i.parent.name.l                                     ./s
-;
-;   egg.item.id                                             ./s
-;
-;   get.new.area.id                                         ./functions/get.new.area.id/t
-;
-;   get.new.item.id                                         ./functions/get.new.item.id/t
-;
-;   get.participant.data                                    ./functions/get.participant.data/t
-;
-;   gylf.connection.descriptor.index                        ./s
-;
-;   notify.in.absentia                                      ./functions/notify.in.absentia/t
-;
-;   open.descriptor                                         ./functions/open.descriptor/t
-;
-;   g.data                                                  ./b
-;
-;   sterilize.memory                                        ./functions/sterilize.memory/t
-;
-;   text.data.index.command.egg.already.fertilized.message  ./functions/main/text.init/b
-;
-;   text.data.index.command.egg.bad.name.message            ./functions/main/text.init/b
-;
-;   text.data.index.command.egg.f.notification.message      ./functions/main/text.init/b
-;
-;   text.data.index.egg.area.description                    ./functions/main/text.init/b
-;
-;   text.data.index.egg.area.name                           ./functions/main/text.init/b
-;
-;   text.data.index.egg.item.description                    ./functions/main/text.init/b
-;
-;   text.data.index.egg.item.name                           ./functions/main/text.init/b
-;
-;   write.bad.command.error                                 ./functions/write.bad.command.error/t
-;
-;   write.descriptor                                        ./functions/write.descriptor/t
+;   ./s                                         egg.area.id
+;                                               egg.e.parent.name
+;                                               egg.e.parent.name.l
+;                                               egg.i.parent.name
+;                                               egg.i.parent.name.l
+;                                               egg.item.id
+;                                               egg_size
+;                                               gylf.connection.descriptor.index
+;                                               gylf.name
+;                                               gylf.name.l
 ;
 
     command.egg:                    call  check.admin                                                                 ; Is the performing participant a privileged user?

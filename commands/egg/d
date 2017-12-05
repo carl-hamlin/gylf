@@ -8,11 +8,10 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.egg   ./commands/egg/t
+;   ./commands/egg/d  command.egg.l
+;                     command.egg.s
 ;
-;   command.egg.l ./commands/egg/d
-;
-;   command.egg.s ./commands/egg/d
+;   ./commands/egg/t  command.egg
 ;
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
