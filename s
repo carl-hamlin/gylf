@@ -167,8 +167,6 @@
       .right.hand.inventory.id            resd  00000001h ; Item id for item held in right hand.
       .left.hand.inventory.id             resd  00000001h ; Item id for item held in left hand.
 
-      .administrative.byte                resb        01h ; Reserved for administrative data
-
       .connection.area.id.index           resd  00000001h ; Placeholder for connection area id.
       .connection.descriptor.index        resd  00000001h ; Placeholder for connection descriptor.
       .connection.external.index          resd  00000001h ; Placeholder for external descriptor.
@@ -210,7 +208,7 @@
       .right.hand.inventory.id            resd  00000001h ; Item id for item held in right hand.
       .left.hand.inventory.id             resd  00000001h ; Item id for item held in left hand.
 
-      .administrative.byte                resb        01h ; Reserved for administrative data
+      .administrative.byte                resb        01h ; Reserved for administrative data.
 
       .connection.area.id.index           resd  00000001h ; Placeholder for connection area id.
       .connection.descriptor.index        resd  00000001h ; Placeholder for connection descriptor.

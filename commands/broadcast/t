@@ -4,8 +4,8 @@
 ;
 ;   This function broadcasts a message to the entire world.
 ;
-;   Assumptions:      ebp - Populated answer.active.socket.packet
-;                     Aggregated arguments.
+;   Assumptions:      ebp - Pointer to populated answer.active.socket.packet.
+;                     Arguments aggregated.
 ;
 ;   Returns:          None.
 ;
@@ -15,26 +15,28 @@
 ;
 ;   ./commands/broadcast/t                            command.broadcast.admin
 ;
-;   ./functions/aggregate.arguments/b                 argument.01.location
-;                                                     argument.01.size
-;
 ;   ./functions/check.admin/t                         check.admin
 ;
 ;   ./functions/socket/communications/send.to.world/t send.to.world
 ;
 ;   ./functions/write.bad.command.error/t             write.bad.command.error
 ;
+;   ./functions/write.prompt/t                        write.prompt
+;
 
-    command.broadcast:        call  check.admin                   ; See if the calling socket is controlled by an admin.
+    command.broadcast:        pusha                               ; Preserve caller's registers.
+
+                              call  check.admin                   ; See if the calling socket is controlled by an admin.
                               jc    command.broadcast.admin       ; If so, go run the broadcast. Otherwise...
 
                               call  write.bad.command.error       ; Tell the user that the command doesn't have a current analogue.
 
+                              popa                                ; Restore caller's registers.
                               ret                                 ; Return to caller.
 
-    command.broadcast.admin:  mov   eax, 00000001h                ; Tell send.to.world to work with buffered data.
-                              push  dword [argument.01.location]  ; Point send.to.world to received data to be broadcast.
-                              push  dword [argument.01.size]      ; Tell send.to.world the length of the data.
-                              call  send.to.world                 ; Broadcast the message.
+    command.broadcast.admin:  call  send.to.world                 ; Broadcast the message.
 
+                              call  write.prompt                  ; Give the performer a prompt.
+
+                              popa                                ; Restore caller's registers.
                               ret                                 ; Return to caller.
