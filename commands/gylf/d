@@ -8,13 +8,11 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.gylf    ./commands/gylf/t
+;   ./commands/gylf/d command.gylf.l
+;                     command.gylf.s
 ;
-;   command.gylf.l  ./commands/gylf/d
+;   ./commands/gylf/t commands.gylf
 ;
-;   command.gylf.s  ./commands/gylf/d
-;
-
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Command Table Entry

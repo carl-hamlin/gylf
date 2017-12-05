@@ -1,0 +1,49 @@
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   ./functions/write.credential/t
+;
+;   This function writes credential data from a buffer to the provided credential.
+;
+;   Assumptions:    Stack Frame:  dword - ID to be read.
+;                                 dword - Pointer to credential filename to be read.
+;                                 dword - Pointer to buffer into which to read the data.
+;                                 dword - Number of bytes to be read.
+;
+;   Returns:        eax - Error.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   dword.l ./b
+;
+
+    write.credential:       push  ebp                                                 ; Preserve caller's ebp.
+
+                            mov   ebp, esp                                            ; ebp - Prepared to be used as data pointer.
+                            add   ebp, (dword.l + write.credential.packet_size)       ; ebp - Data pointer.
+
+                            mov   eax, dword [ebp - write.credential.packet.fpointer] ; eax - Pointer to credential filename.
+                            add   eax, dword.l                                        ; eax - Pointer to ASCII ID to be converted.
+
+                            push  eax                                                 ; Point convert.binary.id.to.ascii.id to egg filename.
+                            push  dword [ebp - write.credential.packet.id]            ; Point convert.binary.id.to.ascii.id to id to be converted.
+                            call  convert.binary.id.to.ascii.id                       ; Convert the id.
+
+                            push  dword [ebp - write.credential.packet.fpointer]      ; Point open.descriptor to the provided credential.
+                            call  open.descriptor                                     ; Attempt to associate a descriptor with the provided credential.
+
+                            or    eax, eax                                            ; Were we able to associate the descriptor?
+                            js    write.credential.done                               ; No. Return with error.
+
+                            push  eax                                                 ; Preserve descriptor for close.descriptor.
+
+                            push  eax                                                 ; Point write.descriptor to the descriptor we associated with the credential.
+                            push  dword [ebp - write.credential.packet.bpointer]      ; Tell write.descriptor to write the credential from the provided buffer.
+                            push  dword [ebp - write.credential.packet.size]          ; Tell write.descriptor to write the specified number of bytes.
+                            call  write.descriptor                                    ; Write the credential.
+
+                            call  close.descriptor                                    ; Close the credential file.
+
+    write.credential.done:  pop   ebp                                                 ; Restore caller's ebp.
+                            ret   write.credential.packet_size                        ; Return to caller.

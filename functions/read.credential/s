@@ -1,0 +1,25 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/read.credential/s
+;
+;   This file contains structures pertinent to the read.credential utility.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+;================================================================================================================================================================================================
+;
+;   read.credential Data Structure
+;
+
+    struc read.credential.packet
+      .id       resd  00000001h ; Storage for id to be read.
+      .fpointer resd  00000001h ; Storage for pointer to file to be read.
+      .bpointer resd  00000001h ; Storage for pointer to buffer into which to read data.
+      .size     resd  00000001h ; Storage for size of data to be read.
+    endstruc
+
