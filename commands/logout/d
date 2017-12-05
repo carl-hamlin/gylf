@@ -8,11 +8,10 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.logout    ./commands/logout/t
+;   ./commands/logout/d command.logout.l
+;                       command.logout.s
 ;
-;   command.logout.l  ./commands/logout/d
-;
-;   command.logout.s  ./commands/logout/d
+;   ./commands/logout/t command.logout
 ;
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

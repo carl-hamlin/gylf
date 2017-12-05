@@ -6,15 +6,16 @@
 ;
 ;   Syntax: logout
 ;
-;   Assumptions:     esi - Pointer to descriptor associated with active socket.
+;   Assumptions:  ebp - Pointer to populated answer.active.socket.packet.
+;                 Arguments aggregated.
 ;
-;   Returns:         None.
+;   Returns:      None.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   write.bad.command.error ./functions/write.bad.command.error/t
+;   ./functions/write.bad.command.error/t write.bad.command.error
 ;
 
 	command.logout:	call  write.bad.command.error ; Let the user know that they've entered a bad command and suggest HELP.
