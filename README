@@ -672,6 +672,8 @@ Relevant data:
 
           command.gylf.admin                    ./commands/gylf/t
 
+          command.gylf.bad                      ./commands/gylf/t
+
           command.gylf.dna.mode                 ./commands/gylf/t
 
           command.gylf.nsp.mode                 ./commands/gylf/t
