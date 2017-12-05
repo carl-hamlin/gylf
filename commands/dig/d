@@ -8,11 +8,10 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.dig   ./commands/dig/t
+;   ./commands/dig/d  command.dig.l
+;                     command.dig.s
 ;
-;   command.dig.l ./commands/dig/d
-;
-;   command.dig.s ./commands/dig/d
+;   ./commands/dig/t  command.dig
 ;
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
