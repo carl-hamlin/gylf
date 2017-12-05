@@ -8,11 +8,10 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.shutdown    ./commands/shutdown/t
+;   ./commands/shutdown/d command.shutdown.l
+;                         command.shutdown.s
 ;
-;   command.shutdown.l  ./commands/shutdown/d
-;
-;   command.shutdown.s  ./commands/shutdown/d
+;   ./commands/shutdown/t command.shutdown
 ;
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
