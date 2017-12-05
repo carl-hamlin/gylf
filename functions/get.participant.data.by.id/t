@@ -1,0 +1,61 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/get.participant.data.by.id/t
+;
+;   This function returns participant data in g.data corresponding to a provided id, or an error in the case of an id that does not exist.
+;
+;   Assumptions:    ebp - Pointer to populated answer.active.socket.packet.
+;
+;   Returns:        [e.data] - Data for the requested egg.
+;                   [g.data] - Data for the requested gylf.
+;                   [d.data] - Data for the requested ghost.
+;
+;                   - OR -
+;
+;                   eax - Error.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   ./b                                         dword.l
+;
+;   ./functions/close.descriptor/t              close.descriptor
+;
+;   ./functions/convert.binary.id.to.ascii.id/t convert.binary.id.to.ascii.id
+;
+;   ./functions/get.participant.data.by.id/t    get.participant.data.by.id.error
+;
+;   ./functions/open.descriptor/t               open.descriptor
+;
+;   ./functions/read.descriptor/t               read.descriptor
+;
+;   ./functions/socket/answer.active.socket/s   answer.active.socket.packet.bpointer
+;                                               answer.active.socket.packet.bsize
+;                                               answer.active.socket.packet.fpointer
+;                                               answer.active.socket.packet.ipointer
+;
+
+    get.participant.data.by.id:       mov   eax, dword [ebp - answer.active.socket.packet.fpointer] ; eax - Pointer to target filename.
+                                      add   eax, dword.l                                            ; eax - Pointer to target buffer for convert.binary.id.to.ascii.id.
+
+                                      push  eax                                                     ; Point convert.binary.id.to.ascii.id to target buffer.
+                                      push  dword [ebp - answer.active.socket.packet.ipointer]      ; Point convert.binary.id.to.ascii.id to target id.
+                                      call  convert.binary.id.to.ascii.id                           ; Convert the id to ASCII.
+
+                                      push  dword [ebp - answer.active.socket.packet.fpointer]      ; Point open.descriptor to the newly created filename containing the converted id.
+                                      call  open.descriptor                                         ; Attempt to open the file for reading.
+
+                                      or    eax, eax                                                ; Did we successfully open the file for reading?
+                                      js    get.participant.data.by.id.error                        ; NO! Go restore the return address and return to sender with the error code in eax.
+
+                                      push  eax                                                     ; Store file descriptor for closing after read.
+
+                                      push  eax                                                     ; Point read.descriptor to the target data file.
+                                      push  dword [ebp - answer.active.socket.packet.bpointer]      ; Point read.descriptor to the supplied buffer.
+                                      push  dword [ebp - answer.active.socket.packet.bsize]         ; Tell read.descriptor to read the whole file.
+                                      call  read.descriptor                                         ; Read that data into the supplied buffer.
+
+                                      call  close.descriptor                                        ; Close the file.
+
+    get.participant.data.by.id.error: ret                                                           ; Return to caller.

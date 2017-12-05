@@ -14,4 +14,5 @@
 
     section   .text
 
+    %include  "./functions/main/text.init/s"
     %include  "./functions/main/text.init/t"

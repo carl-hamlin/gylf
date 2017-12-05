@@ -1,0 +1,57 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/socket/communications/send.to.participant/t
+;
+;   This function sends a provided message out to a provided area.
+;
+;   Assumptions:    Stack frame:  dword - Length of message to be broadcast.
+;                                 dword - Pointer to message to be broadcast.
+;                                 dword - Area from which broadcast is being generated.
+;                                 dword - Connection ID to which to broadcast.
+;
+;   Returns:        eax - 0 on success
+;                   eax - out of area indicator if target recipient is out of area
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   dword.l                               ./b
+;
+;   g.data                                ./b
+;
+;   get.participant.data.by.id            ./functions/get.participant.data.by.id/t
+;
+;   gylf.connection.area.id.index         ./s
+;
+;   send.to.participant.done              ./functions/socket/communications/send.to.participant/t
+;
+;   send.to.participant.out.of.area.error ./functions/socket/communications/send.to.participant/t
+;
+;   socket.send.buf                       ./functions/socket/socket.send/t
+;
+
+    send.to.participant:                    mov   ebp, esp                                            ; ebp - Stack pointer.
+                                            add   ebp, (dword.l + stp.packet_size)                    ; ebp - Pointer to passed stp.packet.
+
+                                            push  dword [ebp + stp.packet.connection]                 ; Point get.participant.data.by.id to the target connection.
+                                            call  get.participant.data.by.id                          ; Put target connection data into g.data.
+
+                                            or    eax, eax                                            ; Did get.participant.data.by.id return an error?
+                                            js    send.to.participant.done                            ; Yes. Go return to caller and let the caller decide what to do with the error.
+
+                                            mov   eax, dword [ebp + stp.packet.area]                  ; eax - Area id to which to be broadcast.
+                                            cmp   dword [g.data + gylf.connection.area.id.index], eax ; Does the area id associated with this connection match the area id to be broadcast?
+                                            jnz   send.to.participant.out.of.area.error               ; No - Return out of area indicator.
+
+                                            push  dword [ebp - stp.packet.connection]                 ; Point send function to specified connection.
+                                            push  dword [ebp + stp.packet.message]                    ; Point send function to the message.
+                                            push  dword [ebp + stp.packet.length]                     ; Tell the send function how long the message is.
+                                            push  dword 00000000h                                     ; Flags for send function.
+                                            call  socket.send                                         ; Send the message to the indicated descriptor.
+
+                                            jmp   send.to.participant.done                            ; Return to caller.
+
+    send.to.participant.out.of.area.error:  mov   eax, 0FFFFh                                         ; eax - Out of area indicator
+
+    send.to.participant.done:               ret   (stp.packet_size)                                   ; Return to caller.

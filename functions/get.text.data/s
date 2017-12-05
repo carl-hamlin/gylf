@@ -1,0 +1,24 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/get.text.data/s
+;
+;   This file contains structures pertinent to the get.text.data utility.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+;================================================================================================================================================================================================
+;
+;   get.text.data Data Structure
+;
+
+    struc get.text.data.packet
+      .message    resd  00000001h ; Storage for pointer to message to be written.
+      .descriptor resd  00000001h ; Storage for descriptor associated with external text.
+      .length     resd  00000001h ; Storage for length of indexed data.
+    endstruc
+

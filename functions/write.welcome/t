@@ -4,7 +4,7 @@
 ;
 ;   This function builds the initial welcome screen.
 ;
-;   Assumptions:    esi - Index to connection table.
+;   Assumptions:    ebp - Pointer to populated answer.active.socket.packet.
 ;
 ;   Returns:        None.
 ;
@@ -17,8 +17,14 @@
 ;   write.prompt                ./functions/write.prompt/t
 ;
 
-    write.welcome: call clear.screen                                 ; Clear the user's screen.
-            
-                   call write.prompt                                 ; Send the prompt to the user.
+    write.welcome:  push  ebx                                                   ; Preserve caller's ebx.
+                    mov   ebx, dword [ebp - answer.active.socket.packet.active] ; ebx - Descriptor associated with active socket.
 
-                   ret                                               ; Return to caller.
+                    push  dword [ebx]                                           ; Point clear.screen to active socket.
+                    call  clear.screen                                          ; Clear the user's screen.
+            
+                    call  write.prompt                                          ; Send the prompt to the user.
+
+                    pop   ebx                                                   ; Restore caller's ebx.
+
+                    ret                                                         ; Return to caller.

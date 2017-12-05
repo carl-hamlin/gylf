@@ -4,14 +4,7 @@
 ;
 ;   This function sends a provided message out to the whole world.
 ;
-;   Assumptions:    Stack Frame:  dword - Index of message to be broadcast.
-;                   al - Buffer mode indicator (!1)
-;
-;                   - OR -
-;
-;                   Stack Frame:  dword - Length of buffered data.
-;                                 dword - Pointer to buffered data.
-;                   al - Buffer mode indicator (1)
+;   Assumptions:    epb - Pointer to populated answer.active.socket.packet
 ;
 ;   Returns:        None.
 ;
@@ -19,82 +12,158 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   connection.entry.size                               ./functions/main/system.check/b
+;   ./b                                               d.data
+;                                                     e.data
+;                                                     g.data
 ;
-;   connection.table                                    ./functions/main/system.check/b
+;   ./functions/aggregate.arguments/t                 argument.01.location
+;                                                     argument.01.size
 ;
-;   dword.l                                             ./b
+;   ./functions/d                                     egg.filename
+;                                                     ghost.filename
+;                                                     gylf.filename
 ;
-;   send.to.world.buf.p                                 ./functions/socket/communications/send.to.world/t
+;   ./functions/get.participant.by.id/t               get.participant.by.id
 ;
-;   send.to.world.buf.s                                 ./functions/socket/communications/send.to.world/t
+;   ./functions/main/b                                top.egg
+;                                                     top.ghost
+;                                                     top.gylf
 ;
-;   send.to.world.buf.sret                              ./functions/socket/communications/send.to.world/t
+;   ./functions/main/text.init/b                      text.data.index.socket.data.prompt.message
 ;
-;   send.to.world.c                                     ./functions/socket/communications/send.to.world/t
+;   ./functions/socket/answer.active.socket/s         answer.active.socket.packet.bpointer
+;                                                     answer.active.socket.packet.bsize
+;                                                     answer.active.socket.packet.fpointer
+;                                                     answer.active.socket.packet.ipointer
 ;
-;   send.to.world.loop                                  ./functions/socket/communications/send.to.world/t
+;   ./functions/socket/communications/send.to.world/t send.to.world.egg.loop
+;                                                     send.to.world.egg.loop.done
+;                                                     send.to.world.egg.loop.next
+;                                                     send.to.world.ghost.loop
+;                                                     send.to.world.ghost.loop.done
+;                                                     send.to.world.ghost.loop.next
+;                                                     send.to.world.gylf.loop
+;                                                     send.to.world.gylf.loop.done
+;                                                     send.to.world.gylf.loop.next
 ;
-;   socket.number                                       ./b
+;   ./functions/socket/socket.send/t                  socket.send
 ;
-;   socket.send                                         ./functions/socket/socket.send/t
-;
-;   text.data.index.local.data.carriage.return.message  ./functions/main/text.init/b
-;
-;   write.prompt                                        ./functions/write.prompt/t
+;   ./s                                               egg.connection.descriptor.index
+;                                                     egg_size
+;                                                     ghost.connection.descriptor.index
+;                                                     ghost.connection.external.index
+;                                                     ghost_size
+;                                                     gylf.connection.descriptor.index
+;                                                     gylf_size
 ;
 
-    send.to.world:          pop   ebp                                                         ; Preserve return address.
+    send.to.world:                  pusha                                                                     ; Preserve caller's registers.
 
-                            cmp   al, 1                                                       ; Buffered mode?
-                            jz    send.to.world.buf.p                                         ; Yes. Skip popping the index.
-
-                            pop   edx                                                         ; edx - Index to message.
-
-    send.to.world.buf.p     push  esi                                                         ; Preserve caller's esi register.
-
-                            mov   esi, connection.table                                       ; esi - Index to socket entries.
-                            mov   ecx, socket.number                                          ; ecx - Number of sockets in table; we use this number as our loop counter.
+                                    mov   dword [ebp - answer.active.socket.packet.fpointer], egg.filename    ; Point get.participant.by.id to egg.filename.
+                                    mov   dword [ebp - answer.active.socket.packet.bpointer], e.data          ; Point get.participant.by.id to e.data.
+                                    mov   dword [ebp - answer.active.socket.packet.bsize], egg_size           ; Tell get.participant.by.id that we're looking for eggs.
+                                    mov   dword [ebp - answer.active.socket.packet.ipointer], 0               ; Zero id counter.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.world.loop:     push  ecx                                                         ; Preserve number of sockets.
-                            push  edx                                                         ; Preserve index to message.
+    send.to.world.egg.loop          call  get.participant.data.by.id                                          ; Attempt to populate e.data with the data corresponding to the current id.
 
-                            cmp   al, 1                                                       ; Buffered mode?
-                            jz    send.to.world.buf.s                                         ; Yes - go activate socket.send.buf instead.
+                                    or    eax, eax                                                            ; Were we able to read the data?
+                                    js    send.to.world.egg.loop.next                                         ; Nope. Go check the next one.
 
-                            push  edx                                                         ; Point socket.send to index.
-                            call  socket.send                                                 ; Send the message to the socket.
+                                    cmp   dword [e.data + egg.connection.descriptor.index], 0                 ; Is this connection alive?
+                                    jz    send.to.world.egg.loop.next                                         ; No. Go check the next one.
 
-    send.to.world.buf.sret: push  dword [text.data.index.local.data.carriage.return.message]  ; Point send function to a carriage return.
-                            call  socket.send                                                 ; Broadcast a carriage return.
+                                    push  dword [e.data + egg.connection.descriptor.index]                    ; Point socket.send to the socket associated with this id.
+                                    push  dword [argument.01.location]                                        ; Point socket.send to the message to be broadcast.
+                                    push  dword [argument.01.size]                                            ; Tell socket.send how long the message is.
+                                    push  dword 00000000h                                                     ; Flags for send function.
+                                    call  socket.send                                                         ; Broadcast to the id.
 
-                            call  write.prompt                                                ; Send a prompt.
+                                    push  dword [e.data + egg.connection.descriptor.index]                    ; Point socket.send to the socket associated with this id.
+                                    push  00000000h                                                           ; No buffered data.
+                                    push  00000000h                                                           ; No buffered length.
+                                    push  dword [text.data.index.socket.data.prompt.message]                  ; Point the send function to the prompt.
+                                    call  socket.send                                                         ; Send the prompt to the socket.
 
-                            add   esi, connection.entry.size                                  ; esi - Pointer to next descriptor in table.
+    send.to.world.egg.loop.next:    mov   eax, dword [top.egg]                                                ; eax - Top egg.
+                                    cmp   eax, dword [ebp - answer.active.socket.packet.ipointer]             ; Have we reached the top egg?
+                                    jz    send.to.world.egg.loop.done                                         ; Yes. Go prepare to broadcast to ghosts.
 
-                            pop   edx                                                         ; Restore return address.
-                            pop   ecx                                                         ; Restore number of sockets.
-                        
-                            loop  send.to.world.loop                                          ; Go broadcast to the next socket in the table.
+                                    inc   dword [ebp - answer.active.socket.packet.ipointer]                  ; Next id to be broadcast to.
+                                    jmp   send.to.world.egg.loop                                              ; Go broadcast to the next id.
 
-                            cmp   al, 1                                                       ; Buffered mode?
-                            jnz   send.to.world.c                                             ; No. Go skip restoring the stack.
-
-                            pop   ecx                                                         ; Killing the pointer to the buffer...
-                            pop   ecx                                                         ; Killing the size of the buffered data...
-
-    send.to.world.c         pop   esi                                                         ; Restore caller's esi register.
-
-                            push  ebp                                                         ; Restore return address.
-
-                            ret                                                               ; Return to caller.
+    send.to.world.egg.loop.done:    mov   dword [ebp - answer.active.socket.packet.fpointer], ghost.filename  ; Point get.participant.by.id to ghost.filename.
+                                    mov   dword [ebp - answer.active.socket.packet.bpointer], d.data          ; Point get.participant.by.id to d.data.
+                                    mov   dword [ebp - answer.active.socket.packet.bsize], ghost_size         ; Tell get.participant.by.id that we're looking for ghosts.
+                                    mov   dword [ebp - answer.active.socket.packet.ipointer], 0               ; Zero id counter.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    send.to.world.buf.s     push  dword [esp+(dword.l * 4)]                                   ; Tell socket.send.buf how long the data is.
-                            push  dword [esp+(dword.l * 3)]                                   ; Point socket.send.buf to the data.
-                            call  socket.send.buf                                             ; Send the data.
+    send.to.world.ghost.loop:       mov   eax, dword [ebp - answer.active.socket.packet.ipointer]             ; eax - Current id.
+                                    cmp   eax, dword [a.p.data.ghost + ghost.connection.external.index]       ; Does this id belong to the performer?
+                                    jz    send.to.world.ghost.loop.next                                       ; Skip this id.
+    
+                                    call  get.participant.data.by.id                                          ; Populate d.data with the participant data to which to send.
 
-                            jmp   send.to.world.buf.sret                                      ; Resume loop.
+                                    or    eax, eax                                                            ; Were we able to read the data?
+                                    js    send.to.world.ghost.loop.next                                       ; No. Go check the next one.
+
+                                    cmp   dword [d.data + ghost.connection.descriptor.index], 0               ; Is this connection alive?
+                                    jz    send.to.world.ghost.loop.next                                       ; No. Go check the next one.
+
+                                    push  dword [d.data + ghost.connection.descriptor.index]                  ; Point socket.send to the socket associated with this id.
+                                    push  dword [argument.01.location]                                        ; Point socket.send to the message to be broadcast.
+                                    push  dword [argument.01.size]                                            ; Tell socket.send how long the message is.
+                                    push  dword 00000000h                                                     ; Flags for send function.
+                                    call  socket.send                                                         ; Broadcast to the id.
+
+                                    push  dword [d.data + ghost.connection.descriptor.index]                  ; Point socket.send to the socket associated with this id.
+                                    push  00000000h                                                           ; No buffered data.
+                                    push  00000000h                                                           ; No buffered length.
+                                    push  dword [text.data.index.socket.data.prompt.message]                  ; Point the send function to the prompt.
+                                    call  socket.send                                                         ; Send the prompt to the socket.
+
+    send.to.world.ghost.loop.next:  mov   eax, dword [top.ghost]                                              ; eax - Top ghost.
+                                    cmp   eax, dword [ebp - answer.active.socket.packet.ipointer]             ; Have we reached the top ghost?
+                                    jz    send.to.world.ghost.loop.done                                       ; Yes. Go prepare to broadcast to gylf.
+
+                                    inc   dword [ebp - answer.active.socket.packet.ipointer]                  ; Next id to be broadcast to.
+                                    jmp   send.to.world.ghost.loop                                            ; Go broadcast to the next id.
+
+    send.to.world.ghost.loop.done:  mov   dword [ebp - answer.active.socket.packet.fpointer], gylf.filename   ; Point get.participant.by.id to gylf.filename.
+                                    mov   dword [ebp - answer.active.socket.packet.bpointer], g.data          ; Point get.participant.by.id to g.data.
+                                    mov   dword [ebp - answer.active.socket.packet.bsize], gylf_size          ; Tell get.participant.by.id that we're looking for gylf.
+                                    mov   dword [ebp - answer.active.socket.packet.ipointer], 0               ; Zero id counter.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    send.to.world.gylf.loop:        call  get.participant.data.by.id                                          ; Populate g.data with the participant data to which to send.
+
+                                    or    eax, eax                                                            ; Were we able to read the data?
+                                    js    send.to.world.gylf.loop.next                                        ; No. Go check the next one.
+
+                                    cmp   dword [g.data + gylf.connection.descriptor.index], 0                ; Is this connection alive?
+                                    jz    send.to.world.gylf.loop.next                                        ; No. Go check the next one.
+
+                                    push  dword [g.data + gylf.connection.descriptor.index]                   ; Point socket.send to the socket associated with this id.
+                                    push  dword [argument.01.location]                                        ; Point socket.send to the message to be broadcast.
+                                    push  dword [argument.01.size]                                            ; Tell socket.send how long the message is.
+                                    push  dword 00000000h                                                     ; Flags for send function.
+                                    call  socket.send                                                         ; Broadcast to the id.
+
+                                    push  dword [g.data + gylf.connection.descriptor.index]                   ; Point socket.send to the socket associated with this id.
+                                    push  00000000h                                                           ; No buffered data.
+                                    push  00000000h                                                           ; No buffered length.
+                                    push  dword [text.data.index.socket.data.prompt.message]                  ; Point the send function to the prompt.
+                                    call  socket.send                                                         ; Send the prompt to the socket.
+
+    send.to.world.gylf.loop.next:   mov   eax, dword [top.gylf]                                               ; eax - Top gylf.
+                                    cmp   eax, dword [ebp - answer.active.socket.packet.ipointer]             ; Have we reached the top gylf?
+                                    jz    send.to.world.gylf.loop.done                                        ; Yes. Go return to caller.
+
+                                    inc   dword [ebp - answer.active.socket.packet.ipointer]                  ; Next id to be broadcast to.
+                                    jmp   send.to.world.gylf.loop                                             ; Go broadcast to the next id.
+
+    send.to.world.gylf.loop.done:   popa                                                                      ; Restore caller's registers.
+                                    ret                                                                       ; Return to caller.
