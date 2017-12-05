@@ -9,62 +9,48 @@
 ;
 ;       Displays information either about the general area occupied by the performing entity, or about the target entity.
 ;
-;   Assumptions:     eax - Length of received data.
-;                    esi - Pointer to descriptor associated with target socket.
+;   Assumptions:  ebp - Pointer to populated answer.active.socket.packet.
+;                 Aggregated arguments.
 ;
-;   Returns:         None.
+;   Returns:      None.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   a.p.data.gylf                                             ./b
+;   ./b                               a.p.data.gylf
+;                                     dword.l
 ;
-;   area.header                                               ./commands/area/b
+;   ./commands/area.d                 area.header
+;                                     area.header.l
+;                                     area.num.contained.items
 ;
-;   area.header.l                                             ./commands/area/b
+;   ./commands/look/d                 command.look.l
 ;
-;   area.num.contained.items                                  ./commands/area/b
+;   ./commands/look/t                 command.look.bad.descriptor
+;                                     command.look.default
+;                                     command.look.default.good.descriptor
+;                                     command.look.targetted.find.target
+;                                     command.look.targetted.good.descriptor
 ;
-;   buffer.1                                                  ./functions/b
+;   ./functions/b                     buffer.1
 ;
-;   close.descriptor                                          ./functions/close.descriptor/t
+;   ./functions/close.descriptor/t    close.descriptor
 ;
-;   command.look.bad.descriptor                               ./commands/look/t
+;   ./functions/main/text.init/b      text.data.index.local.data.bad.area.id.indicator.message
+;                                     text.data.index.socket.data.bad.area.id.message
 ;
-;   command.look.default                                      ./commands/look/t
+;   ./functions/open.descriptor/t     open.descriptor
 ;
-;   command.look.default.good.descriptor                      ./commands/look/t
+;   ./functions/read.descriptor/t     read.descriptor
 ;
-;   command.look.l                                            ./commands/look/d
+;   ./functions/socket/socket.send/t  socket.send
 ;
-;   command.look.targetted.find.target                        ./commands/look/t
+;   ./functions/write.console/t       write.console
 ;
-;   command.look.targetted.good.descriptor                    ./commands/look/t
+;   ./functions/write.prompt/t        write.prompt
 ;
-;   connection.area.id.index                                  ./functions/main/system.check/b
-;
-;   dword.l                                                   ./b
-;
-;   gylf.connection.area.id.index                             ./s
-;
-;   gylf.connection.descriptor.index                          ./s
-;
-;   open.descriptor                                           ./functions/open.descriptor/t
-;
-;   read.descriptor                                           ./functions/read.descriptor/t
-;
-;   socket.send                                               ./functions/socket/socket.send/t
-;
-;   socket.send.buf                                           ./functions/socket/socket.send/t
-;
-;   text.data.index.local.data.bad.area.id.indicator.message  ./functions/main/text.init/b
-;
-;   text.data.index.socket.data.bad.area.id.message           ./functions/main/text.init/b
-;
-;   write.console                                             ./functions/write.console/t
-;
-;   write.prompt                                              ./functions/write.prompt/t
+;   ./s                               gylf.connection.area.id.index
 ;
 
 
