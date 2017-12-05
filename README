@@ -779,6 +779,10 @@ Relevant data:
 
           command.shutdown.admin                ./commands/shutdown/t
 
+          command.shutdown.bail                 ./commands/shutdown/t
+
+          command.shutdown.id.prep              ./commands/shutdown/t
+
           command.shutdown.loop                 ./commands/shutdown/t
 
     ----------------------------------------------------------------------------------------------
