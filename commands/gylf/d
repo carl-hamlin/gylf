@@ -8,11 +8,10 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.gylf    ./commands/gylf/t
+;   ./commands/gylf/d command.gylf.l
+;                     command.gylf.s
 ;
-;   command.gylf.l  ./commands/gylf/d
-;
-;   command.gylf.s  ./commands/gylf/d
+;   ./commands/gylf/t commands.gylf
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
