@@ -8,11 +8,10 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.broadcast   ./commands/broadcast/t
+;   ./commands/broadcast/d  command.broadcast.l
+;                           command.broadcast.s
 ;
-;   command.broadcast.l ./commands/broadcast/d
-;
-;   command.broadcast.s ./commands/broadcast/d
+;   ./commands/broadcast/t  command.broadcast
 ;
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

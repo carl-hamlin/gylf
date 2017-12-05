@@ -12,16 +12,26 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   socket.send                                           ./functions/socket/socket.send/t
+;   ./functions/main/text.init/b              text.data.index.socket.data.bad.command.error.message
 ;
-;   text.data.index.socket.data.bad.command.error.message ./functions/main/text.init/b
+;   ./functions/socket/answer.active.socket/s answer.active.socket.packet.active
 ;
-;   write.prompt                                          ./functions/write.prompt/t
+;   ./functions/socket/socket.send/t          socket.send
+;
+;   ./functions/write.prompt/t                write.prompt
 ;
 
-    write.bad.command.error:  push  dword [text.data.index.socket.data.bad.command.error.message] ; Point send command to the bad command error message.
+    write.bad.command.error:  pusha                                                               ; Preserve caller's registers.
+
+                              mov   ebx, dword [ebp - answer.active.socket.packet.active]         ; ebx - Pointer to active socket.
+
+                              push  dword [ebx]                                                   ; Point send function to active socket.
+                              push  dword 00000000h                                               ; No buffered data.
+                              push  dword 00000000h                                               ; No buffered length.
+                              push  dword [text.data.index.socket.data.bad.command.error.message] ; Point send command to the bad command error message.
                               call  socket.send                                                   ; Tell the user that the command doesn't have a current analogue.
 
-                              call  write.prompt                                                  ; Give the user a command prompt.
+                              call  write.prompt                                                  ; Restore the user's prompt.
 
+                              popa                                                                ; Restore caller's registers.
                               ret                                                                 ; Return to caller.

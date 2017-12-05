@@ -13,7 +13,35 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   No external references.
+;   a.p.type.egg                      ./b
+;
+;   a.p.type.ghost                    ./b
+;
+;   a.p.type.gylf                     ./b
+;
+;   a.p.type.login                    ./b
+;
+;   d.data                            ./b
+;
+;   e.data                            ./b
+;
+;   egg.connection.descriptor.index   ./s
+;
+;   egg.connection.status.index       ./s
+;
+;   g.data                            ./b
+;
+;   ghost.connection.descriptor.index ./s
+;
+;   ghost.connection.status.index     ./s
+;
+;   gylf.connection.descriptor.index  ./s
+;
+;   gylf.connection.status.index      ./s
+;
+;   l.data                            ./b
+;
+;   login.connection.descriptor.index ./s
 ;
 
     clean.socket:       cmp   dword [ebp - answer.active.socket.packet.type], a.p.type.egg    ; Are we cleaning egg sockets?

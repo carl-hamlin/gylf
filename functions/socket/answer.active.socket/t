@@ -20,7 +20,52 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   No external references.
+;   ./b                                                                       a.p.type.egg
+;                                                                             a.p.type.ghost
+;                                                                             a.p.type.gylf
+;                                                                             dword.l
+;                                                                             sys.standard.output
+;                                                                             word.l
+;
+;   ./functions/d                                                             egg.filename
+;                                                                             ghost.filename
+;                                                                             gylf.filename
+;                                                                             login.filename
+;
+;   ./functions/main/b                                                        login.status
+;                                                                             passphrase.status
+;                                                                             set.passphrase.status
+;
+;   ./functions/main/participant.interaction/address.active.status/t          address.active.status
+;
+;   ./functions/main/participant.interaction/address.login.status/t           address.login.status
+;
+;   ./functions/main.participant.interaction/address.passphrase.status/t      address.passphrase.status
+;
+;   ./functions/main/participant.interaction/address.set.passphrase.status/t  address.set.passphrase.status
+;
+;   ./functions/main/text.init/b                                              text.data.index.local.data.active.socket.message
+;                                                                             text.data.index.local.data.carriage.return.message
+;
+;   ./functions/socket/answer.active.socket/s                                 answer.active.socket.packet.fpointer
+;                                                                             answer.active.socket.packet.ipointer
+;                                                                             answer.active.socket.packet.status
+;                                                                             answer.active.socket.packet.tpointer
+;                                                                             answer.active.socket.packet.type
+;                                                                             answer.active.socket.packet_size
+;
+;   ./functions/socket/answer.active.socket/t                                 answer.active.socket.active.status
+;                                                                             answer.active.socket.admin.display.type.set
+;                                                                             answer.active.socket.egg.check
+;                                                                             answer.active.socket.ghost.check
+;                                                                             answer.active.socket.gylf.check
+;                                                                             answer.active.socket.login.check
+;                                                                             answer.active.socket.passphrase.status.check
+;                                                                             answer.active.socket.set.passphrase.status.check
+;
+;   ./functions/write.console/t                                               write.console
+;
+;   ./functions/write.descriptor/t                                            write.descriptor
 ;
 
     answer.active.socket:                             push  ebp                                                                             ; Preserve caller's ebp.

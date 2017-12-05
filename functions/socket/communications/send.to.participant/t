@@ -18,9 +18,11 @@
 ;
 ;   dword.l                               ./b
 ;
-;   g.data                                ./functions/d
+;   g.data                                ./b
 ;
 ;   get.participant.data.by.id            ./functions/get.participant.data.by.id/t
+;
+;   gylf.connection.area.id.index         ./s
 ;
 ;   send.to.participant.done              ./functions/socket/communications/send.to.participant/t
 ;

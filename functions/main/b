@@ -17,9 +17,6 @@
     %define set.passphrase.status     00000003h ; This status indicates that the system has identified you as a new user, and is asking you to enter a passphrase with which to protect your
                                                 ; account.
 
-    %define dead.socket                   0000h ; Dead socket indicator. If the session file returns this value instead of a valid descriptor, the socket once held by the entry has disconnected
-                                                ; and no longer requires polling for activity. Dead socket entries are candidates for reactivation when new connections arrive.
-
     %define sys.poll.in                    001h ; 001h is what gets returned by the poll function when there's data on the socket that needs to be addressed.
     %define sys.poll.timeout               010h ; 010h is the time to wait before assuming the socket isn't communicating.
     %define sys.poll.number.of.structures  001h ; 001h is *always* the number of sockets to be polled in this program. We poll them one at a time to keep it simple.

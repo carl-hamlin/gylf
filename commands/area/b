@@ -8,21 +8,20 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   area.description.field.l  ./commands/area/b
-;   area.header               ./commands/area/b
-;   area.name.field.l         ./commands/area/b
+;   ./commands/area/b area.description.field.l
+;                     area.header
+;                     area.name.field.l
 ;
 
-    %define    available.areas          05F5E0FFh                   ; Number of areas available.
     %define    area.name.field.l        0FFh                        ; Length of area name field.
     %define    area.description.field.l 0FFFFh                      ; Length of area description field.
 
     area.header                 equ     $                           ; Placeholder for area header data.
-    area.name.l                 resd    0001h                       ; Length of area name.
+    area.name.l                 resd    00000001h                   ; Length of area name.
     area.name                   resb    area.name.field.l           ; Area name.
-    area.description.l          resd    0001h                       ; Length of area description.
+    area.description.l          resd    00000001h                   ; Length of area description.
     area.description            resb    area.description.field.l    ; Area description.
-    area.num.contained.items    resd    0001h                       ; Number of items contained in the area.
+    area.num.contained.items    resd    00000001h                   ; Number of items contained in the area.
     area.header.l               equ     $-area.header               ; Length of area header.
 
     ; All data following the number of contained items is comprised of dword item ids corresponding to the items in the area.

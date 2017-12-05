@@ -16,7 +16,7 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   No external references.
+;   dword.l ./b
 ;
 
     get.new.id:       push  ebp                                         ; Preserve caller's ebp.
