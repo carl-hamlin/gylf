@@ -19,35 +19,30 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   a.p.data.gylf                                   ./b
+;   ./commands/think/t                                      command.think.arguments
+;                                                           command.think.help.msg
+;                                                           command.think.untargetted
 ;
-;   argument.02.location                            ./functions/aggregate.arguments/b
+;   ./functions/aggregate.arguments/b                       argument.02.location
+;                                                           argument.02.size
+;                                                           argument.03.location
+;                                                           argument.03.size
+;                                                           arguments.num
 ;
-;   argument.02.size                                ./functions/aggregate.arguments/b
+;   ./functions/d                                           g.data
 ;
-;   arguments.num                                   ./functions/aggregate.arguments/b
+;   ./functions/get.participant.data.by.name/t              get.participant.data.by.name
 ;
-;   command.think.arguments                         ./commands/think/t
+;   ./functions/main/text.init/b                            text.data.index.socket.data.command.think.untargetted
 ;
-;   command.think.help.msg                          ./commands/think/t
+;   ./functions/socket/communications/send.to.area/t        send.to.area
 ;
-;   command.think.untargetted                       ./commands/think/t
+;   ./functions/socket/communications/send.to.participant/t send.to.participant
 ;
-;   connection.descriptor.index                     ./functions/main.system.check/b
+;   ./functions/socket/socket.send/t                        socket.send
 ;
-;   g.data                                          ./b
-;
-;   gylf.connection.area.id.index                   ./s
-;
-;   gylf.connection.descriptor.index                ./s
-;
-;   send.to.area                                    ./functions/socket/communications/send.to.area/t
-;
-;   send.to.participant                             ./functions/socket/communications/send.to.participant/t
-;
-;   socket.send                                     ./functions/socket/socket.send/t
-;
-;   text.data.index.socket.data.command.think.help  ./functions/main/text.init/b
+;   ./s                                                     gylf.connection.area.id.index
+;                                                           gylf.connection.descriptor.index
 ;
 
     command.think:              cmp   dword [arguments.num], 00000000h                                        ; Do we have arguments?
