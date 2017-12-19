@@ -816,48 +816,47 @@ Relevant data:
                               contribute to the overall functioning of the codebase. Things like
                               writing to files, reading user input, etc... are all kept here.
 
-      b   abdomen.worn.item.id                  No references.
+      b   admin.participant                     No references.
 
-          admin.character                       No references.
-
-          administrative.byte                   ./functions/check.admin/t
-
-          back.worn.item.id                     No references.
-
-          buffer.1                              ./commands/look/t
-                                                ./commands/think/t
-                                                ./functions/check.login/t
-                                                ./functions/create.lock.file/t
-                                                ./functions/create.character/t
+          buffer.1                              ./commands/egg/t
+                                                ./commands/look/t
+                                                ./functions/aggregate.arguments/t
+                                                ./functions/create.participant/t
+                                                ./functions/get.participant.data.by.name/t
                                                 ./functions/main/participant.interaction
-                                                  /address.login.status/t
+                                                  /address.active.status/t
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/notify.in.absentia/t
                                                 ./functions/set.single.attribute/t
                                                 ./functions/socket/recv.from.socket/t
 
           buffer.1.l                            ./functions/b
                                                 ./functions/socket/recv.from.socket/t
 
-          buffer.2                              ./functions/create.character/t
-                                                ./functions/check.login/t
-                                                ./functions/get.character.data/t
-                                                ./functions/main/participant.interaction
-                                                  /address.passphrase.status/t
-                                                ./functions/main/participant.interaction
-                                                  /address.set.passphrase.status/t
+          buffer.2                              ./functions/create.participant/t
 
           buffer.2.l                            ./functions/b
 
-          e.data                                ./functions/dna.lab/t
+          child.attribute.computation.factor    ./functions/dna.lab/t
 
-          g.data                                ./functions/dna.lab/t
+          external.data.buffer                  ./functions/clear.screen/t
+                                                ./functions/get.external.data/t
 
-          socket.filename.entry.l               ./functions/b
-                                                ./functions/main/system.check.b
-                                                ./functions/socket/clean.socket/t
+          id.size                               ./functions/create.participant/t
 
-          sockets.left                          ./functions/main/active.socket.poll/t
+          number.of.parents                     ./functions/dna.lab/t
+
+          participant.base.color.number         ./functions/dna.lab/t
+
+          participant.secondary.color.number    ./functions/dna.lab/t
+
+          participant.base.fur.quality.number   ./functions/dna.lab/t
+
+          participant.secondary.fur.quality     ./functions/dna.lab/t
+            .number
 
           sys.lseek.call                        No references.
 
@@ -873,13 +872,15 @@ Relevant data:
                                                 ./functions/close.descriptor/t
                                                 ./functions/create.file/t
                                                 ./functions/get.ticks/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
                                                 ./functions/memory.switch/t
                                                 ./functions/open.descriptor/t
                                                 ./functions/poll.descriptor/t
                                                 ./functions/read.descriptor/t
                                                 ./functions/socket/accept.socket/t
                                                 ./functions/socket/bind.socket/t
-                                                ./functions/socket/clean.socket/t
                                                 ./functions/socket/create.socket/t
                                                 ./functions/socket/listen.socket/t
                                                 ./functions/socket/recv.from.socket/t
@@ -893,10 +894,8 @@ Relevant data:
 
 
       d   area.filename                         ./commands/area/t
-                                                ./functions/create.character/t
-                                                ./functions/d
-
-          area.filename.l                       ./commands/area/t
+                                                ./commands/egg/t
+                                                ./functions/create.participant/t
 
           character.base.color.table            No references.
 
@@ -911,45 +910,73 @@ Relevant data:
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
 
-          current.directory.marker              ./functions/check.login/t
-
-          current.directory.marker.l            ./functions/check.login/t
+          egg.filename                          ./commands/egg/t
+                                                ./commands/shutdown/t
+                                                ./functions/get.participant.data.by.name/t
+                                                ./functions/main/active.socket.poll/t
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t
-
-          egg.directory                         ./functions/d
-
-          egg.directory.l                       No references.
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/communications/send.to.area/t
 
           external.data.cursor.home             ./functions/clear.screen/t
 
           external.data.clear.screen            ./functions/clear.screen/t
 
-          ghost.directory                       ./functions/d
+          ghost.filename                        ./commands/shutdown/t
+                                                ./functions/get.participant.data.by.name/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/particpant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.world/t
 
-          ghost.directory.l                     No references.
+          gylf.filename                         ./commands/shutdown/t
+                                                ./functions/get.participant.data.by.name/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.world/t
 
-          item.filename                         ./functions/d
+          item.filename                         ./commands/egg/t
 
-          item.filename.l                       No references.
+          login.filename                        ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/answer.active.socket/t
+
+          message.marker                        ./functions/d
+                                                ./functions/notify.in.absentia/t
+
+          message.marker.l                      ./functions/d
 
           number.of.commands                    ./commands/help/t
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
 
-          participant.directory                 ./functions/d
-
-          participant.directory.l               No references.
-
           pouch.declaration                     ./functions/d
-                                                ./functions/create.character/t
+                                                ./functions/create.participant/t
 
-          pouch.declaration.l                   ./functions/create.character/t
+          pouch.declaration.l                   ./functions/create.participant/t
 
           pouch.description                     ./functions/d
-                                                ./functions/create.character/t
+                                                ./functions/create.participant/t
 
-          pouch.description.l                   ./functions/create.character/t
+          pouch.description.l                   ./functions/create.participant/t
+
+          tops.filename                         ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
 
     ----------------------------------------------------------------------------------------------
 
