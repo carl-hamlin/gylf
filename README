@@ -5,7 +5,7 @@ An MMO Server for linux implemented entirely in x86 assembly language, using the
 Relevant data:
 
     Where appropriate, each directory may (or may not) contain the following:
-    
+
     b                         Standard definitions shared by all downstream code.
     d                         Data declarations shared by all downstream code.
     i                         Inclusion anchor for tying together downstream code.
@@ -15,12 +15,12 @@ Relevant data:
                               it occurs.
 
     ==============================================================================================
-    
+
     ./                        This is the root directory for the project. the README and build
                               script live here.
 
     Symbolic Cross-Referencing
-    
+
       b   a.p.type.egg                          ./functions/main/active.socket.poll/t
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
@@ -811,7 +811,7 @@ Relevant data:
           command.think.untargetted             ./commands/think/t
 
     ==============================================================================================
-    
+
     ./functions               Contains code pertaining to the background mechanisms that
                               contribute to the overall functioning of the codebase. Things like
                               writing to files, reading user input, etc... are all kept here.
@@ -1073,12 +1073,6 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      /assemble.path          Contains code to assemble a path to a given file.
-
-      t   assemble.path                         ./functions/get.participant.data/t
-
-    ----------------------------------------------------------------------------------------------
-
       /bail                   Contains code that suspends execution of the code, unloads from
                               memory, and returns control to Linux.
 
@@ -1087,7 +1081,6 @@ Relevant data:
 
       t   bail                                  ./commands/shutdown/t
                                                 ./functions/main/text.init/t
-                                                ./functions/main/system.check/t
                                                 ./functions/socket/socket.errors/t
 
     ----------------------------------------------------------------------------------------------
@@ -1141,7 +1134,7 @@ Relevant data:
 
 
       t   close.descriptor                      ./commands/area/t
-                                                ./commands/look/t                                                
+                                                ./commands/look/t
                                                 ./functions/check.login/t
                                                 ./functions/create.character/t
                                                 ./functions/create.lock.file/t
@@ -2250,7 +2243,7 @@ Relevant data:
                                                 ./commands/look/t
                                                 ./functions/socket/communications/send.to.world/t
                                                 ./functions/write.bad.help.command.error/t
-                                                
+
 
     ----------------------------------------------------------------------------------------------
 
