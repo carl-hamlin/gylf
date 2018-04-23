@@ -8,9 +8,8 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   argument.01.size  ./functions/aggregate.arguments/b
-;
-;   arguments.packet  ./functions/aggregate.arguments/b
+;   ./functions/aggregate.arguments/b	argument.01.size
+;																			arguments.packet
 ;
 
 	  arguments.packet	    equ	  $
