@@ -1108,21 +1108,18 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      /check.login            Contains code that checks to see if a user attempting to log in is
-                              already logged in from a different location.
-
-      t   check.login                           ./functions/main/participant.interaction
-                                                  /address.login.status/t
-
-          check.login.logged                    ./functions/check.login/t
-
-    ----------------------------------------------------------------------------------------------
-
       /clear.screen           Contains code that remotely clears the user's screen and places
                               their cursor in the upper left hand corner.
 
       t   clear.screen                          ./functions/main/listening.socket.poll/t
                                                 ./functions/write.welcome/t
+
+
+      s   clear.screen.packet                   No references.
+
+          clear.screen.packet.descriptor        ./functions/clear.screen/t
+
+          clear.screen.packet_size              ./functions/clear.screen/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -2128,6 +2125,7 @@ Relevant data:
         t   socket.send                         ./commands/area/t
                                                 ./commands/look/t
                                                 ./commands/help/t
+                                                ./functions/clear.screen/t
                                                 ./functions/create.character/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/participant.interaction
@@ -2141,7 +2139,6 @@ Relevant data:
                                                 ./functions/write.prompt/t
 
             socket.send.buf                     ./commands/look/t
-                                                ./functions/clear.screen/t
                                                 ./functions/set.single.attribute/t
                                                 ./functions/socket/communications/send.to.area/t
                                                 ./functions/socket/communications/send.to.participant/t
