@@ -17,11 +17,9 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   strip.char  ./functions/buffer.strip/t
-;
-;   strip.loop  ./functions/buffer.strip/t
-;
-;   strip.done  ./functions/buffer.strip/t
+;   ./functions/buffer.strip/t  strip.char
+;                               strip.loop
+;                               strip.done
 ;
 
     buffer.strip: pop   edx             ; Preserve return address.
