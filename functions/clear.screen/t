@@ -12,17 +12,19 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   dword.l                     ./b
+;   ./b                               dword.l
 ;
-;   external.data.buffer        ./functions/b
+;   ./functions/b                     external.data.buffer
 ;
-;   external.data.clear.screen  ./functions/d
+;   ./functions/clear.screen/s        clear.screen.packet.descriptor
+;                                     clear.screen.packet_size
 ;
-;   external.data.cursor.home   ./functions/d
+;   ./functions/d                     external.data.clear.screen
+;                                     external.data.cursor.home
 ;
-;   get.external.data           ./functions/get.external.data/t
+;   ./functions/get.external.data/t   get.external.data
 ;
-;   socket.send.buf             ./functions/socket/socket.send/t
+;   ./functions/socket/socket.send/t  socket.send
 ;
 
     clear.screen: push  ebp                                           ; Preserve caller's ebp.
