@@ -12,9 +12,9 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   sys.exit.call   ./functions/bail/b
+;   ./functions/bail/b  sys.exit.call
 ;
-;   sys.system.call ./functions/b
+;   ./functions/b       sys.system.call
 ;
 
     bail: mov  eax, sys.exit.call ; eax - Suspend execution and return control to linux.
