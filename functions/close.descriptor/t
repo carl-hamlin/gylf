@@ -12,11 +12,14 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   dword.l         ./b
+;   ./b                             dword.l
 ;
-;   sys.close.call  ./functions/close.descriptor/b
+;   ./functions/b                   sys.system.call
 ;
-;   sys.system.call ./functions/b
+;   ./functions/close.descriptor/b  sys.close.call
+;
+;   ./functions/close.descriptor/s  close.descriptor.packet_size
+;                                   close.descriptor.packet.descriptor
 ;
 
     close.descriptor: push  ebp                                                   ; Preserve caller's ebp.
