@@ -1130,21 +1130,36 @@ Relevant data:
       b   sys.close.call                        ./functions/close.descriptor/t
 
 
+      s   close.descriptor.packet               No references.
+
+          close.descriptor.packet_size          ./functions/close.descriptor/t
+
+          close.descriptor.packet.descriptor    ./functions/close.descriptor/t
+
+
       t   close.descriptor                      ./commands/area/t
+                                                ./commands/egg/t
                                                 ./commands/look/t
-                                                ./functions/check.login/t
-                                                ./functions/create.character/t
-                                                ./functions/create.lock.file/t
-                                                ./functions/dna.lab/t
-                                                ./functions/get.character.data/t
+                                                ./functions/create.participant/t
                                                 ./functions/get.external.data/t
+                                                ./functions/get.new.id/t
+                                                ./functions/get.participant.data.by.id/t
+                                                ./functions/get.text.data/t
+                                                ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/main/system.check/t
                                                 ./functions/main/text.init/t
+                                                ./functions/notify.in.absentia/t
+                                                ./functions/read.credential/t
                                                 ./functions/socket/clean.socket/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/write.credential/t
 
     ----------------------------------------------------------------------------------------------
 
