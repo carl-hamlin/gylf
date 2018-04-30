@@ -1163,27 +1163,76 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      /create.character       Contains code that builds out character data on the basis of DNA
-                              sequences left behind by either parent on the associated egg.
+      /convert.binary.id.to.ascii.id  Contains code that converts a binary id to an ASCII id.
 
-      t   area.filename.increment.cmp           ./functions/create.character/t
+      s   convert.binary.id.to ascii.id.packet  ./functions/convert.binary.id.to.ascii.id/t
+            .buffer
 
-          area.filename.next.digit.increment    ./functions/create.character/t
+          convert.binary.id.to.ascii.id.packet  ./functions/convert.binary.id.to.ascii.id/t
+            .id
 
-          area.filename.out.of.ids              ./functions/create.character/t
+          convert.binary.id.to.ascii.id         ./functions/convert.binary.id.to.ascii.id/t
+            .packet_size
 
-          build.pouch                           ./functions/create.character/t
 
-          build.pouch.area.name                 ./functions/create.character/t
+      t   convert.binary.id.to.ascii.id         ./functions/get.new.id/t
+                                                ./functions/get.participant.data.by.id/t
+                                                ./functions/get.participant.data.by.name/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/read.credential/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/write.credential/t
 
-          build.pouch.found.open.id             ./functions/create.character/t
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .ah.a
 
-          build.pouch.increment.byte            ./functions/create.character/t
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .al.a
 
-          create.character                      ./functions/main/participant.interaction
-                                                  /address.set.passphrase.status/t
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .ah.b
 
-          create.character.gylf.command         No references.
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .al.b
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .ah.c
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .al.c
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .ah.d
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .al.d
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .ah.e
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .al.e
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .ah.f
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .al.f
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .ah.convert
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .al.convert
+
+          convert.binary.id.to.ascii.id         ./functions/convert.binary.id.to.ascii.id/t
+            .conversion.loop
+
+          convert.binary.id.to.ascii.id         ./functions/convert.binary.id.to.ascii.id/t
+            .store
 
     ----------------------------------------------------------------------------------------------
 
