@@ -13,13 +13,13 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
+;   ./b                                         dword.l
+;
 ;   ./functions/convert.binary.id.to.ascii.id/t convert.binary.id.to.ascii.id.conversion.loop
 ;
 ;   ./functions/convert.binary.id.to.ascii.id/s convert.binary.id.to.ascii.id.packet.buffer
 ;                                               convert.binary.id.to.ascii.id.packet.id
 ;                                               convert.binary.id.to.ascii.id.packet_size
-;
-;   dword.l                                       ./b
 ;
 
     convert.binary.id.to.ascii.id:                  push  ebp                                                             ; Preserve caller's ebp.
