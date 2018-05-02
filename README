@@ -1244,9 +1244,18 @@ Relevant data:
           sys.rw.r.r                            ./functions/create.file/t
 
 
+      s   create.file.packet                    No references.
+
+          create.file.packet.descriptor         ./functions/create.file/t
+
+          create.file.packet_size               ./functions/create.file/t
+
+
       t   create.file                           ./commands/area/t
-                                                ./functions/create.lock.file/t
-                                                ./functions/create.character/t
+                                                ./commands/egg/t
+                                                ./functions/create.participant/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/notify.in.absentia/t
 
     ----------------------------------------------------------------------------------------------
 
