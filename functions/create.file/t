@@ -13,13 +13,15 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   dword.l         ./b
+;   ./b                       dword.l
 ;
-;   sys.create.call ./functions/create.file/b
+;   ./functions/b             sys.rw.r.r
+;                             sys.system.call
 ;
-;   sys.rw.r.r      ./functions/b
+;   ./functions/create.file/b sys.create.call
 ;
-;   sys.system.call ./functions/b
+;   ./functions/create.file/s create.file.packet.filename
+;                             create.file.packet_size
 ;
 
     create.file:  push  ebp                                             ; Preserve caller's ebp.
