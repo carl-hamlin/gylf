@@ -1259,19 +1259,26 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      /create.lock.file       Contains code that creates a lock file for use in preventing
-                              multiple instances of the same login from different locations.
+      /create.participant     Contains code that creates a file on disk for participant
+                              credentials.
 
-      d   lock.extension                        ./functions/check.login/t
-                                                ./functions/create.lock.file/t
-                                                ./functions/socket/clean.socket/t
+      t   create.participant                    No references.
 
-          lock.extension.l                      ./functions/check.login/t
-                                                ./functions/create.lock.file/t
-                                                ./functions/socket/clean.socket/t
+          create.participant.gylf.command       No references.
 
-      t   create.lock.file                      ./functions/main/participant.interaction
-                                                  /address.login.status/t
+          build.pouch                           ./functions/create.participant/t
+
+          build.pouch.increment.byte            ./functions/create.participant/t
+
+          area.filename.increment.cmp           ./functions/create.participant/t
+
+          area.filename.next.digit.increment    ./functions/create.participant/t
+
+          area.filename.out.of.ids              ./functions/create.participant/t
+
+          build.pouch.area.name                 ./functions/create.participant/t
+
+          build.pouch.found.open.id             ./functions/create.participant/t
 
     ----------------------------------------------------------------------------------------------
 
