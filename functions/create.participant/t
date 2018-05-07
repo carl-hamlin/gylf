@@ -13,131 +13,98 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   a.p.data.gylf                                       ./b
+;   ./b                                               a.p.data.gylf
+;                                                     dword.l
+;                                                     e.data
+;                                                     g.data
 ;
-;   area.description                                    ./commands/area/b
+;   ./commands/area/b                                 area.description
+;                                                     area.description.l
+;                                                     area.header
+;                                                     area.header.l
 ;
-;   area.description.l                                  ./commands/area/b
+;   ./functions/b                                     buffer.1
+;                                                     buffer.2
+;                                                     id.size
 ;
-;   area.filename                                       ./functions/d
+;   ./functions/clean.socket/t                        clean.socket
 ;
-;   area.filename.increment.cmp                         ./functions/create.character/t
+;   ./functions/close.descriptor/t                    close.descriptor
 ;
-;   area.filename.next.digit.increment                  ./functions/create.character/t
+;   ./functions/create.file/t                         create.file
 ;
-;   area.filename.out.of.ids                            ./functions/create.character/t
+;   ./functions/create.participant/t                  area.filename.increment.cmp
+;                                                     area.filename.next.digit.increment
+;                                                     area.filename.out.of.ids
+;                                                     area.name
+;                                                     area.name.l
+;                                                     build.pouch
+;                                                     build.pouch.area.name
+;                                                     build.pouch.found.open.id
+;                                                     build.pouch.increment.byte
 ;
-;   area.header                                         ./commands/area/b
+;   ./functions/d                                     area.filename
+;                                                     pouch.declaration
+;                                                     pouch.declaration.l
+;                                                     pouch.description
+;                                                     pouch.description.l
 ;
-;   area.header.l                                       ./commands/area/b
+;   ./functions/dna.lab/t                             dna.lab
 ;
-;   area.name                                           ./functions/create.character/t
+;   ./functions/main/system.check/b                   connection.filename.index
 ;
-;   area.name.l                                         ./functions/create.character/t
+;   ./functions/main/text.init/b                      text.data.index.local.data.out.of.area.ids.message
+;                                                     text.data.index.socket.data.out.of.area.ids.message
 ;
-;   buffer.1                                            ./functions/b
+;   ./functions/open.descriptor/t                     open.descriptor
 ;
-;   buffer.2                                            ./functions/b
+;   ./functions/read.descriptor/t                     read.descriptor
 ;
-;   build.pouch                                         ./functions/create.character/t
+;   ./functions/socket/communications/send.to.area/t  send.to.area
 ;
-;   build.pouch.area.name                               ./functions/create.character/t
+;   ./functions/socket/socket.send/t                  socket.send
 ;
-;   build.pouch.found.open.id                           ./functions/create.character/t
+;   ./functions/write.console/t                       write.console
 ;
-;   build.pouch.increment.byte                          ./functions/create.character/t
+;   ./functions/write.descriptor/t                    write.descriptor
 ;
-;   clean.socket                                        ./functions/clean.socket/t
-;
-;   close.descriptor                                    ./functions/close.descriptor/t
-;
-;   connection.filename.index                           ./functions/main/system.check/b
-;
-;   create.character.gylf.command                       No references.
-;
-;   create.file                                         ./functions/create.file/t
-;
-;   dna.lab                                             ./functions/dna.lab/t
-;
-;   dword.l                                             ./b
-;
-;   e.data                                              ./b
-;
-;   egg.area.id                                         ./s
-;
-;   egg.e.parent.name                                   ./s
-;
-;   egg.e.parent.name.l                                 ./s
-;
-;   egg.i.parent.name                                   ./s
-;
-;   egg.i.parent.name.l                                 ./s
-;
-;   g.data                                              ./b
-;
-;   gylf.e.parent.name                                  ./s
-;
-;   gylf.e.parent.name.l                                ./s
-;
-;   gylf.i.parent.name                                  ./s
-;
-;   gylf.i.parent.name.l                                ./s
-;
-;   gylf.name                                           ./s
-;
-;   gylf.pouch                                          ./s
-;
-;   id.size                                             ./functions/b
-;
-;   open.descriptor                                     ./functions/open.descriptor/t
-;
-;   pouch.declaration                                   ./functions/d
-;
-;   pouch.declaration.l                                 ./functions/d
-;
-;   pouch.description                                   ./functions/d
-;
-;   pouch.description.l                                 ./functions/d
-;
-;   read.descriptor                                     ./functions/read.descriptor/t
-;
-;   send.to.area                                        ./functions/socket/communications/send.to.area/t
-;
-;   socket.send                                         ./functions/socket/socket.send/t
-;
-;   text.data.index.local.data.out.of.area.ids.message  ./functions/main/text.init/b
-;
-;   text.data.index.socket.data.out.of.area.ids.message ./functions/main/text.init/b
-;
-;   write.console                                       ./functions/write.console/t
-;
-;   write.descriptor                                    ./functions/write.descriptor/t
+;   ./s                                               egg.area.id
+;                                                     egg.e.parent.name
+;                                                     egg.e.parent.name.l
+;                                                     egg.i.parent.name
+;                                                     egg.i.parent.name.l
+;                                                     gylf.e.parent.name
+;                                                     gylf.e.parent.name.l
+;                                                     gylf.i.parent.name
+;                                                     gylf.i.parent.name.l
+;                                                     gylf.name
+;                                                     gylf.pouch
 ;
 
 
-    create.character:                   push  egg_size                                                    ; Tell read.descriptor the length of egg data.
+    create.participant:                 push  egg_size                                                    ; Tell read.descriptor the length of egg data.
                                         push  e.data                                                      ; Point read.descriptor to buffer in which to store the egg data.
                                         push  eax                                                         ; Point read.descriptor to descriptor associated with the egg file.
                                         call  read.descriptor                                             ; Read the egg data into the buffer.
 
                                         call  close.descriptor                                            ; Close the egg file.
 
-    create.character.gylf.command:      push  esi                                                         ; Preserve index to socket entry.
+    create.participant.gylf.command:    push  esi                                                         ; Preserve index to socket entry.
 
                                         sub   ecx, ecx                                                    ; ecx - Prepared for loading.
-                                        mov   cl, byte [e.data+egg.e.parent.name.l]                       ; ecx - length of laying parent's name.
-                                        mov   esi, e.data+egg.e.parent.name                               ; esi - pointer to laying parent's name.
-                                        mov   edi, g.data+gylf.e.parent.name                              ; edi - pointer to entry for laying parent's name on character template.
+                                        mov   cl, byte [e.data + egg.e.parent.name.l]                     ; ecx - length of laying parent's name.
+                                        mov   esi, e.data + egg.e.parent.name                             ; esi - pointer to laying parent's name.
+                                        mov   edi, g.data + gylf.e.parent.name                            ; edi - pointer to entry for laying parent's name on character template.
 
-                                        mov   byte [g.data+gylf.e.parent.name.l], cl                      ; Store length of laying parent's name in character template.
+                                        mov   byte [g.data + gylf.e.parent.name.l], cl                    ; Store length of laying parent's name in character template.
                                         repnz movsb                                                       ; Store laying parent's name in character template.
-                
-                                        sub   ecx, ecx                                                    ; ecx - Prepared for loading.
-                                        mov   cl, byte [e.data+egg.i.parent.name.l]                       ; ecx - length of inseminating parent's name.
-                                        mov   esi, e.data+egg.i.parent.name                               ; esi - pointer to inseminating parent's name.
-                                        mov   edi, g.data+gylf.i.parent.name                              ; edi - pointer to entry for inseminating parent's name on character template.
 
-                                        mov   byte [g.data+gylf.i.parent.name.l], cl                      ; Store length of inseminating parent's name in character template.
+                                        sub   ecx, ecx                                                    ; ecx - Prepared for loading.
+                                        mov   cl, byte [e.data + egg.i.parent.name.l]                     ; ecx - length of inseminating parent's name.
+                                        mov   esi, e.data + egg.i.parent.name                             ; esi - pointer to inseminating parent's name.
+                                        mov   edi, g.data + gylf.i.parent.name                            ; edi - pointer to entry for inseminating parent's name on character template.
+
+                                        mov   byte [g.data + gylf.i.parent.name.l], cl                    ; Store length of inseminating parent's name in character template.
                                         repnz movsb                                                       ; Store inseminating parent's name in character template.
 
                                         pop   esi                                                         ; Restore index to socket entry.
@@ -153,7 +120,7 @@
 
                                         or    eax, eax                                                    ; Were we able to associate a descriptor with the filename?
                                         js    build.pouch.found.open.id                                   ; No. We've found an open id to use - let's go use it.
-                        
+
                                         mov   ebx, eax                                                    ; Yes. Let's close it up so we can search the next id up the ladder. ebx - descriptor
                                                                                                           ; to be disassociated.
                                         call  close.descriptor                                            ; Disassociate that descriptor.
@@ -203,10 +170,10 @@
     build.pouch.found.open.id:          push  dword [text.data.index.socket.data.egg.hatch.message]       ; Point send function to index for message indicating an egg is about to hatch.
                                         push  egg.area.id                                                 ; Tell send function what area to send to.
                                         call  send.to.area                                                ; Tell the area where the egg is sitting that the egg is beginning to hatch.
-                
+
                                         pop   esi                                                         ; esi - Index to socket entry.
 
-                                        mov   dword [g.data+gylf.pouch], ebp                              ; Store area id for character pouch.
+                                        mov   dword [g.data + gylf.pouch], ebp                            ; Store area id for character pouch.
                                         push  area.filename                                               ; Point create.file to file to be created for character pouch.
                                         call  create.file                                                 ; Create the file.
 
@@ -228,7 +195,7 @@
                                         jnz   build.pouch.area.name                                       ; Nope. Go store the rest of the filename.
 
                                         add   al, pouch.declaration.l                                     ; al - length of filename+length of pouch declaration.
-                        
+
                                         mov   byte [area.name.l], al                                      ; Store length of filename + length of pouch declaration.
                                         mov   esi, pouch.declaration                                      ; esi - pointer to pouch declaration.
                                         mov   ecx, pouch.declaration.l                                    ; ecx - length of pouch declaration.
@@ -281,5 +248,5 @@
 
                                         pop   eax                                                         ; Restore descriptor associated with new file.
                                         call  close.descriptor                                            ; Disassociate descriptor.
-                
+
                                         ret                                                               ; Return to caller.
