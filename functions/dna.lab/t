@@ -15,8 +15,6 @@
 ;   ./b                             e.data
 ;                                   g.data
 ;
-;   ./functions/close.descriptor/t  close.descriptor
-;
 ;   ./functions/dna.lab/t           dna.lab.base.fur.quality
 ;                                   dna.lab.e.parent.base.color
 ;                                   dna.lab.e.parent.base.fur.quality
@@ -35,10 +33,6 @@
 ;                                   dna.lab.strength
 ;
 ;   ./functions/get.ticks/t         get.ticks
-;
-;   ./functions/open.descriptor/t   open.descriptor
-;
-;   ./functions/read.descriptor/t   read.descriptor
 ;
 ;   ./s                             egg.e.parent.agility
 ;                                   egg.e.parent.base.color
