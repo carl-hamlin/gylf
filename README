@@ -1289,27 +1289,27 @@ Relevant data:
 
           dna.lab.agility                       ./functions/dna.lab/t
 
-          dna.lab.base.color                    ./functions/dna.lab/t
-
           dna.lab.base.fur.quality              ./functions/dna.lab/t
+
+          dna.lab.e.parent.base.color           ./functions/dna.lab/t
+
+          dna.lab.e.parent.base.fur.quality     ./functions/dna.lab/t
+
+          dna.lab.e.parent.secondary.color      ./functions/dna.lab/t
+
+          dna.lab.e.parent.secondary.fur        ./functions/dna.lab/t
+          .quality
 
           dna.lab.endurance                     ./functions/dna.lab/t
 
-          dna.lab.father.base.color             ./functions/dna.lab/t
+          dna.lab.i.parent.base.color           ./functions/dna.lab/t
 
-          dna.lab.father.base.fur.quality       ./functions/dna.lab/t
+          dna.lab.i.parent.base.fur.quality     ./functions/dna.lab/t
 
-          dna.lab.father.secondary.color        ./functions/dna.lab/t
+          dna.lab.i.parent.secondary.color      ./functions/dna.lab/t
 
-          dna.lab.father.secondary.fur.quality  ./functions/dna.lab/t
-
-          dna.lab.mother.base.color             ./functions/dna.lab/t
-
-          dna.lab.mother.base.fur.quality       ./functions/dna.lab/t
-
-          dna.lab.mother.secondary.color        ./functions/dna.lab/t
-
-          dna.lab.mother.secondary.fur.quality  ./functions/dna.lab/t
+          dna.lab.i.parent.secondary.fur        ./functions/dna.lab/t
+          .quality
 
           dna.lab.mutation.base.color           ./functions/dna.lab/t
 
@@ -1324,10 +1324,10 @@ Relevant data:
           dna.lab.mutation.secondary.color.fix  ./functions/dna.lab/t
 
           dna.lab.mutation.secondary.fur        ./functions/dna.lab/t
-            .quality
+          .quality
 
           dna.lab.mutation.secondary.fur        ./functions/dna.lab/t
-            .quality.fix
+          .quality.fix
 
           dna.lab.secondary.color               ./functions/dna.lab/t
 
