@@ -1337,17 +1337,19 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      /get.character.data     Contains code which populates the character data in memory from file
-                              for the character on the current socket.
-
-      t   get.character.data                    ./functions/check.admin/t
-
-    ----------------------------------------------------------------------------------------------
-
       /get.external.data      Contains code which reads data that exists outside the codebase and
                               memory.
 
       t   get.external.data                     ./functions/clear.screen/t
+
+
+      s   get.external.data.packet              No references.
+
+          get.external.data.packet.descriptor   ./functions/get.external.data/t
+
+          get.external.data.packet.filename     ./functions/get.external.data/t
+
+          get.external.data.packet_size         ./functions/get.external.data/t
 
     ----------------------------------------------------------------------------------------------
 
