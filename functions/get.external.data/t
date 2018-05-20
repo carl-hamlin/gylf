@@ -13,17 +13,20 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   byte.l                ./b
+;   ./b                             byte.l
+;                                   dword.l
 ;
-;   close.descriptor      ./functions/close.descriptor/t
+;   ./functions/b                   external.data.buffer
 ;
-;   dword.l               ./b
+;   ./functions/close.descriptor/t  close.descriptor
 ;
-;   external.data.buffer  ./functions/b
+;   ./functions/open.descriptor/t   open.descriptor
 ;
-;   open.descriptor       ./functions/open.descriptor/t
+;   ./functions/read.descriptor/t   read.descriptor
 ;
-;   read.descriptor       ./functions/read.descriptor/t
+;   ./functions/get.external.data/s get.external.data.packet.descriptor
+;                                   get.external.data.packet.filename
+;                                   get.external.data.packet_size
 ;
 
     get.external.data:  pop   edx                                                     ; Preserve return address.
@@ -43,7 +46,7 @@
                         call  open.descriptor                                         ; Associate a descriptor with the external data file.
 
                         mov   dword [ebp - get.external.data.packet.descriptor], eax  ; Store descriptor associated with external data file.
-            
+
                         push  dword [ebp - get.external.data.packet.descriptor]       ; Point read.descriptor to descriptor associated with the file.
                         push  external.data.buffer                                    ; Point read.descriptor to buffer into which to read the length of the external data.
                         push  byte.l                                                  ; Tell read.descriptor the length of data to be read.
