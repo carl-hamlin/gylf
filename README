@@ -1373,6 +1373,17 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
+      /get.participant.data   Contains code that returns participant data indexed by a provided
+        .by.id                id, or an error if the id does not correspond to extant data.
+
+      t   get.participant.data.by.id            ./functions/socket/communications
+                                                  /send.to.participant/t
+                                                ./functions/socket/communications/send.to.world/t
+
+          get.participant.data.by.id.error      ./functions/get.participant.data.by.id/t
+
+    ----------------------------------------------------------------------------------------------
+
       /get.text.data          Contains code that pulls string data from an external repository.
 
       t   get.text.data                         ./functions/socket/socket.send/t
