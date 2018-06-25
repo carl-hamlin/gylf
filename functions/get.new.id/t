@@ -16,7 +16,19 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   dword.l ./b
+;   ./b                                         dword.l
+;
+;   ./functions/close.descriptor/t              close.descriptor
+;
+;   ./functions/convert.binary.id.to.ascii.id/t convert.binary.id.to.ascii.id
+;
+;   ./functions/get.new.id/s                    get.new.id.packet.id
+;                                               get.new.id.packet_size
+;
+;   ./functions/get.new.id/t                    get.new.id.done
+;                                               get.new.id.loop
+;
+;   ./functions/open.descriptor/t               open.descriptor
 ;
 
     get.new.id:       push  ebp                                         ; Preserve caller's ebp.
