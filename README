@@ -1353,6 +1353,26 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
+      /get.new.id             Contains code that examines the extant id repository for a given
+                              subset of ids and selects a new id for use.
+
+      t   get.new.id                            ./commands/egg/t
+                                                ./commands/area/t
+                                                ./functions/main/listening.socket.poll/t
+
+          get.new.id.loop                       ./functions/get.new.id/t
+
+          get.new.id.done                       ./functions/get.new.id/t
+
+
+      s   get.new.id.packet                     No references.
+
+          get.new.id.packet.id                  ./functions/get.new.id/t
+
+          get.new.id.packet_size                ./functions/get.new.id/t
+
+    ----------------------------------------------------------------------------------------------
+
       /get.text.data          Contains code that pulls string data from an external repository.
 
       t   get.text.data                         ./functions/socket/socket.send/t
