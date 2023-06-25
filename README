@@ -5,7 +5,7 @@ An MMO Server for linux implemented entirely in x86 assembly language, using the
 Relevant data:
 
     Where appropriate, each directory may (or may not) contain the following:
-    
+
     b                         Standard definitions shared by all downstream code.
     d                         Data declarations shared by all downstream code.
     i                         Inclusion anchor for tying together downstream code.
@@ -15,12 +15,12 @@ Relevant data:
                               it occurs.
 
     ==============================================================================================
-    
+
     ./                        This is the root directory for the project. the README and build
                               script live here.
 
     Symbolic Cross-Referencing
-    
+
       b   a.p.type.egg                          ./functions/main/active.socket.poll/t
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
@@ -642,6 +642,14 @@ Relevant data:
 
       t   command.egg                           ./commands/egg/d
 
+          command.egg.admin                     ./commands/egg/t
+
+          command.egg.already.fertilized        ./commands/egg/t
+
+          command.egg.bad.name                  ./commands/egg/t
+
+          command.egg.nat                       ./commands/egg/t
+
     ----------------------------------------------------------------------------------------------
 
       /gylf                   Contains code pertinent to the implementation of the 'gylf' command;
@@ -663,6 +671,8 @@ Relevant data:
       t   command.gylf                          ./commands/gylf/d
 
           command.gylf.admin                    ./commands/gylf/t
+
+          command.gylf.bad                      ./commands/gylf/t
 
           command.gylf.dna.mode                 ./commands/gylf/t
 
@@ -726,6 +736,7 @@ Relevant data:
       d   command.look.h                        No references.
 
           command.look.l                        ./commands/look/d
+                                                ./commands/look/t
 
           command.look.p                        No references.
 
@@ -768,6 +779,10 @@ Relevant data:
 
           command.shutdown.admin                ./commands/shutdown/t
 
+          command.shutdown.bail                 ./commands/shutdown/t
+
+          command.shutdown.id.prep              ./commands/shutdown/t
+
           command.shutdown.loop                 ./commands/shutdown/t
 
     ----------------------------------------------------------------------------------------------
@@ -796,53 +811,52 @@ Relevant data:
           command.think.untargetted             ./commands/think/t
 
     ==============================================================================================
-    
+
     ./functions               Contains code pertaining to the background mechanisms that
                               contribute to the overall functioning of the codebase. Things like
                               writing to files, reading user input, etc... are all kept here.
 
-      b   abdomen.worn.item.id                  No references.
+      b   admin.participant                     No references.
 
-          admin.character                       No references.
-
-          administrative.byte                   ./functions/check.admin/t
-
-          back.worn.item.id                     No references.
-
-          buffer.1                              ./commands/look/t
-                                                ./commands/think/t
-                                                ./functions/check.login/t
-                                                ./functions/create.lock.file/t
-                                                ./functions/create.character/t
+          buffer.1                              ./commands/egg/t
+                                                ./commands/look/t
+                                                ./functions/aggregate.arguments/t
+                                                ./functions/create.participant/t
+                                                ./functions/get.participant.data.by.name/t
                                                 ./functions/main/participant.interaction
-                                                  /address.login.status/t
+                                                  /address.active.status/t
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/notify.in.absentia/t
                                                 ./functions/set.single.attribute/t
                                                 ./functions/socket/recv.from.socket/t
 
           buffer.1.l                            ./functions/b
                                                 ./functions/socket/recv.from.socket/t
 
-          buffer.2                              ./functions/create.character/t
-                                                ./functions/check.login/t
-                                                ./functions/get.character.data/t
-                                                ./functions/main/participant.interaction
-                                                  /address.passphrase.status/t
-                                                ./functions/main/participant.interaction
-                                                  /address.set.passphrase.status/t
+          buffer.2                              ./functions/create.participant/t
 
           buffer.2.l                            ./functions/b
 
-          e.data                                ./functions/dna.lab/t
+          child.attribute.computation.factor    ./functions/dna.lab/t
 
-          g.data                                ./functions/dna.lab/t
+          external.data.buffer                  ./functions/clear.screen/t
+                                                ./functions/get.external.data/t
 
-          socket.filename.entry.l               ./functions/b
-                                                ./functions/main/system.check.b
-                                                ./functions/socket/clean.socket/t
+          id.size                               ./functions/create.participant/t
 
-          sockets.left                          ./functions/main/active.socket.poll/t
+          number.of.parents                     ./functions/dna.lab/t
+
+          participant.base.color.number         ./functions/dna.lab/t
+
+          participant.secondary.color.number    ./functions/dna.lab/t
+
+          participant.base.fur.quality.number   ./functions/dna.lab/t
+
+          participant.secondary.fur.quality     ./functions/dna.lab/t
+            .number
 
           sys.lseek.call                        No references.
 
@@ -858,13 +872,15 @@ Relevant data:
                                                 ./functions/close.descriptor/t
                                                 ./functions/create.file/t
                                                 ./functions/get.ticks/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
                                                 ./functions/memory.switch/t
                                                 ./functions/open.descriptor/t
                                                 ./functions/poll.descriptor/t
                                                 ./functions/read.descriptor/t
                                                 ./functions/socket/accept.socket/t
                                                 ./functions/socket/bind.socket/t
-                                                ./functions/socket/clean.socket/t
                                                 ./functions/socket/create.socket/t
                                                 ./functions/socket/listen.socket/t
                                                 ./functions/socket/recv.from.socket/t
@@ -878,10 +894,8 @@ Relevant data:
 
 
       d   area.filename                         ./commands/area/t
-                                                ./functions/create.character/t
-                                                ./functions/d
-
-          area.filename.l                       ./commands/area/t
+                                                ./commands/egg/t
+                                                ./functions/create.participant/t
 
           character.base.color.table            No references.
 
@@ -896,45 +910,73 @@ Relevant data:
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
 
-          current.directory.marker              ./functions/check.login/t
-
-          current.directory.marker.l            ./functions/check.login/t
+          egg.filename                          ./commands/egg/t
+                                                ./commands/shutdown/t
+                                                ./functions/get.participant.data.by.name/t
+                                                ./functions/main/active.socket.poll/t
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t
-
-          egg.directory                         ./functions/d
-
-          egg.directory.l                       No references.
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/communications/send.to.area/t
 
           external.data.cursor.home             ./functions/clear.screen/t
 
           external.data.clear.screen            ./functions/clear.screen/t
 
-          ghost.directory                       ./functions/d
+          ghost.filename                        ./commands/shutdown/t
+                                                ./functions/get.participant.data.by.name/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/particpant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.world/t
 
-          ghost.directory.l                     No references.
+          gylf.filename                         ./commands/shutdown/t
+                                                ./functions/get.participant.data.by.name/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/answer.active.socket/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/socket/communications/send.to.world/t
 
-          item.filename                         ./functions/d
+          item.filename                         ./commands/egg/t
 
-          item.filename.l                       No references.
+          login.filename                        ./functions/main/active.socket.poll/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/socket/answer.active.socket/t
+
+          message.marker                        ./functions/d
+                                                ./functions/notify.in.absentia/t
+
+          message.marker.l                      ./functions/d
 
           number.of.commands                    ./commands/help/t
                                                 ./functions/main/participant.interaction
                                                   /address.active.status/t
 
-          participant.directory                 ./functions/d
-
-          participant.directory.l               No references.
-
           pouch.declaration                     ./functions/d
-                                                ./functions/create.character/t
+                                                ./functions/create.participant/t
 
-          pouch.declaration.l                   ./functions/create.character/t
+          pouch.declaration.l                   ./functions/create.participant/t
 
           pouch.description                     ./functions/d
-                                                ./functions/create.character/t
+                                                ./functions/create.participant/t
 
-          pouch.description.l                   ./functions/create.character/t
+          pouch.description.l                   ./functions/create.participant/t
+
+          tops.filename                         ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -1031,12 +1073,6 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      /assemble.path          Contains code to assemble a path to a given file.
-
-      t   assemble.path                         ./functions/get.participant.data/t
-
-    ----------------------------------------------------------------------------------------------
-
       /bail                   Contains code that suspends execution of the code, unloads from
                               memory, and returns control to Linux.
 
@@ -1045,7 +1081,6 @@ Relevant data:
 
       t   bail                                  ./commands/shutdown/t
                                                 ./functions/main/text.init/t
-                                                ./functions/main/system.check/t
                                                 ./functions/socket/socket.errors/t
 
     ----------------------------------------------------------------------------------------------
@@ -1073,21 +1108,18 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      /check.login            Contains code that checks to see if a user attempting to log in is
-                              already logged in from a different location.
-
-      t   check.login                           ./functions/main/participant.interaction
-                                                  /address.login.status/t
-
-          check.login.logged                    ./functions/check.login/t
-
-    ----------------------------------------------------------------------------------------------
-
       /clear.screen           Contains code that remotely clears the user's screen and places
                               their cursor in the upper left hand corner.
 
       t   clear.screen                          ./functions/main/listening.socket.poll/t
                                                 ./functions/write.welcome/t
+
+
+      s   clear.screen.packet                   No references.
+
+          clear.screen.packet.descriptor        ./functions/clear.screen/t
+
+          clear.screen.packet_size              ./functions/clear.screen/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -1098,45 +1130,109 @@ Relevant data:
       b   sys.close.call                        ./functions/close.descriptor/t
 
 
+      s   close.descriptor.packet               No references.
+
+          close.descriptor.packet_size          ./functions/close.descriptor/t
+
+          close.descriptor.packet.descriptor    ./functions/close.descriptor/t
+
+
       t   close.descriptor                      ./commands/area/t
-                                                ./commands/look/t                                                
-                                                ./functions/check.login/t
-                                                ./functions/create.character/t
-                                                ./functions/create.lock.file/t
-                                                ./functions/dna.lab/t
-                                                ./functions/get.character.data/t
+                                                ./commands/egg/t
+                                                ./commands/look/t
+                                                ./functions/create.participant/t
                                                 ./functions/get.external.data/t
+                                                ./functions/get.new.id/t
+                                                ./functions/get.participant.data.by.id/t
+                                                ./functions/get.text.data/t
+                                                ./functions/main/active.socket.poll/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/participant.interaction
                                                   /address.login.status/t
                                                 ./functions/main/participant.interaction
                                                   /address.passphrase.status/t
+                                                ./functions/main/participant.interaction
+                                                  /address.set.passphrase.status/t
+                                                ./functions/main/system.check/t
                                                 ./functions/main/text.init/t
+                                                ./functions/notify.in.absentia/t
+                                                ./functions/read.credential/t
                                                 ./functions/socket/clean.socket/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/write.credential/t
 
     ----------------------------------------------------------------------------------------------
 
-      /create.character       Contains code that builds out character data on the basis of DNA
-                              sequences left behind by either parent on the associated egg.
+      /convert.binary.id.to.ascii.id  Contains code that converts a binary id to an ASCII id.
 
-      t   area.filename.increment.cmp           ./functions/create.character/t
+      s   convert.binary.id.to ascii.id.packet  ./functions/convert.binary.id.to.ascii.id/t
+            .buffer
 
-          area.filename.next.digit.increment    ./functions/create.character/t
+          convert.binary.id.to.ascii.id.packet  ./functions/convert.binary.id.to.ascii.id/t
+            .id
 
-          area.filename.out.of.ids              ./functions/create.character/t
+          convert.binary.id.to.ascii.id         ./functions/convert.binary.id.to.ascii.id/t
+            .packet_size
 
-          build.pouch                           ./functions/create.character/t
 
-          build.pouch.area.name                 ./functions/create.character/t
+      t   convert.binary.id.to.ascii.id         ./functions/get.new.id/t
+                                                ./functions/get.participant.data.by.id/t
+                                                ./functions/get.participant.data.by.name/t
+                                                ./functions/main/active.socket.poll/t
+                                                ./functions/main/participant.interaction
+                                                  /address.login.status/t
+                                                ./functions/main/system.check/t
+                                                ./functions/read.credential/t
+                                                ./functions/socket/communications/send.to.area/t
+                                                ./functions/write.credential/t
 
-          build.pouch.found.open.id             ./functions/create.character/t
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .ah.a
 
-          build.pouch.increment.byte            ./functions/create.character/t
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .al.a
 
-          create.character                      ./functions/main/participant.interaction
-                                                  /address.set.passphrase.status/t
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .ah.b
 
-          create.character.gylf.command         No references.
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .al.b
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .ah.c
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .al.c
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .ah.d
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .al.d
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .ah.e
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .al.e
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .ah.f
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .al.f
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .ah.convert
+
+          convert.binary.id.to.ascii.id.cmp     ./functions/convert.binary.id.to.ascii.id/t
+            .al.convert
+
+          convert.binary.id.to.ascii.id         ./functions/convert.binary.id.to.ascii.id/t
+            .conversion.loop
+
+          convert.binary.id.to.ascii.id         ./functions/convert.binary.id.to.ascii.id/t
+            .store
 
     ----------------------------------------------------------------------------------------------
 
@@ -1148,25 +1244,41 @@ Relevant data:
           sys.rw.r.r                            ./functions/create.file/t
 
 
+      s   create.file.packet                    No references.
+
+          create.file.packet.descriptor         ./functions/create.file/t
+
+          create.file.packet_size               ./functions/create.file/t
+
+
       t   create.file                           ./commands/area/t
-                                                ./functions/create.lock.file/t
-                                                ./functions/create.character/t
+                                                ./commands/egg/t
+                                                ./functions/create.participant/t
+                                                ./functions/main/listening.socket.poll/t
+                                                ./functions/notify.in.absentia/t
 
     ----------------------------------------------------------------------------------------------
 
-      /create.lock.file       Contains code that creates a lock file for use in preventing
-                              multiple instances of the same login from different locations.
+      /create.participant     Contains code that creates a file on disk for participant
+                              credentials.
 
-      d   lock.extension                        ./functions/check.login/t
-                                                ./functions/create.lock.file/t
-                                                ./functions/socket/clean.socket/t
+      t   create.participant                    No references.
 
-          lock.extension.l                      ./functions/check.login/t
-                                                ./functions/create.lock.file/t
-                                                ./functions/socket/clean.socket/t
+          create.participant.gylf.command       No references.
 
-      t   create.lock.file                      ./functions/main/participant.interaction
-                                                  /address.login.status/t
+          build.pouch                           ./functions/create.participant/t
+
+          build.pouch.increment.byte            ./functions/create.participant/t
+
+          area.filename.increment.cmp           ./functions/create.participant/t
+
+          area.filename.next.digit.increment    ./functions/create.participant/t
+
+          area.filename.out.of.ids              ./functions/create.participant/t
+
+          build.pouch.area.name                 ./functions/create.participant/t
+
+          build.pouch.found.open.id             ./functions/create.participant/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -1177,27 +1289,27 @@ Relevant data:
 
           dna.lab.agility                       ./functions/dna.lab/t
 
-          dna.lab.base.color                    ./functions/dna.lab/t
-
           dna.lab.base.fur.quality              ./functions/dna.lab/t
+
+          dna.lab.e.parent.base.color           ./functions/dna.lab/t
+
+          dna.lab.e.parent.base.fur.quality     ./functions/dna.lab/t
+
+          dna.lab.e.parent.secondary.color      ./functions/dna.lab/t
+
+          dna.lab.e.parent.secondary.fur        ./functions/dna.lab/t
+          .quality
 
           dna.lab.endurance                     ./functions/dna.lab/t
 
-          dna.lab.father.base.color             ./functions/dna.lab/t
+          dna.lab.i.parent.base.color           ./functions/dna.lab/t
 
-          dna.lab.father.base.fur.quality       ./functions/dna.lab/t
+          dna.lab.i.parent.base.fur.quality     ./functions/dna.lab/t
 
-          dna.lab.father.secondary.color        ./functions/dna.lab/t
+          dna.lab.i.parent.secondary.color      ./functions/dna.lab/t
 
-          dna.lab.father.secondary.fur.quality  ./functions/dna.lab/t
-
-          dna.lab.mother.base.color             ./functions/dna.lab/t
-
-          dna.lab.mother.base.fur.quality       ./functions/dna.lab/t
-
-          dna.lab.mother.secondary.color        ./functions/dna.lab/t
-
-          dna.lab.mother.secondary.fur.quality  ./functions/dna.lab/t
+          dna.lab.i.parent.secondary.fur        ./functions/dna.lab/t
+          .quality
 
           dna.lab.mutation.base.color           ./functions/dna.lab/t
 
@@ -1212,10 +1324,10 @@ Relevant data:
           dna.lab.mutation.secondary.color.fix  ./functions/dna.lab/t
 
           dna.lab.mutation.secondary.fur        ./functions/dna.lab/t
-            .quality
+          .quality
 
           dna.lab.mutation.secondary.fur        ./functions/dna.lab/t
-            .quality.fix
+          .quality.fix
 
           dna.lab.secondary.color               ./functions/dna.lab/t
 
@@ -1225,17 +1337,50 @@ Relevant data:
 
     ----------------------------------------------------------------------------------------------
 
-      /get.character.data     Contains code which populates the character data in memory from file
-                              for the character on the current socket.
-
-      t   get.character.data                    ./functions/check.admin/t
-
-    ----------------------------------------------------------------------------------------------
-
       /get.external.data      Contains code which reads data that exists outside the codebase and
                               memory.
 
       t   get.external.data                     ./functions/clear.screen/t
+
+
+      s   get.external.data.packet              No references.
+
+          get.external.data.packet.descriptor   ./functions/get.external.data/t
+
+          get.external.data.packet.filename     ./functions/get.external.data/t
+
+          get.external.data.packet_size         ./functions/get.external.data/t
+
+    ----------------------------------------------------------------------------------------------
+
+      /get.new.id             Contains code that examines the extant id repository for a given
+                              subset of ids and selects a new id for use.
+
+      t   get.new.id                            ./commands/egg/t
+                                                ./commands/area/t
+                                                ./functions/main/listening.socket.poll/t
+
+          get.new.id.loop                       ./functions/get.new.id/t
+
+          get.new.id.done                       ./functions/get.new.id/t
+
+
+      s   get.new.id.packet                     No references.
+
+          get.new.id.packet.id                  ./functions/get.new.id/t
+
+          get.new.id.packet_size                ./functions/get.new.id/t
+
+    ----------------------------------------------------------------------------------------------
+
+      /get.participant.data   Contains code that returns participant data indexed by a provided
+        .by.id                id, or an error if the id does not correspond to extant data.
+
+      t   get.participant.data.by.id            ./functions/socket/communications
+                                                  /send.to.participant/t
+                                                ./functions/socket/communications/send.to.world/t
+
+          get.participant.data.by.id.error      ./functions/get.participant.data.by.id/t
 
     ----------------------------------------------------------------------------------------------
 
@@ -2093,6 +2238,7 @@ Relevant data:
         t   socket.send                         ./commands/area/t
                                                 ./commands/look/t
                                                 ./commands/help/t
+                                                ./functions/clear.screen/t
                                                 ./functions/create.character/t
                                                 ./functions/main/listening.socket.poll/t
                                                 ./functions/main/participant.interaction
@@ -2106,7 +2252,6 @@ Relevant data:
                                                 ./functions/write.prompt/t
 
             socket.send.buf                     ./commands/look/t
-                                                ./functions/clear.screen/t
                                                 ./functions/set.single.attribute/t
                                                 ./functions/socket/communications/send.to.area/t
                                                 ./functions/socket/communications/send.to.participant/t
@@ -2208,7 +2353,7 @@ Relevant data:
                                                 ./commands/look/t
                                                 ./functions/socket/communications/send.to.world/t
                                                 ./functions/write.bad.help.command.error/t
-                                                
+
 
     ----------------------------------------------------------------------------------------------
 

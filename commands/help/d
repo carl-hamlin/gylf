@@ -8,11 +8,10 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.help    ./commands/help/t
+;   ./commands/help/d command.help.l
+;                     command.help.s
 ;
-;   command.help.l  ./commands/help/d
-;
-;   command.help.s  ./commands/help/d
+;   ./commands/help/t command.help
 ;
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

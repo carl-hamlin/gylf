@@ -8,41 +8,35 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.ai.w                        ./commands/ai/d
+;   ./b                     dword.l
 ;
-;   command.area.w                      ./commands/area/d
+;   ./commands/ai/d         command.ai.w
 ;
-;   command.broadcast.w                 ./commands/broadcast/d
+;   ./commands/area/d       command.area.w
 ;
-;   command.dig.w                       ./commands/dig/d
+;   ./commands/broadcast/d  command.broadcast.w
 ;
-;   command.egg.w                       ./commands/egg/d
+;   ./commands/dig/d        command.dig.w
 ;
-;   command.gylf.w                      ./commands/gylf/d
+;   ./commands/egg/d        command.egg.w
 ;
-;   command.help.w                      ./commands/help/d
+;   ./commands/gylf/d       command.gylf.w
 ;
-;   command.logout.w                    ./commands/logout/d
+;   ./commands/help/d       command.help.w
 ;
-;   command.look.w                      ./commands/look/d
+;   ./commands/logout/d     command.logout.w
 ;
-;   command.shutdown.w                  ./commands/shutdown/d
+;   ./commands/look/d       command.look.w
 ;
-;   command.think.w                     ./commands/think/d
+;   ./commands/shutdown/d   command.shutdown.w
 ;
-;   command.table                       ./functions/d
+;   ./commands/think/d      command.think.w
 ;
-;   current.directory.marker            ./functions/d
+;   ./functions/d           command.table
+;                           current.directory.marker
+;                           pouch.declaration
+;                           pouch.description
 ;
-;   dword.l                             ./b
-;
-;   pouch.declaration                   ./functions/d
-;
-;   pouch.description                   ./functions/d
-;
-
-    current.directory.marker              db  './'                                                                        ; Current directory indicator.
-    current.directory.marker.l            equ $-current.directory.marker                                                  ; Length of current directory indicator.
 
     message.marker                        db  '.m'                                                                        ; Message indicator.
     message.marker.l                      equ $-message.marker                                                            ; Length of message indicator.

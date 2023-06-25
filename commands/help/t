@@ -4,40 +4,34 @@
 ;
 ;   This function displays context-sensitive help.
 ;
-;   Assumptions:      eax - Length of received data.
-;                     esi - Pointer to descriptor associated with target socket.
+;   Assumptions:  ebp - Pointer to populated answer.active.socket.packet.
+;                 Arguments aggregated.
 ;
-;   Returns:          None.
+;   Returns:      None.
 ;
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   argument.01.location                ./functions/aggregate.arguments/b
+;   ./b                                         dword.l
 ;
-;   arguments.num                       ./functions/aggregate.arguments/b
+;   ./commands/help/t                           command.help.found.command
+;                                               command.help.next.command
+;                                               command.help.next.command.jcxnz
+;                                               command.help.no.arguments
+;                                               command.help.parse.arguments
 ;
-;   command.help.found.command          ./commands/help/t
+;   ./functions/aggregate.arguments/d           argument.01.location
+;                                               arguments.num
 ;
-;   command.help.next.command           ./commands/help/t
+;   ./functions/d                               command.table
+;                                               number.of.commands
 ;
-;   command.help.next.command.jcxnz     ./commands/help/t
+;   ./functions/socket/socket.send/t            socket.send
 ;
-;   command.help.no.arguments           ./commands/help/t
+;   ./functions/write.bad.command.error/t       write.bad.command.error
 ;
-;   command.help.parse.arguments        ./commands/help/t
-;
-;   command.table                       ./functions/d
-;
-;   dword.l                             ./b
-;
-;   number.of.commands                  ./functions/d
-;
-;   socket.send                         ./functions/socket/socket.send/t
-;
-;   write.bad.command.error             ./functions/write.bad.command.error/t
-;
-;   write.bad.help.command.error        ./functions/write.bad.help.command.error/t
+;   ./functions/write.bad.help.command.error/t  write.bad.help.command.error
 ;
 
     command.help:                     push  eax                                             ; Preserve length of received data.
@@ -62,11 +56,14 @@
                                       inc   esi                                             ; esi - Pointer to string data corresponding to command currently being referenced in the table.
 
                                       cmp   cl, al                                          ; Is the length of the received data at least the same as the command in the table?
-                                      ja    command.help.next.command                       ; No. It's not necessary to perform any further comparison; the received data cannot possibly refer to the command currently being read from the table. Move on to the next table entry.
+                                      ja    command.help.next.command                       ; No. It's not necessary to perform any further comparison; the received data cannot possibly refer
+                                                                                            ; to the command currently being read from the table. Move on to the next table entry.
 
-                                      repz  cmpsb                                           ; Check to see if the received data is the same as the string data corresponding to the command currently being referenced in the table.
+                                      repz  cmpsb                                           ; Check to see if the received data is the same as the string data corresponding to the command
+                                                                                            ; currently being referenced in the table.
                                       jnz   command.help.next.command.jcxnz                 ; Otherwise, go set up for the next iteration.
-                                      jcxz  command.help.found.command                      ; Did we get all the way through the string before cmpsb cut us loose? If so, go set up the handler and jump to it.
+                                      jcxz  command.help.found.command                      ; Did we get all the way through the string before cmpsb cut us loose? If so, go set up the handler
+                                                                                            ; and jump to it.
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

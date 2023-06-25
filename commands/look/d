@@ -8,11 +8,10 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.look    ./commands/look/t
+;   ./commands/look/d command.look.l
+;                     command.look.s
 ;
-;   command.look.l  ./commands/look/d
-;
-;   command.look.s  ./commands/look/d
+;   ./commands/look/t command.look
 ;
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

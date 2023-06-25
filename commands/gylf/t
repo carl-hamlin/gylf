@@ -4,8 +4,8 @@
 ;
 ;   This function creates a complete user profile without the intervening process of eggdom.
 ;
-;   Assumptions:     eax - Length of received data.
-;                    esi - Pointer to descriptor associated with target socket.
+;   Assumptions:     ebp - Pointer to populated answer.active.socket.packet.
+;                    Arguments aggregated.
 ;
 ;   Returns:         None.
 ;
@@ -13,33 +13,28 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   a.p.data.gylf                 ./b
+;   ./b                                   a.p.data.gylf
+;                                         e.data
 ;
-;   arguments.num                 ./functions/aggregate.arguments/b
+;   ./commands/gylf/t                     command.gylf.admin
+;                                         command.gylf.dna.mode
+;                                         command.gylf.nsp.mode
 ;
-;   check.admin                   ./functions/check.admin/t
+;   ./functions/aggregate.arguments/t     arguments.num
 ;
-;   command.gylf.admin            ./functions/gylf/t
+;   ./functions/check.admin/t             check.admin
 ;
-;   command.gylf.dna.mode         ./functions/gylf/t
+;   ./functions/main/text.init/b          text.data.index.local.data.gylf.bad.syntax.message
+;                                         text.data.index.socket.data.command.gylf.help
 ;
-;   command.gylf.nsp.mode         ./functions/gylf/t
+;   ./functions/socket/socket.send/t      socket.send
 ;
-;   connection.area.id.index      ./functions/main/system/check/b
+;   ./functions/write.bad.command.error/t write.bad.command.error
 ;
-;   connection.descriptor.index   ./functions/main/system.check/b
+;   ./functions/write.descriptor/t        write.descriptor
 ;
-;   e.data                        ./commands/gylf/t
-;
-;   egg.area.id                   ./s
-;
-;   egg.data                      ./commands/egg/b
-;
-;   gylf.connection.area.id.index ./s
-;
-;   write.bad.command.error       ./functions/write.bad.command.error/t
-;
-;   write.descriptor              ./functions/write.descriptor/t
+;   ./s                                   egg.area.id
+;                                         gylf.connection.descriptor.index
 ;
 
     command.gylf:           push  esi                                                         ; Preserve index to connection entry.

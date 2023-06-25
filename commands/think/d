@@ -8,11 +8,10 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   command.think   ./commands/think/t
+;   ./commands/think/d  command.think.l
+;                       command.think.s
 ;
-;   command.think.l ./commands/think/d
-;
-;   command.think.s ./commands/think/d
+;   ./commands/think/t  command.think
 ;
 
 ;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
