@@ -23,6 +23,7 @@
 ;
 ;   system.check          ./functions/main/system.check/t
 ;
+;   text.init             ./functions/main/text.init/t
 
     global   _start
 
