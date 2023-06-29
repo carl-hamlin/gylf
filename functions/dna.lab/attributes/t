@@ -1,0 +1,27 @@
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    get.p.attributes:	push	ebp																																		; Preserve caller's ebp.
+
+                      mov   ebp, esp                                                              ; ebp - Prepared to be used as a data pointer.
+                      add   ebp, (byte.l + get.fur.attributes.packet_size)                        ; ebp - Data pointer.
+
+                      pusha                                                                       ; Preserve caller's registers.
+
+    									mov		al, byte [e.data + get.p.attributes.packet.egg.i.parent.p.attribute] 	; al - Inseminating parent's physical attribute.
+                      mov   ah, byte [e.data + get.p.attributes.packet.egg.e.parent.p.attribute] 	; ah - Laying parent's physical attribute.
+
+                      add   al, ah                                    														; al - The sum of both physical attributes.
+                      sub   ah, ah                                    														; ah - Prepared for averaging.
+                      mov   dl, number.of.parents                     														; dl - Number of contributing parents.
+                      div   dl                                        														; al - Average of parental physical attributes.
+
+                      sub   ah, ah                                    														; ah - Prepared for conversion to embryonic physical attribute.
+                      mov   dl, child.attribute.computation.factor    														; dl - Arbitrary factor for attribute conversion.
+                      div   dl                                        														; al - Embryonic physical attribute.
+
+                      mov   byte [g.data + get.p.attributes.packet.gylf.p.attribute], al         	; Assign embryonic physical attribute value to embryo.
+
+											popa																																				; Restore caller's registers.
+
+											pop		ebp																																		; Restore caller's ebp.
+											ret		get.p.attributes.packet_size																					; Return to caller.

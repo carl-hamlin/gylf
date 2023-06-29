@@ -2,7 +2,6 @@
 
     section   .text
 
-    %include  "./functions/dna.lab/attributes/i"
-    %include  "./functions/dna.lab/fur/i"
-    
-    %include  "./functions/dna.lab/t"
+		%include	"./functions/dna.lab/attributes/s"
+
+    %include  "./functions/dna.lab/attributes/t"

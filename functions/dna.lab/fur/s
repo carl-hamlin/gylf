@@ -1,0 +1,25 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/dna.lab/fur/s
+;
+;   This file contains structures pertinent to the get.fur.attributes utility.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+;================================================================================================================================================================================================
+;
+;   get.colors Data Structure
+;
+
+    struc get.fur.attributes.packet
+        .participant.fur.attribute.number   resb    01h ; Storage for number of attributes in selected set.
+        .egg.i.parent.fur.attribute         resb    01h ; Storage for inseminating parent fur attribute.
+        .egg.e.parent.fur.attribute         resb    01h ; Storage for laying parent fur attribute.
+        .gylf.fur.attribute                 resb    01h ; Storage for gylf fur attribute.
+    endstruc
+

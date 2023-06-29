@@ -1,0 +1,24 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/dna.lab/attributes/s
+;
+;   This file contains structures pertinent to the get.p.attributes utility.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   No external references.
+;
+
+;================================================================================================================================================================================================
+;
+;   get.p.attributes Data Structure
+;
+
+    struc get.p.attributes.packet
+    	.gylf.p.attribute   			resb	01h ; Storage for number of physical attributes in selected set.
+      .egg.i.parent.p.attribute resb  01h ; Storage for inseminating parent physical attribute.
+      .egg.e.parent.p.attribute resb  01h	; Storage for laying parent physical attribute.
+    endstruc
+

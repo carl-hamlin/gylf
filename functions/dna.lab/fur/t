@@ -1,0 +1,84 @@
+;================================================================================================================================================================================================
+;
+;   ./functions/dna.lab/fur/t
+;
+;   This function selects fur attributes for a new gylf being created by dna.lab.
+;
+;   Assumptions:    Populated get.fur.attributes packet.
+;
+;   Returns:        Populated g.data fur attribute fields.
+;
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;
+;   Symbolic Cross-Referencing
+;
+;   ./b                         e.data
+;                               g.data
+;
+;   ./functions/get.ticks/t     get.ticks
+;
+;   ./functions/dna.lab/fur/s   get.fur.attributes.packet_size
+;                               get.fur.attributes.packet.i.parent.fur.attribute
+;                               get.fur.attributes.packet.e.parent.fur.attribute
+;                               get.fur.attributes.packet.participant.fur.attribute.number
+;                               get.fur.attributes.packet.gylf.fur.attribute
+;
+;   ./functions/dna.lab/fur/t   get.fur.attributes.e.parent
+;                               get.fur.attributes.done
+;                               get.fur.attributes.m.parent
+;                               get.fur.attributes.m.parent.fix
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    get.fur.attributes                push	ebp                                                                               ; Preserve caller's ebp.
+
+                                      mov   ebp, esp                                                                          ; ebp - Prepared to be used as a data pointer.
+                                      add   ebp, (byte.l + get.fur.attributes.packet_size)                                    ; ebp - Data pointer.
+
+                                      pusha                                                                                   ; Preserve caller's registers.
+
+                                      sub   ebx, ebx                                                                          ; ebx - Return ticks in eax.
+                                      call  get.ticks                                                                         ; eax - Ticks.
+
+                                      cmp   al, 00h                                                                           ; Did we happen upon a zero lsb?
+                                      jz    get.fur.attributes.m.parent                                                       ; YES! Go mutate the embryo!
+
+                                      shr   al, 01h                                                                           ; Is the least significant bit high?
+                                      jc    get.fur.attributes.e.parent                                                       ; Yes. The embryo inherits its laying parent's selected color.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    get.fur.attributes.i.parent:      mov   al, byte [e.data + (ebp - get.fur.attributes.packet.egg.i.parent.fur.attribute)]	; al - Inseminating parent's selected color.
+                                      jmp   get.fur.attributes.done                                                           ; Pack up and return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    get.fur.attributes.e.parent:      mov   al, byte [e.data + (ebp - get.fur.attributes.packet.egg.e.parent.fur.attribute)]  ; al - Laying parent's selected color.
+                                      jmp   get.fur.attributes.done                                                           ; Pack up and return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    get.fur.attributes.m.parent:      mov   dl, byte [(ebp - get.fur.attributes.packet.participant.fur.attribute.number)]     ; dl - Total number of selected colorings.
+                                      cmp   ah, dl                                                                            ; Is ah higher than the total number of selected colorings?
+                                      ja    get.fur.attributes.m.parent.fix                                                   ; Yes. Go fix that.
+
+                                      mov   al, ah                                                                            ; Use ah as the mutation factor for the embryo's selected coloring.
+
+                                      jmp   get.fur.attributes.done                                                           ; Pack up and return to caller.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    get.fur.attributes.m.parent.fix:	sub   ebx, ebx                                                                          ; ebx - Return ticks in eax.
+                                      call  get.ticks                                                                         ; eax - Ticks.
+
+                                      sub   ah, al                                                                            ; ah - Potential mutation factor for the embryo's selected coloring.
+                                      jmp   get.fur.attributes.m.parent                                                       ; Go see if we can safely mutate the embryo yet.
+
+;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    get.fur.attributes.done:          mov   byte [g.data + (ebp - get.fur.attributes.packet.gylf.fur.attribute)], al          ; Give the embryo a color.
+
+                                      popa                                                                                    ; Restore caller's registers.
+                                      pop   ebp                                                                               ; Restore caller's ebp.
+
+                                      ret   get.fur.attributes.packet_size                                                    ; Return to caller.
