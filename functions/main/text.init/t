@@ -12,39 +12,32 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   bail                                                  ./functions/bail/t
+;   ./b															dword.l
+;																		sys.standard.output
 ;
-;   close.descriptor                                      ./functions/close.descriptor/t
+;   ./functions/bail/t							bail
 ;
-;   dword.l                                               ./b
+;   ./functions/close.descriptor/t	close.descriptor
 ;
-;   local.data.populating.textual.data.indices.message    ./functions/main/text.init/d
+;   ./functions/main/text.init/b		text.data.index.num
+;																    text.data.indices
 ;
-;   local.data.populating.textual.data.indices.message.l  ./functions/main/text.init/d
+;   ./functions/main/text.init/d		local.data.populating.textual.data.indices.message
+;																    local.data.populating.textual.data.indices.message.l
+;																    local.data.text.data.failed
+;																    local.data.text.data.failed.l
+;																		text.data.filename
 ;
-;   local.data.text.data.failed                           ./functions/main/text.init/d
+;   ./functions/main/text.init/t		text.init.fail
+;																    text.init.pop.loop
 ;
-;   local.data.text.data.failed.l                         ./functions/main/text.init/d
+;   ./functions/memory.switch/t			memory.switch
 ;
-;   memory.switch                                         ./functions/memory.switch/t
+;   ./functions/open.descriptor/t		open.descriptor
 ;
-;   open.descriptor                                       ./functions/open.descriptor/t
+;   ./functions/read.descriptor/t		read.descriptor
 ;
-;   read.descriptor                                       ./functions/read.descriptor/t
-;
-;   sys.standard.output                                   ./b
-;
-;   text.data.filename                                    ./functions/main/text.init/d
-;
-;   text.data.index.num                                   ./functions/main/text.init/b
-;
-;   text.data.indices                                     ./functions/main/text.init/b
-;
-;   text.init.fail                                        ./functions/main/text.init/t
-;
-;   text.init.pop.loop                                    ./functions/main/text.init/t
-;
-;   write.descriptor                                      ./functions/write.descriptor/t
+;   ./functions/write.descriptor/t	write.descriptor
 ;
 
     text.init:          push  ebp                                                   ; Preserve caller's ebp.

@@ -12,33 +12,29 @@
 ;
 ;   Symbolic Cross-Referencing
 ;
-;   bail                                              ./functions/bail/t
+;   ./b                                               socket.number
 ;
-;   check.admin                                       ./functions/check.admin/t
+;   ./commands/shutdown/t                             command.shutdown.admin
+;                                                     command.shutdown.loop
 ;
-;   clean.socket                                      ./functions/socket/clean.socket/t
+;   ./functions/bail/t                                bail
 ;
-;   command.shutdown.admin                            ./commands/shutdown/t
+;   ./functions/check.admin/t                         check.admin
 ;
-;   command.shutdown.loop                             ./commands/shutdown/t
+;   ./functions/socket/clean.socket/t                 clean.socket
 ;
-;   connection.entry.size                             ./functions/main/system.check/b
+;   ./functions/main/system.check/b                   connection.entry.size
+;                                                     connection.table
 ;
-;   connection.table                                  ./functions/main/system.check/b
+;   ./functions/main/text.init/b                      text.data.index.local.data.shutdown.message
+;                                                     text.data.index.local.data.smoked.sockets.message
+;                                                     text.data.index.socket.data.shutdown.message
 ;
-;   socket.number                                     ./b
+;   ./functions/socket/communications/send.to.world/t send.to.world
 ;
-;   send.to.world                                     ./functions/socket/communications/send.to.world/t
+;   ./functions/write.bad.command.error/t             write.bad.command.error
 ;
-;   text.data.index.local.data.shutdown.message       ./functions/main/text.init/b
-;
-;   text.data.index.local.data.smoked.sockets.message ./functions/main/text.init/b
-;
-;   text.data.index.socket.data.shutdown.message      ./functions/main/text.init/b
-;
-;   write.bad.command.error                           ./functions/write.bad.command.error/t
-;
-;   write.console                                     ./functions/write.console/t
+;   ./functions/write.console/t                       write.console
 ;
 
     command.shutdown:         call  check.admin                                               ; See if the calling socket is controlled by an admin.
